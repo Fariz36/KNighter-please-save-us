@@ -1,6 +1,6 @@
 # Instruction
 
-You will receive a Linux kernel patch for analysis. Your task is to review the patch and provide the following details:
+You will receive a patch to {{project_description}} for analysis. Your task is to review the patch and provide the following details:
 
 1. **Bug Fix Verification:**
    Determine whether this patch is intended to fix a bug.
@@ -20,7 +20,7 @@ You will receive a Linux kernel patch for analysis. Your task is to review the p
 4. **Bug Pattern Generality Assessment:**
    Evaluate the generality of this bug pattern by addressing:
    - The frequency of this bug pattern in real-world code.
-   - The prevalence across files in the Linux kernel.
+   - The prevalence across files in {{project_description}}.
 
    Rate the generality as (high, medium, low).
 

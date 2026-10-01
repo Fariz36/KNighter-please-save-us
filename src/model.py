@@ -1,8 +1,13 @@
 """Simple and clean LLM model interface supporting both cloud and local models"""
 
+import json
+import threading
 import time
+import uuid
+from pathlib import Path
 from typing import Any, Dict, Optional
 
+import httpx
 from google import genai
 from openai import OpenAI
 
@@ -22,7 +27,20 @@ model_config = {
     "model": "gpt-4o",
     "temperature": 1.0,
     "max_tokens": 16000,
+    "timeout": 900,
+    "stall_timeout": 180,
+    "stream": True,
+    "extra_body": {},
+    "stage_options": {},
 }
+
+# One stable id per process: providers such as OpenCode Go use it for routing
+# and prompt caching ("x-opencode-session").
+SESSION_ID = f"knighter-{uuid.uuid4().hex[:16]}"
+USER_AGENT = "knighter/0.2"
+
+_metrics_lock = threading.Lock()
+_metrics_path: Optional[Path] = None
 
 
 def init_llm():
@@ -53,19 +71,46 @@ def init_llm():
             api_key=keys["deepseek_key"], base_url="https://api.deepseek.com/v1"
         )
 
-    # Initialize custom providers
-    providers = keys.get("providers", {})
-    for name, config in providers.items():
-        clients[name] = OpenAI(
-            base_url=config["base_url"], api_key=config.get("api_key", "dummy")
-        )
-
     # Set model configuration from config.yaml
     model_config["model"] = global_config.get("model", "gpt-4o")
     model_config["temperature"] = global_config.get("temperature", 1.0)
     model_config["max_tokens"] = global_config.get("max_tokens", 16000)
+    model_config["timeout"] = global_config.get("llm_timeout", 900)
+    model_config["stall_timeout"] = global_config.get("llm_stall_timeout", 180)
+    model_config["stream"] = global_config.get("llm_stream", True)
+    model_config["extra_body"] = global_config.get("llm_extra_body", {}) or {}
+    model_config["stage_options"] = global_config.get("stage_options", {}) or {}
 
-    logger.info(f"Init LLM with model: {model_config['model']}")
+    # Initialize custom providers (OpenAI-compatible endpoints)
+    providers = keys.get("providers", {})
+    for name, config in providers.items():
+        headers = {"User-Agent": USER_AGENT}
+        headers.update(config.get("headers", {}))
+        if config.get("session_header"):
+            headers[config["session_header"]] = SESSION_ID
+        clients[name] = OpenAI(
+            base_url=config["base_url"],
+            api_key=config.get("api_key", "dummy"),
+            default_headers=headers,
+            # With streaming, `read` is the longest silence between chunks: a
+            # live reasoning model streams tokens every few seconds, so this
+            # detects stalled requests without capping long generations.
+            timeout=httpx.Timeout(
+                connect=30, read=model_config["stall_timeout"], write=60, pool=60
+            ),
+            max_retries=0,  # retries are handled (and logged) in invoke_llm
+        )
+        clients[name]._knighter_stream = model_config["stream"]
+
+    global _metrics_path
+    result_dir = global_config.get("result_dir")
+    if result_dir:
+        _metrics_path = Path(result_dir) / "llm_calls.jsonl"
+        _metrics_path.parent.mkdir(parents=True, exist_ok=True)
+
+    logger.info(
+        f"Init LLM with model: {model_config['model']} (session {SESSION_ID})"
+    )
 
     if not clients:
         raise ValueError("No LLM clients configured")
@@ -124,21 +169,99 @@ def get_client_and_model(model_name: str) -> tuple:
     raise ValueError(f"No client available for model {model_name}")
 
 
+def _record_call(entry: Dict[str, Any]):
+    """Append one line per LLM call (for speed/cost analysis)."""
+    if _metrics_path is None:
+        return
+    entry["session"] = SESSION_ID
+    with _metrics_lock, open(_metrics_path, "a") as handle:
+        handle.write(json.dumps(entry) + "\n")
+
+
+def _usage_fields(response) -> Dict[str, Any]:
+    usage = getattr(response, "usage", None)
+    if usage is None:
+        return {}
+    details = getattr(usage, "completion_tokens_details", None)
+    prompt_details = getattr(usage, "prompt_tokens_details", None)
+    return {
+        "prompt_tokens": getattr(usage, "prompt_tokens", None),
+        "completion_tokens": getattr(usage, "completion_tokens", None),
+        "reasoning_tokens": getattr(details, "reasoning_tokens", None),
+        "cached_tokens": getattr(prompt_details, "cached_tokens", None),
+    }
+
+
+def _stream_completion(client, kwargs: Dict[str, Any], start: float):
+    """Stream a chat completion; returns (content, usage fields).
+
+    Two independent limits:
+    * stall: the httpx ``read`` timeout (``llm_stall_timeout``) fires when no
+      bytes arrive for that long;
+    * deadline: a watchdog timer closes the connection once the whole call
+      exceeds ``llm_timeout``. It cannot be a check inside the chunk loop:
+      SSE keep-alive comments keep the connection alive without yielding
+      chunks, which kept one request open for 6164 s (see RESEARCH_LOG).
+    """
+    stream = client.chat.completions.create(
+        **kwargs, stream=True, stream_options={"include_usage": True}
+    )
+    deadline = model_config["timeout"]
+    expired = threading.Event()
+
+    def kill():
+        expired.set()
+        try:
+            stream.response.close()
+        except Exception:
+            pass
+
+    watchdog = threading.Timer(max(1.0, deadline - (time.monotonic() - start)), kill)
+    watchdog.daemon = True
+    watchdog.start()
+    parts = []
+    usage: Dict[str, Any] = {}
+    try:
+        for chunk in stream:
+            if chunk.usage is not None:
+                usage = _usage_fields(chunk)
+            if chunk.choices:
+                delta = chunk.choices[0].delta
+                if delta is not None and delta.content:
+                    parts.append(delta.content)
+    except Exception:
+        if expired.is_set():
+            raise TimeoutError(f"LLM call exceeded {deadline}s")
+        raise
+    finally:
+        watchdog.cancel()
+        stream.close()
+    if expired.is_set():
+        raise TimeoutError(f"LLM call exceeded {deadline}s")
+    return "".join(parts), usage
+
+
 def invoke_llm(
     prompt: str,
     temperature: Optional[float] = None,
     model: Optional[str] = None,
     max_tokens: Optional[int] = None,
+    stage: str = "unknown",
 ) -> Optional[str]:
-    """Invoke LLM with the given prompt"""
+    """Invoke LLM with the given prompt.
 
-    model = model or model_config["model"]
-    temperature = (
-        temperature if temperature is not None else model_config["temperature"]
-    )
-    max_tokens = max_tokens or model_config["max_tokens"]
+    ``stage`` names the pipeline step (e.g. "patch2pattern", "repair_syntax"):
+    it selects ``stage_options[stage]`` from the config (model, temperature,
+    max_tokens, extra_body) and tags the call in ``llm_calls.jsonl``.
+    """
+    options = model_config["stage_options"].get(stage, {})
+    model = model or options.get("model") or model_config["model"]
+    if temperature is None:
+        temperature = options.get("temperature", model_config["temperature"])
+    max_tokens = max_tokens or options.get("max_tokens") or model_config["max_tokens"]
+    extra_body = {**model_config["extra_body"], **options.get("extra_body", {})}
 
-    logger.info(f"Start LLM process: {model}")
+    logger.info(f"Start LLM process: {model} [{stage}]")
 
     # Simple token check
     if len(prompt) > 400000:  # ~100k tokens
@@ -155,6 +278,8 @@ def invoke_llm(
 
     # Retry logic
     for attempt in range(6):
+        start = time.monotonic()
+        usage: Dict[str, Any] = {}
         try:
             # Handle different client types
             if isinstance(
@@ -187,11 +312,29 @@ def invoke_llm(
                 no_temp_models = ["o1", "o3-mini", "o4-mini", "o1-preview", "gpt-5"]
                 if not any(m in actual_model for m in no_temp_models):
                     kwargs["temperature"] = temperature
+                if extra_body:
+                    kwargs["extra_body"] = extra_body
 
-                response = client.chat.completions.create(**kwargs)
-                answer = response.choices[0].message.content
+                if getattr(client, "_knighter_stream", False):
+                    answer, usage = _stream_completion(client, kwargs, start)
+                else:
+                    response = client.chat.completions.create(**kwargs)
+                    usage = _usage_fields(response)
+                    answer = response.choices[0].message.content
 
-            logger.info("Finish LLM process")
+            if not answer or not answer.strip():
+                # Seen in practice: a reasoning model spends the whole budget
+                # thinking and returns no content. Retry instead of passing
+                # None downstream.
+                raise ValueError("empty response content")
+
+            duration = time.monotonic() - start
+            logger.info(f"Finish LLM process [{stage}] in {duration:.1f}s")
+            _record_call(
+                {"ts": time.time(), "stage": stage, "model": model, "ok": True,
+                 "attempt": attempt + 1, "seconds": round(duration, 2),
+                 "prompt_chars": len(prompt), **usage}
+            )
 
             # Remove think tags if present
             if answer and "<think>" in answer:
@@ -200,11 +343,17 @@ def invoke_llm(
             return answer
 
         except Exception as e:
-            logger.error(f"Error attempt {attempt + 1}: {e}")
+            duration = time.monotonic() - start
+            logger.error(f"Error attempt {attempt + 1} [{stage}]: {e}")
+            _record_call(
+                {"ts": time.time(), "stage": stage, "model": model, "ok": False,
+                 "attempt": attempt + 1, "seconds": round(duration, 2),
+                 "prompt_chars": len(prompt), "error": str(e)[:300], **usage}
+            )
             if attempt >= 5:
                 logger.error("Failed too many times")
                 raise e
-            time.sleep(2)
+            time.sleep(min(2 ** (attempt + 1), 60))
 
     return None
 

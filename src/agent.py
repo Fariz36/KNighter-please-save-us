@@ -1,9 +1,9 @@
 from pathlib import Path
 
+import yaml
 from loguru import logger
 from pydantic import BaseModel
 
-from checker_example import choose_example
 from global_config import global_config
 from model import invoke_llm
 from tools import error_formatting, grab_error_message
@@ -22,6 +22,7 @@ class Example(BaseModel):
     pattern: str
     plan: str
     checker_code: str
+    project: str = "another project"
 
     @staticmethod
     def load_example_from_dir(checker_dir: str):
@@ -30,13 +31,30 @@ class Example(BaseModel):
         pattern = (checker_dir / "pattern.md").read_text()
         plan = (checker_dir / "plan.md").read_text()
         checker_code = (checker_dir / "checker.cpp").read_text()
+        project = "another project"
+        meta = checker_dir / "meta.yaml"
+        if meta.exists():
+            project = (yaml.safe_load(meta.read_text()) or {}).get("project", project)
 
         return Example(
-            patch=patch, pattern=pattern, plan=plan, checker_code=checker_code
+            patch=patch,
+            pattern=pattern,
+            plan=plan,
+            checker_code=checker_code,
+            project=project,
         )
 
 
-for checker_dir in example_dir.iterdir():
+def _project(prompt: str) -> str:
+    """Fill project-specific placeholders (config is only known at call time)."""
+    if "{{project_feasibility}}" in prompt:
+        name = global_config.project_feasibility
+        feasibility = (prompt_template_dir / "knowledge" / f"feasibility-{name}.md").read_text()
+        prompt = prompt.replace("{{project_feasibility}}", feasibility)
+    return prompt.replace("{{project_description}}", global_config.project_description)
+
+
+for checker_dir in sorted(example_dir.iterdir()):
     if not checker_dir.is_dir():
         continue
     default_checker_examples.append(Example.load_example_from_dir(checker_dir))
@@ -51,7 +69,10 @@ def get_example_text(
 ):
     example_text = ""
     for i, example in enumerate(example_list):
-        example_text += f"## Example {i+1}\n"
+        example_text += (
+            f"## Example {i+1} (from {example.project}; its functions and APIs are "
+            f"specific to that project)\n"
+        )
         if need_patch:
             example_text += example.patch + "\n\n"
         if need_pattern:
@@ -140,7 +161,7 @@ label_commit_template = (prompt_template_dir / "label_commit.md").read_text()
 
 def label_commit(id: str, iter: int, commit_id, patch: str):
     logger.info("start generating label_commit prompts")
-    label_commit_prompt = label_commit_template.replace("{{input_patch}}", patch)
+    label_commit_prompt = _project(label_commit_template).replace("{{input_patch}}", patch)
 
     prompt_history_dir = (
         Path(global_config.result_dir) / id / "prompt_history" / str(iter)
@@ -156,7 +177,7 @@ def label_commit(id: str, iter: int, commit_id, patch: str):
         logger.info("label_commit already exists")
         response = response_store.read_text()
     else:
-        response = invoke_llm(label_commit_prompt)
+        response = invoke_llm(label_commit_prompt, stage="label_commit")
 
     if response is not None:
         response_store.write_text(response)
@@ -167,7 +188,7 @@ def label_commit(id: str, iter: int, commit_id, patch: str):
 
 def patch2checker(id: str, iter: int, patch: str):
     logger.info("start generating patch2checker prompts")
-    patch2checker_prompt = patch2checker_template.replace("{{input_patch}}", patch)
+    patch2checker_prompt = _project(patch2checker_template).replace("{{input_patch}}", patch)
 
     prompt_history_dir = (
         Path(global_config.result_dir) / id / "prompt_history" / str(iter)
@@ -178,7 +199,7 @@ def patch2checker(id: str, iter: int, patch: str):
     path2store.write_text(patch2checker_prompt)
     logger.info("finish patch2checker generation")
 
-    response = invoke_llm(patch2checker_prompt)
+    response = invoke_llm(patch2checker_prompt, stage="patch2checker")
     response_store = prompt_history_dir / "response_checker.md"
     response_store.write_text(response)
     return response
@@ -188,9 +209,9 @@ def patch2pattern(id: str, iter: int, patch_info: str, use_general=False):
     logger.info("start generating patch2pattern prompts")
     if use_general:
         logger.warning("Use general template for patch2pattern")
-        template = patch2pattern_general_template
+        template = _project(patch2pattern_general_template)
     else:
-        template = patch2pattern_template
+        template = _project(patch2pattern_template)
 
     patch2pattern_prompt = template.replace("{{input_patch}}", patch_info)
 
@@ -203,7 +224,7 @@ def patch2pattern(id: str, iter: int, patch_info: str, use_general=False):
     path2store.write_text(patch2pattern_prompt)
     logger.info("finish patch2pattern generation")
 
-    response = invoke_llm(patch2pattern_prompt)
+    response = invoke_llm(patch2pattern_prompt, stage="patch2pattern")
     response_store = prompt_history_dir / "response_patch2pattern.md"
 
     response_store.write_text(response)
@@ -241,6 +262,8 @@ def pattern2plan(
 
     if sample_examples:
         logger.warning("Sample examples for pattern2plan")
+        from checker_example import choose_example  # imports torch: only when sampling
+
         example_list = choose_example(pattern, "pattern")
     else:
         example_list = default_checker_examples
@@ -293,7 +316,7 @@ def pattern2plan(
     path2store.write_text(pattern2plan_prompt)
     logger.info("finish pattern2plan generation")
 
-    response = invoke_llm(pattern2plan_prompt)
+    response = invoke_llm(pattern2plan_prompt, stage="pattern2plan")
     response_store = prompt_history_dir / "response_plan.md"
 
     response_store.write_text(response)
@@ -318,6 +341,8 @@ def plan2checker(
 
     if sample_examples:
         logger.warning("Sample examples for plan2checker")
+        from checker_example import choose_example  # imports torch: only when sampling
+
         example_list = choose_example(refined_plan, "plan")
     else:
         example_list = default_checker_examples
@@ -346,7 +371,7 @@ def plan2checker(
     path2store.write_text(plan2checker_prompt)
     logger.info("finish plan2checker generation")
 
-    response = invoke_llm(plan2checker_prompt)
+    response = invoke_llm(plan2checker_prompt, stage="plan2checker")
     response_store = prompt_history_dir / "response_checker.md"
 
     response_store.write_text(response)
@@ -355,7 +380,7 @@ def plan2checker(
 
 def check_report(id: str, iter: int, report_id, report_md, pattern: str, patch: str):
     logger.info("start generating check_report prompts")
-    check_report = (prompt_template_dir / "check_report.md").read_text()
+    check_report = _project((prompt_template_dir / "check_report.md").read_text())
     check_report_prompt = check_report.replace("{{input_bug_report}}", report_md)
     check_report_prompt = check_report_prompt.replace(
         "{{input_bug_pattern}}", pattern.strip("```")
@@ -371,7 +396,7 @@ def check_report(id: str, iter: int, report_id, report_md, pattern: str, patch: 
     path2store.write_text(check_report_prompt)
     logger.info("finish check_report generation")
 
-    response = invoke_llm(check_report_prompt, temperature=0.01)
+    response = invoke_llm(check_report_prompt, temperature=0.01, stage="check_report")
     response_store = prompt_history_dir / f"response_check_report-{report_id}.md"
 
     if response is not None:
@@ -394,7 +419,7 @@ def reduce_report(id: str, iter: int, report_id, report_md):
         logger.info("reduce_report already exists")
         return response_store.read_text()
 
-    reduce_report = Path("prompt_template/reduce_report.md").read_text()
+    reduce_report = (prompt_template_dir / "reduce_report.md").read_text()
     reduce_report_prompt = reduce_report.replace("{{input_bug_report}}", report_md)
 
     path2store = prompt_history_dir / f"reduce_report-{report_id}.md"
@@ -403,7 +428,7 @@ def reduce_report(id: str, iter: int, report_id, report_md):
     path2store.write_text(reduce_report_prompt)
     logger.info("finish reduce_report generation")
 
-    response = invoke_llm(reduce_report_prompt, temperature=0.01)
+    response = invoke_llm(reduce_report_prompt, temperature=0.01, stage="reduce_report")
 
     if response is not None:
         response_store.write_text(response)
@@ -443,7 +468,7 @@ def repair_FP(
     path2store.write_text(repair_FP_prompt)
     logger.info("finish repair_FP generation")
 
-    response = invoke_llm(repair_FP_prompt)
+    response = invoke_llm(repair_FP_prompt, stage="repair_FP")
     response_store = prompt_history_dir / f"response_repair_FP-{commit_id}.md"
 
     response_store.write_text(response)
@@ -469,7 +494,7 @@ def repair_syntax(id: str, iter: int, times, checker_code, error_content):
     path2store.write_text(prompt)
     logger.info("finish repair_syntax generation")
 
-    response = invoke_llm(prompt)
+    response = invoke_llm(prompt, stage="repair_syntax")
     if response is None:
         logger.error("Empty response")
         response = "SKIP"
