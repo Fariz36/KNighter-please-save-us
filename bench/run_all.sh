@@ -20,23 +20,15 @@ if command -v powershell.exe > /dev/null; then
   echo "keep-awake helper pid $AWAKE_PID"
 fi
 echo "code snapshot: $KNIGHTER_CODE_ROOT ($(cut -c1-16 "$SNAP.sha256"))"
-# Per project: baseline then optimized (adjacent, so provider-load drift hits both alike).
-for spec in "A-lua:configs/lua.yaml:bench/commits-lua.txt:baseline" \
-            "B-lua:configs/lua.yaml:bench/commits-lua.txt:optimized" \
-            "A-re2:configs/re2.yaml:bench/commits-re2.txt:baseline" \
-            "B-re2:configs/re2.yaml:bench/commits-re2.txt:optimized" \
-            "A-yaml-cpp:configs/yaml-cpp.yaml:bench/commits-yaml-cpp.txt:baseline" \
-            "B-yaml-cpp:configs/yaml-cpp.yaml:bench/commits-yaml-cpp.txt:optimized" \
-            "A-libxml2:configs/libxml2.yaml:bench/commits-libxml2.txt:baseline" \
-            "B-libxml2:configs/libxml2.yaml:bench/commits-libxml2.txt:optimized" \
-            "A-sqlite:configs/sqlite.yaml:bench/commits-sqlite.txt:baseline" \
-            "B-sqlite:configs/sqlite.yaml:bench/commits-sqlite.txt:optimized" \
-            "A-curl:configs/curl.yaml:bench/commits-curl.txt:baseline" \
-            "B-curl:configs/curl.yaml:bench/commits-curl.txt:optimized" \
-            "A-libgit2:configs/libgit2.yaml:bench/commits-libgit2.txt:baseline" \
-            "B-libgit2:configs/libgit2.yaml:bench/commits-libgit2.txt:optimized"; do
+# Run list: $SPECS (space-separated name:config:commits:variant), default the full A/B set.
+# Extra key=value overrides for every run: $OVERRIDES (e.g. "role_based_checkers=true").
+DEFAULT_SPECS=""
+for proj in lua re2 yaml-cpp libxml2 sqlite curl libgit2; do
+  DEFAULT_SPECS="$DEFAULT_SPECS A-$proj:configs/$proj.yaml:bench/commits-$proj.txt:baseline B-$proj:configs/$proj.yaml:bench/commits-$proj.txt:optimized"
+done
+for spec in ${SPECS:-$DEFAULT_SPECS}; do
   IFS=: read name cfg commits variant <<< "$spec"
   echo "=== $(date -Is) start $TAG-$name"
-  $PY bench/run_bench.py "$TAG-$name" "$cfg" "$commits" "$variant"
+  $PY bench/run_bench.py "$TAG-$name" "$cfg" "$commits" "$variant" $OVERRIDES
   echo "=== $(date -Is) end $TAG-$name"
 done
