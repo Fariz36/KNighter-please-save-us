@@ -1,0 +1,7 @@
+{"commit": "ddcb79dc9934fd8a26263f6368c4eb7aa43f6d49", "status": "OK", "files": ["parserInternals.c", "testparser.c"], "seconds": 12}
+{"commit": "962bd10d01151d29190567e2d15ccf641be55063", "status": "OK", "files": ["xmlmemory.c"], "seconds": 14}
+{"commit": "26dfab2f8fd36fc3aba8c25c7c358530d9712c7a", "status": "OK", "files": ["parser.c"], "seconds": 15}
+{"commit": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1", "status": "OK", "files": ["xmlregexp.c"], "seconds": 17}
+{"commit": "6be0acd2afb3f55af3c721e1e35ac6675df3057a", "status": "OK", "files": ["tree.c"], "seconds": 12}
+{"commit": "a7511af09f99995cdf81994db21f4eba564276b5", "status": "OK", "files": ["xmlregexp.c"], "seconds": 13}
+{"commit": "c8eaf2236ff16667970f96f3f01e119c99d38ab2", "status": "OK", "files": ["parser.c"], "seconds": 8}

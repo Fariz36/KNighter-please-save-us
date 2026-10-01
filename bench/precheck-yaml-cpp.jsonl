@@ -1,0 +1,3 @@
+{"commit": "8b2e6ba3288de15ed7a61d5c89cde2ed47327c1e", "status": "MISSING {'buggy': ['test/integration/handler_test.cpp'], 'fixed': ['test/integration/handler_test.cpp']}", "files": ["src/scanner.cpp", "test/integration/handler_test.cpp"], "seconds": 18}
+{"commit": "c7aa78d294bbe499c1ebc0abfa1e103490c8525f", "status": "MISSING {'buggy': ['test/fptostring_test.cpp'], 'fixed': ['test/fptostring_test.cpp']}", "files": ["src/fptostring.cpp", "test/fptostring_test.cpp"], "seconds": 14}
+{"commit": "80ea0028c7ba35e6a267e1778eab78a3ee82e8b9", "status": "MISSING {'buggy': ['test/binary_test.cpp'], 'fixed': ['test/binary_test.cpp']}", "files": ["src/binary.cpp", "test/binary_test.cpp"], "seconds": 14}

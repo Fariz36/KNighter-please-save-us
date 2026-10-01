@@ -1,0 +1,8 @@
+{"commit": "7b60ed803b", "status": "OK", "files": ["src/trigger.c"], "seconds": 88}
+{"commit": "a7200804eb", "status": "OK", "files": ["src/printf.c"], "seconds": 97}
+{"commit": "d87f8c4965", "status": "OK", "files": ["src/printf.c"], "seconds": 101}
+{"commit": "720d3afa7e", "status": "OK", "files": ["src/btree.c"], "seconds": 105}
+{"commit": "1bc183a935", "status": "OK", "files": ["src/alter.c"], "seconds": 135}
+{"commit": "97467fa8fa", "status": "OK", "files": ["src/os_kv.c"], "seconds": 138}
+{"commit": "ffbfc27fab", "status": "OK", "files": ["src/vdbe.c"], "seconds": 139}
+{"commit": "2f5d281796", "status": "OK", "files": ["src/func.c"], "seconds": 141}
