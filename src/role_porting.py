@@ -121,11 +121,17 @@ def _target_name() -> str:
     return (global_config.get("target_options") or {}).get("name") or global_config.get("target_type")
 
 
-def port_roles(bundle_dir, commit=None, top_k: int = 40):
+def port_roles(bundle_dir, commit=None, top_k: int = 40, out_name=None):
+    """Map the bundle's roles to the configured target; writes roles/<out_name>.json.
+
+    ``out_name`` defaults to the target name; use another name to avoid
+    overwriting a bundle's own roles file (e.g. self-port experiments).
+    """
     bundle = Path(bundle_dir)
     manifest = yaml.safe_load((bundle / "manifest.yaml").read_text())
     roles = manifest.get("roles") or {}
     target = _target_name()
+    out_name = out_name or target
     if not roles:
         raise ValueError(f"{bundle.name} has no roles: nothing to port (not role-based)")
 
@@ -154,7 +160,7 @@ def port_roles(bundle_dir, commit=None, top_k: int = 40):
     )
     out = bundle / "ports"
     out.mkdir(exist_ok=True)
-    (out / f"{target}.prompt.md").write_text(prompt)
+    (out / f"{out_name}.prompt.md").write_text(prompt)
 
     start = time.monotonic()
     response = invoke_llm(prompt, stage="port_roles", temperature=0.01)
@@ -168,7 +174,7 @@ def port_roles(bundle_dir, commit=None, top_k: int = 40):
         dropped[role] = [n for n in names if n not in valid]
         rationale[role] = entry.get("rationale", "") if isinstance(entry, dict) else ""
 
-    (bundle / "roles" / f"{target}.json").write_text(json.dumps(mapping, indent=2))
+    (bundle / "roles" / f"{out_name}.json").write_text(json.dumps(mapping, indent=2))
     report = {
         "target": target,
         "commit": checkout.revision,
@@ -179,6 +185,6 @@ def port_roles(bundle_dir, commit=None, top_k: int = 40):
         "rationale": rationale,
         "llm_seconds": round(time.monotonic() - start, 1),
     }
-    (out / f"{target}.json").write_text(json.dumps(report, indent=2))
+    (out / f"{out_name}.json").write_text(json.dumps(report, indent=2))
     logger.info(f"Ported {bundle.name} roles to {target}: {mapping}")
     return mapping
