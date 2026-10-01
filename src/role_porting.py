@@ -22,6 +22,26 @@ from tools import extract_json_block
 
 PROMPT = Path(__file__).resolve().parent.parent / "prompt_template" / "port_roles.md"
 HEADER_EXTENSIONS = (".h", ".hh", ".hpp", ".hxx")
+# Template headers generated at build time (e.g. SQLite's public API in sqlite.h.in).
+HEADER_TEMPLATE_SUFFIXES = (".h.in", ".hpp.in")
+
+# Words that name the same API category; a role about "free" must also find
+# "delete"/"release"/"destroy" functions.
+SYNONYMS = [
+    {"free", "release", "delete", "destroy", "dispose", "unref", "drop", "dealloc", "deallocate", "cleanup", "clear", "finalize", "close"},
+    {"alloc", "malloc", "calloc", "new", "create", "make", "dup", "strdup", "allocate", "init", "open"},
+    {"realloc", "resize", "grow", "expand", "reserve"},
+    {"err", "error", "fail", "failf", "raise", "report", "set"},
+    {"lock", "mutex", "acquire", "enter"},
+    {"unlock", "leave", "exit"},
+    {"len", "length", "size", "count", "num"},
+    {"copy", "cpy", "memcpy", "dup", "clone"},
+    {"assert", "check", "verify", "ensure", "require"},
+    {"ref", "incref", "retain", "hold", "get"},
+    {"put", "decref", "unref"},
+    {"str", "string", "text"},
+    {"buf", "buffer"},
+]
 SKIP_DIRS = ("test", "tests", "testing", "doc", "docs", "example", "examples", "fuzz", "fuzzing")
 
 _FUNC_DECL = re.compile(
@@ -43,7 +63,9 @@ def extract_candidates(root: Path) -> Dict[str, str]:
     candidates: Dict[str, str] = {}
     stdlib = standard_names()
     for header in sorted(root.rglob("*")):
-        if header.suffix not in HEADER_EXTENSIONS or not header.is_file():
+        if not header.is_file() or not (
+            header.suffix in HEADER_EXTENSIONS or header.name.endswith(HEADER_TEMPLATE_SUFFIXES)
+        ):
             continue
         rel = header.relative_to(root)
         if any(part.lower() in SKIP_DIRS for part in rel.parts[:-1]) or rel.parts[0].startswith("."):
@@ -62,18 +84,34 @@ def extract_candidates(root: Path) -> Dict[str, str]:
     return candidates
 
 
+def _expand(words):
+    expanded = set(words)
+    for group in SYNONYMS:
+        if expanded & group:
+            expanded |= group
+    return expanded
+
+
 def rank_candidates(role: str, description: str, source_names: List[str],
                     candidates: Dict[str, str], top_k: int = 40) -> List[str]:
-    """Candidates sharing the most words with the role, its description and source names."""
-    words = set(split_words(role)) | set(split_words(" ".join(source_names)))
-    words |= {w for w in split_words(description) if len(w) > 3}
-    # Project prefixes (git, xml, curl, sqlite3) say nothing about the role.
-    words -= {w for name in source_names for w in split_words(name)[:1]}
+    """Candidates sharing the most words with the role (weighted highest), the
+    source project's names for it, and its description (weighted lowest).
+
+    Role and source-name words are expanded with synonyms (free ~ delete ~
+    release ...). Source project prefixes (git, xml, curl, sqlite3) are ignored.
+    """
+    prefixes = {split_words(name)[0] for name in source_names if split_words(name)}
+    core = _expand(set(split_words(role)) | {w for n in source_names for w in split_words(n)[1:]})
+    core -= prefixes
+    described = {w for w in split_words(description) if len(w) > 3} - core - prefixes
+
+    def matches(part, words):
+        return part in words or any(len(w) > 3 and len(part) > 3 and (w in part or part in w) for w in words)
+
     scored = []
     for name in candidates:
         parts = split_words(name)
-        score = sum(2 if p in words else 0 for p in parts)
-        score += sum(1 for w in words if len(w) > 3 and any(w in p or p in w for p in parts))
+        score = 3 * sum(matches(p, core) for p in parts) + sum(matches(p, described) for p in parts)
         if score:
             scored.append((-score, len(name), name))
     return [name for _, _, name in sorted(scored)[:top_k]]

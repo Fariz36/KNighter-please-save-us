@@ -44,6 +44,21 @@ class PortingTest(unittest.TestCase):
         free_ranked = rank_candidates("deallocator", "releases heap memory", ["git__free"], cands)
         self.assertEqual("xmlFree", free_ranked[0])
 
+    def test_synonyms_and_template_headers(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "src").mkdir()
+            (root / "src" / "sqlite.h.in").write_text("SQLITE_API void sqlite3_free(void*);\n")
+            (root / "src" / "sqliteInt.h").write_text(
+                "void sqlite3ExprListDelete(sqlite3*, ExprList*);\nint sqlite3ExprCompare(Expr*, Expr*);\n")
+            cands = extract_candidates(root)
+        self.assertIn("sqlite3_free", cands)
+        ranked = rank_candidates("deallocator",
+                                 "frees an owned resource that a consumer was supposed to release on failure",
+                                 ["xmlFreeDoc"], cands)
+        self.assertEqual({"sqlite3_free", "sqlite3ExprListDelete"}, set(ranked[:2]))
+        self.assertNotIn("sqlite3ExprCompare", ranked)
+
     def test_extract_json_block(self):
         text = 'Here:\n```json\n{"allocator": {"names": ["xmlMalloc"]}}\n```\n'
         self.assertEqual({"allocator": {"names": ["xmlMalloc"]}}, extract_json_block(text))

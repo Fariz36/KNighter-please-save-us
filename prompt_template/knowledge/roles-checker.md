@@ -5,6 +5,17 @@ fields are referred to only through **roles**, so the same checker can run on an
 different roles file. Standard C/C++ library names (malloc, free, memcpy, strlen, std::vector, ...)
 may still be used directly.
 
+Use roles from this standard vocabulary whenever one fits (they map well to other projects):
+`allocator`, `deallocator`, `reallocator`, `duplicator` (returns a new copy, e.g. strdup-like),
+`null_on_failure` (may return NULL), `error_setter` (records/reports an error, printf-like),
+`aborting_assert` (stops execution when its condition is false), `length_of`, `buffer_copy`,
+`bounded_copy`, `lock`, `unlock`, `ref_get`, `ref_put`, `init`, `cleanup`, `container_insert`,
+`container_remove`, `parser_input`, `untrusted_size`.
+A role is an **API category that most C/C++ projects have**, not a description of this patch: name and
+describe what *any* function in that category does (e.g. "frees memory or an object; the pointer must
+not be used afterwards"), never which object, struct or call site it is in this project. Use at most 6
+roles. Only invent a new role when no category fits, and then keep it equally generic.
+
 Rules:
 1. `#include "knighter/roles.h"` and query roles with:
    - `knighter::callIsRole(Call, "allocator")`: is the callee of `Call` an allocator?
