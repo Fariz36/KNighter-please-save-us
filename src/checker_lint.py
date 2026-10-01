@@ -84,10 +84,10 @@ def find_hardcoded_identifiers(checker_code: str) -> List[Finding]:
     findings = []
     for match in _STRING.finditer(code):
         literal = match.group(1)
-        if literal in role_names:
-            continue
+        if literal in role_names or re.search(r"\s", literal):
+            continue  # role names, and natural-language text (bug descriptions)
         # "git_" prefixes and "a|b" alternatives are split into candidate names.
-        for part in re.split(r"[|,\s]+", literal):
+        for part in re.split(r"[|,]+", literal):
             candidate = part.rstrip("_") if part.endswith("_") and len(part) > 1 else part
             if candidate and (looks_project_specific(candidate) or (part != candidate and _IDENT.match(candidate))):
                 line = code.count("\n", 0, match.start()) + 1

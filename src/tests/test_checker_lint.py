@@ -10,6 +10,7 @@ void SAGenTestChecker::checkPreCall(const CallEvent &Call, CheckerContext &C) co
   if (!knighter::callIsRole(Call, "error_setter")) return;
   if (isCallTo(Call, "memcpy", C) || isCallTo(Call, "strlen", C)) return;
   BT.reset(new BugType(this, "Misuse", "Logic error"));
+  report("roles E2E test: sqlite3_free called twice");
 }
 /* KNIGHTER_ROLES
 {"error_setter": ["git_error_set"], "deallocator": ["git__free"]}
