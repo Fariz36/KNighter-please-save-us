@@ -16,17 +16,84 @@ from typing import List, Optional, Tuple
 from html2text import html2text
 from loguru import logger
 
+from backends.csa_compiledb import CompileDBMixin
 from backends.factory import AnalysisBackendFactory
+from backends.plugin_builder import PluginBuilder
 from checker_data import ReportData
-from targets.factory import TargetFactory
+from targets.factory import CompileDBTargetBase, TargetFactory
 from targets.linux import Linux
 from tools import monitor_build_output, remove_text_section
 
 
-class ClangBackend(AnalysisBackendFactory):
+class ClangBackend(CompileDBMixin, AnalysisBackendFactory):
     """
     Concrete implementation of the Backend class for CSA.
     """
+
+    def __init__(
+        self,
+        backend_path: str,
+        plugin_build: str = "standalone",
+        plugin_cache_dir: str = "tmp/plugin-cache",
+        plugin_opt_level: str = "-O1",
+        plugin_pch: bool = True,
+        max_parallel_plugin_builds: int = 4,
+        plugin_cache: bool = True,
+        plugin_preamble: bool = True,
+        analysis_jobs: int = 8,
+        analysis_timeout: int = 600,
+        max_loop: int = 4,
+        validation_scoring: str = "strict",
+    ):
+        """
+        Args:
+            plugin_build: "standalone" builds every checker into its own
+                content-addressed plugin outside the LLVM tree (no shared
+                state); "legacy" is the upstream in-tree `make SAGenTestPlugin`.
+            validation_scoring: "strict" (report location must hit the patched
+                function) or "legacy" (upstream report-count rule).
+        """
+        super().__init__(backend_path)
+        if plugin_build not in ("standalone", "legacy"):
+            raise ValueError(f"Unknown plugin_build: {plugin_build}")
+        if validation_scoring not in ("strict", "legacy"):
+            raise ValueError(f"Unknown validation_scoring: {validation_scoring}")
+        self.plugin_build = plugin_build
+        self.analysis_jobs = analysis_jobs
+        self.analysis_timeout = analysis_timeout
+        self.max_loop = max_loop
+        self.validation_scoring = validation_scoring
+        self.clang_path = (self.backend_path / "build" / "bin" / "clang").absolute()
+        self.plugin_builder = None
+        if plugin_build == "standalone":
+            self.plugin_builder = PluginBuilder(
+                self.backend_path,
+                Path(plugin_cache_dir),
+                opt_level=plugin_opt_level,
+                use_pch=plugin_pch,
+                max_parallel=max_parallel_plugin_builds,
+                cache=plugin_cache,
+                preamble=plugin_preamble,
+            )
+
+    def plugin_for(self, checker_code: str) -> Optional[Path]:
+        """The plugin built from exactly ``checker_code`` (built on demand).
+
+        Standalone plugins are content-addressed, so callers never depend on
+        which checker happened to be built last. Legacy mode rebuilds the
+        shared in-tree plugin.
+        """
+        if self.plugin_builder is not None:
+            code, stderr, path = self.plugin_builder.build(checker_code)
+            if code != 0:
+                logger.error(f"Checker does not compile: {stderr[-500:]}")
+                return None
+            return path
+        code, stderr = self.build_checker(checker_code, Path("tmp"), attempt=1)
+        if code != 0:
+            logger.error(f"Checker does not compile: {stderr[-500:]}")
+            return None
+        return (self.backend_path / "build" / "lib" / "SAGenTestPlugin.so").absolute()
 
     _default_args = [
         ("-disable-checker", "core"),
@@ -65,6 +132,13 @@ class ClangBackend(AnalysisBackendFactory):
         Args:
             checker_code (str): The checker code to build.
         """
+        if self.plugin_builder is not None and checker_name == "SAGenTest":
+            log_dir.mkdir(parents=True, exist_ok=True)
+            code, stderr, plugin = self.plugin_builder.build(checker_code, explicit=True)
+            (log_dir / f"build_stderr_{attempt}.log").write_text(stderr)
+            (log_dir / f"build_plugin_{attempt}.txt").write_text(str(plugin))
+            return code, stderr
+
         # Write the checker code to a file
         checker_file_path = (
             self.backend_path
@@ -416,8 +490,16 @@ extern "C" const char clang_analyzerAPIVersionString[] =
         patch,
         target: TargetFactory,
         skip_build_checker=False,
+        details_out: Optional[Path] = None,
     ) -> Tuple[int, int]:
+        """Validate on the buggy (commit^) and fixed (commit) revisions.
 
+        ``details_out``: optional JSON path for per-report details (compiledb).
+        """
+        if isinstance(target, CompileDBTargetBase):
+            return self._validate_checker_compiledb(
+                checker_code, commit_id, patch, target, details_out=details_out
+            )
         if target._target_type == "linux":
             return self._validate_checker_linux(
                 checker_code, commit_id, patch, target, skip_build_checker
@@ -458,6 +540,16 @@ extern "C" const char clang_analyzerAPIVersionString[] =
             int: Number of bugs found.
         """
 
+        if isinstance(target, CompileDBTargetBase):
+            return self._run_checker_compiledb(
+                checker_code,
+                commit_id,
+                target,
+                object_to_analyze=object_to_analyze,
+                jobs=jobs,
+                output_dir=output_dir,
+                **kwargs,
+            )
         if target._target_type == "linux":
             return self._run_checker_linux(
                 checker_code,
@@ -508,21 +600,32 @@ extern "C" const char clang_analyzerAPIVersionString[] =
         """
 
         TP, TN = 0, 0
-        if not skip_build_checker:
+        plugin_path = None
+        if self.plugin_builder is not None:
+            plugin_path = self.plugin_for(checker_code)
+            if plugin_path is None:
+                return -1, -1
+        elif not skip_build_checker:
             self.build_checker(
                 checker_code,
                 Path("tmp"),
                 attempt=1,
             )
 
-        comd_prefix = self._generate_command()
+        comd_prefix = self._generate_command(plugin_path=plugin_path)
         olddefcmd = comd_prefix + "make LLVM=1 ARCH=x86 olddefconfig"
-        target.checkout_commit(commit_id, is_before=True, olddefcmd=olddefcmd)
+        incremental = getattr(target, "incremental", False)
+        target.checkout_commit(
+            commit_id, is_before=True, olddefcmd=olddefcmd, clean=not incremental
+        )
 
         # Get the modified objects from the patch
         num_bug_obj = {}
         objects = target.get_objects_from_patch(patch)
         for obj in objects:
+            if incremental:
+                # scan-build only analyzes what is recompiled.
+                (Path(target.repo.working_dir) / obj).unlink(missing_ok=True)
             comd = comd_prefix + f"make LLVM=1 ARCH=x86 {obj} -j8"
             logger.info("Running: " + comd)
             try:
@@ -559,8 +662,12 @@ extern "C" const char clang_analyzerAPIVersionString[] =
                 return -1, -1
 
         olddefcmd = comd_prefix + "make LLVM=1 ARCH=x86 olddefconfig"
-        target.checkout_commit(commit_id, is_before=False, olddefcmd=olddefcmd)
+        target.checkout_commit(
+            commit_id, is_before=False, olddefcmd=olddefcmd, clean=not incremental
+        )
         for obj in objects:
+            if incremental:
+                (Path(target.repo.working_dir) / obj).unlink(missing_ok=True)
             comd = comd_prefix + f"make LLVM=1 ARCH=x86 {obj} -j8 2>&1"
             try:
                 res = sp.run(
@@ -623,13 +730,18 @@ extern "C" const char clang_analyzerAPIVersionString[] =
         arch = kwargs.get("arch", "x86")
         timeout = kwargs.get("timeout", 1800)
 
-        if not skip_build_checker:
+        plugin_path = None
+        if self.plugin_builder is not None:
+            plugin_path = self.plugin_for(checker_code)
+            if plugin_path is None:
+                raise Exception("Build failed, skipping analysis.")
+        elif not skip_build_checker:
             build_res, _ = self.build_checker(checker_code, Path("tmp"), attempt=1)
             if build_res != 0:
                 logger.error("Build failed, skipping analysis.")
                 raise Exception("Build failed, skipping analysis.")
 
-        comd_prefix = self._generate_command(no_output=True)
+        comd_prefix = self._generate_command(no_output=True, plugin_path=plugin_path)
         comd_prefix += "-o " + output_dir.absolute().as_posix()
 
         # Note: kernel cleaning is handled by target.checkout_commit() which runs 'make clean'
@@ -2171,7 +2283,7 @@ extern "C" const char clang_analyzerAPIVersionString[] =
 
         return source_files
 
-    def _generate_command(self, no_output=False, plugin_names=None):
+    def _generate_command(self, no_output=False, plugin_names=None, plugin_path=None):
         """
         Generate the command to run the analysis.
 
@@ -2190,7 +2302,8 @@ extern "C" const char clang_analyzerAPIVersionString[] =
                 comd += f"-load-plugin {llvm_build_dir}/lib/{plugin_name}Plugin.so "
                 comd += f"-enable-checker custom.{plugin_name}Checker "
         else:
-            comd += f"-load-plugin {llvm_build_dir}/lib/SAGenTestPlugin.so "
+            plugin_path = plugin_path or f"{llvm_build_dir}/lib/SAGenTestPlugin.so"
+            comd += f"-load-plugin {plugin_path} "
             comd += "-enable-checker custom.SAGenTestChecker "
 
         # Use appropriate arguments based on target type
@@ -2261,6 +2374,9 @@ extern "C" const char clang_analyzerAPIVersionString[] =
         Returns:
             list: List of objects found in the report.
         """
+        if isinstance(target, CompileDBTargetBase):
+            return ClangBackend._objects_from_report_compiledb(report, target)
+
         # Find `File:| XXX.c`
         pattern = r"File:\| (.*).c"
         matches = re.findall(pattern, report)
@@ -2285,7 +2401,9 @@ extern "C" const char clang_analyzerAPIVersionString[] =
         Extract reports from the report directory and process them into markdown files.
         """
         report_dir = Path(report_dir)
-        stop_num = max(sampled_num, stop_num)
+        # (Upstream forced stop_num >= sampled_num, which made a configured
+        # min_reports_for_triage below the sample size ineffective. Sampling
+        # below is already capped by the number of available reports.)
 
         # Sort the report dir by time
         report_dir_list = sorted(
@@ -2323,7 +2441,10 @@ extern "C" const char clang_analyzerAPIVersionString[] =
         filename_pattern = re.compile(r"File:\| (.+)")
         for report_html in report_html_list[:max_len]:
             html_content = report_html.read_text()
-            md_content = html2text(html_content)
+            # bodywidth=0: no line wrapping. Wrapped output split long file paths
+            # ("File:| .../.knighter-" / "work/..."), so refinement could not map a
+            # report back to its source file ("Failed to validate on objects").
+            md_content = html2text(html_content, bodywidth=0)
             # This is specific to the report format
             md_content = remove_text_section(md_content, html_content)
             filename = filename_pattern.search(md_content)
