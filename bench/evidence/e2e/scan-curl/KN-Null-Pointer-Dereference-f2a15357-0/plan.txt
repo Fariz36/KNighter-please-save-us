@@ -1,0 +1,29 @@
+1. **Register Program State Set:**
+   - Use `REGISTER_SET_WITH_PROGRAMSTATE(CheckedPtrSet, const MemRegion *)` to track the `MemRegion` of pointer arguments that have been validated as non-NULL. This set is path-sensitive.
+
+2. **Helper Functions:**
+   - `isTargetFunction(const FunctionDecl *FD)`: returns `true` if `FD` is `curl_easy_send` or `curl_easy_recv`.
+   - `isTargetParam(const VarDecl *VD)`: returns `true` if `VD` is the 4th parameter (index 3) of a target function (the `n` parameter).
+   - `getTargetParamRegion(const Expr *E, CheckerContext &C)`: if `E` (ignoring implicit casts) is a `DeclRefExpr` to a target parameter, return its `MemRegion` using `getMemRegionFromExpr(E, C)`; otherwise return `nullptr`.
+
+3. **`checkBranchCondition`:**
+   - Hook `check::BranchCondition`.
+   - Analyze the condition to detect NULL checks on a target parameter `n` (e.g., `!n`, `n`, `n == NULL`, `n != NULL`, `NULL == n`).
+   - If the checked pointer is a target parameter `n`, obtain its `MemRegion` and add it to `CheckedPtrSet` in the current state. Call `C.addTransition(NewState)` to persist the update.
+
+4. **`checkBind`:**
+   - Hook `check::Bind`.
+   - For a store operation (`*n = ...`), the statement `S` is typically a `BinaryOperator` with `BO_Assign`, whose left-hand side is a `UnaryOperator` with `UO_Deref` on `n`.
+   - Extract the pointer expression from the dereference. If it is a target parameter `n`, get its `MemRegion`.
+   - Check if the region is present in `CheckedPtrSet`. If not, report a bug: “Missing NULL check for argument 'n' before write.”
+   - Generate a non-fatal error node and emit a `PathSensitiveBugReport` using `C.emitReport`.
+
+5. **`checkPreCall`:**
+   - Hook `check::PreCall`.
+   - Use `functionKnownToDeref(Call, DerefParams)` to obtain the list of parameter indices that the callee is known to dereference.
+   - For each such index `i`, retrieve the argument expression `Call.getArgExpr(i)`. If it is a target parameter `n`, get its `MemRegion`.
+   - If the region is not in `CheckedPtrSet`, report a bug: “Missing NULL check for argument 'n' before passing to a function that dereferences it.”
+   - Generate a non-fatal error node and emit a `PathSensitiveBugReport`.
+
+6. **Bug Reporting:**
+   - In both `checkBind` and `checkPreCall`, create a `PathSensitiveBugReport` with a concise message (e.g., “Missing NULL check for pointer argument 'n'.”) and emit it via `C.emitReport`.

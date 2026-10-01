@@ -1,0 +1,32 @@
+# KNighter on yaml-cpp (C++, CMake).
+result_dir: "e2e/refine-t0-yaml-cpp"
+LLVM_dir: "/home/faris/RA-MrYudis/Knight/KNighter/llvm"
+key_file: "llm_keys.yaml"
+model: "opencode-go:deepseek-v4.1-flash"
+checker_nums: 3
+max_tokens: 65536
+llm_timeout: 600
+
+project:
+  description: "yaml-cpp, a YAML parser and emitter library written in C++"
+
+target_type: compiledb
+target_options:
+  name: yaml-cpp
+  repo_dir: "/home/faris/RA-MrYudis/Knight/targets/yaml-cpp"
+  work_dir: "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/yaml-cpp"
+  setup:
+    - "cmake -S {src} -B {build} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DYAML_CPP_BUILD_TESTS=OFF -DYAML_CPP_BUILD_TOOLS=OFF -DCMAKE_CXX_COMPILER={clangxx} -DCMAKE_C_COMPILER={clang}"
+  source_extensions: [".cpp"]
+  scan_include: ["src/"]
+
+plugin_build: standalone
+validation_scoring: strict
+analysis_jobs: 8
+analysis_timeout: 600
+max_parallel_plugin_builds: 4
+
+scan_commit: "HEAD"
+min_reports_for_triage: 1
+perfect_report_threshold: 0
+jobs: 8

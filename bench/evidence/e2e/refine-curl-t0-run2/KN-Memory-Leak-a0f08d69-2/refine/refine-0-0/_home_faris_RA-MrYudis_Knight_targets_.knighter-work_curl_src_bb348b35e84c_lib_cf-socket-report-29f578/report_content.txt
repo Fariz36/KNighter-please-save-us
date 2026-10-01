@@ -1,0 +1,265 @@
+### Report Summary
+
+File:| /home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/bb348b35e84c/lib/cf-socket.c  
+---|---  
+Warning:| line 1048, column 5  
+Resource cleanup after struct clear may leak  
+  
+### Annotated Source Code
+
+
+952   |  
+953   | /**
+954   |  * Determine the curl code for a socket connect() == -1 with errno.
+955   |  */
+956   | static CURLcode socket_connect_result(struct Curl_easy *data,
+957   |  const char *ipaddress, int sockerr)
+958   | {
+959   |  if(sockerr == SOCKEINPROGRESS || SOCK_EAGAIN(sockerr))
+960   |  return CURLE_OK;
+961   |  
+962   |  /* unknown error, fallthrough and try another address! */
+963   |   {
+964   |  VERBOSE(char buffer[STRERROR_LEN]);
+965   |  infof(data, "Immediate connect fail for %s: %s", ipaddress,
+966   |  curlx_strerror(sockerr, buffer, sizeof(buffer)));
+967   |  NOVERBOSE((void)ipaddress);
+968   |   }
+969   |   data->state.os_errno = sockerr;
+970   |  /* connect failed */
+971   |  return CURLE_COULDNT_CONNECT;
+972   | }
+973   |  
+974   | struct cf_socket_ctx {
+975   |  struct Curl_peer *peer;
+976   |  struct Curl_sockaddr_ex addr;      /* address to connect to */
+977   |   curl_socket_t sock;                /* current attempt socket */
+978   |  struct ip_quadruple ip;            /* The IP quadruple 2x(addr+port) */
+979   |  struct curltime started_at;        /* when socket was created */
+980   |  struct curltime connected_at;      /* when socket connected/got first byte */
+981   |  struct curltime first_byte_at;     /* when first byte was recvd */
+982   | #ifdef USE_WINSOCK
+983   |  struct curltime last_sndbuf_query_at;  /* when SO_SNDBUF last queried */
+984   |   ULONG sndbuf_size;                     /* the last set SO_SNDBUF size */
+985   | #endif
+986   |  int sockerr;                       /* socket error of last failure or 0 */
+987   | #ifdef DEBUGBUILD
+988   |  int wblock_percent;                /* percent of writes doing EAGAIN */
+989   |  int wpartial_percent;              /* percent of bytes written in send */
+990   |  int rblock_percent;                /* percent of reads doing EAGAIN */
+991   |   size_t recv_max;                   /* max enforced read size */
+992   | #endif
+993   |   uint8_t transport;
+994   |  BIT(got_first_byte);               /* if first byte was received */
+995   |  BIT(listening);                    /* socket is listening */
+996   |  BIT(accepted);                     /* socket was accepted, not connected */
+997   |  BIT(sock_connected);               /* socket is "connected", e.g. in UDP */
+998   |  BIT(active);
+999   |  BIT(stats_reported);
+1000  | };
+1001  |  
+1002  | static CURLcode cf_socket_ctx_init(struct cf_socket_ctx *ctx,
+1003  |  struct Curl_peer *peer,
+1004  |  struct Curl_sockaddr_ex *addr,
+1005  |                                    uint8_t transport)
+1006  | {
+1007  |   memset(ctx, 0, sizeof(*ctx));
+1008  |   Curl_peer_link(&ctx->peer, peer);
+1009  |   ctx->sock = CURL_SOCKET_BAD;
+1010  |   ctx->transport = transport;
+1011  |   ctx->addr = *addr;
+1012  |  
+1013  | #ifdef DEBUGBUILD
+1014  |   {
+1015  |  const char *p = getenv("CURL_DBG_SOCK_WBLOCK");
+1016  |  if(p) {
+1017  |       curl_off_t l;
+1018  |  if(!curlx_str_number(&p, &l, 100))
+1019  |         ctx->wblock_percent = (int)l;
+1020  |     }
+1021  |     p = getenv("CURL_DBG_SOCK_WPARTIAL");
+1022  |  if(p) {
+1023  |       curl_off_t l;
+1024  |  if(!curlx_str_number(&p, &l, 100))
+1025  |         ctx->wpartial_percent = (int)l;
+1026  |     }
+1027  |     p = getenv("CURL_DBG_SOCK_RBLOCK");
+1028  |  if(p) {
+1029  |       curl_off_t l;
+1030  |  if(!curlx_str_number(&p, &l, 100))
+1031  |         ctx->rblock_percent = (int)l;
+1032  |     }
+1033  |     p = getenv("CURL_DBG_SOCK_RMAX");
+1034  |  if(p) {
+1035  |       curl_off_t l;
+1036  |  if(!curlx_str_number(&p, &l, CURL_OFF_T_MAX))
+1037  |         ctx->recv_max = (size_t)l;
+1038  |     }
+1039  |   }
+1040  | #endif
+1041  |  
+1042  |  return CURLE_OK;
+1043  | }
+1044  |  
+1045  | static void cf_socket_ctx_free(struct cf_socket_ctx *ctx)
+1046  | {
+1047  |  if(ctx9.1'ctx' is non-null) {
+    10←Taking true branch→
+1048  |  Curl_peer_unlink(&ctx->peer);
+    11←Resource cleanup after struct clear may leak
+1049  |  curlx_free(ctx);
+1050  |   }
+1051  | }
+1052  |  
+1053  | static CURLcode cf_socket_shutdown(struct Curl_cfilter *cf,
+1054  |  struct Curl_easy *data,
+1055  |  bool *done)
+1056  | {
+1057  |  if(cf->connected) {
+1058  |  struct cf_socket_ctx *ctx = cf->ctx;
+1059  |  
+1060  |  CURL_TRC_CF(data, cf, "cf_socket_shutdown, fd=%" FMT_SOCKET_T, ctx->sock);
+1061  |  /* On TCP, and when the socket looks well and non-blocking mode
+1062  |  * can be enabled, receive dangling bytes before close to avoid
+1063  |  * entering RST states unnecessarily. */
+1064  |  if(ctx->sock != CURL_SOCKET_BAD &&
+1065  |        ctx->transport == TRNSPRT_TCP &&
+1066  |        (curlx_nonblock(ctx->sock, TRUE) >= 0)) {
+1067  |  unsigned char buf[1024];
+1068  |       (void)sread(ctx->sock, buf, sizeof(buf));
+1069  |     }
+1070  |   }
+1071  |   *done = TRUE;
+1072  |  return CURLE_OK;
+1073  | }
+1074  |  
+1075  | static void cf_socket_destroy(struct Curl_cfilter *cf, struct Curl_easy *data)
+1076  | {
+1077  |  struct cf_socket_ctx *ctx = cf->ctx;
+1078  |  
+2101  |  struct cf_socket_ctx *ctx = NULL;
+2102  |  struct Curl_cfilter *cf = NULL;
+2103  |   CURLcode result;
+2104  |  
+2105  |   (void)data;
+2106  |   (void)origin;
+2107  |   (void)conn;
+2108  |   (void)tunnel_peer;
+2109  |   (void)tunnel_transport;
+2110  |  DEBUGASSERT(transport_peer == TRNSPRT_UDP || transport_peer == TRNSPRT_QUIC);
+2111  |   ctx = curlx_calloc(1, sizeof(*ctx));
+2112  |  if(!ctx) {
+2113  |     result = CURLE_OUT_OF_MEMORY;
+2114  |  goto out;
+2115  |   }
+2116  |  
+2117  |   result = cf_socket_ctx_init(ctx, peer, addr, transport_peer);
+2118  |  if(result)
+2119  |  goto out;
+2120  |  
+2121  |   result = Curl_cf_create(&cf, &Curl_cft_udp, ctx);
+2122  |  
+2123  | out:
+2124  |   *pcf = (!result) ? cf : NULL;
+2125  |  if(result) {
+2126  |  curlx_safefree(cf);
+2127  |     cf_socket_ctx_free(ctx);
+2128  |   }
+2129  |  
+2130  |  return result;
+2131  | }
+2132  |  
+2133  | /* this is the TCP filter which can also handle this case */
+2134  | struct Curl_cftype Curl_cft_unix = {
+2135  |  "UNIX",
+2136  |  CF_TYPE_IP_CONNECT,
+2137  |  CURL_LOG_LVL_NONE,
+2138  |   cf_socket_destroy,
+2139  |   cf_tcp_connect,
+2140  |   cf_socket_shutdown,
+2141  |   cf_socket_adjust_pollset,
+2142  |   Curl_cf_def_data_pending,
+2143  |   cf_socket_send,
+2144  |   cf_socket_recv,
+2145  |   cf_socket_cntrl,
+2146  |   cf_socket_conn_is_alive,
+2147  |   Curl_cf_def_conn_keep_alive,
+2148  |   cf_socket_query,
+2149  | };
+2150  |  
+2151  | CURLcode Curl_cf_unix_create(struct Curl_cfilter **pcf,
+2152  |  struct Curl_easy *data,
+2153  |  struct Curl_peer *origin,
+2154  |  struct Curl_peer *peer,
+2155  |                             uint8_t transport_peer,
+2156  |  struct connectdata *conn,
+2157  |  struct Curl_sockaddr_ex *addr,
+2158  |  struct Curl_peer *tunnel_peer,
+2159  |                             uint8_t tunnel_transport)
+2160  | {
+2161  |  struct cf_socket_ctx *ctx = NULL;
+2162  |  struct Curl_cfilter *cf = NULL;
+2163  |   CURLcode result;
+2164  |  
+2165  |   (void)data;
+2166  |   (void)origin;
+2167  |   (void)conn;
+2168  |   (void)tunnel_peer;
+2169  |  (void)tunnel_transport;
+2170  |  DEBUGASSERT(transport_peer == TRNSPRT_UNIX);
+    1Loop condition is false.  Exiting loop→
+2171  |  ctx = curlx_calloc(1, sizeof(*ctx));
+2172  |  if(!ctx) {
+    2←Assuming 'ctx' is non-null→
+    3←Taking false branch→
+2173  |     result = CURLE_OUT_OF_MEMORY;
+2174  |  goto out;
+2175  |   }
+2176  |  
+2177  |  result = cf_socket_ctx_init(ctx, peer, addr, transport_peer);
+2178  |  if(result3.1'result' is 0)
+    4←Taking false branch→
+2179  |  goto out;
+2180  |  
+2181  |  result = Curl_cf_create(&cf, &Curl_cft_unix, ctx);
+2182  |  
+2183  | out:
+2184  |  *pcf = (!result) ? cf : NULL;
+    5←Assuming 'result' is not equal to 0→
+    6←'?' condition is false→
+2185  |  if(result6.1'result' is not equal to 0) {
+    7←Taking true branch→
+2186  |  curlx_safefree(cf);
+    8←Loop condition is false.  Exiting loop→
+2187  |  cf_socket_ctx_free(ctx);
+    9←Calling 'cf_socket_ctx_free'→
+2188  |   }
+2189  |  
+2190  |  return result;
+2191  | }
+2192  |  
+2193  | static timediff_t cf_tcp_accept_timeleft(struct Curl_cfilter *cf,
+2194  |  struct Curl_easy *data)
+2195  | {
+2196  |  struct cf_socket_ctx *ctx = cf->ctx;
+2197  |   timediff_t timeout_ms = DEFAULT_ACCEPT_TIMEOUT;
+2198  |   timediff_t other_ms;
+2199  |  
+2200  | #ifndef CURL_DISABLE_FTP
+2201  |  if(data->set.accepttimeout > 0)
+2202  |     timeout_ms = data->set.accepttimeout;
+2203  | #endif
+2204  |  
+2205  |  /* check if the generic timeout possibly is set shorter */
+2206  |   other_ms = Curl_timeleft_ms(data);
+2207  |  if(other_ms && (other_ms < timeout_ms))
+2208  |  /* note that this also works fine for when other_ms happens to be negative
+2209  |  due to it already having elapsed */
+2210  |     timeout_ms = other_ms;
+2211  |  else {
+2212  |  /* subtract elapsed time */
+2213  |     timeout_ms -= curlx_ptimediff_ms(Curl_pgrs_now(data), &ctx->started_at);
+2214  |  if(!timeout_ms)
+2215  |  /* avoid returning 0 as that means no timeout! */
+2216  |       timeout_ms = -1;
+2217  |   }

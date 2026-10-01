@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing NULL validation of an input handle pointer before dereferencing it. In `curl_url_dup(const CURLU *in)`, the code checks the allocation result `u`, but never checks `in`, then immediately dereferences `in` fields via `DUP(u, in, ...)` and direct accesses like `in->portnum`. Calling the public API with `NULL` therefore causes a NULL pointer dereference. The fix adds a guard such as `if(!in) return NULL;` before any use of `in`.

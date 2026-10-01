@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The code calls a function that can return `NULL` on allocation or construction failure (`hunk_from_entry()`) and immediately uses/inserts its return value without checking for `NULL`. This can insert a `NULL` pointer into `blame->hunks`, leading to a NULL pointer dereference or invalid vector contents later. The fix is to check the returned pointer before `git_vector_insert()` and propagate the error.

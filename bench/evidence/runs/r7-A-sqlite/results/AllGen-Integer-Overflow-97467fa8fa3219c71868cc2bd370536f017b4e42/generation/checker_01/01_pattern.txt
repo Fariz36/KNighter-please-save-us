@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is using a narrow integer type (e.g., `int`) to accumulate a value (`n += (c - 'a') * mult; mult *= 26;`) that can grow exponentially/unboundedly based on attacker-controlled input, without validating bounds during accumulation. The computed value can overflow the integer type, wrapping to a small (or negative) number, which then bypasses the subsequent bounds check (`if( j+n>nOut ) return -1;`) because the overflowed value is no longer larger than `nOut`. The overflowed value is then used as a size argument to `memset()` and to advance the output index `j`, resulting in out-of-bounds/unauthorized memory writes. The fix is to widen the accumulator types so intermediate arithmetic cannot overflow before the bounds check is performed.

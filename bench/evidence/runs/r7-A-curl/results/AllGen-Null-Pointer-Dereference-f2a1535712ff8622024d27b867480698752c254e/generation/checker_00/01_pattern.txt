@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing NULL-pointer validation for an output parameter before dereferencing or writing through it. In `curl_easy_send()`, the `n` pointer is unconditionally written with `*n = written`; in `curl_easy_recv()`, `n` is passed into `Curl_easy_recv()` which writes the received size through it. Passing `NULL` as `n` therefore causes a NULL pointer dereference. The fix checks `if(!n)` at API entry and returns `CURLE_BAD_FUNCTION_ARGUMENT`.

@@ -1,0 +1,68 @@
+{
+  "commit_id": "c7aa78d294bbe499c1ebc0abfa1e103490c8525f",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-yaml-cpp/plugin-cache/plugins/24b738a51544264b6876/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/fptostring.cpp",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "FpToString"
+        ],
+        "fixed_functions": [
+          "FpToString"
+        ]
+      },
+      {
+        "path": "test/fptostring_test.cpp",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": [
+          "TEST"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/fptostring.cpp": []
+    },
+    "fixed": {
+      "src/fptostring.cpp": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 8.83,
+      "fixed": 8.35
+    },
+    "total_seconds": 17.22
+  },
+  "report_dir": "tmp/validation/c7aa78d294bb/212f2cbe"
+}

@@ -1,0 +1,155 @@
+--- attempt_1_original.cpp+++ attempt_1.cpp@@ -14,7 +14,6 @@ #include "clang/AST/StmtVisitor.h"
+ #include "llvm/Support/raw_ostream.h"
+ #include "llvm/Support/Casting.h"
+-#include "clang/StaticAnalyzer/Checkers/utility.h"
+ 
+ #include "clang/AST/Expr.h"
+ #include "clang/AST/Stmt.h"
+@@ -22,13 +21,48 @@ 
+ #include <memory>
+ 
++#include "clang/AST/ASTContext.h"
++#include "clang/AST/Decl.h"
++#include "clang/StaticAnalyzer/Core/PathSensitive/SVals.h"
++
+ using namespace clang;
+ using namespace ento;
+ using namespace taint;
+ 
+-REGISTER_MAP_WITH_PROGRAMSTATE(ZeroedRegions, const MemRegion *, bool)
++REGISTER_MAP_WITH_PROGRAMSTATE(ZeroedRegions, const MemRegion *, unsigned)
++REGISTER_MAP_WITH_PROGRAMSTATE(InitializedRegions, const MemRegion *, unsigned)
++REGISTER_TRAIT_WITH_PROGRAMSTATE(ZeroedGeneration, unsigned)
+ 
+ namespace {
++
++bool ExprHasName(const Expr *E, StringRef Name, CheckerContext &) {
++  if (!E)
++    return false;
++  const CallExpr *CE = llvm::dyn_cast<CallExpr>(E);
++  if (!CE)
++    return false;
++  const FunctionDecl *FD = CE->getDirectCallee();
++  if (!FD)
++    return false;
++  return FD->getName() == Name;
++}
++
++const MemRegion *getMemRegionFromExpr(const Expr *E, CheckerContext &C) {
++  if (!E)
++    return nullptr;
++  SVal V = C.getState()->getSVal(E, C.getLocationContext());
++  return V.getAsRegion();
++}
++
++bool EvaluateExprToInt(llvm::APSInt &Result, const Expr *E, CheckerContext &C) {
++  if (!E)
++    return false;
++  Expr::EvalResult EvalResult;
++  if (!E->EvaluateAsInt(EvalResult, C.getASTContext()))
++    return false;
++  Result = EvalResult.Val.getInt();
++  return true;
++}
+ 
+ class SAGenTestChecker : public Checker<check::PreCall> {
+   mutable std::unique_ptr<BugType> BT;
+@@ -41,7 +75,31 @@ 
+ private:
+   void reportUnlinkAfterZero(const CallEvent &Call, CheckerContext &C) const;
++  unsigned getMaxZeroGeneration(const MemRegion *MR, ProgramStateRef State,
++                                bool &Found) const;
+ };
++
++unsigned SAGenTestChecker::getMaxZeroGeneration(const MemRegion *MR,
++                                                ProgramStateRef State,
++                                                bool &Found) const {
++  Found = false;
++  unsigned MaxGen = 0;
++  const MemRegion *R = MR;
++  while (R) {
++    if (const unsigned *Gen = State->get<ZeroedRegions>(R)) {
++      if (!Found || *Gen > MaxGen) {
++        MaxGen = *Gen;
++        Found = true;
++      }
++    }
++
++    const auto *SR = llvm::dyn_cast<SubRegion>(R);
++    if (!SR)
++      break;
++    R = SR->getSuperRegion();
++  }
++  return MaxGen;
++}
+ 
+ void SAGenTestChecker::checkPreCall(const CallEvent &Call,
+                                     CheckerContext &C) const {
+@@ -74,7 +132,35 @@     if (!FillVal.isZero())
+       return;
+ 
+-    State = State->set<ZeroedRegions>(MR, true);
++    unsigned Gen = State->get<ZeroedGeneration>();
++    ++Gen;
++    State = State->set<ZeroedGeneration>(Gen);
++    State = State->set<ZeroedRegions>(MR, Gen);
++    C.addTransition(State);
++    return;
++  }
++
++  if (ExprHasName(OriginExpr, "Curl_peer_link", C)) {
++    if (Call.getNumArgs() < 1)
++      return;
++
++    const Expr *ArgExpr = Call.getArgExpr(0);
++    if (!ArgExpr)
++      return;
++
++    const MemRegion *MR = getMemRegionFromExpr(ArgExpr, C);
++    if (!MR)
++      return;
++
++    bool Found = false;
++    unsigned MaxGen = getMaxZeroGeneration(MR, State, Found);
++    if (Found) {
++      State = State->set<InitializedRegions>(MR, MaxGen);
++    } else {
++      // Ensure any stale initialization marker does not match a future
++      // zeroing generation.
++      State = State->set<InitializedRegions>(MR, 0);
++    }
+     C.addTransition(State);
+     return;
+   }
+@@ -91,19 +177,19 @@     if (!MR)
+       return;
+ 
+-    const MemRegion *R = MR;
+-    while (R) {
+-      const bool *Zeroed = State->get<ZeroedRegions>(R);
+-      if (Zeroed && *Zeroed) {
+-        reportUnlinkAfterZero(Call, C);
+-        return;
+-      }
+-
+-      const auto *SR = llvm::dyn_cast<SubRegion>(R);
+-      if (!SR)
+-        break;
+-      R = SR->getSuperRegion();
+-    }
++    bool Found = false;
++    unsigned MaxGen = getMaxZeroGeneration(MR, State, Found);
++    if (!Found)
++      return;
++
++    const unsigned *InitGen = State->get<InitializedRegions>(MR);
++    if (!InitGen)
++      return; // The field was never linked; unlink is a no-op.
++
++    if (*InitGen == MaxGen)
++      return; // The field was linked after the most recent zeroing.
++
++    reportUnlinkAfterZero(Call, C);
+   }
+ }
+ 

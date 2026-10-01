@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The bug pattern is passing an unterminated or invalid token buffer to `sqlite3Dequote()` without first validating the token type. When a corrupt schema causes `getConstraintToken()` to return `TK_ILLEGAL` (with the token bytes not forming a valid quoted identifier), the raw token text is copied into a zero-terminated buffer and handed to `sqlite3Dequote()`, which assumes the input is a valid quoted string and trips an internal assertion.
+
+More generally: **failing to guard a dequoting/parsing helper against malformed or illegal input tokens before calling it.** The fix checks `t==TK_ILLEGAL` and short-circuits (treating it as unequal) before invoking the dequoting routine.

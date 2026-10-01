@@ -1,0 +1,78 @@
+{
+  "commit_id": "962bd10d01151d29190567e2d15ccf641be55063",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/plugin-cache/plugins/58a9aaa65c7363263ac1/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlmemory.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlGrowArray"
+        ],
+        "fixed_functions": [
+          "xmlGrowArray"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlmemory.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/d28f35a26ed6-f6d22c8ac6c7-1790823494186310133/../../src/d28f35a26ed6/xmlmemory.c",
+          "line": 370,
+          "column": 31,
+          "function": "xmlGrowArray",
+          "bug_type": "Missing NULL pointer check",
+          "description": "Dereference of pointer parameter without NULL check",
+          "issue_hash": "964ca119455beb14551e88833d933165",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/962bd10d0115/f89f91e9/buggy/.._.._src_d28f35a26ed6_xmlmemory.c/report-964ca1.html",
+          "relpath": "xmlmemory.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/d28f35a26ed6-f6d22c8ac6c7-1790823494186310133/../../src/d28f35a26ed6/xmlmemory.c",
+          "line": 378,
+          "column": 5,
+          "function": "xmlGrowArray",
+          "bug_type": "Missing NULL pointer check",
+          "description": "Dereference of pointer parameter without NULL check",
+          "issue_hash": "b9ba8ac22970584ca4b71bca5876c145",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/962bd10d0115/f89f91e9/buggy/.._.._src_d28f35a26ed6_xmlmemory.c/report-b9ba8a.html",
+          "relpath": "xmlmemory.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlmemory.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 9.43,
+    "analysis_seconds": {
+      "buggy": 0.18,
+      "fixed": 0.18
+    },
+    "total_seconds": 9.82
+  },
+  "report_dir": "tmp/validation/962bd10d0115/f89f91e9"
+}

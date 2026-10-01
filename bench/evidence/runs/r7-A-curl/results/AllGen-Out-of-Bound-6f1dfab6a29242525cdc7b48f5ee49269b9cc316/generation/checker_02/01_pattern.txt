@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is an out-of-bounds read caused by dereferencing a pointer that may point at the NUL terminator. After `strchr()` finds `'('` and the pointer is incremented, the code assumes at least one more character exists and reads `ptr[1]`, `ptr[2]`, etc. without first checking that `ptr[0]` is not `'\0'`. If the response ends immediately after `'('`, then `sep = ptr[0]` becomes `'\0'`, and `ptr[1]` is read one byte past the string terminator. The fix is to require `sep` to be non-NUL before validating the following separator bytes.

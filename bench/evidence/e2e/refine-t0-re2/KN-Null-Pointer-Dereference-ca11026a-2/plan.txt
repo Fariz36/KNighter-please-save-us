@@ -1,0 +1,32 @@
+## Plan
+
+1. **Register Program State Maps:**
+   - Use `REGISTER_MAP_WITH_PROGRAMSTATE(PossibleNullPtrMap, const MemRegion *, bool)` to track whether a pointer returned by `Regexp::Simplify()` has been NULL-checked.
+   - (Optional but recommended) Use `REGISTER_MAP_WITH_PROGRAMSTATE(PtrAliasMap, const MemRegion *, const MemRegion *)` to track alias relationships between pointers, so that checking one pointer marks its aliases as checked.
+
+2. **Identify the Relevant Function (`checkPostCall`):**
+   - In `checkPostCall`, determine if the callee is `Regexp::Simplify` (use `Call.getCalleeIdentifier()->getName()` or similar).
+   - If so, obtain the return value's `MemRegion` (e.g., via `C.getState()->getSVal(Call.getOriginExpr(), C.getLocationContext()).getAsRegion()`).
+   - Insert this region into `PossibleNullPtrMap` with value `false` (unchecked).
+
+3. **Mark Pointers as Checked (Helper Function):**
+   - Implement a helper `setChecked(State, Region)` that sets the given `Region` to `true` in `PossibleNullPtrMap`.
+   - If using `PtrAliasMap`, recursively mark all aliases of `Region` as checked as well.
+
+4. **Observe NULL Checks (`checkBranchCondition`):**
+   - In `checkBranchCondition`, inspect the condition expression.
+   - Identify patterns like `ptr == NULL`, `ptr != NULL`, `!ptr`, or `ptr` (when used directly in a condition).
+   - Extract the pointer's `MemRegion` (using `getMemRegionFromExpr` utility if helpful) and call `setChecked(State, Region)`.
+
+5. **Detect Unsafe Uses (`checkLocation` and `checkPreCall`):**
+   - In `checkLocation`, when a load (`IsLoad == true`) or store occurs, determine the pointer being dereferenced. If its `MemRegion` is present in `PossibleNullPtrMap` and is `false`, emit a bug report.
+   - In `checkPreCall`, for calls to functions known to dereference their arguments (e.g., `BuildInfo`), check each pointer argument that is known to be dereferenced (use `functionKnownToDeref` utility or a hardcoded check). If the argument's `MemRegion` is in `PossibleNullPtrMap` and is `false`, emit a bug report.
+
+6. **Track Aliases (`checkBind`):**
+   - In `checkBind`, if a pointer value is assigned to another pointer (e.g., `p2 = p1;`), record the alias relationship in `PtrAliasMap` (map `Loc` region to `Val` region).
+   - Do not update `PossibleNullPtrMap` here; alias propagation is handled by `setChecked`.
+
+7. **Report Bugs:**
+   - Use `generateNonFatalErrorNode` to create an error node.
+   - Create a `PathSensitiveBugReport` (or `BasicBugReport`) with a short, clear message such as: `"Possible NULL dereference: Regexp::Simplify() may return NULL."`
+   - Emit the report via `C.emitReport(...)`.

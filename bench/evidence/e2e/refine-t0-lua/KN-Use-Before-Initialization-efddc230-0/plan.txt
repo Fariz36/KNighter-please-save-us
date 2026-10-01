@@ -1,0 +1,29 @@
+## Plan
+
+1. **Decide on Program State:**
+   - No custom program state (`REGISTER_MAP_WITH_PROGRAMSTATE`, etc.) is needed. The bug is a static missing assignment inside a specific function (`reprepstate`), so path‑sensitive runtime tracking is unnecessary.
+
+2. **Choose Callback Function:**
+   - Use `checkASTCodeBody(const Decl *D, AnalysisManager &Mgr, BugReporter &BR)`.
+   - This callback is invoked for every declaration with a statement body, allowing direct inspection of the `reprepstate` function body.
+
+3. **Identify the Target Function:**
+   - In `checkASTCodeBody`, cast `D` to `const FunctionDecl *FD = dyn_cast<FunctionDecl>(D)`.
+   - Get the function name using `FD->getNameAsString()`.
+   - We are interested in `reprepstate`. Optionally, also inspect `prepstate` to confirm the pattern exists (i.e., `prepstate` assigns `matchdepth` but `reprepstate` does not).
+
+4. **Check for Missing Reset in `reprepstate`:**
+   - If `FD->getNameAsString() == "reprepstate"`:
+     - Obtain the function body: `const Stmt *Body = FD->getBody();`
+     - Traverse the body recursively (using a `RecursiveASTVisitor` or a simple recursive lambda) looking for a `BinaryOperator` with `getOpcode() == BO_Assign`.
+     - For each assignment, check if the left‑hand side is a `MemberExpr` whose member name is `"matchdepth"` (use `MemberExpr::getMemberName()` or `getMemberDecl()->getNameAsString()`).
+     - If no such assignment is found, the bug is present.
+
+5. **Emit the Bug Report:**
+   - Create a `BasicBugReport` (or use `BugReporter::EmitBasicReport`).
+   - Set the diagnostic location to the beginning of the `reprepstate` function (e.g., `PathDiagnosticLocation::createBegin(FD, BR.getSourceManager())`).
+   - Use a short, clear message: `"Missing reset of matchdepth in reprepstate; iterator state may be inconsistent after error."`
+   - Emit the report via `BR.emitReport(std::move(Report))`.
+
+6. **Optional Confirmation from `prepstate`:**
+   - To reduce false positives, you can first scan `prepstate` in the same callback. If `prepstate` assigns `matchdepth`, set a static flag or simply proceed. Since the function names are specific to this bug pattern, this step is not strictly required.

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Treating an explicitly length-delimited buffer returned by OpenSSL ASN1 string APIs (`ASN1_STRING_get0_data()` / `ASN1_STRING_to_UTF8()`) as a NUL-terminated C string. The code uses `strlen()` and `%s` on `cn` even though `cn` may not have a terminating NUL within `cnlen`, causing out-of-bounds reads and incorrect matching/printing. The fix uses length-bounded operations: `memchr(cn, '\0', cnlen)` and `%.*s` with `cnlen`.

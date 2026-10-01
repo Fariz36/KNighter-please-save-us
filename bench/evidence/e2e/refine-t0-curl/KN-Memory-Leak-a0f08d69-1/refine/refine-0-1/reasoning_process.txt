@@ -1,0 +1,15 @@
+Refinment Plan:
+
+The false positive is caused by the checker reporting any `Curl_peer_unlink` call on a field that belongs to a zeroed containing region, even when the embedded `Curl_peer` node was never linked. In the false positive path, `cf_ip_ballers_init()` zeroes the `struct cf_ip_ballers` with `memset()` but returns before calling `Curl_peer_link()` on the fields. Later `cf_ip_ballers_clear()` calls `Curl_peer_unlink()` on those never-linked, zeroed nodes. Such an unlink is a no-op and cannot leak a peer.
+
+To fix this while preserving detection of the actual bug (where the node *was* linked before zeroing), we require the checker to have previously observed a `Curl_peer_link()` call on the same memory region. The checker already records such links in `InitializedRegions`. We only report if:
+
+1. The containing region was zeroed (`Found == true`).
+2. The field was previously linked (`InitGen != nullptr`).
+3. The link happened before the most recent zeroing (`*InitGen != MaxGen`).
+
+If the field was never linked, we suppress the report. If it was linked after the most recent zeroing, it is safe (no report). If it was linked before the zeroing, it matches the target bug pattern and is reported.
+
+Refined Code:
+```cpp
+```

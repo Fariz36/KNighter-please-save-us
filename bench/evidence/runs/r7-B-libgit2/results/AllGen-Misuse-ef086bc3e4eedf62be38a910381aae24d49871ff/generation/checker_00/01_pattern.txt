@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using `!!memcmp(...)` to test equality between two buffers. Since `memcmp()` returns `0` when the buffers match and non-zero when they differ, applying `!!` inverts the intended result: matching IP SubjectAltName values become `0` (treated as failure) and non-matching values become `1` (treated as success). The correct equality check is `memcmp(...) == 0`; for binary IP SAN comparison, the compared lengths should also be checked for equality first.

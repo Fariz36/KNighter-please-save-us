@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is an **unchecked lookahead macro**: `NXT(index)` directly dereferences `ctxt->cur[index]` without verifying that `ctxt->cur + index` is still within the input string. Since the parser context does not track the input length, malformed regex input can cause the macro to read past the end of the allocated buffer. The fix adds a `len` field and bounds-checks the offset before dereferencing.

@@ -1,0 +1,235 @@
+### Report Summary
+
+File:| /home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/c43dc98d27ac-f6d22c8ac6c7/../../src/c43dc98d27ac/parserInternals.c  
+---|---  
+Warning:| line 2783, column 12  
+Memory leak: overwriting owned pointer field 'ctxt->sax' without freeing previous allocation  
+  
+### Annotated Source Code
+
+
+2713  |  * `URL` is a filename or URL. If if contains the substring "://",
+2714  |  * it is assumed to be a Legacy Extended IRI. Otherwise, it is
+2715  |  * treated as a filesystem path.
+2716  |  *
+2717  |  * `publicId` is an optional XML public ID, typically from a doctype
+2718  |  * declaration. It is used for catalog lookups.
+2719  |  *
+2720  |  * If catalog lookup is enabled (default is yes) and URL or ID are
+2721  |  * found in system or local XML catalogs, URL is replaced with the
+2722  |  * result. Then the following resource loaders will be called if
+2723  |  * they were registered (in order of precedence):
+2724  |  *
+2725  |  * - the resource loader set with #xmlCtxtSetResourceLoader
+2726  |  * - the global external entity loader set with
+2727  |  *   #xmlSetExternalEntityLoader (without catalog resolution,
+2728  |  *   deprecated)
+2729  |  * - the per-thread #xmlParserInputBufferCreateFilenameFunc set with
+2730  |  *   #xmlParserInputBufferCreateFilenameDefault (deprecated)
+2731  |  * - the default loader which will return
+2732  |  *   - the result from a matching global input callback set with
+2733  |  *     #xmlRegisterInputCallbacks (deprecated)
+2734  |  *   - a file opened from the filesystem, with automatic detection
+2735  |  *     of compressed files if support is compiled in.
+2736  |  *
+2737  |  * @param URL  the URL or system ID for the entity to load
+2738  |  * @param publicId  the public ID for the entity to load (optional)
+2739  |  * @param ctxt  the context in which the entity is called or NULL
+2740  |  * @returns the xmlParserInput or NULL
+2741  |  */
+2742  | xmlParserInput *
+2743  | xmlLoadExternalEntity(const char *URL, const char *publicId,
+2744  |                       xmlParserCtxt *ctxt) {
+2745  |  return(xmlLoadResource(ctxt, URL, publicId, XML_RESOURCE_UNKNOWN));
+2746  | }
+2747  |  
+2748  | /************************************************************************
+2749  |  *									*
+2750  |  *		Commodity functions to handle parser contexts		*
+2751  |  *									*
+2752  |  ************************************************************************/
+2753  |  
+2754  | /**
+2755  |  * Initialize a SAX parser context
+2756  |  *
+2757  |  * @param ctxt  XML parser context
+2758  |  * @param sax  SAX handlert
+2759  |  * @param userData  user data
+2760  |  * @returns 0 in case of success and -1 in case of error
+2761  |  */
+2762  |  
+2763  | static int
+2764  | xmlInitSAXParserCtxt(xmlParserCtxtPtr ctxt, const xmlSAXHandler *sax,
+2765  |  void *userData)
+2766  | {
+2767  |  xmlParserInputPtr input;
+2768  | #ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
+2769  |     size_t initialNodeTabSize = 1;
+2770  | #else
+2771  |     size_t initialNodeTabSize = 10;
+2772  | #endif
+2773  |  
+2774  |  if (ctxt4.1'ctxt' is not equal to NULL == NULL)
+    5←Taking false branch→
+2775  |  return(-1);
+2776  |  
+2777  |  if (ctxt->dict == NULL)
+    6←Assuming field 'dict' is not equal to NULL→
+    7←Taking false branch→
+2778  | 	ctxt->dict = xmlDictCreate();
+2779  |  if (ctxt->dict7.1Field 'dict' is not equal to NULL == NULL)
+    8←Taking false branch→
+2780  |  return(-1);
+2781  |  
+2782  |  if (ctxt->sax == NULL)
+    9←Assuming field 'sax' is equal to NULL→
+    10←Taking true branch→
+2783  |  ctxt->sax = (xmlSAXHandler *) xmlMalloc(sizeof(xmlSAXHandler));
+    11←Memory leak: overwriting owned pointer field 'ctxt->sax' without freeing previous allocation
+2784  |  if (ctxt->sax == NULL)
+2785  |  return(-1);
+2786  |  if (sax == NULL) {
+2787  | 	memset(ctxt->sax, 0, sizeof(xmlSAXHandler));
+2788  |         xmlSAXVersion(ctxt->sax, 2);
+2789  |         ctxt->userData = ctxt;
+2790  |     } else {
+2791  |  if (sax->initialized == XML_SAX2_MAGIC) {
+2792  | 	    memcpy(ctxt->sax, sax, sizeof(xmlSAXHandler));
+2793  |         } else {
+2794  | 	    memset(ctxt->sax, 0, sizeof(xmlSAXHandler));
+2795  | 	    memcpy(ctxt->sax, sax, sizeof(xmlSAXHandlerV1));
+2796  |         }
+2797  |         ctxt->userData = userData ? userData : ctxt;
+2798  |     }
+2799  |  
+2800  |     ctxt->maxatts = 0;
+2801  |     ctxt->atts = NULL;
+2802  |  /* Allocate the Input stack */
+2803  |  if (ctxt->inputTab == NULL) {
+2804  | #ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
+2805  |         size_t initialSize = 1;
+2806  | #else
+2807  |         size_t initialSize = 5;
+2808  | #endif
+2809  |  
+2810  | 	ctxt->inputTab = xmlMalloc(initialSize * sizeof(xmlParserInputPtr));
+2811  | 	ctxt->inputMax = initialSize;
+2812  |     }
+2813  |  if (ctxt->inputTab == NULL)
+2981  |         xmlHashFree(ctxt->attsDefault, xmlHashDefaultDeallocator);
+2982  |  if (ctxt->attsSpecial != NULL)
+2983  |         xmlHashFree(ctxt->attsSpecial, NULL);
+2984  |  if (ctxt->freeElems != NULL) {
+2985  |         xmlNodePtr cur, next;
+2986  |  
+2987  | 	cur = ctxt->freeElems;
+2988  |  while (cur != NULL) {
+2989  | 	    next = cur->next;
+2990  | 	    xmlFree(cur);
+2991  | 	    cur = next;
+2992  | 	}
+2993  |     }
+2994  |  if (ctxt->freeAttrs != NULL) {
+2995  |         xmlAttrPtr cur, next;
+2996  |  
+2997  | 	cur = ctxt->freeAttrs;
+2998  |  while (cur != NULL) {
+2999  | 	    next = cur->next;
+3000  | 	    xmlFree(cur);
+3001  | 	    cur = next;
+3002  | 	}
+3003  |     }
+3004  |  /*
+3005  |  * cleanup the error strings
+3006  |  */
+3007  |  if (ctxt->lastError.message != NULL)
+3008  |         xmlFree(ctxt->lastError.message);
+3009  |  if (ctxt->lastError.file != NULL)
+3010  |         xmlFree(ctxt->lastError.file);
+3011  |  if (ctxt->lastError.str1 != NULL)
+3012  |         xmlFree(ctxt->lastError.str1);
+3013  |  if (ctxt->lastError.str2 != NULL)
+3014  |         xmlFree(ctxt->lastError.str2);
+3015  |  if (ctxt->lastError.str3 != NULL)
+3016  |         xmlFree(ctxt->lastError.str3);
+3017  |  
+3018  | #ifdef LIBXML_CATALOG_ENABLED
+3019  |  if (ctxt->catalogs != NULL)
+3020  | 	xmlCatalogFreeLocal(ctxt->catalogs);
+3021  | #endif
+3022  |     xmlFree(ctxt);
+3023  | }
+3024  |  
+3025  | /**
+3026  |  * Allocate and initialize a new parser context.
+3027  |  *
+3028  |  * @returns the xmlParserCtxt or NULL
+3029  |  */
+3030  |  
+3031  | xmlParserCtxt *
+3032  | xmlNewParserCtxt(void)
+3033  | {
+3034  |  return(xmlNewSAXParserCtxt(NULL, NULL));
+    1Calling 'xmlNewSAXParserCtxt'→
+3035  | }
+3036  |  
+3037  | /**
+3038  |  * Allocate and initialize a new SAX parser context. If userData is NULL,
+3039  |  * the parser context will be passed as user data.
+3040  |  *
+3041  |  * @since 2.11.0
+3042  |  *
+3043  |  * If you want support older versions,
+3044  |  * it's best to invoke #xmlNewParserCtxt and set ctxt->sax with
+3045  |  * struct assignment.
+3046  |  *
+3047  |  * @param sax  SAX handler
+3048  |  * @param userData  user data
+3049  |  * @returns the xmlParserCtxt or NULL if memory allocation failed.
+3050  |  */
+3051  |  
+3052  | xmlParserCtxt *
+3053  | xmlNewSAXParserCtxt(const xmlSAXHandler *sax, void *userData)
+3054  | {
+3055  |  xmlParserCtxtPtr ctxt;
+3056  |  
+3057  |     xmlInitParser();
+3058  |  
+3059  |     ctxt = (xmlParserCtxtPtr) xmlMalloc(sizeof(xmlParserCtxt));
+3060  |  if (ctxt == NULL)
+    2←Assuming 'ctxt' is not equal to NULL→
+    3←Taking false branch→
+3061  |  return(NULL);
+3062  |  memset(ctxt, 0, sizeof(xmlParserCtxt));
+3063  |  if (xmlInitSAXParserCtxt(ctxt, sax, userData) < 0) {
+    4←Calling 'xmlInitSAXParserCtxt'→
+3064  |         xmlFreeParserCtxt(ctxt);
+3065  |  return(NULL);
+3066  |     }
+3067  |  return(ctxt);
+3068  | }
+3069  |  
+3070  | /**
+3071  |  * @since 2.14.0
+3072  |  *
+3073  |  * @param ctxt  parser context
+3074  |  * @returns the private application data.
+3075  |  */
+3076  | void *
+3077  | xmlCtxtGetPrivate(xmlParserCtxt *ctxt) {
+3078  |  if (ctxt == NULL)
+3079  |  return(NULL);
+3080  |  
+3081  |  return(ctxt->_private);
+3082  | }
+3083  |  
+3084  | /**
+3085  |  * Set the private application data.
+3086  |  *
+3087  |  * @since 2.14.0
+3088  |  *
+3089  |  * @param ctxt  parser context
+3090  |  * @param priv  private application data
+3091  |  */
+3092  | void
+3093  | xmlCtxtSetPrivate(xmlParserCtxt *ctxt, void *priv) {

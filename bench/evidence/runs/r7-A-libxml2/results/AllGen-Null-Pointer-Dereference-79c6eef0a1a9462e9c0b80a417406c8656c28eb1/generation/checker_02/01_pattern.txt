@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is using a pointer returned by an allocation/duplication function (`xmlStrdup()`) before checking whether the allocation succeeded. Here, `ret->len = strlen((const char *) ret->string)` is executed before the `ret->string == NULL` check, so if `xmlStrdup()` fails and returns `NULL`, `strlen()` dereferences a NULL pointer. The allocation result must be validated before being passed to any function that dereferences it.

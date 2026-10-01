@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is ignoring a recursive walker’s `stopped_early()` status. `Regexp::Simplify()` runs `CoalesceWalker` and `SimplifyWalker`, which can stop early while still returning a non-NULL `Regexp*` that represents only a partial/incomplete simplification. The buggy code did not check `cw.stopped_early()` or `sw.stopped_early()`, so it returned that incomplete result as if simplification had succeeded. Callers such as `Prefilter::FromRegexp()` then used the result without a NULL check, assuming `Simplify()` never fails. The fix makes `Simplify()` return NULL when a walker stopped early and updates callers to handle the NULL result.

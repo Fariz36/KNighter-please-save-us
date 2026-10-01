@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The code uses `short_oid->id[0]` as an array index into the pack index’s fanout table (`level1_ofs`) without first validating that the mapped pack index (`p->index_map`) is large enough to contain the corresponding entry. This leads to an out-of-bounds read when processing a truncated or corrupt pack index. The fix adds bounds checks against `p->index_map.len` before accessing `level1_ofs[short_oid->id[0]]` (and the adjacent `id[0] - 1` lookup).

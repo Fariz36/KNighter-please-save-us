@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is an out-of-bounds read while parsing a string: after locating a delimiter, the code advances past it and reads fixed offsets (`ptr[1]`, `ptr[2]`, `ptr[3]`) without first checking whether the delimiter itself is `'\0'`. If the delimiter is the last character before the string terminator, those lookaheads read beyond the NUL terminator. The fix adds `sep && ...` to stop before reading past the end of the string.

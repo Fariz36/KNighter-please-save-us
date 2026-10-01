@@ -1,0 +1,67 @@
+{
+  "commit_id": "26dfab2f8fd36fc3aba8c25c7c358530d9712c7a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libxml2/plugin-cache/plugins/29674f99364be6943030/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "parser.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlIOParseDTD"
+        ],
+        "fixed_functions": [
+          "xmlIOParseDTD"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "parser.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libxml2/work/build/c71154dad39f-f6d22c8ac6c7/../../src/c71154dad39f/parser.c",
+          "line": 11571,
+          "column": 9,
+          "function": "xmlIOParseDTD",
+          "bug_type": "Double Free of XML Input Buffer",
+          "description": "Double free: input buffer already consumed by xmlNewIOInputStream",
+          "issue_hash": "1bd649b13efbfc07a2a12b1c18e247f2",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/26dfab2f8fd3/1e4cca07/buggy/.._.._src_c71154dad39f_parser.c/report-1bd649.html",
+          "relpath": "parser.c"
+        }
+      ]
+    },
+    "fixed": {
+      "parser.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 52.38,
+      "fixed": 42.35
+    },
+    "total_seconds": 95.16
+  },
+  "report_dir": "tmp/validation/26dfab2f8fd3/1e4cca07"
+}

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked integer overflow in a size calculation: a potentially very large input size (`part->datasize`) is used in arithmetic to compute a derived output size without first validating it against a maximum safe value. Operations such as `4 * (1 + ((size - 1) / 3))` and later additions for CRLF padding can overflow `curl_off_t`, producing an incorrect or negative size that the caller may trust. The fix adds an explicit upper-bound check before performing the size calculation.

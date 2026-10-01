@@ -1,0 +1,62 @@
+{
+  "start_time": "2026-10-01T08:07:20.609638",
+  "total_commits": 4,
+  "successful_commits": 3,
+  "workers": 1,
+  "results": [
+    {
+      "commit_id": "ca11026a032ce2a3de4b3c389ee53d2bdc8794d6",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 3,
+      "successful_checkers": 3,
+      "perfect_checkers": 0,
+      "best_tp": 2,
+      "best_tn": 0,
+      "total_time": 857.546994,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T08:21:38.158234"
+    },
+    {
+      "commit_id": "a7d27d62330bfe35d82430fa8942feb6f5cddbaf",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 279.342703,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T08:26:17.502671"
+    },
+    {
+      "commit_id": "0f15a359c3227be878fd6dbeadd885867a4155e4",
+      "commit_type": "Out-of-Bound",
+      "total_checkers": 3,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 519.42087,
+      "errors": [],
+      "success_rate": 0.3333333333333333,
+      "timestamp": "2026-10-01T08:34:56.924734"
+    },
+    {
+      "commit_id": "fadc34500b67414df452c54d980372242f3d7f57",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 255.285974,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T08:39:12.213281"
+    }
+  ],
+  "end_time": "2026-10-01T08:39:12.213477",
+  "success_rate": 0.75
+}

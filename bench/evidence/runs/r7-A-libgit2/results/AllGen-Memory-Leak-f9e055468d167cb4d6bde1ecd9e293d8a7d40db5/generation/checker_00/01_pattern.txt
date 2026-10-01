@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing cleanup of an acquired `git_str` buffer on non-transfer exit paths. The function initializes `git_str path`, may allocate memory via `git_fs_path_prettify_dir()`, but several early `return` paths and the final error path return without calling `git_str_dispose(&path)`. This leaks the buffer whenever ownership has not been transferred by `git_str_detach()`. The fix adds `git_str_dispose(&path)` before early returns and after the final use.

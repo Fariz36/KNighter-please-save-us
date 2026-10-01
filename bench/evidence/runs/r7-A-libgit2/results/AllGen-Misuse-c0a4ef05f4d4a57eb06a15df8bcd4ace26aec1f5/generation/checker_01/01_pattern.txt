@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is placing an assignment inside a comparison without parenthesizing the assignment, e.g. `(error = func(...) != 0)` or `(error = func(...) < 0)`. Because assignment has lower precedence than `!=` and `<`, C parses this as `error = (func(...) != 0)` or `error = (func(...) < 0)`, so `error` receives a boolean `0`/`1` instead of the function’s actual return value. This loses the real error code and can break later checks for specific errors such as `GIT_ENOTFOUND`. The correct form is `(error = func(...)) != 0` or `(error = func(...)) < 0`.

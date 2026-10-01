@@ -1,0 +1,18 @@
+1. **Register Program State Trait**:
+   - Use `REGISTER_TRAIT_WITH_PROGRAMSTATE(CapacityChecked, bool)` to track whether the `capacity` parameter has been NULL-checked on the current path. The default value is `false`.
+
+2. **checkBeginFunction**:
+   - If the current function is `xmlGrowArray`, set `CapacityChecked` to `false` in the program state. This ensures a clean state for each analysis of the function.
+
+3. **checkBranchCondition**:
+   - Return if the current function is not `xmlGrowArray`.
+   - Examine the condition. If it references the parameter `capacity` (e.g., `capacity == NULL`, `capacity != NULL`, `!capacity`, or simply `capacity`), set `CapacityChecked` to `true` in the program state.
+   - Detect the reference using `ExprHasName(Condition, "capacity", C)` or a precise AST check for a `DeclRefExpr` to the `capacity` parameter.
+
+4. **checkLocation**:
+   - Return if the current function is not `xmlGrowArray`.
+   - Check if `S` is a `UnaryOperator` with opcode `UO_Deref`. If not, return.
+   - Ignore implicit casts on its sub‑expression. If it is a `DeclRefExpr` to a declaration named `capacity`, then this is a dereference of `capacity`.
+   - Retrieve the state and check `CapacityChecked`. If it is `false`, the parameter is dereferenced without a prior NULL check.
+   - Generate a non‑fatal error node using `C.generateNonFatalErrorNode()`.
+   - Create a `PathSensitiveBugReport` with the short message: “Dereference of NULL pointer parameter 'capacity' without NULL check”. Emit the report using `C.emitReport(std::move(Report))`.

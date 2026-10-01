@@ -1,0 +1,8 @@
+Refinment Plan:
+The false positive is caused by stale state in `ClearedPtrs`. `cf_socket_ctx_init()` calls `memset(ctx, 0, sizeof(*ctx))`, which marks the base object as cleared, but then immediately calls `Curl_peer_link(&ctx->peer, peer)`. That reinitializes the peer linkage, so the later `Curl_peer_unlink(&ctx->peer)` in `cf_socket_ctx_free()` is safe. The original checker never invalidated the “cleared” flag when the peer field was relinked.
+
+The fix adds tracking for `Curl_peer_link()` on a field of a previously cleared struct. If the exact same field is linked after the clear, then a later `Curl_peer_unlink()` on that field is not reported. The target buggy code still reports because there is no `Curl_peer_link()` between `memset(ctx, 0, ...)` and `Curl_peer_unlink(&ctx->dest)`.
+
+Refined Code:
+```cpp
+```

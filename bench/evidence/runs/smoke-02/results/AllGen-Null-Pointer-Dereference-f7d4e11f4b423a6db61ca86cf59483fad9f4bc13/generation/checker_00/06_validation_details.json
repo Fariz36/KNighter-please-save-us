@@ -1,0 +1,101 @@
+{
+  "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/smoke-02/plugin-cache/plugins/261137db8f9913c4a52d/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/setopt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 2,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "Curl_setblobopt"
+        ],
+        "fixed_functions": [
+          "Curl_setblobopt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/smoke-02/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 111,
+          "column": 33,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL check for blob->data",
+          "description": "Missing NULL check for blob->data in length validation",
+          "issue_hash": "9bec971285bc4daf4f169555b5ea7724",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f7d4e11f4b42/8571d7c2/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_smoke-02_work_src_b3675fe80a33_lib_setopt.c/report-9bec97.html",
+          "relpath": "lib/setopt.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/smoke-02/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 111,
+          "column": 8,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL check for blob->data",
+          "description": "Missing NULL check for blob->data in length validation",
+          "issue_hash": "9fce836315ad5ab3ab8eed05e2cb93c1",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f7d4e11f4b42/8571d7c2/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_smoke-02_work_src_b3675fe80a33_lib_setopt.c/report-9fce83.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/smoke-02/work/src/f7d4e11f4b42/lib/setopt.c",
+          "line": 111,
+          "column": 48,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL check for blob->data",
+          "description": "Missing NULL check for blob->data in length validation",
+          "issue_hash": "05bb30416debb781e6d079ede298c687",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f7d4e11f4b42/8571d7c2/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_smoke-02_work_src_f7d4e11f4b42_lib_setopt.c/report-05bb30.html",
+          "relpath": "lib/setopt.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/smoke-02/work/src/f7d4e11f4b42/lib/setopt.c",
+          "line": 111,
+          "column": 23,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL check for blob->data",
+          "description": "Missing NULL check for blob->data in length validation",
+          "issue_hash": "984f05d3135b03eeb29cc59aeca9680a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f7d4e11f4b42/8571d7c2/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_smoke-02_work_src_f7d4e11f4b42_lib_setopt.c/report-984f05.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 49.81,
+    "analysis_seconds": {
+      "buggy": 0.86,
+      "fixed": 0.76
+    },
+    "total_seconds": 51.52
+  },
+  "report_dir": "tmp/validation/f7d4e11f4b42/8571d7c2"
+}

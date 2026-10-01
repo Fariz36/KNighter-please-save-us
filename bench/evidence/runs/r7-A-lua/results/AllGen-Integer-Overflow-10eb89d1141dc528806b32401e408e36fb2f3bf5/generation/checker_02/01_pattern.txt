@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is using an input-controlled loop count as a bit-shift amount without first bounding it to the width of the shifted type. In `utf8_decode`, a leading byte such as `0xFF` causes the continuation-byte loop to reach `count == 7`, so `count * 5 == 35`; then `res |= ((l_uint32)(c & 0x7F) << (count * 5));` shifts a 32-bit value by 35 bits, which is undefined behavior. The later check `count > 5` is too late because the invalid shift has already occurred. The fix rejects invalid leading bytes (`c >= 0xFE`) before the loop, ensuring `count <= 5` before any shift.

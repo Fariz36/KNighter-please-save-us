@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using narrow integer types (`unsigned short`) for packet length and offset values that are later used in a size/bounds check (`off + sizeof(unsigned int) + len > smbc->got`). The arithmetic can overflow if performed in a type too small for the maximum possible sum, allowing the check to be bypassed. This can lead to out-of-bounds reads in the subsequent pointer arithmetic and `Curl_client_write` call. The fix changes `len` and `off` to `size_t` to ensure the size calculation is done in a sufficiently wide type.

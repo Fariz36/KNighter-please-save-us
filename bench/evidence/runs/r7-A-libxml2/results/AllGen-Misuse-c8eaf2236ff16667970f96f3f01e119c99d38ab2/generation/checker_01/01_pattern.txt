@@ -1,0 +1,3 @@
+## Bug Pattern
+
+A configuration/state value (`ctxt->maxAmpl`) is allowed to be zero by its setter and is later used directly as a divisor (`*expandedSize / ctxt->maxAmpl`) without a non-zero check. This causes a division-by-zero / SIGFPE. The root cause is missing validation of a divisor, especially one supplied through an API parameter (`xmlCtxtSetMaxAmplification`), combined with no defensive guard at the arithmetic use site.

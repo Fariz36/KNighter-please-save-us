@@ -1,0 +1,67 @@
+{
+  "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/plugin-cache/plugins/655fab32ff22c89068aa/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/setopt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Curl_setblobopt"
+        ],
+        "fixed_functions": [
+          "Curl_setblobopt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 118,
+          "column": 12,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL check on blob->data",
+          "description": "Missing NULL check on blob->data before copy",
+          "issue_hash": "a649d2ce53d2dcf1b8fa4912fe9a2053",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f7d4e11f4b42/ed969cda/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-curl_work_src_b3675fe80a33_lib_setopt.c/report-a649d2.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/setopt.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 1.16,
+      "fixed": 0.9
+    },
+    "total_seconds": 2.16
+  },
+  "report_dir": "tmp/validation/f7d4e11f4b42/ed969cda"
+}

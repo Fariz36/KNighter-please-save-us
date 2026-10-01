@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is **unchecked integer overflow while calculating a derived size from an input length**. In `encoder_base64_size()`, `part->datasize` is passed into arithmetic that multiplies and adds line-ending overhead (`4 * (1 + ((size - 1) / 3))` and `2 * ((size - 1) / MAX_ENCODED_LINE_LENGTH)`) without first validating that the input size is small enough to keep the result within `curl_off_t`. For sufficiently large input sizes, this arithmetic overflows, producing an incorrect encoded size. The fix adds an upper-bound check (`BASE64_MAX_INPUT_SIZE`) and returns `-1` before performing the unsafe calculation.

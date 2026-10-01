@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using unbounded NUL-terminated string functions (`strstr`, `strchr`) on a length-delimited buffer that is not guaranteed to be NUL-terminated within its known bounds. The code ignores the available remaining length when searching inside `line`, so the search can read past the end of the allocated buffer. The fix is to use length-bounded memory search functions (`git__memmem`, `memchr`) with the remaining buffer length.

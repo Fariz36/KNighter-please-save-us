@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is ignoring a walker's `stopped_early()` flag after calling `Walk()`. A transformation function such as `Regexp::Simplify()` returns the walker's partially built result even when the walk stopped early, instead of propagating the early termination as `NULL`. This causes callers to use an incomplete or invalid simplified regexp and, once the failure is correctly propagated, to dereference a possibly `NULL` pointer without checking. The fix checks `stopped_early()` and returns `NULL`, and callers must handle that `NULL` return.

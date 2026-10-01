@@ -1,0 +1,41 @@
+## Plan
+
+1. **Program State**
+   - Register a map to track delimiter assignments:
+     ```cpp
+     REGISTER_MAP_WITH_PROGRAMSTATE(DelimiterMap, const MemRegion *, const MemRegion *)
+     ```
+   - The key is the `MemRegion` of the delimiter variable (e.g., `sep`).
+   - The value is the `MemRegion` of the pointer variable (e.g., `ptr`) from which `sep` was loaded as `ptr[0]`.
+   - This state is necessary to confirm that the `sep` used in the condition originates from the same `ptr` that is later indexed with `1`, `2`, `3`.
+
+2. **Track Delimiter Assignment (`checkBind`)**
+   - In `checkBind(SVal Loc, SVal Val, const Stmt *S, CheckerContext &C)`:
+     - Check if `S` is an assignment (`BinaryOperator` with `BO_Assign`) or a `DeclStmt` with an initializer.
+     - Extract the LHS region (`Loc`) and the RHS expression.
+     - If the RHS is an `ArraySubscriptExpr` with index `0` (or an equivalent pointer dereference like `*ptr`), get the base pointer expression.
+     - Evaluate the base pointer expression to obtain its `MemRegion`.
+     - Update the state: `State = State->set<DelimiterMap>(LHSRegion, BaseRegion)`.
+     - Return the updated state.
+
+3. **Detect Missing Guard (`checkBranchCondition`)**
+   - In `checkBranchCondition(const Stmt *Condition, CheckerContext &C)`:
+     - Analyze the condition `Condition` for the pattern:
+       - A logical AND chain (`&&`) that contains:
+         - `ptr[1] == sep` (or `sep == ptr[1]`)
+         - `ptr[2] == sep` (or `sep == ptr[2]`)
+         - An access to `ptr[3]` (e.g., `isdigit(ptr[3])` or `ISDIGIT(ptr[3])`)
+       - All these must use the same base pointer `ptr`.
+     - Extract the `MemRegion` of `sep` and the `MemRegion` of `ptr`.
+     - Look up `DelimiterMap` in the current state. If `DelimiterMap[sepRegion] != ptrRegion`, abort (not the target pattern).
+     - Check whether the condition already guards `sep`:
+       - A standalone use of `sep` as a boolean operand (e.g., `sep && ...`).
+       - A comparison `sep != 0`, `sep != '\0'`, or `sep > 0`.
+       - If any such guard exists, abort.
+     - If all conditions are met, report the bug.
+
+4. **Report Bug**
+   - Generate a non-fatal error node using `C.generateNonFatalErrorNode()`.
+   - Create a `PathSensitiveBugReport` with the short message:
+     `"Missing NUL check on delimiter before lookahead reads"`
+   - Emit the report via `C.emitReport(...)`.

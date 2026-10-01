@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked integer overflow when computing a derived buffer/size value from a potentially huge input length. Here, `encoder_base64_size()` performs multiplications and additions on `curl_off_t` values without first validating `part->datasize` against a maximum safe input size, so the base64 encoded-size calculation can overflow and produce an incorrect or negative size. The fix adds `BASE64_MAX_INPUT_SIZE` and rejects oversized inputs before doing the arithmetic.

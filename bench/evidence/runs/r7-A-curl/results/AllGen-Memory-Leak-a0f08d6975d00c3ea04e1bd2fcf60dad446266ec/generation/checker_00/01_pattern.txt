@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is performing resource cleanup (unlinking an embedded peer/list node) **after** the containing structure has been cleared with `memset()`. This zeroes out the embedded link/pointer before `Curl_peer_unlink(&ctx->dest)` is called, so the unlink cannot remove the original peer and the peer leaks. In general, when a struct contains intrusive list/link/resource fields, those fields must be unlinked/released **before** the struct is zeroed or reset.

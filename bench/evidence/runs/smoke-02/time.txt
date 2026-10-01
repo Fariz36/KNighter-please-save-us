@@ -1,0 +1,23 @@
+	Command being timed: "/home/faris/RA-MrYudis/Knight/KNighter/venv/bin/python src/main.py gen --config_file=/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/smoke-02/config.yaml --commit_file=/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/smoke-02/commits.txt"
+	User time (seconds): 55.59
+	System time (seconds): 50.12
+	Percent of CPU this job got: 47%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:43.38
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1258908
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 2011
+	Minor (reclaiming a frame) page faults: 3634790
+	Voluntary context switches: 130449
+	Involuntary context switches: 3835
+	Swaps: 0
+	File system inputs: 299409
+	File system outputs: 1216440
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

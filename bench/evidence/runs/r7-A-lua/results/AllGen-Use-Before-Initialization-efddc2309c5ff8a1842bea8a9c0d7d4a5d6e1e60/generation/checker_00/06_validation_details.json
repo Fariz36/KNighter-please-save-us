@@ -1,0 +1,69 @@
+{
+  "commit_id": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-lua/plugin-cache/plugins/d8a335f4bbbe8da8695e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lstrlib.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "prepstate",
+          "reprepstate"
+        ],
+        "fixed_functions": [
+          "prepstate",
+          "reprepstate"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lstrlib.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-lua/work/src/f1bb2773bba8/lstrlib.c",
+          "line": 770,
+          "column": 13,
+          "function": "unknown",
+          "bug_type": "Lua gmatch matchdepth reset",
+          "description": "matchdepth not reset in reprepstate; stale value after error can break recursion guard",
+          "issue_hash": "1913c9ca59ad2a7f9f77f76fbdcd0133",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/efddc2309c5f/86514103/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-lua_work_src_f1bb2773bba8_lstrlib.c/report-1913c9.html",
+          "relpath": "lstrlib.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lstrlib.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 14.35,
+    "analysis_seconds": {
+      "buggy": 12.09,
+      "fixed": 11.38
+    },
+    "total_seconds": 37.96
+  },
+  "report_dir": "tmp/validation/efddc2309c5f/86514103"
+}

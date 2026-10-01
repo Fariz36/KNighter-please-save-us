@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Double free caused by freeing a resource on the caller’s error path after passing ownership to a callee that also frees that same resource when it fails. Here, `xmlNewIOInputStream(ctxt, input, ...)` consumes `input` and frees it if it returns `NULL`; therefore `xmlIOParseDTD()` must not call `xmlFreeParserInputBuffer(input)` again. The root cause is conflicting ownership/cleanup semantics between caller and callee.

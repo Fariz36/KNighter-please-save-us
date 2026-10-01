@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing cleanup of a temporary/duplicated `SrcList` when ownership is not transferred. In `sqlite3TriggerUpdateStep()`, `pFromDup` is allocated/duplicated (or taken from `pFrom` during rename processing) and is only consumed/attached when `pTriggerStep->pSrc` is non-NULL. If `pTriggerStep->pSrc` is NULL, e.g. following an OOM, the append branch is skipped and `pFromDup` is never freed, causing a memory leak. The fix adds the missing `else { sqlite3SrcListDelete(db, pFromDup); }` cleanup path.

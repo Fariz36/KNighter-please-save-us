@@ -1,0 +1,81 @@
+{
+  "commit_id": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/plugin-cache/plugins/c6090387569df7d8570c/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/cf-h2-proxy.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "cf_h2_proxy_ctx_clear",
+          "cf_h2_proxy_ctx_free"
+        ],
+        "fixed_functions": [
+          "cf_h2_proxy_ctx_clear",
+          "cf_h2_proxy_ctx_free"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/cf-h2-proxy.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/work/src/061136f24b52/lib/cf-h2-proxy.c",
+          "line": 203,
+          "column": 5,
+          "function": "cf_h2_proxy_ctx_free",
+          "bug_type": "Resource Unlink After Zeroing",
+          "description": "Unlinking embedded resource after containing struct was zeroed",
+          "issue_hash": "c719148c25a4d2d7da138f9ebf02e5ea",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a0f08d6975d0/5d4e7c91/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-curl_work_src_061136f24b52_lib_cf-h2-proxy.c/report-c71914.html",
+          "relpath": "lib/cf-h2-proxy.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/cf-h2-proxy.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/work/src/a0f08d6975d0/lib/cf-h2-proxy.c",
+          "line": 203,
+          "column": 5,
+          "function": "cf_h2_proxy_ctx_free",
+          "bug_type": "Resource Unlink After Zeroing",
+          "description": "Unlinking embedded resource after containing struct was zeroed",
+          "issue_hash": "c719148c25a4d2d7da138f9ebf02e5ea",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a0f08d6975d0/5d4e7c91/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-curl_work_src_a0f08d6975d0_lib_cf-h2-proxy.c/report-c71914.html",
+          "relpath": "lib/cf-h2-proxy.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 6.77,
+      "fixed": 7.03
+    },
+    "total_seconds": 13.88
+  },
+  "report_dir": "tmp/validation/a0f08d6975d0/5d4e7c91"
+}

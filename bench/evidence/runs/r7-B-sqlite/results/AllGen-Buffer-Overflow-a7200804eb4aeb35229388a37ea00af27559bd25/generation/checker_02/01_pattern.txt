@@ -1,0 +1,10 @@
+## Bug Pattern
+
+The bug pattern is an **underestimated output buffer size for floating-point conversions in `sqlite3_str_vappendf()`**. The code computes `szBufNeeded` with a hard-coded slack (`+8`), then formats the floating-point value directly into `pAccum->zText` using that estimate. The slack does not account for all characters that can be emitted in the `%e`/`%g`/`%f` path—especially:
+
+- the exponent marker, sign, and up to three exponent digits,
+- the decimal point,
+- the forced trailing zero when the `!` flag is used with a precision of zero,
+- the terminating NUL.
+
+For example, `format('%!.0e', -1e100)` requires 9 output bytes plus NUL, but the old `+8` estimate allowed only 8 bytes, causing a buffer overflow. The fix increases the hard-coded slack from `+8` to `+10` to match the maximum possible floating-point rendering length.

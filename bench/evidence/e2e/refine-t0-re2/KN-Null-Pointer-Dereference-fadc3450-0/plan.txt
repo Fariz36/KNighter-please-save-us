@@ -1,0 +1,30 @@
+1. **Program State:**
+   - Not needed. The bug is a local structural pattern inside `DFA::~DFA()`: an explicit destructor call on `cache_mutex_[i]` is not protected by a check on `cache_mutex_storage_`. We can detect this by inspecting the call’s AST ancestors.
+
+2. **Callback: `checkPreCall`**
+   - **Filter to the target destructor.**
+     - Use `C.getLocationContext()->getDecl()` to obtain the current function.
+     - Return unless it is a `CXXDestructorDecl` whose parent class is `DFA` (or the destructor name is `~DFA`).
+   - **Match the explicit destructor call.**
+     - Get `const Expr *CE = Call.getOriginExpr()`.
+     - Return unless `CE` is a `CXXMemberCallExpr` whose method is a `CXXDestructorDecl` for class `AlignedMutex` (method name `~AlignedMutex`).
+   - **Match the object `cache_mutex_[i]`.**
+     - Get the implicit object argument of the member call: `CXXMemberCallExpr::getImplicitObjectArgument()->IgnoreImpCasts()`.
+     - Ensure it is an `ArraySubscriptExpr`.
+     - Ensure the array base, after ignoring casts, is a `MemberExpr` referring to a field named `cache_mutex_`. Use `getMemberName()->getName()` or `getMemberDecl()->getNameAsString()`.
+   - **Find the enclosing loop over `cache_mutex_count_`.**
+     - Use `findSpecificTypeInParents<ForStmt>(CE, C)` or `findSpecificTypeInParents<WhileStmt>(CE, C)`.
+     - Verify the loop condition references `cache_mutex_count_` using `ExprHasName(loop->getCond(), "cache_mutex_count_", C)`.
+     - If no such loop exists, return.
+   - **Search for a guard on `cache_mutex_storage_`.**
+     - Starting from the loop statement, walk upward through enclosing `IfStmt`s. You can repeatedly call `findSpecificTypeInParents<IfStmt>(...)` starting from the loop, then from each found `IfStmt`.
+     - For each enclosing `IfStmt`, inspect its condition:
+       - Accept the guard if the condition is a non-null test of `cache_mutex_storage_`, e.g. `cache_mutex_storage_ != NULL`, `cache_mutex_storage_ != 0`, or boolean `cache_mutex_storage_`, and the loop is in the `then` branch.
+       - Use `ExprHasName(cond, "cache_mutex_storage_", C)` to quickly confirm the condition mentions `cache_mutex_storage_`, then inspect the binary operator/opcode to ensure the polarity is correct.
+     - If such a guard is found, return without reporting.
+   - **Report the missing guard.**
+     - If no valid guard is found, generate a non-fatal error node: `ExplodedNode *N = C.generateNonFatalErrorNode()`.
+     - Create a `PathSensitiveBugReport` with a short message such as:
+       `"Manual destruction of cache_mutex_ may double-destroy inline mutex"`
+     - Attach the source range of the explicit destructor call or the enclosing loop.
+     - Emit the report with `C.emitReport(std::move(R))`.

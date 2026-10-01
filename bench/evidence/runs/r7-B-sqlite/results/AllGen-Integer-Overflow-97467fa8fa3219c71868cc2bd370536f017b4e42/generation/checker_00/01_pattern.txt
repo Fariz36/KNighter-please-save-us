@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked integer overflow in a length calculation derived from untrusted input, with the bounds check performed too late. In `kvvfsDecode()`, `n` and `mult` are stored in `int` while decoding an attacker-controlled base-26 run length. A corrupt kvvfs block can overflow `n` or `mult`, causing `j+n>nOut` to pass incorrectly, after which `memset(&aOut[j], 0, n)` uses a wrapped or negative length and writes out of bounds. The fix uses `sqlite3_int64` and checks `n>nOut` during accumulation, before overflow can affect the bounds check.

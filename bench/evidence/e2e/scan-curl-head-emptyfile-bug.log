@@ -1,0 +1,48 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-09-30 22:47:12.906 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+2026-09-30 22:47:12.907 | DEBUG    | __main__:init_config:26 - Config file: e2e/scan-curl.yaml
+2026-09-30 22:47:12.907 | DEBUG    | __main__:init_config:27 - Result dir: e2e/scan-curl
+2026-09-30 22:47:12.907 | DEBUG    | __main__:init_config:28 - Analysis backend: Analysis Backend Path: /home/faris/RA-MrYudis/Knight/KNighter/llvm
+2026-09-30 22:47:12.907 | DEBUG    | __main__:init_config:29 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl
+2026-09-30 22:47:12.977 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-6f670151fbea4f28)
+2026-09-30 22:47:12.977 | INFO     | __main__:main:80 - Scan the kernel with valid checkers
+2026-09-30 22:47:18.431 | INFO     | backends.plugin_builder:build:341 - Built plugin 3c40f1617f29e9984137 (compile 5.1s, link 0.3s)
+2026-09-30 22:47:18.453 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision bb348b35e84c
+2026-09-30 22:47:20.738 | WARNING  | backends.direct_analysis:analyze_entries:227 - 194/194 analyses failed (0 crashed); first: /home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/bb348b35e84c/lib/altsvc.c: error: no analyzer checkers or packages are associated with 'custom.SAGenTestChecker'
+note: use -analyzer-disable-all-checks to disable all static analyzer checkers
+1 error generated.
+
+2026-09-30 22:47:20.746 | INFO     | backends.csa_compiledb:_run_checker_compiledb:247 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/3c40f1617f29e9984137/plugin.so', 'files': 194, 'failed': 194, 'crashed': 0, 'reports': 0, 'seconds': 2.29, 'jobs': 32}
+2026-09-30 22:47:20.746 | ERROR    | backends.csa_compiledb:_run_checker_compiledb:256 - Every analysis failed; first error: error: no analyzer checkers or packages are associated with 'custom.SAGenTestChecker'
+note: use -analyzer-disable-all-checks to disable all static analyzer checkers
+1 error generated.
+
+2026-09-30 22:47:20.746 | INFO     | checker_scan:scan_compiledb:96 - Scanned HEAD with KN-Integer-Overflow-bc440a89-0: -999 reports
+2026-09-30 22:47:20.747 | DEBUG    | backends.plugin_builder:build:281 - Plugin cache hit 419e10c1ca105845a91b
+2026-09-30 22:48:10.957 | INFO     | backends.csa_compiledb:_run_checker_compiledb:247 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/419e10c1ca105845a91b/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 50.2, 'jobs': 32}
+2026-09-30 22:48:10.958 | INFO     | checker_scan:scan_compiledb:96 - Scanned HEAD with KN-Memory-Leak-a0f08d69-2: 0 reports
+2026-09-30 22:48:10.958 | DEBUG    | backends.plugin_builder:build:281 - Plugin cache hit 3c40f1617f29e9984137
+2026-09-30 22:48:13.091 | WARNING  | backends.direct_analysis:analyze_entries:227 - 194/194 analyses failed (0 crashed); first: /home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/bb348b35e84c/lib/altsvc.c: error: no analyzer checkers or packages are associated with 'custom.SAGenTestChecker'
+note: use -analyzer-disable-all-checks to disable all static analyzer checkers
+1 error generated.
+
+2026-09-30 22:48:13.099 | INFO     | backends.csa_compiledb:_run_checker_compiledb:247 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/3c40f1617f29e9984137/plugin.so', 'files': 194, 'failed': 194, 'crashed': 0, 'reports': 0, 'seconds': 2.13, 'jobs': 32}
+2026-09-30 22:48:13.100 | ERROR    | backends.csa_compiledb:_run_checker_compiledb:256 - Every analysis failed; first error: error: no analyzer checkers or packages are associated with 'custom.SAGenTestChecker'
+note: use -analyzer-disable-all-checks to disable all static analyzer checkers
+1 error generated.
+
+2026-09-30 22:48:13.100 | INFO     | checker_scan:scan_compiledb:96 - Scanned HEAD with KN-Misuse-c53420e4-1: -999 reports
+2026-09-30 22:48:13.101 | DEBUG    | backends.plugin_builder:build:281 - Plugin cache hit 3c40f1617f29e9984137
+2026-09-30 22:48:14.990 | WARNING  | backends.direct_analysis:analyze_entries:227 - 194/194 analyses failed (0 crashed); first: /home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/bb348b35e84c/lib/altsvc.c: error: no analyzer checkers or packages are associated with 'custom.SAGenTestChecker'
+note: use -analyzer-disable-all-checks to disable all static analyzer checkers
+1 error generated.
+
+2026-09-30 22:48:14.997 | INFO     | backends.csa_compiledb:_run_checker_compiledb:247 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/3c40f1617f29e9984137/plugin.so', 'files': 194, 'failed': 194, 'crashed': 0, 'reports': 0, 'seconds': 1.89, 'jobs': 32}
+2026-09-30 22:48:14.997 | ERROR    | backends.csa_compiledb:_run_checker_compiledb:256 - Every analysis failed; first error: error: no analyzer checkers or packages are associated with 'custom.SAGenTestChecker'
+note: use -analyzer-disable-all-checks to disable all static analyzer checkers
+1 error generated.
+
+2026-09-30 22:48:14.998 | INFO     | checker_scan:scan_compiledb:96 - Scanned HEAD with KN-Null-Pointer-Dereference-f2a15357-0: -999 reports
+2026-09-30 22:48:14.998 | INFO     | checker_scan:scan_compiledb:84 - No valid checker in KN-Null-Pointer-Dereference-f7d4e11f-0, skipping
+scan wall 63.74 s

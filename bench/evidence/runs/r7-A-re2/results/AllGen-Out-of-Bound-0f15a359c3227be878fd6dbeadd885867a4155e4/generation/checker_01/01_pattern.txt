@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Accessing the last element of a container using `index - 1` without first checking that the container is non-empty. In `BitState::Push()`, `job_[njob_-1]` is evaluated when `njob_ == 0`, causing an index underflow and invalid memory access. The fix is to guard the access with `njob_ > 0` before using `job_[njob_-1]`.

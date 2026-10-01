@@ -1,0 +1,67 @@
+{
+  "start_time": "2026-10-01T07:18:03.155016",
+  "total_commits": 4,
+  "successful_commits": 3,
+  "workers": 1,
+  "results": [
+    {
+      "commit_id": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+      "commit_type": "Use-After-Free",
+      "total_checkers": 3,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 744.540532,
+      "errors": [
+        "Failed to generate compilable checker 0",
+        "Failed to generate compilable checker 1"
+      ],
+      "success_rate": 0.3333333333333333,
+      "timestamp": "2026-10-01T07:30:27.706124"
+    },
+    {
+      "commit_id": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+      "commit_type": "Use-Before-Initialization",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 271.680304,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T07:34:59.389241"
+    },
+    {
+      "commit_id": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+      "commit_type": "Integer-Overflow",
+      "total_checkers": 3,
+      "successful_checkers": 2,
+      "perfect_checkers": 0,
+      "best_tp": 1,
+      "best_tn": 0,
+      "total_time": 1375.290497,
+      "errors": [
+        "Failed to generate compilable checker 1"
+      ],
+      "success_rate": 0.6666666666666666,
+      "timestamp": "2026-10-01T07:57:54.686139"
+    },
+    {
+      "commit_id": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+      "commit_type": "Misuse",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 107.735412,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T07:59:42.424027"
+    }
+  ],
+  "end_time": "2026-10-01T07:59:42.424406",
+  "success_rate": 0.75
+}

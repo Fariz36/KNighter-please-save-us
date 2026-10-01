@@ -1,0 +1,49 @@
+## Plan
+
+### 1. Program State Decision
+No custom program state is necessary. The bug pattern is localized: a division by `maxAmpl` occurs without a preceding zero-check. The guard, when present, is syntactically part of the same `if` condition or an enclosing `if`. Therefore, a purely syntactic AST check at the division site is sufficient and avoids unnecessary state tracking.
+
+### 2. Callback: `checkPreStmt(const BinaryOperator *BO, CheckerContext &C)`
+This callback inspects every division operation.
+- **Check opcode**: If `BO->getOpcode() != BO_Div`, return.
+- **Identify denominator**: Get `const Expr *Denom = BO->getRHS()->IgnoreParenImpCasts();`.
+- **Check if denominator is `maxAmpl`**:
+  - If `Denom` is a `MemberExpr`, get its `FieldDecl` and compare `getName()` to `"maxAmpl"`.
+  - If it is a `DeclRefExpr` to a variable named `"maxAmpl"`, also consider it.
+  - Alternatively, use `ExprHasName(Denom, "maxAmpl", C)` as a quick filter.
+- **If not `maxAmpl`**, return.
+- **Find the enclosing `IfStmt`**:
+  - Use `findSpecificTypeInParents<IfStmt>(BO, C)`.
+  - If no enclosing `IfStmt` is found, report the bug (no guard).
+- **Check for a zero guard in the condition**:
+  - Get `const Expr *Cond = IfStmt->getCond();`.
+  - Call the helper `containsMaxAmplZeroCheck(Cond, C)`.
+  - If it returns `true`, the division is guarded; return without reporting.
+- **Report the bug**: If no guard was found, call `reportDivByZero(BO, C)`.
+
+### 3. Helper: `containsMaxAmplZeroCheck(const Expr *E, CheckerContext &C)`
+Recursively scans an expression for a guard that ensures `maxAmpl != 0`.
+- Strip parentheses and implicit casts: `E = E->IgnoreParenImpCasts();`.
+- **Logical AND (`&&`)**: If `E` is a `BinaryOperator` with opcode `BO_LAnd`, recursively check both `getLHS()` and `getRHS()`. A guard in either branch of an `&&` protects the right-hand side.
+- **Comparisons**: If `E` is a `BinaryOperator` with opcode `BO_GT`, `BO_NE`, `BO_LT`, etc.:
+  - Use `EvaluateExprToInt` to check if one operand is the integer `0`.
+  - Use `ExprHasName` (or AST inspection) to check if the other operand refers to `maxAmpl`.
+  - For `>`: guard is `maxAmpl > 0` or `0 < maxAmpl`.
+  - For `!=`: guard is `maxAmpl != 0` or `0 != maxAmpl`.
+  - If such a comparison is found, return `true`.
+- **Implicit boolean check**: If `E` is a `DeclRefExpr` or `MemberExpr` referring to `maxAmpl`, it is an implicit `maxAmpl != 0` check (since it is used in a condition). Return `true`.
+- **Otherwise**: Return `false`.
+
+### 4. Bug Reporting: `reportDivByZero(const BinaryOperator *BO, CheckerContext &C)`
+Generate a warning for the unguarded division.
+- Create a non-fatal error node: `auto N = C.generateNonFatalErrorNode();`.
+- Create a `PathSensitiveBugReport`:
+  ```cpp
+  auto R = std::make_unique<PathSensitiveBugReport>(
+      *N, "Division by zero: maxAmpl can be zero", N);
+  ```
+- Add the division's source range: `R->addRange(BO->getSourceRange());`.
+- Emit the report: `C.emitReport(std::move(R));`.
+
+### 5. Optional: Setter Validation (Not Required)
+If you also want to flag the missing validation in `xmlCtxtSetMaxAmplification`, you could add a separate `checkPreStmt` for the assignment or a `checkBranchCondition` to detect the absence of `if (maxAmpl == 0) return;`. However, the division-site check above already catches the root cause of the SIGFPE and works without cross-function state tracking.

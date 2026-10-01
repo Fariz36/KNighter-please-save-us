@@ -1,0 +1,164 @@
+_base_result_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-B-curl/results
+commit_id: a0f08d6975d00c3ea04e1bd2fcf60dad446266ec
+commit_type: Memory-Leak
+index: 0
+initial_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n#include \"llvm/ADT/APSInt.h\"\n#include <memory>\n\nusing namespace clang;\n\
+  using namespace ento;\nusing namespace taint;\n\nREGISTER_MAP_WITH_PROGRAMSTATE(ZeroedStructMap,\
+  \ const MemRegion *, bool)\n\nnamespace {\n\nstatic bool callIsNamed(const CallEvent\
+  \ &Call, StringRef Name,\n                        CheckerContext &C) {\n  const\
+  \ Expr *E = Call.getOriginExpr();\n  return E && ExprHasName(E, Name, C);\n}\n\n\
+  class SAGenTestChecker : public Checker<check::PostCall, check::PreCall> {\n  mutable\
+  \ std::unique_ptr<BugType> BT;\n\npublic:\n  SAGenTestChecker()\n      : BT(new\
+  \ BugType(this, \"Peer leak after struct zeroing\",\n                       \"Memory\
+  \ Management\")) {}\n\n  void checkPostCall(const CallEvent &Call, CheckerContext\
+  \ &C) const;\n  void checkPreCall(const CallEvent &Call, CheckerContext &C) const;\n\
+  \nprivate:\n  void reportBug(const CallEvent &Call, CheckerContext &C) const;\n\
+  };\n\nvoid SAGenTestChecker::checkPostCall(const CallEvent &Call,\n            \
+  \                         CheckerContext &C) const {\n  ProgramStateRef State =\
+  \ C.getState();\n\n  // Detect memset(dst, 0, ...) and __builtin_memset(dst, 0,\
+  \ ...)\n  if (callIsNamed(Call, \"memset\", C) ||\n      callIsNamed(Call, \"__builtin_memset\"\
+  , C)) {\n    if (Call.getNumArgs() < 2)\n      return;\n\n    const Expr *ValExpr\
+  \ = Call.getArgExpr(1);\n    llvm::APSInt EvalRes;\n    if (!ValExpr || !EvaluateExprToInt(EvalRes,\
+  \ ValExpr, C) ||\n        !EvalRes.isZero())\n      return;\n\n    SVal Dest = Call.getArgSVal(0);\n\
+  \    const MemRegion *MR = Dest.getAsRegion();\n    if (!MR)\n      return;\n\n\
+  \    State = State->set<ZeroedStructMap>(MR, true);\n    C.addTransition(State);\n\
+  \    return;\n  }\n\n  // Summarize cf_h2_proxy_ctx_clear(ctx): it zeroes the whole\
+  \ ctx object.\n  if (callIsNamed(Call, \"cf_h2_proxy_ctx_clear\", C)) {\n    if\
+  \ (Call.getNumArgs() < 1)\n      return;\n\n    SVal Arg = Call.getArgSVal(0);\n\
+  \    const MemRegion *MR = Arg.getAsRegion();\n    if (!MR)\n      return;\n\n \
+  \   State = State->set<ZeroedStructMap>(MR, true);\n    C.addTransition(State);\n\
+  \    return;\n  }\n}\n\nvoid SAGenTestChecker::checkPreCall(const CallEvent &Call,\n\
+  \                                    CheckerContext &C) const {\n  // Detect Curl_peer_unlink(&ctx->dest)\
+  \ after the containing struct was zeroed.\n  if (!callIsNamed(Call, \"Curl_peer_unlink\"\
+  , C))\n    return;\n\n  if (Call.getNumArgs() < 1)\n    return;\n\n  SVal Arg =\
+  \ Call.getArgSVal(0);\n  const MemRegion *MR = Arg.getAsRegion();\n  if (!MR)\n\
+  \    return;\n\n  const MemRegion *Base = MR->getBaseRegion();\n  if (!Base)\n \
+  \   Base = MR;\n\n  ProgramStateRef State = C.getState();\n  const bool *ZeroedMR\
+  \ = State->get<ZeroedStructMap>(MR);\n  const bool *ZeroedBase = State->get<ZeroedStructMap>(Base);\n\
+  \n  if ((ZeroedMR && *ZeroedMR) || (ZeroedBase && *ZeroedBase)) {\n    reportBug(Call,\
+  \ C);\n  }\n}\n\nvoid SAGenTestChecker::reportBug(const CallEvent &Call,\n     \
+  \                            CheckerContext &C) const {\n  ExplodedNode *N = C.generateNonFatalErrorNode();\n\
+  \  if (!N)\n    return;\n\n  auto Report = std::make_unique<PathSensitiveBugReport>(\n\
+  \      *BT,\n      \"Curl_peer_unlink after containing struct was zeroed; possible\
+  \ peer leak.\",\n      N);\n  Report->addRange(Call.getSourceRange());\n  C.emitReport(std::move(Report));\n\
+  }\n\n} // end anonymous namespace\n\nextern \"C\" void clang_registerCheckers(CheckerRegistry\
+  \ &registry) {\n  registry.addChecker<SAGenTestChecker>(\n      \"custom.SAGenTestChecker\"\
+  ,\n      \"Detects Curl_peer_unlink after the containing struct was zeroed\",\n\
+  \      \"\");\n}\n\nextern \"C\" const char clang_analyzerAPIVersionString[] =\n\
+  \    CLANG_ANALYZER_API_VERSION_STRING;\n"
+patch: "## Patch Description\n\ncf-h2-prox: fix peer leak\n\nThe unlinking of the\
+  \ new Curl_peer was happening too later after\nthe struct had been set to zero.\
+  \ Move the unlink to happen before\nthat.\n\nFixes #21602\nReported-by: Joshua Rogers\n\
+  Closes #21627\n\n## Buggy Code\n\n```c\n// Function: cf_h2_proxy_ctx_free in lib/cf-h2-proxy.c\n\
+  static void cf_h2_proxy_ctx_free(struct cf_h2_proxy_ctx *ctx)\n{\n  if(ctx) {\n\
+  \    cf_h2_proxy_ctx_clear(ctx);\n    Curl_peer_unlink(&ctx->dest);\n    curlx_free(ctx);\n\
+  \  }\n}\n```\n\n```c\n// Function: cf_h2_proxy_ctx_clear in lib/cf-h2-proxy.c\n\
+  static void cf_h2_proxy_ctx_clear(struct cf_h2_proxy_ctx *ctx)\n{\n  struct cf_call_data\
+  \ save = ctx->call_data;\n\n  if(ctx->h2) {\n    nghttp2_session_del(ctx->h2);\n\
+  \  }\n  Curl_bufq_free(&ctx->inbufq);\n  Curl_bufq_free(&ctx->outbufq);\n  tunnel_stream_clear(&ctx->tunnel);\n\
+  \  memset(ctx, 0, sizeof(*ctx));\n  ctx->call_data = save;\n}\n```\n\n## Bug Fix\
+  \ Patch\n\n```diff\ndiff --git a/lib/cf-h2-proxy.c b/lib/cf-h2-proxy.c\nindex 1dfd0a0a46..297afb3c8c\
+  \ 100644\n--- a/lib/cf-h2-proxy.c\n+++ b/lib/cf-h2-proxy.c\n@@ -190,6 +190,7 @@\
+  \ static void cf_h2_proxy_ctx_clear(struct cf_h2_proxy_ctx *ctx)\n   }\n   Curl_bufq_free(&ctx->inbufq);\n\
+  \   Curl_bufq_free(&ctx->outbufq);\n+  Curl_peer_unlink(&ctx->dest);\n   tunnel_stream_clear(&ctx->tunnel);\n\
+  \   memset(ctx, 0, sizeof(*ctx));\n   ctx->call_data = save;\n@@ -199,7 +200,6 @@\
+  \ static void cf_h2_proxy_ctx_free(struct cf_h2_proxy_ctx *ctx)\n {\n   if(ctx)\
+  \ {\n     cf_h2_proxy_ctx_clear(ctx);\n-    Curl_peer_unlink(&ctx->dest);\n    \
+  \ curlx_free(ctx);\n   }\n }\n```\n"
+pattern: "## Bug Pattern\n\nClearing/zeroing a containing structure with `memset()`\
+  \ before unlinking an embedded list/link node (`ctx->dest`) invalidates the node\u2019\
+  s linkage. The later `Curl_peer_unlink(&ctx->dest)` operates on zeroed fields instead\
+  \ of the original peer, so the peer is never removed from its list and leaks. The\
+  \ cleanup order must unlink the embedded peer before the containing context is cleared."
+plan: "1. **Program State**\n   - Register a program-state map: `REGISTER_MAP_WITH_PROGRAMSTATE(ZeroedStructMap,\
+  \ const MemRegion *, bool)`.\n   - Purpose: remember which base memory regions have\
+  \ been zeroed/cleared on the current path by `memset` or by a known clear helper.\n\
+  \n2. **`checkPostCall`: Detect `memset`**\n   - Match calls whose callee name is\
+  \ `memset` or `__builtin_memset`.\n   - Optionally verify the second argument evaluates\
+  \ to `0` using `EvaluateExprToInt`.\n   - Get the destination region from the first\
+  \ argument via `Call.getArgSVal(0).getAsRegion()`.\n   - If the region is non-null,\
+  \ add it to `ZeroedStructMap`.\n\n3. **`checkPostCall`: Summarize `cf_h2_proxy_ctx_clear`**\n\
+  \   - Match calls to `cf_h2_proxy_ctx_clear`.\n   - Get the first argument\u2019\
+  s `MemRegion`.\n   - Mark that region as zeroed in `ZeroedStructMap`, because this\
+  \ helper performs `memset(ctx, 0, sizeof(*ctx))`.\n   - This step makes the checker\
+  \ robust when the helper is not inlined. If inlining is reliable, this step can\
+  \ be omitted.\n\n4. **`checkPreCall`: Detect unlink after zeroing**\n   - Match\
+  \ calls to `Curl_peer_unlink`.\n   - Get the first argument\u2019s `MemRegion` via\
+  \ `Call.getArgSVal(0).getAsRegion()`. For `&ctx->dest`, this is a field/subregion.\n\
+  \   - Check whether this region itself or its base region, obtained by `getBaseRegion()`,\
+  \ is present in `ZeroedStructMap` in the current state.\n   - If yes, the containing\
+  \ struct was already zeroed before the embedded peer link was unlinked. This is\
+  \ the bug.\n\n5. **Report the Bug**\n   - Generate a non-fatal error node with `C.generateNonFatalErrorNode()`.\n\
+  \   - Create a `PathSensitiveBugReport` with a short message such as:\n     `\"\
+  Curl_peer_unlink after containing struct was zeroed; possible peer leak.\"`\n  \
+  \ - Emit the report with `C.emitReport(...)`.\n\nNo alias tracking is required because\
+  \ the key is the `MemRegion` itself; aliases that point to the same object resolve\
+  \ to the same base region. The checker is path-sensitive, so it only reports when\
+  \ the zeroing actually happens before the unlink on the same path. In the fixed\
+  \ code, the unlink occurs before the `memset`, so `ZeroedStructMap` is empty at\
+  \ the unlink site and no warning is emitted."
+refined_plan: null
+repaired_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n#include \"llvm/ADT/APSInt.h\"\n#include <memory>\n\nusing namespace clang;\n\
+  using namespace ento;\nusing namespace taint;\n\nREGISTER_MAP_WITH_PROGRAMSTATE(ZeroedStructMap,\
+  \ const MemRegion *, bool)\n\nnamespace {\n\nstatic bool callIsNamed(const CallEvent\
+  \ &Call, StringRef Name,\n                        CheckerContext &C) {\n  const\
+  \ Expr *E = Call.getOriginExpr();\n  return E && ExprHasName(E, Name, C);\n}\n\n\
+  class SAGenTestChecker : public Checker<check::PostCall, check::PreCall> {\n  mutable\
+  \ std::unique_ptr<BugType> BT;\n\npublic:\n  SAGenTestChecker()\n      : BT(new\
+  \ BugType(this, \"Peer leak after struct zeroing\",\n                       \"Memory\
+  \ Management\")) {}\n\n  void checkPostCall(const CallEvent &Call, CheckerContext\
+  \ &C) const;\n  void checkPreCall(const CallEvent &Call, CheckerContext &C) const;\n\
+  \nprivate:\n  void reportBug(const CallEvent &Call, CheckerContext &C) const;\n\
+  };\n\nvoid SAGenTestChecker::checkPostCall(const CallEvent &Call,\n            \
+  \                         CheckerContext &C) const {\n  ProgramStateRef State =\
+  \ C.getState();\n\n  // Detect memset(dst, 0, ...) and __builtin_memset(dst, 0,\
+  \ ...)\n  if (callIsNamed(Call, \"memset\", C) ||\n      callIsNamed(Call, \"__builtin_memset\"\
+  , C)) {\n    if (Call.getNumArgs() < 2)\n      return;\n\n    const Expr *ValExpr\
+  \ = Call.getArgExpr(1);\n    llvm::APSInt EvalRes;\n    if (!ValExpr || !EvaluateExprToInt(EvalRes,\
+  \ ValExpr, C) ||\n        !EvalRes.isZero())\n      return;\n\n    SVal Dest = Call.getArgSVal(0);\n\
+  \    const MemRegion *MR = Dest.getAsRegion();\n    if (!MR)\n      return;\n\n\
+  \    State = State->set<ZeroedStructMap>(MR, true);\n    C.addTransition(State);\n\
+  \    return;\n  }\n\n  // Summarize cf_h2_proxy_ctx_clear(ctx): it zeroes the whole\
+  \ ctx object.\n  if (callIsNamed(Call, \"cf_h2_proxy_ctx_clear\", C)) {\n    if\
+  \ (Call.getNumArgs() < 1)\n      return;\n\n    SVal Arg = Call.getArgSVal(0);\n\
+  \    const MemRegion *MR = Arg.getAsRegion();\n    if (!MR)\n      return;\n\n \
+  \   State = State->set<ZeroedStructMap>(MR, true);\n    C.addTransition(State);\n\
+  \    return;\n  }\n}\n\nvoid SAGenTestChecker::checkPreCall(const CallEvent &Call,\n\
+  \                                    CheckerContext &C) const {\n  // Detect Curl_peer_unlink(&ctx->dest)\
+  \ after the containing struct was zeroed.\n  if (!callIsNamed(Call, \"Curl_peer_unlink\"\
+  , C))\n    return;\n\n  if (Call.getNumArgs() < 1)\n    return;\n\n  SVal Arg =\
+  \ Call.getArgSVal(0);\n  const MemRegion *MR = Arg.getAsRegion();\n  if (!MR)\n\
+  \    return;\n\n  const MemRegion *Base = MR->getBaseRegion();\n  if (!Base)\n \
+  \   Base = MR;\n\n  ProgramStateRef State = C.getState();\n  const bool *ZeroedMR\
+  \ = State->get<ZeroedStructMap>(MR);\n  const bool *ZeroedBase = State->get<ZeroedStructMap>(Base);\n\
+  \n  if ((ZeroedMR && *ZeroedMR) || (ZeroedBase && *ZeroedBase)) {\n    reportBug(Call,\
+  \ C);\n  }\n}\n\nvoid SAGenTestChecker::reportBug(const CallEvent &Call,\n     \
+  \                            CheckerContext &C) const {\n  ExplodedNode *N = C.generateNonFatalErrorNode();\n\
+  \  if (!N)\n    return;\n\n  auto Report = std::make_unique<PathSensitiveBugReport>(\n\
+  \      *BT,\n      \"Curl_peer_unlink after containing struct was zeroed; possible\
+  \ peer leak.\",\n      N);\n  Report->addRange(Call.getSourceRange());\n  C.emitReport(std::move(Report));\n\
+  }\n\n} // end anonymous namespace\n\nextern \"C\" void clang_registerCheckers(CheckerRegistry\
+  \ &registry) {\n  registry.addChecker<SAGenTestChecker>(\n      \"custom.SAGenTestChecker\"\
+  ,\n      \"Detects Curl_peer_unlink after the containing struct was zeroed\",\n\
+  \      \"\");\n}\n\nextern \"C\" const char clang_analyzerAPIVersionString[] =\n\
+  \    CLANG_ANALYZER_API_VERSION_STRING;\n"
+tn_score: 0
+tp_score: 0

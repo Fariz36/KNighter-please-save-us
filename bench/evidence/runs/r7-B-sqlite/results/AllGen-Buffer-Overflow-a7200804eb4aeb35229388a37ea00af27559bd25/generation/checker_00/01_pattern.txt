@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Underestimating the required size of a manually managed output buffer before writing formatted data into it. In `sqlite3_str_vappendf()`, the floating-point conversion path computes `szBufNeeded` for the accumulation buffer, calls `sqlite3StrAccumEnlargeIfNeeded()`, and then writes directly into `pAccum->zText`. The size calculation used a too-small fixed margin (`+8`) and failed to account for all characters that certain format flags/precision combinations can emit, such as the sign, decimal point, forced digit, exponent sign, and exponent digits for `%!.0e`. This causes an out-of-bounds buffer write. The fix increases the fixed margin to `+10`, ensuring the buffer size calculation covers the maximum possible output length.

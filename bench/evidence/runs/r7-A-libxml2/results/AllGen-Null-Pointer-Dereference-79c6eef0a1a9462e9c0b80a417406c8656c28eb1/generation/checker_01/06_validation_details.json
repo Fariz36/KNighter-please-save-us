@@ -1,0 +1,607 @@
+{
+  "commit_id": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/plugin-cache/plugins/d334f468f1328b9aa7d4/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlregexp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 25,
+        "fixed_total": 25,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "xmlRegNewParserCtxt"
+        ],
+        "fixed_functions": [
+          "xmlRegNewParserCtxt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 3344,
+          "column": 9,
+          "function": "xmlFARegExec",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "0050839e2acdd6bb69a138a147a0994e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-005083.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 492,
+          "column": 9,
+          "function": "xmlRegCalloc2",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "00a43625538d31dfec27b603ec42fb0c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-00a436.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 593,
+          "column": 11,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "0daf608da4930a2820ecffa680cddaab",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-0daf60.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 562,
+          "column": 17,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "1237f7e0e475880ba075db533fd6d536",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-1237f7.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 559,
+          "column": 17,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "38e1d4d3db11481c25d188a09c852e56",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-38e1d4.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 6116,
+          "column": 2,
+          "function": "xmlAutomataNewOnceTrans2",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "40aaa7deb817173a1d807c1ec5d0259e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-40aaa7.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 5943,
+          "column": 2,
+          "function": "xmlAutomataNewCountTrans2",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "45941b6c022e0d7944c8095f7efc615c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-45941b.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 906,
+          "column": 10,
+          "function": "xmlRegCopyAtom",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "4e0d8072357cd37755686d134cedece3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-4e0d80.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 841,
+          "column": 5,
+          "function": "xmlRegNewAtom",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "59aefaa79e642c2eed493f7911c838dd",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-59aefa.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 3625,
+          "column": 5,
+          "function": "xmlRegNewExecCtxt",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "6cc59bfe558d86c42c06f97e26f56af2",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-6cc59b.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 905,
+          "column": 21,
+          "function": "xmlRegCopyAtom",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "8cc9b5a09ef7e233f576d41d3780030b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-8cc9b5.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 642,
+          "column": 43,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "9a53f37816791279c66c558b9ebad018",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-9a53f3.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 737,
+          "column": 5,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "9a9e0cd80a05bb80520c83ddac36a5ab",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-9a9e0c.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 3651,
+          "column": 9,
+          "function": "xmlRegNewExecCtxt",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "9ecb3a0acc315470d9980a1c301ca793",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-9ecb3a.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 592,
+          "column": 26,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "a003f688a144e1ef6a076937bd7915d0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-a003f6.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 927,
+          "column": 5,
+          "function": "xmlRegNewState",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "a109e50b8f99f17fe58f201ecdd6a0e3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-a109e5.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 511,
+          "column": 5,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "a361bad7da932ad6786d3f427cc3ac3a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-a361ba.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 5873,
+          "column": 2,
+          "function": "xmlAutomataNewNegTrans",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "a3f3f7c19abdeb9f2e61e99fc797d0d5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-a3f3f7.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 591,
+          "column": 22,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "a8f3f8e9a3beeff311bb68286b066046",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-a8f3f8.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 3283,
+          "column": 2,
+          "function": "xmlFARegExecSave",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "bc9d26a6e2b36bb4e167296a458544f4",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-bc9d26.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 4242,
+          "column": 5,
+          "function": "xmlRegExecPushString2",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "bef83c9e9f62a812aefefb1f1dadbc6f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-bef83c.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 890,
+          "column": 5,
+          "function": "xmlRegCopyAtom",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "c280708b1db3c43c60b6a1e12316df64",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-c28070.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 5811,
+          "column": 2,
+          "function": "xmlAutomataNewTransition2",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "c3f9547d84757b43625773430f8fe79c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-c3f954.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 740,
+          "column": 13,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "da2f5e1e3ac5813acf5c7ac316abdafb",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-da2f5e.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7-1790824284312128776/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 637,
+          "column": 16,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "e15c8ec9616e5fd80b97f3e80b75431b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-e15c8e.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 3344,
+          "column": 9,
+          "function": "xmlFARegExec",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "0050839e2acdd6bb69a138a147a0994e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-005083.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 492,
+          "column": 9,
+          "function": "xmlRegCalloc2",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "00a43625538d31dfec27b603ec42fb0c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-00a436.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 593,
+          "column": 11,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "0daf608da4930a2820ecffa680cddaab",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-0daf60.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 562,
+          "column": 17,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "1237f7e0e475880ba075db533fd6d536",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-1237f7.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 559,
+          "column": 17,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "38e1d4d3db11481c25d188a09c852e56",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-38e1d4.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 6116,
+          "column": 2,
+          "function": "xmlAutomataNewOnceTrans2",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "40aaa7deb817173a1d807c1ec5d0259e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-40aaa7.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 5943,
+          "column": 2,
+          "function": "xmlAutomataNewCountTrans2",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "45941b6c022e0d7944c8095f7efc615c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-45941b.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 906,
+          "column": 10,
+          "function": "xmlRegCopyAtom",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "4e0d8072357cd37755686d134cedece3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-4e0d80.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 841,
+          "column": 5,
+          "function": "xmlRegNewAtom",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "59aefaa79e642c2eed493f7911c838dd",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-59aefa.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 3625,
+          "column": 5,
+          "function": "xmlRegNewExecCtxt",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "6cc59bfe558d86c42c06f97e26f56af2",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-6cc59b.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 905,
+          "column": 21,
+          "function": "xmlRegCopyAtom",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "8cc9b5a09ef7e233f576d41d3780030b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-8cc9b5.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 642,
+          "column": 43,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "9a53f37816791279c66c558b9ebad018",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-9a53f3.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 737,
+          "column": 5,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "9a9e0cd80a05bb80520c83ddac36a5ab",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-9a9e0c.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 3651,
+          "column": 9,
+          "function": "xmlRegNewExecCtxt",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "9ecb3a0acc315470d9980a1c301ca793",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-9ecb3a.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 592,
+          "column": 26,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "a003f688a144e1ef6a076937bd7915d0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-a003f6.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 927,
+          "column": 5,
+          "function": "xmlRegNewState",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "a109e50b8f99f17fe58f201ecdd6a0e3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-a109e5.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 511,
+          "column": 5,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "a361bad7da932ad6786d3f427cc3ac3a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-a361ba.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 744,
+          "column": 20,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "a3a3edd8bc876bd867b769f72d171aa1",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-a3a3ed.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 5873,
+          "column": 2,
+          "function": "xmlAutomataNewNegTrans",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "a3f3f7c19abdeb9f2e61e99fc797d0d5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-a3f3f7.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 591,
+          "column": 22,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "a8f3f8e9a3beeff311bb68286b066046",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-a8f3f8.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 3283,
+          "column": 2,
+          "function": "xmlFARegExecSave",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "bc9d26a6e2b36bb4e167296a458544f4",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-bc9d26.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 4242,
+          "column": 5,
+          "function": "xmlRegExecPushString2",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "bef83c9e9f62a812aefefb1f1dadbc6f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-bef83c.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 890,
+          "column": 5,
+          "function": "xmlRegCopyAtom",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "c280708b1db3c43c60b6a1e12316df64",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-c28070.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 5811,
+          "column": 2,
+          "function": "xmlAutomataNewTransition2",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result used before NULL check",
+          "issue_hash": "c3f9547d84757b43625773430f8fe79c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-c3f954.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7-1790824284318110111/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 637,
+          "column": 16,
+          "function": "xmlRegEpxFromParse",
+          "bug_type": "Use before NULL check",
+          "description": "Allocation result dereferenced before NULL check",
+          "issue_hash": "e15c8ec9616e5fd80b97f3e80b75431b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/79c6eef0a1a9/ac55566a/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-e15c8e.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 2.44,
+    "analysis_seconds": {
+      "buggy": 37.89,
+      "fixed": 36.86
+    },
+    "total_seconds": 77.44
+  },
+  "report_dir": "tmp/validation/79c6eef0a1a9/ac55566a"
+}

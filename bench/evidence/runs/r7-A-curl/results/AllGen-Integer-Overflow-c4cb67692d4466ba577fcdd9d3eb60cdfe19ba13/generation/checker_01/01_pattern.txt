@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is using a narrow integer type (e.g., `unsigned short`) for length/offset variables that participate in a size-check arithmetic expression. In `smb_request_state`, `len` and `off` are `unsigned short`, and they are used in the check `off + sizeof(unsigned int) + len > smbc->got`. If the addition overflows, the size check can be bypassed, leading to out-of-bounds memory access. The fix is to declare these variables as `size_t` so the arithmetic is performed with sufficient width to prevent overflow.

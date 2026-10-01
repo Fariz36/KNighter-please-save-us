@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unconditionally duplicating a possibly-NULL optional string field—here `hunk->summary`—by passing it directly to a string duplication routine such as `git__strdup()`. Some blame hunks legitimately have no commit summary, so the field can be NULL and must be checked before duplication; otherwise the string routine dereferences NULL.

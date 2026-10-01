@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using an unchecked narrowing cast from a potentially large length/pointer difference to `int`. In the `%!.*s` conversion path, `length = (int)(z - (unsigned char*)bufpt)` can overflow/truncate when the scanned UTF-8 string length exceeds `INT_MAX`, producing an invalid or negative length that is later used for output sizing or copying. The fix clamps the computed length before casting to `int`.

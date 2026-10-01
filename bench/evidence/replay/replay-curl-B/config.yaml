@@ -1,0 +1,35 @@
+result_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/replay/replay-curl-B/results
+LLVM_dir: /home/faris/RA-MrYudis/Knight/KNighter/llvm
+key_file: llm_keys.yaml
+model: opencode-go:deepseek-v4.1-flash
+checker_nums: 3
+max_tokens: 65536
+llm_timeout: 600
+project:
+  description: curl, the C library (libcurl) for transferring data with URLs
+target_type: compiledb
+target_options:
+  name: curl
+  repo_dir: /home/faris/RA-MrYudis/Knight/targets/curl
+  work_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/replay/replay-curl-B/work
+  setup:
+  - cmake -S {src} -B {build} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DBUILD_TESTING=OFF
+    -DBUILD_CURL_EXE=OFF -DBUILD_EXAMPLES=OFF -DBUILD_LIBCURL_DOCS=OFF -DBUILD_MISC_DOCS=OFF
+    -DENABLE_CURL_MANUAL=OFF -DCURL_USE_LIBSSH2=OFF -DUSE_LIBIDN2=OFF -DCURL_ZSTD=OFF
+    -DCURL_USE_OPENSSL=ON
+  source_extensions:
+  - .c
+  scan_include:
+  - lib/
+  reuse_revisions: true
+plugin_build: standalone
+validation_scoring: strict
+analysis_jobs: 8
+analysis_timeout: 600
+max_parallel_plugin_builds: 4
+scan_commit: HEAD
+min_reports_for_triage: 1
+perfect_report_threshold: 3
+jobs: 8
+gen_workers: 4
+plugin_cache_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/replay/replay-curl-B/plugin-cache

@@ -1,0 +1,68 @@
+{
+  "commit_id": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-lua/plugin-cache/plugins/2cdb10759f2817860c8b/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lauxlib.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "newbox"
+        ],
+        "fixed_functions": [
+          "getBoxMT",
+          "newbox"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lauxlib.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-lua/work/src/40b76de2d77e/lauxlib.c",
+          "line": 521,
+          "column": 5,
+          "function": "newbox",
+          "bug_type": "Lua API Misuse",
+          "description": "Metatable registered before full initialization",
+          "issue_hash": "38aff4d2fdf99d10c48e9e17171b40f8",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/bc4bbcef651b/2fcbcdcd/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-lua_work_src_40b76de2d77e_lauxlib.c/report-38aff4.html",
+          "relpath": "lauxlib.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lauxlib.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 13.31,
+    "analysis_seconds": {
+      "buggy": 6.8,
+      "fixed": 6.38
+    },
+    "total_seconds": 26.56
+  },
+  "report_dir": "tmp/validation/bc4bbcef651b/2fcbcdcd"
+}

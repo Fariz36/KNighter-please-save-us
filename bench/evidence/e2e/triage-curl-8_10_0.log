@@ -1,0 +1,50 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-09-30 22:57:12.049 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+2026-09-30 22:57:12.049 | DEBUG    | __main__:init_config:26 - Config file: e2e/scan-curl-8_10_0.yaml
+2026-09-30 22:57:12.050 | DEBUG    | __main__:init_config:27 - Result dir: e2e/scan-curl
+2026-09-30 22:57:12.050 | DEBUG    | __main__:init_config:28 - Analysis backend: Analysis Backend Path: /home/faris/RA-MrYudis/Knight/KNighter/llvm
+2026-09-30 22:57:12.050 | DEBUG    | __main__:init_config:29 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl
+2026-09-30 22:57:12.095 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-5cc0464812c1400b)
+2026-09-30 22:57:12.095 | INFO     | __main__:main:80 - Triage the report
+2026-09-30 22:57:12.096 | INFO     | checker_scan:triage_report:391 - Processing KN-Null-Pointer-Dereference-f2a15357-0...
+2026-09-30 22:57:12.100 | INFO     | checker_scan:triage_report:408 - Final report directory: e2e/scan-curl/KN-Null-Pointer-Dereference-f2a15357-0/scan-reports-1/main-report
+2026-09-30 22:57:13.172 | INFO     | checker_scan:collect_reports:370 - Number of unique files with reports: 1
+2026-09-30 22:57:13.177 | INFO     | checker_scan:triage_report:430 - Triaging _home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_a3bd1dda12ec_lib_easy...
+2026-09-30 22:57:13.178 | INFO     | agent:check_report:382 - start generating check_report prompts
+2026-09-30 22:57:13.185 | INFO     | agent:check_report:397 - finish check_report generation
+2026-09-30 22:57:13.185 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-09-30 22:57:46.616 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 33.4s
+2026-09-30 22:57:46.620 | INFO     | checker_scan:triage_report:391 - Processing KN-Memory-Leak-a0f08d69-2...
+2026-09-30 22:57:46.625 | INFO     | checker_scan:triage_report:408 - Final report directory: e2e/scan-curl/KN-Memory-Leak-a0f08d69-2/scan-reports-3/main-report
+2026-09-30 22:57:46.634 | INFO     | checker_scan:collect_reports:370 - Number of unique files with reports: 0
+2026-09-30 22:57:46.639 | INFO     | checker_scan:triage_report:391 - Processing KN-Misuse-c53420e4-1...
+2026-09-30 22:57:46.642 | INFO     | checker_scan:triage_report:408 - Final report directory: e2e/scan-curl/KN-Misuse-c53420e4-1/scan-reports-1/main-report
+2026-09-30 22:57:48.230 | INFO     | checker_scan:collect_reports:370 - Number of unique files with reports: 1
+2026-09-30 22:57:48.235 | INFO     | checker_scan:triage_report:430 - Triaging _home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_a3bd1dda12ec_lib_vtls_openssl...
+2026-09-30 22:57:48.237 | INFO     | agent:check_report:382 - start generating check_report prompts
+2026-09-30 22:57:48.241 | INFO     | agent:check_report:397 - finish check_report generation
+2026-09-30 22:57:48.242 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-09-30 22:58:37.681 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 49.4s
+2026-09-30 22:58:37.687 | INFO     | checker_scan:triage_report:391 - Processing KN-Integer-Overflow-bc440a89-0...
+2026-09-30 22:58:37.691 | INFO     | checker_scan:triage_report:408 - Final report directory: e2e/scan-curl/KN-Integer-Overflow-bc440a89-0/scan-reports-1/main-report
+2026-09-30 22:58:38.290 | INFO     | checker_scan:collect_reports:370 - Number of unique files with reports: 1
+2026-09-30 22:58:38.295 | INFO     | checker_scan:triage_report:430 - Triaging _home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_a3bd1dda12ec_lib_mime...
+2026-09-30 22:58:38.297 | INFO     | agent:check_report:382 - start generating check_report prompts
+2026-09-30 22:58:38.300 | INFO     | agent:check_report:397 - finish check_report generation
+2026-09-30 22:58:38.300 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-09-30 22:58:59.383 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 21.1s
+2026-09-30 22:58:59.387 | INFO     | checker_scan:triage_report:391 - Processing KN-Null-Pointer-Dereference-f7d4e11f-0...
+2026-09-30 22:58:59.391 | WARNING  | checker_scan:triage_report:406 - No final report found!
+2026-09-30 22:58:59.391 | WARNING  | checker_scan:triage_report:472 - finish
+f2a15357 Null-Pointer-Dereference 0
+['TP: 1', 'TN: 1']
+a0f08d69 Memory-Leak 2
+['TP: 1', 'TN: 1']
+c53420e4 Misuse 1
+['TP: 1', 'TN: 1']
+bc440a89 Integer-Overflow 0
+['TP: 1', 'TN: 1']
+f7d4e11f Null-Pointer-Dereference 0
+['TP: 1', 'TN: 0']
+triage wall 109.40 s

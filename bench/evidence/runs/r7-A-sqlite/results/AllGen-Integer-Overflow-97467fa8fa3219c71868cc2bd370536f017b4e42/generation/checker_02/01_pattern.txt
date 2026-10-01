@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The bug pattern is using a 32-bit signed integer type (`int`) for an accumulator and multiplier while decoding a variable-length encoded integer, without checking for overflow during accumulation. When the input is corrupt/malformed, the multiplier is repeatedly multiplied by 26 (or a similar base) and the accumulated value `n` can overflow the `int` range, producing undefined behavior and an incorrect (possibly negative or small positive) value. This bypasses the subsequent bounds check `j+n>nOut`, allowing an out-of-bounds `memset` on `aOut`. The fix is to widen the accumulator/multiplier to a 64-bit type (`sqlite3_int64`) and to check for overflow/oversize during accumulation.
+
+In short: **integer overflow in a length/value accumulator (32-bit `int` used to parse attacker-controlled variable-length encoded integers) leading to a bounds-check bypass and out-of-bounds write.**

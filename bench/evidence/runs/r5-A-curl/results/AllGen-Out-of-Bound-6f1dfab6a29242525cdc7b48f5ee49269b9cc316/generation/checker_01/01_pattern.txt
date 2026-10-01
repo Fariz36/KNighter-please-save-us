@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Parsing a delimiter/prefix in a NUL-terminated string with fixed-offset lookahead (`ptr[1]`, `ptr[2]`, `ptr[3]`) without first checking that the first character (`ptr[0]`) is not the string terminator. If the response ends immediately after `'('`, `sep = ptr[0]` is `'\0'`, and the later indexes read past the NUL terminator, causing an out-of-bounds read. The fix adds a `sep &&` guard before the lookahead.

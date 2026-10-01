@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is an unchecked narrowing conversion of a pointer-difference/string-length value to `int`. In the `"%!.*s"` UTF-8 path, each precision unit can consume multiple bytes via `SQLITE_SKIP_UTF8()`, so the computed byte length `(z - bufpt)` can exceed `INT_MAX`. Casting that value directly to `int` truncates/overflows it, producing an incorrect or negative length that is later used for buffer operations. The fix bounds the byte count before casting it to `int`.

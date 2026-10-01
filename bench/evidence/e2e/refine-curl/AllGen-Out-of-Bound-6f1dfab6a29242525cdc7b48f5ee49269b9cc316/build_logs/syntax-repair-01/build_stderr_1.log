@@ -1,0 +1,4 @@
+checker.cpp: In function ‘void {anonymous}::findPriorInfo(const clang::Stmt*, const clang::VarDecl*, clang::SourceLocation, clang::ento::CheckerContext&, PointerState&)’:
+checker.cpp:156:41: error: binding reference of type ‘clang::SourceManager&’ to ‘const clang::SourceManager’ discards qualifiers
+  156 |   SourceManager &SM = C.getSourceManager();
+      |                       ~~~~~~~~~~~~~~~~~~^~

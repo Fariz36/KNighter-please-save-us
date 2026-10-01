@@ -1,0 +1,5 @@
+## Bug Pattern
+
+Missing NULL validation for output pointer parameters before dereferencing or passing them to functions that write through them.
+
+In `curl_easy_send()`, the parameter `size_t *n` is dereferenced unconditionally via `*n = written;`. In `curl_easy_recv()`, `n` is passed onward to `Curl_easy_recv()` without checking it is non-NULL. If a caller passes `NULL` for `n`, the code can cause a NULL pointer dereference. The fix adds an explicit `if(!n)` check and returns `CURLE_BAD_FUNCTION_ARGUMENT` before using or forwarding the pointer.

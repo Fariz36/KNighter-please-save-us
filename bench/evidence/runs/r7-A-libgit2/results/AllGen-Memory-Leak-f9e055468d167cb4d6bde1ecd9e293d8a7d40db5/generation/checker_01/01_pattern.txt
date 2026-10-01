@@ -1,0 +1,3 @@
+## Bug Pattern
+
+A local `git_str` is initialized and later populated by an allocation-producing API (`git_fs_path_prettify_dir`), but the function does not release it with `git_str_dispose()` on all exit paths. In particular, early returns (`return 0` when the workdir is unchanged, `return -1` when config lookup fails) and the final `return error` path leave the `git_str` buffer allocated when it has not been transferred via `git_str_detach()`, causing a memory leak. The fix adds `git_str_dispose(&path)` before those returns and after the main update block.

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using a potentially `NULL` pointer as the argument for a `%s` format directive without first validating it. In this patch, `value` may be `NULL`, but it is passed to `git_error_set(..., "... '%s' ...", value)`, which can cause undefined behavior or a crash. The fix adds a `GIT_ASSERT_ARG(value)` check to ensure the pointer is non-`NULL` before it can reach the formatted error message.

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using unbounded C string functions (`strstr()`, `strchr()`) on a pointer into a length-delimited buffer, assuming the remaining data is NUL-terminated. When the buffer slice is not NUL-terminated within its bounds, these functions scan past the allocated buffer, causing an out-of-bounds read/heap-buffer-overflow. The fix is to use length-bounded searches such as `git__memmem()` and `memchr()` with the remaining buffer length.

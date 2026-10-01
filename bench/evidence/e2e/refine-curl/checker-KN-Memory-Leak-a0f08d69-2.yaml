@@ -1,0 +1,157 @@
+_base_result_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-B-curl/results
+commit_id: a0f08d6975d00c3ea04e1bd2fcf60dad446266ec
+commit_type: Memory-Leak
+index: 2
+initial_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/MemRegion.h\"\n#include <memory>\n\
+  \nusing namespace clang;\nusing namespace ento;\nusing namespace taint;\n\nREGISTER_MAP_WITH_PROGRAMSTATE(ClearedPtrs,\
+  \ SymbolRef, bool)\n\nnamespace {\nclass SAGenTestChecker : public Checker<check::PreCall>\
+  \ {\n  mutable std::unique_ptr<BugType> BT;\n\npublic:\n  SAGenTestChecker()\n \
+  \     : BT(new BugType(this, \"Resource cleanup after struct clear\",\n        \
+  \               \"Resource Leak\")) {}\n\n  void checkPreCall(const CallEvent &Call,\
+  \ CheckerContext &C) const;\n\nprivate:\n  bool isFunctionNamed(const CallEvent\
+  \ &Call, StringRef Name,\n                       CheckerContext &C) const;\n  void\
+  \ reportCleanupAfterClear(const CallEvent &Call, CheckerContext &C) const;\n};\n\
+  \nbool SAGenTestChecker::isFunctionNamed(const CallEvent &Call, StringRef Name,\n\
+  \                                       CheckerContext &C) const {\n  const Expr\
+  \ *OriginExpr = Call.getOriginExpr();\n  if (!OriginExpr)\n    return false;\n \
+  \ return ExprHasName(OriginExpr, Name, C);\n}\n\nvoid SAGenTestChecker::checkPreCall(const\
+  \ CallEvent &Call,\n                                    CheckerContext &C) const\
+  \ {\n  ProgramStateRef State = C.getState();\n\n  // Track memset() that clears\
+  \ a struct.\n  if (isFunctionNamed(Call, \"memset\", C) ||\n      isFunctionNamed(Call,\
+  \ \"__builtin_memset\", C)) {\n    if (Call.getNumArgs() < 1)\n      return;\n\n\
+  \    SVal Dest = Call.getArgSVal(0);\n    if (SymbolRef Sym = Dest.getAsLocSymbol())\
+  \ {\n      State = State->set<ClearedPtrs>(Sym, true);\n      C.addTransition(State);\n\
+  \    }\n    return;\n  }\n\n  // Detect cleanup of a field after its containing\
+  \ struct was cleared.\n  if (isFunctionNamed(Call, \"Curl_peer_unlink\", C)) {\n\
+  \    if (Call.getNumArgs() < 1)\n      return;\n\n    const Expr *Arg = Call.getArgExpr(0);\n\
+  \    if (!Arg)\n      return;\n\n    const MemRegion *MR = getMemRegionFromExpr(Arg,\
+  \ C);\n    if (!MR)\n      return;\n\n    // Only consider cleanup on a field, e.g.\
+  \ &ctx->dest.\n    if (MR->getBaseRegion() == MR)\n      return;\n\n    const MemRegion\
+  \ *Base = MR->getBaseRegion();\n    if (!Base)\n      return;\n\n    const SymbolicRegion\
+  \ *SR = dyn_cast<SymbolicRegion>(Base);\n    if (!SR)\n      return;\n\n    SymbolRef\
+  \ Sym = SR->getSymbol();\n    if (!Sym)\n      return;\n\n    const bool *Cleared\
+  \ = State->get<ClearedPtrs>(Sym);\n    if (Cleared && *Cleared) {\n      reportCleanupAfterClear(Call,\
+  \ C);\n    }\n  }\n}\n\nvoid SAGenTestChecker::reportCleanupAfterClear(const CallEvent\
+  \ &Call,\n                                               CheckerContext &C) const\
+  \ {\n  ExplodedNode *N = C.generateNonFatalErrorNode();\n  if (!N)\n    return;\n\
+  \n  auto Report = std::make_unique<PathSensitiveBugReport>(\n      *BT, \"Resource\
+  \ cleanup after struct clear may leak\", N);\n  Report->addRange(Call.getSourceRange());\n\
+  \  C.emitReport(std::move(Report));\n}\n\n} // end anonymous namespace\n\nextern\
+  \ \"C\" void clang_registerCheckers(CheckerRegistry &registry) {\n  registry.addChecker<SAGenTestChecker>(\n\
+  \      \"custom.SAGenTestChecker\",\n      \"Detects resource cleanup after the\
+  \ containing struct was cleared\",\n      \"\");\n}\n\nextern \"C\" const char clang_analyzerAPIVersionString[]\
+  \ =\n    CLANG_ANALYZER_API_VERSION_STRING;\n"
+patch: "## Patch Description\n\ncf-h2-prox: fix peer leak\n\nThe unlinking of the\
+  \ new Curl_peer was happening too later after\nthe struct had been set to zero.\
+  \ Move the unlink to happen before\nthat.\n\nFixes #21602\nReported-by: Joshua Rogers\n\
+  Closes #21627\n\n## Buggy Code\n\n```c\n// Function: cf_h2_proxy_ctx_free in lib/cf-h2-proxy.c\n\
+  static void cf_h2_proxy_ctx_free(struct cf_h2_proxy_ctx *ctx)\n{\n  if(ctx) {\n\
+  \    cf_h2_proxy_ctx_clear(ctx);\n    Curl_peer_unlink(&ctx->dest);\n    curlx_free(ctx);\n\
+  \  }\n}\n```\n\n```c\n// Function: cf_h2_proxy_ctx_clear in lib/cf-h2-proxy.c\n\
+  static void cf_h2_proxy_ctx_clear(struct cf_h2_proxy_ctx *ctx)\n{\n  struct cf_call_data\
+  \ save = ctx->call_data;\n\n  if(ctx->h2) {\n    nghttp2_session_del(ctx->h2);\n\
+  \  }\n  Curl_bufq_free(&ctx->inbufq);\n  Curl_bufq_free(&ctx->outbufq);\n  tunnel_stream_clear(&ctx->tunnel);\n\
+  \  memset(ctx, 0, sizeof(*ctx));\n  ctx->call_data = save;\n}\n```\n\n## Bug Fix\
+  \ Patch\n\n```diff\ndiff --git a/lib/cf-h2-proxy.c b/lib/cf-h2-proxy.c\nindex 1dfd0a0a46..297afb3c8c\
+  \ 100644\n--- a/lib/cf-h2-proxy.c\n+++ b/lib/cf-h2-proxy.c\n@@ -190,6 +190,7 @@\
+  \ static void cf_h2_proxy_ctx_clear(struct cf_h2_proxy_ctx *ctx)\n   }\n   Curl_bufq_free(&ctx->inbufq);\n\
+  \   Curl_bufq_free(&ctx->outbufq);\n+  Curl_peer_unlink(&ctx->dest);\n   tunnel_stream_clear(&ctx->tunnel);\n\
+  \   memset(ctx, 0, sizeof(*ctx));\n   ctx->call_data = save;\n@@ -199,7 +200,6 @@\
+  \ static void cf_h2_proxy_ctx_free(struct cf_h2_proxy_ctx *ctx)\n {\n   if(ctx)\
+  \ {\n     cf_h2_proxy_ctx_clear(ctx);\n-    Curl_peer_unlink(&ctx->dest);\n    \
+  \ curlx_free(ctx);\n   }\n }\n```\n"
+pattern: '## Bug Pattern
+
+
+  The bug pattern is cleanup-after-clear: a resource stored in a struct field is unlinked/released
+  **after** the struct has been cleared with `memset()`. The clear operation zeroes
+  the field containing the linkage/resource state, so the later cleanup no longer
+  has the information needed to release it. This causes a resource leak (here, a peer
+  leak).
+
+
+  In this patch, `cf_h2_proxy_ctx_clear()` zeroes `ctx`, including `ctx->dest`, before
+  `cf_h2_proxy_ctx_free()` calls `Curl_peer_unlink(&ctx->dest)`. The fix is to unlink
+  the peer **before** clearing/zeroing the struct.'
+plan: "1. **Decide Program State**  \n   Register one map to track cleared pointer\
+  \ symbols:\n   - `REGISTER_MAP_WITH_PROGRAMSTATE(ClearedPtrs, SymbolRef, bool)`\n\
+  \   - A `true` entry means the struct pointed to by that symbol has been zeroed\
+  \ by `memset`.\n\n2. **Implement `checkPreCall` for `memset`**  \n   - In `checkPreCall`,\
+  \ check if the callee name is `memset` or `__builtin_memset`.\n   - Get the first\
+  \ argument\u2019s `SVal`: `SVal Dest = Call.getArgSVal(0);`\n   - If `SymbolRef\
+  \ Sym = Dest.getAsLocSymbol()` is valid, update the state:\n     `State = State->set<ClearedPtrs>(Sym,\
+  \ true);`\n     and call `C.addTransition(State);`.\n   - This marks the pointer\
+  \ parameter that points to the struct being zeroed.\n\n3. **Implement `checkPreCall`\
+  \ for cleanup functions**  \n   - In `checkPreCall`, check if the callee name is\
+  \ `Curl_peer_unlink` (or any other known cleanup function that releases a resource\
+  \ stored in a struct field).\n   - Get the first argument\u2019s region:\n     `const\
+  \ MemRegion *MR = getMemRegionFromExpr(Call.getArgExpr(0), C);`\n   - If `MR` is\
+  \ null, return.\n   - Only consider cleanup on a field: if `MR->getBaseRegion()\
+  \ == MR`, return.\n   - Get the base region: `const MemRegion *Base = MR->getBaseRegion();`\n\
+  \   - If `Base` is a `SymbolicRegion`, get its symbol:\n     `SymbolRef Sym = dyn_cast<SymbolicRegion>(Base)->getSymbol();`\n\
+  \   - If `State->get<ClearedPtrs>(Sym)` is `true`, the field\u2019s containing struct\
+  \ was cleared before this cleanup call. Proceed to report.\n\n4. **Report the bug**\
+  \  \n   - Generate a non-fatal error node: `C.generateNonFatalErrorNode()`.\n  \
+  \ - If the node is null, return.\n   - Create a `PathSensitiveBugReport` with a\
+  \ short message, e.g.:\n     `\"Resource cleanup after struct clear may leak\"`.\n\
+  \   - Use the current cleanup call as the bug location.\n   - Emit the report: `C.emitReport(std::move(Report));`."
+refined_plan: null
+repaired_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/MemRegion.h\"\n#include <memory>\n\
+  \nusing namespace clang;\nusing namespace ento;\nusing namespace taint;\n\nREGISTER_MAP_WITH_PROGRAMSTATE(ClearedPtrs,\
+  \ SymbolRef, bool)\n\nnamespace {\nclass SAGenTestChecker : public Checker<check::PreCall>\
+  \ {\n  mutable std::unique_ptr<BugType> BT;\n\npublic:\n  SAGenTestChecker()\n \
+  \     : BT(new BugType(this, \"Resource cleanup after struct clear\",\n        \
+  \               \"Resource Leak\")) {}\n\n  void checkPreCall(const CallEvent &Call,\
+  \ CheckerContext &C) const;\n\nprivate:\n  bool isFunctionNamed(const CallEvent\
+  \ &Call, StringRef Name,\n                       CheckerContext &C) const;\n  void\
+  \ reportCleanupAfterClear(const CallEvent &Call, CheckerContext &C) const;\n};\n\
+  \nbool SAGenTestChecker::isFunctionNamed(const CallEvent &Call, StringRef Name,\n\
+  \                                       CheckerContext &C) const {\n  const Expr\
+  \ *OriginExpr = Call.getOriginExpr();\n  if (!OriginExpr)\n    return false;\n \
+  \ return ExprHasName(OriginExpr, Name, C);\n}\n\nvoid SAGenTestChecker::checkPreCall(const\
+  \ CallEvent &Call,\n                                    CheckerContext &C) const\
+  \ {\n  ProgramStateRef State = C.getState();\n\n  // Track memset() that clears\
+  \ a struct.\n  if (isFunctionNamed(Call, \"memset\", C) ||\n      isFunctionNamed(Call,\
+  \ \"__builtin_memset\", C)) {\n    if (Call.getNumArgs() < 1)\n      return;\n\n\
+  \    SVal Dest = Call.getArgSVal(0);\n    if (SymbolRef Sym = Dest.getAsLocSymbol())\
+  \ {\n      State = State->set<ClearedPtrs>(Sym, true);\n      C.addTransition(State);\n\
+  \    }\n    return;\n  }\n\n  // Detect cleanup of a field after its containing\
+  \ struct was cleared.\n  if (isFunctionNamed(Call, \"Curl_peer_unlink\", C)) {\n\
+  \    if (Call.getNumArgs() < 1)\n      return;\n\n    const Expr *Arg = Call.getArgExpr(0);\n\
+  \    if (!Arg)\n      return;\n\n    const MemRegion *MR = getMemRegionFromExpr(Arg,\
+  \ C);\n    if (!MR)\n      return;\n\n    // Only consider cleanup on a field, e.g.\
+  \ &ctx->dest.\n    if (MR->getBaseRegion() == MR)\n      return;\n\n    const MemRegion\
+  \ *Base = MR->getBaseRegion();\n    if (!Base)\n      return;\n\n    const SymbolicRegion\
+  \ *SR = dyn_cast<SymbolicRegion>(Base);\n    if (!SR)\n      return;\n\n    SymbolRef\
+  \ Sym = SR->getSymbol();\n    if (!Sym)\n      return;\n\n    const bool *Cleared\
+  \ = State->get<ClearedPtrs>(Sym);\n    if (Cleared && *Cleared) {\n      reportCleanupAfterClear(Call,\
+  \ C);\n    }\n  }\n}\n\nvoid SAGenTestChecker::reportCleanupAfterClear(const CallEvent\
+  \ &Call,\n                                               CheckerContext &C) const\
+  \ {\n  ExplodedNode *N = C.generateNonFatalErrorNode();\n  if (!N)\n    return;\n\
+  \n  auto Report = std::make_unique<PathSensitiveBugReport>(\n      *BT, \"Resource\
+  \ cleanup after struct clear may leak\", N);\n  Report->addRange(Call.getSourceRange());\n\
+  \  C.emitReport(std::move(Report));\n}\n\n} // end anonymous namespace\n\nextern\
+  \ \"C\" void clang_registerCheckers(CheckerRegistry &registry) {\n  registry.addChecker<SAGenTestChecker>(\n\
+  \      \"custom.SAGenTestChecker\",\n      \"Detects resource cleanup after the\
+  \ containing struct was cleared\",\n      \"\");\n}\n\nextern \"C\" const char clang_analyzerAPIVersionString[]\
+  \ =\n    CLANG_ANALYZER_API_VERSION_STRING;\n"
+tn_score: 1
+tp_score: 1

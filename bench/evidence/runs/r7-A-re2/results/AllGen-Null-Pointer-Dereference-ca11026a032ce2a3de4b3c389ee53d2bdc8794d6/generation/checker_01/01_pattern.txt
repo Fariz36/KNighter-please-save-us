@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Assuming `Regexp::Simplify()` always returns a valid `Regexp*` and using its return value without checking for `NULL`. In particular, `Prefilter::FromRegexp()` passes the result directly to `BuildInfo()` and then calls `simple->Decref()`. Since `Simplify()` can return `NULL` when its internal walker stops early, this leads to a NULL pointer dereference. Callers must check the result of `Regexp::Simplify()` before dereferencing or decref’ing it.

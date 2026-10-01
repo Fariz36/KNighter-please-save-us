@@ -1,0 +1,329 @@
+_base_result_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-B-curl/results
+commit_id: c53420e42742a68004854a7fa354f9500b4b1516
+commit_type: Misuse
+index: 1
+initial_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n\n#include \"clang/AST/Expr.h\"\n#include \"clang/AST/Stmt.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/MemRegion.h\"\
+  \n#include \"llvm/ADT/StringRef.h\"\n#include <memory>\n\nusing namespace clang;\n\
+  using namespace ento;\nusing namespace taint;\n\nREGISTER_MAP_WITH_PROGRAMSTATE(LengthDelimitedPtrMap,\
+  \ SymbolRef, bool)\n\nnamespace {\n\nstatic bool isFunctionNamed(const CallEvent\
+  \ &Call, StringRef Name,\n                            CheckerContext &C) {\n  const\
+  \ Expr *E = Call.getOriginExpr();\n  return E && ExprHasName(E, Name, C);\n}\n\n\
+  static bool isASN1StringGet0Data(const CallEvent &Call, CheckerContext &C) {\n \
+  \ return isFunctionNamed(Call, \"ASN1_STRING_get0_data\", C);\n}\n\nstatic SymbolRef\
+  \ getPointerSymbol(SVal V) {\n  if (SymbolRef Sym = V.getAsSymbol())\n    return\
+  \ Sym;\n\n  if (const MemRegion *MR = V.getAsRegion()) {\n    if (const SymbolicRegion\
+  \ *SR = dyn_cast<SymbolicRegion>(MR))\n      return SR->getSymbol();\n  }\n  return\
+  \ nullptr;\n}\n\nstatic bool isLengthDelimited(ProgramStateRef State, const Expr\
+  \ *E,\n                              CheckerContext &C) {\n  if (!E)\n    return\
+  \ false;\n\n  SVal V = State->getSVal(E, C.getLocationContext());\n  SymbolRef Sym\
+  \ = getPointerSymbol(V);\n  if (!Sym)\n    return false;\n\n  return State->get<LengthDelimitedPtrMap>(Sym)\
+  \ != nullptr;\n}\n\nstatic bool isPrintfLike(StringRef Name) {\n  return Name ==\
+  \ \"failf\" || Name == \"infof\" || Name == \"printf\" ||\n         Name == \"fprintf\"\
+  \ || Name == \"sprintf\" || Name == \"snprintf\";\n}\n\nstatic int getFormatArgIndex(StringRef\
+  \ Name) {\n  if (Name == \"failf\" || Name == \"infof\" || Name == \"fprintf\")\n\
+  \    return 1;\n  if (Name == \"printf\")\n    return 0;\n  if (Name == \"sprintf\"\
+  )\n    return 1;\n  if (Name == \"snprintf\")\n    return 2;\n  return -1;\n}\n\n\
+  static StringRef getPrintfLikeName(const CallEvent &Call) {\n  if (const IdentifierInfo\
+  \ *ID = Call.getCalleeIdentifier()) {\n    StringRef Name = ID->getName();\n   \
+  \ if (isPrintfLike(Name))\n      return Name;\n  }\n  return StringRef();\n}\n\n\
+  static bool isFlagChar(char C) {\n  return C == '-' || C == '+' || C == ' ' || C\
+  \ == '#' || C == '0';\n}\n\nstatic bool isDigitChar(char C) {\n  return C >= '0'\
+  \ && C <= '9';\n}\n\nstatic bool isLengthModifier(char C) {\n  return C == 'h' ||\
+  \ C == 'l' || C == 'j' || C == 'z' || C == 't' || C == 'L';\n}\n\nclass SAGenTestChecker\
+  \ : public Checker<check::PostCall, check::PreCall> {\n  mutable std::unique_ptr<BugType>\
+  \ BT;\n\npublic:\n  SAGenTestChecker()\n      : BT(new BugType(this, \"Length-delimited\
+  \ ASN1 data misuse\",\n                       \"Security\")) {}\n\n  void checkPostCall(const\
+  \ CallEvent &Call, CheckerContext &C) const;\n  void checkPreCall(const CallEvent\
+  \ &Call, CheckerContext &C) const;\n\nprivate:\n  void reportMisuse(CheckerContext\
+  \ &C, const Expr *E, StringRef Msg) const;\n};\n\nvoid SAGenTestChecker::checkPostCall(const\
+  \ CallEvent &Call,\n                                     CheckerContext &C) const\
+  \ {\n  if (!isASN1StringGet0Data(Call, C))\n    return;\n\n  ProgramStateRef State\
+  \ = C.getState();\n  SVal Ret = Call.getReturnValue();\n  SymbolRef Sym = getPointerSymbol(Ret);\n\
+  \  if (!Sym)\n    return;\n\n  State = State->set<LengthDelimitedPtrMap>(Sym, true);\n\
+  \  C.addTransition(State);\n}\n\nvoid SAGenTestChecker::checkPreCall(const CallEvent\
+  \ &Call,\n                                    CheckerContext &C) const {\n  ProgramStateRef\
+  \ State = C.getState();\n\n  if (isFunctionNamed(Call, \"strlen\", C)) {\n    if\
+  \ (Call.getNumArgs() > 0) {\n      const Expr *Arg = Call.getArgExpr(0);\n     \
+  \ if (isLengthDelimited(State, Arg, C)) {\n        reportMisuse(C, Arg,\n      \
+  \               \"Length-delimited ASN1 data used as NUL-terminated string\");\n\
+  \      }\n    }\n    return;\n  }\n\n  StringRef Name = getPrintfLikeName(Call);\n\
+  \  if (Name.empty())\n    return;\n\n  int FmtIdx = getFormatArgIndex(Name);\n \
+  \ if (FmtIdx < 0 || (unsigned)FmtIdx >= Call.getNumArgs())\n    return;\n\n  const\
+  \ Expr *FmtExpr = Call.getArgExpr(FmtIdx);\n  const StringLiteral *SL =\n      dyn_cast<StringLiteral>(FmtExpr->IgnoreParenImpCasts());\n\
+  \  if (!SL)\n    return;\n\n  StringRef Fmt = SL->getString();\n  unsigned ArgIndex\
+  \ = FmtIdx + 1;\n\n  for (unsigned i = 0; i < Fmt.size(); ++i) {\n    if (Fmt[i]\
+  \ != '%')\n      continue;\n\n    ++i;\n    if (i >= Fmt.size())\n      break;\n\
+  \n    if (Fmt[i] == '%')\n      continue;\n\n    unsigned StarCount = 0;\n    bool\
+  \ HasPrecision = false;\n\n    while (i < Fmt.size() && isFlagChar(Fmt[i]))\n  \
+  \    ++i;\n\n    if (i < Fmt.size() && Fmt[i] == '*') {\n      ++StarCount;\n  \
+  \    ++i;\n    } else {\n      while (i < Fmt.size() && isDigitChar(Fmt[i]))\n \
+  \       ++i;\n    }\n\n    if (i < Fmt.size() && Fmt[i] == '.') {\n      HasPrecision\
+  \ = true;\n      ++i;\n      if (i < Fmt.size() && Fmt[i] == '*') {\n        ++StarCount;\n\
+  \        ++i;\n      } else {\n        while (i < Fmt.size() && isDigitChar(Fmt[i]))\n\
+  \          ++i;\n      }\n    }\n\n    while (i < Fmt.size() && isLengthModifier(Fmt[i]))\n\
+  \      ++i;\n\n    if (i >= Fmt.size())\n      break;\n\n    char Conv = Fmt[i];\n\
+  \    ArgIndex += StarCount;\n\n    if (Conv == 's' && !HasPrecision) {\n      if\
+  \ (ArgIndex < Call.getNumArgs()) {\n        const Expr *Arg = Call.getArgExpr(ArgIndex);\n\
+  \        if (isLengthDelimited(State, Arg, C)) {\n          reportMisuse(C, Arg,\
+  \ \"Length-delimited ASN1 data used with %s\");\n        }\n      }\n    }\n\n \
+  \   ++ArgIndex;\n  }\n}\n\nvoid SAGenTestChecker::reportMisuse(CheckerContext &C,\
+  \ const Expr *E,\n                                    StringRef Msg) const {\n \
+  \ ExplodedNode *N = C.generateNonFatalErrorNode();\n  if (!N)\n    return;\n\n \
+  \ auto Report = std::make_unique<PathSensitiveBugReport>(*BT, Msg, N);\n  if (E)\n\
+  \    Report->addRange(E->getSourceRange());\n  C.emitReport(std::move(Report));\n\
+  }\n\n} // end anonymous namespace\n\nextern \"C\" void clang_registerCheckers(CheckerRegistry\
+  \ &registry) {\n  registry.addChecker<SAGenTestChecker>(\n      \"custom.SAGenTestChecker\"\
+  ,\n      \"Detects treating length-delimited ASN1 data as NUL-terminated strings\"\
+  ,\n      \"\");\n}\n\nextern \"C\" const char clang_analyzerAPIVersionString[] =\n\
+  \    CLANG_ANALYZER_API_VERSION_STRING;\n"
+patch: "## Patch Description\n\nossl_verifyhost: remove assumption of null termination\
+  \ of ASN1_STRING.\n\nThis only affects hosts where the deprecated CN is used for\
+  \ matching DNS\nnames, instead of the modern way, which is by using a dNSName-typed\
+  \ SAN.\n\nA similar change but for certs that store the hostname in the SAN (as\n\
+  they should nowadays) was in 543adc4de024dda4f3b8f368893c7d01a3cf0ea8.\n\nFixes\
+  \ #22822\nCloses #22824\n\n## Buggy Code\n\n```c\n// Function: ossl_verifyhost in\
+  \ lib/vtls/openssl.c\nstatic CURLcode ossl_verifyhost(struct Curl_easy *data,\n\
+  \                                struct connectdata *conn,\n                   \
+  \             struct ssl_peer *peer,\n                                X509 *server_cert)\n\
+  {\n  bool matched = FALSE;\n  int target; /* target type, GEN_DNS or GEN_IPADD */\n\
+  \  size_t addrlen = 0;\n  STACK_OF(GENERAL_NAME) *altnames;\n#ifdef USE_IPV6\n \
+  \ struct in6_addr addr;\n#else\n  struct in_addr addr;\n#endif\n  CURLcode result\
+  \ = CURLE_OK;\n  bool dNSName = FALSE; /* if a dNSName field exists in the cert\
+  \ */\n  bool iPAddress = FALSE; /* if an iPAddress field exists in the cert */\n\
+  \  size_t hostlen = strlen(peer->origin->hostname);\n\n  (void)conn;\n  switch(peer->type)\
+  \ {\n  case CURL_SSL_PEER_IPV4:\n    if(!curlx_inet_pton(AF_INET, peer->origin->hostname,\
+  \ &addr))\n      return CURLE_PEER_FAILED_VERIFICATION;\n    target = GEN_IPADD;\n\
+  \    addrlen = sizeof(struct in_addr);\n    break;\n#ifdef USE_IPV6\n  case CURL_SSL_PEER_IPV6:\n\
+  \    if(!curlx_inet_pton(AF_INET6, peer->origin->hostname, &addr))\n      return\
+  \ CURLE_PEER_FAILED_VERIFICATION;\n    target = GEN_IPADD;\n    addrlen = sizeof(struct\
+  \ in6_addr);\n    break;\n#endif\n  case CURL_SSL_PEER_DNS:\n    target = GEN_DNS;\n\
+  \    break;\n  default:\n    DEBUGASSERT(0);\n    failf(data, \"unexpected SSL peer\
+  \ type: %d\", (int)peer->type);\n    return CURLE_PEER_FAILED_VERIFICATION;\n  }\n\
+  \n  /* get a \"list\" of alternative names */\n  altnames = X509_get_ext_d2i(server_cert,\
+  \ NID_subject_alt_name, NULL, NULL);\n\n  if(altnames) {\n#ifdef HAVE_BORINGSSL_LIKE\n\
+  \    size_t numalts;\n    size_t i;\n#else\n    int numalts;\n    int i;\n#endif\n\
+  \n    /* get amount of alternatives, RFC2459 claims there MUST be at least\n   \
+  \    one, but we do not depend on it... */\n    numalts = sk_GENERAL_NAME_num(altnames);\n\
+  \n    /* loop through all alternatives - until a dnsmatch */\n    for(i = 0; (i\
+  \ < numalts) && !matched; i++) {\n      /* get a handle to alternative name number\
+  \ i */\n      const GENERAL_NAME *check = sk_GENERAL_NAME_value(altnames, i);\n\n\
+  \      if(check->type == GEN_DNS)\n        dNSName = TRUE;\n      else if(check->type\
+  \ == GEN_IPADD)\n        iPAddress = TRUE;\n\n      /* only check alternatives of\
+  \ the same type the target is */\n      if(check->type == target) {\n        /*\
+  \ get data and length */\n        const char *altptr = (const char *)ASN1_STRING_get0_data(check->d.ia5);\n\
+  \        size_t altlen = (size_t)ASN1_STRING_length(check->d.ia5);\n\n        switch(target)\
+  \ {\n        case GEN_DNS: /* name/pattern comparison */\n          if(!memchr(altptr,\
+  \ '\\0', altlen) &&\n             Curl_cert_hostcheck(altptr, altlen,\n        \
+  \                         peer->origin->hostname, hostlen)) {\n            matched\
+  \ = TRUE;\n            infof(data, \"  subjectAltName: \\\"%s\\\" matches cert's\
+  \ \\\"%.*s\\\"\",\n                  peer->origin->user_hostname, (int)altlen, altptr);\n\
+  \          }\n          break;\n\n        case GEN_IPADD: /* IP address comparison\
+  \ */\n          /* compare alternative IP address if the data chunk is the same\
+  \ size\n             our server IP address is */\n          if((altlen == addrlen)\
+  \ && !memcmp(altptr, &addr, altlen)) {\n            matched = TRUE;\n          \
+  \  infof(data, \"  subjectAltName: \\\"%s\\\" matches cert's IP address!\",\n  \
+  \                peer->origin->user_hostname);\n          }\n          break;\n\
+  \        }\n      }\n    }\n    GENERAL_NAMES_free(altnames);\n  }\n\n  if(matched)\n\
+  \    /* an alternative name matched */\n    ;\n  else if(dNSName || iPAddress) {\n\
+  \    const char *tname = (peer->type == CURL_SSL_PEER_DNS) ? \"hostname\" :\n  \
+  \                      (peer->type == CURL_SSL_PEER_IPV4) ?\n                  \
+  \      \"IPv4 address\" : \"IPv6 address\";\n    infof(data, \" subjectAltName does\
+  \ not match %s %s\", tname,\n          peer->origin->user_hostname);\n    failf(data,\
+  \ \"SSL: no alternative certificate subject name matches \"\n          \"target\
+  \ %s '%s'\", tname, peer->origin->user_hostname);\n    result = CURLE_PEER_FAILED_VERIFICATION;\n\
+  \  }\n  else {\n    /* we have to look to the last occurrence of a commonName in\
+  \ the\n       distinguished one to get the most significant one. */\n    int i =\
+  \ -1;\n    unsigned char *cn = NULL;\n    int cnlen = 0;\n    bool free_cn = FALSE;\n\
+  \n    /* The following is done because of a bug in 0.9.6b */\n    const X509_NAME\
+  \ *name = X509_get_subject_name(server_cert);\n    if(name) {\n      int j;\n  \
+  \    while((j = X509_NAME_get_index_by_NID(name, NID_commonName, i)) >= 0)\n   \
+  \     i = j;\n    }\n\n    /* we have the name entry and we now convert this to\
+  \ a string\n       that we can use for comparison. Doing this we support BMPstring,\n\
+  \       UTF8, etc. */\n\n    if(i >= 0) {\n      const ASN1_STRING *tmp =\n    \
+  \    X509_NAME_ENTRY_get_data(X509_NAME_get_entry(name, i));\n\n      /* In OpenSSL\
+  \ 0.9.7d and earlier, ASN1_STRING_to_UTF8 fails if the input\n         is already\
+  \ UTF-8 encoded. We check for this case and copy the raw\n         string manually\
+  \ to avoid the problem. This code can be made\n         conditional in the future\
+  \ when OpenSSL has been fixed. */\n      if(tmp) {\n        if(ASN1_STRING_type(tmp)\
+  \ == V_ASN1_UTF8STRING) {\n          cnlen = ASN1_STRING_length(tmp);\n        \
+  \  cn = (unsigned char *)CURL_UNCONST(ASN1_STRING_get0_data(tmp));\n        }\n\
+  \        else { /* not a UTF8 name */\n          cnlen = ASN1_STRING_to_UTF8(&cn,\
+  \ tmp);\n          free_cn = TRUE;\n        }\n\n        if((cnlen <= 0) || !cn)\n\
+  \          result = CURLE_OUT_OF_MEMORY;\n        else if((size_t)cnlen != strlen((char\
+  \ *)cn)) {\n          /* there was a null-terminator before the end of string, this\n\
+  \             cannot match and we return failure! */\n          failf(data, \"SSL:\
+  \ illegal cert name field\");\n          result = CURLE_PEER_FAILED_VERIFICATION;\n\
+  \        }\n      }\n    }\n\n    if(result)\n      /* error already detected, pass\
+  \ through */\n      ;\n    else if(!cn) {\n      failf(data, \"SSL: unable to obtain\
+  \ common name from peer certificate\");\n      result = CURLE_PEER_FAILED_VERIFICATION;\n\
+  \    }\n    else if(!Curl_cert_hostcheck((const char *)cn, cnlen,\n            \
+  \                     peer->origin->hostname, hostlen)) {\n      failf(data, \"\
+  SSL: certificate subject name '%s' does not match \"\n            \"target hostname\
+  \ '%s'\", cn, peer->origin->user_hostname);\n      result = CURLE_PEER_FAILED_VERIFICATION;\n\
+  \    }\n    else {\n      infof(data, \" common name: %s (matched)\", cn);\n   \
+  \ }\n    if(free_cn)\n      OPENSSL_free(cn);\n  }\n\n  return result;\n}\n```\n\
+  \n## Bug Fix Patch\n\n```diff\ndiff --git a/lib/vtls/openssl.c b/lib/vtls/openssl.c\n\
+  index 145d228dd5..d43f1bdc9b 100644\n--- a/lib/vtls/openssl.c\n+++ b/lib/vtls/openssl.c\n\
+  @@ -2166,7 +2166,7 @@ static CURLcode ossl_verifyhost(struct Curl_easy *data,\n\
+  \ \n         if((cnlen <= 0) || !cn)\n           result = CURLE_OUT_OF_MEMORY;\n\
+  -        else if((size_t)cnlen != strlen((char *)cn)) {\n+        else if(memchr(cn,\
+  \ '\\0', cnlen)) {\n           /* there was a null-terminator before the end of\
+  \ string, this\n              cannot match and we return failure! */\n         \
+  \  failf(data, \"SSL: illegal cert name field\");\n@@ -2184,12 +2184,12 @@ static\
+  \ CURLcode ossl_verifyhost(struct Curl_easy *data,\n     }\n     else if(!Curl_cert_hostcheck((const\
+  \ char *)cn, cnlen,\n                                  peer->origin->hostname, hostlen))\
+  \ {\n-      failf(data, \"SSL: certificate subject name '%s' does not match \"\n\
+  -            \"target hostname '%s'\", cn, peer->origin->user_hostname);\n+    \
+  \  failf(data, \"SSL: certificate subject name '%.*s' does not match \"\n+     \
+  \       \"target hostname '%s'\", cnlen, cn, peer->origin->user_hostname);\n   \
+  \    result = CURLE_PEER_FAILED_VERIFICATION;\n     }\n     else {\n-      infof(data,\
+  \ \" common name: %s (matched)\", cn);\n+      infof(data, \" common name: %.*s\
+  \ (matched)\", cnlen, cn);\n     }\n     if(free_cn)\n       OPENSSL_free(cn);\n\
+  ```\n"
+pattern: '## Bug Pattern
+
+
+  Treating length-delimited data, such as an `ASN1_STRING` value retrieved via `ASN1_STRING_get0_data()`,
+  as a NUL-terminated C string. The code uses `strlen(cn)` and `%s` on a buffer whose
+  length is tracked separately by `cnlen`, without ensuring the buffer is NUL-terminated
+  or without respecting the explicit length. This can cause out-of-bounds reads and
+  incorrect string handling when the ASN1 data is not NUL-terminated or contains embedded
+  NUL bytes. The correct pattern is to use explicit-length operations such as `memchr(cn,
+  ''\0'', cnlen)` and `%.*s` instead of relying on NUL termination.'
+plan: "1. **Register a Program State Map:**\n   - Use `REGISTER_MAP_WITH_PROGRAMSTATE(LengthDelimitedPtrMap,\
+  \ SymbolRef, bool)`.\n   - This map marks pointer symbols whose target data comes\
+  \ from `ASN1_STRING_get0_data` and is therefore length-delimited and not guaranteed\
+  \ to be NUL-terminated.\n   - No alias map is needed: assignments and casts preserve\
+  \ the same pointer symbol, so checking the symbol at the use site naturally handles\
+  \ aliases.\n\n2. **Implement Helper Functions:**\n   - `isASN1StringGet0Data(Call)`:\
+  \ return true if the callee name is `\"ASN1_STRING_get0_data\"`.\n   - `getPointerSymbol(SVal\
+  \ V)`: extract a `SymbolRef` from `V` using `V.getAsSymRef()`. If that fails, check\
+  \ whether `V.getAsRegion()` is a `SymbolicRegion` and return its symbol.\n   - `isLengthDelimited(State,\
+  \ const Expr *E, CheckerContext &C)`: get the `SVal` of `E`, extract its pointer\
+  \ symbol via `getPointerSymbol`, and return whether that symbol exists in `LengthDelimitedPtrMap`.\n\
+  \   - `isPrintfLike(StringRef Name)`: return true for `failf`, `infof`, `printf`,\
+  \ `fprintf`, `sprintf`, `snprintf`.\n   - `getFormatArgIndex(StringRef Name)`: return\
+  \ the 0-based index of the format string argument: `1` for `failf`, `infof`, `fprintf`;\
+  \ `0` for `printf`; `1` for `sprintf`; `2` for `snprintf`.\n   - `reportMisuse(CheckerContext\
+  \ &C, const Expr *E, StringRef Msg)`: generate a non-fatal error node, create a\
+  \ `PathSensitiveBugReport` with a short message, and emit it.\n\n3. **Implement\
+  \ `checkPostCall`:**\n   - If `isASN1StringGet0Data(Call)` is true:\n     - Obtain\
+  \ the return value `SVal Ret = Call.getReturnValue()`.\n     - Extract `SymbolRef\
+  \ Sym = getPointerSymbol(Ret)`.\n     - If `Sym` is valid, update the state with\
+  \ `State = State->set<LengthDelimitedPtrMap>(Sym, true)` and call `C.addTransition(State)`.\n\
+  \n4. **Implement `checkPreCall`:**\n   - **For `strlen`:**\n     - If the callee\
+  \ name is `\"strlen\"` and `Call.getNumArgs() > 0`, take `Call.getArgExpr(0)`.\n\
+  \     - If `isLengthDelimited(State, Arg, C)` is true, call `reportMisuse` with\
+  \ a message such as `\"Length-delimited data used as NUL-terminated string\"`.\n\
+  \   - **For printf-like calls:**\n     - If `isPrintfLike(Call)` is true, get the\
+  \ format argument index via `getFormatArgIndex`.\n     - Ensure the format argument\
+  \ is a `StringLiteral`; otherwise skip.\n     - Parse the format string:\n     \
+  \  - Start with `argIndex = fmtIdx + 1`.\n       - Iterate characters. On `%%`,\
+  \ skip.\n       - On `%`, parse the specifier, tracking `starCount` for each `*`\
+  \ and `hasPrecision` for `.`.\n       - When reaching the conversion character,\
+  \ add `starCount` to `argIndex` first.\n       - If the conversion character is\
+  \ `s` and `!hasPrecision`, the string argument is at `argIndex`. If `argIndex <\
+  \ Call.getNumArgs()` and `isLengthDelimited(State, Call.getArgExpr(argIndex), C)`\
+  \ is true, call `reportMisuse` with a message such as `\"Length-delimited data used\
+  \ with %s\"`.\n       - Then increment `argIndex` by 1 for the conversion argument.\n\
+  \       - Continue to the end of the format string.\n     - This correctly treats\
+  \ `%.*s` and `%.Ns` as safe, while flagging bare `%s` and `%*s`.\n\n5. **Reporting:**\n\
+  \   - In `reportMisuse`, call `C.generateNonFatalErrorNode()`.\n   - If the node\
+  \ is non-null, create `std::make_unique<PathSensitiveBugReport>` with a short message\
+  \ like `\"Length-delimited ASN1 data used as NUL-terminated string\"`.\n   - Emit\
+  \ the report using `C.emitReport(...)`."
+refined_plan: null
+repaired_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n\n#include \"clang/AST/Expr.h\"\n#include \"clang/AST/Stmt.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/MemRegion.h\"\
+  \n#include \"llvm/ADT/StringRef.h\"\n#include <memory>\n\nusing namespace clang;\n\
+  using namespace ento;\nusing namespace taint;\n\nREGISTER_MAP_WITH_PROGRAMSTATE(LengthDelimitedPtrMap,\
+  \ SymbolRef, bool)\n\nnamespace {\n\nstatic bool isFunctionNamed(const CallEvent\
+  \ &Call, StringRef Name,\n                            CheckerContext &C) {\n  const\
+  \ Expr *E = Call.getOriginExpr();\n  return E && ExprHasName(E, Name, C);\n}\n\n\
+  static bool isASN1StringGet0Data(const CallEvent &Call, CheckerContext &C) {\n \
+  \ return isFunctionNamed(Call, \"ASN1_STRING_get0_data\", C);\n}\n\nstatic SymbolRef\
+  \ getPointerSymbol(SVal V) {\n  if (SymbolRef Sym = V.getAsSymbol())\n    return\
+  \ Sym;\n\n  if (const MemRegion *MR = V.getAsRegion()) {\n    if (const SymbolicRegion\
+  \ *SR = dyn_cast<SymbolicRegion>(MR))\n      return SR->getSymbol();\n  }\n  return\
+  \ nullptr;\n}\n\nstatic bool isLengthDelimited(ProgramStateRef State, const Expr\
+  \ *E,\n                              CheckerContext &C) {\n  if (!E)\n    return\
+  \ false;\n\n  SVal V = State->getSVal(E, C.getLocationContext());\n  SymbolRef Sym\
+  \ = getPointerSymbol(V);\n  if (!Sym)\n    return false;\n\n  return State->get<LengthDelimitedPtrMap>(Sym)\
+  \ != nullptr;\n}\n\nstatic bool isPrintfLike(StringRef Name) {\n  return Name ==\
+  \ \"failf\" || Name == \"infof\" || Name == \"printf\" ||\n         Name == \"fprintf\"\
+  \ || Name == \"sprintf\" || Name == \"snprintf\";\n}\n\nstatic int getFormatArgIndex(StringRef\
+  \ Name) {\n  if (Name == \"failf\" || Name == \"infof\" || Name == \"fprintf\")\n\
+  \    return 1;\n  if (Name == \"printf\")\n    return 0;\n  if (Name == \"sprintf\"\
+  )\n    return 1;\n  if (Name == \"snprintf\")\n    return 2;\n  return -1;\n}\n\n\
+  static StringRef getPrintfLikeName(const CallEvent &Call) {\n  if (const IdentifierInfo\
+  \ *ID = Call.getCalleeIdentifier()) {\n    StringRef Name = ID->getName();\n   \
+  \ if (isPrintfLike(Name))\n      return Name;\n  }\n  return StringRef();\n}\n\n\
+  static bool isFlagChar(char C) {\n  return C == '-' || C == '+' || C == ' ' || C\
+  \ == '#' || C == '0';\n}\n\nstatic bool isDigitChar(char C) {\n  return C >= '0'\
+  \ && C <= '9';\n}\n\nstatic bool isLengthModifier(char C) {\n  return C == 'h' ||\
+  \ C == 'l' || C == 'j' || C == 'z' || C == 't' || C == 'L';\n}\n\nclass SAGenTestChecker\
+  \ : public Checker<check::PostCall, check::PreCall> {\n  mutable std::unique_ptr<BugType>\
+  \ BT;\n\npublic:\n  SAGenTestChecker()\n      : BT(new BugType(this, \"Length-delimited\
+  \ ASN1 data misuse\",\n                       \"Security\")) {}\n\n  void checkPostCall(const\
+  \ CallEvent &Call, CheckerContext &C) const;\n  void checkPreCall(const CallEvent\
+  \ &Call, CheckerContext &C) const;\n\nprivate:\n  void reportMisuse(CheckerContext\
+  \ &C, const Expr *E, StringRef Msg) const;\n};\n\nvoid SAGenTestChecker::checkPostCall(const\
+  \ CallEvent &Call,\n                                     CheckerContext &C) const\
+  \ {\n  if (!isASN1StringGet0Data(Call, C))\n    return;\n\n  ProgramStateRef State\
+  \ = C.getState();\n  SVal Ret = Call.getReturnValue();\n  SymbolRef Sym = getPointerSymbol(Ret);\n\
+  \  if (!Sym)\n    return;\n\n  State = State->set<LengthDelimitedPtrMap>(Sym, true);\n\
+  \  C.addTransition(State);\n}\n\nvoid SAGenTestChecker::checkPreCall(const CallEvent\
+  \ &Call,\n                                    CheckerContext &C) const {\n  ProgramStateRef\
+  \ State = C.getState();\n\n  if (isFunctionNamed(Call, \"strlen\", C)) {\n    if\
+  \ (Call.getNumArgs() > 0) {\n      const Expr *Arg = Call.getArgExpr(0);\n     \
+  \ if (isLengthDelimited(State, Arg, C)) {\n        reportMisuse(C, Arg,\n      \
+  \               \"Length-delimited ASN1 data used as NUL-terminated string\");\n\
+  \      }\n    }\n    return;\n  }\n\n  StringRef Name = getPrintfLikeName(Call);\n\
+  \  if (Name.empty())\n    return;\n\n  int FmtIdx = getFormatArgIndex(Name);\n \
+  \ if (FmtIdx < 0 || (unsigned)FmtIdx >= Call.getNumArgs())\n    return;\n\n  const\
+  \ Expr *FmtExpr = Call.getArgExpr(FmtIdx);\n  const StringLiteral *SL =\n      dyn_cast<StringLiteral>(FmtExpr->IgnoreParenImpCasts());\n\
+  \  if (!SL)\n    return;\n\n  StringRef Fmt = SL->getString();\n  unsigned ArgIndex\
+  \ = FmtIdx + 1;\n\n  for (unsigned i = 0; i < Fmt.size(); ++i) {\n    if (Fmt[i]\
+  \ != '%')\n      continue;\n\n    ++i;\n    if (i >= Fmt.size())\n      break;\n\
+  \n    if (Fmt[i] == '%')\n      continue;\n\n    unsigned StarCount = 0;\n    bool\
+  \ HasPrecision = false;\n\n    while (i < Fmt.size() && isFlagChar(Fmt[i]))\n  \
+  \    ++i;\n\n    if (i < Fmt.size() && Fmt[i] == '*') {\n      ++StarCount;\n  \
+  \    ++i;\n    } else {\n      while (i < Fmt.size() && isDigitChar(Fmt[i]))\n \
+  \       ++i;\n    }\n\n    if (i < Fmt.size() && Fmt[i] == '.') {\n      HasPrecision\
+  \ = true;\n      ++i;\n      if (i < Fmt.size() && Fmt[i] == '*') {\n        ++StarCount;\n\
+  \        ++i;\n      } else {\n        while (i < Fmt.size() && isDigitChar(Fmt[i]))\n\
+  \          ++i;\n      }\n    }\n\n    while (i < Fmt.size() && isLengthModifier(Fmt[i]))\n\
+  \      ++i;\n\n    if (i >= Fmt.size())\n      break;\n\n    char Conv = Fmt[i];\n\
+  \    ArgIndex += StarCount;\n\n    if (Conv == 's' && !HasPrecision) {\n      if\
+  \ (ArgIndex < Call.getNumArgs()) {\n        const Expr *Arg = Call.getArgExpr(ArgIndex);\n\
+  \        if (isLengthDelimited(State, Arg, C)) {\n          reportMisuse(C, Arg,\
+  \ \"Length-delimited ASN1 data used with %s\");\n        }\n      }\n    }\n\n \
+  \   ++ArgIndex;\n  }\n}\n\nvoid SAGenTestChecker::reportMisuse(CheckerContext &C,\
+  \ const Expr *E,\n                                    StringRef Msg) const {\n \
+  \ ExplodedNode *N = C.generateNonFatalErrorNode();\n  if (!N)\n    return;\n\n \
+  \ auto Report = std::make_unique<PathSensitiveBugReport>(*BT, Msg, N);\n  if (E)\n\
+  \    Report->addRange(E->getSourceRange());\n  C.emitReport(std::move(Report));\n\
+  }\n\n} // end anonymous namespace\n\nextern \"C\" void clang_registerCheckers(CheckerRegistry\
+  \ &registry) {\n  registry.addChecker<SAGenTestChecker>(\n      \"custom.SAGenTestChecker\"\
+  ,\n      \"Detects treating length-delimited ASN1 data as NUL-terminated strings\"\
+  ,\n      \"\");\n}\n\nextern \"C\" const char clang_analyzerAPIVersionString[] =\n\
+  \    CLANG_ANALYZER_API_VERSION_STRING;\n"
+tn_score: 1
+tp_score: 1

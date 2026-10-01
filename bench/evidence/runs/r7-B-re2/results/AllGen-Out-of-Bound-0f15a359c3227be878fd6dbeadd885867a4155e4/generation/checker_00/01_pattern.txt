@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unconditional access to the previous element of a container using `container[index - 1]` when the corresponding size/count (`index`) may be zero. This causes a buffer underflow / out-of-bounds access because `index - 1` becomes negative or wraps. The code must verify the container is non-empty (`index > 0`) before reading the last element.

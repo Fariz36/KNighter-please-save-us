@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is using a Lua GC object obtained from a weak table without keeping it anchored on the Lua stack before calling an operation that may trigger an emergency garbage collection. In `luaV_finishset`, when the `__newindex` metamethod is a table coming from a weak metatable, the table pointer (`h`/`t`) may only be weakly referenced. If `luaH_finishset()` allocates and triggers an emergency GC, that table can be collected and freed while still being used, causing a use-after-free. The fix anchors the table on the stack around the GC-sensitive call.

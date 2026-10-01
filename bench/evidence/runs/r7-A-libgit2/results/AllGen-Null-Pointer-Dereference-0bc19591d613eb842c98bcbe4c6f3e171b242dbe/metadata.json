@@ -1,0 +1,12 @@
+{
+  "commit_id": "0bc19591d613eb842c98bcbe4c6f3e171b242dbe",
+  "commit_type": "Null-Pointer-Dereference",
+  "generation_config": {
+    "use_multi": true,
+    "use_general": false,
+    "no_utility": false,
+    "sample_examples": false,
+    "checker_nums": 3
+  },
+  "start_time": "2026-10-01T15:37:15.520989"
+}

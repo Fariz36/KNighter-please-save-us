@@ -1,0 +1,300 @@
+### Report Summary
+
+File:| /home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/c43dc98d27ac-f6d22c8ac6c7/../../src/c43dc98d27ac/HTMLparser.c  
+---|---  
+Warning:| line 4514, column 19  
+Memory leak: overwriting owned pointer field 'ctxt->sax' without freeing previous allocation  
+  
+### Annotated Source Code
+
+
+4446  |             } else {
+4447  |  SKIP(2);
+4448  |                 htmlParseComment(ctxt, /* bogus */ 1);
+4449  |             }
+4450  |         } else if (NXT(1) == '?') {
+4451  |  SKIP(1);
+4452  |             htmlParseComment(ctxt, /* bogus */ 1);
+4453  |         } else {
+4454  |  break;
+4455  |         }
+4456  |  SKIP_BLANKS;
+4457  |  GROW;
+4458  |     }
+4459  |  
+4460  |  /*
+4461  |  * Time to start parsing the tree itself
+4462  |  */
+4463  |     ctxt->instate = XML_PARSER_CONTENT;
+4464  |     htmlParseContent(ctxt);
+4465  |  
+4466  |  /*
+4467  |  * Only check for truncated multi-byte sequences
+4468  |  */
+4469  |     xmlParserCheckEOF(ctxt, XML_ERR_INTERNAL_ERROR);
+4470  |  
+4471  |  /*
+4472  |  * SAX: end of the document processing.
+4473  |  */
+4474  |  if ((ctxt->sax) && (ctxt->sax->endDocument != NULL))
+4475  |         ctxt->sax->endDocument(ctxt->userData);
+4476  |  
+4477  |  if (! ctxt->wellFormed) return(-1);
+4478  |  return(0);
+4479  | }
+4480  |  
+4481  |  
+4482  | /************************************************************************
+4483  |  *									*
+4484  |  *			Parser contexts handling			*
+4485  |  *									*
+4486  |  ************************************************************************/
+4487  |  
+4488  | /**
+4489  |  * Initialize a parser context
+4490  |  *
+4491  |  * @param ctxt  an HTML parser context
+4492  |  * @param sax  SAX handler
+4493  |  * @param userData  user data
+4494  |  * @returns 0 in case of success and -1 in case of error
+4495  |  */
+4496  | static int
+4497  | htmlInitParserCtxt(htmlParserCtxtPtr ctxt, const htmlSAXHandler *sax,
+4498  |  void *userData)
+4499  | {
+4500  | #ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
+4501  |     size_t initialNodeTabSize = 1;
+4502  | #else
+4503  |  size_t initialNodeTabSize = 10;
+4504  | #endif
+4505  |  
+4506  |  if (ctxt4.1'ctxt' is not equal to NULL == NULL) return(-1);
+    5←Taking false branch→
+4507  |  memset(ctxt, 0, sizeof(htmlParserCtxt));
+4508  |  
+4509  |     ctxt->dict = xmlDictCreate();
+4510  |  if (ctxt->dict == NULL)
+    6←Assuming field 'dict' is not equal to NULL→
+    7←Taking false branch→
+4511  |  return(-1);
+4512  |  
+4513  |  if (ctxt->sax == NULL)
+    8←Assuming field 'sax' is equal to NULL→
+    9←Taking true branch→
+4514  |  ctxt->sax = (htmlSAXHandler *) xmlMalloc(sizeof(htmlSAXHandler));
+    10←Memory leak: overwriting owned pointer field 'ctxt->sax' without freeing previous allocation
+4515  |  if (ctxt->sax == NULL)
+4516  |  return(-1);
+4517  |  if (sax == NULL) {
+4518  |         memset(ctxt->sax, 0, sizeof(htmlSAXHandler));
+4519  |         xmlSAX2InitHtmlDefaultSAXHandler(ctxt->sax);
+4520  |         ctxt->userData = ctxt;
+4521  |     } else {
+4522  |         memcpy(ctxt->sax, sax, sizeof(htmlSAXHandler));
+4523  |         ctxt->userData = userData ? userData : ctxt;
+4524  |     }
+4525  |  
+4526  |  /* Allocate the Input stack */
+4527  |     ctxt->inputTab = (htmlParserInputPtr *)
+4528  |                       xmlMalloc(sizeof(htmlParserInputPtr));
+4529  |  if (ctxt->inputTab == NULL)
+4530  |  return(-1);
+4531  |     ctxt->inputNr = 0;
+4532  |     ctxt->inputMax = 1;
+4533  |     ctxt->input = NULL;
+4534  |     ctxt->version = NULL;
+4535  |     ctxt->encoding = NULL;
+4536  |     ctxt->standalone = -1;
+4537  |     ctxt->instate = XML_PARSER_START;
+4538  |  
+4539  |  /* Allocate the Node stack */
+4540  |     ctxt->nodeTab = xmlMalloc(initialNodeTabSize * sizeof(htmlNodePtr));
+4541  |  if (ctxt->nodeTab == NULL)
+4542  |  return(-1);
+4543  |     ctxt->nodeNr = 0;
+4544  |     ctxt->nodeMax = initialNodeTabSize;
+4573  |  return(0);
+4574  | }
+4575  |  
+4576  | /**
+4577  |  * Free all the memory used by a parser context. However the parsed
+4578  |  * document in `ctxt->myDoc` is not freed.
+4579  |  *
+4580  |  * @param ctxt  an HTML parser context
+4581  |  */
+4582  | void
+4583  | htmlFreeParserCtxt(htmlParserCtxt *ctxt)
+4584  | {
+4585  |     xmlFreeParserCtxt(ctxt);
+4586  | }
+4587  |  
+4588  | /**
+4589  |  * Allocate and initialize a new HTML parser context.
+4590  |  *
+4591  |  * This can be used to parse HTML documents into DOM trees with
+4592  |  * functions like #xmlCtxtReadFile or #xmlCtxtReadMemory.
+4593  |  *
+4594  |  * See #htmlCtxtUseOptions for parser options.
+4595  |  *
+4596  |  * See #xmlCtxtSetErrorHandler for advanced error handling.
+4597  |  *
+4598  |  * See #htmlNewSAXParserCtxt for custom SAX parsers.
+4599  |  *
+4600  |  * @returns the htmlParserCtxt or NULL in case of allocation error
+4601  |  */
+4602  | htmlParserCtxt *
+4603  | htmlNewParserCtxt(void)
+4604  | {
+4605  |  return(htmlNewSAXParserCtxt(NULL, NULL));
+4606  | }
+4607  |  
+4608  | /**
+4609  |  * Allocate and initialize a new HTML SAX parser context. If `userData`
+4610  |  * is NULL, the parser context will be passed as user data.
+4611  |  *
+4612  |  * @since 2.11.0
+4613  |  *
+4614  |  * If you want support older versions, it's best to invoke
+4615  |  * #htmlNewParserCtxt and set `ctxt->sax` with struct assignment.
+4616  |  *
+4617  |  * Also see #htmlNewParserCtxt.
+4618  |  *
+4619  |  * @param sax  SAX handler
+4620  |  * @param userData  user data
+4621  |  * @returns the htmlParserCtxt or NULL in case of allocation error
+4622  |  */
+4623  | htmlParserCtxt *
+4624  | htmlNewSAXParserCtxt(const htmlSAXHandler *sax, void *userData)
+4625  | {
+4626  |  xmlParserCtxtPtr ctxt;
+4627  |  
+4628  |     xmlInitParser();
+4629  |  
+4630  |     ctxt = (xmlParserCtxtPtr) xmlMalloc(sizeof(xmlParserCtxt));
+4631  |  if (ctxt == NULL)
+    2←Assuming 'ctxt' is not equal to NULL→
+    3←Taking false branch→
+4632  |  return(NULL);
+4633  |  memset(ctxt, 0, sizeof(xmlParserCtxt));
+4634  |  if (htmlInitParserCtxt(ctxt, sax, userData) < 0) {
+    4←Calling 'htmlInitParserCtxt'→
+4635  |         htmlFreeParserCtxt(ctxt);
+4636  |  return(NULL);
+4637  |     }
+4638  |  return(ctxt);
+4639  | }
+4640  |  
+4641  | static htmlParserCtxtPtr
+4642  | htmlCreateMemoryParserCtxtInternal(const char *url,
+4643  |  const char *buffer, size_t size,
+4644  |  const char *encoding) {
+4645  |     xmlParserCtxtPtr ctxt;
+4646  |     xmlParserInputPtr input;
+4647  |  
+4648  |  if (buffer == NULL)
+4649  |  return(NULL);
+4650  |  
+4651  |     ctxt = htmlNewParserCtxt();
+4652  |  if (ctxt == NULL)
+4653  |  return(NULL);
+4654  |  
+4655  |     input = xmlCtxtNewInputFromMemory(ctxt, url, buffer, size, encoding, 0);
+4656  |  if (input == NULL) {
+4657  | 	xmlFreeParserCtxt(ctxt);
+4658  |  return(NULL);
+4659  |     }
+4660  |  
+4661  |  if (xmlCtxtPushInput(ctxt, input) < 0) {
+4662  |         xmlFreeInputStream(input);
+4663  |         xmlFreeParserCtxt(ctxt);
+4664  |  return(NULL);
+5167  |  if (size > 0)  {
+5168  | 	size_t pos = ctxt->input->cur - ctxt->input->base;
+5169  |  int res;
+5170  |  
+5171  | 	res = xmlParserInputBufferPush(ctxt->input->buf, size, chunk);
+5172  |         xmlBufUpdateInput(ctxt->input->buf->buffer, ctxt->input, pos);
+5173  |  if (res < 0) {
+5174  |             htmlParseErr(ctxt, ctxt->input->buf->error,
+5175  |  "xmlParserInputBufferPush failed", NULL, NULL);
+5176  |  return (ctxt->errNo);
+5177  | 	}
+5178  |     }
+5179  |  
+5180  |     htmlParseTryOrFinish(ctxt, terminate);
+5181  |  
+5182  |  if ((terminate) && (ctxt->instate != XML_PARSER_EOF)) {
+5183  |         htmlAutoCloseOnEnd(ctxt);
+5184  |  
+5185  |  /*
+5186  |  * Only check for truncated multi-byte sequences
+5187  |  */
+5188  |         xmlParserCheckEOF(ctxt, XML_ERR_INTERNAL_ERROR);
+5189  |  
+5190  |  if ((ctxt->sax) && (ctxt->sax->endDocument != NULL))
+5191  |             ctxt->sax->endDocument(ctxt->userData);
+5192  |  
+5193  | 	ctxt->instate = XML_PARSER_EOF;
+5194  |     }
+5195  |  
+5196  |  return((xmlParserErrors) ctxt->errNo);
+5197  | }
+5198  |  
+5199  | /************************************************************************
+5200  |  *									*
+5201  |  *			User entry points				*
+5202  |  *									*
+5203  |  ************************************************************************/
+5204  |  
+5205  | /**
+5206  |  * Create a parser context for using the HTML parser in push mode.
+5207  |  *
+5208  |  * @param sax  a SAX handler (optional)
+5209  |  * @param user_data  The user data returned on SAX callbacks (optional)
+5210  |  * @param chunk  a pointer to an array of chars (optional)
+5211  |  * @param size  number of chars in the array
+5212  |  * @param filename  only used for error reporting (optional)
+5213  |  * @param enc  encoding (deprecated, pass XML_CHAR_ENCODING_NONE)
+5214  |  * @returns the new parser context or NULL if a memory allocation
+5215  |  * failed.
+5216  |  */
+5217  | htmlParserCtxt *
+5218  | htmlCreatePushParserCtxt(htmlSAXHandler *sax, void *user_data,
+5219  |  const char *chunk, int size, const char *filename,
+5220  | 			 xmlCharEncoding enc) {
+5221  |  htmlParserCtxtPtr ctxt;
+5222  |     htmlParserInputPtr input;
+5223  |  const char *encoding;
+5224  |  
+5225  |  ctxt = htmlNewSAXParserCtxt(sax, user_data);
+    1Calling 'htmlNewSAXParserCtxt'→
+5226  |  if (ctxt == NULL)
+5227  |  return(NULL);
+5228  |  
+5229  |     encoding = xmlGetCharEncodingName(enc);
+5230  |     input = xmlNewPushInput(filename, chunk, size);
+5231  |  if (input == NULL) {
+5232  | 	htmlFreeParserCtxt(ctxt);
+5233  |  return(NULL);
+5234  |     }
+5235  |  
+5236  |  if (xmlCtxtPushInput(ctxt, input) < 0) {
+5237  |         xmlFreeInputStream(input);
+5238  |         xmlFreeParserCtxt(ctxt);
+5239  |  return(NULL);
+5240  |     }
+5241  |  
+5242  |  if (encoding != NULL)
+5243  |         xmlSwitchEncodingName(ctxt, encoding);
+5244  |  
+5245  |  return(ctxt);
+5246  | }
+5247  | #endif /* LIBXML_PUSH_ENABLED */
+5248  |  
+5249  | /**
+5250  |  * Parse an HTML in-memory document. If sax is not NULL, use the SAX callbacks
+5251  |  * to handle parse events. If sax is NULL, fallback to the default DOM
+5252  |  * behavior and return a tree.
+5253  |  *
+5254  |  * @deprecated Use #htmlNewSAXParserCtxt and #htmlCtxtReadDoc.
+5255  |  *

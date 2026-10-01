@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using 32-bit `int` loop counters/indices in arithmetic expressions that can exceed `INT_MAX`, while the associated size/limit values are 64-bit (`i64`). In `replaceFunc`, the assert expression `j+nStr-i+1<=nOut` is evaluated using `int` arithmetic when `i` and `j` are `int`, so it can overflow before being compared to the `i64` value `nOut`. This causes signed integer overflow / undefined behavior under large `SQLITE_MAX_LENGTH` values in debug builds. The fix is to make the loop counters `i64` so the arithmetic is performed with 64-bit precision.

@@ -1,0 +1,11 @@
+## Bug Pattern
+
+A fixed-size stack-buffer overflow caused by writing unbounded formatted output into `std::array<char, 28> output_buffer` without checking remaining capacity. In the default-notation path, the number of trailing zeros depends on the exponent and can be made very large when a large `precision` raises `upperExponentThreshold`, forcing large values to be printed in default notation instead of scientific notation. The loop
+
+```cpp
+for (int i{0}; i < before_decimal_digits - digits_ct; ++i) {
+  *(output_ptr++) = '0';
+}
+```
+
+can therefore write past the end of `output_buffer`. The root cause is assuming a fixed buffer is sufficient for every formatting path and failing to account for output length controlled by `precision` and exponent.

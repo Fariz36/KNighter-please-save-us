@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The function returns success on an early-exit path before initializing the output parameter/resource, leaving `*hosts` set to `NULL`. The caller then assumes a successful return means the out-parameter is valid and dereferences it, causing a NULL pointer dereference. The root cause is deferring required resource initialization until after a non-fatal early return path that still reports success.

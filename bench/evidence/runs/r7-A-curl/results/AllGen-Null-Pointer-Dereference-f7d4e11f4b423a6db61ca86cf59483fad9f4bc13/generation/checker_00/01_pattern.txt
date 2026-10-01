@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing validation of a pointer field before dereferencing or copying it. `Curl_setblobopt()` validates `blob->len` but does not check `blob->data`, so a caller can supply `len > 0` with `data == NULL`. With `CURL_BLOB_COPY`, this causes `memcpy()` to read from a NULL pointer; without it, the NULL data pointer is stored and later dereferenced. The root cause is assuming that a non-zero length implies the associated buffer pointer is valid.

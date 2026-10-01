@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The code performs multi-byte lookahead on a string pointer without first checking whether the current character is the string terminator. In this case, `sep = ptr[0]` may be `'\0'` when the malformed FTP EPSV response ends immediately after `'('`; the code then still evaluates `ptr[1]`, `ptr[2]`, and `ptr[3]`, reading past the NUL terminator. The fix adds `sep &&` so the parser stops before doing lookahead when the delimiter byte is NUL.
+
+General pattern: **missing NUL/end-of-string validation before reading ahead in a string**, causing an out-of-bounds read on malformed input.

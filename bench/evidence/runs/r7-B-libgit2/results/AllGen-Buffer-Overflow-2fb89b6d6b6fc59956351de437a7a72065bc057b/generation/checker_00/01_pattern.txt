@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using unbounded C string search functions (`strstr`, `strchr`) on a pointer into a length-delimited buffer that is not guaranteed to be NUL-terminated within its bounds. The code has `len` available but does not limit the search to the remaining length (`len - (ptr - line)`), so the search can read past the end of the allocated buffer and cause a heap-buffer-overflow. The fix pattern is to replace such searches with length-bounded operations like `git__memmem` and `memchr`, always passing the remaining buffer length.

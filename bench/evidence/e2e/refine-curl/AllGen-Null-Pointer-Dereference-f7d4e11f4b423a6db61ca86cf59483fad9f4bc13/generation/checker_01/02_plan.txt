@@ -1,0 +1,15 @@
+1. **No Program State Customization Needed:**
+   - The missing NULL validation can be detected by inspecting the AST of the `if` condition inside the target function. Therefore, no `REGISTER_MAP_WITH_PROGRAMSTATE` or `REGISTER_TRAIT_WITH_PROGRAMSTATE` is required.
+
+2. **Callback Function: `checkBranchCondition`**
+   - This callback is invoked for every branch condition. Use it to examine the `if` statement in `Curl_setblobopt`.
+   - **Step-by-step implementation:**
+     1. Obtain the current function declaration via `C.getLocationContext()->getDecl()`. If it is not a `FunctionDecl` or its name is not `Curl_setblobopt`, return immediately.
+     2. The `Condition` parameter holds the expression of the `if` statement.
+     3. Use the utility `ExprHasName(Condition, "blob->len", C)` to check whether the condition involves the `blob->len` field. If it returns `false`, this is not the target condition; return.
+     4. Use `ExprHasName(Condition, "blob->data", C)` to check whether the condition also validates `blob->data`. If it returns `true`, the required NULL check is present; return.
+     5. If the condition mentions `blob->len` but not `blob->data`, the bug pattern is present. Generate a non-fatal error node using `C.generateNonFatalErrorNode()`.
+     6. Create a `PathSensitiveBugReport` with a short message, e.g., `"Missing NULL check for blob->data"`, and emit it via `C.emitReport(std::move(R))`.
+
+3. **Reporting:**
+   - The report should be placed at the location of the `if` condition. Keep the message concise and clear as indicated in the suggestions.

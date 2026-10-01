@@ -1,0 +1,211 @@
+{
+  "commit_id": "a7511af09f99995cdf81994db21f4eba564276b5",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/plugin-cache/plugins/89c27e22c6526bb8ecef/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlregexp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 7,
+        "fixed_total": 7,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlRegNewParserCtxt"
+        ],
+        "fixed_functions": [
+          "xmlRegNewParserCtxt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7-1790826088533610532/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5139,
+          "column": 23,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "554d69235dc14fe6f22f70e01b1fc67b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-554d69.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7-1790826088533610532/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5097,
+          "column": 11,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "6986e1a2980c680e0a12725373c1f9db",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-6986e1.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7-1790826088533610532/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5028,
+          "column": 26,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "9bfe314a6f86a2779f3019e0db67aa4a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-9bfe31.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7-1790826088533610532/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5104,
+          "column": 11,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "9db766d92867a37ce34ae2cd7cc75939",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-9db766.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7-1790826088533610532/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5022,
+          "column": 28,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "b0ec59e04ff0f59fb177e55adbcf2c15",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-b0ec59.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7-1790826088533610532/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5028,
+          "column": 45,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "bac27a25dba14cf2897557627ca24ae0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-bac27a.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7-1790826088533610532/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5090,
+          "column": 14,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "f7aa48ec37867b9629cbffc141add4ea",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-f7aa48.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/a7511af09f99-f6d22c8ac6c7-1790826088538823002/../../src/a7511af09f99/xmlregexp.c",
+          "line": 5143,
+          "column": 23,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "554d69235dc14fe6f22f70e01b1fc67b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/fixed/.._.._src_a7511af09f99_xmlregexp.c/report-554d69.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/a7511af09f99-f6d22c8ac6c7-1790826088538823002/../../src/a7511af09f99/xmlregexp.c",
+          "line": 5101,
+          "column": 11,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "6986e1a2980c680e0a12725373c1f9db",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/fixed/.._.._src_a7511af09f99_xmlregexp.c/report-6986e1.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/a7511af09f99-f6d22c8ac6c7-1790826088538823002/../../src/a7511af09f99/xmlregexp.c",
+          "line": 5032,
+          "column": 26,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "9bfe314a6f86a2779f3019e0db67aa4a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/fixed/.._.._src_a7511af09f99_xmlregexp.c/report-9bfe31.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/a7511af09f99-f6d22c8ac6c7-1790826088538823002/../../src/a7511af09f99/xmlregexp.c",
+          "line": 5108,
+          "column": 11,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "9db766d92867a37ce34ae2cd7cc75939",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/fixed/.._.._src_a7511af09f99_xmlregexp.c/report-9db766.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/a7511af09f99-f6d22c8ac6c7-1790826088538823002/../../src/a7511af09f99/xmlregexp.c",
+          "line": 5026,
+          "column": 28,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "b0ec59e04ff0f59fb177e55adbcf2c15",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/fixed/.._.._src_a7511af09f99_xmlregexp.c/report-b0ec59.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/a7511af09f99-f6d22c8ac6c7-1790826088538823002/../../src/a7511af09f99/xmlregexp.c",
+          "line": 5032,
+          "column": 45,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "bac27a25dba14cf2897557627ca24ae0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/fixed/.._.._src_a7511af09f99_xmlregexp.c/report-bac27a.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/a7511af09f99-f6d22c8ac6c7-1790826088538823002/../../src/a7511af09f99/xmlregexp.c",
+          "line": 5094,
+          "column": 14,
+          "function": "unknown",
+          "bug_type": "Unchecked NXT Macro",
+          "description": "Unchecked NXT macro lookahead may read out of bounds",
+          "issue_hash": "f7aa48ec37867b9629cbffc141add4ea",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7511af09f99/d28b8dc6/fixed/.._.._src_a7511af09f99_xmlregexp.c/report-f7aa48.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 2.28,
+    "analysis_seconds": {
+      "buggy": 30.52,
+      "fixed": 29.62
+    },
+    "total_seconds": 62.61
+  },
+  "report_dir": "tmp/validation/a7511af09f99/d28b8dc6"
+}

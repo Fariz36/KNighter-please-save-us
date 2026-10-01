@@ -1,0 +1,101 @@
+{
+  "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/plugin-cache/plugins/7409e678a8d3083d8cef/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/setopt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 2,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "Curl_setblobopt"
+        ],
+        "fixed_functions": [
+          "Curl_setblobopt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 111,
+          "column": 33,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL check on blob->data",
+          "description": "Missing NULL check on blob->data",
+          "issue_hash": "06b176a2dee0d0c6a3700882cf70fc9c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f7d4e11f4b42/77903b05/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-curl_work_src_b3675fe80a33_lib_setopt.c/report-06b176.html",
+          "relpath": "lib/setopt.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 111,
+          "column": 8,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL check on blob->data",
+          "description": "Missing NULL check on blob->data",
+          "issue_hash": "6d4ab98355ca10a2957d5abe674a5bf6",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f7d4e11f4b42/77903b05/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-curl_work_src_b3675fe80a33_lib_setopt.c/report-6d4ab9.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/work/src/f7d4e11f4b42/lib/setopt.c",
+          "line": 111,
+          "column": 48,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL check on blob->data",
+          "description": "Missing NULL check on blob->data",
+          "issue_hash": "a0c3c9333ca812ffc4e4e1d5bc231c68",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f7d4e11f4b42/77903b05/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-curl_work_src_f7d4e11f4b42_lib_setopt.c/report-a0c3c9.html",
+          "relpath": "lib/setopt.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/work/src/f7d4e11f4b42/lib/setopt.c",
+          "line": 111,
+          "column": 23,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL check on blob->data",
+          "description": "Missing NULL check on blob->data",
+          "issue_hash": "f4630b0a421744451e391dcde4c6a6e8",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f7d4e11f4b42/77903b05/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-curl_work_src_f7d4e11f4b42_lib_setopt.c/report-f4630b.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 0.9,
+      "fixed": 1.15
+    },
+    "total_seconds": 2.17
+  },
+  "report_dir": "tmp/validation/f7d4e11f4b42/77903b05"
+}

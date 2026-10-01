@@ -1,0 +1,156 @@
+{
+  "commit_id": "f9e055468d167cb4d6bde1ecd9e293d8a7d40db5",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/plugin-cache/plugins/8b9b086813948c74049e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/repository.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 6,
+        "fixed_total": 3,
+        "buggy_on_target": 3,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "git_repository_set_workdir"
+        ],
+        "fixed_functions": [
+          "git_repository_set_workdir"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/repository.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/8fd4f83e8acf/src/libgit2/repository.c",
+          "line": 457,
+          "column": 2,
+          "function": "load_workdir",
+          "bug_type": "Memory leak: git_str not disposed before return",
+          "description": "Memory leak: git_str not disposed before return",
+          "issue_hash": "1977ef3ee2a2c77c6427bfa99c531557",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f9e055468d16/c43c31f5/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_8fd4f83e8acf_src_libgit2_repository.c/report-1977ef.html",
+          "relpath": "src/libgit2/repository.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/8fd4f83e8acf/src/libgit2/repository.c",
+          "line": 3279,
+          "column": 2,
+          "function": "git_repository_set_workdir",
+          "bug_type": "Memory leak: git_str not disposed before return",
+          "description": "Memory leak: git_str not disposed before return",
+          "issue_hash": "300c8bbfe5279f684c507d876f7b9664",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f9e055468d16/c43c31f5/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_8fd4f83e8acf_src_libgit2_repository.c/report-300c8b.html",
+          "relpath": "src/libgit2/repository.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/8fd4f83e8acf/src/libgit2/repository.c",
+          "line": 3250,
+          "column": 3,
+          "function": "git_repository_set_workdir",
+          "bug_type": "Memory leak: git_str not disposed before return",
+          "description": "Memory leak: git_str not disposed before return",
+          "issue_hash": "7990e019e445e5f48f02e30c02370954",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f9e055468d16/c43c31f5/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_8fd4f83e8acf_src_libgit2_repository.c/report-7990e0.html",
+          "relpath": "src/libgit2/repository.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/8fd4f83e8acf/src/libgit2/repository.c",
+          "line": 1031,
+          "column": 3,
+          "function": "git_repository_open_bare",
+          "bug_type": "Memory leak: git_str not disposed before return",
+          "description": "Memory leak: git_str not disposed before return",
+          "issue_hash": "bc5bf7241e86bf0f01fe582693c56d09",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f9e055468d16/c43c31f5/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_8fd4f83e8acf_src_libgit2_repository.c/report-bc5bf7.html",
+          "relpath": "src/libgit2/repository.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/8fd4f83e8acf/src/libgit2/repository.c",
+          "line": 1041,
+          "column": 2,
+          "function": "git_repository_open_bare",
+          "bug_type": "Memory leak: git_str not disposed before return",
+          "description": "Memory leak: git_str not disposed before return",
+          "issue_hash": "bc9c0e0f589ace8c96911fa6049ca8af",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f9e055468d16/c43c31f5/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_8fd4f83e8acf_src_libgit2_repository.c/report-bc9c0e.html",
+          "relpath": "src/libgit2/repository.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/8fd4f83e8acf/src/libgit2/repository.c",
+          "line": 3256,
+          "column": 4,
+          "function": "git_repository_set_workdir",
+          "bug_type": "Memory leak: git_str not disposed before return",
+          "description": "Memory leak: git_str not disposed before return",
+          "issue_hash": "d3bdc0ff415468c82f2e81c1a51e3170",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f9e055468d16/c43c31f5/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_8fd4f83e8acf_src_libgit2_repository.c/report-d3bdc0.html",
+          "relpath": "src/libgit2/repository.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/repository.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/f9e055468d16/src/libgit2/repository.c",
+          "line": 457,
+          "column": 2,
+          "function": "load_workdir",
+          "bug_type": "Memory leak: git_str not disposed before return",
+          "description": "Memory leak: git_str not disposed before return",
+          "issue_hash": "1977ef3ee2a2c77c6427bfa99c531557",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f9e055468d16/c43c31f5/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_f9e055468d16_src_libgit2_repository.c/report-1977ef.html",
+          "relpath": "src/libgit2/repository.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/f9e055468d16/src/libgit2/repository.c",
+          "line": 1031,
+          "column": 3,
+          "function": "git_repository_open_bare",
+          "bug_type": "Memory leak: git_str not disposed before return",
+          "description": "Memory leak: git_str not disposed before return",
+          "issue_hash": "bc5bf7241e86bf0f01fe582693c56d09",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f9e055468d16/c43c31f5/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_f9e055468d16_src_libgit2_repository.c/report-bc5bf7.html",
+          "relpath": "src/libgit2/repository.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/f9e055468d16/src/libgit2/repository.c",
+          "line": 1041,
+          "column": 2,
+          "function": "git_repository_open_bare",
+          "bug_type": "Memory leak: git_str not disposed before return",
+          "description": "Memory leak: git_str not disposed before return",
+          "issue_hash": "bc9c0e0f589ace8c96911fa6049ca8af",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f9e055468d16/c43c31f5/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_f9e055468d16_src_libgit2_repository.c/report-bc9c0e.html",
+          "relpath": "src/libgit2/repository.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 25.29,
+    "analysis_seconds": {
+      "buggy": 14.08,
+      "fixed": 14.85
+    },
+    "total_seconds": 54.36
+  },
+  "report_dir": "tmp/validation/f9e055468d16/c43c31f5"
+}

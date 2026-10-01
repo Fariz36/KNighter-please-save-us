@@ -1,0 +1,82 @@
+{
+  "commit_id": "8b2e6ba3288de15ed7a61d5c89cde2ed47327c1e",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-yaml-cpp/plugin-cache/plugins/8df9a97fd91e2346a8b2/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/scanner.cpp",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Scanner::PopIndent",
+          "Scanner::ScanNextToken"
+        ],
+        "fixed_functions": [
+          "Scanner::PopIndent",
+          "Scanner::ScanNextToken"
+        ]
+      },
+      {
+        "path": "test/integration/handler_test.cpp",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": [
+          "TEST_F"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/scanner.cpp": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-yaml-cpp/work/src/3eb39d5808c3/src/scanner.cpp",
+          "line": 179,
+          "column": 39,
+          "function": "ScanNextToken",
+          "bug_type": "Unconditional PopIndent",
+          "description": "Unconditional PopIndent() may cause indent stack underflow",
+          "issue_hash": "9505ba22ef63cb0b7e2567f14faee1fe",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/8b2e6ba3288d/596fcc08/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-yaml-cpp_work_src_3eb39d5808c3_src_scanner.cpp/report-9505ba.html",
+          "relpath": "src/scanner.cpp"
+        }
+      ]
+    },
+    "fixed": {
+      "src/scanner.cpp": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 5.25,
+    "analysis_seconds": {
+      "buggy": 6.64,
+      "fixed": 6.85
+    },
+    "total_seconds": 18.76
+  },
+  "report_dir": "tmp/validation/8b2e6ba3288d/596fcc08"
+}

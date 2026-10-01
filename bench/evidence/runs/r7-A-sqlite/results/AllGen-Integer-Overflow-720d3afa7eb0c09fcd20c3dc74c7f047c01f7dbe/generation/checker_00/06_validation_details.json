@@ -1,0 +1,112 @@
+{
+  "commit_id": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/plugin-cache/plugins/319284ac6e0c36cfa8fb/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/btree.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 3,
+        "fixed_total": 2,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "accessPayload"
+        ],
+        "fixed_functions": [
+          "accessPayload"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/btree.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/4cc2dbd54dba/src/btree.c",
+          "line": 7005,
+          "column": 11,
+          "function": "unknown",
+          "bug_type": "Integer Overflow Before Widening",
+          "description": "Potential integer overflow in 32-bit arithmetic before widening to i64",
+          "issue_hash": "2296407a3112b2e149f1886a34d0e2dc",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/720d3afa7eb0/74e6f971/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_4cc2dbd54dba_src_btree.c/report-229640.html",
+          "relpath": "src/btree.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/4cc2dbd54dba/src/btree.c",
+          "line": 5198,
+          "column": 19,
+          "function": "unknown",
+          "bug_type": "Integer Overflow Before Widening",
+          "description": "Potential integer overflow in 32-bit arithmetic before widening to i64",
+          "issue_hash": "32f84f55cdc253ad773834c37f6b2a7b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/720d3afa7eb0/74e6f971/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_4cc2dbd54dba_src_btree.c/report-32f84f.html",
+          "relpath": "src/btree.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/4cc2dbd54dba/src/btree.c",
+          "line": 11000,
+          "column": 15,
+          "function": "unknown",
+          "bug_type": "Integer Overflow Before Widening",
+          "description": "Potential integer overflow in 32-bit arithmetic before widening to i64",
+          "issue_hash": "e1dde2c27431a3b3b6c62fc6e1287a11",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/720d3afa7eb0/74e6f971/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_4cc2dbd54dba_src_btree.c/report-e1dde2.html",
+          "relpath": "src/btree.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/btree.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/720d3afa7eb0/src/btree.c",
+          "line": 7007,
+          "column": 11,
+          "function": "unknown",
+          "bug_type": "Integer Overflow Before Widening",
+          "description": "Potential integer overflow in 32-bit arithmetic before widening to i64",
+          "issue_hash": "2296407a3112b2e149f1886a34d0e2dc",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/720d3afa7eb0/74e6f971/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_720d3afa7eb0_src_btree.c/report-229640.html",
+          "relpath": "src/btree.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/720d3afa7eb0/src/btree.c",
+          "line": 11002,
+          "column": 15,
+          "function": "unknown",
+          "bug_type": "Integer Overflow Before Widening",
+          "description": "Potential integer overflow in 32-bit arithmetic before widening to i64",
+          "issue_hash": "e1dde2c27431a3b3b6c62fc6e1287a11",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/720d3afa7eb0/74e6f971/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_720d3afa7eb0_src_btree.c/report-e1dde2.html",
+          "relpath": "src/btree.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 73.8,
+    "analysis_seconds": {
+      "buggy": 60.87,
+      "fixed": 65.3
+    },
+    "total_seconds": 200.47
+  },
+  "report_dir": "tmp/validation/720d3afa7eb0/74e6f971"
+}

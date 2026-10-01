@@ -1,0 +1,95 @@
+--- attempt_1_original.cpp+++ attempt_1.cpp@@ -25,6 +25,56 @@ REGISTER_SET_WITH_PROGRAMSTATE(AllocatedPtrs, SymbolRef)
+ 
+ namespace {
++
++// Helper: Checks if an expression is a null pointer constant.
++static bool isNullPointerConstant(const Expr *E, ASTContext &Ctx) {
++  return E->isNullPointerConstant(Ctx, Expr::NPC_ValueDependentIsNull);
++}
++
++// Helper: Checks if the condition is a comparison of the given field to NULL.
++// If so, sets IsNullIfTrue to true if the true branch implies the field is null,
++// false if the false branch implies the field is null.
++static bool isFieldNullCheck(const Expr *Cond, const FieldDecl *FD,
++                             ASTContext &Ctx, bool &IsNullIfTrue) {
++  Cond = Cond->IgnoreImpCasts();
++  const BinaryOperator *BO = dyn_cast<BinaryOperator>(Cond);
++  if (!BO || (!BO->isEqualityOp()))
++    return false;
++  const Expr *LHS = BO->getLHS()->IgnoreImpCasts();
++  const Expr *RHS = BO->getRHS()->IgnoreImpCasts();
++  const MemberExpr *ME = nullptr;
++  const Expr *Other = nullptr;
++  if (const MemberExpr *ME1 = dyn_cast<MemberExpr>(LHS)) {
++    ME = ME1;
++    Other = RHS;
++  } else if (const MemberExpr *ME2 = dyn_cast<MemberExpr>(RHS)) {
++    ME = ME2;
++    Other = LHS;
++  } else {
++    return false;
++  }
++  if (ME->getMemberDecl() != FD)
++    return false;
++  if (!isNullPointerConstant(Other, Ctx))
++    return false;
++  bool isEq = BO->getOpcode() == BO_EQ;
++  IsNullIfTrue = isEq;
++  return true;
++}
++
++// Helper: Checks if Child is contained within Parent (including Parent itself).
++static bool containsStmt(const Stmt *Parent, const Stmt *Child) {
++  if (!Parent || !Child)
++    return false;
++  if (Parent == Child)
++    return true;
++  for (const Stmt *S : Parent->children()) {
++    if (containsStmt(S, Child))
++      return true;
++  }
++  return false;
++}
++
+ class SAGenTestChecker : public Checker<check::PostCall, check::Bind> {
+   mutable std::unique_ptr<BugType> BT;
+ 
+@@ -60,6 +110,9 @@ 
+ void SAGenTestChecker::checkBind(SVal Loc, SVal Val, const Stmt *StoreE,
+                                  CheckerContext &C) const {
++  if (!StoreE)
++    return;
++
+   const MemRegion *MR = Loc.getAsRegion();
+   if (!MR)
+     return;
+@@ -89,8 +142,29 @@     return;
+ 
+   SVal OldVal = State->getSVal(MR);
+-  if (OldVal.isZeroConstant())
++
++  // If the old value is undefined or known to be null (either a concrete
++  // zero or a symbol constrained to null), there is no previous allocation
++  // to leak.
++  if (OldVal.isUnknown() || State->isNull(OldVal).isConstrainedTrue())
+     return;
++
++  // Check if this store is guarded by a null check on the same field.
++  // If so, there is no previous allocation to leak.
++  const Stmt *Current = StoreE;
++  while (true) {
++    const IfStmt *IS = findSpecificTypeInParents<IfStmt>(Current, C);
++    if (!IS)
++      break;
++    bool IsNullIfTrue;
++    if (isFieldNullCheck(IS->getCond(), FD, C.getASTContext(), IsNullIfTrue)) {
++      bool InThen = containsStmt(IS->getThen(), Current);
++      bool InElse = containsStmt(IS->getElse(), Current);
++      if ((IsNullIfTrue && InThen) || (!IsNullIfTrue && InElse))
++        return;
++    }
++    Current = IS;
++  }
+ 
+   ExplodedNode *N = C.generateNonFatalErrorNode(State);
+   if (!N)

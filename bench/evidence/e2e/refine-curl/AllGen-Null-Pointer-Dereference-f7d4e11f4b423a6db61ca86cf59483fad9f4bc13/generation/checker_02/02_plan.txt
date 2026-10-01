@@ -1,0 +1,18 @@
+```
+1. **No Custom Program State Needed:**
+   - The bug is a missing validation in a specific function’s `if` condition. It can be detected syntactically by inspecting the condition expression. No path-sensitive tracking, alias analysis, or program state maps are required.
+
+2. **Callback: `checkBranchCondition`:**
+   - Implement `checkBranchCondition(const Stmt *Condition, CheckerContext &C)`.
+   - First, verify the current function being analyzed is `Curl_setblobopt`. Obtain it from `C.getLocationContext()->getDecl()`. If it is not a `FunctionDecl` or its name is not `"Curl_setblobopt"`, return immediately.
+   - Cast the condition to `const Expr *` (branch conditions are expressions). If the cast fails, return.
+   - Use the utility `ExprHasName(CondExpr, "blob->len", C)` to check whether the condition validates the `len` field.
+   - Use `ExprHasName(CondExpr, "blob->data", C)` to check whether the condition validates the `data` pointer.
+   - If the condition contains `"blob->len"` but does **not** contain `"blob->data"`, then the code validates the size but fails to validate the associated data pointer. This matches the bug pattern.
+
+3. **Report the Bug:**
+   - When the above condition is met, generate a non-fatal error node using `C.generateNonFatalErrorNode()`.
+   - Create a `PathSensitiveBugReport` (or `BasicBugReport`) with a short, clear message such as:
+     `"Missing NULL check for 'blob->data' before use in Curl_setblobopt"`
+   - Emit the report using `C.emitReport(std::move(Report))`.
+```

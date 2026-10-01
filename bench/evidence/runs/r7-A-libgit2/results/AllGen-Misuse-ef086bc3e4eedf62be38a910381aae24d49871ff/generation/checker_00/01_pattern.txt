@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using `!!memcmp()` as an equality/match test. Since `memcmp()` returns `0` for equal buffers and non-zero for different buffers, `!!memcmp()` inverts the result: matching values evaluate to `0`/failure, while mismatching values evaluate to `1`/success. In certificate SAN verification, this causes matching IP SANs to be rejected and non-matching IP SANs to be accepted, allowing hostname verification bypass. The correct form is `memcmp(...) == 0`; for IP SANs, also verify `namelen == addrlen` before comparing.

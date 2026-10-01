@@ -1,0 +1,65 @@
+--- original_code.cpp+++ syntax_correct_refine_code.cpp@@ -14,7 +14,6 @@ #include "clang/AST/StmtVisitor.h"
+ #include "llvm/Support/raw_ostream.h"
+ #include "llvm/Support/Casting.h"
+-#include "clang/StaticAnalyzer/Checkers/utility.h"
+ 
+ #include "clang/AST/Expr.h"
+ #include "clang/AST/Stmt.h"
+@@ -22,6 +21,10 @@ 
+ #include <memory>
+ 
++#include "clang/AST/ASTContext.h"
++#include "clang/AST/Decl.h"
++#include "clang/StaticAnalyzer/Core/PathSensitive/SVals.h"
++
+ using namespace clang;
+ using namespace ento;
+ using namespace taint;
+@@ -31,6 +34,35 @@ REGISTER_TRAIT_WITH_PROGRAMSTATE(ZeroedGeneration, unsigned)
+ 
+ namespace {
++
++bool ExprHasName(const Expr *E, StringRef Name, CheckerContext &) {
++  if (!E)
++    return false;
++  const CallExpr *CE = llvm::dyn_cast<CallExpr>(E);
++  if (!CE)
++    return false;
++  const FunctionDecl *FD = CE->getDirectCallee();
++  if (!FD)
++    return false;
++  return FD->getName() == Name;
++}
++
++const MemRegion *getMemRegionFromExpr(const Expr *E, CheckerContext &C) {
++  if (!E)
++    return nullptr;
++  SVal V = C.getState()->getSVal(E, C.getLocationContext());
++  return V.getAsRegion();
++}
++
++bool EvaluateExprToInt(llvm::APSInt &Result, const Expr *E, CheckerContext &C) {
++  if (!E)
++    return false;
++  Expr::EvalResult EvalResult;
++  if (!E->EvaluateAsInt(EvalResult, C.getASTContext()))
++    return false;
++  Result = EvalResult.Val.getInt();
++  return true;
++}
+ 
+ class SAGenTestChecker : public Checker<check::PreCall> {
+   mutable std::unique_ptr<BugType> BT;
+@@ -151,8 +183,11 @@       return;
+ 
+     const unsigned *InitGen = State->get<InitializedRegions>(MR);
+-    if (InitGen && *InitGen == MaxGen)
+-      return; // The field was reinitialized after the most recent zeroing.
++    if (!InitGen)
++      return; // The field was never linked; unlink is a no-op.
++
++    if (*InitGen == MaxGen)
++      return; // The field was linked after the most recent zeroing.
+ 
+     reportUnlinkAfterZero(Call, C);
+   }

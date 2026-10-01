@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked narrowing of a string/byte length from a pointer difference (`ptrdiff_t`) to `int` in the UTF-8 `%!.*s` path of `sqlite3_str_vappendf()`. Because `flag_altform2` counts characters while `SQLITE_SKIP_UTF8` can advance up to 4 bytes per character, the scanned byte length can exceed `INT_MAX`. Casting `(z - (unsigned char*)bufpt)` to `int` then overflows/truncates, producing an invalid negative/short length that is later used as a buffer length. The fix clamps the length to `0x7ffffff0` before the `int` cast.

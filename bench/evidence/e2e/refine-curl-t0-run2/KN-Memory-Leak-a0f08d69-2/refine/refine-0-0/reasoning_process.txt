@@ -1,0 +1,13 @@
+Refinement Plan:
+The false positive occurs because the checker marks a struct as "cleared" when `memset()` is called, but it never invalidates that mark when the struct's peer linkage is subsequently re-initialized. In the reported case, `cf_socket_ctx_init()` does:
+
+1. `memset(ctx, 0, sizeof(*ctx))` → marks `ctx` as cleared.
+2. `Curl_peer_link(&ctx->peer, peer)` → re-establishes a valid peer linkage.
+
+Later, `cf_socket_ctx_free()` calls `Curl_peer_unlink(&ctx->peer)`. The checker still believes `ctx` is in the cleared state, so it incorrectly reports a leak.
+
+The fix is to invalidate the "cleared" marker whenever `Curl_peer_link()` is called on a field of the same base struct. Linking a peer re-initializes the linkage, so a subsequent `Curl_peer_unlink()` is no longer a cleanup-after-clear. The true bug pattern (clear then unlink without an intervening link) remains detected because no `Curl_peer_link()` occurs between the `memset()` and the `Curl_peer_unlink()`.
+
+Refined Code:
+```cpp
+```

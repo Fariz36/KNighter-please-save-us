@@ -1,0 +1,79 @@
+{
+  "commit_id": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-sqlite/plugin-cache/plugins/eca7baed4c67ef161ba7/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/trigger.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "sqlite3TriggerUpdateStep"
+        ],
+        "fixed_functions": [
+          "sqlite3TriggerUpdateStep"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/trigger.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-sqlite/work/src/73937f0ca880/src/trigger.c",
+          "line": 597,
+          "column": 3,
+          "function": "sqlite3TriggerUpdateStep",
+          "bug_type": "Memory leak",
+          "description": "Memory leak: SrcList not freed on no-transfer path",
+          "issue_hash": "d81249b800805339b785abf2b5071638",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/c0b3c173/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-sqlite_work_src_73937f0ca880_src_trigger.c/report-d81249.html",
+          "relpath": "src/trigger.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/trigger.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-sqlite/work/src/7b60ed803b8d/src/trigger.c",
+          "line": 599,
+          "column": 3,
+          "function": "sqlite3TriggerUpdateStep",
+          "bug_type": "Memory leak",
+          "description": "Memory leak: SrcList not freed on no-transfer path",
+          "issue_hash": "d81249b800805339b785abf2b5071638",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/c0b3c173/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-sqlite_work_src_7b60ed803b8d_src_trigger.c/report-d81249.html",
+          "relpath": "src/trigger.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 10.67,
+      "fixed": 9.47
+    },
+    "total_seconds": 20.25
+  },
+  "report_dir": "tmp/validation/7b60ed803b8d/c0b3c173"
+}

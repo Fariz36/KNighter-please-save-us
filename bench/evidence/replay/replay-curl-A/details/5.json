@@ -1,0 +1,67 @@
+{
+  "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/replay/replay-curl-A/plugin-cache/plugins/87ef3d428ddef324bb5e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/setopt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Curl_setblobopt"
+        ],
+        "fixed_functions": [
+          "Curl_setblobopt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/replay/replay-curl-A/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 122,
+          "column": 7,
+          "function": "Curl_setblobopt",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: 'data' member may be NULL",
+          "issue_hash": "9578dfc1747dedc6dd17940d871ca57a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f7d4e11f4b42/bf93f3db/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_replay_replay-curl-A_work_src_b3675fe80a33_lib_setopt.c/report-9578df.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/setopt.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 42.52,
+    "analysis_seconds": {
+      "buggy": 0.9,
+      "fixed": 0.95
+    },
+    "total_seconds": 44.47
+  },
+  "report_dir": "tmp/validation/f7d4e11f4b42/bf93f3db"
+}

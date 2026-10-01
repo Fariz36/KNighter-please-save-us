@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is returning success from an early exit/cleanup path while leaving an output parameter uninitialized or `NULL`. Here, `known_hosts` is initialized only after `git_sysdir_expand_homedir_file()`, but if that lookup reports `GIT_ENOTFOUND`, the function treats it as success (`error = 0`) and jumps to `out`, assigning `*hosts = known_hosts`, which is still `NULL`, then returns success. The caller assumes a valid `LIBSSH2_KNOWNHOSTS *` on success and later dereferences it, causing a segfault. The fix moves `libssh2_knownhost_init()` before any path that can return success.

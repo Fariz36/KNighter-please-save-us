@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Fixed-size stack buffer written through an unchecked raw pointer while formatting variable-length numeric output. In `FpToString`, `std::array<char, 28> output_buffer` is assumed to fit every possible representation, but `precision` can force default notation for large exponents, causing loops to emit many trailing zeros (`before_decimal_digits - digits_ct`) directly via `*(output_ptr++) = '0'` without verifying remaining buffer space. This leads to a stack-buffer overflow when the required output length exceeds 28 bytes. The root cause is using a fixed-size output buffer with no bounds checking for output whose length depends on caller-controlled `precision` and the numeric exponent.

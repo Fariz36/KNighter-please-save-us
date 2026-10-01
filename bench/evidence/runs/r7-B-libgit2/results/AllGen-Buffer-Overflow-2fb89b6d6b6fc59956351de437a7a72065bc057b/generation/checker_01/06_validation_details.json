@@ -1,0 +1,55 @@
+{
+  "commit_id": "2fb89b6d6b6fc59956351de437a7a72065bc057b",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/plugin-cache/plugins/b67e7a71a39aae4f6a8a/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/transports/smart_pkt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "set_data"
+        ],
+        "fixed_functions": [
+          "set_data"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/transports/smart_pkt.c": []
+    },
+    "fixed": {
+      "src/libgit2/transports/smart_pkt.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 5.79,
+    "analysis_seconds": {
+      "buggy": 2.47,
+      "fixed": 2.36
+    },
+    "total_seconds": 10.66
+  },
+  "report_dir": "tmp/validation/2fb89b6d6b6f/c22b5e5e"
+}

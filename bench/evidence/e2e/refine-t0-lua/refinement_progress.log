@@ -1,0 +1,21 @@
+# Refinement Progress Log
+Generated: 2026-10-01 17:05:43
+Base Directory: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/e2e/refine-t0-lua
+
+## Progress Log
+[17:05:43] Starting refinement of 4 valid checkers
+[17:05:43] [1/4] Processing KN-Integer-Overflow-10eb89d1-0
+[17:07:54] COMPLETED: KN-Integer-Overflow-10eb89d1-0 - Perfect (FAILED)
+[17:07:54] [2/4] Processing KN-Use-After-Free-22974326-1
+[17:09:52] COMPLETED: KN-Use-After-Free-22974326-1 - Perfect (FAILED)
+[17:09:52] [3/4] Processing KN-Misuse-bc4bbcef-0
+[17:11:05] COMPLETED: KN-Misuse-bc4bbcef-0 - Perfect (FAILED)
+[17:11:05] [4/4] Processing KN-Use-Before-Initialization-efddc230-0
+[17:12:10] COMPLETED: KN-Use-Before-Initialization-efddc230-0 - Perfect (FAILED)
+
+## Completion Summary
+Process completed: 2026-10-01 17:12:10
+- Total Processed: 4
+- Successful Refinements: 0
+- Skipped (Invalid): 0
+- Errors: 0

@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The bug pattern is calling a function that may fail and return `NULL` (`hunk_from_entry()`), then using its return value without checking for `NULL`. Here, the result is inserted into `blame->hunks` via `git_vector_insert()` even when `hunk_from_entry()` fails, so a failed hunk creation can propagate a `NULL` pointer and cause a crash or invalid state later.
+
+The required fix is to check the returned pointer and exit via the error path if it is `NULL`.

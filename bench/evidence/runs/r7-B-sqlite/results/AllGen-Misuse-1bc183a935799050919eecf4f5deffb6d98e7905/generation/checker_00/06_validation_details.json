@@ -1,0 +1,71 @@
+{
+  "commit_id": "1bc183a935799050919eecf4f5deffb6d98e7905",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-sqlite/plugin-cache/plugins/eaa0619db316033ee843/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/alter.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ],
+        "fixed_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 2465,
+          "column": 3,
+          "function": "quotedCompare",
+          "bug_type": "Missing TK_ILLEGAL check",
+          "description": "Missing TK_ILLEGAL check before sqlite3Dequote",
+          "issue_hash": "cfa726d2d71bef34948e6d7e0090851f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/fc76f026/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-sqlite_work_src_79837b6ee5d4_src_alter.c/report-cfa726.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/alter.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 20.19,
+      "fixed": 20.7
+    },
+    "total_seconds": 41.05
+  },
+  "report_dir": "tmp/validation/1bc183a93579/fc76f026"
+}

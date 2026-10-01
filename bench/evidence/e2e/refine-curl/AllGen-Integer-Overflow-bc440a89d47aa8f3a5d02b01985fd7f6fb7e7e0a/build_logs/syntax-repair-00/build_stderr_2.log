@@ -1,0 +1,16 @@
+checker.cpp: In member function ‘void {anonymous}::SAGenTestChecker::checkPreStmt(const clang::BinaryOperator*, clang::ento::CheckerContext&) const’:
+checker.cpp:129:37: error: no matching function for call to ‘clang::ento::PathDiagnosticLocation::create(const clang::BinaryOperator*&, const clang::SourceManager&, const clang::LocationContext*) const’
+  129 |       PathDiagnosticLocation::create(BO, C.getSourceManager(),
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+  130 |                                      C.getLocationContext()));
+      |                                      ~~~~~~~~~~~~~~~~~~~~~~~
+checker.cpp:129:37: note: there are 2 candidates
+In file included from /home/faris/RA-MrYudis/Knight/KNighter/llvm/clang/include/clang/StaticAnalyzer/Core/BugReporter/BugReporter.h:17,
+/home/faris/RA-MrYudis/Knight/KNighter/llvm/clang/include/clang/Analysis/PathDiagnostic.h:248:33: note: candidate 1: ‘static clang::ento::PathDiagnosticLocation clang::ento::PathDiagnosticLocation::create(const clang::Decl*, const clang::SourceManager&)’
+  248 |   static PathDiagnosticLocation create(const Decl *D,
+      |                                 ^~~~~~
+/home/faris/RA-MrYudis/Knight/KNighter/llvm/clang/include/clang/Analysis/PathDiagnostic.h:248:33: note: candidate expects 2 arguments, 3 provided
+/home/faris/RA-MrYudis/Knight/KNighter/llvm/clang/include/clang/Analysis/PathDiagnostic.h:313:33: note: candidate 2: ‘static clang::ento::PathDiagnosticLocation clang::ento::PathDiagnosticLocation::create(const clang::ProgramPoint&, const clang::SourceManager&)’
+  313 |   static PathDiagnosticLocation create(const ProgramPoint &P,
+      |                                 ^~~~~~
+/home/faris/RA-MrYudis/Knight/KNighter/llvm/clang/include/clang/Analysis/PathDiagnostic.h:313:33: note: candidate expects 2 arguments, 3 provided

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is unconditional cleanup of an optional/owned resource in a destructor: the destructor explicitly calls `~AlignedMutex()` for elements of `cache_mutex_` without first checking whether the backing storage `cache_mutex_storage_` was actually allocated. When `cache_mutex_storage_` is `NULL` (for example, when a single default/shared mutex is used instead of an allocated array), the loop still runs and destroys an object that the DFA does not own. The fix guards the explicit destructor loop with `if (cache_mutex_storage_ != NULL)`, ensuring cleanup only happens for mutexes constructed in the allocated storage.

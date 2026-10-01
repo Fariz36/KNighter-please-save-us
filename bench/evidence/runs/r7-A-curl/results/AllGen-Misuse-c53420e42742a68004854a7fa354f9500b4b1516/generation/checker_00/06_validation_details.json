@@ -1,0 +1,78 @@
+{
+  "commit_id": "c53420e42742a68004854a7fa354f9500b4b1516",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/plugin-cache/plugins/d1e6e4e0a6cbe8b1f15b/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/vtls/openssl.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "ossl_verifyhost"
+        ],
+        "fixed_functions": [
+          "ossl_verifyhost"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/vtls/openssl.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/f042c25fb876/lib/vtls/openssl.c",
+          "line": 2187,
+          "column": 7,
+          "function": "ossl_verifyhost",
+          "bug_type": "ASN1_STRING as C string",
+          "description": "%s on non-NUL-terminated ASN1_STRING data",
+          "issue_hash": "123f10c831e859a037720b8e4bed5a76",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/c53420e42742/37eacde7/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_f042c25fb876_lib_vtls_openssl.c/report-123f10.html",
+          "relpath": "lib/vtls/openssl.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/f042c25fb876/lib/vtls/openssl.c",
+          "line": 2169,
+          "column": 34,
+          "function": "ossl_verifyhost",
+          "bug_type": "ASN1_STRING as C string",
+          "description": "strlen() on non-NUL-terminated ASN1_STRING data",
+          "issue_hash": "de89d9f410e7d04c9bc4aa475a2d8f60",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/c53420e42742/37eacde7/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_f042c25fb876_lib_vtls_openssl.c/report-de89d9.html",
+          "relpath": "lib/vtls/openssl.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/vtls/openssl.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 50.97,
+    "analysis_seconds": {
+      "buggy": 6.49,
+      "fixed": 6.04
+    },
+    "total_seconds": 64.39
+  },
+  "report_dir": "tmp/validation/c53420e42742/37eacde7"
+}

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is missing validation that the Base64 input contains a complete number of 4-character encoding blocks. The decoder only emits bytes when it sees a complete quartet, but after the loop it never checks whether leftover characters remain. As a result, truncated input with 1–3 trailing non-whitespace characters is silently accepted, and the decoder returns partial output instead of rejecting the malformed input.

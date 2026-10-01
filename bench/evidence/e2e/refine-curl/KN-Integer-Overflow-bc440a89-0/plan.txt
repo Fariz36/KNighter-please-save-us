@@ -1,0 +1,13 @@
+1. **No custom program state is needed.**
+   The checker only needs to verify the presence of an upper-bound guard before the overflow-prone arithmetic. This can be done by inspecting the AST at the point of the multiplication, without tracking state across paths.
+
+2. **Implement `checkPreStmt` for `BinaryOperator`:**
+   - Filter for the base64 size calculation: check if the `BinaryOperator` has opcode `BO_Mul` and one operand is an integer literal `4` (e.g., `4 * (1 + ((size - 1) / 3))`).
+   - Ensure the enclosing function is `encoder_base64_size` by getting the `FunctionDecl` from `C.getLocationContext()->getDecl()` and comparing `FD->getNameAsString()` to `"encoder_base64_size"`.
+   - If the function matches, obtain its body (`CompoundStmt`).
+   - Iterate over all statements in the body that appear before the multiplication (compare source locations). For each preceding `IfStmt`:
+     - Check if the condition contains both the variable `size` and the macro `BASE64_MAX_INPUT_SIZE` using the provided `ExprHasName` utility (e.g., `ExprHasName(If->getCond(), "BASE64_MAX_INPUT_SIZE", C)` and `ExprHasName(If->getCond(), "size", C)`).
+     - Check that the `IfStmt`'s then branch contains a `ReturnStmt` (e.g., `return -1;`) using `findSpecificTypeInChildren<ReturnStmt>(If->getThen())`.
+     - If such a guard is found, the overflow is prevented; stop checking and return.
+   - If no such guard is found before the multiplication, create a `BasicBugReport` at the multiplication's location (`BO->getExprLoc()`) with the message: `"Potential integer overflow in base64 size calculation; missing upper-bound check."`
+   - Emit the report using `C.emitReport(std::move(Report))`.

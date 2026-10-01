@@ -1,0 +1,92 @@
+{
+  "commit_id": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-lua/plugin-cache/plugins/85bb8e6e3f6716a4c767/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lapi.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": []
+      },
+      {
+        "path": "lvm.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "luaV_finishset"
+        ],
+        "fixed_functions": [
+          "luaV_finishset"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lapi.c": [],
+      "lvm.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-lua/work/src/c931d86e98da/lvm.c",
+          "line": 338,
+          "column": 9,
+          "function": "luaV_finishset",
+          "bug_type": "Use-after-free in luaV_finishset",
+          "description": "Table passed to luaH_finishset is not anchored on Lua stack; possible use-after-free",
+          "issue_hash": "287b86774a88586556dff909be66d7e8",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/22974326ca0d/1807b612/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-lua_work_src_c931d86e98da_lvm.c/report-287b86.html",
+          "relpath": "lvm.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lapi.c": [],
+      "lvm.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-lua/work/src/22974326ca0d/lvm.c",
+          "line": 345,
+          "column": 9,
+          "function": "luaV_finishset",
+          "bug_type": "Use-after-free in luaV_finishset",
+          "description": "Table passed to luaH_finishset is not anchored on Lua stack; possible use-after-free",
+          "issue_hash": "287b86774a88586556dff909be66d7e8",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/22974326ca0d/1807b612/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-lua_work_src_22974326ca0d_lvm.c/report-287b86.html",
+          "relpath": "lvm.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 5.51,
+      "fixed": 5.51
+    },
+    "total_seconds": 11.22
+  },
+  "report_dir": "tmp/validation/22974326ca0d/1807b612"
+}

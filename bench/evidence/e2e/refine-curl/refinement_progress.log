@@ -1,0 +1,21 @@
+# Refinement Progress Log
+Generated: 2026-09-30 21:52:18
+Base Directory: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/e2e/refine-curl
+
+## Progress Log
+[21:52:18] Starting refinement of 4 valid checkers
+[21:52:18] [1/4] Processing KN-Null-Pointer-Dereference-f2a15357-0
+[21:54:31] COMPLETED: KN-Null-Pointer-Dereference-f2a15357-0 - Perfect (FAILED)
+[21:54:31] [2/4] Processing KN-Memory-Leak-a0f08d69-2
+[21:55:44] COMPLETED: KN-Memory-Leak-a0f08d69-2 - Perfect (FAILED)
+[21:55:44] [3/4] Processing KN-Misuse-c53420e4-1
+[21:56:57] COMPLETED: KN-Misuse-c53420e4-1 - Perfect (FAILED)
+[21:56:57] [4/4] Processing KN-Integer-Overflow-bc440a89-0
+[21:58:08] COMPLETED: KN-Integer-Overflow-bc440a89-0 - Perfect (FAILED)
+
+## Completion Summary
+Process completed: 2026-09-30 21:58:08
+- Total Processed: 4
+- Successful Refinements: 0
+- Skipped (Invalid): 0
+- Errors: 0

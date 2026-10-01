@@ -1,0 +1,13 @@
+{
+  "commit_id": "ef086bc3e4eedf62be38a910381aae24d49871ff",
+  "commit_type": "Misuse",
+  "total_checkers": 3,
+  "successful_checkers": 0,
+  "perfect_checkers": 0,
+  "best_tp": 0,
+  "best_tn": 0,
+  "total_time": 371.998588,
+  "errors": [],
+  "success_rate": 0.0,
+  "timestamp": "2026-10-01T16:48:09.247723"
+}

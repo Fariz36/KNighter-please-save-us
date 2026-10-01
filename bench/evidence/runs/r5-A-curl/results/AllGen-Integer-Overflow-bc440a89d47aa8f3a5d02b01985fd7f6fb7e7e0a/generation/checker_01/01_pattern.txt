@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Performing size/offset arithmetic on an unchecked input length (`part->datasize`) before verifying that the calculation cannot overflow the integer type. In `encoder_base64_size()`, the base64 size formula `4 * (1 + ((size - 1) / 3))` plus CRLF overhead can overflow `curl_off_t` for very large input sizes, producing a wrapped or incorrect encoded size. The fix bounds the input size against `BASE64_MAX_INPUT_SIZE` before doing the arithmetic.

@@ -1,0 +1,67 @@
+{
+  "commit_id": "a7d27d62330bfe35d82430fa8942feb6f5cddbaf",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/plugin-cache/plugins/a336ee801262135b3625/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "re2/prefilter.cc",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Prefilter::OrStrings"
+        ],
+        "fixed_functions": [
+          "Prefilter::OrStrings"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "re2/prefilter.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/6e70e9e8556f/re2/prefilter.cc",
+          "line": 174,
+          "column": 7,
+          "function": "OrStrings",
+          "bug_type": "Null return from factory for empty input",
+          "description": "Function returns NULL for empty input; callers may dereference NULL",
+          "issue_hash": "2c21e193b1d187f8ab06057a1e950bb2",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7d27d62330b/81461eeb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_6e70e9e8556f_re2_prefilter.cc/report-2c21e1.html",
+          "relpath": "re2/prefilter.cc"
+        }
+      ]
+    },
+    "fixed": {
+      "re2/prefilter.cc": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 9.23,
+    "analysis_seconds": {
+      "buggy": 7.96,
+      "fixed": 8.48
+    },
+    "total_seconds": 25.71
+  },
+  "report_dir": "tmp/validation/a7d27d62330b/81461eeb"
+}

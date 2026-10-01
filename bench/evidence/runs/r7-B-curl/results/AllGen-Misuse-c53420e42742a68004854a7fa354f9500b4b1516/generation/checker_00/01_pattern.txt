@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Treating length-delimited ASN.1 string data as a NUL-terminated C string. The code gets `cn` and `cnlen` from `ASN1_STRING_get0_data()` / `ASN1_STRING_to_UTF8()`, but that data is not guaranteed to have a trailing `\0`. Using `strlen((char *)cn)` and `%s` then reads past the valid `cnlen` bytes, causing an out-of-bounds read. The fix uses length-aware operations: `memchr(cn, '\0', cnlen)` and `%.*s` with `cnlen`.

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Freeing a node with `xmlFreeNode()` while it is still linked into the document tree, without first unlinking it. `xmlFreeNode()` does not remove the node from its parent/children/sibling pointers, so the surrounding tree keeps dangling references to freed memory. In this case, when `parent` is a text node, `cur` is merged into `parent` and then freed, but its old links remain; later tree traversal or cleanup can trigger use-after-free, double-free, or memory corruption. The fix is to call `xmlUnlinkNodeInternal(cur)` before `xmlFreeNode(cur)`.

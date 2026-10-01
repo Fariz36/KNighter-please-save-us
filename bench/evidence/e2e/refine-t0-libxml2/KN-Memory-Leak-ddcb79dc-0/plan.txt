@@ -1,0 +1,32 @@
+```
+1. **Register Program State Map:**
+   - Use `REGISTER_SET_WITH_PROGRAMSTATE(AllocatedPtrs, SymbolRef)` to track symbols of pointers returned by owned allocation functions. This set will be used to identify newly allocated pointers that are assigned to the `ctxt->sax` field.
+
+2. **Model Memory Allocation (`checkPostCall`):**
+   - In `checkPostCall`, inspect the callee identifier.
+   - If the callee is `xmlMalloc`, `xmlMallocAtomic`, `xmlRealloc`, or similar allocation functions, retrieve the return value `SVal` via `Call.getReturnValue()`.
+   - Extract the symbol using `RetVal.getAsSymbol()`. If the symbol is valid, add it to the `AllocatedPtrs` set in the current program state and call `C.addTransition(State)`.
+
+3. **Model Memory Free (`checkPreCall`):**
+   - In `checkPreCall`, detect calls to `xmlFree` (and other deallocation functions).
+   - Retrieve the argument `SVal` for the freed pointer.
+   - Extract its symbol. If valid, remove the symbol from `AllocatedPtrs` in the program state and call `C.addTransition(State)`.
+   - (This step avoids false positives if the old pointer was already freed, though it is not strictly required for the specific bug.)
+
+4. **Detect Overwrite of Owned Pointer Field (`checkBind`):**
+   - In `checkBind`, examine the assignment `Loc = Val`.
+   - Verify that `Loc` is the field `sax` of a `struct xmlParserCtxt`:
+     - Obtain the `MemRegion` from `Loc.getAsRegion()`.
+     - If it is a `FieldRegion`, check that the field's name is `"sax"` and its parent record's name is `"xmlParserCtxt"`.
+   - If the destination field is correct, check whether the new value `Val` is an owned allocated pointer:
+     - Obtain `ValSym = Val.getAsSymbol()`.
+     - If `ValSym` is invalid or not present in `AllocatedPtrs`, return.
+   - Retrieve the previous value of the field: `SVal OldVal = State->getSVal(Loc, C.getLocationContext())`.
+   - If `OldVal` is a null constant (e.g., `OldVal.isZeroConstant()`), return (overwriting NULL is safe).
+   - Otherwise, the old value is a non-null owned pointer that is being overwritten without being freed. Proceed to report.
+
+5. **Report the Bug:**
+   - Generate a non-fatal error node using `C.generateNonFatalErrorNode()`.
+   - Create a `PathSensitiveBugReport` with a short message: `"Memory leak: overwriting owned pointer field 'ctxt->sax' without freeing previous allocation."`
+   - Emit the report with `C.emitReport(std::move(R))`.
+```

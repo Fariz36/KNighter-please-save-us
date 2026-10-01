@@ -1,0 +1,26 @@
+```
+1. **Decide Program State Needs:**
+   - No program state maps or traits are required. The bug is a local AST pattern in a specific function (`Curl_setblobopt`), so we can detect it by inspecting the conditional expression directly.
+
+2. **Define BugType:**
+   - In the checker class, define a `BugType` for the missing null check (e.g., `MissingBlobDataCheckBugType`) with a short description like `"Missing null check on blob->data"`.
+
+3. **Implement `checkBranchCondition`:**
+   - Get the current function declaration:
+     - `const FunctionDecl *FD = dyn_cast<FunctionDecl>(Ctx.getLocationContext()->getDecl());`
+     - If `FD` is null or `FD->getName() != "Curl_setblobopt"`, return.
+   - Get the condition expression:
+     - `const Expr *Cond = dyn_cast<Expr>(Condition);`
+     - If `Cond` is null, return.
+   - Check whether this condition is the length validation that fails to check `blob->data`:
+     - `ExprHasName(Cond, "blob->len", Ctx)` must be `true`.
+     - `ExprHasName(Cond, "CURL_MAX_INPUT_LENGTH", Ctx)` must be `true`.
+     - `ExprHasName(Cond, "blob->data", Ctx)` must be `false`.
+   - If all three conditions hold, this is the buggy validation.
+
+4. **Report the Bug:**
+   - Generate a non-fatal error node: `ExplodedNode *N = Ctx.generateNonFatalErrorNode();`
+   - If `N` is non-null, create a `PathSensitiveBugReport`:
+     - `std::make_unique<PathSensitiveBugReport>(*MissingBlobDataCheckBugType, "Missing null check on blob->data", N)`
+   - Emit the report via `Ctx.emitReport(...)`.
+```

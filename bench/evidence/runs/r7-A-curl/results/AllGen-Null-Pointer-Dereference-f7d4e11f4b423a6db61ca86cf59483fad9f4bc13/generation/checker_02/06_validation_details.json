@@ -1,0 +1,67 @@
+{
+  "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/plugin-cache/plugins/bdde7c6c3e636745d89c/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/setopt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Curl_setblobopt"
+        ],
+        "fixed_functions": [
+          "Curl_setblobopt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 118,
+          "column": 12,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL check for blob->data",
+          "description": "blob->data may be NULL and is used without NULL check",
+          "issue_hash": "62e331c378ce5613f38f50b5b02f6855",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f7d4e11f4b42/23f8aaf4/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_b3675fe80a33_lib_setopt.c/report-62e331.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/setopt.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 46.79,
+    "analysis_seconds": {
+      "buggy": 0.98,
+      "fixed": 1.03
+    },
+    "total_seconds": 48.89
+  },
+  "report_dir": "tmp/validation/f7d4e11f4b42/23f8aaf4"
+}

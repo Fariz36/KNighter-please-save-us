@@ -1,0 +1,577 @@
+## Patch Description
+
+fix: fix stack underflow of PopIndent (#1476)
+
+* fix indent-stack underflow for literal scalar with tag
+
+* add tests
+
+* correct name for the new test
+
+* add guard for PopIndent
+
+log: fixes indent underflow (introduced a few commits back)
+
+* fix comments
+
+## Buggy Code
+
+```c
+// Function: Scanner::PopIndent in src/scanner.cpp
+void Scanner::PopIndent() {
+  const IndentMarker& indent = *m_indents.top();
+  m_indents.pop();
+
+  if (indent.status != IndentMarker::VALID) {
+    InvalidateSimpleKey();
+    return;
+  }
+
+  if (indent.type == IndentMarker::SEQ) {
+    m_tokens.push(Token(Token::BLOCK_SEQ_END, INPUT.mark()));
+  } else if (indent.type == IndentMarker::MAP) {
+    m_tokens.push(Token(Token::BLOCK_MAP_END, INPUT.mark()));
+  }
+}
+```
+
+```c
+// Function: TEST_F in test/integration/handler_test.cpp
+TEST_F(HandlerTest, CommentOnNewlineOfMapValueWithManySpace) {
+  EXPECT_CALL(handler, OnDocumentStart(_));
+  EXPECT_CALL(handler, OnMapStart(_, "?", 0, EmitterStyle::Block));
+  EXPECT_CALL(handler, OnScalar(_, "?", 0, "key"));
+  EXPECT_CALL(handler, OnScalar(_, "?", 0, "value"));
+  EXPECT_CALL(handler, OnMapEnd());
+  EXPECT_CALL(handler, OnDocumentEnd());
+  Parse("key: value\n    # comment");
+}
+```
+
+```c
+// Complete file: include/yaml-cpp/exceptions.h (tree-sitter fallback)
+#ifndef EXCEPTIONS_H_62B23520_7C8E_11DE_8A39_0800200C9A66
+#define EXCEPTIONS_H_62B23520_7C8E_11DE_8A39_0800200C9A66
+
+#if defined(_MSC_VER) ||                                            \
+    (defined(__GNUC__) && (__GNUC__ == 3 && __GNUC_MINOR__ >= 4) || \
+     (__GNUC__ >= 4))  // GCC supports "pragma once" correctly since 3.4
+#pragma once
+#endif
+
+#include "yaml-cpp/mark.h"
+#include "yaml-cpp/noexcept.h"
+#include "yaml-cpp/traits.h"
+#include <sstream>
+#include <stdexcept>
+#include <string>
+
+namespace YAML {
+// error messages
+namespace ErrorMsg {
+const char* const YAML_DIRECTIVE_ARGS =
+    "YAML directives must have exactly one argument";
+const char* const YAML_VERSION = "bad YAML version: ";
+const char* const YAML_MAJOR_VERSION = "YAML major version too large";
+const char* const REPEATED_YAML_DIRECTIVE = "repeated YAML directive";
+const char* const TAG_DIRECTIVE_ARGS =
+    "TAG directives must have exactly two arguments";
+const char* const REPEATED_TAG_DIRECTIVE = "repeated TAG directive";
+const char* const CHAR_IN_TAG_HANDLE =
+    "illegal character found while scanning tag handle";
+const char* const TAG_WITH_NO_SUFFIX = "tag handle with no suffix";
+const char* const END_OF_VERBATIM_TAG = "end of verbatim tag not found";
+const char* const END_OF_MAP = "end of map not found";
+const char* const END_OF_MAP_FLOW = "end of map flow not found";
+const char* const END_OF_SEQ = "end of sequence not found";
+const char* const END_OF_SEQ_FLOW = "end of sequence flow not found";
+const char* const MULTIPLE_TAGS =
+    "cannot assign multiple tags to the same node";
+const char* const MULTIPLE_ANCHORS =
+    "cannot assign multiple anchors to the same node";
+const char* const MULTIPLE_ALIASES =
+    "cannot assign multiple aliases to the same node";
+const char* const ALIAS_CONTENT =
+    "aliases can't have any content, *including* tags";
+const char* const INVALID_HEX = "bad character found while scanning hex number";
+const char* const INVALID_UNICODE = "invalid unicode: ";
+const char* const INVALID_ESCAPE = "unknown escape character: ";
+const char* const UNKNOWN_TOKEN = "unknown token";
+const char* const DOC_IN_SCALAR = "illegal document indicator in scalar";
+const char* const EOF_IN_SCALAR = "illegal EOF in scalar";
+const char* const CHAR_IN_SCALAR = "illegal character in scalar";
+const char* const UNEXPECTED_SCALAR = "unexpected scalar";
+const char* const UNEXPECTED_FLOW = "plain value cannot start with flow indicator character";
+const char* const TAB_IN_INDENTATION =
+    "illegal tab when looking for indentation";
+const char* const FLOW_END = "illegal flow end";
+const char* const BLOCK_ENTRY = "illegal block entry";
+const char* const MAP_KEY = "illegal map key";
+const char* const MAP_VALUE = "illegal map value";
+const char* const ALIAS_NOT_FOUND = "alias not found after *";
+const char* const ANCHOR_NOT_FOUND = "anchor not found after &";
+const char* const CHAR_IN_ALIAS =
+    "illegal character found while scanning alias";
+const char* const CHAR_IN_ANCHOR =
+    "illegal character found while scanning anchor";
+const char* const ZERO_INDENT_IN_BLOCK =
+    "cannot set zero indentation for a block scalar";
+const char* const CHAR_IN_BLOCK = "unexpected character in block scalar";
+const char* const AMBIGUOUS_ANCHOR =
+    "cannot assign the same alias to multiple nodes";
+const char* const UNKNOWN_ANCHOR = "the referenced anchor is not defined: ";
+
+const char* const INVALID_NODE =
+    "invalid node; this may result from using a map iterator as a sequence "
+    "iterator, or vice-versa";
+const char* const INVALID_SCALAR = "invalid scalar";
+const char* const KEY_NOT_FOUND = "key not found";
+const char* const BAD_CONVERSION = "bad conversion";
+const char* const BAD_DEREFERENCE = "bad dereference";
+const char* const BAD_SUBSCRIPT = "operator[] call on a scalar";
+const char* const BAD_PUSHBACK = "appending to a non-sequence";
+const char* const BAD_INSERT = "inserting in a non-convertible-to-map";
+
+const char* const UNMATCHED_GROUP_TAG = "unmatched group tag";
+const char* const UNEXPECTED_END_SEQ = "unexpected end sequence token";
+const char* const UNEXPECTED_END_MAP = "unexpected end map token";
+const char* const SINGLE_QUOTED_CHAR =
+    "invalid character in single-quoted string";
+const char* const INVALID_ANCHOR = "invalid anchor";
+const char* const INVALID_ALIAS = "invalid alias";
+const char* const INVALID_TAG = "invalid tag";
+const char* const BAD_FILE = "bad file";
+const char* const UNEXPECTED_TOKEN_AFTER_DOC = "unexpected token after end of document";
+const char* const NON_UNIQUE_MAP_KEY = "map keys must be unique";
+
+template <typename T>
+inline const std::string KEY_NOT_FOUND_WITH_KEY(
+    const T&, typename disable_if<is_numeric<T>>::type* = 0) {
+  return KEY_NOT_FOUND;
+}
+
+inline const std::string KEY_NOT_FOUND_WITH_KEY(const std::string& key) {
+  std::stringstream stream;
+  stream << KEY_NOT_FOUND << ": " << key;
+  return stream.str();
+}
+
+inline const std::string KEY_NOT_FOUND_WITH_KEY(const char* key) {
+  std::stringstream stream;
+  stream << KEY_NOT_FOUND << ": " << key;
+  return stream.str();
+}
+
+template <typename T>
+inline const std::string KEY_NOT_FOUND_WITH_KEY(
+    const T& key, typename enable_if<is_numeric<T>>::type* = 0) {
+  std::stringstream stream;
+  stream << KEY_NOT_FOUND << ": " << key;
+  return stream.str();
+}
+
+template <typename T>
+inline const std::string BAD_SUBSCRIPT_WITH_KEY(
+    const T&, typename disable_if<is_numeric<T>>::type* = nullptr) {
+  return BAD_SUBSCRIPT;
+}
+
+inline const std::string BAD_SUBSCRIPT_WITH_KEY(const std::string& key) {
+  std::stringstream stream;
+  stream << BAD_SUBSCRIPT << " (key: \"" << key << "\")";
+  return stream.str();
+}
+
+inline const std::string BAD_SUBSCRIPT_WITH_KEY(const char* key) {
+  std::stringstream stream;
+  stream << BAD_SUBSCRIPT << " (key: \"" << key << "\")";
+  return stream.str();
+}
+
+template <typename T>
+inline const std::string BAD_SUBSCRIPT_WITH_KEY(
+    const T& key, typename enable_if<is_numeric<T>>::type* = nullptr) {
+  std::stringstream stream;
+  stream << BAD_SUBSCRIPT << " (key: \"" << key << "\")";
+  return stream.str();
+}
+
+inline const std::string INVALID_NODE_WITH_KEY(const std::string& key) {
+  std::stringstream stream;
+  if (key.empty()) {
+    return INVALID_NODE;
+  }
+  stream << "invalid node; first invalid key: \"" << key << "\"";
+  return stream.str();
+}
+}  // namespace ErrorMsg
+
+class YAML_CPP_API Exception : public std::runtime_error {
+ public:
+  Exception(const Mark& mark_, const std::string& msg_)
+      : std::runtime_error(build_what(mark_, msg_)), mark(mark_), msg(msg_) {}
+  ~Exception() YAML_CPP_NOEXCEPT override;
+
+  Exception(const Exception&) = default;
+
+  Mark mark;
+  std::string msg;
+
+ private:
+  static const std::string build_what(const Mark& mark,
+                                      const std::string& msg) {
+    if (mark.is_null()) {
+      return msg;
+    }
+
+    std::stringstream output;
+    output << "yaml-cpp: error at line " << mark.line + 1 << ", column "
+           << mark.column + 1 << ": " << msg;
+    return output.str();
+  }
+};
+
+class YAML_CPP_API ParserException : public Exception {
+ public:
+  ParserException(const Mark& mark_, const std::string& msg_)
+      : Exception(mark_, msg_) {}
+  ParserException(const ParserException&) = default;
+  ~ParserException() YAML_CPP_NOEXCEPT override;
+};
+
+class YAML_CPP_API RepresentationException : public Exception {
+ public:
+  RepresentationException(const Mark& mark_, const std::string& msg_)
+      : Exception(mark_, msg_) {}
+  RepresentationException(const RepresentationException&) = default;
+  ~RepresentationException() YAML_CPP_NOEXCEPT override;
+};
+
+// representation exceptions
+class YAML_CPP_API InvalidScalar : public RepresentationException {
+ public:
+  InvalidScalar(const Mark& mark_)
+      : RepresentationException(mark_, ErrorMsg::INVALID_SCALAR) {}
+  InvalidScalar(const InvalidScalar&) = default;
+  ~InvalidScalar() YAML_CPP_NOEXCEPT override;
+};
+
+class YAML_CPP_API KeyNotFound : public RepresentationException {
+ public:
+  template <typename T>
+  KeyNotFound(const Mark& mark_, const T& key_)
+      : RepresentationException(mark_, ErrorMsg::KEY_NOT_FOUND_WITH_KEY(key_)) {
+  }
+  KeyNotFound(const KeyNotFound&) = default;
+  ~KeyNotFound() YAML_CPP_NOEXCEPT override;
+};
+
+template <typename T>
+class YAML_CPP_API TypedKeyNotFound : public KeyNotFound {
+ public:
+  TypedKeyNotFound(const Mark& mark_, const T& key_)
+      : KeyNotFound(mark_, key_), key(key_) {}
+  ~TypedKeyNotFound() YAML_CPP_NOEXCEPT override = default;
+
+  T key;
+};
+
+template <typename T>
+inline TypedKeyNotFound<T> MakeTypedKeyNotFound(const Mark& mark,
+                                                const T& key) {
+  return TypedKeyNotFound<T>(mark, key);
+}
+
+class YAML_CPP_API InvalidNode : public RepresentationException {
+ public:
+  InvalidNode(const std::string& key)
+      : RepresentationException(Mark::null_mark(),
+                                ErrorMsg::INVALID_NODE_WITH_KEY(key)) {}
+  InvalidNode(const InvalidNode&) = default;
+  ~InvalidNode() YAML_CPP_NOEXCEPT override;
+};
+
+class YAML_CPP_API BadConversion : public RepresentationException {
+ public:
+  explicit BadConversion(const Mark& mark_)
+      : RepresentationException(mark_, ErrorMsg::BAD_CONVERSION) {}
+  BadConversion(const BadConversion&) = default;
+  ~BadConversion() YAML_CPP_NOEXCEPT override;
+};
+
+template <typename T>
+class TypedBadConversion : public BadConversion {
+ public:
+  explicit TypedBadConversion(const Mark& mark_) : BadConversion(mark_) {}
+};
+
+class YAML_CPP_API BadDereference : public RepresentationException {
+ public:
+  BadDereference()
+      : RepresentationException(Mark::null_mark(), ErrorMsg::BAD_DEREFERENCE) {}
+  BadDereference(const BadDereference&) = default;
+  ~BadDereference() YAML_CPP_NOEXCEPT override;
+};
+
+class YAML_CPP_API BadSubscript : public RepresentationException {
+ public:
+  template <typename Key>
+  BadSubscript(const Mark& mark_, const Key& key)
+      : RepresentationException(mark_, ErrorMsg::BAD_SUBSCRIPT_WITH_KEY(key)) {}
+  BadSubscript(const BadSubscript&) = default;
+  ~BadSubscript() YAML_CPP_NOEXCEPT override;
+};
+
+class YAML_CPP_API BadPushback : public RepresentationException {
+ public:
+  BadPushback()
+      : RepresentationException(Mark::null_mark(), ErrorMsg::BAD_PUSHBACK) {}
+  BadPushback(const BadPushback&) = default;
+  ~BadPushback() YAML_CPP_NOEXCEPT override;
+};
+
+class YAML_CPP_API BadInsert : public RepresentationException {
+ public:
+  BadInsert()
+      : RepresentationException(Mark::null_mark(), ErrorMsg::BAD_INSERT) {}
+  BadInsert(const BadInsert&) = default;
+  ~BadInsert() YAML_CPP_NOEXCEPT override;
+};
+
+class YAML_CPP_API EmitterException : public Exception {
+ public:
+  EmitterException(const std::string& msg_)
+      : Exception(Mark::null_mark(), msg_) {}
+  EmitterException(const EmitterException&) = default;
+  ~EmitterException() YAML_CPP_NOEXCEPT override;
+};
+
+class YAML_CPP_API BadFile : public Exception {
+ public:
+  explicit BadFile(const std::string& filename)
+      : Exception(Mark::null_mark(),
+                  std::string(ErrorMsg::BAD_FILE) + ": " + filename) {}
+  BadFile(const BadFile&) = default;
+  ~BadFile() YAML_CPP_NOEXCEPT override;
+};
+
+class YAML_CPP_API NonUniqueMapKey : public RepresentationException {
+ public:
+  template <typename Key>
+  NonUniqueMapKey(const Mark& mark_, const Key& /*key*/)
+      : RepresentationException(mark_, ErrorMsg::NON_UNIQUE_MAP_KEY) {}
+  NonUniqueMapKey(const NonUniqueMapKey&) = default;
+  ~NonUniqueMapKey() YAML_CPP_NOEXCEPT override;
+};
+
+}  // namespace YAML
+
+#if defined(_MSC_VER)
+#define YAML_ATTRIBUTE_NO_SANITIZE_ADDRESS __declspec(no_sanitize_address)
+#elif defined(__has_cpp_attribute) && __has_cpp_attribute(gnu::no_sanitize)
+#define YAML_ATTRIBUTE_NO_SANITIZE_ADDRESS [[gnu::no_sanitize("address")]]
+#elif defined(__has_cpp_attribute) && __has_cpp_attribute(clang::no_sanitize)
+#define YAML_ATTRIBUTE_NO_SANITIZE_ADDRESS [[clang::no_sanitize("address")]]
+#elif defined(__has_attribute) && __has_attribute(no_sanitize)
+#define YAML_ATTRIBUTE_NO_SANITIZE_ADDRESS \
+  __attribute__((no_sanitize("address")))
+#elif defined(__has_attribute) && __has_attribute(no_sanitize_address)
+#define YAML_ATTRIBUTE_NO_SANITIZE_ADDRESS __attribute__((no_sanitize_address))
+#else
+#define YAML_ATTRIBUTE_NO_SANITIZE_ADDRESS
+#endif
+
+#endif  // EXCEPTIONS_H_62B23520_7C8E_11DE_8A39_0800200C9A66
+```
+
+```c
+// Function: Scanner::ScanNextToken in src/scanner.cpp
+void Scanner::ScanNextToken() {
+  if (m_endedStream) {
+    return;
+  }
+
+  if (!m_startedStream) {
+    return StartStream();
+  }
+
+  // get rid of whitespace, etc. (in between tokens it should be irrelevant)
+  ScanToNextToken();
+
+  // maybe need to end some blocks
+  PopIndentToHere();
+
+  // *****
+  // And now branch based on the next few characters!
+  // *****
+
+  // end of stream
+  if (!INPUT) {
+    return EndStream();
+  }
+
+  if (INPUT.column() == 0 && INPUT.peek() == Keys::Directive) {
+    return ScanDirective();
+  }
+
+  // document token
+  if (INPUT.column() == 0 && Exp::DocStart().Matches(INPUT)) {
+    return ScanDocStart();
+  }
+
+  if (INPUT.column() == 0 && Exp::DocEnd().Matches(INPUT)) {
+    return ScanDocEnd();
+  }
+
+  // flow start/end/entry
+  if (INPUT.peek() == Keys::FlowSeqStart ||
+      INPUT.peek() == Keys::FlowMapStart) {
+    return ScanFlowStart();
+  }
+
+  if (INPUT.peek() == Keys::FlowSeqEnd || INPUT.peek() == Keys::FlowMapEnd) {
+    return ScanFlowEnd();
+  }
+
+  if (INPUT.peek() == Keys::FlowEntry) {
+    // values starting with `,` are not allowed.
+    // eg: reject `,foo`
+    if (INPUT.column() == 0) {
+      throw ParserException(INPUT.mark(), ErrorMsg::UNEXPECTED_FLOW);
+    }
+    // if we already parsed a quoted scalar value and we are not in a flow,
+    // then `,` is not a valid character.
+    // eg: reject `"foo",`
+    if (!m_scalarValueAllowed) {
+      throw ParserException(INPUT.mark(), ErrorMsg::UNEXPECTED_SCALAR);
+    }
+    return ScanFlowEntry();
+  }
+
+  // block/map stuff
+  if (Exp::BlockEntry().Matches(INPUT)) {
+    return ScanBlockEntry();
+  }
+
+  if ((InBlockContext() ? Exp::Key() : Exp::KeyInFlow()).Matches(INPUT)) {
+    return ScanKey();
+  }
+
+  if (GetValueRegex().Matches(INPUT)) {
+    return ScanValue();
+  }
+
+  // alias/anchor
+  if (INPUT.peek() == Keys::Alias || INPUT.peek() == Keys::Anchor) {
+    return ScanAnchorOrAlias();
+  }
+
+  // tag
+  if (INPUT.peek() == Keys::Tag) {
+    return ScanTag();
+  }
+
+  // special scalars
+  if (InBlockContext() && (INPUT.peek() == Keys::LiteralScalar ||
+                           INPUT.peek() == Keys::FoldedScalar)) {
+    // if we begin parsing a literal scalar with an unverified potential 
+    // simple key pushed, that may be a tag to the literal scalar, and
+    // should be removed to avoid wrong indentation limit
+    // eg:
+    // - !!str |
+    //  literal
+    //  scalar
+    if (!m_simpleKeys.empty() &&
+      m_simpleKeys.top().pKey->status == Token::UNVERIFIED) {
+        PopIndent();
+    }
+    return ScanBlockScalar();
+  }
+
+  // if we already parsed a quoted scalar value in this line,
+  // another scalar value is an error.
+  // eg: reject `"foo" "bar"`
+  if (!m_scalarValueAllowed) {
+    throw ParserException(INPUT.mark(), ErrorMsg::UNEXPECTED_SCALAR);
+  }
+
+  if (INPUT.peek() == '\'' || INPUT.peek() == '\"') {
+    return ScanQuotedScalar();
+  }
+
+  // plain scalars
+  if ((InBlockContext() ? Exp::PlainScalar() : Exp::PlainScalarInFlow())
+          .Matches(INPUT)) {
+    return ScanPlainScalar();
+  }
+
+  // don't know what it is!
+  throw ParserException(INPUT.mark(), ErrorMsg::UNKNOWN_TOKEN);
+}
+```
+
+## Bug Fix Patch
+
+```diff
+diff --git a/include/yaml-cpp/exceptions.h b/include/yaml-cpp/exceptions.h
+index 6070553..83a65d3 100644
+--- a/include/yaml-cpp/exceptions.h
++++ b/include/yaml-cpp/exceptions.h
+@@ -92,6 +92,8 @@ const char* const BAD_FILE = "bad file";
+ const char* const UNEXPECTED_TOKEN_AFTER_DOC = "unexpected token after end of document";
+ const char* const NON_UNIQUE_MAP_KEY = "map keys must be unique";
+ 
++const char* const INDENT_STACK_UNDERFLOW = "indentation stack underflow (please report this bug to yaml-cpp)";
++
+ template <typename T>
+ inline const std::string KEY_NOT_FOUND_WITH_KEY(
+     const T&, typename disable_if<is_numeric<T>>::type* = 0) {
+diff --git a/src/scanner.cpp b/src/scanner.cpp
+index 211e196..a0abd3b 100644
+--- a/src/scanner.cpp
++++ b/src/scanner.cpp
+@@ -177,7 +177,15 @@ void Scanner::ScanNextToken() {
+     //  scalar
+     if (!m_simpleKeys.empty() &&
+       m_simpleKeys.top().pKey->status == Token::UNVERIFIED) {
++      // if the top of the indents does not match the unverified simple key,
++      // just invalidate the simple key and do not pop indent to avoid crash.
++      // eg: an unverified key crossing lines, like issue #1475.
++      if (m_simpleKeys.top().pIndent && !m_indents.empty() &&
++          m_indents.top() == m_simpleKeys.top().pIndent) {
+         PopIndent();
++      } else {
++        InvalidateSimpleKey();
++      }
+     }
+     return ScanBlockScalar();
+   }
+@@ -393,6 +401,9 @@ void Scanner::PopAllIndents() {
+ }
+ 
+ void Scanner::PopIndent() {
++  if (m_indents.empty()) {
++    ThrowParserException(ErrorMsg::INDENT_STACK_UNDERFLOW);
++  }
+   const IndentMarker& indent = *m_indents.top();
+   m_indents.pop();
+ 
+diff --git a/test/integration/handler_test.cpp b/test/integration/handler_test.cpp
+index fe389db..13005df 100644
+--- a/test/integration/handler_test.cpp
++++ b/test/integration/handler_test.cpp
+@@ -73,6 +73,13 @@ TEST_F(HandlerTest, CommentOnNewlineOfMapValueWithManySpace) {
+   Parse("key: value\n    # comment");
+ }
+ 
++// example from issue #1475: a stale simple key (from a plain scalar spanning
++// a line break) must not pop an unrelated indent when parsing a block scalar
++TEST_F(HandlerTest, LiteralScalarWithMultiLineUnverifiedPotentialSimpleKey) {
++  EXPECT_THROW_PARSER_EXCEPTION(IgnoreParse("!\n: |\nb\n>\n|\n  !\n>"),
++                                ErrorMsg::END_OF_MAP);
++}
++
+ // examples from issue #1163
+ TEST_F(HandlerTest, LiteralScalarWithTagAndLargeIndentation) {
+   EXPECT_CALL(handler, OnDocumentStart(_));
+```

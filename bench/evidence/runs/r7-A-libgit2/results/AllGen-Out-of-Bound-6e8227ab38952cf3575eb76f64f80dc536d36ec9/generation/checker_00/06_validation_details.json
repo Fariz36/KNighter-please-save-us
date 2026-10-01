@@ -1,0 +1,78 @@
+{
+  "commit_id": "6e8227ab38952cf3575eb76f64f80dc536d36ec9",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/plugin-cache/plugins/f9ac257986566ce65c98/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/pack.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "pack_entry_find_offset"
+        ],
+        "fixed_functions": [
+          "pack_entry_find_offset"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/pack.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/8afdad0eb049/src/libgit2/pack.c",
+          "line": 1531,
+          "column": 13,
+          "function": "pack_entry_find_offset",
+          "bug_type": "Missing bounds check before pack index fanout table read",
+          "description": "Missing bounds check before using short_oid->id[0] as index into pack index fanout table",
+          "issue_hash": "87629067dabce9135cf24f44cb9fda94",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6e8227ab3895/1b82b7a1/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_8afdad0eb049_src_libgit2_pack.c/report-876290.html",
+          "relpath": "src/libgit2/pack.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/8afdad0eb049/src/libgit2/pack.c",
+          "line": 1532,
+          "column": 46,
+          "function": "pack_entry_find_offset",
+          "bug_type": "Missing bounds check before pack index fanout table read",
+          "description": "Missing bounds check before using short_oid->id[0] as index into pack index fanout table",
+          "issue_hash": "8d4a92a5e551593decae904d3c6ca7ce",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6e8227ab3895/1b82b7a1/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_8afdad0eb049_src_libgit2_pack.c/report-8d4a92.html",
+          "relpath": "src/libgit2/pack.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/pack.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 48.23,
+    "analysis_seconds": {
+      "buggy": 5.07,
+      "fixed": 5.17
+    },
+    "total_seconds": 58.52
+  },
+  "report_dir": "tmp/validation/6e8227ab3895/1b82b7a1"
+}

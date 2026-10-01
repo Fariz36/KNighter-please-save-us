@@ -1,0 +1,89 @@
+{
+  "commit_id": "2fb89b6d6b6fc59956351de437a7a72065bc057b",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/plugin-cache/plugins/9a59cbf462fc9e8230d7/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/transports/smart_pkt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 3,
+        "fixed_total": 0,
+        "buggy_on_target": 3,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "set_data"
+        ],
+        "fixed_functions": [
+          "set_data"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/transports/smart_pkt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/9d5f1bacc235/src/libgit2/transports/smart_pkt.c",
+          "line": 246,
+          "column": 14,
+          "function": "set_data",
+          "bug_type": "Unbounded string function on length-delimited buffer",
+          "description": "Unbounded string function on length-delimited buffer; use bounded search (memmem/memchr)",
+          "issue_hash": "1ee1944302f5becf1a3b184b3eac3601",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2fb89b6d6b6f/e24bc898/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_9d5f1bacc235_src_libgit2_transports_smart_pkt.c/report-1ee194.html",
+          "relpath": "src/libgit2/transports/smart_pkt.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/9d5f1bacc235/src/libgit2/transports/smart_pkt.c",
+          "line": 241,
+          "column": 26,
+          "function": "set_data",
+          "bug_type": "Unbounded string function on length-delimited buffer",
+          "description": "Unbounded string function on length-delimited buffer; use bounded search (memmem/memchr)",
+          "issue_hash": "5984d8dd9ee9ad8812389afc47c2e778",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2fb89b6d6b6f/e24bc898/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_9d5f1bacc235_src_libgit2_transports_smart_pkt.c/report-5984d8.html",
+          "relpath": "src/libgit2/transports/smart_pkt.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/9d5f1bacc235/src/libgit2/transports/smart_pkt.c",
+          "line": 247,
+          "column": 10,
+          "function": "set_data",
+          "bug_type": "Unbounded string function on length-delimited buffer",
+          "description": "Unbounded string function on length-delimited buffer; use bounded search (memmem/memchr)",
+          "issue_hash": "95d308ed540ce37e82fb511a99cd756c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2fb89b6d6b6f/e24bc898/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_9d5f1bacc235_src_libgit2_transports_smart_pkt.c/report-95d308.html",
+          "relpath": "src/libgit2/transports/smart_pkt.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/transports/smart_pkt.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 53.66,
+    "analysis_seconds": {
+      "buggy": 2.12,
+      "fixed": 2.08
+    },
+    "total_seconds": 57.88
+  },
+  "report_dir": "tmp/validation/2fb89b6d6b6f/e24bc898"
+}

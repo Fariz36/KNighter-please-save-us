@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The code performs lookahead reads (`ptr[1]`, `ptr[2]`, `ptr[3]`) immediately after advancing past a delimiter `'('`, without first checking whether the current character (`ptr[0]`) is the NUL terminator. If the response ends right after `'('`, `sep` is `'\0'`, and the first comparison reads `ptr[1]`, i.e. one byte past the NUL terminator, causing an out-of-bounds read. The fix is to short-circuit when `sep` is zero before accessing subsequent bytes.

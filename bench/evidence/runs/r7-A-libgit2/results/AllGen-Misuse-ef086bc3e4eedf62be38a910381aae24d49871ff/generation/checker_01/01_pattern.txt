@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Incorrectly treating `memcmp()` as a boolean equality test via `!!memcmp(...)`. Since `memcmp()` returns `0` when buffers are equal and nonzero when they differ, applying `!!` inverts the comparison. In this certificate verification path, matching IP SubjectAltName entries are rejected while mismatching ones are accepted; the correct check is `memcmp(...) == 0` (with matching length validation).

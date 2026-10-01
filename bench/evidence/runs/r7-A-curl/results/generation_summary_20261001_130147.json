@@ -1,0 +1,116 @@
+{
+  "start_time": "2026-10-01T13:01:47.439273",
+  "total_commits": 8,
+  "successful_commits": 5,
+  "workers": 1,
+  "results": [
+    {
+      "commit_id": "f2a1535712ff8622024d27b867480698752c254e",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 207.917002,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T13:05:15.358453"
+    },
+    {
+      "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 3,
+      "successful_checkers": 2,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 857.199799,
+      "errors": [],
+      "success_rate": 0.6666666666666666,
+      "timestamp": "2026-10-01T13:19:32.559596"
+    },
+    {
+      "commit_id": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+      "commit_type": "Memory-Leak",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 200.882902,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T13:22:53.444126"
+    },
+    {
+      "commit_id": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+      "commit_type": "Out-of-Bound",
+      "total_checkers": 3,
+      "successful_checkers": 2,
+      "perfect_checkers": 0,
+      "best_tp": 1,
+      "best_tn": 0,
+      "total_time": 1212.047133,
+      "errors": [],
+      "success_rate": 0.6666666666666666,
+      "timestamp": "2026-10-01T13:43:05.493497"
+    },
+    {
+      "commit_id": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+      "commit_type": "Integer-Overflow",
+      "total_checkers": 2,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 921.713733,
+      "errors": [
+        "Failed to generate compilable checker 0"
+      ],
+      "success_rate": 0.5,
+      "timestamp": "2026-10-01T13:58:27.209066"
+    },
+    {
+      "commit_id": "c53420e42742a68004854a7fa354f9500b4b1516",
+      "commit_type": "Misuse",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 248.680403,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T14:02:35.890718"
+    },
+    {
+      "commit_id": "466c06cf706bd92ff77beb402934f7265183f8ff",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 3,
+      "successful_checkers": 2,
+      "perfect_checkers": 0,
+      "best_tp": 1,
+      "best_tn": 0,
+      "total_time": 970.264462,
+      "errors": [],
+      "success_rate": 0.6666666666666666,
+      "timestamp": "2026-10-01T14:18:46.156407"
+    },
+    {
+      "commit_id": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+      "commit_type": "Integer-Overflow",
+      "total_checkers": 3,
+      "successful_checkers": 0,
+      "perfect_checkers": 0,
+      "best_tp": 0,
+      "best_tn": 0,
+      "total_time": 808.285629,
+      "errors": [],
+      "success_rate": 0.0,
+      "timestamp": "2026-10-01T14:32:14.463733"
+    }
+  ],
+  "end_time": "2026-10-01T14:32:14.464010",
+  "success_rate": 0.625
+}

@@ -1,0 +1,374 @@
+_base_result_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-B-curl/results
+commit_id: 6f1dfab6a29242525cdc7b48f5ee49269b9cc316
+commit_type: Out-of-Bound
+index: 2
+initial_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n\n#include \"clang/AST/ASTContext.h\"\n#include \"clang/AST/Expr.h\"\n#include\
+  \ \"clang/AST/Stmt.h\"\n#include \"llvm/ADT/SmallPtrSet.h\"\n#include \"llvm/ADT/SmallVector.h\"\
+  \n#include \"llvm/Support/Casting.h\"\n#include <memory>\n\nusing namespace clang;\n\
+  using namespace ento;\nusing namespace taint;\n\nnamespace {\n\n// Helper: get VarDecl\
+  \ from a DeclRefExpr.\nstatic const VarDecl *getVarDecl(const Expr *E) {\n  if (!E)\
+  \ return nullptr;\n  E = E->IgnoreParenImpCasts();\n  if (const DeclRefExpr *DRE\
+  \ = dyn_cast<DeclRefExpr>(E)) {\n    return dyn_cast<VarDecl>(DRE->getDecl());\n\
+  \  }\n  return nullptr;\n}\n\n// Helper: flatten && chain in left-to-right order.\n\
+  static void flattenLAnd(const Expr *E, SmallVectorImpl<const Expr *> &Ops) {\n \
+  \ if (!E) return;\n  E = E->IgnoreParenImpCasts();\n  if (const BinaryOperator *BO\
+  \ = dyn_cast<BinaryOperator>(E)) {\n    if (BO->getOpcode() == BO_LAnd) {\n    \
+  \  flattenLAnd(BO->getLHS(), Ops);\n      flattenLAnd(BO->getRHS(), Ops);\n    \
+  \  return;\n    }\n  }\n  Ops.push_back(E);\n}\n\n// Helper: check if an expression\
+  \ evaluates to integer zero.\nstatic bool isZeroConstant(const Expr *E, CheckerContext\
+  \ &C) {\n  if (!E) return false;\n  E = E->IgnoreParenImpCasts();\n  llvm::APSInt\
+  \ Val;\n  if (!EvaluateExprToInt(Val, E, C))\n    return false;\n  return Val ==\
+  \ 0;\n}\n\n// Helper: detect ptr[N] with N >= 1.\nstatic bool isDangerousSubscript(const\
+  \ Expr *E, const VarDecl *&Ptr,\n                                 CheckerContext\
+  \ &C) {\n  if (!E) return false;\n  E = E->IgnoreParenImpCasts();\n  const ArraySubscriptExpr\
+  \ *ASE = dyn_cast<ArraySubscriptExpr>(E);\n  if (!ASE) return false;\n  const Expr\
+  \ *Base = ASE->getBase()->IgnoreParenImpCasts();\n  const Expr *IdxE = ASE->getIdx()->IgnoreParenImpCasts();\n\
+  \  const VarDecl *VD = getVarDecl(Base);\n  if (!VD) return false;\n  llvm::APSInt\
+  \ Idx;\n  if (!EvaluateExprToInt(Idx, IdxE, C))\n    return false;\n  if (Idx.getSExtValue()\
+  \ < 1)\n    return false;\n  Ptr = VD;\n  return true;\n}\n\n// Helper: recognize\
+  \ a guard on a variable: var, var != 0, var != '\\0'.\nstatic const VarDecl *getGuardVar(const\
+  \ Expr *E, CheckerContext &C) {\n  if (!E) return nullptr;\n  E = E->IgnoreParenImpCasts();\n\
+  \n  if (const VarDecl *VD = getVarDecl(E))\n    return VD;\n\n  const BinaryOperator\
+  \ *BO = dyn_cast<BinaryOperator>(E);\n  if (!BO) return nullptr;\n  if (BO->getOpcode()\
+  \ != BO_NE) return nullptr;\n\n  const Expr *LHS = BO->getLHS()->IgnoreParenImpCasts();\n\
+  \  const Expr *RHS = BO->getRHS()->IgnoreParenImpCasts();\n  const VarDecl *LVD\
+  \ = getVarDecl(LHS);\n  const VarDecl *RVD = getVarDecl(RHS);\n  if (LVD && isZeroConstant(RHS,\
+  \ C))\n    return LVD;\n  if (RVD && isZeroConstant(LHS, C))\n    return RVD;\n\
+  \  return nullptr;\n}\n\n// Helper: recognize ptr[N] == sep or ptr[N] != sep with\
+  \ N >= 1.\nstatic bool getComparedSep(const Expr *E, const VarDecl *&Ptr,\n    \
+  \                       const VarDecl *&Sep, CheckerContext &C) {\n  if (!E) return\
+  \ false;\n  E = E->IgnoreParenImpCasts();\n  const BinaryOperator *BO = dyn_cast<BinaryOperator>(E);\n\
+  \  if (!BO) return false;\n  if (BO->getOpcode() != BO_EQ && BO->getOpcode() !=\
+  \ BO_NE)\n    return false;\n\n  const Expr *LHS = BO->getLHS()->IgnoreParenImpCasts();\n\
+  \  const Expr *RHS = BO->getRHS()->IgnoreParenImpCasts();\n\n  const VarDecl *LHSVar\
+  \ = nullptr;\n  const VarDecl *RHSVar = nullptr;\n  if (isDangerousSubscript(LHS,\
+  \ LHSVar, C)) {\n    const VarDecl *RVar = getVarDecl(RHS);\n    if (RVar) {\n \
+  \     Ptr = LHSVar;\n      Sep = RVar;\n      return true;\n    }\n  }\n  if (isDangerousSubscript(RHS,\
+  \ RHSVar, C)) {\n    const VarDecl *LVar = getVarDecl(LHS);\n    if (LVar) {\n \
+  \     Ptr = RHSVar;\n      Sep = LVar;\n      return true;\n    }\n  }\n  return\
+  \ false;\n}\n\n// Helper: check if expression is ptr[0] or *ptr.\nstatic bool isPtr0Expr(const\
+  \ Expr *E, const VarDecl *Ptr, CheckerContext &C) {\n  if (!E) return false;\n \
+  \ E = E->IgnoreParenImpCasts();\n  if (const ArraySubscriptExpr *ASE = dyn_cast<ArraySubscriptExpr>(E))\
+  \ {\n    const VarDecl *BaseVar = getVarDecl(ASE->getBase()->IgnoreParenImpCasts());\n\
+  \    if (BaseVar != Ptr) return false;\n    llvm::APSInt Idx;\n    if (!EvaluateExprToInt(Idx,\
+  \ ASE->getIdx()->IgnoreParenImpCasts(), C))\n      return false;\n    return Idx.getSExtValue()\
+  \ == 0;\n  }\n  if (const UnaryOperator *UO = dyn_cast<UnaryOperator>(E)) {\n  \
+  \  if (UO->getOpcode() == UO_Deref) {\n      const VarDecl *SubVar = getVarDecl(UO->getSubExpr()->IgnoreParenImpCasts());\n\
+  \      return SubVar == Ptr;\n    }\n  }\n  return false;\n}\n\n// Helper: check\
+  \ if statement assigns sep = ptr[0] (or *ptr).\nstatic bool isSepAssignFromPtr0(const\
+  \ Stmt *S, const VarDecl *Sep,\n                                const VarDecl *Ptr,\
+  \ CheckerContext &C) {\n  if (!S) return false;\n  if (const DeclStmt *DS = dyn_cast<DeclStmt>(S))\
+  \ {\n    for (const Decl *D : DS->decls()) {\n      if (const VarDecl *VD = dyn_cast<VarDecl>(D))\
+  \ {\n        if (VD == Sep && VD->hasInit()) {\n          return isPtr0Expr(VD->getInit(),\
+  \ Ptr, C);\n        }\n      }\n    }\n    return false;\n  }\n\n  const Expr *E\
+  \ = dyn_cast<Expr>(S);\n  if (!E) return false;\n  E = E->IgnoreParenImpCasts();\n\
+  \  const BinaryOperator *BO = dyn_cast<BinaryOperator>(E);\n  if (!BO || BO->getOpcode()\
+  \ != BO_Assign) return false;\n  const VarDecl *LHSVar = getVarDecl(BO->getLHS()->IgnoreParenImpCasts());\n\
+  \  if (LHSVar != Sep) return false;\n  return isPtr0Expr(BO->getRHS()->IgnoreParenImpCasts(),\
+  \ Ptr, C);\n}\n\n// Helper: check if statement increments Ptr (ptr++, ++ptr, ptr\
+  \ += 1, ptr = ptr + 1).\nstatic bool isPtrIncrement(const Stmt *S, const VarDecl\
+  \ *Ptr, CheckerContext &C) {\n  if (!S) return false;\n  const Expr *E = dyn_cast<Expr>(S);\n\
+  \  if (!E) return false;\n  E = E->IgnoreParenImpCasts();\n\n  if (const UnaryOperator\
+  \ *UO = dyn_cast<UnaryOperator>(E)) {\n    if (UO->getOpcode() == UO_PostInc ||\
+  \ UO->getOpcode() == UO_PreInc) {\n      const VarDecl *VD = getVarDecl(UO->getSubExpr()->IgnoreParenImpCasts());\n\
+  \      return VD == Ptr;\n    }\n  }\n\n  const BinaryOperator *BO = dyn_cast<BinaryOperator>(E);\n\
+  \  if (!BO) return false;\n\n  // ptr += 1\n  if (BO->getOpcode() == BO_AddAssign)\
+  \ {\n    const VarDecl *LHS = getVarDecl(BO->getLHS()->IgnoreParenImpCasts());\n\
+  \    if (LHS != Ptr) return false;\n    llvm::APSInt Val;\n    if (EvaluateExprToInt(Val,\
+  \ BO->getRHS()->IgnoreParenImpCasts(), C))\n      return Val.getSExtValue() == 1;\n\
+  \  }\n\n  // ptr = ptr + 1\n  if (BO->getOpcode() == BO_Assign) {\n    const VarDecl\
+  \ *LHS = getVarDecl(BO->getLHS()->IgnoreParenImpCasts());\n    if (LHS != Ptr) return\
+  \ false;\n    const Expr *RHS = BO->getRHS()->IgnoreParenImpCasts();\n    if (const\
+  \ BinaryOperator *Add = dyn_cast<BinaryOperator>(RHS)) {\n      if (Add->getOpcode()\
+  \ == BO_Add) {\n        const VarDecl *AddLHS = getVarDecl(Add->getLHS()->IgnoreParenImpCasts());\n\
+  \        const VarDecl *AddRHS = getVarDecl(Add->getRHS()->IgnoreParenImpCasts());\n\
+  \        if (AddLHS == Ptr) {\n          llvm::APSInt Val;\n          if (EvaluateExprToInt(Val,\
+  \ Add->getRHS()->IgnoreParenImpCasts(), C))\n            return Val.getSExtValue()\
+  \ == 1;\n        }\n        if (AddRHS == Ptr) {\n          llvm::APSInt Val;\n\
+  \          if (EvaluateExprToInt(Val, Add->getLHS()->IgnoreParenImpCasts(), C))\n\
+  \            return Val.getSExtValue() == 1;\n        }\n      }\n    }\n  }\n \
+  \ return false;\n}\n\n// Helper: check if expression is a call to strchr.\nstatic\
+  \ bool isStrchrCall(const Expr *E, CheckerContext &C) {\n  if (!E) return false;\n\
+  \  E = E->IgnoreParenImpCasts();\n  const CallExpr *CE = dyn_cast<CallExpr>(E);\n\
+  \  if (!CE) return false;\n  const FunctionDecl *FD = CE->getDirectCallee();\n \
+  \ if (!FD) return false;\n  return FD->getName() == \"strchr\";\n}\n\n// Helper:\
+  \ check if Ptr is initialized from strchr.\nstatic bool isPtrFromStrchr(const VarDecl\
+  \ *Ptr, CheckerContext &C) {\n  if (Ptr->hasInit()) {\n    return isStrchrCall(Ptr->getInit(),\
+  \ C);\n  }\n  return false;\n}\n\nclass SAGenTestChecker : public Checker<check::BranchCondition>\
+  \ {\n  mutable std::unique_ptr<BugType> BT;\n\npublic:\n  SAGenTestChecker()\n \
+  \     : BT(new BugType(this, \"Missing NUL check\", \"Logic Error\")) {}\n\n  void\
+  \ checkBranchCondition(const Stmt *Condition, CheckerContext &C) const;\n\nprivate:\n\
+  \  bool isSepFromPtr0(const VarDecl *Sep, const VarDecl *Ptr,\n                \
+  \     const Stmt *Condition, CheckerContext &C) const;\n};\n\n} // end anonymous\
+  \ namespace\n\nvoid SAGenTestChecker::checkBranchCondition(const Stmt *Condition,\n\
+  \                                            CheckerContext &C) const {\n  const\
+  \ Expr *Cond = dyn_cast<Expr>(Condition);\n  if (!Cond) return;\n  Cond = Cond->IgnoreParenImpCasts();\n\
+  \n  SmallVector<const Expr *, 8> Ops;\n  flattenLAnd(Cond, Ops);\n  if (Ops.size()\
+  \ < 2) return;\n\n  llvm::SmallPtrSet<const VarDecl *, 8> Guarded;\n  for (const\
+  \ Expr *Op : Ops) {\n    if (const VarDecl *V = getGuardVar(Op, C)) {\n      Guarded.insert(V);\n\
+  \      continue;\n    }\n\n    const VarDecl *Ptr = nullptr;\n    const VarDecl\
+  \ *Sep = nullptr;\n    if (getComparedSep(Op, Ptr, Sep, C)) {\n      if (!Guarded.contains(Sep))\
+  \ {\n        if (isSepFromPtr0(Sep, Ptr, Condition, C)) {\n          ExplodedNode\
+  \ *N = C.generateNonFatalErrorNode();\n          if (!N) return;\n          auto\
+  \ Report = std::make_unique<PathSensitiveBugReport>(\n              *BT, \"Missing\
+  \ NUL check before reading past delimiter\", N);\n          Report->addRange(Op->getSourceRange());\n\
+  \          C.emitReport(std::move(Report));\n          return;\n        }\n    \
+  \  }\n    }\n  }\n}\n\nbool SAGenTestChecker::isSepFromPtr0(const VarDecl *Sep,\
+  \ const VarDecl *Ptr,\n                                     const Stmt *Condition,\n\
+  \                                     CheckerContext &C) const {\n  if (!Sep ||\
+  \ !Ptr) return false;\n\n  if (!isPtrFromStrchr(Ptr, C))\n    return false;\n\n\
+  \  const IfStmt *If = findSpecificTypeInParents<IfStmt>(Condition, C);\n  if (!If)\
+  \ return false;\n\n  const CompoundStmt *CS = findSpecificTypeInParents<CompoundStmt>(If,\
+  \ C);\n  if (!CS) return false;\n\n  bool FoundInc = false;\n  bool ValidAssign\
+  \ = false;\n\n  for (const Stmt *S : CS->body()) {\n    if (S == If) {\n      return\
+  \ ValidAssign;\n    }\n    if (isSepAssignFromPtr0(S, Sep, Ptr, C)) {\n      if\
+  \ (FoundInc)\n        ValidAssign = true;\n    }\n    if (isPtrIncrement(S, Ptr,\
+  \ C)) {\n      FoundInc = true;\n    }\n  }\n\n  return false;\n}\n\nextern \"C\"\
+  \ void clang_registerCheckers(CheckerRegistry &registry) {\n  registry.addChecker<SAGenTestChecker>(\n\
+  \      \"custom.SAGenTestChecker\",\n      \"Detects missing NUL check before reading\
+  \ past delimiter\",\n      \"\");\n}\n\nextern \"C\" const char clang_analyzerAPIVersionString[]\
+  \ =\n    CLANG_ANALYZER_API_VERSION_STRING;\n"
+patch: "## Patch Description\n\nftp: avoid accessing EPSV response one byte past the\
+  \ NULL\n\nIf the response is just a single \"(\".\n\nReported-by: Andrew Nesbit\n\
+  Closes #21545\n\n## Buggy Code\n\n```c\n// Function: ftp_state_pasv_resp in lib/ftp.c\n\
+  static CURLcode ftp_state_pasv_resp(struct Curl_easy *data,\n                  \
+  \                  struct ftp_conn *ftpc,\n                                    int\
+  \ ftpcode)\n{\n  struct connectdata *conn = data->conn;\n  CURLcode result;\n  const\
+  \ struct pingpong *pp = &ftpc->pp;\n  char *newhost = NULL;\n  unsigned short newport\
+  \ = 0;\n  const char *str = curlx_dyn_ptr(&pp->recvbuf) + 4; /* start on the first\n\
+  \                                                        letter */\n  if((ftpc->count1\
+  \ == 0) &&\n     (ftpcode == 229)) {\n    /* positive EPSV response */\n    const\
+  \ char *ptr = strchr(str, '(');\n    if(ptr) {\n      char sep;\n      ptr++;\n\
+  \      /* |||12345| */\n      sep = ptr[0];\n      if((ptr[1] == sep) && (ptr[2]\
+  \ == sep) && ISDIGIT(ptr[3])) {\n        const char *p = &ptr[3];\n        curl_off_t\
+  \ num;\n        if(curlx_str_number(&p, &num, 0xffff) || (*p != sep)) {\n      \
+  \    failf(data, \"Illegal port number in EPSV reply\");\n          return CURLE_FTP_WEIRD_PASV_REPLY;\n\
+  \        }\n        newport = (unsigned short)num;\n        result = ftp_control_addr_dup(data,\
+  \ &newhost);\n        if(result)\n          return result;\n      }\n      else\n\
+  \        ptr = NULL;\n    }\n    if(!ptr) {\n      failf(data, \"Weirdly formatted\
+  \ EPSV reply\");\n      return CURLE_FTP_WEIRD_PASV_REPLY;\n    }\n  }\n  else if((ftpc->count1\
+  \ == 1) &&\n          (ftpcode == 227)) {\n    /* positive PASV response */\n  \
+  \  unsigned int ip[6];\n\n    /*\n     * Scan for a sequence of six comma-separated\
+  \ numbers and use them as\n     * IP+port indicators.\n     *\n     * Found reply-strings\
+  \ include:\n     * \"227 Entering Passive Mode (127,0,0,1,4,51)\"\n     * \"227\
+  \ Data transfer will passively listen to 127,0,0,1,4,51\"\n     * \"227 Entering\
+  \ passive mode. 127,0,0,1,4,51\"\n     */\n    while(*str) {\n      if(match_pasv_6nums(str,\
+  \ ip))\n        break;\n      str++;\n    }\n\n    if(!*str) {\n      failf(data,\
+  \ \"Could not interpret the 227-response\");\n      return CURLE_FTP_WEIRD_227_FORMAT;\n\
+  \    }\n\n    /* we got OK from server */\n    if(data->set.ftp_skip_ip) {\n   \
+  \   /* told to ignore the remotely given IP but instead use the host we used\n \
+  \        for the control connection */\n      infof(data, \"Skip %u.%u.%u.%u for\
+  \ data connection, reuse %s instead\",\n            ip[0], ip[1], ip[2], ip[3],\
+  \ conn->origin->hostname);\n      result = ftp_control_addr_dup(data, &newhost);\n\
+  \      if(result)\n        return result;\n    }\n    else\n      newhost = curl_maprintf(\"\
+  %u.%u.%u.%u\", ip[0], ip[1], ip[2], ip[3]);\n\n    if(!newhost)\n      return CURLE_OUT_OF_MEMORY;\n\
+  \n    newport = (unsigned short)(((ip[4] << 8) + ip[5]) & 0xffff);\n  }\n  else\
+  \ if(ftpc->count1 == 0) {\n    /* EPSV failed, move on to PASV */\n    return ftp_epsv_disable(data,\
+  \ ftpc, conn);\n  }\n  else {\n    failf(data, \"Bad PASV/EPSV response: %03d\"\
+  , ftpcode);\n    return CURLE_FTP_WEIRD_PASV_REPLY;\n  }\n\n  DEBUGASSERT(newhost);\n\
+  \  Curl_peer_unlink(&conn->origin2);\n  result = Curl_peer_create(data, conn->scheme,\
+  \ newhost, newport,\n                            &conn->origin2);\n  if(result)\n\
+  \    goto error;\n\n  /* If FIRSTSOCKET goes via another peer, SECONDARY needs as\
+  \ well,\n   * but with its new port. */\n  if(conn->via_peer) {\n    Curl_peer_unlink(&conn->via_peer2);\n\
+  \    result = Curl_peer_create(data, conn->via_peer->scheme,\n                 \
+  \             conn->via_peer->hostname, newport,\n                             \
+  \ &conn->via_peer2);\n    if(result)\n      goto error;\n  }\n\n  result = Curl_conn_setup(data,\
+  \ conn, SECONDARYSOCKET,\n                           conn->bits.ftp_use_data_ssl\
+  \ ?\n                           CURL_CF_SSL_ENABLE : CURL_CF_SSL_DISABLE);\n\n \
+  \ if(result) {\n    if((result != CURLE_OUT_OF_MEMORY) &&\n       (ftpc->count1\
+  \ == 0) && (ftpcode == 229)) {\n      result = ftp_epsv_disable(data, ftpc, conn);\n\
+  \    }\n    goto error;\n  }\n\n  /*\n   * When this is used from the multi interface,\
+  \ this might have returned with\n   * the 'connected' set to FALSE and thus we are\
+  \ now awaiting a non-blocking\n   * connect to connect.\n   */\n\n#ifdef CURLVERBOSE\n\
+  \  if(data->set.verbose) {\n    /* Dump information about this second connection\
+  \ when we have issued\n     * a PASV command. */\n    infof(data, \"Connecting to\
+  \ %s port %d\",\n          conn->origin2->hostname, conn->origin2->port);\n  }\n\
+  #endif\n\n  conn->bits.do_more = TRUE;\n  ftp_state(data, ftpc, FTP_STOP); /* this\
+  \ phase is completed */\n\nerror:\n  curlx_free(newhost);\n  return result;\n}\n\
+  ```\n\n## Bug Fix Patch\n\n```diff\ndiff --git a/lib/ftp.c b/lib/ftp.c\nindex 17cedb3353..3f55f68d82\
+  \ 100644\n--- a/lib/ftp.c\n+++ b/lib/ftp.c\n@@ -2073,7 +2073,7 @@ static CURLcode\
+  \ ftp_state_pasv_resp(struct Curl_easy *data,\n       ptr++;\n       /* |||12345|\
+  \ */\n       sep = ptr[0];\n-      if((ptr[1] == sep) && (ptr[2] == sep) && ISDIGIT(ptr[3]))\
+  \ {\n+      if(sep && (ptr[1] == sep) && (ptr[2] == sep) && ISDIGIT(ptr[3])) {\n\
+  \         const char *p = &ptr[3];\n         curl_off_t num;\n         if(curlx_str_number(&p,\
+  \ &num, 0xffff) || (*p != sep)) {\n```\n"
+pattern: '## Bug Pattern
+
+
+  After locating a delimiter with `strchr()` and incrementing past it, the code dereferences
+  subsequent characters (`ptr[1]`, `ptr[2]`, etc.) without first verifying that `ptr[0]`
+  is non-NUL. If the delimiter is the last character before the string terminator,
+  `ptr[0]` is the NUL byte and `ptr[1]` reads one byte past the end of the string.
+  The fix short-circuits on `sep && ...`, ensuring the string has a character after
+  `(` before reading further bytes.'
+plan: "1. **Program State**: Not needed. The bug is a local condition pattern; no\
+  \ aliasing or interprocedural tracking is required.\n\n2. **Callback: `checkBranchCondition`**\n\
+  \   - Implement a helper to flatten a condition expression into its `&&` operands\
+  \ in evaluation order. Recursively decompose `BinaryOperator` with `BO_LAnd`, ignoring\
+  \ parentheses and implicit casts.\n   - Implement a helper `isDangerousSubscript`\
+  \ that detects `ptr[N]` where `N >= 1` and `ptr` is a variable. Use `EvaluateExprToInt`\
+  \ to evaluate `N`. Return the base variable `ptr` and index `N`.\n   - Implement\
+  \ a helper `getGuardVar` that recognizes a short-circuit guard on a variable: `var`,\
+  \ `var != 0`, or `var != '\\0'`. Return the guarded variable.\n   - Implement a\
+  \ helper `getComparedSep` that recognizes an operand of the form `ptr[N] == sep`\
+  \ or `ptr[N] != sep` with `N >= 1`. Return the subscript pointer `ptr` and the compared\
+  \ variable `sep`.\n   - Implement a helper `isSepFromPtr0` that verifies in the\
+  \ enclosing compound statement before the `if` that `sep` was assigned from `ptr[0]`\
+  \ (or `*ptr`) and that `ptr` was incremented after being obtained from `strchr`.\
+  \ This reduces false positives.\n   - In `checkBranchCondition`:\n     - If the\
+  \ condition is not a `&&` chain, return.\n     - Flatten the `&&` operands in left-to-right\
+  \ evaluation order.\n     - Maintain a set of guarded variables.\n     - Iterate\
+  \ operands left-to-right:\n       - If an operand is a guard for variable `V`, add\
+  \ `V` to the guarded set.\n       - If an operand is a comparison `ptr[N] == sep`\
+  \ with `N >= 1`:\n         - If `sep` is not already in the guarded set and `isSepFromPtr0(sep,\
+  \ ptr, Condition, C)` succeeds, report a bug at the operand\u2019s source range.\n\
+  \         - Stop after the first report.\n   - Report message: `\"Missing NUL check\
+  \ before reading past delimiter\"`.\n   - Use `C.generateNonFatalErrorNode()` and\
+  \ `std::make_unique<PathSensitiveBugReport>` to emit the report."
+refined_plan: null
+repaired_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n\n#include \"clang/AST/ASTContext.h\"\n#include \"clang/AST/Expr.h\"\n#include\
+  \ \"clang/AST/Stmt.h\"\n#include \"llvm/ADT/SmallPtrSet.h\"\n#include \"llvm/ADT/SmallVector.h\"\
+  \n#include \"llvm/Support/Casting.h\"\n#include <memory>\n\nusing namespace clang;\n\
+  using namespace ento;\nusing namespace taint;\n\nnamespace {\n\n// Helper: get VarDecl\
+  \ from a DeclRefExpr.\nstatic const VarDecl *getVarDecl(const Expr *E) {\n  if (!E)\
+  \ return nullptr;\n  E = E->IgnoreParenImpCasts();\n  if (const DeclRefExpr *DRE\
+  \ = dyn_cast<DeclRefExpr>(E)) {\n    return dyn_cast<VarDecl>(DRE->getDecl());\n\
+  \  }\n  return nullptr;\n}\n\n// Helper: flatten && chain in left-to-right order.\n\
+  static void flattenLAnd(const Expr *E, SmallVectorImpl<const Expr *> &Ops) {\n \
+  \ if (!E) return;\n  E = E->IgnoreParenImpCasts();\n  if (const BinaryOperator *BO\
+  \ = dyn_cast<BinaryOperator>(E)) {\n    if (BO->getOpcode() == BO_LAnd) {\n    \
+  \  flattenLAnd(BO->getLHS(), Ops);\n      flattenLAnd(BO->getRHS(), Ops);\n    \
+  \  return;\n    }\n  }\n  Ops.push_back(E);\n}\n\n// Helper: check if an expression\
+  \ evaluates to integer zero.\nstatic bool isZeroConstant(const Expr *E, CheckerContext\
+  \ &C) {\n  if (!E) return false;\n  E = E->IgnoreParenImpCasts();\n  llvm::APSInt\
+  \ Val;\n  if (!EvaluateExprToInt(Val, E, C))\n    return false;\n  return Val ==\
+  \ 0;\n}\n\n// Helper: detect ptr[N] with N >= 1.\nstatic bool isDangerousSubscript(const\
+  \ Expr *E, const VarDecl *&Ptr,\n                                 CheckerContext\
+  \ &C) {\n  if (!E) return false;\n  E = E->IgnoreParenImpCasts();\n  const ArraySubscriptExpr\
+  \ *ASE = dyn_cast<ArraySubscriptExpr>(E);\n  if (!ASE) return false;\n  const Expr\
+  \ *Base = ASE->getBase()->IgnoreParenImpCasts();\n  const Expr *IdxE = ASE->getIdx()->IgnoreParenImpCasts();\n\
+  \  const VarDecl *VD = getVarDecl(Base);\n  if (!VD) return false;\n  llvm::APSInt\
+  \ Idx;\n  if (!EvaluateExprToInt(Idx, IdxE, C))\n    return false;\n  if (Idx.getSExtValue()\
+  \ < 1)\n    return false;\n  Ptr = VD;\n  return true;\n}\n\n// Helper: recognize\
+  \ a guard on a variable: var, var != 0, var != '\\0'.\nstatic const VarDecl *getGuardVar(const\
+  \ Expr *E, CheckerContext &C) {\n  if (!E) return nullptr;\n  E = E->IgnoreParenImpCasts();\n\
+  \n  if (const VarDecl *VD = getVarDecl(E))\n    return VD;\n\n  const BinaryOperator\
+  \ *BO = dyn_cast<BinaryOperator>(E);\n  if (!BO) return nullptr;\n  if (BO->getOpcode()\
+  \ != BO_NE) return nullptr;\n\n  const Expr *LHS = BO->getLHS()->IgnoreParenImpCasts();\n\
+  \  const Expr *RHS = BO->getRHS()->IgnoreParenImpCasts();\n  const VarDecl *LVD\
+  \ = getVarDecl(LHS);\n  const VarDecl *RVD = getVarDecl(RHS);\n  if (LVD && isZeroConstant(RHS,\
+  \ C))\n    return LVD;\n  if (RVD && isZeroConstant(LHS, C))\n    return RVD;\n\
+  \  return nullptr;\n}\n\n// Helper: recognize ptr[N] == sep or ptr[N] != sep with\
+  \ N >= 1.\nstatic bool getComparedSep(const Expr *E, const VarDecl *&Ptr,\n    \
+  \                       const VarDecl *&Sep, CheckerContext &C) {\n  if (!E) return\
+  \ false;\n  E = E->IgnoreParenImpCasts();\n  const BinaryOperator *BO = dyn_cast<BinaryOperator>(E);\n\
+  \  if (!BO) return false;\n  if (BO->getOpcode() != BO_EQ && BO->getOpcode() !=\
+  \ BO_NE)\n    return false;\n\n  const Expr *LHS = BO->getLHS()->IgnoreParenImpCasts();\n\
+  \  const Expr *RHS = BO->getRHS()->IgnoreParenImpCasts();\n\n  const VarDecl *LHSVar\
+  \ = nullptr;\n  const VarDecl *RHSVar = nullptr;\n  if (isDangerousSubscript(LHS,\
+  \ LHSVar, C)) {\n    const VarDecl *RVar = getVarDecl(RHS);\n    if (RVar) {\n \
+  \     Ptr = LHSVar;\n      Sep = RVar;\n      return true;\n    }\n  }\n  if (isDangerousSubscript(RHS,\
+  \ RHSVar, C)) {\n    const VarDecl *LVar = getVarDecl(LHS);\n    if (LVar) {\n \
+  \     Ptr = RHSVar;\n      Sep = LVar;\n      return true;\n    }\n  }\n  return\
+  \ false;\n}\n\n// Helper: check if expression is ptr[0] or *ptr.\nstatic bool isPtr0Expr(const\
+  \ Expr *E, const VarDecl *Ptr, CheckerContext &C) {\n  if (!E) return false;\n \
+  \ E = E->IgnoreParenImpCasts();\n  if (const ArraySubscriptExpr *ASE = dyn_cast<ArraySubscriptExpr>(E))\
+  \ {\n    const VarDecl *BaseVar = getVarDecl(ASE->getBase()->IgnoreParenImpCasts());\n\
+  \    if (BaseVar != Ptr) return false;\n    llvm::APSInt Idx;\n    if (!EvaluateExprToInt(Idx,\
+  \ ASE->getIdx()->IgnoreParenImpCasts(), C))\n      return false;\n    return Idx.getSExtValue()\
+  \ == 0;\n  }\n  if (const UnaryOperator *UO = dyn_cast<UnaryOperator>(E)) {\n  \
+  \  if (UO->getOpcode() == UO_Deref) {\n      const VarDecl *SubVar = getVarDecl(UO->getSubExpr()->IgnoreParenImpCasts());\n\
+  \      return SubVar == Ptr;\n    }\n  }\n  return false;\n}\n\n// Helper: check\
+  \ if statement assigns sep = ptr[0] (or *ptr).\nstatic bool isSepAssignFromPtr0(const\
+  \ Stmt *S, const VarDecl *Sep,\n                                const VarDecl *Ptr,\
+  \ CheckerContext &C) {\n  if (!S) return false;\n  if (const DeclStmt *DS = dyn_cast<DeclStmt>(S))\
+  \ {\n    for (const Decl *D : DS->decls()) {\n      if (const VarDecl *VD = dyn_cast<VarDecl>(D))\
+  \ {\n        if (VD == Sep && VD->hasInit()) {\n          return isPtr0Expr(VD->getInit(),\
+  \ Ptr, C);\n        }\n      }\n    }\n    return false;\n  }\n\n  const Expr *E\
+  \ = dyn_cast<Expr>(S);\n  if (!E) return false;\n  E = E->IgnoreParenImpCasts();\n\
+  \  const BinaryOperator *BO = dyn_cast<BinaryOperator>(E);\n  if (!BO || BO->getOpcode()\
+  \ != BO_Assign) return false;\n  const VarDecl *LHSVar = getVarDecl(BO->getLHS()->IgnoreParenImpCasts());\n\
+  \  if (LHSVar != Sep) return false;\n  return isPtr0Expr(BO->getRHS()->IgnoreParenImpCasts(),\
+  \ Ptr, C);\n}\n\n// Helper: check if statement increments Ptr (ptr++, ++ptr, ptr\
+  \ += 1, ptr = ptr + 1).\nstatic bool isPtrIncrement(const Stmt *S, const VarDecl\
+  \ *Ptr, CheckerContext &C) {\n  if (!S) return false;\n  const Expr *E = dyn_cast<Expr>(S);\n\
+  \  if (!E) return false;\n  E = E->IgnoreParenImpCasts();\n\n  if (const UnaryOperator\
+  \ *UO = dyn_cast<UnaryOperator>(E)) {\n    if (UO->getOpcode() == UO_PostInc ||\
+  \ UO->getOpcode() == UO_PreInc) {\n      const VarDecl *VD = getVarDecl(UO->getSubExpr()->IgnoreParenImpCasts());\n\
+  \      return VD == Ptr;\n    }\n  }\n\n  const BinaryOperator *BO = dyn_cast<BinaryOperator>(E);\n\
+  \  if (!BO) return false;\n\n  // ptr += 1\n  if (BO->getOpcode() == BO_AddAssign)\
+  \ {\n    const VarDecl *LHS = getVarDecl(BO->getLHS()->IgnoreParenImpCasts());\n\
+  \    if (LHS != Ptr) return false;\n    llvm::APSInt Val;\n    if (EvaluateExprToInt(Val,\
+  \ BO->getRHS()->IgnoreParenImpCasts(), C))\n      return Val.getSExtValue() == 1;\n\
+  \  }\n\n  // ptr = ptr + 1\n  if (BO->getOpcode() == BO_Assign) {\n    const VarDecl\
+  \ *LHS = getVarDecl(BO->getLHS()->IgnoreParenImpCasts());\n    if (LHS != Ptr) return\
+  \ false;\n    const Expr *RHS = BO->getRHS()->IgnoreParenImpCasts();\n    if (const\
+  \ BinaryOperator *Add = dyn_cast<BinaryOperator>(RHS)) {\n      if (Add->getOpcode()\
+  \ == BO_Add) {\n        const VarDecl *AddLHS = getVarDecl(Add->getLHS()->IgnoreParenImpCasts());\n\
+  \        const VarDecl *AddRHS = getVarDecl(Add->getRHS()->IgnoreParenImpCasts());\n\
+  \        if (AddLHS == Ptr) {\n          llvm::APSInt Val;\n          if (EvaluateExprToInt(Val,\
+  \ Add->getRHS()->IgnoreParenImpCasts(), C))\n            return Val.getSExtValue()\
+  \ == 1;\n        }\n        if (AddRHS == Ptr) {\n          llvm::APSInt Val;\n\
+  \          if (EvaluateExprToInt(Val, Add->getLHS()->IgnoreParenImpCasts(), C))\n\
+  \            return Val.getSExtValue() == 1;\n        }\n      }\n    }\n  }\n \
+  \ return false;\n}\n\n// Helper: check if expression is a call to strchr.\nstatic\
+  \ bool isStrchrCall(const Expr *E, CheckerContext &C) {\n  if (!E) return false;\n\
+  \  E = E->IgnoreParenImpCasts();\n  const CallExpr *CE = dyn_cast<CallExpr>(E);\n\
+  \  if (!CE) return false;\n  const FunctionDecl *FD = CE->getDirectCallee();\n \
+  \ if (!FD) return false;\n  return FD->getName() == \"strchr\";\n}\n\n// Helper:\
+  \ check if Ptr is initialized from strchr.\nstatic bool isPtrFromStrchr(const VarDecl\
+  \ *Ptr, CheckerContext &C) {\n  if (Ptr->hasInit()) {\n    return isStrchrCall(Ptr->getInit(),\
+  \ C);\n  }\n  return false;\n}\n\nclass SAGenTestChecker : public Checker<check::BranchCondition>\
+  \ {\n  mutable std::unique_ptr<BugType> BT;\n\npublic:\n  SAGenTestChecker()\n \
+  \     : BT(new BugType(this, \"Missing NUL check\", \"Logic Error\")) {}\n\n  void\
+  \ checkBranchCondition(const Stmt *Condition, CheckerContext &C) const;\n\nprivate:\n\
+  \  bool isSepFromPtr0(const VarDecl *Sep, const VarDecl *Ptr,\n                \
+  \     const Stmt *Condition, CheckerContext &C) const;\n};\n\n} // end anonymous\
+  \ namespace\n\nvoid SAGenTestChecker::checkBranchCondition(const Stmt *Condition,\n\
+  \                                            CheckerContext &C) const {\n  const\
+  \ Expr *Cond = dyn_cast<Expr>(Condition);\n  if (!Cond) return;\n  Cond = Cond->IgnoreParenImpCasts();\n\
+  \n  SmallVector<const Expr *, 8> Ops;\n  flattenLAnd(Cond, Ops);\n  if (Ops.size()\
+  \ < 2) return;\n\n  llvm::SmallPtrSet<const VarDecl *, 8> Guarded;\n  for (const\
+  \ Expr *Op : Ops) {\n    if (const VarDecl *V = getGuardVar(Op, C)) {\n      Guarded.insert(V);\n\
+  \      continue;\n    }\n\n    const VarDecl *Ptr = nullptr;\n    const VarDecl\
+  \ *Sep = nullptr;\n    if (getComparedSep(Op, Ptr, Sep, C)) {\n      if (!Guarded.contains(Sep))\
+  \ {\n        if (isSepFromPtr0(Sep, Ptr, Condition, C)) {\n          ExplodedNode\
+  \ *N = C.generateNonFatalErrorNode();\n          if (!N) return;\n          auto\
+  \ Report = std::make_unique<PathSensitiveBugReport>(\n              *BT, \"Missing\
+  \ NUL check before reading past delimiter\", N);\n          Report->addRange(Op->getSourceRange());\n\
+  \          C.emitReport(std::move(Report));\n          return;\n        }\n    \
+  \  }\n    }\n  }\n}\n\nbool SAGenTestChecker::isSepFromPtr0(const VarDecl *Sep,\
+  \ const VarDecl *Ptr,\n                                     const Stmt *Condition,\n\
+  \                                     CheckerContext &C) const {\n  if (!Sep ||\
+  \ !Ptr) return false;\n\n  if (!isPtrFromStrchr(Ptr, C))\n    return false;\n\n\
+  \  const IfStmt *If = findSpecificTypeInParents<IfStmt>(Condition, C);\n  if (!If)\
+  \ return false;\n\n  const CompoundStmt *CS = findSpecificTypeInParents<CompoundStmt>(If,\
+  \ C);\n  if (!CS) return false;\n\n  bool FoundInc = false;\n  bool ValidAssign\
+  \ = false;\n\n  for (const Stmt *S : CS->body()) {\n    if (S == If) {\n      return\
+  \ ValidAssign;\n    }\n    if (isSepAssignFromPtr0(S, Sep, Ptr, C)) {\n      if\
+  \ (FoundInc)\n        ValidAssign = true;\n    }\n    if (isPtrIncrement(S, Ptr,\
+  \ C)) {\n      FoundInc = true;\n    }\n  }\n\n  return false;\n}\n\nextern \"C\"\
+  \ void clang_registerCheckers(CheckerRegistry &registry) {\n  registry.addChecker<SAGenTestChecker>(\n\
+  \      \"custom.SAGenTestChecker\",\n      \"Detects missing NUL check before reading\
+  \ past delimiter\",\n      \"\");\n}\n\nextern \"C\" const char clang_analyzerAPIVersionString[]\
+  \ =\n    CLANG_ANALYZER_API_VERSION_STRING;\n"
+tn_score: 0
+tp_score: 0

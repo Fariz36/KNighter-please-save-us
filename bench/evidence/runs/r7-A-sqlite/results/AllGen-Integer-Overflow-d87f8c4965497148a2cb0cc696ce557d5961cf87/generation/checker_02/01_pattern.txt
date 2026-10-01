@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked narrowing conversion of a pointer-difference value to `int` when computing a string length for a `%!.*s` conversion. In `sqlite3_str_vappendf()`, the `%!.*s` path advances a pointer through an arbitrarily long input string using `SQLITE_SKIP_UTF8()` for up to `precision` UTF-8 characters, then computes `length = (int)(z - (unsigned char*)bufpt)`. Since `precision` can be very large and each UTF-8 character can consume multiple bytes, the pointer difference can exceed `INT_MAX`. Casting it to `int` truncates/overflows, producing an invalid or negative `length` that is later used for width/output calculations. The fix bounds the difference with `MIN(..., 0x7ffffff0)` before the cast.

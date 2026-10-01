@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Out-of-bounds read when parsing a C string after finding a delimiter: the code increments past the delimiter and then indexes `ptr[1]`, `ptr[2]`, `ptr[3]` without first checking that `ptr[0]` is non-NUL. If the response ends immediately after the delimiter, `ptr` points at the terminating NUL and the fixed-offset reads access memory past the end of the string/buffer. The root cause is missing validation that enough characters remain before doing fixed-offset lookahead.

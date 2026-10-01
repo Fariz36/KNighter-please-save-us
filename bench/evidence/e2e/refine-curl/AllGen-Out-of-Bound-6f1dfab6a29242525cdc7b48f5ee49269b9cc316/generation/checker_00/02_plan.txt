@@ -1,0 +1,45 @@
+## Plan
+
+1. **Program State**
+   - No custom program state is needed. The bug is a local syntactic pattern inside a single `if` condition and its preceding assignment. No alias tracking or path-sensitive value propagation is required.
+
+2. **Hook `checkBranchCondition`**
+   - Implement `checkBranchCondition(const Stmt *Condition, CheckerContext &C)`.
+   - Normalize `Condition` by ignoring parentheses and implicit casts.
+   - Only proceed if the normalized expression is a logical AND (`BinaryOperator` with `BO_LAnd`). Flatten all operands connected by `&&` into an ordered list.
+
+3. **Find the Dangerous Lookahead Comparison**
+   - Scan the flattened `&&` operands for a comparison where one side is `ptr[1]` and the other side is a variable `sep`.
+   - Specifically match a `BinaryOperator` with `BO_EQ` where:
+     - One operand is an `ArraySubscriptExpr` with base `DeclRefExpr` to some pointer variable `PtrVD` and index evaluated to `1`.
+     - The other operand is a `DeclRefExpr` to a variable `SepVD`.
+   - If this comparison is not found, return.
+
+4. **Verify the Pattern Context**
+   - Use `findSpecificTypeInParents<IfStmt>(Condition, C)` to get the enclosing `IfStmt` of this condition.
+   - Use `findSpecificTypeInParents<CompoundStmt>(IfStmt, C)` to get the compound statement containing that `IfStmt`.
+   - Walk backwards from the `IfStmt` in the compound body to find the most recent assignment to `SepVD`.
+   - Check that the assignment is `sep = ptr[0]` (or a declaration initialized with `ptr[0]`) using the same `PtrVD`.
+   - If this context is not found, return to avoid false positives.
+
+5. **Check for a Missing NUL Guard**
+   - In the flattened `&&` operand list, locate the index of the `ptr[1] == sep` comparison.
+   - For all operands before that index, check whether any is a non-zero check of `SepVD`:
+     - `sep` used directly as a condition
+     - `sep != 0`, `0 != sep`
+     - `sep != '\0'`, `'\0' != sep`
+     - Equivalent comparisons that guarantee `sep` is not the NUL terminator
+   - If such a guard exists before the dangerous comparison, return as safe.
+   - Otherwise, continue to report.
+
+6. **Report the Bug**
+   - Generate a non-fatal error node at the dangerous `ptr[1]` expression or at the enclosing condition.
+   - Create a `PathSensitiveBugReport` with a short message such as:
+     - `"Out-of-bounds read: missing NUL check before lookahead"`
+   - Optionally add a note pointing to the `ptr[1]` subscript.
+
+7. **Helper Functions to Implement**
+   - `isArraySubscriptOf(E, VD, Index, C)`: ignore casts; match `ArraySubscriptExpr` with base `DeclRefExpr` to `VD` and index evaluated to `Index` using `EvaluateExprToInt`.
+   - `getSepAndPtrFromComparison(E, SepVD, PtrVD, C)`: match `BO_EQ`; check one side is `ptr[1]`, the other is `DeclRefExpr` to `sep`.
+   - `isGuardForVar(E, VD, C)`: match `sep` alone or comparisons with `0` / `'\0'` that ensure non-zero.
+   - `isAssignmentFromPtrZero(S, SepVD, PtrVD, C)`: match `sep = ptr[0]` or `char sep = ptr[0]` using the same pointer variable.

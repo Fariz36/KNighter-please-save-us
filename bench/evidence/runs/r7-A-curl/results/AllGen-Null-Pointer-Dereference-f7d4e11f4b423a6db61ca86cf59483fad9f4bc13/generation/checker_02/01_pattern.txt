@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The code fails to validate the `blob->data` pointer before using or storing it. It checks `blob->len`, but `blob->data` can still be NULL. If `CURL_BLOB_COPY` is set, `memcpy(nblob->data, blob->data, blob->len)` dereferences the NULL `blob->data`; if not set, the NULL pointer is stored in `nblob->data` and may be dereferenced later outside `Curl_setblobopt()`. The fix adds `!blob->data` to the argument validation.

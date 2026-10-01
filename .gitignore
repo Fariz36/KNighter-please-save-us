@@ -37,4 +37,11 @@ bench/replay/
 bench/*.out
 bench/snapshots/
 .venv/
-e2e/
+/e2e/
+
+# Committed evidence behind docs/RESULTS_*.md (overrides the result* rule above)
+!bench/evidence/**/results
+!bench/evidence/**/results/**
+!bench/evidence/**/results-*
+!bench/evidence/**/results-*/**
+!bench/evidence/**/results.jsonl

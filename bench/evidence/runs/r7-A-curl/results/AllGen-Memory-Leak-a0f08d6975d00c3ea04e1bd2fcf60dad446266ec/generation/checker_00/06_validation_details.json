@@ -1,0 +1,69 @@
+{
+  "commit_id": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/plugin-cache/plugins/aaedc316e4eb723e0bab/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/cf-h2-proxy.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "cf_h2_proxy_ctx_clear",
+          "cf_h2_proxy_ctx_free"
+        ],
+        "fixed_functions": [
+          "cf_h2_proxy_ctx_clear",
+          "cf_h2_proxy_ctx_free"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/cf-h2-proxy.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/061136f24b52/lib/cf-h2-proxy.c",
+          "line": 202,
+          "column": 5,
+          "function": "cf_h2_proxy_ctx_free",
+          "bug_type": "Unlink after memset may leak peer",
+          "description": "Unlink after memset may leak peer",
+          "issue_hash": "a7c3d173b1ad12379289b46d1c3d96f9",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a0f08d6975d0/0ece27ea/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_061136f24b52_lib_cf-h2-proxy.c/report-a7c3d1.html",
+          "relpath": "lib/cf-h2-proxy.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/cf-h2-proxy.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 51.67,
+    "analysis_seconds": {
+      "buggy": 6.6,
+      "fixed": 6.51
+    },
+    "total_seconds": 64.83
+  },
+  "report_dir": "tmp/validation/a0f08d6975d0/0ece27ea"
+}

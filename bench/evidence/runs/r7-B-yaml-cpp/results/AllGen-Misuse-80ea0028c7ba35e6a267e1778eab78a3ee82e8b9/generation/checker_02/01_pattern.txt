@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is failing to validate that the Base64 input contains a complete number of 4-character encoded groups. The decoder processes only full quanta but does not check after the loop that the remaining group counter is zero (equivalently, that the non-whitespace character count is a multiple of 4). As a result, truncated Base64 input with 1–3 leftover characters is silently accepted and partially decoded instead of being rejected. The fix resets the group counter and rejects any final non-zero remainder.

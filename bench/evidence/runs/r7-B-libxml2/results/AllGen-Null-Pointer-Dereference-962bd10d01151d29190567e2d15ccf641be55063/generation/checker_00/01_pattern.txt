@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Dereferencing a pointer parameter (`capacity`) without first checking whether it is `NULL`. In `xmlGrowArray`, the expression `*capacity` is evaluated before any validation, so a caller passing `NULL` causes a NULL pointer dereference. The fix adds an explicit `if (capacity == NULL) return(NULL);` guard before the first dereference.

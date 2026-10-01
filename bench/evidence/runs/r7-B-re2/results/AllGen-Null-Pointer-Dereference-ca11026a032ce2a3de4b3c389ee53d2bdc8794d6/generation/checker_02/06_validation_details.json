@@ -1,0 +1,108 @@
+{
+  "commit_id": "ca11026a032ce2a3de4b3c389ee53d2bdc8794d6",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/plugin-cache/plugins/ac84210b7981eaef070c/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 2,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "re2/prefilter.cc",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 3,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Prefilter::FromRegexp"
+        ],
+        "fixed_functions": [
+          "Prefilter::FromRegexp"
+        ]
+      },
+      {
+        "path": "re2/simplify.cc",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Regexp::Simplify",
+          "Regexp::SimplifyRegexp"
+        ],
+        "fixed_functions": [
+          "Regexp::Simplify",
+          "Regexp::SimplifyRegexp"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "re2/prefilter.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/prefilter.cc",
+          "line": 651,
+          "column": 27,
+          "function": "FromRegexp",
+          "bug_type": "Null Dereference",
+          "description": "Possible NULL dereference: Regexp::Simplify() may return NULL",
+          "issue_hash": "49dffe4e9ffbcf1e67dce594df46b33b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/402db900/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-49dffe.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/regexp.h",
+          "line": 325,
+          "column": 61,
+          "function": "parse_flags",
+          "bug_type": "Null Dereference",
+          "description": "Possible NULL dereference: Regexp::Simplify() may return NULL",
+          "issue_hash": "d2cd585d7a0c9bb49f2b3b9a89a8449f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/402db900/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-d2cd58.html",
+          "relpath": "re2/regexp.h"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/prefilter.cc",
+          "line": 653,
+          "column": 3,
+          "function": "FromRegexp",
+          "bug_type": "Null Dereference",
+          "description": "Possible NULL dereference: Regexp::Simplify() may return NULL",
+          "issue_hash": "e505ec4f52840e4f5f649ade0c9d6fb5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/402db900/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-e505ec.html",
+          "relpath": "re2/prefilter.cc"
+        }
+      ],
+      "re2/simplify.cc": []
+    },
+    "fixed": {
+      "re2/prefilter.cc": [],
+      "re2/simplify.cc": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 8.12,
+      "fixed": 9.2
+    },
+    "total_seconds": 17.37
+  },
+  "report_dir": "tmp/validation/ca11026a032c/402db900"
+}

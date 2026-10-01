@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is using narrow integer types (e.g., `unsigned short`) to store length and offset values that are later combined in a size validation check. The addition can overflow or wrap around within the narrow type, causing the bounds check to pass incorrectly and allowing an out-of-bounds memory access. The fix changes these variables to `size_t` to ensure the arithmetic is performed in a sufficiently wide type and the size check cannot be bypassed by integer overflow.

@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The function validates the `len` field of the input `struct curl_blob` but fails to validate the required `data` pointer before using or storing it. If `CURL_BLOB_COPY` is set, this leads to a NULL pointer dereference in `memcpy(nblob->data, blob->data, blob->len)`. If `CURL_BLOB_COPY` is not set, the NULL `data` pointer is stored in the returned blob and can be dereferenced later.
+
+The root cause is missing NULL validation of a pointer field in an input structure before dereferencing it or propagating it for later use.

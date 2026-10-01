@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The error path frees a resource (`input`) after passing it to `xmlNewIOInputStream()`, but that callee already frees the resource on failure. The caller incorrectly assumes it still owns and must clean up the resource when the callee returns `NULL`, while the callee has already freed it. This ownership/cleanup contract mismatch causes a double free.

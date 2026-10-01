@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unbounded writes into a fixed-size stack buffer while formatting output whose length depends on user-controlled `precision`. The code assumes `output_buffer` is large enough based on the scientific-notation maximum, but the default-notation path can emit many trailing zeros (`before_decimal_digits - digits_ct`) and does not check remaining buffer space before writing, causing a stack buffer overflow.

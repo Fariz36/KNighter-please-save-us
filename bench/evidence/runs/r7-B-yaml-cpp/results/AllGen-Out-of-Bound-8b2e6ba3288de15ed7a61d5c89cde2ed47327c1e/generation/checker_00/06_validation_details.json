@@ -1,0 +1,93 @@
+{
+  "commit_id": "8b2e6ba3288de15ed7a61d5c89cde2ed47327c1e",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-yaml-cpp/plugin-cache/plugins/0be3d9e5b88515b66593/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/scanner.cpp",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Scanner::PopIndent",
+          "Scanner::ScanNextToken"
+        ],
+        "fixed_functions": [
+          "Scanner::PopIndent",
+          "Scanner::ScanNextToken"
+        ]
+      },
+      {
+        "path": "test/integration/handler_test.cpp",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": [
+          "TEST_F"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/scanner.cpp": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-yaml-cpp/work/src/3eb39d5808c3/src/scanner.cpp",
+          "line": 395,
+          "column": 27,
+          "function": "unknown",
+          "bug_type": "Indent Stack Underflow",
+          "description": "PopIndent() does not check for empty indent stack",
+          "issue_hash": "a01032ede112a8428aec1103218732fe",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/8b2e6ba3288d/31f4ef53/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-yaml-cpp_work_src_3eb39d5808c3_src_scanner.cpp/report-a01032.html",
+          "relpath": "src/scanner.cpp"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-yaml-cpp/work/src/3eb39d5808c3/src/scanner.cpp",
+          "line": 180,
+          "column": 9,
+          "function": "ScanNextToken",
+          "bug_type": "Indent Stack Underflow",
+          "description": "PopIndent() called without checking indent stack; possible underflow",
+          "issue_hash": "c82adfe8397911a4507fab3484e2b6ae",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/8b2e6ba3288d/31f4ef53/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-yaml-cpp_work_src_3eb39d5808c3_src_scanner.cpp/report-c82adf.html",
+          "relpath": "src/scanner.cpp"
+        }
+      ]
+    },
+    "fixed": {
+      "src/scanner.cpp": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 6.85,
+      "fixed": 6.82
+    },
+    "total_seconds": 13.71
+  },
+  "report_dir": "tmp/validation/8b2e6ba3288d/31f4ef53"
+}

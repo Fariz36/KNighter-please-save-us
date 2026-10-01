@@ -1,0 +1,19 @@
+## Bug Pattern
+
+The bug pattern is an unchecked lookahead/index access in the `NXT(index)` macro:
+
+```c
+#define NXT(index) (ctxt->cur[index])
+```
+
+The parser context stores a pointer `cur` into the input string, but it does not track the string length or verify that `cur + index` remains within the allocated buffer. Any use of `NXT()` near the end of the input can therefore read past the end of the string, causing an out-of-bounds read.
+
+The fix introduces a `len` field and changes `NXT()` to check the offset before dereferencing:
+
+```c
+#define NXT(index) \
+    (((size_t)(ctxt->cur + index - ctxt->string) < ctxt->len) \
+      ? ctxt->cur[index] : 0)
+```
+
+So the specific bug pattern is: **direct pointer indexing for lookahead without bounds checking against the remaining input length**.

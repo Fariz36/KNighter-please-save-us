@@ -1,0 +1,78 @@
+{
+  "commit_id": "c0a4ef05f4d4a57eb06a15df8bcd4ace26aec1f5",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/plugin-cache/plugins/b11fec78ae80bcae81dc/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/repository.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "git_repository_foreach_worktree"
+        ],
+        "fixed_functions": [
+          "git_repository_foreach_worktree"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/repository.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/c16683f5fb31/src/libgit2/repository.c",
+          "line": 3148,
+          "column": 13,
+          "function": "git_repository_foreach_worktree",
+          "bug_type": "Operator precedence bug",
+          "description": "operator precedence bug: assignment result used as comparison",
+          "issue_hash": "4b44b9213d778d7b68d8ddc174bc0645",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/c0a4ef05f4d4/c11e3177/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_c16683f5fb31_src_libgit2_repository.c/report-4b44b9.html",
+          "relpath": "src/libgit2/repository.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/c16683f5fb31/src/libgit2/repository.c",
+          "line": 3163,
+          "column": 14,
+          "function": "git_repository_foreach_worktree",
+          "bug_type": "Operator precedence bug",
+          "description": "operator precedence bug: assignment result used as comparison",
+          "issue_hash": "843b0b7fea609d9a1024e57c808deda8",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/c0a4ef05f4d4/c11e3177/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_c16683f5fb31_src_libgit2_repository.c/report-843b0b.html",
+          "relpath": "src/libgit2/repository.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/repository.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 39.24,
+    "analysis_seconds": {
+      "buggy": 6.45,
+      "fixed": 6.1
+    },
+    "total_seconds": 52.12
+  },
+  "report_dir": "tmp/validation/c0a4ef05f4d4/c11e3177"
+}

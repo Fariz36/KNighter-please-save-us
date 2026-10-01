@@ -1,0 +1,5 @@
+## Bug Pattern
+
+Misuse of `memcmp()` as a boolean match predicate via double negation: `matched = addr && !!memcmp(name, addr, namelen);`. Since `memcmp()` returns `0` for equal buffers and non-zero for different buffers, `!!memcmp(...)` inverts the result: a matching IP SubjectAltName becomes `matched = 0` (failure), while a non-matching IP SubjectAltName becomes `matched = 1` (success). This causes hostname/IP certificate verification bypass.
+
+The correct pattern is to check equality explicitly, e.g. `memcmp(name, addr, namelen) == 0`, and to ensure the SAN IP length matches the expected address length (`namelen == addrlen`).

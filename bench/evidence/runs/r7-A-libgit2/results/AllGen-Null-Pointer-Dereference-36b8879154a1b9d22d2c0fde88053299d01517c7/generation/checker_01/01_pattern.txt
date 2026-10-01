@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is an unchecked return value from `hunk_from_entry()`, which may return `NULL` on error, followed by directly using that result in `git_vector_insert(&blame->hunks, h)` without checking for `NULL`. This can insert a `NULL` hunk into the vector, leading to later invalid dereferences or incorrect error handling. The fix validates `h` and jumps to the error path when it is `NULL`.

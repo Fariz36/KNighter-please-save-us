@@ -1,0 +1,80 @@
+{
+  "commit_id": "967b28f0e5e10a81021cf398bef9fba8b4c6774a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/plugin-cache/plugins/81cbb2174d38e47eb9eb/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/blame.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "dup_hunk"
+        ],
+        "fixed_functions": [
+          "dup_hunk"
+        ]
+      },
+      {
+        "path": "tests/libgit2/blame/buffer.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": [
+          "test_blame_buffer__reblame_buffer_result"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/blame.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/work/src/36b8879154a1/src/libgit2/blame.c",
+          "line": 112,
+          "column": 26,
+          "function": "dup_hunk",
+          "bug_type": "Unchecked nullable string field passed to git__strdup",
+          "description": "Unchecked nullable string field passed to git__strdup",
+          "issue_hash": "3bfdb6fa194e6ca96e99e97ff1818538",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/967b28f0e5e1/d7745756/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-libgit2_work_src_36b8879154a1_src_libgit2_blame.c/report-3bfdb6.html",
+          "relpath": "src/libgit2/blame.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/blame.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 4.24,
+      "fixed": 6.48
+    },
+    "total_seconds": 10.8
+  },
+  "report_dir": "tmp/validation/967b28f0e5e1/d7745756"
+}

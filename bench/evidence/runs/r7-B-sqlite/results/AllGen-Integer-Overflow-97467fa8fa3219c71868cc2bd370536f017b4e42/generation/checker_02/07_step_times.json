@@ -1,0 +1,9 @@
+{
+  "steps": {
+    "\ud83e\udde9 Pattern Extraction": 7.36,
+    "\ud83d\udccb Plan Generation": 60.61,
+    "\ud83d\udcbb Code Generation": 124.41,
+    "\ud83d\udd27 Syntax Repair": 153.23
+  },
+  "failed_step": "\ud83d\udd27 Syntax Repair"
+}

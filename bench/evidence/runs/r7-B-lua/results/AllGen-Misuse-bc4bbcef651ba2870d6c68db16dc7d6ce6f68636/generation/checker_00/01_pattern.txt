@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Publishing/registering an object in a persistent table before it has been fully initialized, while the subsequent initialization can raise an error. In this case, `luaL_newmetatable()` stores the new metatable in the Lua registry immediately, and then `luaL_setfuncs()` is called separately to populate it. If `luaL_setfuncs()` raises a memory error, the registry is left containing an incomplete metatable; later calls to `luaL_newmetatable()` see it already exists and skip initialization, so the incomplete metatable is reused. The safe pattern is to fully initialize the metatable first and only then register it.

@@ -1,0 +1,9 @@
+checker.cpp: In function ‘bool {anonymous}::EvaluateExprToInt(llvm::APSInt&, const clang::Expr*, clang::ento::CheckerContext&)’:
+checker.cpp:60:27: error: cannot convert ‘llvm::APSInt’ to ‘clang::Expr::EvalResult&’
+   60 |   return E->EvaluateAsInt(Result, C.getASTContext());
+      |                           ^~~~~~
+      |                           |
+      |                           llvm::APSInt
+/home/faris/RA-MrYudis/Knight/KNighter/llvm/clang/include/clang/AST/Expr.h:664:34: note: initializing argument 1 of ‘bool clang::Expr::EvaluateAsInt(EvalResult&, const clang::ASTContext&, SideEffectsKind, bool) const’
+  664 |   bool EvaluateAsInt(EvalResult &Result, const ASTContext &Ctx,
+      |                      ~~~~~~~~~~~~^~~~~~

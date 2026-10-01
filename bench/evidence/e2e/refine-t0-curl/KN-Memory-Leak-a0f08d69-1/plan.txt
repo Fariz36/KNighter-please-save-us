@@ -1,0 +1,28 @@
+## Plan
+
+1. **Register Program State Map**
+   - Define a map to track memory regions that have been zeroed:
+     `REGISTER_MAP_WITH_PROGRAMSTATE(ZeroedRegions, const MemRegion *, bool)`
+   - This map records whether a given memory region (e.g., the `ctx` struct) has been cleared by `memset`.
+
+2. **Implement `checkPreCall`**
+   - Handle two callees in this single callback:
+
+   **a. `memset` calls**
+   - Check if the callee name is `"memset"`.
+   - Get the destination argument (`Call.getArgExpr(0)`).
+   - Obtain its `MemRegion` using `getMemRegionFromExpr`.
+   - Evaluate the fill value (`Call.getArgExpr(1)`) with `EvaluateExprToInt`.
+   - If the fill value is zero and the region is non-null, mark the region as zeroed:
+     `State = State->set<ZeroedRegions>(Region, true);`
+   - Call `C.addTransition(State)`.
+
+   **b. `Curl_peer_unlink` calls**
+   - Check if the callee name is `"Curl_peer_unlink"`.
+   - Get the first argument (`Call.getArgExpr(0)`), which is an address of an embedded list node (e.g., `&ctx->dest`).
+   - Obtain its `MemRegion` using `getMemRegionFromExpr`. This will be a `FieldRegion` whose superregion is the containing struct.
+   - Walk up the region hierarchy: for each region `R` starting from the argument’s region and following `R->getSuperRegion()`, check whether `R` is present in `ZeroedRegions`.
+   - If any superregion is marked as zeroed, the containing struct was cleared before the unlink. Generate a non-fatal error node and emit a `PathSensitiveBugReport` with a short message such as:
+     `"Curl_peer_unlink after memset zeroed containing struct"`.
+
+**Note:** The analyzer inlines small functions like `cf_h2_proxy_ctx_clear` when analyzing `cf_h2_proxy_ctx_free`, so the `memset` inside the clear function is observed in the same path. This allows the checker to detect the order violation across function boundaries without additional interprocedural summaries.

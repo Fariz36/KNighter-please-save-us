@@ -1,0 +1,3 @@
+## Bug Pattern
+
+After locating a delimiter with `strchr()` and incrementing past it, the code dereferences subsequent characters (`ptr[1]`, `ptr[2]`, etc.) without first verifying that `ptr[0]` is non-NUL. If the delimiter is the last character before the string terminator, `ptr[0]` is the NUL byte and `ptr[1]` reads one byte past the end of the string. The fix short-circuits on `sep && ...`, ensuring the string has a character after `(` before reading further bytes.

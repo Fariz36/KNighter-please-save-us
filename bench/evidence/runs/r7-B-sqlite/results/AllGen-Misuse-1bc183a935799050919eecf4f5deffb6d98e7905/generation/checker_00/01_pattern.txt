@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is failing to check the tokenizer result for `TK_ILLEGAL` before passing a raw token span (pointer and length) into a helper that assumes valid SQL token text. In this case, `quotedCompare()` calls `sqlite3Dequote()` on the token bytes without knowing whether the token is legal; with a corrupt schema, the tokenizer can return `TK_ILLEGAL`, leading to an assertion fault in `sqlite3Dequote()`. The fix propagates the token type into `quotedCompare()` and returns early when `t == TK_ILLEGAL` before calling `sqlite3Dequote()`.

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is an early success path that skips initialization of an output resource: the function initializes a local pointer to `NULL`, can return success before allocating/assigning that pointer, and then stores the still-`NULL` pointer into the caller-provided out-parameter. Thus the caller receives success with a `NULL` handle/resource and later dereferences it, causing a segfault. The root cause is failing to ensure that every success path produces a valid initialized output value.

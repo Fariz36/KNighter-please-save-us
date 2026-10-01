@@ -1,0 +1,105 @@
+{
+  "commit_id": "1bc183a935799050919eecf4f5deffb6d98e7905",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/plugin-cache/plugins/0854a551003ff466a7b3/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/alter.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 2,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ],
+        "fixed_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 2557,
+          "column": 15,
+          "function": "dropConstraintFunc",
+          "bug_type": "Missing TK_ILLEGAL check before sqlite3Dequote()",
+          "description": "Missing TK_ILLEGAL check before sqlite3Dequote()",
+          "issue_hash": "4221699be3a5bc8a3ae45bc44ff896c9",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/96e02886/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_79837b6ee5d4_src_alter.c/report-422169.html",
+          "relpath": "src/alter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 2951,
+          "column": 11,
+          "function": "findConstraintFunc",
+          "bug_type": "Missing TK_ILLEGAL check before sqlite3Dequote()",
+          "description": "Missing TK_ILLEGAL check before sqlite3Dequote()",
+          "issue_hash": "c81c2206ebf81ce0e1c7355834616f2c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/96e02886/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_79837b6ee5d4_src_alter.c/report-c81c22.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/1bc183a93579/src/alter.c",
+          "line": 2562,
+          "column": 15,
+          "function": "dropConstraintFunc",
+          "bug_type": "Missing TK_ILLEGAL check before sqlite3Dequote()",
+          "description": "Missing TK_ILLEGAL check before sqlite3Dequote()",
+          "issue_hash": "2bba350d89ac437b431f495bd16d0905",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/96e02886/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_1bc183a93579_src_alter.c/report-2bba35.html",
+          "relpath": "src/alter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/1bc183a93579/src/alter.c",
+          "line": 2956,
+          "column": 11,
+          "function": "findConstraintFunc",
+          "bug_type": "Missing TK_ILLEGAL check before sqlite3Dequote()",
+          "description": "Missing TK_ILLEGAL check before sqlite3Dequote()",
+          "issue_hash": "9e997a062fe88c604806606b5d68352c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/96e02886/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_1bc183a93579_src_alter.c/report-9e997a.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 71.81,
+    "analysis_seconds": {
+      "buggy": 25.01,
+      "fixed": 21.13
+    },
+    "total_seconds": 118.11
+  },
+  "report_dir": "tmp/validation/1bc183a93579/96e02886"
+}

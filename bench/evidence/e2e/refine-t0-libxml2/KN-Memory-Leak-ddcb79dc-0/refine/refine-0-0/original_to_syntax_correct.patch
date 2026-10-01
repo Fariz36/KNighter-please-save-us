@@ -1,0 +1,12 @@
+--- original_code.cpp+++ syntax_correct_refine_code.cpp@@ -89,7 +89,11 @@     return;
+ 
+   SVal OldVal = State->getSVal(MR);
+-  if (OldVal.isZeroConstant())
++
++  // If the old value is undefined or known to be null (either a concrete
++  // zero or a symbol constrained to null), there is no previous allocation
++  // to leak.
++  if (OldVal.isUnknown() || State->isNull(OldVal).isConstrainedTrue())
+     return;
+ 
+   ExplodedNode *N = C.generateNonFatalErrorNode(State);

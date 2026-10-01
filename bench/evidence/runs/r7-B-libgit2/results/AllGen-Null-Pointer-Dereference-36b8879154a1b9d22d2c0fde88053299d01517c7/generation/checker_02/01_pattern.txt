@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is failing to check the return value of a pointer-returning function that can fail (`hunk_from_entry()` may return `NULL` on allocation/error), then using that pointer as if it were valid. Here the `NULL` result is passed to `git_vector_insert()`, potentially inserting an invalid element and leading to a later NULL pointer dereference or inconsistent state. The fix validates the return value immediately and propagates the error before continuing.

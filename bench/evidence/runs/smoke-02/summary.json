@@ -1,0 +1,112 @@
+{
+  "run": "smoke-02",
+  "wall_seconds": 223.4,
+  "commits": 1,
+  "commits_with_perfect_checker": 0,
+  "llm_calls_total": 3,
+  "llm_seconds_sum": 129.1,
+  "llm_by_stage": {
+    "patch2pattern": {
+      "calls": 1,
+      "failed": 0,
+      "seconds": 8.4,
+      "prompt_tokens": 5142,
+      "completion_tokens": 605,
+      "reasoning_tokens": 489
+    },
+    "pattern2plan": {
+      "calls": 1,
+      "failed": 0,
+      "seconds": 92.8,
+      "prompt_tokens": 4227,
+      "completion_tokens": 12104,
+      "reasoning_tokens": 11722
+    },
+    "plan2checker": {
+      "calls": 1,
+      "failed": 0,
+      "seconds": 27.9,
+      "prompt_tokens": 11327,
+      "completion_tokens": 6871,
+      "reasoning_tokens": 5945
+    }
+  },
+  "step_seconds_sum": {
+    "\ud83e\udde9 Pattern Extraction": 8.4,
+    "\ud83d\udccb Plan Generation": 92.8,
+    "\ud83d\udcbb Code Generation": 27.9,
+    "\ud83d\udd27 Syntax Repair": 34.8,
+    "\u2705 Validation": 51.5
+  },
+  "validation_seconds": {
+    "plugin_seconds": {
+      "n": 1,
+      "sum": 0.0,
+      "mean": 0.0
+    },
+    "setup_seconds": {
+      "n": 1,
+      "sum": 49.8,
+      "mean": 49.81
+    },
+    "total_seconds": {
+      "n": 1,
+      "sum": 51.5,
+      "mean": 51.52
+    }
+  },
+  "per_commit": [
+    {
+      "id": "AllGen-Null-Pointer-Dereference-f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+      "summary": {
+        "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "commit_type": "Null-Pointer-Dereference",
+        "total_checkers": 1,
+        "successful_checkers": 1,
+        "perfect_checkers": 0,
+        "best_tp": 1,
+        "best_tn": 0,
+        "total_time": 215.603617,
+        "errors": [],
+        "success_rate": 1.0,
+        "timestamp": "2026-09-30T17:02:06.266607"
+      },
+      "attempts": [
+        {
+          "attempt": "checker_00",
+          "steps": {
+            "\ud83e\udde9 Pattern Extraction": 8.45,
+            "\ud83d\udccb Plan Generation": 92.82,
+            "\ud83d\udcbb Code Generation": 27.87,
+            "\ud83d\udd27 Syntax Repair": 34.83,
+            "\u2705 Validation": 51.52
+          },
+          "failed_step": null,
+          "strict": [
+            1,
+            0
+          ],
+          "legacy": [
+            1,
+            0
+          ],
+          "error": null,
+          "validation_timing": {
+            "plugin_seconds": 0.0,
+            "setup_seconds": 49.81,
+            "analysis_seconds": {
+              "buggy": 0.86,
+              "fixed": 0.76
+            },
+            "total_seconds": 51.52
+          }
+        }
+      ]
+    }
+  ],
+  "variant": "optimized",
+  "exit_code": 0,
+  "overrides": [
+    "checker_nums=1"
+  ]
+}

@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The floating-point formatting path in `sqlite3_str_vappendf` underestimates the required buffer size by using a hard-coded slack (`+8`) that does not account for all characters emitted by formatting flags. Specifically, when `flag_altform2` is set (the `!` flag) and precision is zero, the code still emits a decimal point and a trailing `'0'` (`1.0`), adding two bytes beyond the `precision`-based count. This causes the later direct writes, including the exponent suffix and NUL terminator, to overflow the guaranteed buffer. The fix increases the slack to `+10`.
+
+In short: **manual buffer-size calculation for formatted floating-point output omits flag-induced characters, leading to a heap buffer overflow.**

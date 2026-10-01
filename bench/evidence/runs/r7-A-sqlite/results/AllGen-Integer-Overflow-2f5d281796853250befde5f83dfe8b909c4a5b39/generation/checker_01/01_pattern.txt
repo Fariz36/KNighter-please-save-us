@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is using narrow integer types (e.g., `int`) for loop counters and size-related variables that can exceed the range of that type when the program is compiled with large limits (such as a very large `SQLITE_MAX_LENGTH`). When these variables are later used in `assert()` statements or arithmetic expressions, the value can overflow, producing an incorrect comparison. In debug builds where `assert()` is active, this can trigger a false assertion failure; in other contexts, the same overflow could silently corrupt size calculations. The root cause is a mismatch between the type used for counters/accumulators and the maximum possible value they may hold, so widening the variables (here to `i64`) is required to prevent overflow.

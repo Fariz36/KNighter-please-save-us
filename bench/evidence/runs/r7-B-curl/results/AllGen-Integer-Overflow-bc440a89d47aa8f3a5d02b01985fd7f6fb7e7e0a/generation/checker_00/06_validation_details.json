@@ -1,0 +1,67 @@
+{
+  "commit_id": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/plugin-cache/plugins/0ead36398b3b009f231a/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/mime.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "encoder_base64_size"
+        ],
+        "fixed_functions": [
+          "encoder_base64_size"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/mime.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/work/src/6546ffeda4f1/lib/mime.c",
+          "line": 430,
+          "column": 8,
+          "function": "encoder_base64_size",
+          "bug_type": "Base64 size calculation overflow",
+          "description": "Possible integer overflow in base64 size calculation",
+          "issue_hash": "221bfa82d7076424ad9f4a59ff01afe0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/bc440a89d47a/3007831d/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-curl_work_src_6546ffeda4f1_lib_mime.c/report-221bfa.html",
+          "relpath": "lib/mime.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/mime.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 19.47,
+      "fixed": 21.3
+    },
+    "total_seconds": 40.86
+  },
+  "report_dir": "tmp/validation/bc440a89d47a/3007831d"
+}

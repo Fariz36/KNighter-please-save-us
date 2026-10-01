@@ -1,0 +1,7 @@
+## Bug Pattern
+
+The bug pattern is **using the return value of an allocation/duplication function before checking it for NULL**.
+
+In the buggy code, `xmlStrdup()` can return NULL on allocation failure, but `ret->string` is immediately passed to `strlen()` before the `if (ret->string == NULL)` check. This causes a NULL pointer dereference when `xmlStrdup()` fails.
+
+The fix moves the NULL check before any dereference, ensuring the allocated/duplicated pointer is validated before use.

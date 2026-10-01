@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is using narrow integer types (`unsigned short`) for length and offset variables that participate in a size check. When these variables are added together (e.g., `off + sizeof(unsigned int) + len`), the arithmetic can overflow the type used for the calculation, bypassing the bounds check and leading to out-of-bounds memory access. The fix is to declare such variables as `size_t` to ensure the addition is performed with sufficient width to prevent integer overflow.

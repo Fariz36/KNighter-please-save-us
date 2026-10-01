@@ -1,0 +1,71 @@
+--- original_code.cpp+++ syntax_correct_refine_code.cpp@@ -21,6 +21,7 @@ using namespace taint;
+ 
+ REGISTER_MAP_WITH_PROGRAMSTATE(ClearedPtrs, SymbolRef, bool)
++REGISTER_MAP_WITH_PROGRAMSTATE(LinkedPeerFields, SymbolRef, const MemRegion *)
+ 
+ namespace {
+ class SAGenTestChecker : public Checker<check::PreCall> {
+@@ -60,7 +61,49 @@     SVal Dest = Call.getArgSVal(0);
+     if (SymbolRef Sym = Dest.getAsLocSymbol()) {
+       State = State->set<ClearedPtrs>(Sym, true);
++      State = State->remove<LinkedPeerFields>(Sym);
+       C.addTransition(State);
++    }
++    return;
++  }
++
++  // If a peer field is linked after the containing struct was cleared,
++  // remember that this specific field is valid again.  A later
++  // Curl_peer_unlink() on the same field is then a normal cleanup, not a
++  // cleanup-after-clear leak.
++  if (isFunctionNamed(Call, "Curl_peer_link", C)) {
++    if (Call.getNumArgs() < 1)
++      return;
++
++    const Expr *Arg = Call.getArgExpr(0);
++    if (!Arg)
++      return;
++
++    const MemRegion *MR = getMemRegionFromExpr(Arg, C);
++    if (!MR)
++      return;
++
++    // We only care about fields of structs, e.g. &ctx->peer.
++    if (MR->getBaseRegion() == MR)
++      return;
++
++    const MemRegion *Base = MR->getBaseRegion();
++    if (!Base)
++      return;
++
++    const SymbolicRegion *SR = dyn_cast<SymbolicRegion>(Base);
++    if (!SR)
++      return;
++
++    SymbolRef Sym = SR->getSymbol();
++    if (!Sym)
++      return;
++
++    if (const bool *Cleared = State->get<ClearedPtrs>(Sym)) {
++      if (*Cleared) {
++        State = State->set<LinkedPeerFields>(Sym, MR);
++        C.addTransition(State);
++      }
+     }
+     return;
+   }
+@@ -96,7 +139,14 @@ 
+     const bool *Cleared = State->get<ClearedPtrs>(Sym);
+     if (Cleared && *Cleared) {
+-      reportCleanupAfterClear(Call, C);
++      const MemRegion *const *LinkedField =
++          State->get<LinkedPeerFields>(Sym);
++
++      // If this exact field was linked after the clear, then unlinking it
++      // now is safe.  Otherwise, report the cleanup-after-clear pattern.
++      if (!LinkedField || *LinkedField != MR) {
++        reportCleanupAfterClear(Call, C);
++      }
+     }
+   }
+ }

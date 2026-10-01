@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The buggy code holds a raw pointer to a GC-managed object (`Table *h`) that may be only weakly reachable (for example, as the `__newindex` value of a weak metatable) and then calls a function (`luaH_finishset`) that can allocate memory and trigger an emergency garbage collection. Since the object is not anchored/rooted on the Lua stack or otherwise protected from GC, the collector can free it during the call, and the subsequent use of `h` becomes a use-after-free. The fix is to temporarily anchor the table on the stack before the GC-triggering call.

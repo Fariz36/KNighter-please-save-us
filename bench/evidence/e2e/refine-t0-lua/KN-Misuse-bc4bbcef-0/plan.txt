@@ -1,0 +1,18 @@
+1. **No Custom Program State Needed:**
+   - The bug pattern is a syntactic combination within an `if` statement. No path-sensitive tracking or alias analysis is required. We can detect the bug by examining the AST of the condition and the true branch.
+
+2. **Hook the Condition (`checkBranchCondition`):**
+   - Implement `checkBranchCondition(const Stmt *Condition, CheckerContext &C)`.
+   - Ignore implicit casts on the condition expression.
+   - Check if the condition is a `CallExpr` whose callee name is `luaL_newmetatable`. Use `dyn_cast<CallExpr>` and compare `getDirectCallee()->getNameAsString()`.
+   - If it matches, find the enclosing `IfStmt` using `findSpecificTypeInParents<IfStmt>(Condition, C)`.
+
+3. **Inspect the True Branch:**
+   - Retrieve the then branch of the `IfStmt` (`IS->getThen()`).
+   - Recursively traverse the then branch (using a simple `RecursiveASTVisitor` or manual `Stmt::children()` traversal) to find any `CallExpr` whose callee name is `luaL_setfuncs`.
+   - If such a call is found, the metatable is being registered before it is fully initialized.
+
+4. **Report the Bug:**
+   - Generate a non-fatal error node using `C.generateNonFatalErrorNode()`.
+   - Create and emit a `PathSensitiveBugReport` with a short message such as `"Metatable registered before initialization"`.
+   - Place the report at the location of the `luaL_newmetatable` call or the `luaL_setfuncs` call.

@@ -1,0 +1,12 @@
+- Decision: NotABug
+- Reason: The reported `cf_socket_ctx_free()` does **not** match the target bug pattern. In the target bug, `cf_h2_proxy_ctx_clear()` zeroes the whole context via `memset(ctx, 0, sizeof(*ctx))` before `cf_h2_proxy_ctx_free()` calls `Curl_peer_unlink(&ctx->dest)`, so the peer linkage is lost before cleanup. In the reported code, `cf_socket_ctx_free()` directly performs:
+  ```c
+  Curl_peer_unlink(&ctx->peer);
+  curlx_free(ctx);
+  ```
+  There is no preceding struct clear inside `cf_socket_ctx_free()`. The only relevant clear is in `cf_socket_ctx_init()`:
+  ```c
+  memset(ctx, 0, sizeof(*ctx));
+  Curl_peer_link(&ctx->peer, peer);
+  ```
+  That clear happens **before** the peer is linked, not after. On the error path shown in the report, `cf_socket_ctx_init()` has already linked `ctx->peer`, then `Curl_cf_create()` fails, and `cf_socket_ctx_free()` correctly unlinks the still-valid peer before freeing `ctx`. Thus no peer is leaked, and the reported warning is a false positive relative to the cleanup-after-clear bug pattern.

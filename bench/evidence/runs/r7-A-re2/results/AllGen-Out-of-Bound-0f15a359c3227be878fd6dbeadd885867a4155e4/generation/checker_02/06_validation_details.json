@@ -1,0 +1,67 @@
+{
+  "commit_id": "0f15a359c3227be878fd6dbeadd885867a4155e4",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/plugin-cache/plugins/5f808d0738d14bbec4eb/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "re2/bitstate.cc",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "BitState::Push"
+        ],
+        "fixed_functions": [
+          "BitState::Push"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "re2/bitstate.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/bc03e48df7d5/re2/bitstate.cc",
+          "line": 120,
+          "column": 17,
+          "function": "Push",
+          "bug_type": "Buffer underflow",
+          "description": "Buffer underflow: accessing container[count-1] without checking count > 0",
+          "issue_hash": "8d1a23173f4e7dbcf5a96adbc2b335fd",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/0f15a359c322/d7ffcd10/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_bc03e48df7d5_re2_bitstate.cc/report-8d1a23.html",
+          "relpath": "re2/bitstate.cc"
+        }
+      ]
+    },
+    "fixed": {
+      "re2/bitstate.cc": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 5.8,
+    "analysis_seconds": {
+      "buggy": 5.31,
+      "fixed": 4.96
+    },
+    "total_seconds": 16.08
+  },
+  "report_dir": "tmp/validation/0f15a359c322/d7ffcd10"
+}

@@ -1,0 +1,24 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-09-30 22:48:45.096 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+2026-09-30 22:48:45.097 | DEBUG    | __main__:init_config:26 - Config file: e2e/scan-curl.yaml
+2026-09-30 22:48:45.097 | DEBUG    | __main__:init_config:27 - Result dir: e2e/scan-curl
+2026-09-30 22:48:45.097 | DEBUG    | __main__:init_config:28 - Analysis backend: Analysis Backend Path: /home/faris/RA-MrYudis/Knight/KNighter/llvm
+2026-09-30 22:48:45.097 | DEBUG    | __main__:init_config:29 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl
+2026-09-30 22:48:45.139 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-80921679b52b40ad)
+2026-09-30 22:48:45.139 | INFO     | __main__:main:80 - Scan the kernel with valid checkers
+2026-09-30 22:48:45.146 | DEBUG    | backends.plugin_builder:build:281 - Plugin cache hit a468a1d13437f0e26dea
+2026-09-30 22:48:45.152 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision bb348b35e84c
+2026-09-30 22:49:36.369 | INFO     | backends.csa_compiledb:_run_checker_compiledb:247 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/a468a1d13437f0e26dea/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 51.21, 'jobs': 32}
+2026-09-30 22:49:36.370 | INFO     | checker_scan:scan_compiledb:101 - Scanned HEAD with KN-Integer-Overflow-bc440a89-0: 0 reports
+2026-09-30 22:49:36.371 | DEBUG    | backends.plugin_builder:build:281 - Plugin cache hit 419e10c1ca105845a91b
+2026-09-30 22:50:28.007 | INFO     | backends.csa_compiledb:_run_checker_compiledb:247 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/419e10c1ca105845a91b/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 51.63, 'jobs': 32}
+2026-09-30 22:50:28.008 | INFO     | checker_scan:scan_compiledb:101 - Scanned HEAD with KN-Memory-Leak-a0f08d69-2: 0 reports
+2026-09-30 22:50:28.009 | DEBUG    | backends.plugin_builder:build:281 - Plugin cache hit c0c26d785f59dcf6d9aa
+2026-09-30 22:51:19.781 | INFO     | backends.csa_compiledb:_run_checker_compiledb:247 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/c0c26d785f59dcf6d9aa/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 51.76, 'jobs': 32}
+2026-09-30 22:51:19.782 | INFO     | checker_scan:scan_compiledb:101 - Scanned HEAD with KN-Misuse-c53420e4-1: 0 reports
+2026-09-30 22:51:19.785 | DEBUG    | backends.plugin_builder:build:281 - Plugin cache hit efac10e6431eb96a5d98
+2026-09-30 22:52:11.222 | INFO     | backends.csa_compiledb:_run_checker_compiledb:247 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/efac10e6431eb96a5d98/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 51.43, 'jobs': 32}
+2026-09-30 22:52:11.222 | INFO     | checker_scan:scan_compiledb:101 - Scanned HEAD with KN-Null-Pointer-Dereference-f2a15357-0: 0 reports
+2026-09-30 22:52:11.223 | INFO     | checker_scan:scan_compiledb:89 - No valid checker in KN-Null-Pointer-Dereference-f7d4e11f-0, skipping
+scan wall 208.12 s

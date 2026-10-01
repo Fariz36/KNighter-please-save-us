@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing NULL-pointer validation for an input handle/pointer parameter before it is dereferenced. In `curl_url_dup()`, the parameter `in` is passed to `DUP()` and used directly as `in->portnum`, `in->port_present`, etc., without checking `if(!in)`. If a caller passes a NULL `CURLU *`, the function dereferences NULL and crashes. The fix adds an early `if(!in) return NULL;` check before any dereference, matching the expected behavior for public API handle duplication functions.

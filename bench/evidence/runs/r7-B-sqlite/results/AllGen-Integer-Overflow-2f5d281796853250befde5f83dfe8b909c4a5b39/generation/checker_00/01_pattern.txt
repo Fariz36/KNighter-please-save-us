@@ -1,0 +1,9 @@
+## Bug Pattern
+
+The bug pattern is using 32-bit `int` loop counters (`i`, `j`) in code whose indices and output sizes can grow up to SQLite’s configurable maximum string length (`SQLITE_MAX_LENGTH`). In `replaceFunc()`, the assertion
+
+```c
+assert( j+nStr-i+1<=nOut );
+```
+
+is evaluated using `int` arithmetic because `i`, `j`, and `nStr` are all `int`, while `nOut` is `i64`. When SQLite is built with `SQLITE_DEBUG` and an extra-large `SQLITE_MAX_LENGTH`, this expression can exceed `INT_MAX`, causing signed integer overflow. The counters should use a wider type such as `i64` so the size/assert arithmetic does not overflow.

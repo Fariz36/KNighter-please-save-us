@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing bounds check before using `short_oid->id[0]` as an index into the memory-mapped pack index fanout table (`level1_ofs`). The code dereferences `level1_ofs[(int)short_oid->id[0]]` without verifying that the mapped index region (`p->index_map.len`) is large enough for the version-specific fanout table offset, allowing an out-of-bounds read when processing a malformed or truncated pack index.

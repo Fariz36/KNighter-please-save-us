@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Conditional ownership transfer without cleanup on the no-transfer path. `pFromDup` is allocated/duplicated and is only attached to `pTriggerStep->pSrc` when both are non-NULL. If `pTriggerStep->pSrc` is NULL due to an earlier OOM (for example, after `triggerStepAllocate()` fails to duplicate the target table list), `pFromDup` is neither consumed nor freed, causing a memory leak. The missing `else` must free `pFromDup` with `sqlite3SrcListDelete()`.

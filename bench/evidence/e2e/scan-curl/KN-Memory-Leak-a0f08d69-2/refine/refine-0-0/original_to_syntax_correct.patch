@@ -1,0 +1,82 @@
+--- original_code.cpp+++ syntax_correct_refine_code.cpp@@ -37,6 +37,7 @@   bool isFunctionNamed(const CallEvent &Call, StringRef Name,
+                        CheckerContext &C) const;
+   void reportCleanupAfterClear(const CallEvent &Call, CheckerContext &C) const;
++  SymbolRef getBaseSymbol(const Expr *Arg, CheckerContext &C) const;
+ };
+ 
+ bool SAGenTestChecker::isFunctionNamed(const CallEvent &Call, StringRef Name,
+@@ -45,6 +46,26 @@   if (!OriginExpr)
+     return false;
+   return ExprHasName(OriginExpr, Name, C);
++}
++
++SymbolRef SAGenTestChecker::getBaseSymbol(const Expr *Arg,
++                                          CheckerContext &C) const {
++  if (!Arg)
++    return nullptr;
++
++  const MemRegion *MR = getMemRegionFromExpr(Arg, C);
++  if (!MR)
++    return nullptr;
++
++  const MemRegion *Base = MR->getBaseRegion();
++  if (!Base)
++    return nullptr;
++
++  const SymbolicRegion *SR = dyn_cast<SymbolicRegion>(Base);
++  if (!SR)
++    return nullptr;
++
++  return SR->getSymbol();
+ }
+ 
+ void SAGenTestChecker::checkPreCall(const CallEvent &Call,
+@@ -65,32 +86,28 @@     return;
+   }
+ 
++  // If a peer is linked after the struct was cleared, the peer field is
++  // re-initialized. Do not treat a subsequent Curl_peer_unlink() on the
++  // same struct as cleanup-after-clear.
++  if (isFunctionNamed(Call, "Curl_peer_link", C)) {
++    if (Call.getNumArgs() < 1)
++      return;
++
++    if (SymbolRef Sym = getBaseSymbol(Call.getArgExpr(0), C)) {
++      if (State->get<ClearedPtrs>(Sym)) {
++        State = State->remove<ClearedPtrs>(Sym);
++        C.addTransition(State);
++      }
++    }
++    return;
++  }
++
+   // Detect cleanup of a field after its containing struct was cleared.
+   if (isFunctionNamed(Call, "Curl_peer_unlink", C)) {
+     if (Call.getNumArgs() < 1)
+       return;
+ 
+-    const Expr *Arg = Call.getArgExpr(0);
+-    if (!Arg)
+-      return;
+-
+-    const MemRegion *MR = getMemRegionFromExpr(Arg, C);
+-    if (!MR)
+-      return;
+-
+-    // Only consider cleanup on a field, e.g. &ctx->dest.
+-    if (MR->getBaseRegion() == MR)
+-      return;
+-
+-    const MemRegion *Base = MR->getBaseRegion();
+-    if (!Base)
+-      return;
+-
+-    const SymbolicRegion *SR = dyn_cast<SymbolicRegion>(Base);
+-    if (!SR)
+-      return;
+-
+-    SymbolRef Sym = SR->getSymbol();
++    SymbolRef Sym = getBaseSymbol(Call.getArgExpr(0), C);
+     if (!Sym)
+       return;
+ 

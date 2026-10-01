@@ -1,0 +1,36 @@
+1. **Program State:**
+   - No custom program state is necessary. The bug pattern is a local AST pattern inside one branch condition and its preceding statements. Alias tracking and path-sensitive value tracking are not needed.
+
+2. **Bug Type Registration:**
+   - In the checker constructor, register a `BugType` for the report, e.g. `"Out-of-bounds read after delimiter"`.
+
+3. **Implement `checkBranchCondition`:**
+   - **Step 3.1:** Only handle conditions that belong to an `IfStmt`. Use `findSpecificTypeInParents<IfStmt>(Condition, C)`. If no enclosing `IfStmt` is found, return.
+   - **Step 3.2:** Traverse the condition AST to collect unsafe fixed-offset reads. For every `ArraySubscriptExpr`:
+     - Get the base after `IgnoreParenImpCasts()`.
+     - If the base is a `DeclRefExpr` to a pointer `VarDecl *P`, evaluate the index using `EvaluateExprToInt`.
+     - If the index is a constant `N > 0` (especially `1`, `2`, or `3`), record `(P, N, ArraySubscriptExpr*)`.
+   - **Step 3.3:** For each collected base pointer `P`, verify it matches the bug pattern:
+     - Get the enclosing `FunctionDecl` from `C.getLocationContext()->getDecl()`.
+     - Traverse its body and search for a prior call to `strchr`, `strrchr`, or `memchr` whose result is assigned/initialized to `P`.
+     - Search for a prior increment of `P` (`P++`, `++P`, or `P = P + 1`) before the current `IfStmt`.
+     - If either the delimiter-search assignment or the increment is missing, skip `P`.
+   - **Step 3.4:** Find the delimiter-character variable `S` if it exists:
+     - Search prior statements for an assignment or initialization like `S = P[0]` or `char S = P[0]`.
+   - **Step 3.5:** Check whether the condition guards `P` before the fixed-offset reads:
+     - Flatten the condition’s top-level `&&` chain into operands in evaluation order.
+     - Maintain `Guarded = false`.
+     - For each operand:
+       - If the operand is a boolean test of `S` or `P[0]` (e.g. `S`, `S != 0`, `P[0]`), set `Guarded = true`.
+       - If the operand contains any recorded unsafe access for `P` and `Guarded` is still `false`, report on that access and stop processing `P`.
+   - **Step 3.6:** Report the bug:
+     - Generate a non-fatal error node using `C.generateNonFatalErrorNode()`.
+     - Create a `PathSensitiveBugReport` with a short message such as `"Out-of-bounds read after strchr delimiter"`.
+     - Add the source range of the offending `ArraySubscriptExpr`.
+     - Emit the report with `C.emitReport(std::move(R))`.
+
+4. **False-Positive Control:**
+   - Only report when the pointer is confirmed to come from `strchr`/`strrchr`/`memchr` and is incremented.
+   - Only report offsets `> 0`.
+   - Do not report if the condition already checks `P[0]` or its saved delimiter `S` before the unsafe fixed-offset access.
+   - `checkBind` and `checkLocation` are not needed because the pattern is local to the branch condition.

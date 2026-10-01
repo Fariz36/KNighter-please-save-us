@@ -1,0 +1,82 @@
+{
+  "commit_id": "d6486af3e9decf1d3a626a0d211f0eb1a209c455",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/plugin-cache/plugins/a40f203ffce122c9c826/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/cli/opt_usage.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "cli_opt_help_fprint"
+        ],
+        "fixed_functions": [
+          "cli_opt_help_fprint"
+        ]
+      },
+      {
+        "path": "src/libgit2/diff_driver.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "git_diff_driver_load"
+        ],
+        "fixed_functions": [
+          "git_diff_driver_load"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/diff_driver.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 343,
+          "column": 6,
+          "function": "git_diff_driver_load",
+          "bug_type": "Uninitialized local variable",
+          "description": "Use of uninitialized local variable 'drv' in logical expression",
+          "issue_hash": "fc6936915e011b4894a3fbb6027fa2b6",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/faa537e9/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-fc6936.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/diff_driver.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 3.97,
+      "fixed": 3.84
+    },
+    "total_seconds": 7.87
+  },
+  "report_dir": "tmp/validation/d6486af3e9de/faa537e9"
+}

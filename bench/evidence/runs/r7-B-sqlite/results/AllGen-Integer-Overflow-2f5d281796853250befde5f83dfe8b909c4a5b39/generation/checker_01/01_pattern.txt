@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using 32-bit `int` loop counters (`i`, `j`) in size/counter arithmetic that can exceed `INT_MAX` before being compared with a wider `i64` size variable (`nOut`). In `replaceFunc()`, the assertion expression `j+nStr-i+1` is evaluated entirely in `int` because all operands are `int`/`int` loop counters, even though the right-hand side is `i64`. With an extra-large `SQLITE_MAX_LENGTH` and `SQLITE_DEBUG`, this can cause signed integer overflow/undefined behavior inside the assertion. The fix promotes the loop counters to `i64`, matching the width of the size accounting.

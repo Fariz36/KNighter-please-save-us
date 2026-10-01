@@ -1,0 +1,39 @@
+1. **Register Program State Map:**
+   - Use `REGISTER_MAP_WITH_PROGRAMSTATE(ASN1LenBufferMap, const MemRegion *, bool)` to track memory regions that originate from ASN1 length-delimited APIs. Presence of a region in this map means it is a length-delimited buffer that may not be NUL-terminated.
+   - Tracking `MemRegion` automatically handles aliases, so no separate alias map is required.
+
+2. **Implement Helper Functions:**
+   - `isASN1Get0Data`, `isASN1ToUTF8`, `isStrlen`, `isPrintfLike` to match callee names.
+   - `getFormatArgIndex` to return the format string argument index for known printf-like functions (e.g., `0` for `printf`, `1` for `fprintf`, `failf`, `infof`).
+   - A simple format-string parser that iterates over `%s` specifiers, determines whether a specifier lacks a precision (i.e., no `.` before `s`), and computes the corresponding variadic argument index.
+
+3. **Model ASN1 APIs in `evalCall`:**
+   - If the call is `ASN1_STRING_get0_data`:
+     - Conjure a symbolic heap region for the returned buffer using `getConjuredHeapSymbolVal`.
+     - Bind the call’s return expression to `loc::MemRegionVal(BufferRegion)`.
+     - Mark `BufferRegion` in `ASN1LenBufferMap`.
+     - Add transition and return `true`.
+   - If the call is `ASN1_STRING_to_UTF8`:
+     - Get the first argument expression (e.g., `&cn`) and its `SVal` (a `Loc` for the pointer variable).
+     - Conjure a symbolic heap region `BufferRegion` for the output buffer.
+     - Bind the pointer variable to `BufferRegion` via `State->bindLoc(OutLoc, loc::MemRegionVal(BufferRegion), C.getLocationContext())`.
+     - Mark `BufferRegion` in `ASN1LenBufferMap`.
+     - Bind the call’s return value to a conjured symbolic integer (the length).
+     - Add transition and return `true`.
+
+4. **Detect Misuse in `strlen` (`checkPreCall`):**
+   - If the call is `strlen`, retrieve the first argument’s `MemRegion` using `getMemRegionFromExpr`.
+   - If the region exists in `ASN1LenBufferMap`, generate a non-fatal error node and emit a `PathSensitiveBugReport` with message: `"ASN1 length-delimited buffer used as NUL-terminated string (strlen)"`.
+
+5. **Detect Misuse in printf-like `%s` (`checkPreCall`):**
+   - If the call is a known printf-like function, get the format string argument index.
+   - If the format string is a `StringLiteral`, parse it. For each `%s` specifier without precision, determine the corresponding variadic argument index.
+   - Retrieve that argument’s `MemRegion` using `getMemRegionFromExpr`.
+   - If the region exists in `ASN1LenBufferMap`, generate a non-fatal error node and emit a `PathSensitiveBugReport` with message: `"ASN1 length-delimited buffer passed to %s"`.
+
+6. **Reporting:**
+   - Use `C.generateNonFatalErrorNode()` to obtain the error node.
+   - Create `std::make_unique<PathSensitiveBugReport>(*N, "short message", N->getLocation())` and emit via `C.emitReport(...)`.
+
+7. **Optional Cleanup:**
+   - Implement `checkDeadSymbols` to remove dead regions from `ASN1LenBufferMap` to keep the program state small. (Not strictly required for correctness.)

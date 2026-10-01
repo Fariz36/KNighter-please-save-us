@@ -1,0 +1,538 @@
+## Patch Description
+
+Fix a bug in the DFA destructor.
+
+Change-Id: I6ab0bef2223b6b9b64db0fd6cb1178ef4d9cf8d7
+Reviewed-on: https://code-review.googlesource.com/c/36390
+Reviewed-by: Paul Wankadia <junyer@google.com>
+
+## Buggy Code
+
+```c
+// Complete file: re2/dfa.cc (tree-sitter fallback)
+// Copyright 2008 The RE2 Authors.  All Rights Reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// A DFA (deterministic finite automaton)-based regular expression search.
+//
+// The DFA search has two main parts: the construction of the automaton,
+// which is represented by a graph of State structures, and the execution
+// of the automaton over a given input string.
+//
+// The basic idea is that the State graph is constructed so that the
+// execution can simply start with a state s, and then for each byte c in
+// the input string, execute "s = s->next[c]", checking at each point whether
+// the current s represents a matching state.
+//
+// The simple explanation just given does convey the essence of this code,
+// but it omits the details of how the State graph gets constructed as well
+// as some performance-driven optimizations to the execution of the automaton.
+// All these details are explained in the comments for the code following
+// the definition of class DFA.
+//
+// See http://swtch.com/~rsc/regexp/ for a very bare-bones equivalent.
+
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+#include <algorithm>
+#include <atomic>
+#include <deque>
+#include <mutex>
+#include <new>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <utility>
+#include <vector>
+
+#include "util/util.h"
+#include "util/logging.h"
+#include "util/mix.h"
+#include "util/mutex.h"
+#include "util/sparse_set.h"
+#include "util/strutil.h"
+#include "re2/prog.h"
+#include "re2/stringpiece.h"
+
+#if defined(RE2_USE_NUMA)
+#include <numa.h>
+#include <sched.h>
+#endif
+
+// Silence "zero-sized array in struct/union" warning for DFA::State::next_.
+#ifdef _MSC_VER
+#pragma warning(disable: 4200)
+#endif
+
+namespace re2 {
+
+#if !defined(__linux__)  /* only Linux seems to have memrchr */
+static void* memrchr(const void* s, int c, size_t n) {
+  const unsigned char* p = (const unsigned char*)s;
+  for (p += n; n > 0; n--)
+    if (*--p == c)
+      return (void*)p;
+
+  return NULL;
+}
+#endif
+
+// Controls whether the DFA should bail out early if the NFA would be faster.
+static bool dfa_should_bail_when_slow = true;
+
+// Changing this to true compiles in prints that trace execution of the DFA.
+// Generates a lot of output -- only useful for debugging.
+static const bool ExtraDebug = false;
+
+// A DFA implementation of a regular expression program.
+// Since this is entirely a forward declaration mandated by C++,
+// some of the comments here are better understood after reading
+// the comments in the sections that follow the DFA definition.
+class DFA {
+ public:
+  DFA(Prog* prog, Prog::MatchKind kind, int64_t max_mem);
+  ~DFA();
+  bool ok() const { return !init_failed_; }
+  Prog::MatchKind kind() { return kind_; }
+
+  // Searches for the regular expression in text, which is considered
+  // as a subsection of context for the purposes of interpreting flags
+  // like ^ and $ and \A and \z.
+  // Returns whether a match was found.
+  // If a match is found, sets *ep to the end point of the best match in text.
+  // If "anchored", the match must begin at the start of text.
+  // If "want_earliest_match", the match that ends first is used, not
+  //   necessarily the best one.
+  // If "run_forward" is true, the DFA runs from text.begin() to text.end().
+  //   If it is false, the DFA runs from text.end() to text.begin(),
+  //   returning the leftmost end of the match instead of the rightmost one.
+  // If the DFA cannot complete the search (for example, if it is out of
+  //   memory), it sets *failed and returns false.
+  bool Search(const StringPiece& text, const StringPiece& context,
+              bool anchored, bool want_earliest_match, bool run_forward,
+              bool* failed, const char** ep, SparseSet* matches);
+
+  // Builds out all states for the entire DFA.
+  // If cb is not empty, it receives one callback per state built.
+  // Returns the number of states built.
+  // FOR TESTING OR EXPERIMENTAL PURPOSES ONLY.
+  int BuildAllStates(const Prog::DFAStateCallback& cb);
+
+  // Computes min and max for matching strings.  Won't return strings
+  // bigger than maxlen.
+  bool PossibleMatchRange(string* min, string* max, int maxlen);
+
+  // These data structures are logically private, but C++ makes it too
+  // difficult to mark them as such.
+  class RWLocker;
+  class StateSaver;
+  class Workq;
+
+  // A single DFA state.  The DFA is represented as a graph of these
+  // States, linked by the next_ pointers.  If in state s and reading
+  // byte c, the next state should be s->next_[c].
+  struct State {
+    inline bool IsMatch() const { return (flag_ & kFlagMatch) != 0; }
+    void SaveMatch(std::vector<int>* v);
+
+    int* inst_;         // Instruction pointers in the state.
+    int ninst_;         // # of inst_ pointers.
+    uint32_t flag_;     // Empty string bitfield flags in effect on the way
+                        // into this state, along with kFlagMatch if this
+                        // is a matching state.
+
+// Work around the bug affecting flexible array members in GCC 6.x (for x >= 1).
+// (https://gcc.gnu.org/bugzilla/show_bug.cgi?id=70932)
+#if !defined(__clang__) && defined(__GNUC__) && __GNUC__ == 6 && __GNUC_MINOR__ >= 1
+    std::atomic<State*> next_[0];   // Outgoing arrows from State,
+#else
+    std::atomic<State*> next_[];    // Outgoing arrows from State,
+#endif
+
+                        // one per input byte class
+  };
+
+  enum {
+    kByteEndText = 256,         // imaginary byte at end of text
+
+    kFlagEmptyMask = 0xFF,      // State.flag_: bits holding kEmptyXXX flags
+    kFlagMatch = 0x0100,        // State.flag_: this is a matching state
+    kFlagLastWord = 0x0200,     // State.flag_: last byte was a word char
+    kFlagNeedShift = 16,        // needed kEmpty bits are or'ed in shifted left
+  };
+
+  struct StateHash {
+    size_t operator()(const State* a) const {
+      DCHECK(a != NULL);
+      HashMix mix(a->flag_);
+      for (int i = 0; i < a->ninst_; i++)
+        mix.Mix(a->inst_[i]);
+      mix.Mix(0);
+      return mix.get();
+    }
+  };
+
+  struct StateEqual {
+    bool operator()(const State* a, const State* b) const {
+      DCHECK(a != NULL);
+      DCHECK(b != NULL);
+      if (a == b)
+        return true;
+      if (a->flag_ != b->flag_)
+        return false;
+      if (a->ninst_ != b->ninst_)
+        return false;
+      for (int i = 0; i < a->ninst_; i++)
+        if (a->inst_[i] != b->inst_[i])
+          return false;
+      return true;
+    }
+  };
+
+  typedef std::unordered_set<State*, StateHash, StateEqual> StateSet;
+
+ private:
+  // Special "first_byte" values for a state.  (Values >= 0 denote actual bytes.)
+  enum {
+    kFbUnknown = -1,   // No analysis has been performed.
+    kFbNone = -2,      // The first-byte trick cannot be used.
+  };
+
+  enum {
+    // Indices into start_ for unanchored searches.
+    // Add kStartAnchored for anchored searches.
+    kStartBeginText = 0,          // text at beginning of context
+    kStartBeginLine = 2,          // text at beginning of line
+    kStartAfterWordChar = 4,      // text follows a word character
+    kStartAfterNonWordChar = 6,   // text follows non-word character
+    kMaxStart = 8,
+
+    kStartAnchored = 1,
+  };
+
+  // Resets the DFA State cache, flushing all saved State* information.
+  // Releases and reacquires cache_mutex_ via cache_lock, so any
+  // State* existing before the call are not valid after the call.
+  // Use a StateSaver to preserve important states across the call.
+  // cache_mutex_.r <= L < mutex_
+  // After: cache_mutex_.w <= L < mutex_
+  void ResetCache(RWLocker* cache_lock);
+
+  // Looks up and returns the State corresponding to a Workq.
+  // L >= mutex_
+  State* WorkqToCachedState(Workq* q, Workq* mq, uint32_t flag);
+
+  // Looks up and returns a State matching the inst, ninst, and flag.
+  // L >= mutex_
+  State* CachedState(int* inst, int ninst, uint32_t flag);
+
+  // Clear the cache entirely.
+  // Must hold cache_mutex_.w or be in destructor.
+  void ClearCache();
+
+  // Converts a State into a Workq: the opposite of WorkqToCachedState.
+  // L >= mutex_
+  void StateToWorkq(State* s, Workq* q);
+
+  // Runs a State on a given byte, returning the next state.
+  State* RunStateOnByteUnlocked(State*, int);  // cache_mutex_.r <= L < mutex_
+  State* RunStateOnByte(State*, int);          // L >= mutex_
+
+  // Runs a Workq on a given byte followed by a set of empty-string flags,
+  // producing a new Workq in nq.  If a match instruction is encountered,
+  // sets *ismatch to true.
+  // L >= mutex_
+  void RunWorkqOnByte(Workq* q, Workq* nq,
+                      int c, uint32_t flag, bool* ismatch);
+
+  // Runs a Workq on a set of empty-string flags, producing a new Workq in nq.
+  // L >= mutex_
+  void RunWorkqOnEmptyString(Workq* q, Workq* nq, uint32_t flag);
+
+  // Adds the instruction id to the Workq, following empty arrows
+  // according to flag.
+  // L >= mutex_
+  void AddToQueue(Workq* q, int id, uint32_t flag);
+
+  // For debugging, returns a text representation of State.
+  static string DumpState(State* state);
+
+
+// ... [TRUNCATED: 1737 lines omitted] ...
+
+  int nnext = prog_->bytemap_range() + 1;  // + 1 for kByteEndText slot
+  std::vector<int> input(nnext);
+  for (int c = 0; c < 256; c++) {
+    int b = prog_->bytemap()[c];
+    while (c < 256-1 && prog_->bytemap()[c+1] == b)
+      c++;
+    input[b] = c;
+  }
+  input[prog_->bytemap_range()] = kByteEndText;
+
+  // Scratch space for the output.
+  std::vector<int> output(nnext);
+
+  // Flood to expand every state.
+  bool oom = false;
+  while (!q.empty()) {
+    State* s = q.front();
+    q.pop_front();
+    for (int c : input) {
+      State* ns = RunStateOnByteUnlocked(s, c);
+      if (ns == NULL) {
+        oom = true;
+        break;
+      }
+      if (ns == DeadState) {
+        output[ByteMap(c)] = -1;
+        continue;
+      }
+      if (m.find(ns) == m.end()) {
+        m.emplace(ns, static_cast<int>(m.size()));
+        q.push_back(ns);
+      }
+      output[ByteMap(c)] = m[ns];
+    }
+    if (cb)
+      cb(oom ? NULL : output.data(),
+         s == FullMatchState || s->IsMatch());
+    if (oom)
+      break;
+  }
+
+  return static_cast<int>(m.size());
+}
+
+// Build out all states in DFA for kind.  Returns number of states.
+int Prog::BuildEntireDFA(MatchKind kind, const DFAStateCallback& cb) {
+  return GetDFA(kind)->BuildAllStates(cb);
+}
+
+void Prog::TEST_dfa_should_bail_when_slow(bool b) {
+  dfa_should_bail_when_slow = b;
+}
+
+// Computes min and max for matching string.
+// Won't return strings bigger than maxlen.
+bool DFA::PossibleMatchRange(string* min, string* max, int maxlen) {
+  if (!ok())
+    return false;
+
+  // NOTE: if future users of PossibleMatchRange want more precision when
+  // presented with infinitely repeated elements, consider making this a
+  // parameter to PossibleMatchRange.
+  static int kMaxEltRepetitions = 0;
+
+  // Keep track of the number of times we've visited states previously. We only
+  // revisit a given state if it's part of a repeated group, so if the value
+  // portion of the map tuple exceeds kMaxEltRepetitions we bail out and set
+  // |*max| to |PrefixSuccessor(*max)|.
+  //
+  // Also note that previously_visited_states[UnseenStatePtr] will, in the STL
+  // tradition, implicitly insert a '0' value at first use. We take advantage
+  // of that property below.
+  std::unordered_map<State*, int> previously_visited_states;
+
+  // Pick out start state for anchored search at beginning of text.
+  RWLocker l(this);
+  SearchParams params(StringPiece(), StringPiece(), &l);
+  params.anchored = true;
+  if (!AnalyzeSearch(&params))
+    return false;
+  if (params.start == DeadState) {  // No matching strings
+    *min = "";
+    *max = "";
+    return true;
+  }
+  if (params.start == FullMatchState)  // Every string matches: no max
+    return false;
+
+  // The DFA is essentially a big graph rooted at params.start,
+  // and paths in the graph correspond to accepted strings.
+  // Each node in the graph has potentially 256+1 arrows
+  // coming out, one for each byte plus the magic end of
+  // text character kByteEndText.
+
+  // To find the smallest possible prefix of an accepted
+  // string, we just walk the graph preferring to follow
+  // arrows with the lowest bytes possible.  To find the
+  // largest possible prefix, we follow the largest bytes
+  // possible.
+
+  // The test for whether there is an arrow from s on byte j is
+  //    ns = RunStateOnByteUnlocked(s, j);
+  //    if (ns == NULL)
+  //      return false;
+  //    if (ns != DeadState && ns->ninst > 0)
+  // The RunStateOnByteUnlocked call asks the DFA to build out the graph.
+  // It returns NULL only if the DFA has run out of memory,
+  // in which case we can't be sure of anything.
+  // The second check sees whether there was graph built
+  // and whether it is interesting graph.  Nodes might have
+  // ns->ninst == 0 if they exist only to represent the fact
+  // that a match was found on the previous byte.
+
+  // Build minimum prefix.
+  State* s = params.start;
+  min->clear();
+  MutexLock lock(&mutex_);
+  for (int i = 0; i < maxlen; i++) {
+    if (previously_visited_states[s] > kMaxEltRepetitions)
+      break;
+    previously_visited_states[s]++;
+
+    // Stop if min is a match.
+    State* ns = RunStateOnByte(s, kByteEndText);
+    if (ns == NULL)  // DFA out of memory
+      return false;
+    if (ns != DeadState && (ns == FullMatchState || ns->IsMatch()))
+      break;
+
+    // Try to extend the string with low bytes.
+    bool extended = false;
+    for (int j = 0; j < 256; j++) {
+      ns = RunStateOnByte(s, j);
+      if (ns == NULL)  // DFA out of memory
+        return false;
+      if (ns == FullMatchState ||
+          (ns > SpecialStateMax && ns->ninst_ > 0)) {
+        extended = true;
+        min->append(1, static_cast<char>(j));
+        s = ns;
+        break;
+      }
+    }
+    if (!extended)
+      break;
+  }
+
+  // Build maximum prefix.
+  previously_visited_states.clear();
+  s = params.start;
+  max->clear();
+  for (int i = 0; i < maxlen; i++) {
+    if (previously_visited_states[s] > kMaxEltRepetitions)
+      break;
+    previously_visited_states[s] += 1;
+
+    // Try to extend the string with high bytes.
+    bool extended = false;
+    for (int j = 255; j >= 0; j--) {
+      State* ns = RunStateOnByte(s, j);
+      if (ns == NULL)
+        return false;
+      if (ns == FullMatchState ||
+          (ns > SpecialStateMax && ns->ninst_ > 0)) {
+        extended = true;
+        max->append(1, static_cast<char>(j));
+        s = ns;
+        break;
+      }
+    }
+    if (!extended) {
+      // Done, no need for PrefixSuccessor.
+      return true;
+    }
+  }
+
+  // Stopped while still adding to *max - round aaaaaaaaaa... to aaaa...b
+  PrefixSuccessor(max);
+
+  // If there are no bytes left, we have no way to say "there is no maximum
+  // string".  We could make the interface more complicated and be able to
+  // return "there is no maximum but here is a minimum", but that seems like
+  // overkill -- the most common no-max case is all possible strings, so not
+  // telling the caller that the empty string is the minimum match isn't a
+  // great loss.
+  if (max->empty())
+    return false;
+
+  return true;
+}
+
+// PossibleMatchRange for a Prog.
+bool Prog::PossibleMatchRange(string* min, string* max, int maxlen) {
+  // Have to use dfa_longest_ to get all strings for full matches.
+  // For example, (a|aa) never matches aa in first-match mode.
+  return GetDFA(kLongestMatch)->PossibleMatchRange(min, max, maxlen);
+}
+
+#if defined(RE2_USE_NUMA)
+static int numa_max_count;
+static std::vector<int>* numa_cpu_map;
+
+void InitNUMA() {
+  numa_max_count = 0;
+  numa_cpu_map = new std::vector<int>;
+  if (numa_available() == -1)
+    return;
+  int nodes = numa_num_configured_nodes();
+  if (nodes < 1)
+    return;
+  int cpus = numa_num_configured_cpus();
+  if (cpus < 1)
+    return;
+  std::vector<int> count;
+  count.resize(nodes);
+  for (int cpu = 0; cpu < cpus; cpu++) {
+    int node = numa_node_of_cpu(cpu);
+    numa_cpu_map->emplace_back(count[node]++);
+  }
+  numa_max_count = *std::max_element(count.begin(), count.end());
+}
+#endif
+
+int DFA::CacheMutexCount() const {
+#if !defined(RE2_USE_NUMA)
+  return 1;
+#else
+  if (!prog_->shard_cache_mutex())
+    return 1;
+  static std::once_flag numa_once;
+  std::call_once(numa_once, &InitNUMA);
+  if (numa_max_count == 0)
+    return 1;
+  return numa_max_count;
+#endif
+}
+
+int DFA::WhichCacheMutex() const {
+#if !defined(RE2_USE_NUMA)
+  return 0;
+#else
+  if (!prog_->shard_cache_mutex())
+    return 0;
+  if (numa_cpu_map->empty())
+    return 0;
+  return (*numa_cpu_map)[sched_getcpu()];
+#endif
+}
+
+}  // namespace re2
+```
+
+## Bug Fix Patch
+
+```diff
+diff --git a/re2/dfa.cc b/re2/dfa.cc
+index 5c50b4a..5574071 100644
+--- a/re2/dfa.cc
++++ b/re2/dfa.cc
+@@ -522,8 +522,10 @@ DFA::DFA(Prog* prog, Prog::MatchKind kind, int64_t max_mem)
+ }
+ 
+ DFA::~DFA() {
+-  for (int i = 0; i < cache_mutex_count_; i++)
+-    cache_mutex_[i].~AlignedMutex();
++  if (cache_mutex_storage_ != NULL) {
++    for (int i = 0; i < cache_mutex_count_; i++)
++      cache_mutex_[i].~AlignedMutex();
++  }
+   delete[] cache_mutex_storage_;
+   delete[] astack_;
+   delete q1_;
+```

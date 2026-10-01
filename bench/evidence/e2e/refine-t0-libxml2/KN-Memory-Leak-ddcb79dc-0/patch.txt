@@ -1,0 +1,143 @@
+## Patch Description
+
+parser: Fix memory leak in xmlCtxtSetSaxHandler
+
+## Buggy Code
+
+```c
+// Function: testSwitchDtd in testparser.c
+static int
+testSwitchDtd(void) {
+    const char dtdContent[] =
+        "<!ENTITY test '<elem1/><elem2/>'>\n";
+    const char docContent[] =
+        "<!DOCTYPE doc SYSTEM 'entities.dtd'>\n"
+        "<doc>&test;</doc>\n";
+    xmlParserInputBufferPtr input;
+    xmlParserCtxtPtr ctxt;
+    xmlDtdPtr dtd;
+    xmlDocPtr doc;
+    xmlEntityPtr ent;
+    int err = 0;
+
+    input = xmlParserInputBufferCreateStatic(dtdContent,
+                                             sizeof(dtdContent) - 1,
+                                             XML_CHAR_ENCODING_NONE);
+    dtd = xmlIOParseDTD(NULL, input, XML_CHAR_ENCODING_NONE);
+
+    ctxt = xmlNewParserCtxt();
+    ctxt->_private = dtd;
+    ctxt->sax->externalSubset = testSwitchDtdExtSubset;
+    doc = xmlCtxtReadMemory(ctxt, docContent, sizeof(docContent) - 1, NULL,
+                            NULL, XML_PARSE_NOENT | XML_PARSE_DTDLOAD);
+    xmlFreeParserCtxt(ctxt);
+
+    ent = xmlGetDocEntity(doc, BAD_CAST "test");
+    if (ent->children->doc != NULL) {
+        fprintf(stderr, "Entity content should have NULL doc\n");
+        err = 1;
+    }
+
+    /* Free doc before DTD */
+    doc->extSubset = NULL;
+    xmlFreeDoc(doc);
+    xmlFreeDtd(dtd);
+
+    return err;
+}
+```
+
+```c
+// Function: xmlCtxtSetSaxHandler in parserInternals.c
+int
+xmlCtxtSetSaxHandler(xmlParserCtxt *ctxt, const xmlSAXHandler *sax) {
+    xmlSAXHandler *copy;
+
+    if ((ctxt == NULL) || (sax == NULL))
+        return(-1);
+
+    copy = xmlMalloc(sizeof(*copy));
+    if (copy == NULL)
+        return(-1);
+
+    memcpy(copy, sax, sizeof(*copy));
+    ctxt->sax = copy;
+
+    return(0);
+}
+```
+
+```c
+// Function: testSwitchDtdExtSubset in testparser.c
+static void
+testSwitchDtdExtSubset(void *vctxt, const xmlChar *name ATTRIBUTE_UNUSED,
+                       const xmlChar *externalId ATTRIBUTE_UNUSED,
+                       const xmlChar *systemId ATTRIBUTE_UNUSED) {
+    xmlParserCtxtPtr ctxt = vctxt;
+
+    ctxt->myDoc->extSubset = ctxt->_private;
+}
+```
+
+## Bug Fix Patch
+
+```diff
+diff --git a/parserInternals.c b/parserInternals.c
+index c3eec132..24e7c5ba 100644
+--- a/parserInternals.c
++++ b/parserInternals.c
+@@ -3189,17 +3189,10 @@ xmlCtxtGetSaxHandler(xmlParserCtxt *ctxt) {
+  */
+ int
+ xmlCtxtSetSaxHandler(xmlParserCtxt *ctxt, const xmlSAXHandler *sax) {
+-    xmlSAXHandler *copy;
+-
+-    if ((ctxt == NULL) || (sax == NULL))
+-        return(-1);
+-
+-    copy = xmlMalloc(sizeof(*copy));
+-    if (copy == NULL)
++    if ((ctxt == NULL) || (ctxt->sax == NULL) || (sax == NULL))
+         return(-1);
+ 
+-    memcpy(copy, sax, sizeof(*copy));
+-    ctxt->sax = copy;
++    *ctxt->sax = *sax;
+ 
+     return(0);
+ }
+diff --git a/testparser.c b/testparser.c
+index 30b4eaa4..02f5c5f5 100644
+--- a/testparser.c
++++ b/testparser.c
+@@ -279,7 +279,7 @@ testSwitchDtdExtSubset(void *vctxt, const xmlChar *name ATTRIBUTE_UNUSED,
+                        const xmlChar *systemId ATTRIBUTE_UNUSED) {
+     xmlParserCtxtPtr ctxt = vctxt;
+ 
+-    ctxt->myDoc->extSubset = ctxt->_private;
++    ctxt->myDoc->extSubset = xmlCtxtGetPrivate(ctxt);
+ }
+ 
+ static int
+@@ -291,6 +291,7 @@ testSwitchDtd(void) {
+         "<doc>&test;</doc>\n";
+     xmlParserInputBufferPtr input;
+     xmlParserCtxtPtr ctxt;
++    xmlSAXHandler sax;
+     xmlDtdPtr dtd;
+     xmlDocPtr doc;
+     xmlEntityPtr ent;
+@@ -302,8 +303,10 @@ testSwitchDtd(void) {
+     dtd = xmlIOParseDTD(NULL, input, XML_CHAR_ENCODING_NONE);
+ 
+     ctxt = xmlNewParserCtxt();
+-    ctxt->_private = dtd;
+-    ctxt->sax->externalSubset = testSwitchDtdExtSubset;
++    xmlCtxtSetPrivate(ctxt, dtd);
++    xmlSAXVersion(&sax, 2);
++    sax.externalSubset = testSwitchDtdExtSubset;
++    xmlCtxtSetSaxHandler(ctxt, &sax);
+     doc = xmlCtxtReadMemory(ctxt, docContent, sizeof(docContent) - 1, NULL,
+                             NULL, XML_PARSE_NOENT | XML_PARSE_DTDLOAD);
+     xmlFreeParserCtxt(ctxt);
+```

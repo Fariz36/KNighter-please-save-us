@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Cleanup order violation: the code zeroes out a containing struct with `memset()` before unlinking/releasing an embedded resource. Here, `ctx->dest` is an intrusive list node; calling `Curl_peer_unlink(&ctx->dest)` after `memset(ctx, 0, ...)` loses the node’s list pointers, so the unlink becomes ineffective and the peer is leaked. The unlink must happen before the struct is cleared.

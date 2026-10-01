@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is an **ownership-transfer leak on an error/OOM path**: a locally allocated or duplicated object (`pFromDup`) is conditionally handed off to another object via `sqlite3SrcListAppendList()`. If that handoff condition is false — for example, `pTriggerStep->pSrc` is `NULL` after an earlier OOM — the duplicate is neither attached to the owner nor freed, so it leaks. The root cause is allocating/duplicating a resource and only cleaning it up on the success/transfer path, while omitting cleanup on the non-transfer path.

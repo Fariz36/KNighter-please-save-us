@@ -1,0 +1,260 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-01 17:05:43.136 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (re2), Repository Path: /home/faris/RA-MrYudis/Knight/targets/re2; plugin_build=standalone; validation_scoring=strict
+2026-10-01 17:05:43.137 | DEBUG    | __main__:init_config:28 - Config file: e2e/refine-t0-re2.yaml
+2026-10-01 17:05:43.137 | DEBUG    | __main__:init_config:29 - Result dir: e2e/refine-t0-re2
+2026-10-01 17:05:43.137 | DEBUG    | __main__:init_config:30 - Analysis backend: Analysis Backend Path: /home/faris/RA-MrYudis/Knight/KNighter/llvm
+2026-10-01 17:05:43.138 | DEBUG    | __main__:init_config:31 - Target: Target Type: compiledb (re2), Repository Path: /home/faris/RA-MrYudis/Knight/targets/re2
+2026-10-01 17:05:43.280 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-bd3f549aae3741c5)
+2026-10-01 17:05:43.280 | INFO     | __main__:main:90 - Refine and improve checkers
+2026-10-01 17:05:43.281 | INFO     | checker_refine:_create_progress_tracker:134 - Progress tracking initialized: e2e/refine-t0-re2/refinement_progress.log
+2026-10-01 17:05:43.281 | INFO     | checker_refine:refine_checker:44 - Found 3 checker directories, validating...
+2026-10-01 17:05:43.297 | INFO     | checker_refine:refine_checker:65 - Starting refinement of 3 valid checkers in e2e/refine-t0-re2
+2026-10-01 17:05:43.297 | INFO     | checker_refine:refine_checker:74 - [1/3] Refining checker e2e/refine-t0-re2/KN-Null-Pointer-Dereference-fadc3450-0...
+2026-10-01 17:05:43.301 | INFO     | checker_refine:refine_checker_with_max_attempts:557 - Starting refinement of checker KN-Null-Pointer-Dereference-fadc3450-0 with max 2 attempts
+2026-10-01 17:05:43.301 | INFO     | checker_refine:refine_checker_with_max_attempts:562 - === Refinement Attempt 1/2 ===
+2026-10-01 17:05:43.301 | INFO     | checker_refine:refine_checker_with_max_attempts:563 - Last scan ID: None
+2026-10-01 17:05:43.311 | INFO     | checker_repair:repair_checker:51 - Compilation attempt 1/5
+2026-10-01 17:06:09.753 | INFO     | backends.plugin_builder:build:364 - Built plugin 25a22c92f5cf7580e21c (compile 23.1s, link 3.4s)
+2026-10-01 17:06:09.756 | INFO     | checker_repair:repair_checker:60 - Syntax repair successful!
+2026-10-01 17:06:09.757 | INFO     | checker_refine:_initialize_refinement:1056 - Compiled original code successfully!
+2026-10-01 17:06:09.761 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 25a22c92f5cf7580e21c
+2026-10-01 17:06:32.262 | ERROR    | checker_refine:_scan_target:1087 - Error scanning target: [re2] setup failed for 972a15cedd00 (cmake -S /home/faris/RA-MrYudis/Knight/targets/.knighter-work/re2/src/972a15cedd00 -B /home/faris/RA-MrYudis/Knight/targets/.knighter-work/re2/build/972a15cedd00-57512bd124ee -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DRE2_BUILD_TESTING=OFF -DCMAKE_CXX_COMPILER=/home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang++ -DCMAKE_C_COMPILER=/home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang -DCMAKE_POLICY_VERSION_MINIMUM=3.5):
+$ cmake -S /home/faris/RA-MrYudis/Knight/targets/.knighter-work/re2/src/972a15cedd00 -B /home/faris/RA-MrYudis/Knight/targets/.knighter-work/re2/build/972a15cedd00-57512bd124ee -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DRE2_BUILD_TESTING=OFF -DCMAKE_CXX_COMPILER=/home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang++ -DCMAKE_C_COMPILER=/home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+-- The CXX compiler identification is Clang 18.1.8
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+CMake Error at CMakeLists.txt:94 (find_package):
+  By not providing "Findabsl.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "absl", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "absl" with any of
+  the following names:
+
+    abslConfig.cmake
+    absl-config.cmake
+
+  Add the installation prefix of "absl" to CMAKE_PREFIX_PATH or set
+  "absl_DIR" to a directory containing one of the above files.  If "absl"
+  provides a separate development package or SDK, be sure it has been
+  installed.
+
+
+-- Configuring incomplete, errors occurred!
+
+2026-10-01 17:06:32.262 | INFO     | checker_refine:_log_attempt_result:619 - Attempt 1 Result:
+2026-10-01 17:06:32.262 | INFO     | checker_refine:_log_attempt_result:620 -   - Status: Failed
+2026-10-01 17:06:32.262 | INFO     | checker_refine:_log_attempt_result:621 -   - Refined: False
+2026-10-01 17:06:32.263 | INFO     | checker_refine:_log_attempt_result:628 -   - ✗ Code Changed: NO (no valid modifications made)
+2026-10-01 17:06:32.263 | INFO     | checker_refine:_log_attempt_result:630 -   - Reports: 0
+2026-10-01 17:06:32.263 | INFO     | checker_refine:_log_attempt_result:631 -   - True Positives: 0
+2026-10-01 17:06:32.263 | INFO     | checker_refine:_log_attempt_result:632 -   - False Positives: 0
+2026-10-01 17:06:32.263 | INFO     | checker_refine:_log_attempt_result:640 -   - Refine Attempts: 0
+2026-10-01 17:06:32.263 | WARNING  | checker_refine:refine_checker_with_max_attempts:605 - Attempt 1 failed - will reuse scan results
+2026-10-01 17:06:32.263 | INFO     | checker_refine:refine_checker_with_max_attempts:562 - === Refinement Attempt 2/2 ===
+2026-10-01 17:06:32.263 | INFO     | checker_refine:refine_checker_with_max_attempts:563 - Last scan ID: 0
+2026-10-01 17:06:32.264 | INFO     | checker_repair:repair_checker:51 - Compilation attempt 1/5
+2026-10-01 17:06:32.264 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 25a22c92f5cf7580e21c
+2026-10-01 17:06:32.265 | INFO     | checker_repair:repair_checker:60 - Syntax repair successful!
+2026-10-01 17:06:32.265 | INFO     | checker_refine:_initialize_refinement:1056 - Compiled original code successfully!
+2026-10-01 17:06:32.267 | ERROR    | backends.csa:extract_reports:2414 - No report found!
+2026-10-01 17:06:32.267 | INFO     | checker_refine:_process_reports:1106 - Total reports: 0
+2026-10-01 17:06:32.267 | INFO     | checker_refine:_process_reports:1108 - Checker is perfect!
+2026-10-01 17:06:32.267 | INFO     | checker_refine:_log_attempt_result:619 - Attempt 2 Result:
+2026-10-01 17:06:32.267 | INFO     | checker_refine:_log_attempt_result:620 -   - Status: Perfect
+2026-10-01 17:06:32.268 | INFO     | checker_refine:_log_attempt_result:621 -   - Refined: False
+2026-10-01 17:06:32.268 | INFO     | checker_refine:_log_attempt_result:628 -   - ✗ Code Changed: NO (no valid modifications made)
+2026-10-01 17:06:32.268 | INFO     | checker_refine:_log_attempt_result:630 -   - Reports: 0
+2026-10-01 17:06:32.268 | INFO     | checker_refine:_log_attempt_result:631 -   - True Positives: 0
+2026-10-01 17:06:32.268 | INFO     | checker_refine:_log_attempt_result:632 -   - False Positives: 0
+2026-10-01 17:06:32.268 | INFO     | checker_refine:_log_attempt_result:640 -   - Refine Attempts: 0
+2026-10-01 17:06:32.268 | INFO     | checker_refine:refine_checker_with_max_attempts:590 - Checker is perfect - stopping refinement
+2026-10-01 17:06:32.291 | INFO     | checker_refine:create_refinement_summary:925 - Refinement summary saved to: e2e/refine-t0-re2/KN-Null-Pointer-Dereference-fadc3450-0/refinements/README.md
+2026-10-01 17:06:32.292 | INFO     | checker_refine:_log_refine_results:683 - === Final Refinement Summary for KN-Null-Pointer-Dereference-fadc3450-0 ===
+2026-10-01 17:06:32.292 | INFO     | checker_refine:_log_refine_results:684 - Total attempts: 2
+2026-10-01 17:06:32.292 | INFO     | checker_refine:_log_refine_results:697 - Successful refinements: 0
+2026-10-01 17:06:32.292 | INFO     | checker_refine:_log_refine_results:698 - Code actually changed: 0 attempts
+2026-10-01 17:06:32.292 | INFO     | checker_refine:_log_refine_results:699 - Final status: Perfect
+2026-10-01 17:06:32.292 | INFO     | checker_refine:_log_refine_results:700 - Final checker refined: False
+2026-10-01 17:06:32.293 | INFO     | checker_refine:_log_refine_results:701 - Final code changed: NO
+2026-10-01 17:06:32.293 | INFO     | checker_refine:_log_refine_results:719 - Refinement progression:
+2026-10-01 17:06:32.293 | INFO     | checker_refine:_log_refine_results:726 -   Attempt 1: Failed | NO_CHANGE | Reports: 0 | TP: 0 | FP: 0 | Precision: 0.00%
+2026-10-01 17:06:32.293 | INFO     | checker_refine:_log_refine_results:726 -   Attempt 2: Perfect | NO_CHANGE | Reports: 0 | TP: 0 | FP: 0 | Precision: 0.00%
+2026-10-01 17:06:32.303 | INFO     | checker_refine:_save_refine_log_to_file:835 - Detailed refinement log saved to: e2e/refine-t0-re2/KN-Null-Pointer-Dereference-fadc3450-0/refinement_logs/KN-Null-Pointer-Dereference-fadc3450-0_refinement.md
+2026-10-01 17:06:32.310 | INFO     | checker_refine:refine_checker:74 - [2/3] Refining checker e2e/refine-t0-re2/KN-Null-Pointer-Dereference-ca11026a-2...
+2026-10-01 17:06:32.331 | INFO     | checker_refine:refine_checker_with_max_attempts:557 - Starting refinement of checker KN-Null-Pointer-Dereference-ca11026a-2 with max 2 attempts
+2026-10-01 17:06:32.332 | INFO     | checker_refine:refine_checker_with_max_attempts:562 - === Refinement Attempt 1/2 ===
+2026-10-01 17:06:32.332 | INFO     | checker_refine:refine_checker_with_max_attempts:563 - Last scan ID: None
+2026-10-01 17:06:32.340 | INFO     | checker_repair:repair_checker:51 - Compilation attempt 1/5
+2026-10-01 17:07:11.369 | INFO     | backends.plugin_builder:build:364 - Built plugin 033f84e5c5a6842b3890 (compile 29.6s, link 9.5s)
+2026-10-01 17:07:11.370 | INFO     | checker_repair:repair_checker:60 - Syntax repair successful!
+2026-10-01 17:07:11.370 | INFO     | checker_refine:_initialize_refinement:1056 - Compiled original code successfully!
+2026-10-01 17:07:11.382 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 033f84e5c5a6842b3890
+2026-10-01 17:07:11.396 | ERROR    | checker_refine:_scan_target:1087 - Error scanning target: [re2] setup failed for 972a15cedd00 (cmake -S /home/faris/RA-MrYudis/Knight/targets/.knighter-work/re2/src/972a15cedd00 -B /home/faris/RA-MrYudis/Knight/targets/.knighter-work/re2/build/972a15cedd00-57512bd124ee -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DRE2_BUILD_TESTING=OFF -DCMAKE_CXX_COMPILER=/home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang++ -DCMAKE_C_COMPILER=/home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang -DCMAKE_POLICY_VERSION_MINIMUM=3.5):
+$ cmake -S /home/faris/RA-MrYudis/Knight/targets/.knighter-work/re2/src/972a15cedd00 -B /home/faris/RA-MrYudis/Knight/targets/.knighter-work/re2/build/972a15cedd00-57512bd124ee -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DRE2_BUILD_TESTING=OFF -DCMAKE_CXX_COMPILER=/home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang++ -DCMAKE_C_COMPILER=/home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+-- The CXX compiler identification is Clang 18.1.8
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+CMake Error at CMakeLists.txt:94 (find_package):
+  By not providing "Findabsl.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "absl", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "absl" with any of
+  the following names:
+
+    abslConfig.cmake
+    absl-config.cmake
+
+  Add the installation prefix of "absl" to CMAKE_PREFIX_PATH or set
+  "absl_DIR" to a directory containing one of the above files.  If "absl"
+  provides a separate development package or SDK, be sure it has been
+  installed.
+
+
+-- Configuring incomplete, errors occurred!
+
+2026-10-01 17:07:11.397 | INFO     | checker_refine:_log_attempt_result:619 - Attempt 1 Result:
+2026-10-01 17:07:11.397 | INFO     | checker_refine:_log_attempt_result:620 -   - Status: Failed
+2026-10-01 17:07:11.397 | INFO     | checker_refine:_log_attempt_result:621 -   - Refined: False
+2026-10-01 17:07:11.397 | INFO     | checker_refine:_log_attempt_result:628 -   - ✗ Code Changed: NO (no valid modifications made)
+2026-10-01 17:07:11.397 | INFO     | checker_refine:_log_attempt_result:630 -   - Reports: 0
+2026-10-01 17:07:11.397 | INFO     | checker_refine:_log_attempt_result:631 -   - True Positives: 0
+2026-10-01 17:07:11.397 | INFO     | checker_refine:_log_attempt_result:632 -   - False Positives: 0
+2026-10-01 17:07:11.397 | INFO     | checker_refine:_log_attempt_result:640 -   - Refine Attempts: 0
+2026-10-01 17:07:11.397 | WARNING  | checker_refine:refine_checker_with_max_attempts:605 - Attempt 1 failed - will reuse scan results
+2026-10-01 17:07:11.402 | INFO     | checker_refine:refine_checker_with_max_attempts:562 - === Refinement Attempt 2/2 ===
+2026-10-01 17:07:11.402 | INFO     | checker_refine:refine_checker_with_max_attempts:563 - Last scan ID: 0
+2026-10-01 17:07:11.402 | INFO     | checker_repair:repair_checker:51 - Compilation attempt 1/5
+2026-10-01 17:07:11.403 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 033f84e5c5a6842b3890
+2026-10-01 17:07:11.405 | INFO     | checker_repair:repair_checker:60 - Syntax repair successful!
+2026-10-01 17:07:11.405 | INFO     | checker_refine:_initialize_refinement:1056 - Compiled original code successfully!
+2026-10-01 17:07:11.422 | ERROR    | backends.csa:extract_reports:2414 - No report found!
+2026-10-01 17:07:11.422 | INFO     | checker_refine:_process_reports:1106 - Total reports: 0
+2026-10-01 17:07:11.422 | INFO     | checker_refine:_process_reports:1108 - Checker is perfect!
+2026-10-01 17:07:11.422 | INFO     | checker_refine:_log_attempt_result:619 - Attempt 2 Result:
+2026-10-01 17:07:11.422 | INFO     | checker_refine:_log_attempt_result:620 -   - Status: Perfect
+2026-10-01 17:07:11.422 | INFO     | checker_refine:_log_attempt_result:621 -   - Refined: False
+2026-10-01 17:07:11.423 | INFO     | checker_refine:_log_attempt_result:628 -   - ✗ Code Changed: NO (no valid modifications made)
+2026-10-01 17:07:11.425 | INFO     | checker_refine:_log_attempt_result:630 -   - Reports: 0
+2026-10-01 17:07:11.425 | INFO     | checker_refine:_log_attempt_result:631 -   - True Positives: 0
+2026-10-01 17:07:11.425 | INFO     | checker_refine:_log_attempt_result:632 -   - False Positives: 0
+2026-10-01 17:07:11.426 | INFO     | checker_refine:_log_attempt_result:640 -   - Refine Attempts: 0
+2026-10-01 17:07:11.426 | INFO     | checker_refine:refine_checker_with_max_attempts:590 - Checker is perfect - stopping refinement
+2026-10-01 17:07:11.428 | INFO     | checker_refine:create_refinement_summary:925 - Refinement summary saved to: e2e/refine-t0-re2/KN-Null-Pointer-Dereference-ca11026a-2/refinements/README.md
+2026-10-01 17:07:11.429 | INFO     | checker_refine:_log_refine_results:683 - === Final Refinement Summary for KN-Null-Pointer-Dereference-ca11026a-2 ===
+2026-10-01 17:07:11.429 | INFO     | checker_refine:_log_refine_results:684 - Total attempts: 2
+2026-10-01 17:07:11.429 | INFO     | checker_refine:_log_refine_results:697 - Successful refinements: 0
+2026-10-01 17:07:11.429 | INFO     | checker_refine:_log_refine_results:698 - Code actually changed: 0 attempts
+2026-10-01 17:07:11.429 | INFO     | checker_refine:_log_refine_results:699 - Final status: Perfect
+2026-10-01 17:07:11.429 | INFO     | checker_refine:_log_refine_results:700 - Final checker refined: False
+2026-10-01 17:07:11.429 | INFO     | checker_refine:_log_refine_results:701 - Final code changed: NO
+2026-10-01 17:07:11.429 | INFO     | checker_refine:_log_refine_results:719 - Refinement progression:
+2026-10-01 17:07:11.429 | INFO     | checker_refine:_log_refine_results:726 -   Attempt 1: Failed | NO_CHANGE | Reports: 0 | TP: 0 | FP: 0 | Precision: 0.00%
+2026-10-01 17:07:11.432 | INFO     | checker_refine:_log_refine_results:726 -   Attempt 2: Perfect | NO_CHANGE | Reports: 0 | TP: 0 | FP: 0 | Precision: 0.00%
+2026-10-01 17:07:11.435 | INFO     | checker_refine:_save_refine_log_to_file:835 - Detailed refinement log saved to: e2e/refine-t0-re2/KN-Null-Pointer-Dereference-ca11026a-2/refinement_logs/KN-Null-Pointer-Dereference-ca11026a-2_refinement.md
+2026-10-01 17:07:11.436 | INFO     | checker_refine:refine_checker:74 - [3/3] Refining checker e2e/refine-t0-re2/KN-Null-Pointer-Dereference-a7d27d62-2...
+2026-10-01 17:07:11.589 | INFO     | checker_refine:refine_checker_with_max_attempts:557 - Starting refinement of checker KN-Null-Pointer-Dereference-a7d27d62-2 with max 2 attempts
+2026-10-01 17:07:11.591 | INFO     | checker_refine:refine_checker_with_max_attempts:562 - === Refinement Attempt 1/2 ===
+2026-10-01 17:07:11.592 | INFO     | checker_refine:refine_checker_with_max_attempts:563 - Last scan ID: None
+2026-10-01 17:07:11.694 | INFO     | checker_repair:repair_checker:51 - Compilation attempt 1/5
+2026-10-01 17:08:36.414 | INFO     | backends.plugin_builder:build:364 - Built plugin 585100bfe01b9f708642 (compile 74.2s, link 10.5s)
+2026-10-01 17:08:36.417 | INFO     | checker_repair:repair_checker:60 - Syntax repair successful!
+2026-10-01 17:08:36.417 | INFO     | checker_refine:_initialize_refinement:1056 - Compiled original code successfully!
+2026-10-01 17:08:36.438 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 585100bfe01b9f708642
+2026-10-01 17:08:36.480 | ERROR    | checker_refine:_scan_target:1087 - Error scanning target: [re2] setup failed for 972a15cedd00 (cmake -S /home/faris/RA-MrYudis/Knight/targets/.knighter-work/re2/src/972a15cedd00 -B /home/faris/RA-MrYudis/Knight/targets/.knighter-work/re2/build/972a15cedd00-57512bd124ee -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DRE2_BUILD_TESTING=OFF -DCMAKE_CXX_COMPILER=/home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang++ -DCMAKE_C_COMPILER=/home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang -DCMAKE_POLICY_VERSION_MINIMUM=3.5):
+$ cmake -S /home/faris/RA-MrYudis/Knight/targets/.knighter-work/re2/src/972a15cedd00 -B /home/faris/RA-MrYudis/Knight/targets/.knighter-work/re2/build/972a15cedd00-57512bd124ee -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DRE2_BUILD_TESTING=OFF -DCMAKE_CXX_COMPILER=/home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang++ -DCMAKE_C_COMPILER=/home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+-- The CXX compiler identification is Clang 18.1.8
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/faris/RA-MrYudis/Knight/KNighter/llvm/build/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+CMake Error at CMakeLists.txt:94 (find_package):
+  By not providing "Findabsl.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "absl", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "absl" with any of
+  the following names:
+
+    abslConfig.cmake
+    absl-config.cmake
+
+  Add the installation prefix of "absl" to CMAKE_PREFIX_PATH or set
+  "absl_DIR" to a directory containing one of the above files.  If "absl"
+  provides a separate development package or SDK, be sure it has been
+  installed.
+
+
+-- Configuring incomplete, errors occurred!
+
+2026-10-01 17:08:36.481 | INFO     | checker_refine:_log_attempt_result:619 - Attempt 1 Result:
+2026-10-01 17:08:36.481 | INFO     | checker_refine:_log_attempt_result:620 -   - Status: Failed
+2026-10-01 17:08:36.481 | INFO     | checker_refine:_log_attempt_result:621 -   - Refined: False
+2026-10-01 17:08:36.481 | INFO     | checker_refine:_log_attempt_result:628 -   - ✗ Code Changed: NO (no valid modifications made)
+2026-10-01 17:08:36.482 | INFO     | checker_refine:_log_attempt_result:630 -   - Reports: 0
+2026-10-01 17:08:36.482 | INFO     | checker_refine:_log_attempt_result:631 -   - True Positives: 0
+2026-10-01 17:08:36.482 | INFO     | checker_refine:_log_attempt_result:632 -   - False Positives: 0
+2026-10-01 17:08:36.482 | INFO     | checker_refine:_log_attempt_result:640 -   - Refine Attempts: 0
+2026-10-01 17:08:36.482 | WARNING  | checker_refine:refine_checker_with_max_attempts:605 - Attempt 1 failed - will reuse scan results
+2026-10-01 17:08:36.482 | INFO     | checker_refine:refine_checker_with_max_attempts:562 - === Refinement Attempt 2/2 ===
+2026-10-01 17:08:36.482 | INFO     | checker_refine:refine_checker_with_max_attempts:563 - Last scan ID: 0
+2026-10-01 17:08:36.483 | INFO     | checker_repair:repair_checker:51 - Compilation attempt 1/5
+2026-10-01 17:08:36.484 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 585100bfe01b9f708642
+2026-10-01 17:08:36.484 | INFO     | checker_repair:repair_checker:60 - Syntax repair successful!
+2026-10-01 17:08:36.484 | INFO     | checker_refine:_initialize_refinement:1056 - Compiled original code successfully!
+2026-10-01 17:08:36.513 | ERROR    | backends.csa:extract_reports:2414 - No report found!
+2026-10-01 17:08:36.513 | INFO     | checker_refine:_process_reports:1106 - Total reports: 0
+2026-10-01 17:08:36.513 | INFO     | checker_refine:_process_reports:1108 - Checker is perfect!
+2026-10-01 17:08:36.513 | INFO     | checker_refine:_log_attempt_result:619 - Attempt 2 Result:
+2026-10-01 17:08:36.514 | INFO     | checker_refine:_log_attempt_result:620 -   - Status: Perfect
+2026-10-01 17:08:36.514 | INFO     | checker_refine:_log_attempt_result:621 -   - Refined: False
+2026-10-01 17:08:36.514 | INFO     | checker_refine:_log_attempt_result:628 -   - ✗ Code Changed: NO (no valid modifications made)
+2026-10-01 17:08:36.514 | INFO     | checker_refine:_log_attempt_result:630 -   - Reports: 0
+2026-10-01 17:08:36.514 | INFO     | checker_refine:_log_attempt_result:631 -   - True Positives: 0
+2026-10-01 17:08:36.514 | INFO     | checker_refine:_log_attempt_result:632 -   - False Positives: 0
+2026-10-01 17:08:36.514 | INFO     | checker_refine:_log_attempt_result:640 -   - Refine Attempts: 0
+2026-10-01 17:08:36.514 | INFO     | checker_refine:refine_checker_with_max_attempts:590 - Checker is perfect - stopping refinement
+2026-10-01 17:08:36.517 | INFO     | checker_refine:create_refinement_summary:925 - Refinement summary saved to: e2e/refine-t0-re2/KN-Null-Pointer-Dereference-a7d27d62-2/refinements/README.md
+2026-10-01 17:08:36.522 | INFO     | checker_refine:_log_refine_results:683 - === Final Refinement Summary for KN-Null-Pointer-Dereference-a7d27d62-2 ===
+2026-10-01 17:08:36.522 | INFO     | checker_refine:_log_refine_results:684 - Total attempts: 2
+2026-10-01 17:08:36.522 | INFO     | checker_refine:_log_refine_results:697 - Successful refinements: 0
+2026-10-01 17:08:36.522 | INFO     | checker_refine:_log_refine_results:698 - Code actually changed: 0 attempts
+2026-10-01 17:08:36.522 | INFO     | checker_refine:_log_refine_results:699 - Final status: Perfect
+2026-10-01 17:08:36.522 | INFO     | checker_refine:_log_refine_results:700 - Final checker refined: False
+2026-10-01 17:08:36.523 | INFO     | checker_refine:_log_refine_results:701 - Final code changed: NO
+2026-10-01 17:08:36.523 | INFO     | checker_refine:_log_refine_results:719 - Refinement progression:
+2026-10-01 17:08:36.523 | INFO     | checker_refine:_log_refine_results:726 -   Attempt 1: Failed | NO_CHANGE | Reports: 0 | TP: 0 | FP: 0 | Precision: 0.00%
+2026-10-01 17:08:36.523 | INFO     | checker_refine:_log_refine_results:726 -   Attempt 2: Perfect | NO_CHANGE | Reports: 0 | TP: 0 | FP: 0 | Precision: 0.00%
+2026-10-01 17:08:36.554 | INFO     | checker_refine:_save_refine_log_to_file:835 - Detailed refinement log saved to: e2e/refine-t0-re2/KN-Null-Pointer-Dereference-a7d27d62-2/refinement_logs/KN-Null-Pointer-Dereference-a7d27d62-2_refinement.md
+2026-10-01 17:08:36.556 | INFO     | checker_refine:_finalize_progress_tracker:180 - Progress tracking completed: e2e/refine-t0-re2/refinement_progress.log
+2026-10-01 17:08:36.556 | INFO     | checker_refine:refine_checker:118 - Refinement process completed for directory: e2e/refine-t0-re2
+fadc3450 Null-Pointer-Dereference 0
+['TP: 1', 'TN: 1']
+ca11026a Null-Pointer-Dereference 2
+['TP: 1', 'TN: 1']
+a7d27d62 Null-Pointer-Dereference 2
+['TP: 1', 'TN: 1']
+fadc3450 Null-Pointer-Dereference 0
+['TP: 1', 'TN: 1']
+ca11026a Null-Pointer-Dereference 2
+['TP: 1', 'TN: 1']
+a7d27d62 Null-Pointer-Dereference 2
+['TP: 1', 'TN: 1']

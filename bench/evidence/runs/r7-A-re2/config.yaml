@@ -1,0 +1,40 @@
+result_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/results
+LLVM_dir: /home/faris/RA-MrYudis/Knight/KNighter/llvm
+key_file: llm_keys.yaml
+model: opencode-go:deepseek-v4.1-flash
+checker_nums: 3
+max_tokens: 65536
+llm_timeout: 600
+project:
+  description: RE2, the regular expression library written in C++
+target_type: compiledb
+target_options:
+  name: re2
+  repo_dir: /home/faris/RA-MrYudis/Knight/targets/re2
+  work_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work
+  setup:
+  - cmake -S {src} -B {build} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DRE2_BUILD_TESTING=OFF
+    -DCMAKE_CXX_COMPILER={clangxx} -DCMAKE_C_COMPILER={clang} -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+  source_extensions:
+  - .cc
+  scan_include:
+  - re2/
+  - util/
+  scan_exclude:
+  - re2/testing/
+  - re2/fuzzing/
+  reuse_revisions: false
+plugin_build: standalone
+validation_scoring: strict
+analysis_jobs: 1
+analysis_timeout: 600
+max_parallel_plugin_builds: 4
+scan_commit: HEAD
+min_reports_for_triage: 1
+perfect_report_threshold: 3
+jobs: 8
+plugin_opt_level: -O3
+plugin_pch: false
+plugin_cache: false
+gen_workers: 1
+plugin_cache_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/plugin-cache

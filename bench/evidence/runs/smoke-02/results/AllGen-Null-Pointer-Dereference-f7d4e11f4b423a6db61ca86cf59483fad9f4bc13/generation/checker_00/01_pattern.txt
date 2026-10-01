@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is validating only the length field (`blob->len`) of an input buffer descriptor while failing to validate the associated data pointer (`blob->data`) before copying from or storing it. A caller can provide a positive length with a NULL data pointer, causing a NULL pointer dereference via `memcpy()` when `CURL_BLOB_COPY` is set, or propagating the NULL pointer for later dereference when it is not set. The root cause is missing NULL validation of the data pointer in a pointer-plus-length API argument.

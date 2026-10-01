@@ -1,0 +1,79 @@
+{
+  "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-B-curl/plugin-cache/plugins/f6d8aaeb22caa017842f/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/setopt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "Curl_setblobopt"
+        ],
+        "fixed_functions": [
+          "Curl_setblobopt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-B-curl/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 111,
+          "column": 33,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing null check on blob->data",
+          "description": "Missing null check on blob->data",
+          "issue_hash": "cc7fecfefdcfa8040d295162289dd560",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r5/tmp/validation/f7d4e11f4b42/483ad5fe/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r5-B-curl_work_src_b3675fe80a33_lib_setopt.c/report-cc7fec.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-B-curl/work/src/f7d4e11f4b42/lib/setopt.c",
+          "line": 111,
+          "column": 48,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing null check on blob->data",
+          "description": "Missing null check on blob->data",
+          "issue_hash": "ad67435aaf7bc608779011bbe2aea79a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r5/tmp/validation/f7d4e11f4b42/483ad5fe/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r5-B-curl_work_src_f7d4e11f4b42_lib_setopt.c/report-ad6743.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 1.16,
+      "fixed": 0.95
+    },
+    "total_seconds": 2.23
+  },
+  "report_dir": "tmp/validation/f7d4e11f4b42/483ad5fe"
+}

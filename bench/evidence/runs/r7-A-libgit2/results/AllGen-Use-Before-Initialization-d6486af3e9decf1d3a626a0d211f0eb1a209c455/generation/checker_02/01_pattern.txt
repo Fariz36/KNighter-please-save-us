@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Local variables are declared without initialization but are later read on control-flow paths where no assignment has occurred. In this patch, `bool required` is used in the loop expression `((spec->usage & CLI_OPT_USAGE_CHOICE) && required)` before it is guaranteed to be set, and `git_diff_driver *drv` is checked in the cleanup path `if (drv && drv != *out)` even when `diff_driver_alloc()` failed or was skipped. The bug pattern is using uninitialized stack variables in conditionals/cleanup logic; variables that may only be conditionally initialized must be given a safe default value such as `true` or `NULL`.

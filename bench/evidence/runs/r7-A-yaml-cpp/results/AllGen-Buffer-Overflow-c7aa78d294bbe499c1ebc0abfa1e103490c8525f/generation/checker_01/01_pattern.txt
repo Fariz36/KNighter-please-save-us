@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is an unchecked write to a fixed-size stack buffer while formatting a value whose output length is controlled by user-provided precision. In `FpToString`, `output_buffer` is a fixed `std::array<char, 28>`, but in default-notation mode the code can emit many trailing zeros derived from `precision`/exponent. These writes use raw pointer increments with no bounds check, so a large `precision` can cause a stack buffer overflow. The root cause is that the buffer size only accounts for the scientific-notation case, while the default-notation path can produce an arbitrarily longer output that is not bounded by the buffer capacity.

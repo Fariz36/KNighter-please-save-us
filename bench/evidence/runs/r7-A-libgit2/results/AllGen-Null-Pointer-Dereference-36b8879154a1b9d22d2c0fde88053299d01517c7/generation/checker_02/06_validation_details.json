@@ -1,0 +1,79 @@
+{
+  "commit_id": "36b8879154a1b9d22d2c0fde88053299d01517c7",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/plugin-cache/plugins/aafc1f0131b4934870a4/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/blame.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "blame_internal"
+        ],
+        "fixed_functions": [
+          "blame_internal"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/blame.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/07de6a7e438f/src/libgit2/blame.c",
+          "line": 464,
+          "column": 3,
+          "function": "blame_internal",
+          "bug_type": "Unchecked hunk_from_entry() result",
+          "description": "hunk_from_entry() result used without NULL check",
+          "issue_hash": "3bf25994dc33c65a57f748c0188c777e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/36b8879154a1/0fd5b728/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_07de6a7e438f_src_libgit2_blame.c/report-3bf259.html",
+          "relpath": "src/libgit2/blame.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/blame.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/36b8879154a1/src/libgit2/blame.c",
+          "line": 470,
+          "column": 3,
+          "function": "blame_internal",
+          "bug_type": "Unchecked hunk_from_entry() result",
+          "description": "hunk_from_entry() result used without NULL check",
+          "issue_hash": "3bf25994dc33c65a57f748c0188c777e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/36b8879154a1/0fd5b728/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_36b8879154a1_src_libgit2_blame.c/report-3bf259.html",
+          "relpath": "src/libgit2/blame.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 24.36,
+    "analysis_seconds": {
+      "buggy": 5.19,
+      "fixed": 5.78
+    },
+    "total_seconds": 35.36
+  },
+  "report_dir": "tmp/validation/36b8879154a1/0fd5b728"
+}

@@ -1,0 +1,108 @@
+--- original_code.cpp+++ syntax_correct_refine_code.cpp@@ -20,7 +20,8 @@ using namespace ento;
+ using namespace taint;
+ 
+-REGISTER_MAP_WITH_PROGRAMSTATE(ClearedPtrs, SymbolRef, bool)
++REGISTER_MAP_WITH_PROGRAMSTATE(ClearEpoch, SymbolRef, unsigned)
++REGISTER_MAP_WITH_PROGRAMSTATE(LinkEpoch, const MemRegion *, unsigned)
+ 
+ namespace {
+ class SAGenTestChecker : public Checker<check::PreCall> {
+@@ -36,7 +37,8 @@ private:
+   bool isFunctionNamed(const CallEvent &Call, StringRef Name,
+                        CheckerContext &C) const;
+-  void reportCleanupAfterClear(const CallEvent &Call, CheckerContext &C) const;
++  void reportCleanupAfterClear(const CallEvent &Call, CheckerContext &C,
++                               ProgramStateRef State) const;
+ };
+ 
+ bool SAGenTestChecker::isFunctionNamed(const CallEvent &Call, StringRef Name,
+@@ -59,9 +61,47 @@ 
+     SVal Dest = Call.getArgSVal(0);
+     if (SymbolRef Sym = Dest.getAsLocSymbol()) {
+-      State = State->set<ClearedPtrs>(Sym, true);
++      unsigned Epoch = 0;
++      if (const unsigned *Curr = State->get<ClearEpoch>(Sym))
++        Epoch = *Curr;
++      State = State->set<ClearEpoch>(Sym, Epoch + 1);
+       C.addTransition(State);
+     }
++    return;
++  }
++
++  // Track Curl_peer_link(&ctx->field, peer): the field is linked after the
++  // latest clear of the containing struct.
++  if (isFunctionNamed(Call, "Curl_peer_link", C)) {
++    if (Call.getNumArgs() < 1)
++      return;
++
++    const Expr *Arg = Call.getArgExpr(0);
++    if (!Arg)
++      return;
++
++    const MemRegion *MR = getMemRegionFromExpr(Arg, C);
++    if (!MR)
++      return;
++
++    // Only consider a field, e.g. &ctx->peer.
++    if (MR->getBaseRegion() == MR)
++      return;
++
++    const MemRegion *Base = MR->getBaseRegion();
++    const SymbolicRegion *SR = dyn_cast<SymbolicRegion>(Base);
++    if (!SR)
++      return;
++
++    SymbolRef Sym = SR->getSymbol();
++    if (!Sym)
++      return;
++
++    unsigned Epoch = 0;
++    if (const unsigned *Curr = State->get<ClearEpoch>(Sym))
++      Epoch = *Curr;
++    State = State->set<LinkEpoch>(MR, Epoch);
++    C.addTransition(State);
+     return;
+   }
+ 
+@@ -94,16 +134,37 @@     if (!Sym)
+       return;
+ 
+-    const bool *Cleared = State->get<ClearedPtrs>(Sym);
+-    if (Cleared && *Cleared) {
+-      reportCleanupAfterClear(Call, C);
++    unsigned Clear = 0;
++    if (const unsigned *C = State->get<ClearEpoch>(Sym))
++      Clear = *C;
++
++    bool ShouldReport = false;
++    if (Clear > 0) {
++      const unsigned *Link = State->get<LinkEpoch>(MR);
++      // If the field was linked after the latest clear, the clear did not
++      // invalidate the linkage. Otherwise, it was either linked before the
++      // clear or we never saw a re-link, so the cleanup may operate on a
++      // zeroed field.
++      if (!Link || *Link < Clear)
++        ShouldReport = true;
++    }
++
++    // The field is unlinked now; it is no longer linked until a new
++    // Curl_peer_link() call.
++    State = State->remove<LinkEpoch>(MR);
++
++    if (ShouldReport) {
++      reportCleanupAfterClear(Call, C, State);
++    } else {
++      C.addTransition(State);
+     }
+   }
+ }
+ 
+ void SAGenTestChecker::reportCleanupAfterClear(const CallEvent &Call,
+-                                               CheckerContext &C) const {
+-  ExplodedNode *N = C.generateNonFatalErrorNode();
++                                               CheckerContext &C,
++                                               ProgramStateRef State) const {
++  ExplodedNode *N = C.generateNonFatalErrorNode(State);
+   if (!N)
+     return;
+ 

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using a struct pointer member (here `blob->data`) without validating it is non-NULL, while relying on other fields such as `blob->len` to decide how much data to access. This leads to a NULL pointer dereference when the data is copied with `memcpy()` or stored and later used. The fix adds an explicit `!blob->data` check before accessing or copying the pointer.

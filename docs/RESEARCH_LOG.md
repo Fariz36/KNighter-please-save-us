@@ -930,3 +930,151 @@ Ignored: `bench/runs` 11 GB, `bench/replay` 1.7 GB, `bench/snapshots` 347 MB (co
 `llm_keys.yaml`, `.venv/`. Secret scan (exact key string) over all untracked files and the full diff:
 **0 hits**. Disk: 818 GB free. Plan: also commit a slim evidence bundle (per-run summary,
 llm_calls.jsonl, per-attempt 06/07 JSON, rankings) so every reported number is auditable from the repo.
+
+## 2026-10-01 15:30 — Sections 0–2 committed locally (branch general-c-speed, not pushed)
+
+- Verified the working tree is identical to the r7 snapshot (`diff -rq` of `src/` and `prompt_template/`: no
+  differences), so the commits are exactly the benchmarked code.
+- 7 commits on `general-c-speed` (e3174ef..e07b55f): backend/plugins, targets, strict scoring,
+  pipeline, LLM layer + prompts, requirements, bench + docs. Secret scan of `git log -p main..HEAD`
+  for the key string and an `oc_sk_` pattern: 0 hits. Push waits for the results report (user decision).
+- User decision (15:2x): section 3.1 via **A** (role-based checkers through the existing stages + a
+  deterministic hardcoded-identifier check) **and B** (one new LLM step that ports roles to a target
+  project). 3.3 bundles need no LLM. Section 3 work proceeds on top of these commits; CPU-heavy runs wait
+  for r7 to finish.
+
+## 2026-10-01 15:45 — 3.1-A building blocks: roles header, roles block, hardcoded-identifier check
+
+- `src/knighter_include/knighter/roles.h` (header-only): `knighter::callIsRole(Call, role)`,
+  `isRole`, `declIsRole`, `roleNames`. Reads `{role: [names]}` JSON from `$KNIGHTER_ROLES`, loaded
+  once; without a file every query is false (the checker is inert, not crashing).
+- Roles travel *inside* the checker source as a `/* KNIGHTER_ROLES {...} */` block, so no pipeline
+  plumbing is needed: `PluginBuilder` extracts it to `roles.json` next to the plugin (an invalid block is
+  a build error for syntax repair) and adds `-I src/knighter_include`. The header contents are part of
+  the cache key. `direct_analysis` exports `KNIGHTER_ROLES` from the plugin dir (an explicit env or
+  `roles_file` wins). Porting = supplying another roles file.
+- `src/checker_lint.py` (deterministic): string literals outside comments and the roles block that are
+  identifier-shaped, not standard names, and carry `_`, camelCase or digits. Role-name arguments of
+  `knighter::` queries are exempt. The standard-name allowlist (`knighter_include/stdlib_names.txt`,
+  3488 names) comes from `clang -E` of 36 libc/POSIX headers + 18 libstdc++ headers.
+- **Baseline measurement [M]:** **14/22** previous-attempt libgit2 checkers and **89/123** r7 checkers so far
+  hardcode project identifiers (e.g. `git_vector_insert`, `Curl_peer_unlink`, `ASN1_STRING_get0_data`,
+  `curl_url_dup`). This is the metric 3.1-A must reduce.
+- Tests: `src/tests/test_checker_lint.py` (5). Suite total 30.
+
+## 2026-10-01 16:00 — Section 3 code (3.1-A, 3.1-B, 3.3) written; unit-tested only (no CPU-heavy runs during r7)
+
+3.1-A role-based generation (`role_based_checkers: true`, default off, so r7-style runs are unchanged):
+- `knowledge/roles-pattern.md` (patch2pattern: state the pattern in roles + list each role's names in
+  this patch) and `knowledge/roles-checker.md` (pattern2plan, plan2checker, repair_FP, repair_syntax:
+  `#include "knighter/roles.h"`, the query API, no project names in logic, and a `KNIGHTER_ROLES` block with
+  a project-independent description per role). `agent._roles()` inserts the guidance before
+  `# Formatting`; verified that it is inserted when enabled and changes nothing when disabled.
+- Roles block format extended: each role is `[names]` or `{"names": [...], "description": "..."}`
+  (descriptions are what porting needs). `parse_roles_block` normalises; `roles.json` stays
+  `{role: [names]}`.
+- New LLM stage `repair_roles` (`prompt_template/repair_roles.md`). In gen, after a successful syntax
+  repair, `_enforce_roles` always records `08_roles.json` (initial/final hardcoded identifiers + roles),
+  and for role-based runs does up to `roles_repair_attempts` (2) rounds of repair_roles → compile →
+  re-check. It never rejects a working checker; leftovers are recorded.
+
+3.3 bundles (`src/checker_bundle.py`, `main.py export --checker_dir=... [--out_dir=...]`), no LLM:
+- Per valid KN-* checker: `checker.cpp`, `plugin.so` (KNighter's clang), `roles/<source>.json`,
+  `manifest.yaml` (source project/commit, scores, pattern, roles with descriptions,
+  `hardcoded_identifiers`, `portable` flag, clang version, KNighter revision), `run_bundle.py` +
+  `knighter_analysis.py`, rebuild kit (`CMakeLists.txt` with `find_package(Clang)` for shared
+  libclang-cpp or static component libs, `include/knighter/roles.h`, `utility.{h,cpp}` vendored from
+  `llvm_utils`, identical to the LLVM-tree copies [M]), README.
+- `direct_analysis.py` is now stdlib-only (loguru optional) and ships verbatim as the bundle runtime, so
+  the bundle and KNighter build identical analyzer commands. Verified importable without loguru.
+
+3.1-B roles porting (`src/role_porting.py`, `main.py port_roles --bundle_dir=...` with the *target's*
+config), one new LLM stage `port_roles` (temperature 0.01):
+- Deterministic candidate extraction from the target's headers (function declarations + function-like
+  macros; test/doc/example/fuzz dirs and standard names excluded) and per-role ranking by word overlap
+  with role name, description, and source names (source project prefixes ignored). Top 40 per role go to
+  the LLM, which must choose only from the candidates or return none.
+- Validation: names not among the candidates are dropped and reported. Output: `roles/<target>.json` plus
+  `ports/<target>.{json,prompt.md}` (offered candidates, mapping, dropped, rationale).
+- New `tools.extract_json_block`.
+- Tests: `test_role_porting.py` (3; extraction skips tests/standard/definitions; allocator and
+  deallocator rank first on a libxml2-style header), `test_checker_lint.py` (5). **Suite: 33/33 pass.**
+
+Pending E2E (after r7, CPU): compile+run a role-based checker (roles.h + env), export curl bundles and
+run one standalone on another project, a role-based gen run to measure hardcoded-identifier reduction and
+success rate vs r7, then port roles and scan a different project (3.4).
+
+## 2026-10-01 16:05 — Evidence that needs no CPU: 0.2 audit, 2.1, 2.3, 2.5
+
+- **0.2 [M]** `bench/audit_plugins.py` over every finished r7 run (12 runs, libgit2 still running): for
+  each validated attempt, the plugin recorded in `06_validation_details.json` was built from a
+  `checker.cpp` byte-identical to the attempt's `05_repaired_code.cpp`: **114/114 exact matches, 0
+  mismatches, 0 missing**, including the 4-worker optimized runs.
+- **2.1 [M]** `src/tests/test_target_registry.py`: a misspelled `target_type` raises
+  `ValueError: Unknown target_type ...`; registry = {linux, v8, compiledb}.
+- **2.3 [M]** no `_target_type ==` / `"compiledb"` branches in `csa_compiledb.py`, `checker_gen.py`, or
+  `checker_scan.py` (dispatch is `isinstance(target, CompileDBTargetBase)`).
+- **2.5 [M]** `grep -rni libgit2 src --include=*.py` (excluding tests): **0 hits**.
+- Unit suite: 35/35.
+
+## 2026-10-01 16:55 — r7 complete (43 commits, 7 projects) + audits
+
+Correction: the r7 benchmark has **43** commits, not 44 (curl 8 + sqlite 7 + lua 4 + libxml2 7 + libgit2 10
++ re2 4 + yaml-cpp 3).
+
+`bench/aggregate.py r7` [M]:
+
+| Project | Commits | Wall A (min) | Wall B (min) | Speedup | Perfect A | Perfect B | LLM calls A/B | Repair calls A/B |
+|---|---|---|---|---|---|---|---|---|
+| lua | 4 | 41.7 | 7.6 | 5.5× | 3/4 | 4/4 | 44/21 | 19/5 |
+| re2 | 4 | 31.9 | 12.4 | 2.6× | 3/4 | 3/4 | 30/40 | 6/10 |
+| yaml-cpp | 3 | 44.0 | 15.3 | 2.9× | 2/3 | 1/3 | 51/43 | 27/22 |
+| libxml2 | 7 | 65.7 | 25.7 | 2.6× | 4/7 | 5/7 | 59/61 | 14/12 |
+| sqlite | 7 | 73.4 | 26.1 | 2.8× | 3/7 | 2/7 | 82/85 | 34/34 |
+| curl | 8 | 90.5 | 22.9 | 3.9× | 5/8 | 6/8 | 62/57 | 11/9 |
+| libgit2 | 10 | 93.8 | 25.3 | 3.7× | 6/10 | 6/10 | 79/81 | 19/18 |
+| **total** | 43 | **441.0** | **135.2** | **3.3×** | **26/43** | **27/43** | 407/388 | 130/110 |
+
+- All 14 runs: `suspended_seconds` 0 (keep-awake worked; the helper exited with the driver).
+- Summed LLM time A 321.9 min, B 334.1 min. The LLM work is the same; B overlaps it across 4 workers.
+- **0.2 audit, all r7 runs [M]: 152/152** validations used the plugin built from exactly the scored checker.
+- **Strict vs legacy over 152 attempts [M]:** 51 valid under both, **5 legacy-only**, 2 strict-only, 94 neither.
+  - The 5 legacy-only cases are all "still reports in the patched function after the fix" (curl 466c06cf70
+    14→1 and 14→1, re2 ca11026a03 2→2/4→2 twice, lua 22974326 1→1). Legacy credited TN because the count
+    dropped below 5. In the lua case, legacy credited TN from *another* patched file (`lapi.c`) that never
+    had reports. **None is the A2 callee blind spot**: every one has on-target reports.
+  - The 2 strict-only cases (libgit2 f9e05546: on-target 3→0 among 75→72 reports; libgit2 6d63f4b6: 1→0
+    among 9→8): the checker detects the bug and stops after the fix, but is noisy elsewhere. Strict judges
+    this bug, not noise; noise is refine's job. **This property must be stated in the paper.**
+
+## 2026-10-01 17:05 — 1.4 scan parity [M] (`e2e/scan-parity/parity.json`)
+
+Previous attempt's UBI checker over curl HEAD `lib/` (194 files), plugin built and revision configured
+before timing: serial `jobs=1` **484.0 s**, parallel `jobs=8` **88.0 s** (5.5×, 18% of serial; the criterion
+is ≤40%). **1029 reports in both, identical sets** (keyed by file, line, issue hash).
+
+- 17:07: launched 1.5 refine (threshold 0, `max_tries 2`) on the 21 strict-valid r7-B checkers of 6
+  projects (`e2e/refine-t0-*`; libgit2 B finished after the copies were made), plus 0.3 retry
+  (`e2e/retry-curl*`: curl 6f1dfab6 with a complete, non-perfect ranking [[0,0,0],[1,0,0],[2,0,0]],
+  `checker_nums 1`: first without the flag, then with `--retry_failed`).
+
+## 2026-10-01 17:40 — 0.3 and 1.5 E2E results
+
+- **0.3 [M]** (`e2e/retry-curl-{noflag,flag}.log`): curl 6f1dfab6 with a complete, non-perfect ranking and
+  `checker_nums 1`. Without the flag: "skipped, 3 attempts without a perfect checker" logged at 17:05:43,
+  with no LLM calls (upstream: silent no-op). With `--retry_failed`: "3 attempts without a perfect
+  checker; retrying". `generation/checker_03` was created and the ranking became
+  `[[0,0,0],[1,0,0],[2,0,0],[3,0,0]]` (the new attempt also scored 0/0).
+- **1.5 [M]** refine, threshold 0, `max_tries 2`, on 21 strict-valid r7-B checkers (curl 6, libxml2 5, lua 4,
+  re2 3, sqlite 2, yaml-cpp 1):
+  - All 21 end "Perfect". At HEAD (all fixes present) 19 checkers produce 0 reports.
+  - curl KN-Memory-Leak-a0f08d69-1 (2 reports: `lib/cf-socket.c`, `lib/cf-ip-happy.c`) and libxml2
+    KN-Memory-Leak-ddcb79dc-0 (2 reports: `HTMLparser.c`, `parserInternals.c`): all 4 triaged FP → 4
+    `repair_FP` (48–126 s) → **4/4 FP objects re-scanned clean and re-validation strict 1/1** →
+    "Refined", and attempt 2 found 0 reports. **Validation-failure rate 0/4** (criterion < 20%; previous
+    attempt 12/12 and 15/15 failures).
+  - Parallel triage [M]: both `check_report` calls of a checker start within 13 ms and finish at the
+    slowest call: curl 42.2 s + 55.1 s → 55.1 s wall; libxml2 13.9 + 14.2 s → 14.2 s wall.
+  - Caveat: n=4 repairs. Most curl/libxml2/... checkers are silent at HEAD, so the triage/repair path is
+    exercised only where a checker over-reports.
+- `docs/RESULTS_SECTIONS_0_2.md` written: every acceptance criterion with its result and evidence path.

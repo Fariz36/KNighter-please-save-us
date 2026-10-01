@@ -1,0 +1,5 @@
+## Bug Pattern
+
+Publishing/registering an object in a globally visible table before it is fully initialized, where the remaining initialization can fail. Here, `luaL_newmetatable()` both creates and stores the metatable in the Lua registry; if the following `luaL_setfuncs()` raises a memory error, the registry is left pointing to an incomplete metatable. Later calls see the metatable already exists and skip initialization, so the incomplete object is used.
+
+The fix constructs and initializes the metatable locally first, then inserts it into the registry only after initialization is complete.

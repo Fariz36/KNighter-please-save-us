@@ -1,0 +1,369 @@
+{
+  "commit_id": "d6486af3e9decf1d3a626a0d211f0eb1a209c455",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/plugin-cache/plugins/92e5c0211b95a10ccf5b/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/cli/opt_usage.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "cli_opt_help_fprint"
+        ],
+        "fixed_functions": [
+          "cli_opt_help_fprint"
+        ]
+      },
+      {
+        "path": "src/libgit2/diff_driver.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 18,
+        "fixed_total": 9,
+        "buggy_on_target": 10,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "git_diff_driver_load"
+        ],
+        "fixed_functions": [
+          "git_diff_driver_load"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/diff_driver.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 46,
+          "column": 1,
+          "function": "git_diff_driver_map_get",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'idx'",
+          "issue_hash": "0084402c217f361704893d0aeef20064",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-008440.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 291,
+          "column": 47,
+          "function": "git_diff_driver_load",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'drv'",
+          "issue_hash": "21141f92017486d8b4c5ab268d548c45",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-21141f.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 275,
+          "column": 26,
+          "function": "git_diff_driver_load",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'namelen'",
+          "issue_hash": "28991d71086389d38263dc701fdcd07b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-28991d.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/util/array.h",
+          "line": 58,
+          "column": 12,
+          "function": "git_array__alloc",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'new_size'",
+          "issue_hash": "2e203c82d7fe302437ef29f11e69e321",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-2e203c.html",
+          "relpath": "src/util/array.h"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 343,
+          "column": 13,
+          "function": "git_diff_driver_load",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'drv'",
+          "issue_hash": "31db51f77d4ac05ae0542ed1a60442e8",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-31db51.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 72,
+          "column": 24,
+          "function": "git_diff_driver_registry_free",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'drv'",
+          "issue_hash": "33b841fdb94d78d6aff02b1b7b72b38a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-33b841.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 299,
+          "column": 3,
+          "function": "git_diff_driver_load",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'drv'",
+          "issue_hash": "51b87353eb26af7c351b51b0bab86e97",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-51b873.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 265,
+          "column": 3,
+          "function": "git_diff_driver_load",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'drv'",
+          "issue_hash": "67cf92e3f1478d4c423182098eed2217",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-67cf92.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 343,
+          "column": 6,
+          "function": "git_diff_driver_load",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'drv'",
+          "issue_hash": "8cfd18792c12fd0ccc40bc8a7419a3a0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-8cfd18.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 280,
+          "column": 48,
+          "function": "git_diff_driver_load",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'drv'",
+          "issue_hash": "8e7a888bdff6fad5daa7539d84490419",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-8e7a88.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 344,
+          "column": 24,
+          "function": "git_diff_driver_load",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'drv'",
+          "issue_hash": "9d3dadb610be314939be88fdd885790c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-9d3dad.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 165,
+          "column": 26,
+          "function": "diff_driver_alloc",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'alloclen'",
+          "issue_hash": "ab7c308220476e70c7d25d6a6649ab02",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-ab7c30.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 46,
+          "column": 1,
+          "function": "git_diff_driver_map_foreach",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'key'",
+          "issue_hash": "c4695cf6ee0f298e071a72f2858a3c9f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-c4695c.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 246,
+          "column": 2,
+          "function": "git_diff_driver_load",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'drv'",
+          "issue_hash": "cb3c04a150529905db658013e8cf72a6",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-cb3c04.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 46,
+          "column": 1,
+          "function": "git_diff_driver_map_remove",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'idx'",
+          "issue_hash": "db5ff740abcd64264281ce62ceeb2929",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-db5ff7.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 298,
+          "column": 6,
+          "function": "git_diff_driver_load",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'drv'",
+          "issue_hash": "e7a93beceff2d6e0dd2845f17e06cba8",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-e7a93b.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 46,
+          "column": 1,
+          "function": "git_diff_driver_map_put",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'key_exists'",
+          "issue_hash": "f06c88e07801db4f508af51d2464ea69",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-f06c88.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/58d9363f02f1/src/libgit2/diff_driver.c",
+          "line": 163,
+          "column": 2,
+          "function": "diff_driver_alloc",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'alloclen'",
+          "issue_hash": "fafcfd8c98bc6b9763ac4315ccce602a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_58d9363f02f1_src_libgit2_diff_driver.c/report-fafcfd.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/diff_driver.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/d6486af3e9de/src/libgit2/diff_driver.c",
+          "line": 46,
+          "column": 1,
+          "function": "git_diff_driver_map_get",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'idx'",
+          "issue_hash": "0084402c217f361704893d0aeef20064",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_d6486af3e9de_src_libgit2_diff_driver.c/report-008440.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/d6486af3e9de/src/libgit2/diff_driver.c",
+          "line": 275,
+          "column": 26,
+          "function": "git_diff_driver_load",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'namelen'",
+          "issue_hash": "28991d71086389d38263dc701fdcd07b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_d6486af3e9de_src_libgit2_diff_driver.c/report-28991d.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/d6486af3e9de/src/util/array.h",
+          "line": 58,
+          "column": 12,
+          "function": "git_array__alloc",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'new_size'",
+          "issue_hash": "2e203c82d7fe302437ef29f11e69e321",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_d6486af3e9de_src_libgit2_diff_driver.c/report-2e203c.html",
+          "relpath": "src/util/array.h"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/d6486af3e9de/src/libgit2/diff_driver.c",
+          "line": 72,
+          "column": 24,
+          "function": "git_diff_driver_registry_free",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'drv'",
+          "issue_hash": "33b841fdb94d78d6aff02b1b7b72b38a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_d6486af3e9de_src_libgit2_diff_driver.c/report-33b841.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/d6486af3e9de/src/libgit2/diff_driver.c",
+          "line": 165,
+          "column": 26,
+          "function": "diff_driver_alloc",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'alloclen'",
+          "issue_hash": "ab7c308220476e70c7d25d6a6649ab02",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_d6486af3e9de_src_libgit2_diff_driver.c/report-ab7c30.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/d6486af3e9de/src/libgit2/diff_driver.c",
+          "line": 46,
+          "column": 1,
+          "function": "git_diff_driver_map_foreach",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'key'",
+          "issue_hash": "c4695cf6ee0f298e071a72f2858a3c9f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_d6486af3e9de_src_libgit2_diff_driver.c/report-c4695c.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/d6486af3e9de/src/libgit2/diff_driver.c",
+          "line": 46,
+          "column": 1,
+          "function": "git_diff_driver_map_remove",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'idx'",
+          "issue_hash": "db5ff740abcd64264281ce62ceeb2929",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_d6486af3e9de_src_libgit2_diff_driver.c/report-db5ff7.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/d6486af3e9de/src/libgit2/diff_driver.c",
+          "line": 46,
+          "column": 1,
+          "function": "git_diff_driver_map_put",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'key_exists'",
+          "issue_hash": "f06c88e07801db4f508af51d2464ea69",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_d6486af3e9de_src_libgit2_diff_driver.c/report-f06c88.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/d6486af3e9de/src/libgit2/diff_driver.c",
+          "line": 163,
+          "column": 2,
+          "function": "diff_driver_alloc",
+          "bug_type": "Uninitialized variable",
+          "description": "Use of uninitialized variable 'alloclen'",
+          "issue_hash": "fafcfd8c98bc6b9763ac4315ccce602a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/d6486af3e9de/ba27c080/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_d6486af3e9de_src_libgit2_diff_driver.c/report-fafcfd.html",
+          "relpath": "src/libgit2/diff_driver.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 27.55,
+    "analysis_seconds": {
+      "buggy": 3.89,
+      "fixed": 3.13
+    },
+    "total_seconds": 34.6
+  },
+  "report_dir": "tmp/validation/d6486af3e9de/ba27c080"
+}

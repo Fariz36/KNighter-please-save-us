@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The code decodes an untrusted, variable-length run count using narrow signed `int` arithmetic (`n` and `mult`) and only checks the accumulated value against the output bound after decoding the entire count. A corrupt/malicious kvvfs block can contain enough base-26 digits to overflow `n` or `mult *= 26` before that check. The overflow can wrap the count to a small or negative value, bypassing `if( j+n>nOut )`, leading to an incorrect `memset` size and potential out-of-bounds memory access. The pattern is missing overflow/bounds checking while accumulating a length/count from untrusted input.

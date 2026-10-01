@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked NULL return from `hunk_from_entry()` before using the result. Since `hunk_from_entry()` can fail and return `NULL`, inserting that result directly into `blame->hunks` can store a NULL hunk in the vector, leading to a NULL pointer dereference later and preventing the original error from being propagated. The code should check `if (!h)` and jump to the error path.

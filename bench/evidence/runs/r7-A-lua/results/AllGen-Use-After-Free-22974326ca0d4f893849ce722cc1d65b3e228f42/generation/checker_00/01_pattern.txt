@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is holding a raw pointer to a garbage-collected Lua object (`Table *h` derived from `t`) across a call that can trigger an emergency garbage collection (`luaH_finishset`) without anchoring it in the Lua stack or GC roots. If the table is only reachable through a weak table, such as a `__newindex` value stored in a weak metatable, the emergency GC can collect it while the raw pointer is still used, causing a use-after-free. The fix anchors the table on the stack before `luaH_finishset` and removes the anchor afterward.

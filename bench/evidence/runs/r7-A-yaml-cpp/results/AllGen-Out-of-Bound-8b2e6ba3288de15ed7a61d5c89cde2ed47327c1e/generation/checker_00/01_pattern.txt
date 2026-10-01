@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked pop of the scanner's indent stack: `ScanNextToken()` calls `PopIndent()` whenever an unverified simple key exists, assuming that this simple key has an associated indent marker currently on top of `m_indents`. If the simple key is stale or its `pIndent` does not match `m_indents.top()`—or if `m_indents` is already empty—`PopIndent()` pops an unrelated indent or underflows the stack. The fix requires verifying that `m_simpleKeys.top().pIndent` is present and equals `m_indents.top()` before popping, invalidating the simple key otherwise, and guarding `PopIndent()` against an empty stack.

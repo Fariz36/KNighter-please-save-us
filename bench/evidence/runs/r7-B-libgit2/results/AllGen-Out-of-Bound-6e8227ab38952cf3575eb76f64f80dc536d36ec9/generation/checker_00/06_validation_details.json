@@ -1,0 +1,78 @@
+{
+  "commit_id": "6e8227ab38952cf3575eb76f64f80dc536d36ec9",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/plugin-cache/plugins/21f637bb0ddf2d9e5dd1/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/pack.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "pack_entry_find_offset"
+        ],
+        "fixed_functions": [
+          "pack_entry_find_offset"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/pack.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/work/src/8afdad0eb049/src/libgit2/pack.c",
+          "line": 1531,
+          "column": 13,
+          "function": "pack_entry_find_offset",
+          "bug_type": "Out-of-bounds read on pack index fanout table",
+          "description": "Out-of-bounds read on pack index fanout table: missing bounds check against p->index_map.len",
+          "issue_hash": "296a7c75570ad56bda89007e34976da4",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6e8227ab3895/c8a0c518/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-libgit2_work_src_8afdad0eb049_src_libgit2_pack.c/report-296a7c.html",
+          "relpath": "src/libgit2/pack.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/work/src/8afdad0eb049/src/libgit2/pack.c",
+          "line": 1532,
+          "column": 46,
+          "function": "pack_entry_find_offset",
+          "bug_type": "Out-of-bounds read on pack index fanout table",
+          "description": "Out-of-bounds read on pack index fanout table: missing bounds check against p->index_map.len",
+          "issue_hash": "a2a7854a7c969fbbaf304e8b8eea7a6e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6e8227ab3895/c8a0c518/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-libgit2_work_src_8afdad0eb049_src_libgit2_pack.c/report-a2a785.html",
+          "relpath": "src/libgit2/pack.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/pack.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 5.96,
+      "fixed": 5.74
+    },
+    "total_seconds": 11.77
+  },
+  "report_dir": "tmp/validation/6e8227ab3895/c8a0c518"
+}

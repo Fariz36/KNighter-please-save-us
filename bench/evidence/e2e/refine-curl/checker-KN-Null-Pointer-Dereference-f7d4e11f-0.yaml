@@ -1,0 +1,120 @@
+_base_result_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-B-curl/results
+commit_id: f7d4e11f4b423a6db61ca86cf59483fad9f4bc13
+commit_type: Null-Pointer-Dereference
+index: 0
+initial_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n#include \"clang/AST/ASTContext.h\"\n#include \"clang/AST/Decl.h\"\n#include \"\
+  clang/AST/Expr.h\"\n#include \"clang/AST/Stmt.h\"\n#include \"llvm/Support/Casting.h\"\
+  \n#include <memory>\n\nusing namespace clang;\nusing namespace ento;\nusing namespace\
+  \ taint;\n\nnamespace {\nclass SAGenTestChecker : public Checker<check::BranchCondition>\
+  \ {\n  mutable std::unique_ptr<BugType> BT;\n\npublic:\n  SAGenTestChecker()\n \
+  \     : BT(new BugType(this, \"Missing null check on blob->data\",\n           \
+  \            \"Null Pointer Dereference\")) {}\n\n  void checkBranchCondition(const\
+  \ Stmt *Condition, CheckerContext &Ctx) const;\n};\n} // end anonymous namespace\n\
+  \nvoid SAGenTestChecker::checkBranchCondition(const Stmt *Condition,\n         \
+  \                                   CheckerContext &Ctx) const {\n  const FunctionDecl\
+  \ *FD =\n      dyn_cast<FunctionDecl>(Ctx.getLocationContext()->getDecl());\n  if\
+  \ (!FD || !FD->getName().equals(\"Curl_setblobopt\"))\n    return;\n\n  const Expr\
+  \ *Cond = dyn_cast<Expr>(Condition);\n  if (!Cond)\n    return;\n\n  if (!ExprHasName(Cond,\
+  \ \"blob->len\", Ctx))\n    return;\n  if (!ExprHasName(Cond, \"CURL_MAX_INPUT_LENGTH\"\
+  , Ctx))\n    return;\n  if (ExprHasName(Cond, \"blob->data\", Ctx))\n    return;\n\
+  \n  ExplodedNode *N = Ctx.generateNonFatalErrorNode();\n  if (!N)\n    return;\n\
+  \n  auto Report = std::make_unique<PathSensitiveBugReport>(\n      *BT, \"Missing\
+  \ null check on blob->data\", N);\n  Report->addRange(Cond->getSourceRange());\n\
+  \  Ctx.emitReport(std::move(Report));\n}\n\nextern \"C\" void clang_registerCheckers(CheckerRegistry\
+  \ &registry) {\n  registry.addChecker<SAGenTestChecker>(\n      \"custom.SAGenTestChecker\"\
+  ,\n      \"Detects missing null check on blob->data in Curl_setblobopt\",\n    \
+  \  \"\");\n}\n\nextern \"C\" const char clang_analyzerAPIVersionString[] =\n   \
+  \ CLANG_ANALYZER_API_VERSION_STRING;\n"
+patch: "## Patch Description\n\nsetopt: return error if received `curl_blob->data`\
+  \ is NULL\n\nTo avoid dereferencing in the function if `CURL_BLOB_COPY` is set,\
+  \ or\noutside of the function if unset.\n\nReported-by: netspacer.research\n\nCloses\
+  \ #22129\n\n## Buggy Code\n\n```c\n// Function: Curl_setblobopt in lib/setopt.c\n\
+  CURLcode Curl_setblobopt(struct curl_blob **blobp,\n                         const\
+  \ struct curl_blob *blob)\n{\n  /* free the previous storage at `blobp' and replace\
+  \ by a dynamic storage\n     copy of blob. If CURL_BLOB_COPY is set, the data is\
+  \ copied. */\n\n  curlx_safefree(*blobp);\n\n  if(blob) {\n    struct curl_blob\
+  \ *nblob;\n    if(!blob->len || (blob->len > CURL_MAX_INPUT_LENGTH))\n      return\
+  \ CURLE_BAD_FUNCTION_ARGUMENT;\n    nblob = (struct curl_blob *)\n      curlx_malloc(sizeof(struct\
+  \ curl_blob) +\n                   ((blob->flags & CURL_BLOB_COPY) ? blob->len :\
+  \ 0));\n    if(!nblob)\n      return CURLE_OUT_OF_MEMORY;\n    *nblob = *blob;\n\
+  \    if(blob->flags & CURL_BLOB_COPY) {\n      /* put the data after the blob struct\
+  \ in memory */\n      nblob->data = (char *)nblob + sizeof(struct curl_blob);\n\
+  \      memcpy(nblob->data, blob->data, blob->len);\n    }\n\n    *blobp = nblob;\n\
+  \    return CURLE_OK;\n  }\n\n  return CURLE_OK;\n}\n```\n\n## Bug Fix Patch\n\n\
+  ```diff\ndiff --git a/lib/setopt.c b/lib/setopt.c\nindex df054469d4..eb9ff2e396\
+  \ 100644\n--- a/lib/setopt.c\n+++ b/lib/setopt.c\n@@ -108,7 +108,7 @@ CURLcode Curl_setblobopt(struct\
+  \ curl_blob **blobp,\n \n   if(blob) {\n     struct curl_blob *nblob;\n-    if(!blob->len\
+  \ || (blob->len > CURL_MAX_INPUT_LENGTH))\n+    if(!blob->data || !blob->len ||\
+  \ (blob->len > CURL_MAX_INPUT_LENGTH))\n       return CURLE_BAD_FUNCTION_ARGUMENT;\n\
+  \     nblob = (struct curl_blob *)\n       curlx_malloc(sizeof(struct curl_blob)\
+  \ +\n```\n"
+pattern: '## Bug Pattern
+
+
+  Missing validation of the data pointer in an input struct: `Curl_setblobopt()` checks
+  `blob->len` and size limits but not `blob->data`. If `CURL_BLOB_COPY` is set, this
+  leads to `memcpy(nblob->data, blob->data, blob->len)` dereferencing a NULL source;
+  if unset, the invalid NULL data pointer is accepted and may be dereferenced later.
+  The fix adds `!blob->data` to the argument validation.'
+plan: "```\n1. **Decide Program State Needs:**\n   - No program state maps or traits\
+  \ are required. The bug is a local AST pattern in a specific function (`Curl_setblobopt`),\
+  \ so we can detect it by inspecting the conditional expression directly.\n\n2. **Define\
+  \ BugType:**\n   - In the checker class, define a `BugType` for the missing null\
+  \ check (e.g., `MissingBlobDataCheckBugType`) with a short description like `\"\
+  Missing null check on blob->data\"`.\n\n3. **Implement `checkBranchCondition`:**\n\
+  \   - Get the current function declaration:\n     - `const FunctionDecl *FD = dyn_cast<FunctionDecl>(Ctx.getLocationContext()->getDecl());`\n\
+  \     - If `FD` is null or `FD->getName() != \"Curl_setblobopt\"`, return.\n   -\
+  \ Get the condition expression:\n     - `const Expr *Cond = dyn_cast<Expr>(Condition);`\n\
+  \     - If `Cond` is null, return.\n   - Check whether this condition is the length\
+  \ validation that fails to check `blob->data`:\n     - `ExprHasName(Cond, \"blob->len\"\
+  , Ctx)` must be `true`.\n     - `ExprHasName(Cond, \"CURL_MAX_INPUT_LENGTH\", Ctx)`\
+  \ must be `true`.\n     - `ExprHasName(Cond, \"blob->data\", Ctx)` must be `false`.\n\
+  \   - If all three conditions hold, this is the buggy validation.\n\n4. **Report\
+  \ the Bug:**\n   - Generate a non-fatal error node: `ExplodedNode *N = Ctx.generateNonFatalErrorNode();`\n\
+  \   - If `N` is non-null, create a `PathSensitiveBugReport`:\n     - `std::make_unique<PathSensitiveBugReport>(*MissingBlobDataCheckBugType,\
+  \ \"Missing null check on blob->data\", N)`\n   - Emit the report via `Ctx.emitReport(...)`.\n\
+  ```"
+refined_plan: null
+repaired_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n#include \"clang/AST/ASTContext.h\"\n#include \"clang/AST/Decl.h\"\n#include \"\
+  clang/AST/Expr.h\"\n#include \"clang/AST/Stmt.h\"\n#include \"llvm/Support/Casting.h\"\
+  \n#include <memory>\n\nusing namespace clang;\nusing namespace ento;\nusing namespace\
+  \ taint;\n\nnamespace {\nclass SAGenTestChecker : public Checker<check::BranchCondition>\
+  \ {\n  mutable std::unique_ptr<BugType> BT;\n\npublic:\n  SAGenTestChecker()\n \
+  \     : BT(new BugType(this, \"Missing null check on blob->data\",\n           \
+  \            \"Null Pointer Dereference\")) {}\n\n  void checkBranchCondition(const\
+  \ Stmt *Condition, CheckerContext &Ctx) const;\n};\n} // end anonymous namespace\n\
+  \nvoid SAGenTestChecker::checkBranchCondition(const Stmt *Condition,\n         \
+  \                                   CheckerContext &Ctx) const {\n  const FunctionDecl\
+  \ *FD =\n      dyn_cast<FunctionDecl>(Ctx.getLocationContext()->getDecl());\n  if\
+  \ (!FD || !FD->getName().equals(\"Curl_setblobopt\"))\n    return;\n\n  const Expr\
+  \ *Cond = dyn_cast<Expr>(Condition);\n  if (!Cond)\n    return;\n\n  if (!ExprHasName(Cond,\
+  \ \"blob->len\", Ctx))\n    return;\n  if (!ExprHasName(Cond, \"CURL_MAX_INPUT_LENGTH\"\
+  , Ctx))\n    return;\n  if (ExprHasName(Cond, \"blob->data\", Ctx))\n    return;\n\
+  \n  ExplodedNode *N = Ctx.generateNonFatalErrorNode();\n  if (!N)\n    return;\n\
+  \n  auto Report = std::make_unique<PathSensitiveBugReport>(\n      *BT, \"Missing\
+  \ null check on blob->data\", N);\n  Report->addRange(Cond->getSourceRange());\n\
+  \  Ctx.emitReport(std::move(Report));\n}\n\nextern \"C\" void clang_registerCheckers(CheckerRegistry\
+  \ &registry) {\n  registry.addChecker<SAGenTestChecker>(\n      \"custom.SAGenTestChecker\"\
+  ,\n      \"Detects missing null check on blob->data in Curl_setblobopt\",\n    \
+  \  \"\");\n}\n\nextern \"C\" const char clang_analyzerAPIVersionString[] =\n   \
+  \ CLANG_ANALYZER_API_VERSION_STRING;\n"
+tn_score: 0
+tp_score: 1

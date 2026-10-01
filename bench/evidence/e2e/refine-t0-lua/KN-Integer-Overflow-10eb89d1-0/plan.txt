@@ -1,0 +1,27 @@
+**Plan**
+
+1. **Register Program State Traits:**
+   - Use `REGISTER_TRAIT_WITH_PROGRAMSTATE(InputBounded, bool)` to track whether the leading byte `c` has been checked against `0xFE` (i.e., `c >= 0xfe`).
+   - Use `REGISTER_TRAIT_WITH_PROGRAMSTATE(CountBounded, bool)` to track whether `count` has been explicitly bounded (e.g., via `lua_assert(count <= 5)`).
+   - Initialize both to `false`.
+
+2. **Detect Input Guard (`c >= 0xfe`) in `checkBranchCondition`:**
+   - If the current function is `utf8_decode` and the branch condition is a binary `>=` (or `<=` reversed) comparing a `DeclRefExpr` of variable `c` against integer literal `0xFE` (254), set `InputBounded` to `true` in the program state.
+   - This marks that any path reaching the shift will have `c < 0xfe`, which guarantees `count <= 5`.
+
+3. **Detect Count Guard (`lua_assert(count <= 5)`) in `checkPreCall`:**
+   - If the current function is `utf8_decode` and the callee is `lua_assert`, inspect its argument.
+   - If the argument is a binary comparison `<=` (or `<` with constant adjusted) between `count` and `5` (or `count < 6`), set `CountBounded` to `true` in the program state.
+   - This marks that `count` has been explicitly validated before the shift.
+
+4. **Detect Shift Expression in `checkPreStmt(const BinaryOperator *BO, CheckerContext &C)`:**
+   - Check if `BO->getOpcode() == BO_Shl` (left shift).
+   - Verify the enclosing function is `utf8_decode`.
+   - Verify the right-hand side of the shift is a multiplication of a `DeclRefExpr` to `count` and an integer literal `5` (i.e., `count * 5`).
+   - Verify the left-hand side type is a 32-bit integer (`l_uint32`).
+   - Retrieve the program state. If **neither** `InputBounded` **nor** `CountBounded` is `true`, the shift amount is not validated and may exceed 31 bits.
+
+5. **Report the Bug:**
+   - Generate a non-fatal error node using `C.generateNonFatalErrorNode()`.
+   - Create a `PathSensitiveBugReport` with a short, clear message, e.g., `"Shift amount may exceed 31 bits before bounds validation"`.
+   - Emit the report via `C.emitReport(std::move(Report))`.

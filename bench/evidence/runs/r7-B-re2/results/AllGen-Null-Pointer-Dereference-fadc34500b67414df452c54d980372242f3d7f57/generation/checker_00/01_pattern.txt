@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The destructor unconditionally invokes `~AlignedMutex()` on elements reachable through `cache_mutex_` using `cache_mutex_count_`, but `cache_mutex_` may point to a single inline member object (e.g. `cache_mutex_single_`) rather than a dynamically allocated/placement-new array when `cache_mutex_storage_ == NULL`. That inline object is also destroyed automatically as a member, so the explicit destructor call causes double destruction and undefined behavior. The fix guards the manual destruction loop with `if (cache_mutex_storage_ != NULL)`, restricting it to objects that were actually placement-new'ed in dynamically allocated storage.

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is using the return value of an allocation function (`xmlStrdup()`) before checking whether it is `NULL`. Here the code computes `strlen((const char *) ret->string)` before verifying `ret->string != NULL`, so if `xmlStrdup()` fails and returns `NULL`, the program dereferences a null pointer and crashes. The fix moves the null check before any use of the allocated pointer.

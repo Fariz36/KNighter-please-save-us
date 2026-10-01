@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is freeing a node (`xmlFreeNode(cur)`) while it is still linked into the document tree/list. `xmlFreeNode` does not unlink the node from its parent, siblings, or child lists, so freeing it leaves dangling pointers in the tree. When a node’s content is merged into another node and the source node is no longer needed, the source node must be unlinked first (`xmlUnlinkNodeInternal(cur)`) before being freed; otherwise later tree traversal or access can cause use-after-free or memory corruption.

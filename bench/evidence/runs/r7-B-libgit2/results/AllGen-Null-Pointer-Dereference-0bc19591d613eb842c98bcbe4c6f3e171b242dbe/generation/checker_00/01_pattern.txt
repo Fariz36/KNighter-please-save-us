@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is an output parameter/resource being initialized only after an early-exit path that can return success. In `load_known_hosts`, `known_hosts` starts as `NULL`, and the `git_sysdir_expand_homedir_file()` failure path (`GIT_ENOTFOUND`) jumps to `out` with `error = 0` before `libssh2_knownhost_init()` is called. Then `*hosts = known_hosts` returns `NULL` to the caller while the function reports success, causing a NULL pointer dereference later. The fix moves the required initialization before any early success return so every successful path produces a valid output/resource.

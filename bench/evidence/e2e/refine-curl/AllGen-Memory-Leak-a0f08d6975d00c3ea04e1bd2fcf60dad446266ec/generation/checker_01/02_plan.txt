@@ -1,0 +1,40 @@
+1. **Program State Customization**
+   - Register a set to track memory regions zeroed by `memset`:
+     `REGISTER_SET_WITH_PROGRAMSTATE(ZeroedRegions, const MemRegion *)`
+   - This set stores the base region or field region that was zeroed. No alias map is needed because `MemRegion` identity already captures aliases of the same object. When checking an embedded field, also check its base region.
+
+2. **Callback: `checkPostCall` — Mark Regions Zeroed by `memset`**
+   - Implement `void checkPostCall(const CallEvent &Call, CheckerContext &C) const`.
+   - Get the callee name via `Call.getCalleeIdentifier()`. Match `memset` or `__builtin_memset`.
+   - Ensure the call has at least 3 arguments.
+   - Evaluate the second argument (the fill value) using `EvaluateExprToInt`. If it does not evaluate to `0`, return.
+   - Obtain the destination region:
+     `const MemRegion *DestR = getMemRegionFromExpr(Call.getArgExpr(0), C);`
+   - If `DestR` is non-null, add it to the state:
+     `ProgramStateRef State = C.getState();`
+     `State = State->add<ZeroedRegions>(DestR);`
+     `C.addTransition(State);`
+   - This marks the struct (or a field) as zeroed.
+
+3. **Callback: `checkPreCall` — Detect Unlink After Zeroing**
+   - Implement `void checkPreCall(const CallEvent &Call, CheckerContext &C) const`.
+   - Get the callee name. For the target patch, match `Curl_peer_unlink`. For broader coverage, extend to other list-removal functions.
+   - Ensure the call has at least 1 argument.
+   - Obtain the region of the first argument:
+     `const MemRegion *ArgR = getMemRegionFromExpr(Call.getArgExpr(0), C);`
+   - If `ArgR` is null, return.
+   - Retrieve the current state: `ProgramStateRef State = C.getState();`
+   - Check whether the region was previously zeroed:
+     - `State->contains<ZeroedRegions>(ArgR)` OR
+     - if `ArgR` is a `FieldRegion`, `State->contains<ZeroedRegions>(ArgR->getBaseRegion())`.
+   - If true, the embedded list node is being unlinked after its containing structure was zeroed.
+
+4. **Report the Bug**
+   - In `checkPreCall`, when the condition is met:
+     - Generate an error node: `ExplodedNode *N = C.generateNonFatalErrorNode();`
+     - If `N` is null, return.
+     - Create a `PathSensitiveBugReport` with a short message, e.g., `"Unlinking list node after memset zeroed its structure"`.
+     - Call `C.emitReport(std::move(Report));`
+
+5. **Order Sensitivity**
+   - Because the program state is path-sensitive, an unlink before the `memset` will not see the region in `ZeroedRegions` and will not report. This correctly accepts the patched code where `Curl_peer_unlink` is moved before the zeroing.

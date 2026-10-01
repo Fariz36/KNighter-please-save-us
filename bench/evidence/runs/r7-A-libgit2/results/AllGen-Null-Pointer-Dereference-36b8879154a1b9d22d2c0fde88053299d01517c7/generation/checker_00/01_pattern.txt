@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked failure return from a fallible object-creation function. Here, `hunk_from_entry()` can return `NULL` on error, but the caller immediately uses the result by inserting it into `blame->hunks` without checking it. This turns an allocation/creation failure into a stored invalid entry and can later cause a NULL pointer dereference or inconsistent state. The correct pattern is to check the returned pointer immediately and jump to error cleanup if it is `NULL`.

@@ -1,0 +1,125 @@
+{
+  "commit_id": "967b28f0e5e10a81021cf398bef9fba8b4c6774a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/plugin-cache/plugins/a05dc9dd19b68dd33388/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/blame.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 3,
+        "fixed_total": 2,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "dup_hunk"
+        ],
+        "fixed_functions": [
+          "dup_hunk"
+        ]
+      },
+      {
+        "path": "tests/libgit2/blame/buffer.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": [
+          "test_blame_buffer__reblame_buffer_result"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/blame.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/36b8879154a1/src/libgit2/blame.c",
+          "line": 112,
+          "column": 26,
+          "function": "dup_hunk",
+          "bug_type": "NULL pointer argument to string duplication",
+          "description": "Possible NULL passed to string duplication function",
+          "issue_hash": "7a1094eec69fb1abada4daf8397a837e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/967b28f0e5e1/e75fa622/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_36b8879154a1_src_libgit2_blame.c/report-7a1094.html",
+          "relpath": "src/libgit2/blame.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/36b8879154a1/src/libgit2/blame.c",
+          "line": 149,
+          "column": 37,
+          "function": "git_blame__alloc",
+          "bug_type": "NULL pointer argument to string duplication",
+          "description": "Possible NULL passed to string duplication function",
+          "issue_hash": "7a69ef94f52204c02407e963912b78f5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/967b28f0e5e1/e75fa622/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_36b8879154a1_src_libgit2_blame.c/report-7a69ef.html",
+          "relpath": "src/libgit2/blame.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/36b8879154a1/src/libgit2/blame.c",
+          "line": 148,
+          "column": 19,
+          "function": "git_blame__alloc",
+          "bug_type": "NULL pointer argument to string duplication",
+          "description": "Possible NULL passed to string duplication function",
+          "issue_hash": "891785079058f73bf518592f8277ad8a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/967b28f0e5e1/e75fa622/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_36b8879154a1_src_libgit2_blame.c/report-891785.html",
+          "relpath": "src/libgit2/blame.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/blame.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/967b28f0e5e1/src/libgit2/blame.c",
+          "line": 154,
+          "column": 37,
+          "function": "git_blame__alloc",
+          "bug_type": "NULL pointer argument to string duplication",
+          "description": "Possible NULL passed to string duplication function",
+          "issue_hash": "7a69ef94f52204c02407e963912b78f5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/967b28f0e5e1/e75fa622/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_967b28f0e5e1_src_libgit2_blame.c/report-7a69ef.html",
+          "relpath": "src/libgit2/blame.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/967b28f0e5e1/src/libgit2/blame.c",
+          "line": 153,
+          "column": 19,
+          "function": "git_blame__alloc",
+          "bug_type": "NULL pointer argument to string duplication",
+          "description": "Possible NULL passed to string duplication function",
+          "issue_hash": "891785079058f73bf518592f8277ad8a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/967b28f0e5e1/e75fa622/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_967b28f0e5e1_src_libgit2_blame.c/report-891785.html",
+          "relpath": "src/libgit2/blame.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 55.99,
+    "analysis_seconds": {
+      "buggy": 3.37,
+      "fixed": 4.43
+    },
+    "total_seconds": 63.84
+  },
+  "report_dir": "tmp/validation/967b28f0e5e1/e75fa622"
+}

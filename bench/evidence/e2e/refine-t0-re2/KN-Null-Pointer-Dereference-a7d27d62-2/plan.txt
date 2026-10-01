@@ -1,0 +1,31 @@
+1. **No Program State Required:**
+   - The bug pattern is local and syntactic within a single function body. It can be detected by inspecting the AST, so no `REGISTER_TRAIT_WITH_PROGRAMSTATE` or `REGISTER_MAP_WITH_PROGRAMSTATE` is needed.
+
+2. **Hook `checkASTCodeBody`:**
+   - Implement `void checkASTCodeBody(const Decl *D, AnalysisManager &Mgr, BugReporter &BR) const`.
+   - Cast `D` to `const FunctionDecl *FD`. If `FD` has no body or its return type is not a pointer, return.
+   - For this target, optionally restrict to functions named `OrStrings` whose parent class is `Prefilter` to avoid false positives. For a generic version, skip the name check.
+
+3. **Find the Returned Pointer Variable:**
+   - Traverse `FD->getBody()` to locate `ReturnStmt`s.
+   - For each `ReturnStmt`, take `getRetValue()`, then strip `ImplicitCastExpr` and `ParenExpr`.
+   - If the result is a `DeclRefExpr` to a local `VarDecl *V` whose type is a pointer, record `V` and the `ReturnStmt`.
+   - If no such variable is found, stop.
+
+4. **Check Initialization to NULL:**
+   - Locate the `DeclStmt` declaring `V`.
+   - Get its initializer and use `Mgr.getASTContext().isNullPointerConstant(Init, Expr::NPC_ValueDependentIsNull)` to verify it is a null pointer constant (e.g., `NULL`, `nullptr`, or `0`).
+   - If `V` is not initialized to NULL, stop.
+
+5. **Find Conditional Non-NULL Assignment:**
+   - Search the function body for an `IfStmt` whose condition, after stripping `ParenExpr` and `ImplicitCastExpr`, is a `UnaryOperator` with `UO_LNot` applied to a `CXXMemberCallExpr` (or `CallExpr`) whose callee method name is `empty`. This matches `!ss->empty()`.
+   - Inside the then-branch of that `IfStmt`, recursively search for an assignment to `V` where the right-hand side is not a null pointer constant (e.g., a `CXXNewExpr` or a call returning a pointer). In the target, this is `V = new Prefilter(NONE)`.
+   - Verify that no other non-NULL assignment to `V` exists outside this `IfStmt` before the `ReturnStmt`. If there is, the empty path could still get a non-NULL value, so the pattern does not apply.
+   - Verify that the `ReturnStmt` is not nested inside this `IfStmt`; it should be reached when the condition is false. In the target, the return is after the `if`.
+
+6. **Report the Bug:**
+   - If all conditions match, create a `BasicBugReport` (or use `BR.EmitBasicReport`) with:
+     - Bug type: `"Conditional NULL return"`
+     - Description: `"Return value may be NULL when set is empty"`
+     - Location: the `IfStmt` or the `ReturnStmt`
+   - Emit the report via `BR`.

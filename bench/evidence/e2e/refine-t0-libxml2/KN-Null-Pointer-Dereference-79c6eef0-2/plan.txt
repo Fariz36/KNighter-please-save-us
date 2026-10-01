@@ -1,0 +1,40 @@
+## Plan
+
+1. **Custom Program State**
+   - Register one program-state map: `UncheckedAllocMap` of type `SymbolRef -> bool`.
+   - The key is the symbolic pointer value returned by an allocation/duplication function.
+   - `true` means the pointer has been produced by `xmlStrdup` (or another tracked allocation function) and has not yet been compared against `NULL`.
+   - No separate alias map is needed for this pattern because simple pointer copies preserve the same `SymbolRef`; checking the symbol directly is sufficient.
+
+2. **Helper Logic**
+   - Implement `isTrackedAllocFunction(Call)`: return true when the callee name is `xmlStrdup`; optionally include other libxml2 allocation/duplication functions if desired.
+   - Implement `markChecked(State, Sym)`: remove `Sym` from `UncheckedAllocMap`.
+   - Implement `getNullCheckedSymbol(Condition, C)`: strip parentheses and implicit casts, then recognize null-check forms such as `!ptr`, `ptr`, `ptr == NULL`, `ptr != NULL`, `NULL == ptr`, and `NULL != ptr`. For binary comparisons, use `isNullPointerConstant` or evaluate the other side to integer `0`. Return the `SymbolRef` of the tested pointer expression if available.
+
+3. **`checkPostCall`**
+   - If `isTrackedAllocFunction(Call)` is true, obtain the call’s return value with `Call.getReturnValue()`.
+   - If the return value has a `SymbolRef`, set `UncheckedAllocMap[Sym] = true` in the current state.
+   - Add the updated state with `C.addTransition(State)`.
+
+4. **`checkBranchCondition`**
+   - Call `getNullCheckedSymbol(Condition, C)`.
+   - If a `SymbolRef` is found and present in `UncheckedAllocMap`, remove it using `markChecked`.
+   - Add the updated state with `C.addTransition(State)`.
+   - This ensures that a correct `if (ret->string == NULL)` before any use suppresses later warnings.
+
+5. **`checkPreCall`**
+   - Use `functionKnownToDeref(Call, DerefParams)` to obtain parameter indices that are known to be dereferenced.
+   - If the utility table does not include `strlen`, explicitly treat `strlen` as dereferencing its first argument.
+   - For each dereferenced parameter index:
+     - Get the argument value using `Call.getArgSVal(Index)`.
+     - If it has a `SymbolRef`, check whether that symbol exists in `UncheckedAllocMap` with value `true`.
+     - If yes, the pointer is used before any `NULL` check.
+   - Emit a bug report:
+     - Generate a non-fatal error node with `C.generateNonFatalErrorNode()`.
+     - Create a `PathSensitiveBugReport` with a short message such as `"Use of possibly-NULL pointer before NULL check"`.
+     - Call `C.emitReport(...)`.
+
+6. **Resulting Behavior for the Target Patch**
+   - In the buggy code, `xmlStrdup` returns a symbol, which is stored in `ret->string` and added to `UncheckedAllocMap`.
+   - `strlen((const char *) ret->string)` triggers `checkPreCall`; the argument symbol is still present in `UncheckedAllocMap`, so the checker reports the bug.
+   - In the fixed code, `if (ret->string == NULL)` triggers `checkBranchCondition`, which removes the symbol before `strlen` is called, so no report is emitted.

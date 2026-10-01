@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is using 32-bit `int` variables as loop counters and related arithmetic/assertion operands when the values being tracked can exceed the range of `int`. If `SQLITE_MAX_LENGTH` is configured larger enough (e.g. near or above `INT_MAX`), expressions such as `j + nStr - i + 1 <= nOut` inside `assert()` can overflow the `int` counter, producing incorrect results. The root cause is that counters meant to index or bound large buffers are typed as `int` instead of a 64-bit type (`i64`), so the arithmetic overflows before the comparison happens. The fix is to promote such counters (`i`, `j`) to `i64` so the arithmetic is performed in 64-bit and the assertion evaluates correctly.

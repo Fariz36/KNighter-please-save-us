@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The function validates the `len` field of a caller-supplied blob but fails to validate the associated `data` pointer before dereferencing/copying it. With `CURL_BLOB_COPY` set, `memcpy(nblob->data, blob->data, blob->len)` can dereference a NULL `blob->data`; without it, the NULL pointer is stored and may be dereferenced later. The root cause is incomplete validation of a pointer/length pair: the length is checked, but the pointer is assumed non-NULL.

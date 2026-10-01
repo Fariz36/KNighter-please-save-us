@@ -1,0 +1,5 @@
+## Bug Pattern
+
+A fixed-size stack buffer (`std::array<char, 28> output_buffer`) is used to manually format floating-point output without validating that the variable-length formatted result fits. In the default-notation branch, the number of trailing zeros depends on `precision`/exponent and can be much larger than the remaining buffer space, so repeated `*(output_ptr++) = '0'` writes overflow the stack buffer. The root cause is missing bounds checking/accounting when writing variable-length data into a fixed-size buffer.
+
+A similar bug occurs whenever formatting code assumes a constant maximum output length but writes data whose length is controlled by input parameters such as precision.

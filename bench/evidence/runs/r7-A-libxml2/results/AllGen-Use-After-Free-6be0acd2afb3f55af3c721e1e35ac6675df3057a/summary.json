@@ -1,0 +1,15 @@
+{
+  "commit_id": "6be0acd2afb3f55af3c721e1e35ac6675df3057a",
+  "commit_type": "Use-After-Free",
+  "total_checkers": 3,
+  "successful_checkers": 0,
+  "perfect_checkers": 0,
+  "best_tp": 0,
+  "best_tn": 0,
+  "total_time": 708.337139,
+  "errors": [
+    "Failed to generate compilable checker 2"
+  ],
+  "success_rate": 0.0,
+  "timestamp": "2026-10-01T10:28:51.408545"
+}

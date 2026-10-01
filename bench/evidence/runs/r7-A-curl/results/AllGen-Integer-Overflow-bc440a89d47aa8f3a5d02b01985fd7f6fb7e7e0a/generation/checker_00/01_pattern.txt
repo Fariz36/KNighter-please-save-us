@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked integer overflow in a derived size calculation. The code computes a base64 output size with arithmetic like `4 * (1 + ((size - 1) / 3))` using a potentially very large `curl_off_t` input, without first ensuring that the input size is bounded. A sufficiently large input causes signed integer overflow, producing an incorrect or negative encoded-size result. The fix prevents this by rejecting inputs larger than `BASE64_MAX_INPUT_SIZE` before performing the size arithmetic.

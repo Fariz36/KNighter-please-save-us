@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing validation of a pointer member inside a caller-supplied struct before using it. `Curl_setblobopt()` checks that `blob` and `blob->len` are valid, but assumes `blob->data` is non-NULL. When `CURL_BLOB_COPY` is set, this causes `memcpy()` from a NULL `blob->data`; when unset, it stores the NULL pointer for later use. The root cause is incomplete input validation of nested pointer fields before dereference/use.

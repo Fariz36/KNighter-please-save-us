@@ -1,0 +1,101 @@
+{
+  "commit_id": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-A-curl/plugin-cache/plugins/7252a9505f12c95a1ae5/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/ftp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 2,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "ftp_state_pasv_resp"
+        ],
+        "fixed_functions": [
+          "ftp_state_pasv_resp"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/ftp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-A-curl/work/src/67ce67284258/lib/ftp.c",
+          "line": 2076,
+          "column": 37,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "Missing NUL Check",
+          "description": "Missing NUL check before multi-byte lookahead on string",
+          "issue_hash": "635fad547f92a56696b3f6d2ffea4c9e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r5/tmp/validation/6f1dfab6a292/5e34efd6/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r5-A-curl_work_src_67ce67284258_lib_ftp.c/report-635fad.html",
+          "relpath": "lib/ftp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-A-curl/work/src/67ce67284258/lib/ftp.c",
+          "line": 2076,
+          "column": 18,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "Missing NUL Check",
+          "description": "Missing NUL check before multi-byte lookahead on string",
+          "issue_hash": "9bc99c7c163b2f4487e75539ca2b7b11",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r5/tmp/validation/6f1dfab6a292/5e34efd6/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r5-A-curl_work_src_67ce67284258_lib_ftp.c/report-9bc99c.html",
+          "relpath": "lib/ftp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/ftp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-A-curl/work/src/6f1dfab6a292/lib/ftp.c",
+          "line": 2076,
+          "column": 44,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "Missing NUL Check",
+          "description": "Missing NUL check before multi-byte lookahead on string",
+          "issue_hash": "1fb5b7e2fd2e1c20f29330b8ec6a79bf",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r5/tmp/validation/6f1dfab6a292/5e34efd6/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r5-A-curl_work_src_6f1dfab6a292_lib_ftp.c/report-1fb5b7.html",
+          "relpath": "lib/ftp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-A-curl/work/src/6f1dfab6a292/lib/ftp.c",
+          "line": 2076,
+          "column": 25,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "Missing NUL Check",
+          "description": "Missing NUL check before multi-byte lookahead on string",
+          "issue_hash": "8a320f4ecae11d7f94567cae1f7ae91a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r5/tmp/validation/6f1dfab6a292/5e34efd6/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r5-A-curl_work_src_6f1dfab6a292_lib_ftp.c/report-8a320f.html",
+          "relpath": "lib/ftp.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 64.43,
+    "analysis_seconds": {
+      "buggy": 9.68,
+      "fixed": 10.5
+    },
+    "total_seconds": 84.75
+  },
+  "report_dir": "tmp/validation/6f1dfab6a292/5e34efd6"
+}

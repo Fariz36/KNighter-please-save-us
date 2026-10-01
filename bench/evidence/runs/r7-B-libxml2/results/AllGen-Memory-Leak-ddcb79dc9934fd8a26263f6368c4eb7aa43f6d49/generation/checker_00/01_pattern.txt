@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Overwriting an owned pointer field with a newly allocated replacement without freeing the previous allocation. In `xmlCtxtSetSaxHandler`, the existing `ctxt->sax` handler is leaked when `ctxt->sax = copy` discards the old pointer, and repeated calls leak the previously installed copy as well.

@@ -1,0 +1,5 @@
+## Bug Pattern
+
+Accessing the “top” element of a stack/array using `container[count - 1]` without first checking that `count > 0`. When the container can be empty, `count - 1` underflows to an invalid negative index, causing an out-of-bounds buffer access.
+
+In this patch, `BitState::Push()` computes `Job* top = &job_[njob_-1]` after a code path that can be reached with `njob_ == 0`, leading to a buffer underflow. The fix guards the access with `if (njob_ > 0)`.

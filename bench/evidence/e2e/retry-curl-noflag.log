@@ -1,0 +1,37 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-01 17:05:43.137 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+2026-10-01 17:05:43.139 | DEBUG    | __main__:init_config:28 - Config file: e2e/retry-curl.yaml
+2026-10-01 17:05:43.139 | DEBUG    | __main__:init_config:29 - Result dir: e2e/retry-curl
+2026-10-01 17:05:43.139 | DEBUG    | __main__:init_config:30 - Analysis backend: Analysis Backend Path: /home/faris/RA-MrYudis/Knight/KNighter/llvm
+2026-10-01 17:05:43.139 | DEBUG    | __main__:init_config:31 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl
+2026-10-01 17:05:43.281 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-75a9aa14efdc444c)
+2026-10-01 17:05:43.281 | INFO     | __main__:main:90 - Generate new checkers
+2026-10-01 17:05:43.282 | INFO     | checker_gen:gen_checker:213 - Starting batch generation with multi=True, workers=1
+2026-10-01 17:05:43.564 | WARNING  | checker_gen:gen_checker_worker:396 - AllGen-Out-of-Bound-6f1dfab6a29242525cdc7b48f5ee49269b9cc316: skipped, 3 attempts without a perfect checker
+2026-10-01 17:05:43.564 | INFO     | checker_gen:start_step:58 - [ 16.7%] 📊 Summary Generation
+2026-10-01 17:05:43.566 | INFO     | checker_gen:complete_step:75 - Completed: 📊 Summary Generation in 0.0s - Generated summary for 3 checkers
+🚀 Starting Checker Generation
+📁 Config: multi=True, general=False, utility=True, workers=1, retry_failed=False
+
+📦 Processing commit 1: 6f1dfab6a29242525cdc7b48f5ee49269b9cc316 (Out-of-Bound)
+⏭️  AllGen-Out-of-Bound-6f1dfab6a29242525cdc7b48f5ee49269b9cc316: all 3 attempts done, none perfect (use --retry_failed)
+⏳ [ 16.7%] 📊 Summary Generation...
+✅ 📊 Summary Generation (0.0s)
+   └── Generated summary for 3 checkers
+
+============================================================
+🎯 GENERATION SUMMARY
+============================================================
+📋 Commit: 6f1dfab6a29242525cdc7b48f5ee49269b9cc316 (Out-of-Bound)
+⏱️  Total Time: 0.3s
+🔢 Checkers Generated: 3
+✅ Successful: 0/3
+🎉 Perfect: 0
+🏆 Best Scores: TP=0, TN=0
+⚠️  Low generation rate - consider reviewing parameters
+============================================================
+
+🎊 Batch Complete!
+📊 Success Rate: 0/1
+📄 Summary saved to: e2e/retry-curl/generation_summary_20261001_170543.json

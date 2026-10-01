@@ -1,0 +1,67 @@
+{
+  "commit_id": "a7200804eb4aeb35229388a37ea00af27559bd25",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/plugin-cache/plugins/9e4c46ed726aba7199b5/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/printf.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "sqlite3_str_vappendf"
+        ],
+        "fixed_functions": [
+          "sqlite3_str_vappendf"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/printf.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/0d979c217fd5/src/printf.c",
+          "line": 624,
+          "column": 9,
+          "function": "unknown",
+          "bug_type": "Under-estimated buffer size",
+          "description": "under-estimated buffer size: +8 slack may miss NUL terminator (use +10)",
+          "issue_hash": "e965a23554f78e85c4d2ceebe8ac145f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7200804eb4a/9b29cf48/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_0d979c217fd5_src_printf.c/report-e965a2.html",
+          "relpath": "src/printf.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/printf.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 71.03,
+    "analysis_seconds": {
+      "buggy": 3.01,
+      "fixed": 2.78
+    },
+    "total_seconds": 76.9
+  },
+  "report_dir": "tmp/validation/a7200804eb4a/9b29cf48"
+}

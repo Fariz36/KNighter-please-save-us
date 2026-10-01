@@ -1,0 +1,19 @@
+1. **Program State**: No custom program state is required. The bug is detected purely from AST structure, type information, and source text at a single declaration. No value tracking, aliasing, or path-sensitive state is needed.
+
+2. **Bug Type**: Declare a `BugType` member in the checker (e.g., `OverflowBugType`) to categorize the report.
+
+3. **Callback: `checkPostStmt(const DeclStmt *DS, CheckerContext &C)`**
+   - Obtain the enclosing function from `C.getLocationContext()->getDecl()`. If it is not a `FunctionDecl` named `accessPayload`, return.
+   - Iterate over every declaration in `DS->decls()`.
+   - For each `VarDecl *VD`:
+     - Require `VD->getNameAsString() == "nOvfl"`.
+     - Require `VD->getType()` to be a 32-bit signed integer (`int`).
+     - Retrieve `VD->getInit()`. If null, continue.
+     - Strip parentheses and implicit casts using `IgnoreParenImpCasts()`.
+     - Require the resulting expression to be a `BinaryOperator` with opcode `BO_Div`.
+     - Let `LHS = Div->getLHS()->IgnoreParenImpCasts()`.
+     - Require `LHS` to be a `BinaryOperator` whose type is 32-bit unsigned (`getTypeSize(...) == 32` and `isUnsignedIntegerType()`). This identifies the 32-bit intermediate arithmetic that can wrap.
+     - For precision, use `ExprHasName(LHS, "nPayload", C)` and `ExprHasName(LHS, "nLocal", C)` to ensure the numerator involves the overflow payload and local size. Also use `ExprHasName(Div->getRHS(), "ovflSize", C)` to ensure the divisor is the overflow page size.
+     - If all conditions match, generate a non-fatal error node with `C.generateNonFatalErrorNode()`, create a `PathSensitiveBugReport` using `OverflowBugType` with a short message such as `"Potential 32-bit overflow in nOvfl computation"`, add the initializer’s source range, and emit it via `C.emitReport`.
+
+4. **Optional Extension**: To also catch equivalent assignments outside a declaration, implement `checkPostStmt(const BinaryOperator *BO, CheckerContext &C)` and apply the same division/LHS-type/name checks when the assignment target is `nOvfl`. This is not required for the provided patch.

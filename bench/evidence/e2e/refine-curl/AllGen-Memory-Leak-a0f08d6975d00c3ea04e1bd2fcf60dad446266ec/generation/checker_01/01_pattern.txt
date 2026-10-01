@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The bug pattern is unlinking/removing an embedded list node **after** its containing structure has been zeroed with `memset()`. In the buggy code, `cf_h2_proxy_ctx_clear()` zeroes the entire `ctx`, including `ctx->dest`, and then `cf_h2_proxy_ctx_free()` calls `Curl_peer_unlink(&ctx->dest)` on the already-zeroed node. This loses the node’s list linkage, so the peer is never actually removed from its list and remains leaked.
+
+The cleanup order must be: unlink the embedded node first, then clear/zero the containing structure.

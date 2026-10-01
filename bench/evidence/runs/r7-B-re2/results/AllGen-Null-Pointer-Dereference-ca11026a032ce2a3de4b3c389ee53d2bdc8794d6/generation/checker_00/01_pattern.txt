@@ -1,0 +1,5 @@
+## Bug Pattern
+
+A walker/traversal API can indicate an early stop or internal failure through a separate status flag (`stopped_early()`) while still returning a non-NULL partial result. The caller checks only the returned pointer for NULL and then treats that partial result as a successful simplification. This silently ignores allocation/early-termination failures and can produce an incomplete or invalid simplified regexp.
+
+The fix is to check `cw.stopped_early()` and `sw.stopped_early()` after each walk and return NULL when set; callers such as `Prefilter::FromRegexp()` must then handle the possible NULL result.

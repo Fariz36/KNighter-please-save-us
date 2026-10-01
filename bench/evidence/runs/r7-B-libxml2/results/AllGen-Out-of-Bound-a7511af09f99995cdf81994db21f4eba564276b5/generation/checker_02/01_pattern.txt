@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked out-of-bounds read in a lookahead/indexing macro: `NXT(index)` expands directly to `ctxt->cur[index]` without verifying that the requested index is within the length of the regex string. When parsing malformed input or when the parser is near the end of the string, this reads past the NUL terminator or allocated buffer. The fix adds a `len` field to the parser context and makes `NXT` validate `(ctxt->cur + index - ctxt->string) < ctxt->len` before accessing the buffer.

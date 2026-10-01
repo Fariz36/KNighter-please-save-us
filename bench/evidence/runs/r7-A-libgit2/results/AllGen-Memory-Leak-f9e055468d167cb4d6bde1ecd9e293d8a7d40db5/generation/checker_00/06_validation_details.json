@@ -1,0 +1,55 @@
+{
+  "commit_id": "f9e055468d167cb4d6bde1ecd9e293d8a7d40db5",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/plugin-cache/plugins/143a83c081849a0ef34e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/repository.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "git_repository_set_workdir"
+        ],
+        "fixed_functions": [
+          "git_repository_set_workdir"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/repository.c": []
+    },
+    "fixed": {
+      "src/libgit2/repository.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 57.3,
+    "analysis_seconds": {
+      "buggy": 15.6,
+      "fixed": 15.13
+    },
+    "total_seconds": 88.16
+  },
+  "report_dir": "tmp/validation/f9e055468d16/903b5c2f"
+}

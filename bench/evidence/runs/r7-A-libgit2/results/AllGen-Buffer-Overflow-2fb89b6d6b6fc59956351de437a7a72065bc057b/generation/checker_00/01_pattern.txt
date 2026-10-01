@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using length-unbounded C string functions (`strstr`, `strchr`) on a pointer into a length-delimited buffer that is not guaranteed to be NUL-terminated within its bounds. Here, after locating a NUL with `memchr`, `caps` is treated as a C string, but the remaining packet data may not contain another NUL before `line + len`; therefore `strstr`/`strchr` can read past the allocated buffer. The correct pattern is to use bounded searches such as `memmem`/`memchr` with the remaining buffer length.

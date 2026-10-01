@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The bug pattern is **releasing/unlinking an embedded resource after the containing structure has already been zeroed with `memset()`**. The cleanup order is wrong: `cf_h2_proxy_ctx_clear()` zeroes the whole context, including `ctx->dest`, and then `cf_h2_proxy_ctx_free()` calls `Curl_peer_unlink(&ctx->dest)` on the now-zeroed member. This loses the original peer linkage and causes a resource leak.
+
+In general: **do not `memset()`/zero a structure before unregistering, unlinking, or freeing resources stored inside that structure**. The resource must be released while its pointer/linkage is still valid.

@@ -1,0 +1,8 @@
+attempt_id: 1
+num_FP: 2
+num_TP: 0
+num_reports: 2
+precision: 0.0
+refined: true
+refinement_attempts: 2
+result: Refined

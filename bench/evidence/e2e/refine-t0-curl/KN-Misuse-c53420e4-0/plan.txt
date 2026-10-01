@@ -1,0 +1,35 @@
+```
+Plan:
+
+1. **Taint Tag Definition**:
+   - Define a unique `TaintTagType` (e.g., `Asn1TaintTag = 101`) to mark pointers that originate from length-delimited ASN.1 string data.
+   - No custom program state map is necessary; the existing taint infrastructure is sufficient to track these pointers and their propagation through assignments.
+
+2. **Taint ASN.1 String Pointers (`checkPostCall`)**:
+   - Retrieve the callee name via `Call.getCalleeIdentifier()`.
+   - If the name is `ASN1_STRING_get0_data`:
+     - Get the return value `SVal` of the call.
+     - If it has a `SymbolRef`, add taint to that symbol using `addTaint(State, Sym, Asn1TaintTag)`.
+     - Otherwise, if it has a `MemRegion`, add taint to that region.
+   - If the name is `ASN1_STRING_to_UTF8`:
+     - Get the first argument expression (the output pointer, e.g., `&cn`).
+     - Use `getMemRegionFromExpr(Call.getArgExpr(0), C)` to obtain the `MemRegion` of the output variable.
+     - Add taint to that `MemRegion` to mark the output variable as holding ASN.1 data.
+
+3. **Detect Unsafe NUL-Terminated Operations (`checkPreCall`)**:
+   - Retrieve the callee name.
+   - If the name is `strlen`:
+     - Get the first argument’s `SVal`.
+     - If it is tainted with `Asn1TaintTag`, report a bug.
+   - If the callee is a known variadic formatting function (`failf`, `infof`, `Curl_failf`, `Curl_infof`, `printf`, `fprintf`, `sprintf`, `snprintf`):
+     - Identify the index of the format string argument and the starting index of variadic arguments. For `Curl_failf`/`Curl_infof`, format index is 1 and varargs start at 2. For `printf`, format index is 0 and varargs start at 1.
+     - If the format string is a `StringLiteral` (after `IgnoreImpCasts()`), parse it for `%` conversion specifiers.
+     - For each `%s` (not part of `%.*s`), get the corresponding variadic argument expression, retrieve its `SVal`, and if tainted with `Asn1TaintTag`, report a bug.
+     - For `%.*s`, advance the variadic argument index by two (precision and string) without checking, since it is length-aware and safe.
+     - For other specifiers, advance the argument index appropriately (or ignore for this target).
+
+4. **Bug Reporting**:
+   - In a helper function, use `C.generateNonFatalErrorNode()` to create an error node.
+   - Create a `PathSensitiveBugReport` with a short message: `"Length-delimited ASN.1 string used as NUL-terminated C string"`.
+   - Emit the report via `C.emitReport()`.
+```

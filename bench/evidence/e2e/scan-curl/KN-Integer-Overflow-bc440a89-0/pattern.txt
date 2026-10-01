@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked integer overflow when calculating an encoded/output size from a large input size. In `encoder_base64_size()`, the expression `4 * (1 + ((size - 1) / 3))` can overflow `curl_off_t` for sufficiently large `part->datasize`; the resulting wrapped value is then used as the claimed encoded size, leading to incorrect size accounting and potentially undersized allocation or buffer handling. The fix prevents this by rejecting input sizes larger than `BASE64_MAX_INPUT_SIZE` before performing the size arithmetic.

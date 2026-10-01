@@ -1,0 +1,39 @@
+1. **Program State**
+   - Register one map: `REGISTER_MAP_WITH_PROGRAMSTATE(UncheckedSizeMap, const MemRegion *, bool)`.
+   - Purpose: track the local `size` variable in `encoder_base64_size`.
+     - `true` = initialized from `part->datasize` and not yet validated against an upper bound.
+     - `false` = an upper-bound guard such as `size > BASE64_MAX_INPUT_SIZE` has been seen.
+   - No alias map is needed because the tracked value is a local scalar variable.
+
+2. **Helper Predicates**
+   - `isEncoderBase64Size(C)`: check that the current function is `encoder_base64_size`.
+   - `isPartDatasizeInit(E)`: check that the initializer is `part->datasize` or contains that source text.
+   - `isOverflowProneBase64Arithmetic(E)`: check that the expression contains the base64 size arithmetic, e.g. multiplication/division involving the tracked `size` variable and constants/macros such as `3` or `MAX_ENCODED_LINE_LENGTH`.
+
+3. **`checkPostStmt(const DeclStmt *DS, CheckerContext &C)`**
+   - Return immediately if not inside `encoder_base64_size`.
+   - Iterate over the `VarDecl`s in `DS`.
+   - For a `VarDecl` named `size` whose initializer satisfies `isPartDatasizeInit`, obtain its `MemRegion`.
+   - Insert or set `UncheckedSizeMap[region] = true`.
+   - Add the transition.
+
+4. **`checkBranchCondition(const Stmt *Condition, CheckerContext &C)`**
+   - Return immediately if not inside `encoder_base64_size`.
+   - Use `ExprHasName(Condition, "BASE64_MAX_INPUT_SIZE", C)` to detect the fixed upper-bound guard.
+   - Find the enclosing `IfStmt` via `findSpecificTypeInParents<IfStmt>(Condition, C)`.
+   - Verify that the then-branch contains a `ReturnStmt` returning a negative value, e.g. `-1`, confirming it is an early-exit guard.
+   - Find the `DeclRefExpr` for the tracked `size` variable in the condition.
+   - Get its `MemRegion` and, if present in `UncheckedSizeMap`, set it to `false`.
+   - This models the patch’s guard and prevents false positives on correctly fixed code.
+
+5. **`checkBind(SVal Loc, SVal Val, const Stmt *S, CheckerContext &C)`**
+   - Return immediately if not inside `encoder_base64_size`.
+   - Get the region from `Loc`. If it is not in `UncheckedSizeMap` or is already `false`, return.
+   - Check that `S` is the assignment to `size` whose right-hand side is overflow-prone base64 arithmetic.
+   - For the target code, this is the assignment `size = 4 * (1 + ((size - 1) / 3))`.
+   - If this condition holds while the region is still marked `true`, report the bug.
+
+6. **Reporting**
+   - Generate a non-fatal error node with `C.generateNonFatalErrorNode()`.
+   - Create a `PathSensitiveBugReport` using `std::make_unique`.
+   - Use a short message such as `"Possible integer overflow in base64 size calculation"`.

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using narrow integer types (such as `unsigned short`) for length or offset variables that participate in size validation checks. In this patch, `len` and `off` are read as 16-bit values and then used in the expression `off + sizeof(unsigned int) + len > smbc->got`. Because these variables are too narrow, the arithmetic can overflow or be truncated, potentially bypassing the bounds check and leading to out-of-bounds access. The fix is to use `size_t` so the arithmetic matches the type and range of the buffer size being checked.

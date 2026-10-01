@@ -1,0 +1,39 @@
+1. **Program State Decision:**
+   - No program state maps or taint tags are needed. The bug pattern is a local syntactic/semantic pattern inside a branch condition and its immediately preceding statements. Path-sensitive value tracking, aliasing, or cross-function analysis is not required.
+
+2. **Hook the Branch Condition (`checkBranchCondition`):**
+   - Implement `checkBranchCondition(const Stmt *Condition, CheckerContext &C)`.
+   - Recursively traverse `Condition` to collect all `ArraySubscriptExpr` nodes.
+   - For each subscript, evaluate its index expression using `EvaluateExprToInt` and group subscripts by their base variable name. Extract the base name from the `DeclRefExpr` after ignoring implicit/paren casts.
+   - Look for a base variable `ptr` that has constant-index accesses `ptr[1]`, `ptr[2]`, and `ptr[3]` in the same condition.
+   - For that base, find a comparison (`==`) where one side is `ptr[1]` or `ptr[2]` and the other side is a `DeclRefExpr` to a variable. Record that variable name as `sep`.
+
+3. **Check for Missing Separator Guard:**
+   - Traverse `Condition` and determine whether `sep` is guarded against being NUL:
+     - `sep` appears directly as an operand of a logical `&&` (e.g., `sep && ...`).
+     - Or `sep` is compared against `0` or `'\0'` using `!=` (e.g., `sep != '\0'`).
+   - If such a guard exists, the condition is safe; stop processing.
+
+4. **Verify Local Context to Reduce False Positives:**
+   - From `Condition`, find the enclosing `IfStmt` using `findSpecificTypeInParents<IfStmt>(Condition, C)`.
+   - Find the enclosing `CompoundStmt` of that `IfStmt`.
+   - Scan the statements in that block before the `IfStmt`:
+     - Look for `ptr` being incremented: `ptr++`, `++ptr`, or `ptr += 1`.
+     - Look for `sep` being assigned from `ptr[0]`, either as a `DeclStmt` initializer (`char sep = ptr[0];`) or as a `BinaryOperator` assignment (`sep = ptr[0];`).
+   - Optionally, scan ancestor `CompoundStmt` blocks for `ptr` being assigned from a `strchr` call. This confirms the delimiter-search origin.
+   - If the increment and `sep = ptr[0]` (and optionally `strchr`) are found, the bug pattern is confirmed.
+
+5. **Report the Bug:**
+   - Generate a non-fatal error node with `C.generateNonFatalErrorNode()`.
+   - Create a `PathSensitiveBugReport` with a short message such as:
+     `"Potential out-of-bounds read: missing non-NUL separator check before fixed-offset access"`
+   - Set the report range to the matched `Condition` or the `ptr[3]` subscript.
+   - Emit the report via `C.emitReport`.
+
+6. **Helper Functions:**
+   - `isArraySubscriptWithIndex(const ArraySubscriptExpr *ASE, StringRef BaseName, unsigned Index)`:
+     Checks that the base is a `DeclRefExpr` to `BaseName` and the index evaluates to `Index` via `EvaluateExprToInt`.
+   - `hasNonNullGuard(const Stmt *Condition, StringRef SepName)`:
+     Recursive walker that returns true if `SepName` is checked as non-zero (`SepName && ...`, `SepName != 0`, `SepName != '\0'`).
+   - `findIncrementAndSepAssign(const CompoundStmt *CS, const Stmt *Before, StringRef PtrName, StringRef SepName)`:
+     Scans statements before `Before` for a `PtrName` increment and a `SepName = PtrName[0]` assignment.

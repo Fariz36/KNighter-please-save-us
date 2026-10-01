@@ -1,0 +1,3 @@
+## Bug Pattern
+
+`OrStrings()` conditionally returns `NULL` when the input string set is empty, violating the invariant that callers expect a usable `Prefilter*`. An OR over zero strings should be represented by a valid identity object (`Prefilter(NONE)`), not `NULL`; otherwise callers may dereference or pass the `NULL` result to operations like `Or`/`And`, causing a NULL pointer dereference or incorrect prefilter behavior.

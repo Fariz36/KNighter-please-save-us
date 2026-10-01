@@ -1,0 +1,19 @@
+1. **Program State**: Not needed. The bug is a local condition pattern; no aliasing or interprocedural tracking is required.
+
+2. **Callback: `checkBranchCondition`**
+   - Implement a helper to flatten a condition expression into its `&&` operands in evaluation order. Recursively decompose `BinaryOperator` with `BO_LAnd`, ignoring parentheses and implicit casts.
+   - Implement a helper `isDangerousSubscript` that detects `ptr[N]` where `N >= 1` and `ptr` is a variable. Use `EvaluateExprToInt` to evaluate `N`. Return the base variable `ptr` and index `N`.
+   - Implement a helper `getGuardVar` that recognizes a short-circuit guard on a variable: `var`, `var != 0`, or `var != '\0'`. Return the guarded variable.
+   - Implement a helper `getComparedSep` that recognizes an operand of the form `ptr[N] == sep` or `ptr[N] != sep` with `N >= 1`. Return the subscript pointer `ptr` and the compared variable `sep`.
+   - Implement a helper `isSepFromPtr0` that verifies in the enclosing compound statement before the `if` that `sep` was assigned from `ptr[0]` (or `*ptr`) and that `ptr` was incremented after being obtained from `strchr`. This reduces false positives.
+   - In `checkBranchCondition`:
+     - If the condition is not a `&&` chain, return.
+     - Flatten the `&&` operands in left-to-right evaluation order.
+     - Maintain a set of guarded variables.
+     - Iterate operands left-to-right:
+       - If an operand is a guard for variable `V`, add `V` to the guarded set.
+       - If an operand is a comparison `ptr[N] == sep` with `N >= 1`:
+         - If `sep` is not already in the guarded set and `isSepFromPtr0(sep, ptr, Condition, C)` succeeds, report a bug at the operand’s source range.
+         - Stop after the first report.
+   - Report message: `"Missing NUL check before reading past delimiter"`.
+   - Use `C.generateNonFatalErrorNode()` and `std::make_unique<PathSensitiveBugReport>` to emit the report.

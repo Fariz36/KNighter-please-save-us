@@ -1,0 +1,22 @@
+## Bug Pattern
+
+Operator-precedence bug when combining assignment with a comparison in an `if` condition. Because `=` has lower precedence than `<` and `!=`, expressions like:
+
+```c
+(error = func() < 0)
+(error = cb(...) != 0)
+```
+
+are parsed as:
+
+```c
+error = (func() < 0)
+error = (cb(...) != 0)
+```
+
+so `error` is assigned a boolean `0`/`1` instead of the function’s real return value. This loses actual error codes and can misclassify special errors such as `GIT_ENOTFOUND` as fatal. The fix is to parenthesize the assignment before the comparison:
+
+```c
+(error = func()) < 0
+(error = cb(...)) != 0
+```

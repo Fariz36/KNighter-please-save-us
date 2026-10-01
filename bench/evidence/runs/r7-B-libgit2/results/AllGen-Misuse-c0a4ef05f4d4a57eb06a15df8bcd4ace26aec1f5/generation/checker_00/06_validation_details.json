@@ -1,0 +1,78 @@
+{
+  "commit_id": "c0a4ef05f4d4a57eb06a15df8bcd4ace26aec1f5",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/plugin-cache/plugins/8a1c9f4d56d88883607d/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/repository.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "git_repository_foreach_worktree"
+        ],
+        "fixed_functions": [
+          "git_repository_foreach_worktree"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/repository.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/work/src/c16683f5fb31/src/libgit2/repository.c",
+          "line": 3163,
+          "column": 14,
+          "function": "git_repository_foreach_worktree",
+          "bug_type": "Operator Precedence",
+          "description": "Operator precedence: assignment before comparison; parenthesize the assignment",
+          "issue_hash": "1aa5522f9f08e6d5d9d8512c1af0c41c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/c0a4ef05f4d4/0d7a9337/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-libgit2_work_src_c16683f5fb31_src_libgit2_repository.c/report-1aa552.html",
+          "relpath": "src/libgit2/repository.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/work/src/c16683f5fb31/src/libgit2/repository.c",
+          "line": 3148,
+          "column": 13,
+          "function": "git_repository_foreach_worktree",
+          "bug_type": "Operator Precedence",
+          "description": "Operator precedence: assignment before comparison; parenthesize the assignment",
+          "issue_hash": "e3cd47ff21d9a48c356be5ac8ec30e54",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/c0a4ef05f4d4/0d7a9337/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-libgit2_work_src_c16683f5fb31_src_libgit2_repository.c/report-e3cd47.html",
+          "relpath": "src/libgit2/repository.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/repository.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.03,
+    "analysis_seconds": {
+      "buggy": 14.25,
+      "fixed": 15.59
+    },
+    "total_seconds": 30.01
+  },
+  "report_dir": "tmp/validation/c0a4ef05f4d4/0d7a9337"
+}

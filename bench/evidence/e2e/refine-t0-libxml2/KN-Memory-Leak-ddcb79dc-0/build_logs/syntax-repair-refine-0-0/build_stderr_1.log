@@ -1,0 +1,11 @@
+checker.cpp: In member function ‘void {anonymous}::SAGenTestChecker::checkBind(clang::ento::SVal, clang::ento::SVal, const clang::Stmt*, clang::ento::CheckerContext&) const’:
+checker.cpp:96:26: error: no match for ‘operator||’ (operand types are ‘bool’ and ‘clang::ento::ConditionTruthVal’)
+   96 |   if (OldVal.isUnknown() || State->isNull(OldVal))
+      |       ~~~~~~~~~~~~~~~~~~ ^~ ~~~~~~~~~~~~~~~~~~~~~
+      |                       |                  |
+      |                       bool               clang::ento::ConditionTruthVal
+checker.cpp:96:26: note: there is 1 candidate
+   96 |   if (OldVal.isUnknown() || State->isNull(OldVal))
+      |       ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+checker.cpp:96:26: note: candidate 1: ‘operator||(bool, bool)’ (built-in)
+checker.cpp:96:26: note: no known conversion for argument 2 from ‘clang::ento::ConditionTruthVal’ to ‘bool’

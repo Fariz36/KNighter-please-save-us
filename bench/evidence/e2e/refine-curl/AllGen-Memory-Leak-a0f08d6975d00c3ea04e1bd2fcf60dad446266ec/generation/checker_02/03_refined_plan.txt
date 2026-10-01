@@ -1,0 +1,31 @@
+1. **Decide Program State**  
+   Register one map to track cleared pointer symbols:
+   - `REGISTER_MAP_WITH_PROGRAMSTATE(ClearedPtrs, SymbolRef, bool)`
+   - A `true` entry means the struct pointed to by that symbol has been zeroed by `memset`.
+
+2. **Implement `checkPreCall` for `memset`**  
+   - In `checkPreCall`, check if the callee name is `memset` or `__builtin_memset`.
+   - Get the first argument’s `SVal`: `SVal Dest = Call.getArgSVal(0);`
+   - If `SymbolRef Sym = Dest.getAsLocSymbol()` is valid, update the state:
+     `State = State->set<ClearedPtrs>(Sym, true);`
+     and call `C.addTransition(State);`.
+   - This marks the pointer parameter that points to the struct being zeroed.
+
+3. **Implement `checkPreCall` for cleanup functions**  
+   - In `checkPreCall`, check if the callee name is `Curl_peer_unlink` (or any other known cleanup function that releases a resource stored in a struct field).
+   - Get the first argument’s region:
+     `const MemRegion *MR = getMemRegionFromExpr(Call.getArgExpr(0), C);`
+   - If `MR` is null, return.
+   - Only consider cleanup on a field: if `MR->getBaseRegion() == MR`, return.
+   - Get the base region: `const MemRegion *Base = MR->getBaseRegion();`
+   - If `Base` is a `SymbolicRegion`, get its symbol:
+     `SymbolRef Sym = dyn_cast<SymbolicRegion>(Base)->getSymbol();`
+   - If `State->get<ClearedPtrs>(Sym)` is `true`, the field’s containing struct was cleared before this cleanup call. Proceed to report.
+
+4. **Report the bug**  
+   - Generate a non-fatal error node: `C.generateNonFatalErrorNode()`.
+   - If the node is null, return.
+   - Create a `PathSensitiveBugReport` with a short message, e.g.:
+     `"Resource cleanup after struct clear may leak"`.
+   - Use the current cleanup call as the bug location.
+   - Emit the report: `C.emitReport(std::move(Report));`.

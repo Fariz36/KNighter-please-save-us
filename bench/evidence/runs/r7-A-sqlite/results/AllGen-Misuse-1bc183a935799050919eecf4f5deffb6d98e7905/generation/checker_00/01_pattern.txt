@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The code passes token text obtained from the SQL lexer directly to `sqlite3Dequote()` without first checking the token type. When the schema is corrupt or malformed, the lexer can return `TK_ILLEGAL`, so `sqlite3Dequote()` receives invalid/non-identifier input and hits an assertion. The root cause is failing to handle illegal tokens before calling a routine that assumes it is given a valid, possibly quoted identifier.

@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The bug pattern is cleanup-after-clear: a resource stored in a struct field is unlinked/released **after** the struct has been cleared with `memset()`. The clear operation zeroes the field containing the linkage/resource state, so the later cleanup no longer has the information needed to release it. This causes a resource leak (here, a peer leak).
+
+In this patch, `cf_h2_proxy_ctx_clear()` zeroes `ctx`, including `ctx->dest`, before `cf_h2_proxy_ctx_free()` calls `Curl_peer_unlink(&ctx->dest)`. The fix is to unlink the peer **before** clearing/zeroing the struct.

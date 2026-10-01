@@ -1,0 +1,429 @@
+### Report Summary
+
+File:| /home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/bb348b35e84c/lib/cf-ip-happy.c  
+---|---  
+Warning:| line 332, column 3  
+Curl_peer_unlink after memset zeroed containing struct  
+  
+### Annotated Source Code
+
+
+41    | #include <arpa/inet.h>
+42    | #endif
+43    |  
+44    | #ifdef __VMS
+45    | #include <in.h>
+46    | #include <inet.h>
+47    | #endif
+48    |  
+49    | #include "urldata.h"
+50    | #include "connect.h"
+51    | #include "cfilters.h"
+52    | #include "cf-ip-happy.h"
+53    | #include "curl_addrinfo.h"
+54    | #include "curl_trc.h"
+55    | #include "multiif.h"
+56    | #include "progress.h"
+57    | #include "select.h"
+58    | #include "sockaddr.h"
+59    | #include "vdns/cf-dns.h"
+60    | #include "vquic/vquic.h" /* for quic cfilters */
+61    |  
+62    |  
+63    | struct transport_provider {
+64    |   cf_ip_connect_create *cf_create;
+65    |   uint8_t transport;
+66    |  bool tunnel;
+67    | };
+68    |  
+69    | static
+70    | #ifndef UNITTESTS
+71    | const
+72    | #endif
+73    | struct transport_provider transport_providers[] = {
+74    |   { Curl_cf_tcp_create, TRNSPRT_TCP, FALSE },
+75    |   { Curl_cf_tcp_create, TRNSPRT_TCP, TRUE },
+76    | #if !defined(CURL_DISABLE_HTTP) && defined(USE_HTTP3)
+77    |   { Curl_cf_quic_create, TRNSPRT_QUIC, FALSE },
+78    | #endif
+79    | #if !defined(CURL_DISABLE_HTTP) && defined(USE_PROXY_HTTP3)
+80    |   { Curl_cf_h3_proxy_create, TRNSPRT_QUIC, TRUE },
+81    | #endif
+82    | #ifndef CURL_DISABLE_TFTP
+83    |   { Curl_cf_udp_create, TRNSPRT_UDP, FALSE },
+84    | #endif
+85    | #ifdef USE_UNIX_SOCKETS
+86    |   { Curl_cf_unix_create, TRNSPRT_UNIX, FALSE },
+87    |   { Curl_cf_unix_create, TRNSPRT_UNIX, TRUE },
+88    | #endif
+89    | };
+90    |  
+91    | static cf_ip_connect_create *get_cf_create(uint8_t transport,
+92    |  bool tunnel)
+93    | {
+94    |   size_t i;
+95    |  for(i = 0; i < CURL_ARRAYSIZE(transport_providers); ++i) {
+96    |  if((transport == transport_providers[i].transport) &&
+97    |        (tunnel == transport_providers[i].tunnel))
+98    |  return transport_providers[i].cf_create;
+99    |   }
+100   |  return NULL;
+101   | }
+102   |  
+103   | #ifdef UNITTESTS
+104   | /* @unittest 2600 */
+105   | UNITTEST void debug_set_transport_provider(
+106   |   uint8_t transport, cf_ip_connect_create *cf_create);
+107   | UNITTEST void debug_set_transport_provider(
+108   |   uint8_t transport, cf_ip_connect_create *cf_create)
+109   | {
+110   |   size_t i;
+111   |  for(i = 0; i < CURL_ARRAYSIZE(transport_providers); ++i) {
+112   |  if(transport == transport_providers[i].transport) {
+113   |       transport_providers[i].cf_create = cf_create;
+114   |     }
+115   |   }
+116   | }
+117   | #endif /* UNITTESTS */
+118   |  
+119   | struct cf_ai_iter {
+120   |  struct Curl_cfilter *cf;
+121   |  struct Curl_peer *peer;
+122   |  int ai_family;
+123   |  unsigned int n;
+124   | };
+125   |  
+126   | static void cf_ai_iter_init(struct cf_ai_iter *iter,
+127   |  struct Curl_cfilter *cf,
+128   |  struct Curl_peer *peer,
+270   |  struct cf_ip_attempt **running_tail;  /* &running or &(last->next) */
+271   |  struct cf_ip_attempt *winner;
+272   |  struct cf_ai_iter addr_iter;
+273   | #ifdef USE_IPV6
+274   |  struct cf_ai_iter ipv6_iter;
+275   | #endif
+276   |  struct Curl_peer *origin;
+277   |  struct Curl_peer *peer;
+278   |  struct Curl_peer *tunnel_peer;
+279   |   cf_ip_connect_create *cf_create;   /* for creating cf */
+280   |  struct curltime last_attempt_started;
+281   |   timediff_t attempt_delay_ms;
+282   |   CURLcode last_dead_result;  /* result of last discarded hard failure */
+283   |  int last_attempt_ai_family;
+284   |   uint32_t max_concurrent;
+285   |   uint8_t transport_peer;
+286   |   uint8_t tunnel_transport;
+287   |  BIT(had_dead);              /* a hard failure was discarded */
+288   | };
+289   |  
+290   | static CURLcode cf_ip_attempt_restart(struct cf_ip_attempt *a,
+291   |  struct Curl_cfilter *cf,
+292   |  struct Curl_easy *data)
+293   | {
+294   |  struct Curl_cfilter *wcf;
+295   |   CURLcode result;
+296   |  
+297   |  if(a->cf)
+298   |     Curl_conn_cf_discard_chain(&a->cf, data);
+299   |  
+300   |   a->result = CURLE_OK;
+301   |   a->connected = FALSE;
+302   |   a->inconclusive = FALSE;
+303   |   a->cf = NULL;
+304   |  
+305   |   result = a->cf_create(&a->cf, data, a->origin, a->peer, a->transport_peer,
+306   |                         cf->conn, &a->addr,
+307   |                         a->tunnel_peer, a->tunnel_transport);
+308   |  if(!result) {
+309   |  bool dummy;
+310   |  /* the new filter might have sub-filters */
+311   |  for(wcf = a->cf; wcf; wcf = wcf->next) {
+312   |       wcf->conn = cf->conn;
+313   |       wcf->sockindex = cf->sockindex;
+314   |     }
+315   |     a->result = cf_ip_attempt_connect(a, data, &dummy);
+316   |   }
+317   |  return result;
+318   | }
+319   |  
+320   | static void cf_ip_ballers_clear(struct Curl_easy *data,
+321   |  struct cf_ip_ballers *bs)
+322   | {
+323   |  while(bs->running) {
+    15←Loop condition is false. Execution continues on line 328→
+324   |  struct cf_ip_attempt *a = bs->running;
+325   |     bs->running = a->next;
+326   |     cf_ip_attempt_free(a, data);
+327   |   }
+328   |  bs->running_tail = &bs->running;
+329   |   cf_ip_attempt_free(bs->winner, data);
+330   |   bs->winner = NULL;
+331   |   Curl_peer_unlink(&bs->origin);
+332   |  Curl_peer_unlink(&bs->peer);
+    16←Curl_peer_unlink after memset zeroed containing struct
+333   |   Curl_peer_unlink(&bs->tunnel_peer);
+334   | }
+335   |  
+336   | static CURLcode cf_ip_ballers_init(struct cf_ip_ballers *bs,
+337   |  struct Curl_easy *data,
+338   |  struct Curl_peer *origin,
+339   |  struct Curl_peer *peer,
+340   |                                    uint8_t transport_peer,
+341   |  struct Curl_peer *tunnel_peer,
+342   |                                    uint8_t tunnel_transport,
+343   |                                    timediff_t attempt_delay_ms,
+344   |                                    uint32_t max_concurrent)
+345   | {
+346   |   memset(bs, 0, sizeof(*bs));
+347   |   bs->running_tail = &bs->running;
+348   |   bs->cf_create = get_cf_create(transport_peer, !!tunnel_peer);
+349   |  if(!bs->cf_create) {
+350   |  failf(data, "unsupported transport type %u%s",
+351   |           transport_peer, tunnel_peer ? " to proxy" : "");
+352   |  return CURLE_UNSUPPORTED_PROTOCOL;
+353   |   }
+354   |   Curl_peer_link(&bs->origin, origin);
+355   |   Curl_peer_link(&bs->peer, peer);
+356   |   bs->transport_peer = transport_peer;
+357   |   Curl_peer_link(&bs->tunnel_peer, tunnel_peer);
+358   |   bs->tunnel_transport = tunnel_transport;
+359   |   bs->attempt_delay_ms = attempt_delay_ms;
+360   |   bs->max_concurrent = max_concurrent;
+361   |   bs->last_attempt_ai_family = AF_INET; /* so AF_INET6 is next */
+362   |  return CURLE_OK;
+363   | }
+364   |  
+365   | static void cf_ip_ballers_prune(struct cf_ip_ballers *bs,
+366   |  struct Curl_cfilter *cf,
+367   |  struct Curl_easy *data,
+368   |                                 uint32_t max_concurrent)
+369   | {
+370   |  struct cf_ip_attempt *a = NULL, **panchor;
+371   |   uint32_t ongoing = 0;
+372   |  
+373   |  for(a = bs->running; a; a = a->next) {
+374   |  if(!a->result && !a->connected)
+375   |       ++ongoing;
+376   |   }
+377   |  
+378   |   panchor = &bs->running;
+379   |  while(*panchor && (ongoing > max_concurrent)) {
+380   |     a = *panchor;
+381   |  if(!a->result && !a->connected) {
+382   |       *panchor = a->next;
+737   |  failf(data, "Failed to connect to %s:%u%s %s%s%safter "
+738   |  "%" FMT_TIMEDIFF_T " ms: %s",
+739   |           conn->origin->hostname, conn->origin->port, viamsg,
+740   |           proxy_peer ? "over proxy " : "",
+741   |           proxy_peer ? proxy_peer->hostname : "",
+742   |           proxy_peer ? " " : "",
+743   |           Curl_pgrs_since_ms(data, NULL, TIMER_STARTSINGLE),
+744   |           curl_easy_strerror(result));
+745   |  
+746   | #ifdef SOCKETIMEDOUT
+747   |  if(SOCKETIMEDOUT == data->state.os_errno)
+748   |       result = CURLE_OPERATION_TIMEDOUT;
+749   | #endif
+750   |  
+751   |  return result;
+752   |   }
+753   | }
+754   |  
+755   | #define IP_HE_MAX_CONCURRENT_ATTEMPTS     6
+756   |  
+757   | static CURLcode cf_ip_happy_init(struct Curl_cfilter *cf,
+758   |  struct Curl_easy *data)
+759   | {
+760   |  struct cf_ip_happy_ctx *ctx = cf->ctx;
+761   |  
+762   |  if(Curl_timeleft_ms(data) < 0) {
+763   |  /* a precaution, no need to continue if time already is up */
+764   |  failf(data, "Connection time-out");
+765   |  return CURLE_OPERATION_TIMEDOUT;
+766   |   }
+767   |  
+768   |  if(ctx->ballers.transport_peer == TRNSPRT_UNIX) {
+769   | #ifdef USE_UNIX_SOCKETS
+770   |     cf_ai_iter_init(&ctx->ballers.addr_iter, cf, ctx->ballers.peer, AF_UNIX);
+771   | #else
+772   |  return CURLE_UNSUPPORTED_PROTOCOL;
+773   | #endif
+774   |   }
+775   |  else { /* TCP/UDP/QUIC */
+776   | #ifdef USE_IPV6
+777   |     cf_ai_iter_init(&ctx->ballers.ipv6_iter, cf, ctx->ballers.peer, AF_INET6);
+778   | #endif
+779   |     cf_ai_iter_init(&ctx->ballers.addr_iter, cf, ctx->ballers.peer, AF_INET);
+780   |   }
+781   |  
+782   |  CURL_TRC_CF(data, cf, "init ip ballers for transport %u",
+783   |  ctx->ballers.transport_peer);
+784   |  return CURLE_OK;
+785   | }
+786   |  
+787   | static void cf_ip_happy_ctx_clear(struct cf_ip_happy_ctx *ctx,
+788   |  struct Curl_easy *data)
+789   | {
+790   |  DEBUGASSERT(ctx);
+    12←Loop condition is false.  Exiting loop→
+791   |  if(ctx12.1'ctx' is non-null)
+    13←Taking true branch→
+792   |  cf_ip_ballers_clear(data, &ctx->ballers);
+    14←Calling 'cf_ip_ballers_clear'→
+793   | }
+794   |  
+795   | static void cf_ip_happy_ctx_destroy(struct cf_ip_happy_ctx *ctx,
+796   |  struct Curl_easy *data)
+797   | {
+798   |  if(ctx9.1'ctx' is non-null) {
+    10←Taking true branch→
+799   |  cf_ip_happy_ctx_clear(ctx, data);
+    11←Calling 'cf_ip_happy_ctx_clear'→
+800   |  curlx_free(ctx);
+801   |   }
+802   | }
+803   |  
+804   | static CURLcode cf_ip_happy_shutdown(struct Curl_cfilter *cf,
+805   |  struct Curl_easy *data,
+806   |  bool *done)
+807   | {
+808   |  struct cf_ip_happy_ctx *ctx = cf->ctx;
+809   |   CURLcode result = CURLE_OK;
+810   |  
+811   |  DEBUGASSERT(data);
+812   |  if(cf->connected) {
+813   |     *done = TRUE;
+814   |  return CURLE_OK;
+815   |   }
+816   |  
+817   |   result = cf_ip_ballers_shutdown(&ctx->ballers, data, done);
+818   |  CURL_TRC_CF(data, cf, "shutdown -> %d, done=%d", (int)result, *done);
+819   |  return result;
+820   | }
+821   |  
+822   | static CURLcode cf_ip_happy_adjust_pollset(struct Curl_cfilter *cf,
+823   |  struct Curl_easy *data,
+824   |  struct easy_pollset *ps)
+825   | {
+826   |  struct cf_ip_happy_ctx *ctx = cf->ctx;
+827   |   CURLcode result = CURLE_OK;
+828   |  
+829   |  if(!cf->connected) {
+931   |  int query, int *pres1, void *pres2)
+932   | {
+933   |  struct cf_ip_happy_ctx *ctx = cf->ctx;
+934   |  
+935   |  if(!cf->connected) {
+936   |  switch(query) {
+937   |  case CF_QUERY_CONNECT_REPLY_MS: {
+938   |       *pres1 = cf_ip_ballers_min_reply_ms(&ctx->ballers, data);
+939   |  CURL_TRC_CF(data, cf, "query connect reply: %dms", *pres1);
+940   |  return CURLE_OK;
+941   |     }
+942   |  default:
+943   |  break;
+944   |     }
+945   |   }
+946   |  
+947   |  return cf->next ?
+948   |     cf->next->cft->query(cf->next, data, query, pres1, pres2) :
+949   |     CURLE_UNKNOWN_OPTION;
+950   | }
+951   |  
+952   | static void cf_ip_happy_destroy(struct Curl_cfilter *cf,
+953   |  struct Curl_easy *data)
+954   | {
+955   |  struct cf_ip_happy_ctx *ctx = cf->ctx;
+956   |  
+957   |  CURL_TRC_CF(data, cf, "destroy");
+958   |  if(ctx) {
+959   |     cf_ip_happy_ctx_clear(ctx, data);
+960   |     cf_ip_happy_ctx_destroy(ctx, data);
+961   |   }
+962   | }
+963   |  
+964   | struct Curl_cftype Curl_cft_ip_happy = {
+965   |  "HAPPY-EYEBALLS",
+966   |  CF_TYPE_SETUP,
+967   |  CURL_LOG_LVL_NONE,
+968   |   cf_ip_happy_destroy,
+969   |   cf_ip_happy_connect,
+970   |   cf_ip_happy_shutdown,
+971   |   cf_ip_happy_adjust_pollset,
+972   |   cf_ip_happy_data_pending,
+973   |   Curl_cf_def_send,
+974   |   Curl_cf_def_recv,
+975   |   Curl_cf_def_cntrl,
+976   |   Curl_cf_def_conn_is_alive,
+977   |   Curl_cf_def_conn_keep_alive,
+978   |   cf_ip_happy_query,
+979   | };
+980   |  
+981   | static CURLcode cf_ip_happy_create(struct Curl_cfilter **pcf,
+982   |  struct Curl_easy *data,
+983   |  struct Curl_peer *origin,
+984   |  struct Curl_peer *peer,
+985   |                                    uint8_t transport_peer,
+986   |  struct connectdata *conn,
+987   |  struct Curl_peer *tunnel_peer,
+988   |                                    uint8_t tunnel_transport)
+989   | {
+990   |  struct cf_ip_happy_ctx *ctx = NULL;
+991   |   CURLcode result;
+992   |  
+993   |   (void)data;
+994   |   (void)conn;
+995   |   *pcf = NULL;
+996   |   ctx = curlx_calloc(1, sizeof(*ctx));
+997   |  if(!ctx) {
+    3←Assuming 'ctx' is non-null→
+    4←Taking false branch→
+998   |     result = CURLE_OUT_OF_MEMORY;
+999   |  goto out;
+1000  |   }
+1001  |  result = cf_ip_ballers_init(&ctx->ballers, data,
+1002  |                               origin, peer, transport_peer,
+1003  |                               tunnel_peer, tunnel_transport,
+1004  |                               data->set.happy_eyeballs_timeout,
+1005  |  IP_HE_MAX_CONCURRENT_ATTEMPTS);
+1006  |  if(result4.1'result' is 1)
+    5←Taking true branch→
+1007  |  goto out;
+    6←Control jumps to line 1012→
+1008  |  
+1009  |   result = Curl_cf_create(pcf, &Curl_cft_ip_happy, ctx);
+1010  |  
+1011  | out:
+1012  |  if(result6.1'result' is 1) {
+    7←Taking true branch→
+1013  |  curlx_safefree(*pcf);
+    8←Loop condition is false.  Exiting loop→
+1014  |  cf_ip_happy_ctx_destroy(ctx, data);
+    9←Calling 'cf_ip_happy_ctx_destroy'→
+1015  |   }
+1016  |  return result;
+1017  | }
+1018  |  
+1019  | CURLcode Curl_cf_ip_happy_insert_after(struct Curl_cfilter *cf_at,
+1020  |  struct Curl_easy *data,
+1021  |  struct Curl_peer *origin,
+1022  |  struct Curl_peer *peer,
+1023  |                                        uint8_t transport_peer,
+1024  |  struct Curl_peer *tunnel_peer,
+1025  |                                        uint8_t tunnel_transport)
+1026  | {
+1027  |  struct Curl_cfilter *cf;
+1028  |   CURLcode result;
+1029  |  
+1030  |  /* Need to be first */
+1031  |  DEBUGASSERT(cf_at);
+    1Loop condition is false.  Exiting loop→
+1032  |  result = cf_ip_happy_create(&cf, data, origin, peer, transport_peer,
+    2←Calling 'cf_ip_happy_create'→
+1033  |  cf_at->conn, tunnel_peer, tunnel_transport);
+1034  |  if(result)
+1035  |  return result;
+1036  |  
+1037  |   Curl_conn_cf_insert_after(cf_at, cf);
+1038  |  return CURLE_OK;
+1039  | }

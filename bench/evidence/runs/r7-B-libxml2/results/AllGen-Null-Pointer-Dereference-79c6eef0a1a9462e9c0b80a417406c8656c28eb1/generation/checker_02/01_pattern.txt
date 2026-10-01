@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is dereferencing a pointer returned by an allocation/duplication function (such as `xmlStrdup`) before checking whether it is `NULL`. If the allocation fails and returns `NULL`, the subsequent use (here `strlen(ret->string)`) causes a NULL pointer dereference. The NULL check must occur before any use of the returned pointer.

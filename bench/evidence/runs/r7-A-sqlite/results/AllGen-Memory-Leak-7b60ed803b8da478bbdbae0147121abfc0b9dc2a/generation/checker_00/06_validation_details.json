@@ -1,0 +1,189 @@
+{
+  "commit_id": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/plugin-cache/plugins/01ea83cf3d9a6bff4008/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/trigger.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 6,
+        "fixed_total": 6,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "sqlite3TriggerUpdateStep"
+        ],
+        "fixed_functions": [
+          "sqlite3TriggerUpdateStep"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/trigger.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/73937f0ca880/src/trigger.c",
+          "line": 1214,
+          "column": 5,
+          "function": "transferParseError",
+          "bug_type": "SrcList Leak",
+          "description": "Potential SrcList leak: missing cleanup on error path",
+          "issue_hash": "25fd4e4b2ca279a11c4c89399272d896",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/8578150d/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_73937f0ca880_src_trigger.c/report-25fd4e.html",
+          "relpath": "src/trigger.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/73937f0ca880/src/trigger.c",
+          "line": 1329,
+          "column": 3,
+          "function": "codeRowTrigger",
+          "bug_type": "SrcList Leak",
+          "description": "Potential SrcList leak: missing cleanup on error path",
+          "issue_hash": "34c0a1cfd0fb7db5b1a68d674f60588b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/8578150d/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_73937f0ca880_src_trigger.c/report-34c0a1.html",
+          "relpath": "src/trigger.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/73937f0ca880/src/trigger.c",
+          "line": 1212,
+          "column": 13,
+          "function": "transferParseError",
+          "bug_type": "SrcList Leak",
+          "description": "Potential SrcList leak: missing cleanup on error path",
+          "issue_hash": "4bd2e72852bdc7b4b9304bbe34a13255",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/8578150d/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_73937f0ca880_src_trigger.c/report-4bd2e7.html",
+          "relpath": "src/trigger.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/73937f0ca880/src/trigger.c",
+          "line": 597,
+          "column": 3,
+          "function": "sqlite3TriggerUpdateStep",
+          "bug_type": "SrcList Leak",
+          "description": "Potential SrcList leak: missing cleanup on error path",
+          "issue_hash": "592a82222d248e50860b4ca7a9a30a7f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/8578150d/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_73937f0ca880_src_trigger.c/report-592a82.html",
+          "relpath": "src/trigger.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/73937f0ca880/src/trigger.c",
+          "line": 1180,
+          "column": 3,
+          "function": "codeTriggerProgram",
+          "bug_type": "SrcList Leak",
+          "description": "Potential SrcList leak: missing cleanup on error path",
+          "issue_hash": "75ec42360cd71627f6857246b6f8a726",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/8578150d/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_73937f0ca880_src_trigger.c/report-75ec42.html",
+          "relpath": "src/trigger.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/73937f0ca880/src/trigger.c",
+          "line": 1364,
+          "column": 3,
+          "function": "getRowTrigger",
+          "bug_type": "SrcList Leak",
+          "description": "Potential SrcList leak: missing cleanup on error path",
+          "issue_hash": "a111319214eac59efc81d34757a272f3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/8578150d/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_73937f0ca880_src_trigger.c/report-a11131.html",
+          "relpath": "src/trigger.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/trigger.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/7b60ed803b8d/src/trigger.c",
+          "line": 1216,
+          "column": 5,
+          "function": "transferParseError",
+          "bug_type": "SrcList Leak",
+          "description": "Potential SrcList leak: missing cleanup on error path",
+          "issue_hash": "25fd4e4b2ca279a11c4c89399272d896",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/8578150d/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_7b60ed803b8d_src_trigger.c/report-25fd4e.html",
+          "relpath": "src/trigger.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/7b60ed803b8d/src/trigger.c",
+          "line": 1331,
+          "column": 3,
+          "function": "codeRowTrigger",
+          "bug_type": "SrcList Leak",
+          "description": "Potential SrcList leak: missing cleanup on error path",
+          "issue_hash": "34c0a1cfd0fb7db5b1a68d674f60588b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/8578150d/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_7b60ed803b8d_src_trigger.c/report-34c0a1.html",
+          "relpath": "src/trigger.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/7b60ed803b8d/src/trigger.c",
+          "line": 1214,
+          "column": 13,
+          "function": "transferParseError",
+          "bug_type": "SrcList Leak",
+          "description": "Potential SrcList leak: missing cleanup on error path",
+          "issue_hash": "4bd2e72852bdc7b4b9304bbe34a13255",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/8578150d/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_7b60ed803b8d_src_trigger.c/report-4bd2e7.html",
+          "relpath": "src/trigger.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/7b60ed803b8d/src/trigger.c",
+          "line": 599,
+          "column": 3,
+          "function": "sqlite3TriggerUpdateStep",
+          "bug_type": "SrcList Leak",
+          "description": "Potential SrcList leak: missing cleanup on error path",
+          "issue_hash": "592a82222d248e50860b4ca7a9a30a7f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/8578150d/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_7b60ed803b8d_src_trigger.c/report-592a82.html",
+          "relpath": "src/trigger.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/7b60ed803b8d/src/trigger.c",
+          "line": 1182,
+          "column": 3,
+          "function": "codeTriggerProgram",
+          "bug_type": "SrcList Leak",
+          "description": "Potential SrcList leak: missing cleanup on error path",
+          "issue_hash": "75ec42360cd71627f6857246b6f8a726",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/8578150d/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_7b60ed803b8d_src_trigger.c/report-75ec42.html",
+          "relpath": "src/trigger.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/7b60ed803b8d/src/trigger.c",
+          "line": 1366,
+          "column": 3,
+          "function": "getRowTrigger",
+          "bug_type": "SrcList Leak",
+          "description": "Potential SrcList leak: missing cleanup on error path",
+          "issue_hash": "a111319214eac59efc81d34757a272f3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/7b60ed803b8d/8578150d/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_7b60ed803b8d_src_trigger.c/report-a11131.html",
+          "relpath": "src/trigger.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 71.01,
+    "analysis_seconds": {
+      "buggy": 9.8,
+      "fixed": 9.69
+    },
+    "total_seconds": 90.56
+  },
+  "report_dir": "tmp/validation/7b60ed803b8d/8578150d"
+}

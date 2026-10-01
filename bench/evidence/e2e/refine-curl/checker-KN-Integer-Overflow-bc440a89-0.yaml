@@ -1,0 +1,197 @@
+_base_result_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-B-curl/results
+commit_id: bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a
+commit_type: Integer-Overflow
+index: 0
+initial_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n\n#include \"clang/AST/ASTContext.h\"\n#include \"clang/AST/Decl.h\"\n#include\
+  \ \"clang/AST/Expr.h\"\n#include \"clang/AST/Stmt.h\"\n\nusing namespace clang;\n\
+  using namespace ento;\nusing namespace taint;\n\nnamespace {\nclass SAGenTestChecker\
+  \ : public Checker<check::PreStmt<BinaryOperator>> {\n  mutable std::unique_ptr<BugType>\
+  \ BT;\n\npublic:\n  SAGenTestChecker()\n      : BT(new BugType(this, \"Integer Overflow\
+  \ in Base64 Size Calculation\",\n                       \"Integer Overflow\")) {}\n\
+  \n  void checkPreStmt(const BinaryOperator *BO, CheckerContext &C) const;\n};\n\
+  } // end anonymous namespace\n\nvoid SAGenTestChecker::checkPreStmt(const BinaryOperator\
+  \ *BO,\n                                    CheckerContext &C) const {\n  if (!BO)\n\
+  \    return;\n\n  // 1. Filter: must be a multiplication (BO_Mul).\n  if (BO->getOpcode()\
+  \ != BO_Mul)\n    return;\n\n  // 2. Ensure one operand is an integer literal 4\
+  \ (e.g. `4 * (...)`)\n  //    This matches `4 * (1 + ((size - 1) / 3))`.\n  bool\
+  \ HasLiteralFour = false;\n  const Expr *LHS = BO->getLHS()->IgnoreParenImpCasts();\n\
+  \  const Expr *RHS = BO->getRHS()->IgnoreParenImpCasts();\n  auto IsLiteralFour\
+  \ = [](const Expr *E) -> bool {\n    const IntegerLiteral *IL = dyn_cast<IntegerLiteral>(E);\n\
+  \    if (!IL)\n      return false;\n    return IL->getValue() == 4;\n  };\n  if\
+  \ (IsLiteralFour(LHS) || IsLiteralFour(RHS))\n    HasLiteralFour = true;\n  if (!HasLiteralFour)\n\
+  \    return;\n\n  // 3. Ensure the enclosing function is `encoder_base64_size`.\n\
+  \  const LocationContext *LCtx = C.getLocationContext();\n  if (!LCtx)\n    return;\n\
+  \  const Decl *D = LCtx->getDecl();\n  const FunctionDecl *FD = dyn_cast_or_null<FunctionDecl>(D);\n\
+  \  if (!FD)\n    return;\n  if (FD->getNameAsString() != \"encoder_base64_size\"\
+  )\n    return;\n\n  // 4. Get the function body and inspect preceding statements\
+  \ for a guard.\n  const Stmt *Body = FD->getBody();\n  const CompoundStmt *CS =\
+  \ dyn_cast_or_null<CompoundStmt>(Body);\n  if (!CS)\n    return;\n\n  // Source\
+  \ location of the multiplication expression.\n  SourceLocation MulLoc = BO->getExprLoc();\n\
+  \n  // Iterate over the body's top-level statements appearing before MulLoc.\n \
+  \ bool GuardFound = false;\n  for (const Stmt *S : CS->body()) {\n    if (!S)\n\
+  \      continue;\n\n    // Only consider statements entirely before the multiplication.\n\
+  \    SourceLocation StmtLoc = S->getBeginLoc();\n    // If the statement's begin\
+  \ location is after MulLoc, stop (we've passed).\n    if (StmtLoc.isValid() && MulLoc.isValid()\
+  \ &&\n        C.getSourceManager().isBeforeInTranslationUnit(MulLoc, StmtLoc)) {\n\
+  \      break;\n    }\n\n    const IfStmt *If = dyn_cast<IfStmt>(S);\n    if (!If)\n\
+  \      continue;\n\n    const Expr *Cond = If->getCond();\n    if (!Cond)\n    \
+  \  continue;\n\n    // 5. Condition must reference both `size` and `BASE64_MAX_INPUT_SIZE`.\n\
+  \    if (!ExprHasName(Cond, \"BASE64_MAX_INPUT_SIZE\", C))\n      continue;\n  \
+  \  if (!ExprHasName(Cond, \"size\", C))\n      continue;\n\n    // 6. Then branch\
+  \ must contain a `return` statement (e.g. `return -1;`).\n    if (!findSpecificTypeInChildren<ReturnStmt>(If->getThen()))\n\
+  \      continue;\n\n    // Guard found \u2014 overflow is prevented.\n    GuardFound\
+  \ = true;\n    break;\n  }\n\n  if (GuardFound)\n    return;\n\n  // No guard found\
+  \ \u2014 report a potential overflow.\n  auto Report = std::make_unique<BasicBugReport>(\n\
+  \      *BT,\n      \"Potential integer overflow in base64 size calculation; missing\
+  \ \"\n      \"upper-bound check.\",\n      BO->getExprLoc());\n  Report->addRange(BO->getSourceRange());\n\
+  \  C.emitReport(std::move(Report));\n}\n\nextern \"C\" void clang_registerCheckers(CheckerRegistry\
+  \ &registry) {\n  registry.addChecker<SAGenTestChecker>(\n      \"custom.SAGenTestChecker\"\
+  ,\n      \"Detects missing upper-bound check before overflow-prone base64 size \"\
+  \n      \"calculation in encoder_base64_size\",\n      \"\");\n}\n\nextern \"C\"\
+  \ const char clang_analyzerAPIVersionString[] =\n    CLANG_ANALYZER_API_VERSION_STRING;\n"
+patch: "## Patch Description\n\nmime.c: avoid integer overflow in base64 size calculation\n\
+  \nReported-by: xmoezzz on github\nFixes #22320\nCloses #22322\n\n## Buggy Code\n\
+  \n```c\n// Function: encoder_base64_size in lib/mime.c\nstatic curl_off_t encoder_base64_size(curl_mimepart\
+  \ *part)\n{\n  curl_off_t size = part->datasize;\n\n  if(size <= 0)\n    return\
+  \ size;    /* Unknown size or no data. */\n\n  /* Compute base64 character count.\
+  \ */\n  size = 4 * (1 + ((size - 1) / 3));\n\n  /* Effective character count must\
+  \ include CRLFs. */\n  return size + (2 * ((size - 1) / MAX_ENCODED_LINE_LENGTH));\n\
+  }\n```\n\n```c\n// Function: encoder_base64_read in lib/mime.c\nstatic size_t encoder_base64_read(char\
+  \ *buffer, size_t size, bool ateof,\n                                  curl_mimepart\
+  \ *part)\n{\n  struct mime_encoder_state *st = &part->encstate;\n  size_t cursize\
+  \ = 0;\n  int i;\n  char *ptr = buffer;\n\n  while(st->bufbeg < st->bufend) {\n\
+  \    /* Line full ? */\n    if(st->pos > MAX_ENCODED_LINE_LENGTH - 4) {\n      /*\
+  \ Yes, we need 2 characters for CRLF. */\n      if(size < 2) {\n        if(!cursize)\n\
+  \          return STOP_FILLING;\n        break;\n      }\n      *ptr++ = '\\r';\n\
+  \      *ptr++ = '\\n';\n      st->pos = 0;\n      cursize += 2;\n      size -= 2;\n\
+  \    }\n\n    /* Be sure there is enough space and input data for a base64 group.\
+  \ */\n    if(size < 4) {\n      if(!cursize)\n        return STOP_FILLING;\n   \
+  \   break;\n    }\n    if(st->bufend - st->bufbeg < 3)\n      break;\n\n    /* Encode\
+  \ three bytes as four characters. */\n    i = st->buf[st->bufbeg++] & 0xFF;\n  \
+  \  i = (i << 8) | (st->buf[st->bufbeg++] & 0xFF);\n    i = (i << 8) | (st->buf[st->bufbeg++]\
+  \ & 0xFF);\n    *ptr++ = curlx_base64encdec[(i >> 18) & 0x3F];\n    *ptr++ = curlx_base64encdec[(i\
+  \ >> 12) & 0x3F];\n    *ptr++ = curlx_base64encdec[(i >> 6) & 0x3F];\n    *ptr++\
+  \ = curlx_base64encdec[i & 0x3F];\n    cursize += 4;\n    st->pos += 4;\n    size\
+  \ -= 4;\n  }\n\n  /* If at eof, we have to flush the buffered data. */\n  if(ateof)\
+  \ {\n    if(size < 4) {\n      if(!cursize)\n        return STOP_FILLING;\n    }\n\
+  \    else {\n      /* Buffered data size can only be 0, 1 or 2. */\n      ptr[2]\
+  \ = ptr[3] = '=';\n      i = 0;\n\n      /* If there is buffered data */\n     \
+  \ if(st->bufend != st->bufbeg) {\n\n        if(st->bufend - st->bufbeg == 2)\n \
+  \         i = (st->buf[st->bufbeg + 1] & 0xFF) << 8;\n\n        i |= (st->buf[st->bufbeg]\
+  \ & 0xFF) << 16;\n        ptr[0] = curlx_base64encdec[(i >> 18) & 0x3F];\n     \
+  \   ptr[1] = curlx_base64encdec[(i >> 12) & 0x3F];\n        if(++st->bufbeg != st->bufend)\
+  \ {\n          ptr[2] = curlx_base64encdec[(i >> 6) & 0x3F];\n          st->bufbeg++;\n\
+  \        }\n        cursize += 4;\n        st->pos += 4;\n      }\n    }\n  }\n\n\
+  \  return cursize;\n}\n```\n\n## Bug Fix Patch\n\n```diff\ndiff --git a/lib/mime.c\
+  \ b/lib/mime.c\nindex 11eb66207d..638831d9c8 100644\n--- a/lib/mime.c\n+++ b/lib/mime.c\n\
+  @@ -419,6 +419,11 @@ static size_t encoder_base64_read(char *buffer, size_t size,\
+  \ bool ateof,\n   return cursize;\n }\n \n+/* The maximum input size that does not\
+  \ cause an overflow. */\n+#define BASE64_MAX_INPUT_SIZE                        \
+  \                   \\\n+  (((CURL_OFF_T_MAX / (MAX_ENCODED_LINE_LENGTH + 2)) *\
+  \                  \\\n+    MAX_ENCODED_LINE_LENGTH / 4) * 3 - 3)\n+\n static curl_off_t\
+  \ encoder_base64_size(curl_mimepart *part)\n {\n   curl_off_t size = part->datasize;\n\
+  @@ -426,6 +431,10 @@ static curl_off_t encoder_base64_size(curl_mimepart *part)\n\
+  \   if(size <= 0)\n     return size;    /* Unknown size or no data. */\n \n+  /*\
+  \ Prevent integer overflows */\n+  if(size > BASE64_MAX_INPUT_SIZE)\n+    return\
+  \ -1;\n+\n   /* Compute base64 character count. */\n   size = 4 * (1 + ((size -\
+  \ 1) / 3));\n \n```\n"
+pattern: '## Bug Pattern
+
+
+  Unchecked integer overflow when calculating an encoded/output size from a large
+  input size. In `encoder_base64_size()`, the expression `4 * (1 + ((size - 1) / 3))`
+  can overflow `curl_off_t` for sufficiently large `part->datasize`; the resulting
+  wrapped value is then used as the claimed encoded size, leading to incorrect size
+  accounting and potentially undersized allocation or buffer handling. The fix prevents
+  this by rejecting input sizes larger than `BASE64_MAX_INPUT_SIZE` before performing
+  the size arithmetic.'
+plan: "1. **No custom program state is needed.**\n   The checker only needs to verify\
+  \ the presence of an upper-bound guard before the overflow-prone arithmetic. This\
+  \ can be done by inspecting the AST at the point of the multiplication, without\
+  \ tracking state across paths.\n\n2. **Implement `checkPreStmt` for `BinaryOperator`:**\n\
+  \   - Filter for the base64 size calculation: check if the `BinaryOperator` has\
+  \ opcode `BO_Mul` and one operand is an integer literal `4` (e.g., `4 * (1 + ((size\
+  \ - 1) / 3))`).\n   - Ensure the enclosing function is `encoder_base64_size` by\
+  \ getting the `FunctionDecl` from `C.getLocationContext()->getDecl()` and comparing\
+  \ `FD->getNameAsString()` to `\"encoder_base64_size\"`.\n   - If the function matches,\
+  \ obtain its body (`CompoundStmt`).\n   - Iterate over all statements in the body\
+  \ that appear before the multiplication (compare source locations). For each preceding\
+  \ `IfStmt`:\n     - Check if the condition contains both the variable `size` and\
+  \ the macro `BASE64_MAX_INPUT_SIZE` using the provided `ExprHasName` utility (e.g.,\
+  \ `ExprHasName(If->getCond(), \"BASE64_MAX_INPUT_SIZE\", C)` and `ExprHasName(If->getCond(),\
+  \ \"size\", C)`).\n     - Check that the `IfStmt`'s then branch contains a `ReturnStmt`\
+  \ (e.g., `return -1;`) using `findSpecificTypeInChildren<ReturnStmt>(If->getThen())`.\n\
+  \     - If such a guard is found, the overflow is prevented; stop checking and return.\n\
+  \   - If no such guard is found before the multiplication, create a `BasicBugReport`\
+  \ at the multiplication's location (`BO->getExprLoc()`) with the message: `\"Potential\
+  \ integer overflow in base64 size calculation; missing upper-bound check.\"`\n \
+  \  - Emit the report using `C.emitReport(std::move(Report))`."
+refined_plan: null
+repaired_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n\n#include \"clang/AST/ASTContext.h\"\n#include \"clang/AST/Decl.h\"\n#include\
+  \ \"clang/AST/Expr.h\"\n#include \"clang/AST/Stmt.h\"\n\nusing namespace clang;\n\
+  using namespace ento;\nusing namespace taint;\n\nnamespace {\nclass SAGenTestChecker\
+  \ : public Checker<check::PreStmt<BinaryOperator>> {\n  mutable std::unique_ptr<BugType>\
+  \ BT;\n\npublic:\n  SAGenTestChecker()\n      : BT(new BugType(this, \"Integer Overflow\
+  \ in Base64 Size Calculation\",\n                       \"Integer Overflow\")) {}\n\
+  \n  void checkPreStmt(const BinaryOperator *BO, CheckerContext &C) const;\n};\n\
+  } // end anonymous namespace\n\nvoid SAGenTestChecker::checkPreStmt(const BinaryOperator\
+  \ *BO,\n                                    CheckerContext &C) const {\n  if (!BO)\n\
+  \    return;\n\n  // 1. Filter: must be a multiplication (BO_Mul).\n  if (BO->getOpcode()\
+  \ != BO_Mul)\n    return;\n\n  // 2. Ensure one operand is an integer literal 4\
+  \ (e.g. `4 * (...)`)\n  //    This matches `4 * (1 + ((size - 1) / 3))`.\n  bool\
+  \ HasLiteralFour = false;\n  const Expr *LHS = BO->getLHS()->IgnoreParenImpCasts();\n\
+  \  const Expr *RHS = BO->getRHS()->IgnoreParenImpCasts();\n  auto IsLiteralFour\
+  \ = [](const Expr *E) -> bool {\n    const IntegerLiteral *IL = dyn_cast<IntegerLiteral>(E);\n\
+  \    if (!IL)\n      return false;\n    return IL->getValue() == 4;\n  };\n  if\
+  \ (IsLiteralFour(LHS) || IsLiteralFour(RHS))\n    HasLiteralFour = true;\n  if (!HasLiteralFour)\n\
+  \    return;\n\n  // 3. Ensure the enclosing function is `encoder_base64_size`.\n\
+  \  const LocationContext *LCtx = C.getLocationContext();\n  if (!LCtx)\n    return;\n\
+  \  const Decl *D = LCtx->getDecl();\n  const FunctionDecl *FD = dyn_cast_or_null<FunctionDecl>(D);\n\
+  \  if (!FD)\n    return;\n  if (FD->getNameAsString() != \"encoder_base64_size\"\
+  )\n    return;\n\n  // 4. Get the function body and inspect preceding statements\
+  \ for a guard.\n  const Stmt *Body = FD->getBody();\n  const CompoundStmt *CS =\
+  \ dyn_cast_or_null<CompoundStmt>(Body);\n  if (!CS)\n    return;\n\n  // Source\
+  \ location of the multiplication expression.\n  SourceLocation MulLoc = BO->getExprLoc();\n\
+  \n  // Iterate over the body's top-level statements appearing before MulLoc.\n \
+  \ bool GuardFound = false;\n  for (const Stmt *S : CS->body()) {\n    if (!S)\n\
+  \      continue;\n\n    // Only consider statements entirely before the multiplication.\n\
+  \    SourceLocation StmtLoc = S->getBeginLoc();\n    // If the statement's begin\
+  \ location is after MulLoc, stop (we've passed).\n    if (StmtLoc.isValid() && MulLoc.isValid()\
+  \ &&\n        C.getSourceManager().isBeforeInTranslationUnit(MulLoc, StmtLoc)) {\n\
+  \      break;\n    }\n\n    const IfStmt *If = dyn_cast<IfStmt>(S);\n    if (!If)\n\
+  \      continue;\n\n    const Expr *Cond = If->getCond();\n    if (!Cond)\n    \
+  \  continue;\n\n    // 5. Condition must reference both `size` and `BASE64_MAX_INPUT_SIZE`.\n\
+  \    if (!ExprHasName(Cond, \"BASE64_MAX_INPUT_SIZE\", C))\n      continue;\n  \
+  \  if (!ExprHasName(Cond, \"size\", C))\n      continue;\n\n    // 6. Then branch\
+  \ must contain a `return` statement (e.g. `return -1;`).\n    if (!findSpecificTypeInChildren<ReturnStmt>(If->getThen()))\n\
+  \      continue;\n\n    // Guard found \u2014 overflow is prevented.\n    GuardFound\
+  \ = true;\n    break;\n  }\n\n  if (GuardFound)\n    return;\n\n  // No guard found\
+  \ \u2014 report a potential overflow.\n  auto Report = std::make_unique<BasicBugReport>(\n\
+  \      *BT,\n      \"Potential integer overflow in base64 size calculation; missing\
+  \ \"\n      \"upper-bound check.\",\n      PathDiagnosticLocation(BO, C.getSourceManager(),\n\
+  \                             C.getLocationContext()));\n  Report->addRange(BO->getSourceRange());\n\
+  \  C.emitReport(std::move(Report));\n}\n\nextern \"C\" void clang_registerCheckers(CheckerRegistry\
+  \ &registry) {\n  registry.addChecker<SAGenTestChecker>(\n      \"custom.SAGenTestChecker\"\
+  ,\n      \"Detects missing upper-bound check before overflow-prone base64 size \"\
+  \n      \"calculation in encoder_base64_size\",\n      \"\");\n}\n\nextern \"C\"\
+  \ const char clang_analyzerAPIVersionString[] =\n    CLANG_ANALYZER_API_VERSION_STRING;\n"
+tn_score: 1
+tp_score: 1

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Cleanup ordering error: an embedded resource/list node is unlinked after its containing structure has already been zeroed with `memset()`. The zeroing destroys the linkage/state needed by the unlink operation, so the peer is never actually removed and leaks. In this patch, `cf_h2_proxy_ctx_free()` calls `cf_h2_proxy_ctx_clear()` first, which does `memset(ctx, 0, sizeof(*ctx))` and wipes `ctx->dest`, and only then calls `Curl_peer_unlink(&ctx->dest)`. The fix is to unlink `ctx->dest` before the `memset()` clears it.

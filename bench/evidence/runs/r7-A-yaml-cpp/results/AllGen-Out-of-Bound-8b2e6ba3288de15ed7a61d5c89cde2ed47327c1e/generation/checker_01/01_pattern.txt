@@ -1,0 +1,22 @@
+## Bug Pattern
+
+Unconditionally calling `PopIndent()` while handling an unverified simple key before scanning a block scalar, without verifying that the indent stack is non-empty and that the simple key’s saved indent marker is the current top of `m_indents`. A stale or unrelated unverified simple key can therefore cause `PopIndent()` to pop an unrelated indent marker or pop from an empty stack, leading to an indentation stack underflow.
+
+The buggy pattern is:
+
+```cpp
+if (!m_simpleKeys.empty() &&
+    m_simpleKeys.top().pKey->status == Token::UNVERIFIED) {
+  PopIndent();
+}
+```
+
+The missing guard is that `PopIndent()` should only be called when:
+
+```cpp
+m_simpleKeys.top().pIndent &&
+!m_indents.empty() &&
+m_indents.top() == m_simpleKeys.top().pIndent
+```
+
+Otherwise the simple key should be invalidated instead of popping the indent stack.

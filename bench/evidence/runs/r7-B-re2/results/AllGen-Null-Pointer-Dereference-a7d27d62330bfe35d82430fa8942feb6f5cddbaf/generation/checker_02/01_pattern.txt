@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The function conditionally initializes its return value only when the input set is non-empty, so for an empty set it returns `NULL` instead of a valid `Prefilter` node. This uses `NULL` as an implicit empty logical OR, but callers may treat the returned `Prefilter*` as a valid prefilter and dereference it, or interpret `NULL` as “no prefilter” rather than “no matches.” The fix always creates and returns `new Prefilter(NONE)`, the proper empty/no-match prefilter.

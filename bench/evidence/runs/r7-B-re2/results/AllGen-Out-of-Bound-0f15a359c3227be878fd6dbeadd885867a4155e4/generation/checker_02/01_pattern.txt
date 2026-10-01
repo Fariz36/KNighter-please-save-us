@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Accessing the top of a stack/array using `container[count - 1]` without first checking that `count > 0`. In `BitState::Push`, `njob_` can be zero, but the code unconditionally accesses `job_[njob_ - 1]` on the `id >= 0` path, causing an out-of-bounds buffer underflow. The missing guard is `if (njob_ > 0)` before using `njob_ - 1`.

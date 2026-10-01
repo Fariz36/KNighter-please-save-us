@@ -1,0 +1,6 @@
+checker.cpp: In member function ‘void {anonymous}::SAGenTestChecker::checkBranchCondition(const clang::Stmt*, clang::ento::CheckerContext&) const’:
+checker.cpp:276:58: error: cannot convert ‘clang::ento::ProgramStatePartialTrait<llvm::ImmutableMap<const clang::ento::MemRegion*, const clang::ento::MemRegion*> >::lookup_type’ {aka ‘const clang::ento::MemRegion* const*’} to ‘const clang::ento::MemRegion*’ in initialization
+  276 |   const MemRegion *ExpectedPtr = State->get<DelimiterMap>(SepRegion);
+      |                                  ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+      |                                                          |
+      |                                                          clang::ento::ProgramStatePartialTrait<llvm::ImmutableMap<const clang::ento::MemRegion*, const clang::ento::MemRegion*> >::lookup_type {aka const clang::ento::MemRegion* const*}

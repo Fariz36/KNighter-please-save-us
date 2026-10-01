@@ -1,0 +1,68 @@
+{
+  "commit_id": "967b28f0e5e10a81021cf398bef9fba8b4c6774a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/plugin-cache/plugins/248cfb4def2e8952971b/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/blame.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "dup_hunk"
+        ],
+        "fixed_functions": [
+          "dup_hunk"
+        ]
+      },
+      {
+        "path": "tests/libgit2/blame/buffer.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": [
+          "test_blame_buffer__reblame_buffer_result"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/blame.c": []
+    },
+    "fixed": {
+      "src/libgit2/blame.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 3.52,
+      "fixed": 5.19
+    },
+    "total_seconds": 8.83
+  },
+  "report_dir": "tmp/validation/967b28f0e5e1/c22e58f4"
+}

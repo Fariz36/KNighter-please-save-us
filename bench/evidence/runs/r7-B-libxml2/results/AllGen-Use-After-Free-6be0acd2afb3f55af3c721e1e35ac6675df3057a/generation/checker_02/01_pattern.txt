@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Freeing a tree/list node with `xmlFreeNode()` while it is still linked into its parent/sibling structure, without first unlinking it. `xmlFreeNode()` does not remove the node from the tree, so the surrounding parent, sibling, or document pointers can be left dangling and later dereferenced, causing use-after-free. The fix is to call `xmlUnlinkNodeInternal(cur)` before `xmlFreeNode(cur)`.

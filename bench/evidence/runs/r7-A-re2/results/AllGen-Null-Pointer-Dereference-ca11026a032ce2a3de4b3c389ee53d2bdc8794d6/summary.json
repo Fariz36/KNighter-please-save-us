@@ -1,0 +1,13 @@
+{
+  "commit_id": "ca11026a032ce2a3de4b3c389ee53d2bdc8794d6",
+  "commit_type": "Null-Pointer-Dereference",
+  "total_checkers": 3,
+  "successful_checkers": 3,
+  "perfect_checkers": 0,
+  "best_tp": 2,
+  "best_tn": 0,
+  "total_time": 857.546994,
+  "errors": [],
+  "success_rate": 1.0,
+  "timestamp": "2026-10-01T08:21:38.156881"
+}

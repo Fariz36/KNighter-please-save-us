@@ -1,0 +1,4 @@
+checker.cpp:17:10: fatal error: clang/StaticAnalyzer/Checkers/Utility.h: No such file or directory
+   17 | #include "clang/StaticAnalyzer/Checkers/Utility.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.

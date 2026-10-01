@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Ignoring an early-termination/failure status from a recursive walker and treating the partial result as successful. `Regexp::Simplify()` did not check `stopped_early()` after walking, so it could return a non-NULL but incompletely simplified regexp; after the fix, it returns NULL on early stop, so callers such as `Prefilter::FromRegexp()` must check the returned pointer before dereferencing it.

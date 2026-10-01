@@ -1,0 +1,24 @@
+## Bug Pattern
+
+Using an assignment to an error variable together with a comparison operator without parenthesizing the assignment, e.g.:
+
+```c
+(error = func() < 0)
+(error = cb(...) != 0)
+```
+
+Because `<` and `!=` have higher precedence than `=`, this is parsed as:
+
+```c
+error = (func() < 0)
+error = (cb(...) != 0)
+```
+
+so `error` receives only a boolean `0` or `1`, not the actual function return value. This causes incorrect error handling, such as losing the original error code or failing to recognize special errors like `GIT_ENOTFOUND`.
+
+The correct pattern is to parenthesize the assignment before comparing its result:
+
+```c
+(error = func()) < 0
+(error = cb(...)) != 0
+```

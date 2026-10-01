@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unconditionally accessing the top element of a stack/container as `container[size - 1]` without first checking that the container is non-empty. When the size is zero, `size - 1` underflows, causing an out-of-bounds buffer underflow. The fix is to guard the top-element access with a `size > 0` check.

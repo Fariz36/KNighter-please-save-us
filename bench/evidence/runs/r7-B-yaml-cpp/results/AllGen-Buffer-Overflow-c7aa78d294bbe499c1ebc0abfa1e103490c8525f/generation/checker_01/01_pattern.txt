@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using a fixed-size stack buffer (`std::array<char, 28> output_buffer`) to build a formatted floating-point string while the required output length depends on the caller-controlled `precision`. In default notation, large precision values can require many trailing zeros before the decimal point, exceeding the hard-coded buffer capacity, so the write loops overflow the stack buffer. The code fails to bound-check or dynamically handle output whose size can grow with user input.

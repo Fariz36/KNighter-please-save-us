@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Using `!!memcmp(a, b, n)` as a positive match test. Since `memcmp()` returns `0` when the buffers are equal and non-zero when they differ, `!!memcmp(...)` evaluates to `1` for a mismatch and `0` for a match. When the surrounding code treats `1` as “matched” and `0` as “not matched”, the comparison is inverted, so mismatching values are accepted and matching values are rejected. In certificate verification this becomes a security bypass. The correct check is `memcmp(...) == 0`, and for binary SAN IP addresses the SAN length should also be validated against the expected address length before comparing.

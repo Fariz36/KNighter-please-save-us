@@ -1,0 +1,5 @@
+checker.cpp: In function ‘const clang::ento::MemRegion* {anonymous}::getTargetParamRegion(const clang::Expr*, clang::ento::CheckerContext&)’:
+checker.cpp:58:12: error: ‘class clang::ento::CheckerContext’ has no member named ‘getMemRegionManager’; did you mean ‘getSymbolManager’?
+   58 |   return C.getMemRegionManager().getVarRegion(VD, C.getLocationContext());
+      |            ^~~~~~~~~~~~~~~~~~~
+      |            getSymbolManager

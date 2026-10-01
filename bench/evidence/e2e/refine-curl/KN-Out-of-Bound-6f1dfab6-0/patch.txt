@@ -1,0 +1,176 @@
+## Patch Description
+
+ftp: avoid accessing EPSV response one byte past the NULL
+
+If the response is just a single "(".
+
+Reported-by: Andrew Nesbit
+Closes #21545
+
+## Buggy Code
+
+```c
+// Function: ftp_state_pasv_resp in lib/ftp.c
+static CURLcode ftp_state_pasv_resp(struct Curl_easy *data,
+                                    struct ftp_conn *ftpc,
+                                    int ftpcode)
+{
+  struct connectdata *conn = data->conn;
+  CURLcode result;
+  const struct pingpong *pp = &ftpc->pp;
+  char *newhost = NULL;
+  unsigned short newport = 0;
+  const char *str = curlx_dyn_ptr(&pp->recvbuf) + 4; /* start on the first
+                                                        letter */
+  if((ftpc->count1 == 0) &&
+     (ftpcode == 229)) {
+    /* positive EPSV response */
+    const char *ptr = strchr(str, '(');
+    if(ptr) {
+      char sep;
+      ptr++;
+      /* |||12345| */
+      sep = ptr[0];
+      if((ptr[1] == sep) && (ptr[2] == sep) && ISDIGIT(ptr[3])) {
+        const char *p = &ptr[3];
+        curl_off_t num;
+        if(curlx_str_number(&p, &num, 0xffff) || (*p != sep)) {
+          failf(data, "Illegal port number in EPSV reply");
+          return CURLE_FTP_WEIRD_PASV_REPLY;
+        }
+        newport = (unsigned short)num;
+        result = ftp_control_addr_dup(data, &newhost);
+        if(result)
+          return result;
+      }
+      else
+        ptr = NULL;
+    }
+    if(!ptr) {
+      failf(data, "Weirdly formatted EPSV reply");
+      return CURLE_FTP_WEIRD_PASV_REPLY;
+    }
+  }
+  else if((ftpc->count1 == 1) &&
+          (ftpcode == 227)) {
+    /* positive PASV response */
+    unsigned int ip[6];
+
+    /*
+     * Scan for a sequence of six comma-separated numbers and use them as
+     * IP+port indicators.
+     *
+     * Found reply-strings include:
+     * "227 Entering Passive Mode (127,0,0,1,4,51)"
+     * "227 Data transfer will passively listen to 127,0,0,1,4,51"
+     * "227 Entering passive mode. 127,0,0,1,4,51"
+     */
+    while(*str) {
+      if(match_pasv_6nums(str, ip))
+        break;
+      str++;
+    }
+
+    if(!*str) {
+      failf(data, "Could not interpret the 227-response");
+      return CURLE_FTP_WEIRD_227_FORMAT;
+    }
+
+    /* we got OK from server */
+    if(data->set.ftp_skip_ip) {
+      /* told to ignore the remotely given IP but instead use the host we used
+         for the control connection */
+      infof(data, "Skip %u.%u.%u.%u for data connection, reuse %s instead",
+            ip[0], ip[1], ip[2], ip[3], conn->origin->hostname);
+      result = ftp_control_addr_dup(data, &newhost);
+      if(result)
+        return result;
+    }
+    else
+      newhost = curl_maprintf("%u.%u.%u.%u", ip[0], ip[1], ip[2], ip[3]);
+
+    if(!newhost)
+      return CURLE_OUT_OF_MEMORY;
+
+    newport = (unsigned short)(((ip[4] << 8) + ip[5]) & 0xffff);
+  }
+  else if(ftpc->count1 == 0) {
+    /* EPSV failed, move on to PASV */
+    return ftp_epsv_disable(data, ftpc, conn);
+  }
+  else {
+    failf(data, "Bad PASV/EPSV response: %03d", ftpcode);
+    return CURLE_FTP_WEIRD_PASV_REPLY;
+  }
+
+  DEBUGASSERT(newhost);
+  Curl_peer_unlink(&conn->origin2);
+  result = Curl_peer_create(data, conn->scheme, newhost, newport,
+                            &conn->origin2);
+  if(result)
+    goto error;
+
+  /* If FIRSTSOCKET goes via another peer, SECONDARY needs as well,
+   * but with its new port. */
+  if(conn->via_peer) {
+    Curl_peer_unlink(&conn->via_peer2);
+    result = Curl_peer_create(data, conn->via_peer->scheme,
+                              conn->via_peer->hostname, newport,
+                              &conn->via_peer2);
+    if(result)
+      goto error;
+  }
+
+  result = Curl_conn_setup(data, conn, SECONDARYSOCKET,
+                           conn->bits.ftp_use_data_ssl ?
+                           CURL_CF_SSL_ENABLE : CURL_CF_SSL_DISABLE);
+
+  if(result) {
+    if((result != CURLE_OUT_OF_MEMORY) &&
+       (ftpc->count1 == 0) && (ftpcode == 229)) {
+      result = ftp_epsv_disable(data, ftpc, conn);
+    }
+    goto error;
+  }
+
+  /*
+   * When this is used from the multi interface, this might have returned with
+   * the 'connected' set to FALSE and thus we are now awaiting a non-blocking
+   * connect to connect.
+   */
+
+#ifdef CURLVERBOSE
+  if(data->set.verbose) {
+    /* Dump information about this second connection when we have issued
+     * a PASV command. */
+    infof(data, "Connecting to %s port %d",
+          conn->origin2->hostname, conn->origin2->port);
+  }
+#endif
+
+  conn->bits.do_more = TRUE;
+  ftp_state(data, ftpc, FTP_STOP); /* this phase is completed */
+
+error:
+  curlx_free(newhost);
+  return result;
+}
+```
+
+## Bug Fix Patch
+
+```diff
+diff --git a/lib/ftp.c b/lib/ftp.c
+index 17cedb3353..3f55f68d82 100644
+--- a/lib/ftp.c
++++ b/lib/ftp.c
+@@ -2073,7 +2073,7 @@ static CURLcode ftp_state_pasv_resp(struct Curl_easy *data,
+       ptr++;
+       /* |||12345| */
+       sep = ptr[0];
+-      if((ptr[1] == sep) && (ptr[2] == sep) && ISDIGIT(ptr[3])) {
++      if(sep && (ptr[1] == sep) && (ptr[2] == sep) && ISDIGIT(ptr[3])) {
+         const char *p = &ptr[3];
+         curl_off_t num;
+         if(curlx_str_number(&p, &num, 0xffff) || (*p != sep)) {
+```

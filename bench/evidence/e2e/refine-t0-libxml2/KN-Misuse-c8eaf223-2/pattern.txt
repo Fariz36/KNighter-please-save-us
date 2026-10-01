@@ -1,0 +1,3 @@
+## Bug Pattern
+
+A configuration value (`maxAmpl`) is accepted from a public setter without validating that it is non-zero, and is later used directly as the divisor in `(*expandedSize / ctxt->maxAmpl > consumed)`. If the value is set to zero, the division triggers a divide-by-zero fault (SIGFPE). The root cause is missing zero/divisor validation both when setting the value and immediately before the division.

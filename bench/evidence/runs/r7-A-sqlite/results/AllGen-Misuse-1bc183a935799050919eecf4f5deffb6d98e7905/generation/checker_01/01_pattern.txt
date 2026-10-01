@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The code calls `sqlite3Dequote()` on token text returned by `getConstraintToken()` without first checking the corresponding token type. On a corrupt schema, `getConstraintToken()` can return `TK_ILLEGAL` (for example, an unterminated quoted identifier), and `sqlite3Dequote()` assumes well-formed quoted input and asserts when given such malformed text. The fix passes the token type into `quotedCompare()` and returns early for `TK_ILLEGAL` before calling `sqlite3Dequote()`.

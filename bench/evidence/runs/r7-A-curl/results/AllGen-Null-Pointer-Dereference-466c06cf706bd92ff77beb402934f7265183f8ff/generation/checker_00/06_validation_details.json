@@ -1,0 +1,237 @@
+{
+  "commit_id": "466c06cf706bd92ff77beb402934f7265183f8ff",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/plugin-cache/plugins/3edd5b3f0ad41a7c4f3d/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/urlapi.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 14,
+        "fixed_total": 1,
+        "buggy_on_target": 14,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "curl_url_dup"
+        ],
+        "fixed_functions": [
+          "curl_url_dup"
+        ]
+      },
+      {
+        "path": "tests/libtest/lib1560.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "test_api_errors"
+        ],
+        "fixed_functions": [
+          "test_api_errors"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/urlapi.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1440,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "0e2f2137f42fad65b8c033a57c08a75e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-0e2f21.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1450,
+          "column": 24,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "1d83750291ea3f8ef5c9295c7d2e7489",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-1d8375.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1451,
+          "column": 25,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "4b99d5f47ef33bd28e5a1e691d448811",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-4b99d5.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1438,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "6f6549bd4ffaa5ec6fedc6d9465433fb",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-6f6549.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1443,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "7212f24d07ee04cf3e62dee1e4d08d40",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-7212f2.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1444,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "7ad0eab510b8b350189b69922d683c8b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-7ad0ea.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1441,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "84c2e7ea9e50964f8595e46c069bea0e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-84c2e7.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1446,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "924d5beb115799392abf68114778b24c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-924d5b.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1442,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "ae4cafa30d25bab6cf4e84e4e8136949",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-ae4caf.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1448,
+          "column": 23,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "b034a6967e9ad05070bbdd383248e9ff",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-b034a6.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1449,
+          "column": 27,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "b61ef48e3e1c6c22990aed2d9710605a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-b61ef4.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1447,
+          "column": 18,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "b9e438481dd508904d069c06704b55af",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-b9e438.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1445,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "bd249ee5e014750d5d28575eedc7a0f3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-bd249e.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1439,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "eedb2818e90951702ff7b4e6f03d20e4",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-eedb28.html",
+          "relpath": "lib/urlapi.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/urlapi.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/466c06cf706b/lib/urlapi.c",
+          "line": 1438,
+          "column": 7,
+          "function": "curl_url_dup",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: 'in' is not checked before use",
+          "issue_hash": "da976358bb0a0cd455ac379906a4b4b0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/10e7f423/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_466c06cf706b_lib_urlapi.c/report-da9763.html",
+          "relpath": "lib/urlapi.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 51.15,
+    "analysis_seconds": {
+      "buggy": 6.74,
+      "fixed": 4.52
+    },
+    "total_seconds": 62.65
+  },
+  "report_dir": "tmp/validation/466c06cf706b/10e7f423"
+}

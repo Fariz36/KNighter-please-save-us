@@ -1,0 +1,11 @@
+## Bug Pattern
+
+The bug pattern is an unchecked nullable return value from `Regexp::Simplify()`. `Simplify()` can now stop early and return `NULL` when its walkers set `stopped_early()`, but `Prefilter::FromRegexp()` assumes it always returns a valid `Regexp*` and then uses it unconditionally:
+
+```cpp
+Regexp* simple = re->Simplify();
+Prefilter::Info *info = BuildInfo(simple);
+simple->Decref();
+```
+
+If `Simplify()` returns `NULL`, this leads to a null pointer dereference. The fix is to check `simple == NULL` immediately after `Simplify()` and propagate failure, and to make `Simplify()` itself return `NULL` whenever either walker stopped early. The root cause is assuming `Simplify()` never fails, as reflected by the removed comment “Should not happen, since Simplify never fails.”

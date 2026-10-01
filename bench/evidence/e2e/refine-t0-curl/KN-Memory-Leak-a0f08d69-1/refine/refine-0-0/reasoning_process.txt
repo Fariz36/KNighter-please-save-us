@@ -1,0 +1,8 @@
+Refinement Plan:
+The false positive is caused by the checker recording only that a containing struct was zeroed by `memset()`, and then reporting any later `Curl_peer_unlink()` on a field of that struct, regardless of whether that field was reinitialized after the zeroing. In the reported case, `cf_socket_ctx_init()` does `memset(ctx, 0, ...)` and then immediately calls `Curl_peer_link(&ctx->peer, peer)`, which reinitializes the field. Later `cf_socket_ctx_free()` calls `Curl_peer_unlink(&ctx->peer)`, which is valid. The checker incorrectly still sees the old `memset` marker.
+
+The fix is to track the order of zeroing versus reinitialization. I introduce a monotonically increasing zeroing generation counter. Each qualifying `memset(..., 0, ...)` records the current generation for the zeroed region. When `Curl_peer_link()` is seen, the field passed as its first argument is marked with the latest zeroing generation of any containing region. At `Curl_peer_unlink()`, the checker only reports if the latest zeroing generation affecting the field is *not* matched by the field’s last reinitialization generation. This preserves detection of the target bug (`memset` before `unlink` with no subsequent link) while suppressing the false positive where `memset` is followed by a link that reinitializes the field.
+
+Refined Code:
+```cpp
+```

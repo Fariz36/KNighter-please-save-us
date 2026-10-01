@@ -1,0 +1,171 @@
+{
+  "commit_id": "1bc183a935799050919eecf4f5deffb6d98e7905",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/plugin-cache/plugins/5c4a9338f54a1c88d6f2/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/alter.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 5,
+        "fixed_total": 5,
+        "buggy_on_target": 4,
+        "fixed_on_target": 4,
+        "buggy_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ],
+        "fixed_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 1290,
+          "column": 9,
+          "function": "renameEditSql",
+          "bug_type": "Unguarded call into sqlite3Dequote",
+          "description": "Unvalidated token passed to sqlite3Dequote",
+          "issue_hash": "60193cbab00e85a48db3608cd40bd370",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/28580ea0/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_79837b6ee5d4_src_alter.c/report-60193c.html",
+          "relpath": "src/alter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 2557,
+          "column": 15,
+          "function": "dropConstraintFunc",
+          "bug_type": "Unguarded call into sqlite3Dequote",
+          "description": "Unvalidated token passed to sqlite3Dequote",
+          "issue_hash": "802feda00c2d955d7a99cc7c71b526b6",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/28580ea0/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_79837b6ee5d4_src_alter.c/report-802fed.html",
+          "relpath": "src/alter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 2450,
+          "column": 1,
+          "function": "unknown",
+          "bug_type": "Unguarded call into sqlite3Dequote",
+          "description": "Unvalidated token passed to sqlite3Dequote",
+          "issue_hash": "a12c871998217256aa653221e324bfcc",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/28580ea0/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_79837b6ee5d4_src_alter.c/report-a12c87.html",
+          "relpath": "src/alter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 2465,
+          "column": 3,
+          "function": "quotedCompare",
+          "bug_type": "Unguarded call into sqlite3Dequote",
+          "description": "Unvalidated token passed to sqlite3Dequote",
+          "issue_hash": "b8e7fb75020a0584f9339a6039f34084",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/28580ea0/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_79837b6ee5d4_src_alter.c/report-b8e7fb.html",
+          "relpath": "src/alter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 2951,
+          "column": 11,
+          "function": "findConstraintFunc",
+          "bug_type": "Unguarded call into sqlite3Dequote",
+          "description": "Unvalidated token passed to sqlite3Dequote",
+          "issue_hash": "f460fafd2d94cb843c9c130c1c49e699",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/28580ea0/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_79837b6ee5d4_src_alter.c/report-f460fa.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/1bc183a93579/src/alter.c",
+          "line": 2562,
+          "column": 15,
+          "function": "dropConstraintFunc",
+          "bug_type": "Unguarded call into sqlite3Dequote",
+          "description": "Unvalidated token passed to sqlite3Dequote",
+          "issue_hash": "0d2540c8493b9d4ad60885385c37ca1e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/28580ea0/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_1bc183a93579_src_alter.c/report-0d2540.html",
+          "relpath": "src/alter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/1bc183a93579/src/alter.c",
+          "line": 2956,
+          "column": 11,
+          "function": "findConstraintFunc",
+          "bug_type": "Unguarded call into sqlite3Dequote",
+          "description": "Unvalidated token passed to sqlite3Dequote",
+          "issue_hash": "203bada74cb6bcae7b8d02f61130ebfb",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/28580ea0/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_1bc183a93579_src_alter.c/report-203bad.html",
+          "relpath": "src/alter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/1bc183a93579/src/alter.c",
+          "line": 1290,
+          "column": 9,
+          "function": "renameEditSql",
+          "bug_type": "Unguarded call into sqlite3Dequote",
+          "description": "Unvalidated token passed to sqlite3Dequote",
+          "issue_hash": "60193cbab00e85a48db3608cd40bd370",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/28580ea0/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_1bc183a93579_src_alter.c/report-60193c.html",
+          "relpath": "src/alter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/1bc183a93579/src/alter.c",
+          "line": 2450,
+          "column": 1,
+          "function": "unknown",
+          "bug_type": "Unguarded call into sqlite3Dequote",
+          "description": "Unvalidated token passed to sqlite3Dequote",
+          "issue_hash": "a12c871998217256aa653221e324bfcc",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/28580ea0/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_1bc183a93579_src_alter.c/report-a12c87.html",
+          "relpath": "src/alter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/1bc183a93579/src/alter.c",
+          "line": 2470,
+          "column": 3,
+          "function": "quotedCompare",
+          "bug_type": "Unguarded call into sqlite3Dequote",
+          "description": "Unvalidated token passed to sqlite3Dequote",
+          "issue_hash": "efc754952cd6352868c26f399934852a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/1bc183a93579/28580ea0/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_1bc183a93579_src_alter.c/report-efc754.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 109.24,
+    "analysis_seconds": {
+      "buggy": 46.59,
+      "fixed": 35.4
+    },
+    "total_seconds": 191.44
+  },
+  "report_dir": "tmp/validation/1bc183a93579/28580ea0"
+}

@@ -1,0 +1,101 @@
+{
+  "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/replay/replay-curl-A/plugin-cache/plugins/2d3a92a0878a2c48de10/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/setopt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 2,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "Curl_setblobopt"
+        ],
+        "fixed_functions": [
+          "Curl_setblobopt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/replay/replay-curl-A/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 111,
+          "column": 8,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL Check",
+          "description": "Missing NULL check for 'blob->data' before use in Curl_setblobopt",
+          "issue_hash": "1223d430b174349e5b64a5e7dc221729",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f7d4e11f4b42/7783c92f/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_replay_replay-curl-A_work_src_b3675fe80a33_lib_setopt.c/report-1223d4.html",
+          "relpath": "lib/setopt.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/replay/replay-curl-A/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 111,
+          "column": 33,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL Check",
+          "description": "Missing NULL check for 'blob->data' before use in Curl_setblobopt",
+          "issue_hash": "c07a181b4565f20ca7eef369c1787d82",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f7d4e11f4b42/7783c92f/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_replay_replay-curl-A_work_src_b3675fe80a33_lib_setopt.c/report-c07a18.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/replay/replay-curl-A/work/src/f7d4e11f4b42/lib/setopt.c",
+          "line": 111,
+          "column": 48,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL Check",
+          "description": "Missing NULL check for 'blob->data' before use in Curl_setblobopt",
+          "issue_hash": "395c4eff7d531272c347458f134b2a55",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f7d4e11f4b42/7783c92f/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_replay_replay-curl-A_work_src_f7d4e11f4b42_lib_setopt.c/report-395c4e.html",
+          "relpath": "lib/setopt.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/replay/replay-curl-A/work/src/f7d4e11f4b42/lib/setopt.c",
+          "line": 111,
+          "column": 23,
+          "function": "Curl_setblobopt",
+          "bug_type": "Missing NULL Check",
+          "description": "Missing NULL check for 'blob->data' before use in Curl_setblobopt",
+          "issue_hash": "5cb37defa95116c64fee9ae3bc8eb5ef",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f7d4e11f4b42/7783c92f/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_replay_replay-curl-A_work_src_f7d4e11f4b42_lib_setopt.c/report-5cb37d.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 52.63,
+    "analysis_seconds": {
+      "buggy": 1.42,
+      "fixed": 1.26
+    },
+    "total_seconds": 55.41
+  },
+  "report_dir": "tmp/validation/f7d4e11f4b42/7783c92f"
+}

@@ -1,0 +1,8 @@
+## Bug Pattern
+
+Local variables are declared without an initializer and can later be read on paths where no assignment has occurred. The two instances show the same root cause in different forms:
+
+- `required` is used on the right-hand side of its own assignment in the first loop, so if the first visible option has `CLI_OPT_USAGE_CHOICE` but not `CLI_OPT_USAGE_REQUIRED`, it is read before being initialized.
+- `drv` is checked and possibly freed in the shared `done:` cleanup path, but if `diff_driver_alloc()` fails before assigning it, or another early path jumps to cleanup without setting it, the uninitialized pointer is used in `if (drv && drv != *out)`.
+
+The fix is to initialize such locals at declaration to a safe default (`required = true`, `drv = NULL`) so all paths that read or clean up the variable have a defined value.

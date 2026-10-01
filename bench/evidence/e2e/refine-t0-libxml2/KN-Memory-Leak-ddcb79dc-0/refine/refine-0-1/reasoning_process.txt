@@ -1,0 +1,8 @@
+Refinement Plan:
+The false positive occurs because the checker relies on the program state to determine that the old value of `ctxt->sax` is null. In `xmlInitSAXParserCtxt`, the field is initialized to zero via `memset`, which the analyzer does not model as a concrete null value. The enclosing condition `if (ctxt->sax == NULL)` constrains a transient symbol loaded from the field, but the region itself is not updated, so `State->getSVal(MR)` does not reflect the null constraint. As a result, the checker incorrectly believes a non-null previous allocation exists.
+
+To eliminate this false positive while still detecting the target bug, we add an AST-based guard check: before reporting, walk up the parent statements of the store to find any enclosing `if` statement that compares the same field to `NULL`. If the store is executed only on the branch where the field is null (e.g., the then-branch of `if (field == NULL)` or the else-branch of `if (field != NULL)`), we suppress the warning. The target buggy function `xmlCtxtSetSaxHandler` has no such guard, so it will still be reported.
+
+Refined Code:
+```cpp
+```

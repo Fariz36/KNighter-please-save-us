@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Freeing a linked tree node with `xmlFreeNode(cur)` without first unlinking it from its parent/sibling list via `xmlUnlinkNodeInternal(cur)`. This leaves dangling references in the original tree, so later traversal or cleanup can access freed memory, causing use-after-free/corruption. Consuming or replacing a node in libxml2 requires unlinking it before freeing.

@@ -1,0 +1,40 @@
+1. **Register a Program State Map:**
+   - Use `REGISTER_MAP_WITH_PROGRAMSTATE(LengthDelimitedPtrMap, SymbolRef, bool)`.
+   - This map marks pointer symbols whose target data comes from `ASN1_STRING_get0_data` and is therefore length-delimited and not guaranteed to be NUL-terminated.
+   - No alias map is needed: assignments and casts preserve the same pointer symbol, so checking the symbol at the use site naturally handles aliases.
+
+2. **Implement Helper Functions:**
+   - `isASN1StringGet0Data(Call)`: return true if the callee name is `"ASN1_STRING_get0_data"`.
+   - `getPointerSymbol(SVal V)`: extract a `SymbolRef` from `V` using `V.getAsSymRef()`. If that fails, check whether `V.getAsRegion()` is a `SymbolicRegion` and return its symbol.
+   - `isLengthDelimited(State, const Expr *E, CheckerContext &C)`: get the `SVal` of `E`, extract its pointer symbol via `getPointerSymbol`, and return whether that symbol exists in `LengthDelimitedPtrMap`.
+   - `isPrintfLike(StringRef Name)`: return true for `failf`, `infof`, `printf`, `fprintf`, `sprintf`, `snprintf`.
+   - `getFormatArgIndex(StringRef Name)`: return the 0-based index of the format string argument: `1` for `failf`, `infof`, `fprintf`; `0` for `printf`; `1` for `sprintf`; `2` for `snprintf`.
+   - `reportMisuse(CheckerContext &C, const Expr *E, StringRef Msg)`: generate a non-fatal error node, create a `PathSensitiveBugReport` with a short message, and emit it.
+
+3. **Implement `checkPostCall`:**
+   - If `isASN1StringGet0Data(Call)` is true:
+     - Obtain the return value `SVal Ret = Call.getReturnValue()`.
+     - Extract `SymbolRef Sym = getPointerSymbol(Ret)`.
+     - If `Sym` is valid, update the state with `State = State->set<LengthDelimitedPtrMap>(Sym, true)` and call `C.addTransition(State)`.
+
+4. **Implement `checkPreCall`:**
+   - **For `strlen`:**
+     - If the callee name is `"strlen"` and `Call.getNumArgs() > 0`, take `Call.getArgExpr(0)`.
+     - If `isLengthDelimited(State, Arg, C)` is true, call `reportMisuse` with a message such as `"Length-delimited data used as NUL-terminated string"`.
+   - **For printf-like calls:**
+     - If `isPrintfLike(Call)` is true, get the format argument index via `getFormatArgIndex`.
+     - Ensure the format argument is a `StringLiteral`; otherwise skip.
+     - Parse the format string:
+       - Start with `argIndex = fmtIdx + 1`.
+       - Iterate characters. On `%%`, skip.
+       - On `%`, parse the specifier, tracking `starCount` for each `*` and `hasPrecision` for `.`.
+       - When reaching the conversion character, add `starCount` to `argIndex` first.
+       - If the conversion character is `s` and `!hasPrecision`, the string argument is at `argIndex`. If `argIndex < Call.getNumArgs()` and `isLengthDelimited(State, Call.getArgExpr(argIndex), C)` is true, call `reportMisuse` with a message such as `"Length-delimited data used with %s"`.
+       - Then increment `argIndex` by 1 for the conversion argument.
+       - Continue to the end of the format string.
+     - This correctly treats `%.*s` and `%.Ns` as safe, while flagging bare `%s` and `%*s`.
+
+5. **Reporting:**
+   - In `reportMisuse`, call `C.generateNonFatalErrorNode()`.
+   - If the node is non-null, create `std::make_unique<PathSensitiveBugReport>` with a short message like `"Length-delimited ASN1 data used as NUL-terminated string"`.
+   - Emit the report using `C.emitReport(...)`.

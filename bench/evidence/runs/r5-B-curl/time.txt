@@ -1,0 +1,23 @@
+	Command being timed: "/home/faris/RA-MrYudis/Knight/KNighter/venv/bin/python src/main.py gen --config_file=/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-B-curl/config.yaml --commit_file=/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-B-curl/commits.txt"
+	User time (seconds): 589.96
+	System time (seconds): 377.12
+	Percent of CPU this job got: 116%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 13:47.53
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1258660
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 21
+	Minor (reclaiming a frame) page faults: 22386908
+	Voluntary context switches: 937690
+	Involuntary context switches: 25300
+	Swaps: 0
+	File system inputs: 9849
+	File system outputs: 2499480
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

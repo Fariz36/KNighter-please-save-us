@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Parsing a string by loading a delimiter byte (`sep = ptr[0]`) and then unconditionally reading fixed lookahead bytes (`ptr[1]`, `ptr[2]`, `ptr[3]`) without first checking that `sep` is not the NUL terminator. If the string ends immediately after an opening `(`, `ptr` points at `\0`, so the subsequent indexing reads past the NUL terminator, causing an out-of-bounds read. The fix adds `sep && ...` to guard the lookahead.

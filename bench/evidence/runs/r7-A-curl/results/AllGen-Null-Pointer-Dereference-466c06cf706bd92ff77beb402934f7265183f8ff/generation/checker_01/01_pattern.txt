@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing NULL check on an input pointer before dereferencing it. In `curl_url_dup(const CURLU *in)`, the `in` parameter is dereferenced inside the `DUP()` macros and later via `in->portnum`, `in->port_present`, etc., without first checking whether `in` is NULL. Calling `curl_url_dup(NULL)` therefore causes a NULL pointer dereference. The correct pattern is to validate `in` and return early, e.g. `if(!in) return NULL;`, before allocating or dereferencing it.

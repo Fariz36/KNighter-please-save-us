@@ -1,0 +1,3 @@
+## Bug Pattern
+
+A settable numeric parameter or field is used as a divisor without validating that it is non-zero, and the division site lacks a guard for a zero denominator. In this case, `xmlCtxtSetMaxAmplification()` accepts `maxAmpl == 0`, stores it in `ctxt->maxAmpl`, and `xmlParserEntityCheck()` later computes `*expandedSize / ctxt->maxAmpl`, causing a division-by-zero/SIGFPE. The root cause is missing zero validation on a value that can be supplied externally and later used in arithmetic as a denominator.

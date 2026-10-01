@@ -1,0 +1,15 @@
+## Bug Pattern
+
+The bug pattern is **returning an output resource pointer as `NULL` on a success path because initialization/allocation happens after an early-`goto out` path**.
+
+In `load_known_hosts()`, `known_hosts` starts as `NULL`. If `git_sysdir_expand_homedir_file()` returns `GIT_ENOTFOUND`, the code sets `error = 0` and jumps to `out` without calling `libssh2_knownhost_init()`. The function then executes:
+
+```c
+out:
+	*hosts = known_hosts;
+	return error;
+```
+
+so it returns success (`0`) while setting `*hosts = NULL`. The caller treats the returned known-hosts object as valid and later dereferences it, causing a NULL pointer dereference/segfault.
+
+The fix is to initialize/acquire the known-hosts object before any path that can return success without it, ensuring `*hosts` is valid whenever the function reports success.

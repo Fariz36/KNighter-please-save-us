@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Freeing a tree node without first unlinking it from its current parent/sibling list. In `xmlAddChild`, the text-node branch consumes `cur` by calling `xmlFreeNode(cur)`, but `cur` may still be linked into the document tree, so its old parent, previous sibling, or next sibling can retain dangling pointers to freed memory. The missing `xmlUnlinkNodeInternal(cur)` causes a dangling-link/use-after-free bug.

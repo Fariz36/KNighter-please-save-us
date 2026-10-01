@@ -1,0 +1,29 @@
+1. **Program State**
+   - Register a program-state map: `REGISTER_MAP_WITH_PROGRAMSTATE(ZeroedStructMap, const MemRegion *, bool)`.
+   - Purpose: remember which base memory regions have been zeroed/cleared on the current path by `memset` or by a known clear helper.
+
+2. **`checkPostCall`: Detect `memset`**
+   - Match calls whose callee name is `memset` or `__builtin_memset`.
+   - Optionally verify the second argument evaluates to `0` using `EvaluateExprToInt`.
+   - Get the destination region from the first argument via `Call.getArgSVal(0).getAsRegion()`.
+   - If the region is non-null, add it to `ZeroedStructMap`.
+
+3. **`checkPostCall`: Summarize `cf_h2_proxy_ctx_clear`**
+   - Match calls to `cf_h2_proxy_ctx_clear`.
+   - Get the first argument’s `MemRegion`.
+   - Mark that region as zeroed in `ZeroedStructMap`, because this helper performs `memset(ctx, 0, sizeof(*ctx))`.
+   - This step makes the checker robust when the helper is not inlined. If inlining is reliable, this step can be omitted.
+
+4. **`checkPreCall`: Detect unlink after zeroing**
+   - Match calls to `Curl_peer_unlink`.
+   - Get the first argument’s `MemRegion` via `Call.getArgSVal(0).getAsRegion()`. For `&ctx->dest`, this is a field/subregion.
+   - Check whether this region itself or its base region, obtained by `getBaseRegion()`, is present in `ZeroedStructMap` in the current state.
+   - If yes, the containing struct was already zeroed before the embedded peer link was unlinked. This is the bug.
+
+5. **Report the Bug**
+   - Generate a non-fatal error node with `C.generateNonFatalErrorNode()`.
+   - Create a `PathSensitiveBugReport` with a short message such as:
+     `"Curl_peer_unlink after containing struct was zeroed; possible peer leak."`
+   - Emit the report with `C.emitReport(...)`.
+
+No alias tracking is required because the key is the `MemRegion` itself; aliases that point to the same object resolve to the same base region. The checker is path-sensitive, so it only reports when the zeroing actually happens before the unlink on the same path. In the fixed code, the unlink occurs before the `memset`, so `ZeroedStructMap` is empty at the unlink site and no warning is emitted.

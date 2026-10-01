@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is an unchecked lookahead/indexing in a parser macro: `NXT(index)` directly evaluates `ctxt->cur[index]` without verifying that `ctxt->cur + index` remains within the bounds of the input string. Because the parser context does not track the string length, the macro can read past the end of the duplicated regex string, causing an out-of-bounds read. The fix adds a `len` field and bounds-checks the index before accessing the buffer.

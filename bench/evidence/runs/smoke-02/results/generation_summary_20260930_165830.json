@@ -1,0 +1,23 @@
+{
+  "start_time": "2026-09-30T16:58:30.661941",
+  "total_commits": 1,
+  "successful_commits": 0,
+  "workers": 4,
+  "results": [
+    {
+      "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 0,
+      "best_tp": 1,
+      "best_tn": 0,
+      "total_time": 215.603617,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-09-30T17:02:06.268131"
+    }
+  ],
+  "end_time": "2026-09-30T17:02:06.269335",
+  "success_rate": 0.0
+}

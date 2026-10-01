@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Freeing an `xmlNode` that may still be linked into the document tree without first unlinking it. In `xmlAddChild`, when `parent` is an `XML_TEXT_NODE`, the function merges `cur->content` into `parent` and then calls `xmlFreeNode(cur)`, but it does not detach `cur` from its current parent/sibling list. Any existing parent, `prev`, or `next` pointers can then reference freed memory, leading to dangling pointers and use-after-free. The fix is to call `xmlUnlinkNodeInternal(cur)` before `xmlFreeNode(cur)`.

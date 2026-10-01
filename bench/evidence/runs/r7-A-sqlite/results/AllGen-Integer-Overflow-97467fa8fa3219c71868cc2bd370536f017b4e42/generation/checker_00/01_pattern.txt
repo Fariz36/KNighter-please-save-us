@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The bug pattern is accumulating an attacker-controlled quantity into a fixed-width signed integer without checking for overflow during accumulation. In this case, `n` is built up from a repeatedly-multiplied base-26 encoding (`n += (c - 'a') * mult; mult *= 26;`) using `int` for both `n` and `mult`. A corrupt or maliciously crafted input can cause `mult` and `n` to overflow, producing a negative or wrong-sized value. When such a value is later used in bounds checks (e.g. `j+n>nOut`) or as a length argument to `memset`, it leads to out-of-bounds writes or an integer-overflow-derived bypass of the size check. The fix is to widen the accumulator to a 64-bit type (`sqlite3_int64`) and validate the running sum *inside* the accumulation loop, rather than only checking `j+n>nOut` after the loop completes.
+
+More generally: **unbounded accumulation of an input-derived value into a fixed-width integer, with the overflow check performed only after the accumulation rather than during it.**

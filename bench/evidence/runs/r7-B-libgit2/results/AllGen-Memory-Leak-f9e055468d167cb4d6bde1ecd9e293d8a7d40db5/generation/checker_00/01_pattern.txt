@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is missing cleanup of an initialized `git_str` buffer on early-return and error paths. After `git_str path = GIT_STR_INIT` is populated by `git_fs_path_prettify_dir()`, the function must either transfer ownership via `git_str_detach()` or release it via `git_str_dispose()`. The buggy code returns early when the workdir is unchanged or when config lookup fails, and also exits with an error without disposing `path`, causing a memory leak. The fix ensures `git_str_dispose(&path)` is called on all non-ownership-transferring exits.

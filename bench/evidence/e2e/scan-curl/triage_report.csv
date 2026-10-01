@@ -1,0 +1,5 @@
+Commit ID,Num_Bugs,Num_Not_Bugs
+KN-Null-Pointer-Dereference-f2a15357-0,1,0
+KN-Memory-Leak-a0f08d69-2,0,0
+KN-Misuse-c53420e4-1,1,0
+KN-Integer-Overflow-bc440a89-0,1,0

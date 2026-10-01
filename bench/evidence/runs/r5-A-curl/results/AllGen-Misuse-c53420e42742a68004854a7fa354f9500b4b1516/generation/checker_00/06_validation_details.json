@@ -1,0 +1,78 @@
+{
+  "commit_id": "c53420e42742a68004854a7fa354f9500b4b1516",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-A-curl/plugin-cache/plugins/84211078aa4dd969f6b2/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/vtls/openssl.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "ossl_verifyhost"
+        ],
+        "fixed_functions": [
+          "ossl_verifyhost"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/vtls/openssl.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-A-curl/work/src/f042c25fb876/lib/vtls/openssl.c",
+          "line": 2169,
+          "column": 34,
+          "function": "ossl_verifyhost",
+          "bug_type": "Treating length-delimited ASN.1 data as NUL-terminated C string",
+          "description": "Treating length-delimited ASN.1 data as NUL-terminated C string",
+          "issue_hash": "1d8bff3b18224ef118fa96a21c32bd88",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r5/tmp/validation/c53420e42742/0dc40107/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r5-A-curl_work_src_f042c25fb876_lib_vtls_openssl.c/report-1d8bff.html",
+          "relpath": "lib/vtls/openssl.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-A-curl/work/src/f042c25fb876/lib/vtls/openssl.c",
+          "line": 2187,
+          "column": 7,
+          "function": "ossl_verifyhost",
+          "bug_type": "Treating length-delimited ASN.1 data as NUL-terminated C string",
+          "description": "Treating length-delimited ASN.1 data as NUL-terminated C string",
+          "issue_hash": "3fab0ca3fea3a19808772efe270e188a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r5/tmp/validation/c53420e42742/0dc40107/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r5-A-curl_work_src_f042c25fb876_lib_vtls_openssl.c/report-3fab0c.html",
+          "relpath": "lib/vtls/openssl.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/vtls/openssl.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 64.45,
+    "analysis_seconds": {
+      "buggy": 8.82,
+      "fixed": 8.38
+    },
+    "total_seconds": 81.91
+  },
+  "report_dir": "tmp/validation/c53420e42742/0dc40107"
+}

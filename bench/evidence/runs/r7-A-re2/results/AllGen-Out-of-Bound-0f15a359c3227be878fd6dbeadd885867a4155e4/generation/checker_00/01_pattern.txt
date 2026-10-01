@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is accessing the top element of a stack/array as `job_[njob_-1]` without first checking that `njob_ > 0`. When the stack is empty, `njob_ - 1` underflows, leading to an out-of-bounds/buffer-underflow access. The fix adds an emptiness check before indexing `njob_ - 1`.

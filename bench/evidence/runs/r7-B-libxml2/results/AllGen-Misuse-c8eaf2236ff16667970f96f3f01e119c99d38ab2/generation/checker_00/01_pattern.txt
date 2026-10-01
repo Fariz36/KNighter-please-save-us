@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is using a configurable or stateful value as a divisor without validating that it is nonzero. In this case, `xmlCtxtSetMaxAmplification()` accepts `maxAmpl == 0`, and `xmlParserEntityCheck()` later computes `*expandedSize / ctxt->maxAmpl`, causing a division-by-zero/SIGFPE. The fix rejects `maxAmpl == 0` at the setter and adds a `ctxt->maxAmpl > 0` guard before the division.

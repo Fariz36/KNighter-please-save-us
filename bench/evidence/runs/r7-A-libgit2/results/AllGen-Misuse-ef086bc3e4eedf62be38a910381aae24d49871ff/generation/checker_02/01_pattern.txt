@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The code uses `!!memcmp(...)` to test whether two SAN IP buffers are equal. Since `memcmp()` returns `0` on equality and non-zero on difference, `!!memcmp()` inverts the result: it yields `1` for a mismatch and `0` for a match. In a verifier where `matched == 1` means success and `matched == 0` means failure, this causes matching IP addresses to be rejected and mismatched IP addresses to be accepted. The correct pattern is `memcmp(...) == 0`, and for SAN IP comparison the SAN length should also be checked against the expected address length before calling `memcmp`.

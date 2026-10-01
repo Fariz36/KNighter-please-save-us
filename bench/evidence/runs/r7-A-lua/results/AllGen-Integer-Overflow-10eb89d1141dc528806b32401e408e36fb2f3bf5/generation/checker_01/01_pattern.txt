@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The bug pattern is using an input-derived byte count as a shift amount before validating that the count is within the allowed range. In `utf8_decode`, the number of continuation bytes (`count`) can exceed 5 for leading bytes such as `0xFF`, but `count` is used in `res |= ((l_uint32)(c & 0x7F) << (count * 5))` before the later `count > 5` check. This causes a shift by 35 bits on a 32-bit value, which is undefined behavior/shift overflow.
+
+The correct pattern is to validate or reject leading bytes that would require too many continuation bytes before computing any shift based on `count`.

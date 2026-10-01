@@ -1,0 +1,8 @@
+Refinement Plan:
+The false positive occurs because the checker uses `OldVal.isZeroConstant()` to determine whether the old field value is null. In the false positive case, `ctxt->sax` is not a concrete zero but a symbolic value constrained to null (due to the preceding `memset` and the `if (ctxt->sax == NULL)` branch). `isZeroConstant()` returns false for such symbolic nulls, causing the checker to incorrectly treat the old value as a live allocation and report a leak.  
+
+The fix is to query the constraint manager for nullness using `State->isNull(OldVal)`, which correctly recognizes both concrete zeros and symbolic values constrained to null. We also skip undefined values to avoid reporting on uninitialized fields. This preserves detection of the target bug (`ctxt->sax = copy;` in `xmlCtxtSetSaxHandler`), because there the old `ctxt->sax` is not constrained to null (it is typically an unknown symbolic value), so `State->isNull` returns false and the report is still emitted.
+
+Refined Code:
+```cpp
+```

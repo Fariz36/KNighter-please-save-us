@@ -1,0 +1,34 @@
+**Plan:**
+
+1. **Decide Program States:**
+   - No custom program state is required. The bug is entirely detectable by statically inspecting the function definition’s AST. No path-sensitive tracking, taint analysis, or alias mapping is needed.
+
+2. **Choose Callback Function:**
+   - Use `checkASTCodeBody(const Decl *D, AnalysisManager &Mgr, BugReporter &BR)`. This callback is invoked for every declaration that has a statement body, allowing direct inspection of `curl_url_dup`’s implementation.
+
+3. **Identify the Target Function and Parameter:**
+   - In `checkASTCodeBody`, cast `D` to `FunctionDecl`.
+   - Check if `FD->getNameAsString() == "curl_url_dup"`. If not, return.
+   - Retrieve the first parameter (`FD->getParamDecl(0)`). Verify its name is `"in"` and its type is a pointer (`getType()->isPointerType()`).
+
+4. **Check for a NULL Guard Before Any Dereference:**
+   - Implement a helper `bool hasNullGuardBeforeDeref(const FunctionDecl *FD, const ParmVarDecl *Param)`.
+   - Traverse the function body statements in order (e.g., using a `RecursiveASTVisitor` or manual iteration).
+   - Maintain a boolean `isChecked = false`.
+   - When visiting an `IfStmt`:
+     - Inspect its condition. If it represents a NULL check on `Param` (e.g., `!in`, `in == nullptr`, `nullptr == in`) and the then-branch contains a `ReturnStmt` returning `NULL`/`nullptr`/`0`, set `isChecked = true`.
+   - When visiting a dereference of `Param`:
+     - Recognize patterns such as `MemberExpr` with `getBase()` being a `DeclRefExpr` to `Param` (e.g., `in->scheme`), `UnaryOperator` with `UO_Deref` on `Param`, or `ArraySubscriptExpr` on `Param`.
+     - If `isChecked` is still `false`, return `false` (unguarded dereference found).
+   - If traversal completes without finding an unguarded dereference, return `true`.
+
+5. **Report the Bug:**
+   - If `hasNullGuardBeforeDeref` returns `false`, create a `BasicBugReport` with a `BugType` named `"MissingNullCheck"`.
+   - Set the report message to: `"curl_url_dup: parameter 'in' dereferenced without NULL check"`.
+   - Attach the source location of the first unguarded dereference (or the function entry if the exact location is difficult to capture).
+   - Emit the report using `BR.EmitReport(...)`.
+
+6. **Edge Cases:**
+   - If the function body is missing or the parameter is never dereferenced, no report is generated.
+   - If a NULL guard exists but appears after the first dereference, the helper will correctly flag the bug because `isChecked` remains `false` at the dereference point.
+   - The `DUP` macro expands to member accesses like `in->scheme`, so the dereference is visible in the AST as a `MemberExpr` and will be caught.

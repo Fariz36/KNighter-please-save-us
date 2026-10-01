@@ -1,0 +1,19 @@
+1. **Program State:**
+   - No custom program state is necessary. The bug is a missing structural guard in the `quotedCompare` function. We can detect it by inspecting the AST of the enclosing function when a `sqlite3Dequote` call is encountered.
+
+2. **Callback: `checkPreCall`**
+   - Intercept calls to `sqlite3Dequote`.
+   - Check the callee name. If it is not `sqlite3Dequote`, return.
+   - Obtain the enclosing `FunctionDecl` from `C.getLocationContext()`. If the function name is not `quotedCompare`, return (or match any function that handles raw token spans as needed).
+   - Retrieve the function body and locate the current `sqlite3Dequote` call expression.
+   - Traverse the function body to find an `IfStmt` that acts as a `TK_ILLEGAL` guard:
+     - Its condition must contain the name `TK_ILLEGAL`. Use `ExprHasName(IfStmt->getCond(), "TK_ILLEGAL", C)`.
+     - Either its then or else branch must contain a `ReturnStmt`, indicating an early exit on illegal tokens. Use `findSpecificTypeInChildren<ReturnStmt>` on both branches.
+     - Its source location must be before the `sqlite3Dequote` call location.
+   - If such a guard exists before the call, the `sqlite3Dequote` call is safe; return without reporting.
+   - If no guard exists, generate a non-fatal error node at the `sqlite3Dequote` call site and emit a `PathSensitiveBugReport` with the short message: `"Missing TK_ILLEGAL check before sqlite3Dequote"`.
+
+3. **Bug Reporting:**
+   - Use `C.generateNonFatalErrorNode()` to create an error node.
+   - Create a `PathSensitiveBugReport` with the message above.
+   - Emit the report via `C.emitReport`.

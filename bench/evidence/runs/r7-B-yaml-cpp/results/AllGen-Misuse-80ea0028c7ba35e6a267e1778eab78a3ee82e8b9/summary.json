@@ -1,0 +1,17 @@
+{
+  "commit_id": "80ea0028c7ba35e6a267e1778eab78a3ee82e8b9",
+  "commit_type": "Misuse",
+  "total_checkers": 3,
+  "successful_checkers": 0,
+  "perfect_checkers": 0,
+  "best_tp": -10,
+  "best_tn": -10,
+  "total_time": 915.954115,
+  "errors": [
+    "Failed to generate compilable checker 0",
+    "Failed to generate compilable checker 1",
+    "Failed to generate compilable checker 2"
+  ],
+  "success_rate": 0.0,
+  "timestamp": "2026-10-01T09:50:55.355404"
+}

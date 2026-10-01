@@ -1,0 +1,211 @@
+{
+  "commit_id": "2f5d281796853250befde5f83dfe8b909c4a5b39",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/plugin-cache/plugins/76ec362dc6dc5727af3b/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/func.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 7,
+        "fixed_total": 7,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "replaceFunc"
+        ],
+        "fixed_functions": [
+          "replaceFunc"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/func.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/6a1efec20af4/src/func.c",
+          "line": 1243,
+          "column": 23,
+          "function": "unistrFunc",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "0e7242766e7feb61df0a414eb0adba61",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_6a1efec20af4_src_func.c/report-0e7242.html",
+          "relpath": "src/func.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/6a1efec20af4/src/func.c",
+          "line": 1251,
+          "column": 23,
+          "function": "unistrFunc",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "3cb8639d99e702e43561823363486795",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_6a1efec20af4_src_func.c/report-3cb863.html",
+          "relpath": "src/func.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/6a1efec20af4/src/func.c",
+          "line": 2979,
+          "column": 13,
+          "function": "percentSort",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "6cab5a1ee2c75b0c562f29aabaf06a32",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_6a1efec20af4_src_func.c/report-6cab5a.html",
+          "relpath": "src/func.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/6a1efec20af4/src/func.c",
+          "line": 1663,
+          "column": 62,
+          "function": "trimFunc",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "89faa9ba07158c0f5bda9c8a37807921",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_6a1efec20af4_src_func.c/report-89faa9.html",
+          "relpath": "src/func.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/6a1efec20af4/src/func.c",
+          "line": 1239,
+          "column": 15,
+          "function": "unistrFunc",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "a20e0afc82ccec470dee488fd4fd69ca",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_6a1efec20af4_src_func.c/report-a20e0a.html",
+          "relpath": "src/func.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/6a1efec20af4/src/func.c",
+          "line": 1247,
+          "column": 23,
+          "function": "unistrFunc",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "be7894bc7617fece737f352ee7f2d581",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_6a1efec20af4_src_func.c/report-be7894.html",
+          "relpath": "src/func.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/6a1efec20af4/src/func.c",
+          "line": 1236,
+          "column": 17,
+          "function": "unistrFunc",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "d7d92f71978323d752094a89a097f6cc",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_6a1efec20af4_src_func.c/report-d7d92f.html",
+          "relpath": "src/func.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/func.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/2f5d28179685/src/func.c",
+          "line": 1243,
+          "column": 23,
+          "function": "unistrFunc",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "0e7242766e7feb61df0a414eb0adba61",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_2f5d28179685_src_func.c/report-0e7242.html",
+          "relpath": "src/func.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/2f5d28179685/src/func.c",
+          "line": 1251,
+          "column": 23,
+          "function": "unistrFunc",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "3cb8639d99e702e43561823363486795",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_2f5d28179685_src_func.c/report-3cb863.html",
+          "relpath": "src/func.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/2f5d28179685/src/func.c",
+          "line": 2979,
+          "column": 13,
+          "function": "percentSort",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "6cab5a1ee2c75b0c562f29aabaf06a32",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_2f5d28179685_src_func.c/report-6cab5a.html",
+          "relpath": "src/func.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/2f5d28179685/src/func.c",
+          "line": 1663,
+          "column": 62,
+          "function": "trimFunc",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "89faa9ba07158c0f5bda9c8a37807921",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_2f5d28179685_src_func.c/report-89faa9.html",
+          "relpath": "src/func.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/2f5d28179685/src/func.c",
+          "line": 1239,
+          "column": 15,
+          "function": "unistrFunc",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "a20e0afc82ccec470dee488fd4fd69ca",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_2f5d28179685_src_func.c/report-a20e0a.html",
+          "relpath": "src/func.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/2f5d28179685/src/func.c",
+          "line": 1247,
+          "column": 23,
+          "function": "unistrFunc",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "be7894bc7617fece737f352ee7f2d581",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_2f5d28179685_src_func.c/report-be7894.html",
+          "relpath": "src/func.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-sqlite/work/src/2f5d28179685/src/func.c",
+          "line": 1236,
+          "column": 17,
+          "function": "unistrFunc",
+          "bug_type": "Narrow loop counter may overflow",
+          "description": "Arithmetic on narrow loop counter may overflow against large bound",
+          "issue_hash": "d7d92f71978323d752094a89a097f6cc",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/2f5d28179685/383bde15/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-sqlite_work_src_2f5d28179685_src_func.c/report-d7d92f.html",
+          "relpath": "src/func.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 63.02,
+    "analysis_seconds": {
+      "buggy": 12.51,
+      "fixed": 12.6
+    },
+    "total_seconds": 88.26
+  },
+  "report_dir": "tmp/validation/2f5d28179685/383bde15"
+}

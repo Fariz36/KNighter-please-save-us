@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is deferring initialization of an output/resource parameter until after early-return paths that can still report success. Here, `known_hosts` is initialized only after `git_sysdir_expand_homedir_file()` and `git_str_joinpath()`, so the `GIT_ENOTFOUND` path sets `error = 0`, jumps to `out`, and returns success while assigning a still-NULL `known_hosts` to `*hosts`. The caller then treats that NULL handle as valid and dereferences it. The fix is to initialize the resource before any early success path that exposes it.

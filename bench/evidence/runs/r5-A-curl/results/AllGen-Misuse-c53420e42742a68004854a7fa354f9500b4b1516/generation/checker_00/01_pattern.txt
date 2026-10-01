@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Treating explicitly length-delimited ASN.1 data as a NUL-terminated C string. In `ossl_verifyhost`, `ASN1_STRING_get0_data()` data has a known length `ASN1_STRING_length()`, but the code uses `strlen()` and `%s` on it as if it were NUL-terminated. This can cause out-of-bounds reads when the ASN1_STRING is not NUL-terminated. The fix is to use bounded, length-aware operations such as `memchr()` and `%.*s`.

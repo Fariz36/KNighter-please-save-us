@@ -1,0 +1,19 @@
+1. **Program State:**
+   Not necessary. The bug pattern can be recognized syntactically from the branch condition and the preceding statements in the same compound statement. No alias tracking or path-sensitive state is needed.
+
+2. **Callback: `checkBranchCondition(const Stmt *Condition, CheckerContext &C)`**
+   - **Step 1 – Find unsafe lookahead in the condition:**
+     Recursively scan `Condition` for `ArraySubscriptExpr` nodes. For each subscript, ignore parentheses and implicit casts, then check whether its base is a `DeclRefExpr` to a pointer variable `P` and whether its index evaluates to a positive integer (e.g., `1`, `2`, `3`). If no such positive-index access exists, return.
+   - **Step 2 – Confirm the branch is an `if` statement:**
+     Use `findSpecificTypeInParents<IfStmt>(Condition, C)` to get the enclosing `IfStmt`. If none is found, return.
+   - **Step 3 – Locate the preceding delimiter pattern:**
+     Find the enclosing `CompoundStmt` with `findSpecificTypeInParents<CompoundStmt>(IfStmt, C)`. Iterate over its body statements before the `IfStmt` and look for all of the following involving the same pointer variable `P`:
+       - A declaration or assignment where `P` is initialized from a call to `strchr`.
+       - An increment of `P` (`P++`, `++P`, or `P += 1`).
+       - An assignment `S = P[0]` or `S = *P` for some local variable `S`.
+     If all three are found in the expected order, record `S` as the separator variable. If not, return.
+   - **Step 4 – Check whether the condition already guards the separator:**
+     Flatten the top-level `&&` operands of `Condition` in evaluation order, ignoring parentheses and implicit casts. Find the first operand that contains an unsafe `P[index]` with `index > 0`. Check whether any operand before it is a truthiness guard for `S`, such as `S`, `S != 0`, or `S != '\0'`. If such a guard exists, the code is safe; return.
+   - **Step 5 – Report the bug:**
+     If no guard exists, emit a non-fatal `PathSensitiveBugReport` using `C.generateNonFatalErrorNode()` and `C.emitReport(...)`. Anchor the report at the `IfStmt` or the unsafe subscript. Use a short message like:
+     `"Unchecked lookahead after strchr delimiter; missing non-NUL check for separator before reading past it."`

@@ -1,0 +1,156 @@
+{
+  "commit_id": "6d63f4b63af72aa41e41be3d7b3acaf5b093fd33",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/plugin-cache/plugins/95bf8db24baa6d5d12aa/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/config.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 5,
+        "fixed_total": 4,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "git_config_parse_bool"
+        ],
+        "fixed_functions": [
+          "git_config_parse_bool"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/config.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/610dcaac065c/src/libgit2/config.c",
+          "line": 721,
+          "column": 3,
+          "function": "git_config_set_string",
+          "bug_type": "NULL argument for %s directive",
+          "description": "Potential NULL argument passed to %s format directive",
+          "issue_hash": "3c656e411e32a35d2959202630f203ab",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6d63f4b63af7/41c5af4f/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_610dcaac065c_src_libgit2_config.c/report-3c656e.html",
+          "relpath": "src/libgit2/config.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/610dcaac065c/src/libgit2/config.c",
+          "line": 1450,
+          "column": 2,
+          "function": "git_config_parse_bool",
+          "bug_type": "NULL argument for %s directive",
+          "description": "Potential NULL argument passed to %s format directive",
+          "issue_hash": "50dee3f5ae4c2e19b69fcbdf36973998",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6d63f4b63af7/41c5af4f/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_610dcaac065c_src_libgit2_config.c/report-50dee3.html",
+          "relpath": "src/libgit2/config.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/610dcaac065c/src/libgit2/config.c",
+          "line": 1171,
+          "column": 3,
+          "function": "git_config_set_multivar",
+          "bug_type": "NULL argument for %s directive",
+          "description": "Potential NULL argument passed to %s format directive",
+          "issue_hash": "54c6eede0ece3f21157b617c6ae44a2c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6d63f4b63af7/41c5af4f/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_610dcaac065c_src_libgit2_config.c/report-54c6ee.html",
+          "relpath": "src/libgit2/config.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/610dcaac065c/src/libgit2/config.c",
+          "line": 770,
+          "column": 2,
+          "function": "config_error_notfound",
+          "bug_type": "NULL argument for %s directive",
+          "description": "Potential NULL argument passed to %s format directive",
+          "issue_hash": "578857d394cf993be97ab2e8668895a5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6d63f4b63af7/41c5af4f/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_610dcaac065c_src_libgit2_config.c/report-578857.html",
+          "relpath": "src/libgit2/config.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/610dcaac065c/src/libgit2/config.c",
+          "line": 1416,
+          "column": 2,
+          "function": "git_config_lookup_map_value",
+          "bug_type": "NULL argument for %s directive",
+          "description": "Potential NULL argument passed to %s format directive",
+          "issue_hash": "d0e5e67184935439b54760696710852d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6d63f4b63af7/41c5af4f/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_610dcaac065c_src_libgit2_config.c/report-d0e5e6.html",
+          "relpath": "src/libgit2/config.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/config.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/6d63f4b63af7/src/libgit2/config.c",
+          "line": 721,
+          "column": 3,
+          "function": "git_config_set_string",
+          "bug_type": "NULL argument for %s directive",
+          "description": "Potential NULL argument passed to %s format directive",
+          "issue_hash": "3c656e411e32a35d2959202630f203ab",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6d63f4b63af7/41c5af4f/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_6d63f4b63af7_src_libgit2_config.c/report-3c656e.html",
+          "relpath": "src/libgit2/config.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/6d63f4b63af7/src/libgit2/config.c",
+          "line": 1171,
+          "column": 3,
+          "function": "git_config_set_multivar",
+          "bug_type": "NULL argument for %s directive",
+          "description": "Potential NULL argument passed to %s format directive",
+          "issue_hash": "54c6eede0ece3f21157b617c6ae44a2c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6d63f4b63af7/41c5af4f/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_6d63f4b63af7_src_libgit2_config.c/report-54c6ee.html",
+          "relpath": "src/libgit2/config.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/6d63f4b63af7/src/libgit2/config.c",
+          "line": 770,
+          "column": 2,
+          "function": "config_error_notfound",
+          "bug_type": "NULL argument for %s directive",
+          "description": "Potential NULL argument passed to %s format directive",
+          "issue_hash": "578857d394cf993be97ab2e8668895a5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6d63f4b63af7/41c5af4f/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_6d63f4b63af7_src_libgit2_config.c/report-578857.html",
+          "relpath": "src/libgit2/config.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libgit2/work/src/6d63f4b63af7/src/libgit2/config.c",
+          "line": 1416,
+          "column": 2,
+          "function": "git_config_lookup_map_value",
+          "bug_type": "NULL argument for %s directive",
+          "description": "Potential NULL argument passed to %s format directive",
+          "issue_hash": "d0e5e67184935439b54760696710852d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6d63f4b63af7/41c5af4f/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-libgit2_work_src_6d63f4b63af7_src_libgit2_config.c/report-d0e5e6.html",
+          "relpath": "src/libgit2/config.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 55.25,
+    "analysis_seconds": {
+      "buggy": 6.54,
+      "fixed": 7.27
+    },
+    "total_seconds": 69.18
+  },
+  "report_dir": "tmp/validation/6d63f4b63af7/41c5af4f"
+}

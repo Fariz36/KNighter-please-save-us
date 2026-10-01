@@ -1,0 +1,105 @@
+--- original_code.cpp+++ semantic_correct_refine_code.cpp@@ -26,7 +26,9 @@ using namespace ento;
+ using namespace taint;
+ 
+-REGISTER_MAP_WITH_PROGRAMSTATE(ZeroedRegions, const MemRegion *, bool)
++REGISTER_MAP_WITH_PROGRAMSTATE(ZeroedRegions, const MemRegion *, unsigned)
++REGISTER_MAP_WITH_PROGRAMSTATE(InitializedRegions, const MemRegion *, unsigned)
++REGISTER_TRAIT_WITH_PROGRAMSTATE(ZeroedGeneration, unsigned)
+ 
+ namespace {
+ 
+@@ -41,7 +43,31 @@ 
+ private:
+   void reportUnlinkAfterZero(const CallEvent &Call, CheckerContext &C) const;
++  unsigned getMaxZeroGeneration(const MemRegion *MR, ProgramStateRef State,
++                                bool &Found) const;
+ };
++
++unsigned SAGenTestChecker::getMaxZeroGeneration(const MemRegion *MR,
++                                                ProgramStateRef State,
++                                                bool &Found) const {
++  Found = false;
++  unsigned MaxGen = 0;
++  const MemRegion *R = MR;
++  while (R) {
++    if (const unsigned *Gen = State->get<ZeroedRegions>(R)) {
++      if (!Found || *Gen > MaxGen) {
++        MaxGen = *Gen;
++        Found = true;
++      }
++    }
++
++    const auto *SR = llvm::dyn_cast<SubRegion>(R);
++    if (!SR)
++      break;
++    R = SR->getSuperRegion();
++  }
++  return MaxGen;
++}
+ 
+ void SAGenTestChecker::checkPreCall(const CallEvent &Call,
+                                     CheckerContext &C) const {
+@@ -74,7 +100,35 @@     if (!FillVal.isZero())
+       return;
+ 
+-    State = State->set<ZeroedRegions>(MR, true);
++    unsigned Gen = State->get<ZeroedGeneration>();
++    ++Gen;
++    State = State->set<ZeroedGeneration>(Gen);
++    State = State->set<ZeroedRegions>(MR, Gen);
++    C.addTransition(State);
++    return;
++  }
++
++  if (ExprHasName(OriginExpr, "Curl_peer_link", C)) {
++    if (Call.getNumArgs() < 1)
++      return;
++
++    const Expr *ArgExpr = Call.getArgExpr(0);
++    if (!ArgExpr)
++      return;
++
++    const MemRegion *MR = getMemRegionFromExpr(ArgExpr, C);
++    if (!MR)
++      return;
++
++    bool Found = false;
++    unsigned MaxGen = getMaxZeroGeneration(MR, State, Found);
++    if (Found) {
++      State = State->set<InitializedRegions>(MR, MaxGen);
++    } else {
++      // Ensure any stale initialization marker does not match a future
++      // zeroing generation.
++      State = State->set<InitializedRegions>(MR, 0);
++    }
+     C.addTransition(State);
+     return;
+   }
+@@ -91,19 +145,16 @@     if (!MR)
+       return;
+ 
+-    const MemRegion *R = MR;
+-    while (R) {
+-      const bool *Zeroed = State->get<ZeroedRegions>(R);
+-      if (Zeroed && *Zeroed) {
+-        reportUnlinkAfterZero(Call, C);
+-        return;
+-      }
++    bool Found = false;
++    unsigned MaxGen = getMaxZeroGeneration(MR, State, Found);
++    if (!Found)
++      return;
+ 
+-      const auto *SR = llvm::dyn_cast<SubRegion>(R);
+-      if (!SR)
+-        break;
+-      R = SR->getSuperRegion();
+-    }
++    const unsigned *InitGen = State->get<InitializedRegions>(MR);
++    if (InitGen && *InitGen == MaxGen)
++      return; // The field was reinitialized after the most recent zeroing.
++
++    reportUnlinkAfterZero(Call, C);
+   }
+ }
+ 

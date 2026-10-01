@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The decoder lacks validation that the Base64 input forms complete 4-character encoding quanta. It processes only complete groups and silently ignores any trailing 1–3 Base64 characters, so truncated input is accepted and decoded as if it were valid instead of being rejected. The fix adds a post-loop check for a leftover partial quantum (`cnt != 0`) and returns an empty result.

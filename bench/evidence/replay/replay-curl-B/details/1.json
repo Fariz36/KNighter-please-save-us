@@ -1,0 +1,69 @@
+{
+  "commit_id": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/replay/replay-curl-B/plugin-cache/plugins/332eb99d38feb8656864/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/cf-h2-proxy.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "cf_h2_proxy_ctx_clear",
+          "cf_h2_proxy_ctx_free"
+        ],
+        "fixed_functions": [
+          "cf_h2_proxy_ctx_clear",
+          "cf_h2_proxy_ctx_free"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/cf-h2-proxy.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/replay/replay-curl-B/work/src/061136f24b52/lib/cf-h2-proxy.c",
+          "line": 202,
+          "column": 5,
+          "function": "cf_h2_proxy_ctx_free",
+          "bug_type": "Unlink after zeroing leaks peer",
+          "description": "Unlink after zeroing leaks peer",
+          "issue_hash": "725353142c40648fac73adba822ee9fe",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a0f08d6975d0/f1cef1cb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_replay_replay-curl-B_work_src_061136f24b52_lib_cf-h2-proxy.c/report-725353.html",
+          "relpath": "lib/cf-h2-proxy.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/cf-h2-proxy.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 63.17,
+    "analysis_seconds": {
+      "buggy": 7.9,
+      "fixed": 8.5
+    },
+    "total_seconds": 79.68
+  },
+  "report_dir": "tmp/validation/a0f08d6975d0/f1cef1cb"
+}

@@ -1,0 +1,23 @@
+- Decision: NotABug
+- Reason: The report points to `xmlInitSAXParserCtxt` at `parserInternals.c:2783`, not to the target buggy function `xmlCtxtSetSaxHandler`.
+
+  The reported code is:
+
+  ```c
+  if (ctxt->sax == NULL)
+      ctxt->sax = (xmlSAXHandler *) xmlMalloc(sizeof(xmlSAXHandler));
+  ```
+
+  The assignment to `ctxt->sax` happens only when `ctxt->sax == NULL`. Therefore there is no previously owned allocation in `ctxt->sax` to leak. The static analyzer’s warning about “overwriting owned pointer field” is not valid on this path.
+
+  The target bug pattern is instead in `xmlCtxtSetSaxHandler`, where the code does:
+
+  ```c
+  copy = xmlMalloc(sizeof(*copy));
+  ...
+  ctxt->sax = copy;
+  ```
+
+  without freeing the existing `ctxt->sax`. That overwrites a non-NULL, already-owned SAX handler and leaks it. The provided fix changes `xmlCtxtSetSaxHandler` to copy into the existing handler with `*ctxt->sax = *sax` rather than allocating and replacing it.
+
+  The reported line in `xmlInitSAXParserCtxt` is not changed by the fix patch and is guarded by a NULL check, so it neither matches the target bug pattern nor represents a real leak. It is a false positive.

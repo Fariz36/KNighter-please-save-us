@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Conditional ownership transfer without cleanup on the failure/skip path. Here, `pFromDup` is allocated/duplicated and is only consumed when it is successfully appended via `sqlite3SrcListAppendList(pParse, pTriggerStep->pSrc, pFromDup)`. If that condition is false—for example because an earlier OOM left `pTriggerStep->pSrc` as `NULL`—no append happens, and `pFromDup` is leaked. The fix is to free it in the missing `else` branch with `sqlite3SrcListDelete(db, pFromDup)`.

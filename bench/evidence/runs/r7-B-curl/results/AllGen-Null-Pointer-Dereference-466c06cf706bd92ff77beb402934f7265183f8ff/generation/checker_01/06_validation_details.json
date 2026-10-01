@@ -1,0 +1,82 @@
+{
+  "commit_id": "466c06cf706bd92ff77beb402934f7265183f8ff",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/plugin-cache/plugins/500171ba8c8ffae68be5/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/urlapi.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "curl_url_dup"
+        ],
+        "fixed_functions": [
+          "curl_url_dup"
+        ]
+      },
+      {
+        "path": "tests/libtest/lib1560.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "test_api_errors"
+        ],
+        "fixed_functions": [
+          "test_api_errors"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/urlapi.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1438,
+          "column": 5,
+          "function": "unknown",
+          "bug_type": "MissingNullCheck",
+          "description": "curl_url_dup: parameter 'in' dereferenced without NULL check",
+          "issue_hash": "90b1516c6bd80612d199bd47064442e5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/466c06cf706b/839f289c/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-90b151.html",
+          "relpath": "lib/urlapi.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/urlapi.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 5.57,
+      "fixed": 5.69
+    },
+    "total_seconds": 12.27
+  },
+  "report_dir": "tmp/validation/466c06cf706b/839f289c"
+}

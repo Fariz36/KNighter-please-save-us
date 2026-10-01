@@ -1,0 +1,13 @@
+Refinment Plan:
+The false positive is caused by the checker remembering that a struct was cleared via `memset()`, but never invalidating that fact when the resource field is subsequently re-linked. In `cf-socket.c`, `memset(ctx, 0, sizeof(*ctx))` happens in `cf_socket_ctx_init()` before `Curl_peer_link(&ctx->peer, peer)`. Later, `cf_socket_ctx_free()` calls `Curl_peer_unlink(&ctx->peer)`. The old checker only saw “struct was cleared” and reported, even though the field was validly linked after the clear.
+
+Fix:
+- Track a per-base-struct clear epoch (`ClearEpoch`).
+- Track a per-field link epoch (`LinkEpoch`) when `Curl_peer_link(&ctx->field, ...)` is seen.
+- On `Curl_peer_unlink(&ctx->field)`, report only when the field was not linked after the latest clear. More precisely, report if the struct was cleared (`ClearEpoch > 0`) and either the field was never re-linked after the clear, or its last link happened before the latest clear.
+- Invalidate `LinkEpoch` on `Curl_peer_unlink` so repeated unlinks do not leave stale link state.
+- This preserves detection for the target `cf-h2-proxy.c` case: there the peer is linked before `cf_h2_proxy_ctx_clear()` does its `memset()`, so the link epoch is older than the clear epoch, and the unlink after clear is still reported.
+
+Refined Code:
+```cpp
+```

@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The code advances a string pointer, reads a separator character with `sep = ptr[0]`, and then immediately performs lookahead reads (`ptr[1]`, `ptr[2]`, `ptr[3]`) without first checking that `sep` is not the string terminator (`'\0'`). If the response ends right after `'('`, `sep` becomes `'\0'` and the lookahead reads past the terminating NUL.
+
+The general bug pattern is: **missing validation of a delimiter/character before using it in subsequent pointer-indexed lookahead, leading to an out-of-bounds read past a string’s NUL terminator.**

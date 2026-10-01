@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing validation of the data pointer in an input struct: `Curl_setblobopt()` checks `blob->len` and size limits but not `blob->data`. If `CURL_BLOB_COPY` is set, this leads to `memcpy(nblob->data, blob->data, blob->len)` dereferencing a NULL source; if unset, the invalid NULL data pointer is accepted and may be dereferenced later. The fix adds `!blob->data` to the argument validation.

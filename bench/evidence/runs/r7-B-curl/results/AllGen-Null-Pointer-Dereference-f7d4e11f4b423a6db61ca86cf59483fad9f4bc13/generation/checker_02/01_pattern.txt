@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing NULL check on an input structure’s pointer field before it is dereferenced or copied. In `Curl_setblobopt()`, the code validates `blob->len` and the blob flags but never checks `blob->data`; with `CURL_BLOB_COPY` set, `memcpy()` reads from `blob->data` even when it is NULL, and without the copy flag a NULL data pointer can still be stored for later use. The fix is to reject `blob->data == NULL` as an invalid argument before any use.

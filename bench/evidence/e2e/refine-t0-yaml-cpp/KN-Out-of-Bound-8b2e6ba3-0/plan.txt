@@ -1,0 +1,24 @@
+1. **Program State:**
+   - No custom program state is required. The bug pattern is a structural AST pattern involving control flow and method calls. No pointer aliasing, taint, or value tracking is necessary.
+
+2. **Callback: `checkPreCall`**
+   - Detect calls to `Scanner::PopIndent` that are guarded only by an unverified simple key check.
+   - Implementation:
+     - Get the call expression: `const Expr *CE = Call.getOriginExpr();`
+     - Cast to `CXXMemberCallExpr`. If cast fails, return.
+     - Get the method declaration: `const CXXMethodDecl *MD = MCE->getMethodDecl();`
+     - Check `MD->getNameAsString() == "PopIndent"` and `MD->getParent()->getNameAsString() == "Scanner"`. If not, return.
+     - Find the nearest enclosing `IfStmt` using `findSpecificTypeInParents<IfStmt>(MCE, C)`. If none, return.
+     - Get the condition: `const Expr *Cond = If->getCond();`
+     - Check if the condition contains `m_simpleKeys` and `UNVERIFIED` using `ExprHasName(Cond, "m_simpleKeys", C)` and `ExprHasName(Cond, "UNVERIFIED", C)`. If not, return.
+     - Check for required guards: `ExprHasName(Cond, "m_indents.empty()", C)` and `ExprHasName(Cond, "m_indents.top() == m_simpleKeys.top().pIndent", C)`.
+     - If either guard is missing, generate a non-fatal error node and emit a `PathSensitiveBugReport` at the call site with message: `"PopIndent() called without indent stack guard; possible underflow."`
+
+3. **Callback: `checkASTCodeBody` (Optional)**
+   - Ensure `Scanner::PopIndent` itself guards against empty indent stack.
+   - Implementation:
+     - In `checkASTCodeBody`, cast `D` to `FunctionDecl`. If not, return.
+     - Check if it is the `Scanner::PopIndent` method (name and parent class).
+     - Get the function body.
+     - Traverse the body to find an `IfStmt` whose condition calls `m_indents.empty()`.
+     - If no such guard exists before the first access to `m_indents.top()`, emit a bug report: `"PopIndent() does not check for empty indent stack."`

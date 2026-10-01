@@ -1,0 +1,309 @@
+{
+  "commit_id": "ca11026a032ce2a3de4b3c389ee53d2bdc8794d6",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/plugin-cache/plugins/f53300aaea2692ebf363/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    2,
+    0
+  ],
+  "score": {
+    "tp": 2,
+    "tn": 0,
+    "legacy_tp": 2,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "re2/prefilter.cc",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 6,
+        "fixed_total": 6,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "Prefilter::FromRegexp"
+        ],
+        "fixed_functions": [
+          "Prefilter::FromRegexp"
+        ]
+      },
+      {
+        "path": "re2/simplify.cc",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 7,
+        "fixed_total": 2,
+        "buggy_on_target": 5,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "Regexp::Simplify",
+          "Regexp::SimplifyRegexp"
+        ],
+        "fixed_functions": [
+          "Regexp::Simplify",
+          "Regexp::SimplifyRegexp"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "re2/prefilter.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/walker-inl.h",
+          "line": 166,
+          "column": 15,
+          "function": "WalkInternal",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "24c6299f4f0ca4e394f837cbe0441379",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-24c629.html",
+          "relpath": "re2/walker-inl.h"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/prefilter.cc",
+          "line": 508,
+          "column": 18,
+          "function": "BuildInfo",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "2d021d37f1f6b7fffdaff40a5643674c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-2d021d.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/prefilter.cc",
+          "line": 510,
+          "column": 27,
+          "function": "BuildInfo",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "695057df4ffa189af28a877855fe90a3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-695057.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/prefilter.cc",
+          "line": 651,
+          "column": 27,
+          "function": "FromRegexp",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "9074e9912089cc1f70a649c7219c8a94",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-9074e9.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/walker-inl.h",
+          "line": 241,
+          "column": 10,
+          "function": "WalkExponential",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "cc55a724683549723c47bc374a23338b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-cc55a7.html",
+          "relpath": "re2/walker-inl.h"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/prefilter.cc",
+          "line": 653,
+          "column": 3,
+          "function": "FromRegexp",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "e4069a21f132a9aba916d22f223f9e1b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-e4069a.html",
+          "relpath": "re2/prefilter.cc"
+        }
+      ],
+      "re2/simplify.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/simplify.cc",
+          "line": 186,
+          "column": 3,
+          "function": "Simplify",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Walk result used before checking stopped_early()",
+          "issue_hash": "1311d86f925774020722b08ac31a796f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_simplify.cc/report-1311d8.html",
+          "relpath": "re2/simplify.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/simplify.cc",
+          "line": 40,
+          "column": 3,
+          "function": "SimplifyRegexp",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Walk result used before checking stopped_early()",
+          "issue_hash": "1af433408b36ed3b165b084409147305",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_simplify.cc/report-1af433.html",
+          "relpath": "re2/simplify.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/simplify.cc",
+          "line": 185,
+          "column": 17,
+          "function": "Simplify",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Walk result used before checking stopped_early()",
+          "issue_hash": "1b21471d04b5a4c2044f4736cc85cfa2",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_simplify.cc/report-1b2147.html",
+          "relpath": "re2/simplify.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/walker-inl.h",
+          "line": 166,
+          "column": 15,
+          "function": "WalkInternal",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Walk result used before checking stopped_early()",
+          "issue_hash": "24c6299f4f0ca4e394f837cbe0441379",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_simplify.cc/report-24c629.html",
+          "relpath": "re2/walker-inl.h"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/simplify.cc",
+          "line": 187,
+          "column": 3,
+          "function": "Simplify",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Returning Walk result without checking stopped_early()",
+          "issue_hash": "2805d4ff77c77ced32a2095bf4ac1d1a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_simplify.cc/report-2805d4.html",
+          "relpath": "re2/simplify.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/simplify.cc",
+          "line": 39,
+          "column": 10,
+          "function": "SimplifyRegexp",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Walk result used before checking stopped_early()",
+          "issue_hash": "3a9c133651b008b524635fb47640a83f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_simplify.cc/report-3a9c13.html",
+          "relpath": "re2/simplify.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/fe8a81adc2ef/re2/walker-inl.h",
+          "line": 235,
+          "column": 10,
+          "function": "Walk",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Walk result used before checking stopped_early()",
+          "issue_hash": "d9c46c5a155c2ddd7f6ac57e1ac1c4f8",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_fe8a81adc2ef_re2_simplify.cc/report-d9c46c.html",
+          "relpath": "re2/walker-inl.h"
+        }
+      ]
+    },
+    "fixed": {
+      "re2/prefilter.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/ca11026a032c/re2/walker-inl.h",
+          "line": 166,
+          "column": 15,
+          "function": "WalkInternal",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "24c6299f4f0ca4e394f837cbe0441379",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_ca11026a032c_re2_prefilter.cc/report-24c629.html",
+          "relpath": "re2/walker-inl.h"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/ca11026a032c/re2/prefilter.cc",
+          "line": 508,
+          "column": 18,
+          "function": "BuildInfo",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "2d021d37f1f6b7fffdaff40a5643674c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_ca11026a032c_re2_prefilter.cc/report-2d021d.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/ca11026a032c/re2/prefilter.cc",
+          "line": 510,
+          "column": 27,
+          "function": "BuildInfo",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "695057df4ffa189af28a877855fe90a3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_ca11026a032c_re2_prefilter.cc/report-695057.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/ca11026a032c/re2/prefilter.cc",
+          "line": 654,
+          "column": 27,
+          "function": "FromRegexp",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "9074e9912089cc1f70a649c7219c8a94",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_ca11026a032c_re2_prefilter.cc/report-9074e9.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/ca11026a032c/re2/walker-inl.h",
+          "line": 241,
+          "column": 10,
+          "function": "WalkExponential",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "cc55a724683549723c47bc374a23338b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_ca11026a032c_re2_prefilter.cc/report-cc55a7.html",
+          "relpath": "re2/walker-inl.h"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/ca11026a032c/re2/prefilter.cc",
+          "line": 655,
+          "column": 3,
+          "function": "FromRegexp",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "e4069a21f132a9aba916d22f223f9e1b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_ca11026a032c_re2_prefilter.cc/report-e4069a.html",
+          "relpath": "re2/prefilter.cc"
+        }
+      ],
+      "re2/simplify.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/ca11026a032c/re2/simplify.cc",
+          "line": 38,
+          "column": 3,
+          "function": "SimplifyRegexp",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "1af433408b36ed3b165b084409147305",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_ca11026a032c_re2_simplify.cc/report-1af433.html",
+          "relpath": "re2/simplify.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/ca11026a032c/re2/simplify.cc",
+          "line": 37,
+          "column": 10,
+          "function": "SimplifyRegexp",
+          "bug_type": "RE2 Regexp Simplify",
+          "description": "Simplify() result may be NULL and is used without check",
+          "issue_hash": "3a9c133651b008b524635fb47640a83f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/891c2a46/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_ca11026a032c_re2_simplify.cc/report-3a9c13.html",
+          "relpath": "re2/simplify.cc"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 8.23,
+      "fixed": 6.99
+    },
+    "total_seconds": 15.28
+  },
+  "report_dir": "tmp/validation/ca11026a032c/891c2a46"
+}

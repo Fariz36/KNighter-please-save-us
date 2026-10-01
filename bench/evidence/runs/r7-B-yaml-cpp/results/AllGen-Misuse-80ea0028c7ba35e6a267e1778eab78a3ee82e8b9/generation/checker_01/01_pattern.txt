@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The decoder consumes Base64 input in 4-character quanta but never validates, after processing the whole input, that the number of non-whitespace characters is a multiple of 4. A trailing incomplete quantum is silently ignored, so truncated Base64 input is accepted and partially decoded instead of being rejected as invalid.

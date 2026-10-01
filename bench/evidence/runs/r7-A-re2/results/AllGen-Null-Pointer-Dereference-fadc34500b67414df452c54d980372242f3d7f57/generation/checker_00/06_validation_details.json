@@ -1,0 +1,67 @@
+{
+  "commit_id": "fadc34500b67414df452c54d980372242f3d7f57",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/plugin-cache/plugins/702b3249ba1bfc2798a7/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "re2/dfa.cc",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "DFA::~DFA"
+        ],
+        "fixed_functions": [
+          "DFA::~DFA"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "re2/dfa.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/2da2cd14bc6d/re2/dfa.cc",
+          "line": 526,
+          "column": 5,
+          "function": "~DFA",
+          "bug_type": "Unconditional Destructor Call",
+          "description": "Unconditional destructor call on cache_mutex_ without checking cache_mutex_storage_",
+          "issue_hash": "ebe11ac8edfaea2474f34cec848e4d27",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/fadc34500b67/76162bdd/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_2da2cd14bc6d_re2_dfa.cc/report-ebe11a.html",
+          "relpath": "re2/dfa.cc"
+        }
+      ]
+    },
+    "fixed": {
+      "re2/dfa.cc": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 8.48,
+    "analysis_seconds": {
+      "buggy": 13.18,
+      "fixed": 12.34
+    },
+    "total_seconds": 34.1
+  },
+  "report_dir": "tmp/validation/fadc34500b67/76162bdd"
+}

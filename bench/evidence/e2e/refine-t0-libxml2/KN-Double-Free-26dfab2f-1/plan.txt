@@ -1,0 +1,37 @@
+1. **Register Program State Map**
+   - Use `REGISTER_MAP_WITH_PROGRAMSTATE(ConsumedBufferMap, const MemRegion *, bool)`.
+   - Key: the `xmlParserInputBuffer` memory region passed as the second argument to `xmlNewIOInputStream`.
+   - Value: `true` once ownership of that buffer has been consumed by `xmlNewIOInputStream`.
+   - No alias map is needed: the same buffer pointer will resolve to the same `MemRegion` at the later free call.
+
+2. **Hook `checkPostCall` for `xmlNewIOInputStream`**
+   - Get the callee name via `Call.getCalleeIdentifier()` and compare with `"xmlNewIOInputStream"`.
+   - If it matches:
+     - Retrieve the second argument expression using `Call.getArgExpr(1)`.
+     - Get its memory region using `getMemRegionFromExpr(Call.getArgExpr(1), C)` or equivalently `Call.getArgSVal(1).getAsRegion()`.
+     - If the region is non-null, update the state:
+       `State = State->set<ConsumedBufferMap>(Region, true);`
+       then call `C.addTransition(State)`.
+   - Use `checkPostCall`, not `checkPreCall`, so internal cleanup inside `xmlNewIOInputStream` is not falsely reported.
+
+3. **Hook `checkPreCall` for `xmlFreeParserInputBuffer`**
+   - Get the callee name and compare with `"xmlFreeParserInputBuffer"`.
+   - If it matches:
+     - Retrieve the first argument expression using `Call.getArgExpr(0)`.
+     - Get its memory region using `getMemRegionFromExpr(...)` or `Call.getArgSVal(0).getAsRegion()`.
+     - If `State->contains<ConsumedBufferMap>(Region)` is true, then this free is freeing a buffer whose ownership was already consumed by `xmlNewIOInputStream`.
+     - Report the double-free/ownership violation.
+     - Optionally remove the region from the map before continuing, e.g. `State = State->remove<ConsumedBufferMap>(Region);`.
+
+4. **Emit the Bug Report**
+   - Define a static `BugType`, e.g. `BugType BT("DoubleFreeXMLInputBuffer", "Double free of XML input buffer");`.
+   - In the reporting helper:
+     - Generate a non-fatal error node: `ExplodedNode *N = C.generateNonFatalErrorNode();`
+     - If `N` is null, return.
+     - Create a `PathSensitiveBugReport` with a short message such as:
+       `"Double free: input buffer already consumed by xmlNewIOInputStream"`.
+     - Emit it with `C.emitReport(std::move(Report));`.
+
+5. **No `checkBranchCondition` Needed**
+   - The bug is already captured by the fact that `xmlFreeParserInputBuffer(input)` is called after `xmlNewIOInputStream` consumed `input`.
+   - Whether the callee returned `NULL` or not, the caller must not free `input` afterward, so tracking the ownership transfer is sufficient and simpler.

@@ -1,0 +1,10 @@
+## Bug Pattern
+
+Unconditionally calling `PopIndent()` based only on the presence of an unverified simple key, without verifying that the indent stack is non-empty and that the top indent marker matches the simple key’s associated indent marker (`m_simpleKeys.top().pIndent`). A stale or unrelated unverified simple key can then cause `PopIndent()` to pop a nonexistent or wrong indentation marker, leading to indent-stack underflow, undefined behavior, or a crash.
+
+The fix pattern is to only call `PopIndent()` when:
+- `m_simpleKeys.top().pIndent` is non-null,
+- `m_indents` is non-empty, and
+- `m_indents.top() == m_simpleKeys.top().pIndent`,
+
+otherwise invalidate the simple key instead of popping. `PopIndent()` itself should also guard against an empty stack.

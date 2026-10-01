@@ -1,0 +1,197 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-09-30 21:52:18.827 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+2026-09-30 21:52:18.828 | DEBUG    | __main__:init_config:26 - Config file: e2e/refine-curl.yaml
+2026-09-30 21:52:18.828 | DEBUG    | __main__:init_config:27 - Result dir: e2e/refine-curl
+2026-09-30 21:52:18.828 | DEBUG    | __main__:init_config:28 - Analysis backend: Analysis Backend Path: /home/faris/RA-MrYudis/Knight/KNighter/llvm
+2026-09-30 21:52:18.829 | DEBUG    | __main__:init_config:29 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl
+2026-09-30 21:52:18.957 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-5bb8a793a96449eb)
+2026-09-30 21:52:18.957 | INFO     | __main__:main:80 - Refine and improve checkers
+2026-09-30 21:52:18.958 | INFO     | checker_refine:_create_progress_tracker:134 - Progress tracking initialized: e2e/refine-curl/refinement_progress.log
+2026-09-30 21:52:18.960 | INFO     | checker_refine:refine_checker:44 - Found 13 checker directories, validating...
+2026-09-30 21:52:18.962 | WARNING  | checker_refine:refine_checker:53 - [INVALID] Checker KN-Memory-Leak-a0f08d69-1 is not valid - skipping
+2026-09-30 21:52:18.966 | WARNING  | checker_refine:refine_checker:53 - [INVALID] Checker KN-Null-Pointer-Dereference-f7d4e11f-1 is not valid - skipping
+2026-09-30 21:52:18.972 | WARNING  | checker_refine:refine_checker:53 - [INVALID] Checker KN-Out-of-Bound-6f1dfab6-2 is not valid - skipping
+2026-09-30 21:52:18.975 | WARNING  | checker_refine:refine_checker:53 - [INVALID] Checker KN-Out-of-Bound-6f1dfab6-0 is not valid - skipping
+2026-09-30 21:52:18.983 | WARNING  | checker_refine:refine_checker:53 - [INVALID] Checker KN-Memory-Leak-a0f08d69-0 is not valid - skipping
+2026-09-30 21:52:18.984 | WARNING  | checker_refine:refine_checker:53 - [INVALID] Checker KN-Null-Pointer-Dereference-f7d4e11f-0 is not valid - skipping
+2026-09-30 21:52:18.987 | WARNING  | checker_refine:refine_checker:53 - [INVALID] Checker KN-Null-Pointer-Dereference-f7d4e11f-2 is not valid - skipping
+2026-09-30 21:52:18.990 | WARNING  | checker_refine:refine_checker:53 - [INVALID] Checker KN-Out-of-Bound-6f1dfab6-1 is not valid - skipping
+2026-09-30 21:52:18.992 | WARNING  | checker_refine:refine_checker:53 - [INVALID] Checker KN-Misuse-c53420e4-0 is not valid - skipping
+2026-09-30 21:52:18.992 | INFO     | checker_refine:refine_checker:63 - Filtered out 9 invalid checkers
+2026-09-30 21:52:18.992 | INFO     | checker_refine:refine_checker:65 - Starting refinement of 4 valid checkers in e2e/refine-curl
+2026-09-30 21:52:18.993 | INFO     | checker_refine:refine_checker:74 - [1/4] Refining checker e2e/refine-curl/KN-Null-Pointer-Dereference-f2a15357-0...
+2026-09-30 21:52:18.996 | INFO     | checker_refine:refine_checker_with_max_attempts:557 - Starting refinement of checker KN-Null-Pointer-Dereference-f2a15357-0 with max 3 attempts
+2026-09-30 21:52:18.997 | INFO     | checker_refine:refine_checker_with_max_attempts:562 - === Refinement Attempt 1/3 ===
+2026-09-30 21:52:18.997 | INFO     | checker_refine:refine_checker_with_max_attempts:563 - Last scan ID: None
+2026-09-30 21:52:19.009 | INFO     | checker_repair:repair_checker:51 - Compilation attempt 1/5
+2026-09-30 21:52:39.171 | INFO     | backends.plugin_builder:build:341 - Built plugin efac10e6431eb96a5d98 (compile 17.7s, link 2.4s)
+2026-09-30 21:52:39.172 | INFO     | checker_repair:repair_checker:60 - Syntax repair successful!
+2026-09-30 21:52:39.172 | INFO     | checker_refine:_initialize_refinement:1056 - Compiled original code successfully!
+2026-09-30 21:52:39.175 | DEBUG    | backends.plugin_builder:build:281 - Plugin cache hit efac10e6431eb96a5d98
+2026-09-30 21:53:29.221 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision bb348b35e84c in 48.1s
+2026-09-30 21:54:31.969 | INFO     | backends.csa_compiledb:_run_checker_compiledb:247 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/efac10e6431eb96a5d98/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 62.74, 'jobs': 8}
+2026-09-30 21:54:31.976 | WARNING  | backends.csa:extract_reports:2436 - < 1 reports!
+2026-09-30 21:54:31.977 | INFO     | checker_refine:_process_reports_with_count:1136 - Backend found 0 total reports
+2026-09-30 21:54:31.977 | INFO     | checker_refine:_process_reports_with_count:1137 - Extracted 0 reports for processing
+2026-09-30 21:54:31.977 | INFO     | checker_refine:_process_reports_with_count:1142 - Checker is perfect - very few reports found!
+2026-09-30 21:54:31.977 | INFO     | checker_refine:_log_attempt_result:619 - Attempt 1 Result:
+2026-09-30 21:54:31.977 | INFO     | checker_refine:_log_attempt_result:620 -   - Status: Perfect
+2026-09-30 21:54:31.977 | INFO     | checker_refine:_log_attempt_result:621 -   - Refined: False
+2026-09-30 21:54:31.978 | INFO     | checker_refine:_log_attempt_result:628 -   - ✗ Code Changed: NO (no valid modifications made)
+2026-09-30 21:54:31.978 | INFO     | checker_refine:_log_attempt_result:630 -   - Reports: 0
+2026-09-30 21:54:31.978 | INFO     | checker_refine:_log_attempt_result:631 -   - True Positives: 0
+2026-09-30 21:54:31.978 | INFO     | checker_refine:_log_attempt_result:632 -   - False Positives: 0
+2026-09-30 21:54:31.978 | INFO     | checker_refine:_log_attempt_result:640 -   - Refine Attempts: 0
+2026-09-30 21:54:31.978 | INFO     | checker_refine:refine_checker_with_max_attempts:590 - Checker is perfect - stopping refinement
+2026-09-30 21:54:31.980 | INFO     | checker_refine:create_refinement_summary:925 - Refinement summary saved to: e2e/refine-curl/KN-Null-Pointer-Dereference-f2a15357-0/refinements/README.md
+2026-09-30 21:54:31.981 | INFO     | checker_refine:_log_refine_results:683 - === Final Refinement Summary for KN-Null-Pointer-Dereference-f2a15357-0 ===
+2026-09-30 21:54:31.981 | INFO     | checker_refine:_log_refine_results:684 - Total attempts: 1
+2026-09-30 21:54:31.981 | INFO     | checker_refine:_log_refine_results:697 - Successful refinements: 0
+2026-09-30 21:54:31.981 | INFO     | checker_refine:_log_refine_results:698 - Code actually changed: 0 attempts
+2026-09-30 21:54:31.982 | INFO     | checker_refine:_log_refine_results:699 - Final status: Perfect
+2026-09-30 21:54:31.982 | INFO     | checker_refine:_log_refine_results:700 - Final checker refined: False
+2026-09-30 21:54:31.982 | INFO     | checker_refine:_log_refine_results:701 - Final code changed: NO
+2026-09-30 21:54:31.982 | INFO     | checker_refine:_log_refine_results:719 - Refinement progression:
+2026-09-30 21:54:31.982 | INFO     | checker_refine:_log_refine_results:726 -   Attempt 1: Perfect | NO_CHANGE | Reports: 0 | TP: 0 | FP: 0 | Precision: 0.00%
+2026-09-30 21:54:31.985 | INFO     | checker_refine:_save_refine_log_to_file:835 - Detailed refinement log saved to: e2e/refine-curl/KN-Null-Pointer-Dereference-f2a15357-0/refinement_logs/KN-Null-Pointer-Dereference-f2a15357-0_refinement.md
+2026-09-30 21:54:31.985 | INFO     | checker_refine:refine_checker:74 - [2/4] Refining checker e2e/refine-curl/KN-Memory-Leak-a0f08d69-2...
+2026-09-30 21:54:31.990 | INFO     | checker_refine:refine_checker_with_max_attempts:557 - Starting refinement of checker KN-Memory-Leak-a0f08d69-2 with max 3 attempts
+2026-09-30 21:54:31.990 | INFO     | checker_refine:refine_checker_with_max_attempts:562 - === Refinement Attempt 1/3 ===
+2026-09-30 21:54:31.990 | INFO     | checker_refine:refine_checker_with_max_attempts:563 - Last scan ID: None
+2026-09-30 21:54:31.997 | INFO     | checker_repair:repair_checker:51 - Compilation attempt 1/5
+2026-09-30 21:54:40.487 | INFO     | backends.plugin_builder:build:341 - Built plugin 4b37e6e9f7587b93fd84 (compile 6.1s, link 2.4s)
+2026-09-30 21:54:40.488 | INFO     | checker_repair:repair_checker:60 - Syntax repair successful!
+2026-09-30 21:54:40.489 | INFO     | checker_refine:_initialize_refinement:1056 - Compiled original code successfully!
+2026-09-30 21:54:40.492 | DEBUG    | backends.plugin_builder:build:281 - Plugin cache hit 4b37e6e9f7587b93fd84
+2026-09-30 21:55:43.897 | INFO     | backends.csa_compiledb:_run_checker_compiledb:247 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/4b37e6e9f7587b93fd84/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 63.4, 'jobs': 8}
+2026-09-30 21:55:43.904 | INFO     | backends.csa:extract_reports:2432 - Found V8-style report structure with subdirectories
+2026-09-30 21:55:44.882 | WARNING  | backends.csa:extract_reports:2473 - Sample size: 1 by seed 0
+2026-09-30 21:55:44.882 | INFO     | checker_refine:_process_reports_with_count:1136 - Backend found 1 total reports
+2026-09-30 21:55:44.883 | INFO     | checker_refine:_process_reports_with_count:1137 - Extracted 1 reports for processing
+2026-09-30 21:55:44.883 | INFO     | checker_refine:_process_reports_with_count:1142 - Checker is perfect - very few reports found!
+2026-09-30 21:55:44.883 | INFO     | checker_refine:_log_attempt_result:619 - Attempt 1 Result:
+2026-09-30 21:55:44.883 | INFO     | checker_refine:_log_attempt_result:620 -   - Status: Perfect
+2026-09-30 21:55:44.883 | INFO     | checker_refine:_log_attempt_result:621 -   - Refined: False
+2026-09-30 21:55:44.883 | INFO     | checker_refine:_log_attempt_result:628 -   - ✗ Code Changed: NO (no valid modifications made)
+2026-09-30 21:55:44.883 | INFO     | checker_refine:_log_attempt_result:630 -   - Reports: 1
+2026-09-30 21:55:44.883 | INFO     | checker_refine:_log_attempt_result:631 -   - True Positives: 0
+2026-09-30 21:55:44.883 | INFO     | checker_refine:_log_attempt_result:632 -   - False Positives: 0
+2026-09-30 21:55:44.883 | INFO     | checker_refine:_log_attempt_result:639 -   - Precision: 0.00%
+2026-09-30 21:55:44.884 | INFO     | checker_refine:_log_attempt_result:640 -   - Refine Attempts: 0
+2026-09-30 21:55:44.884 | INFO     | checker_refine:refine_checker_with_max_attempts:590 - Checker is perfect - stopping refinement
+2026-09-30 21:55:44.886 | INFO     | checker_refine:create_refinement_summary:925 - Refinement summary saved to: e2e/refine-curl/KN-Memory-Leak-a0f08d69-2/refinements/README.md
+2026-09-30 21:55:44.886 | INFO     | checker_refine:_log_refine_results:683 - === Final Refinement Summary for KN-Memory-Leak-a0f08d69-2 ===
+2026-09-30 21:55:44.886 | INFO     | checker_refine:_log_refine_results:684 - Total attempts: 1
+2026-09-30 21:55:44.886 | INFO     | checker_refine:_log_refine_results:697 - Successful refinements: 0
+2026-09-30 21:55:44.886 | INFO     | checker_refine:_log_refine_results:698 - Code actually changed: 0 attempts
+2026-09-30 21:55:44.887 | INFO     | checker_refine:_log_refine_results:699 - Final status: Perfect
+2026-09-30 21:55:44.887 | INFO     | checker_refine:_log_refine_results:700 - Final checker refined: False
+2026-09-30 21:55:44.887 | INFO     | checker_refine:_log_refine_results:701 - Final code changed: NO
+2026-09-30 21:55:44.887 | INFO     | checker_refine:_log_refine_results:719 - Refinement progression:
+2026-09-30 21:55:44.887 | INFO     | checker_refine:_log_refine_results:726 -   Attempt 1: Perfect | NO_CHANGE | Reports: 1 | TP: 0 | FP: 0 | Precision: 0.00%
+2026-09-30 21:55:44.889 | INFO     | checker_refine:_save_refine_log_to_file:835 - Detailed refinement log saved to: e2e/refine-curl/KN-Memory-Leak-a0f08d69-2/refinement_logs/KN-Memory-Leak-a0f08d69-2_refinement.md
+2026-09-30 21:55:44.890 | INFO     | checker_refine:refine_checker:74 - [3/4] Refining checker e2e/refine-curl/KN-Misuse-c53420e4-1...
+2026-09-30 21:55:44.895 | INFO     | checker_refine:refine_checker_with_max_attempts:557 - Starting refinement of checker KN-Misuse-c53420e4-1 with max 3 attempts
+2026-09-30 21:55:44.895 | INFO     | checker_refine:refine_checker_with_max_attempts:562 - === Refinement Attempt 1/3 ===
+2026-09-30 21:55:44.896 | INFO     | checker_refine:refine_checker_with_max_attempts:563 - Last scan ID: None
+2026-09-30 21:55:44.902 | INFO     | checker_repair:repair_checker:51 - Compilation attempt 1/5
+2026-09-30 21:55:52.118 | INFO     | backends.plugin_builder:build:341 - Built plugin c0c26d785f59dcf6d9aa (compile 4.7s, link 2.5s)
+2026-09-30 21:55:52.119 | INFO     | checker_repair:repair_checker:60 - Syntax repair successful!
+2026-09-30 21:55:52.119 | INFO     | checker_refine:_initialize_refinement:1056 - Compiled original code successfully!
+2026-09-30 21:55:52.122 | DEBUG    | backends.plugin_builder:build:281 - Plugin cache hit c0c26d785f59dcf6d9aa
+2026-09-30 21:56:57.616 | INFO     | backends.csa_compiledb:_run_checker_compiledb:247 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/c0c26d785f59dcf6d9aa/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 65.49, 'jobs': 8}
+2026-09-30 21:56:57.622 | WARNING  | backends.csa:extract_reports:2436 - < 1 reports!
+2026-09-30 21:56:57.623 | INFO     | checker_refine:_process_reports_with_count:1136 - Backend found 0 total reports
+2026-09-30 21:56:57.623 | INFO     | checker_refine:_process_reports_with_count:1137 - Extracted 0 reports for processing
+2026-09-30 21:56:57.623 | INFO     | checker_refine:_process_reports_with_count:1142 - Checker is perfect - very few reports found!
+2026-09-30 21:56:57.623 | INFO     | checker_refine:_log_attempt_result:619 - Attempt 1 Result:
+2026-09-30 21:56:57.623 | INFO     | checker_refine:_log_attempt_result:620 -   - Status: Perfect
+2026-09-30 21:56:57.623 | INFO     | checker_refine:_log_attempt_result:621 -   - Refined: False
+2026-09-30 21:56:57.623 | INFO     | checker_refine:_log_attempt_result:628 -   - ✗ Code Changed: NO (no valid modifications made)
+2026-09-30 21:56:57.624 | INFO     | checker_refine:_log_attempt_result:630 -   - Reports: 0
+2026-09-30 21:56:57.624 | INFO     | checker_refine:_log_attempt_result:631 -   - True Positives: 0
+2026-09-30 21:56:57.624 | INFO     | checker_refine:_log_attempt_result:632 -   - False Positives: 0
+2026-09-30 21:56:57.624 | INFO     | checker_refine:_log_attempt_result:640 -   - Refine Attempts: 0
+2026-09-30 21:56:57.624 | INFO     | checker_refine:refine_checker_with_max_attempts:590 - Checker is perfect - stopping refinement
+2026-09-30 21:56:57.626 | INFO     | checker_refine:create_refinement_summary:925 - Refinement summary saved to: e2e/refine-curl/KN-Misuse-c53420e4-1/refinements/README.md
+2026-09-30 21:56:57.627 | INFO     | checker_refine:_log_refine_results:683 - === Final Refinement Summary for KN-Misuse-c53420e4-1 ===
+2026-09-30 21:56:57.627 | INFO     | checker_refine:_log_refine_results:684 - Total attempts: 1
+2026-09-30 21:56:57.627 | INFO     | checker_refine:_log_refine_results:697 - Successful refinements: 0
+2026-09-30 21:56:57.627 | INFO     | checker_refine:_log_refine_results:698 - Code actually changed: 0 attempts
+2026-09-30 21:56:57.627 | INFO     | checker_refine:_log_refine_results:699 - Final status: Perfect
+2026-09-30 21:56:57.628 | INFO     | checker_refine:_log_refine_results:700 - Final checker refined: False
+2026-09-30 21:56:57.628 | INFO     | checker_refine:_log_refine_results:701 - Final code changed: NO
+2026-09-30 21:56:57.628 | INFO     | checker_refine:_log_refine_results:719 - Refinement progression:
+2026-09-30 21:56:57.628 | INFO     | checker_refine:_log_refine_results:726 -   Attempt 1: Perfect | NO_CHANGE | Reports: 0 | TP: 0 | FP: 0 | Precision: 0.00%
+2026-09-30 21:56:57.629 | INFO     | checker_refine:_save_refine_log_to_file:835 - Detailed refinement log saved to: e2e/refine-curl/KN-Misuse-c53420e4-1/refinement_logs/KN-Misuse-c53420e4-1_refinement.md
+2026-09-30 21:56:57.630 | INFO     | checker_refine:refine_checker:74 - [4/4] Refining checker e2e/refine-curl/KN-Integer-Overflow-bc440a89-0...
+2026-09-30 21:56:57.634 | INFO     | checker_refine:refine_checker_with_max_attempts:557 - Starting refinement of checker KN-Integer-Overflow-bc440a89-0 with max 3 attempts
+2026-09-30 21:56:57.634 | INFO     | checker_refine:refine_checker_with_max_attempts:562 - === Refinement Attempt 1/3 ===
+2026-09-30 21:56:57.634 | INFO     | checker_refine:refine_checker_with_max_attempts:563 - Last scan ID: None
+2026-09-30 21:56:57.641 | INFO     | checker_repair:repair_checker:51 - Compilation attempt 1/5
+2026-09-30 21:57:03.987 | INFO     | backends.plugin_builder:build:341 - Built plugin a468a1d13437f0e26dea (compile 3.8s, link 2.6s)
+2026-09-30 21:57:03.989 | INFO     | checker_repair:repair_checker:60 - Syntax repair successful!
+2026-09-30 21:57:03.989 | INFO     | checker_refine:_initialize_refinement:1056 - Compiled original code successfully!
+2026-09-30 21:57:03.993 | DEBUG    | backends.plugin_builder:build:281 - Plugin cache hit a468a1d13437f0e26dea
+2026-09-30 21:58:08.888 | INFO     | backends.csa_compiledb:_run_checker_compiledb:247 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/a468a1d13437f0e26dea/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 64.89, 'jobs': 8}
+2026-09-30 21:58:08.894 | WARNING  | backends.csa:extract_reports:2436 - < 1 reports!
+2026-09-30 21:58:08.894 | INFO     | checker_refine:_process_reports_with_count:1136 - Backend found 0 total reports
+2026-09-30 21:58:08.894 | INFO     | checker_refine:_process_reports_with_count:1137 - Extracted 0 reports for processing
+2026-09-30 21:58:08.895 | INFO     | checker_refine:_process_reports_with_count:1142 - Checker is perfect - very few reports found!
+2026-09-30 21:58:08.895 | INFO     | checker_refine:_log_attempt_result:619 - Attempt 1 Result:
+2026-09-30 21:58:08.895 | INFO     | checker_refine:_log_attempt_result:620 -   - Status: Perfect
+2026-09-30 21:58:08.895 | INFO     | checker_refine:_log_attempt_result:621 -   - Refined: False
+2026-09-30 21:58:08.895 | INFO     | checker_refine:_log_attempt_result:628 -   - ✗ Code Changed: NO (no valid modifications made)
+2026-09-30 21:58:08.895 | INFO     | checker_refine:_log_attempt_result:630 -   - Reports: 0
+2026-09-30 21:58:08.895 | INFO     | checker_refine:_log_attempt_result:631 -   - True Positives: 0
+2026-09-30 21:58:08.895 | INFO     | checker_refine:_log_attempt_result:632 -   - False Positives: 0
+2026-09-30 21:58:08.895 | INFO     | checker_refine:_log_attempt_result:640 -   - Refine Attempts: 0
+2026-09-30 21:58:08.895 | INFO     | checker_refine:refine_checker_with_max_attempts:590 - Checker is perfect - stopping refinement
+2026-09-30 21:58:08.897 | INFO     | checker_refine:create_refinement_summary:925 - Refinement summary saved to: e2e/refine-curl/KN-Integer-Overflow-bc440a89-0/refinements/README.md
+2026-09-30 21:58:08.897 | INFO     | checker_refine:_log_refine_results:683 - === Final Refinement Summary for KN-Integer-Overflow-bc440a89-0 ===
+2026-09-30 21:58:08.897 | INFO     | checker_refine:_log_refine_results:684 - Total attempts: 1
+2026-09-30 21:58:08.897 | INFO     | checker_refine:_log_refine_results:697 - Successful refinements: 0
+2026-09-30 21:58:08.897 | INFO     | checker_refine:_log_refine_results:698 - Code actually changed: 0 attempts
+2026-09-30 21:58:08.897 | INFO     | checker_refine:_log_refine_results:699 - Final status: Perfect
+2026-09-30 21:58:08.897 | INFO     | checker_refine:_log_refine_results:700 - Final checker refined: False
+2026-09-30 21:58:08.897 | INFO     | checker_refine:_log_refine_results:701 - Final code changed: NO
+2026-09-30 21:58:08.897 | INFO     | checker_refine:_log_refine_results:719 - Refinement progression:
+2026-09-30 21:58:08.897 | INFO     | checker_refine:_log_refine_results:726 -   Attempt 1: Perfect | NO_CHANGE | Reports: 0 | TP: 0 | FP: 0 | Precision: 0.00%
+2026-09-30 21:58:08.899 | INFO     | checker_refine:_save_refine_log_to_file:835 - Detailed refinement log saved to: e2e/refine-curl/KN-Integer-Overflow-bc440a89-0/refinement_logs/KN-Integer-Overflow-bc440a89-0_refinement.md
+2026-09-30 21:58:08.900 | INFO     | checker_refine:_finalize_progress_tracker:180 - Progress tracking completed: e2e/refine-curl/refinement_progress.log
+2026-09-30 21:58:08.900 | INFO     | checker_refine:refine_checker:118 - Refinement process completed for directory: e2e/refine-curl
+a0f08d69 Memory-Leak 1
+['TP: 0', 'TN: 0']
+f7d4e11f Null-Pointer-Dereference 1
+['TP: 1', 'TN: 0']
+f2a15357 Null-Pointer-Dereference 0
+['TP: 1', 'TN: 1']
+6f1dfab6 Out-of-Bound 2
+['TP: 0', 'TN: 0']
+6f1dfab6 Out-of-Bound 0
+['TP: 0', 'TN: 0']
+a0f08d69 Memory-Leak 2
+['TP: 1', 'TN: 1']
+c53420e4 Misuse 1
+['TP: 1', 'TN: 1']
+bc440a89 Integer-Overflow 0
+['TP: 1', 'TN: 1']
+a0f08d69 Memory-Leak 0
+['TP: 0', 'TN: 0']
+f7d4e11f Null-Pointer-Dereference 0
+['TP: 1', 'TN: 0']
+f7d4e11f Null-Pointer-Dereference 2
+['TP: 1', 'TN: 0']
+6f1dfab6 Out-of-Bound 1
+['TP: 0', 'TN: 0']
+c53420e4 Misuse 0
+['TP: -2', 'TN: -2']
+f2a15357 Null-Pointer-Dereference 0
+['TP: 1', 'TN: 1']
+a0f08d69 Memory-Leak 2
+['TP: 1', 'TN: 1']
+c53420e4 Misuse 1
+['TP: 1', 'TN: 1']
+bc440a89 Integer-Overflow 0
+['TP: 1', 'TN: 1']

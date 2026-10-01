@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing NULL validation of a required pointer argument before it is dereferenced or written through. In `curl_easy_send()`, `*n` is assigned without checking `n`; in `curl_easy_recv()`, `n` is forwarded to a callee that writes through it without checking `n`. If the caller passes `NULL`, this causes a NULL pointer dereference. The fix validates `n` first and returns `CURLE_BAD_FUNCTION_ARGUMENT`.

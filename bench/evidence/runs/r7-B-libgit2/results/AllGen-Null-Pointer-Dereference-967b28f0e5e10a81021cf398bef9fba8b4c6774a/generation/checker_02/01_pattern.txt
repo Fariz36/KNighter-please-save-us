@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unconditionally duplicating a nullable string field with a `strdup`-style function. In `dup_hunk()`, the source hunk's `summary` may legitimately be `NULL` (for hunks created by blaming a buffer), but the code always calls `git__strdup(hunk->summary)`. Passing `NULL` to `git__strdup()` causes a NULL dereference/assertion or incorrect OOM handling. The fix is to guard the duplication with a NULL check on the source field before calling `git__strdup()`.

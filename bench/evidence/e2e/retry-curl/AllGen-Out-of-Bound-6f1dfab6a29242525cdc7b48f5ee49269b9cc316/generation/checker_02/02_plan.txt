@@ -1,0 +1,40 @@
+1. **No Program State Needed:**
+   - This bug pattern is a local AST/syntactic check. Do not register any `PROGRAMSTATE` maps or use `checkBind`; alias tracking is unnecessary because the pattern uses the same local pointer variable.
+
+2. **Define a `BugType`:**
+   - Create a `BugType` member for the checker, e.g., `OutOfBoundsRead` with a short name such as `"Out-of-bounds read"`.
+
+3. **Implement `checkBranchCondition`:**
+   - **Find the enclosing `IfStmt`:**
+     - Use `findSpecificTypeInParents<IfStmt>(Condition, C)` to get the enclosing `IfStmt`.
+     - Verify that `IfStmt->getCond() == Condition`; otherwise return.
+   - **Verify the delimiter assignment:**
+     - Find the `CompoundStmt` containing this `IfStmt` via `findSpecificTypeInParents<CompoundStmt>(IfStmt, C)`.
+     - Iterate the `CompoundStmt` body to locate this `IfStmt`, then take the immediately preceding statement.
+     - Check that the preceding statement is an assignment `sep = ptr[0]` (or `sep = *ptr`):
+       - It must be a `BinaryOperator` with opcode `BO_Assign`.
+       - The LHS must be a `DeclRefExpr` to a variable (record as `SepDecl`).
+       - The RHS must be an `ArraySubscriptExpr` whose base is a `DeclRefExpr` to a pointer (record as `PtrDecl`) and whose index evaluates to `0` using `EvaluateExprToInt`. Alternatively, accept a `UnaryOperator` with `UO_Deref` on the same pointer.
+     - If this pattern is not found, return.
+   - **Flatten the `&&` chain:**
+     - If `Condition` is not a `BinaryOperator` with `BO_LAnd`, return.
+     - Recursively collect all operands of `&&` in left-to-right evaluation order, ignoring `ParenExpr`. Store them in a `SmallVector<const Expr*, 8>`.
+   - **Check operands in order:**
+     - Maintain `bool SepChecked = false`.
+     - For each operand `Op` in the flattened list:
+       - **Detect a guard on `sep`:**
+         - Strip `ParenExpr`/`ImplicitCastExpr` from `Op`.
+         - If it is a `DeclRefExpr` to `SepDecl`, set `SepChecked = true` and continue.
+         - If it is a `BinaryOperator` with `BO_NE` where one side is a `DeclRefExpr` to `SepDecl` and the other side evaluates to `0` (using `EvaluateExprToInt`), set `SepChecked = true` and continue.
+         - Do **not** treat `!sep` or `sep == 0` as a guard; they do not prevent the read when `sep` is `'\0'`.
+       - **Detect an unsafe read:**
+         - Recursively scan `Op` for an `ArraySubscriptExpr`.
+         - Ignore parentheses/casts on the base. If the base is a `DeclRefExpr` to `PtrDecl` and the index evaluates to `1`, `2`, or `3`, then this is a fixed-offset read.
+         - If `SepChecked` is `false`, report the bug and return.
+     - If no unsafe read is found, return.
+
+4. **Report the Bug:**
+   - Generate a non-fatal error node: `ExplodedNode *N = C.generateNonFatalErrorNode();`
+   - If `N` is non-null, create a `PathSensitiveBugReport` with the `BugType` and a short message:
+     - `"Out-of-bounds read: delimiter may be NUL"`
+   - Emit the report via `C.emitReport(std::move(Report));`

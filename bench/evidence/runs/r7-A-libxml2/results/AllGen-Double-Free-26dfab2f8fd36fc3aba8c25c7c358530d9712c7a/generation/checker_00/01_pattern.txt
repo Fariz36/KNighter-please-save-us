@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is a **double free caused by caller-side cleanup of a resource whose ownership was transferred to a callee that already frees it on failure**. In `xmlIOParseDTD`, `xmlNewIOInputStream(ctxt, input, ...)` takes ownership of `input`; if it fails and returns `NULL`, it has already freed `input`. The caller then calls `xmlFreeParserInputBuffer(input)` again on that same error path, causing a double free. The root cause is failing to respect the callee’s ownership/cleanup contract and redundantly freeing the resource in the caller.

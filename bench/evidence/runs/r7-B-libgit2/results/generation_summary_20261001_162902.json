@@ -1,0 +1,142 @@
+{
+  "start_time": "2026-10-01T16:29:02.934809",
+  "total_commits": 10,
+  "successful_commits": 6,
+  "workers": 4,
+  "results": [
+    {
+      "commit_id": "6e8227ab38952cf3575eb76f64f80dc536d36ec9",
+      "commit_type": "Out-of-Bound",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 250.703887,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T16:33:13.644247"
+    },
+    {
+      "commit_id": "6d63f4b63af72aa41e41be3d7b3acaf5b093fd33",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 189.121334,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T16:36:22.766830"
+    },
+    {
+      "commit_id": "d6486af3e9decf1d3a626a0d211f0eb1a209c455",
+      "commit_type": "Use-Before-Initialization",
+      "total_checkers": 2,
+      "successful_checkers": 2,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 468.35743,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T16:36:51.297541"
+    },
+    {
+      "commit_id": "2fb89b6d6b6fc59956351de437a7a72065bc057b",
+      "commit_type": "Buffer-Overflow",
+      "total_checkers": 3,
+      "successful_checkers": 0,
+      "perfect_checkers": 0,
+      "best_tp": 0,
+      "best_tn": 0,
+      "total_time": 635.70649,
+      "errors": [],
+      "success_rate": 0.0,
+      "timestamp": "2026-10-01T16:39:38.645454"
+    },
+    {
+      "commit_id": "f9e055468d167cb4d6bde1ecd9e293d8a7d40db5",
+      "commit_type": "Memory-Leak",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 303.801857,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T16:41:26.571151"
+    },
+    {
+      "commit_id": "967b28f0e5e10a81021cf398bef9fba8b4c6774a",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 3,
+      "successful_checkers": 2,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 774.311455,
+      "errors": [],
+      "success_rate": 0.6666666666666666,
+      "timestamp": "2026-10-01T16:41:57.248819"
+    },
+    {
+      "commit_id": "c0a4ef05f4d4a57eb06a15df8bcd4ace26aec1f5",
+      "commit_type": "Misuse",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 195.170941,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T16:42:53.820353"
+    },
+    {
+      "commit_id": "ef086bc3e4eedf62be38a910381aae24d49871ff",
+      "commit_type": "Misuse",
+      "total_checkers": 3,
+      "successful_checkers": 0,
+      "perfect_checkers": 0,
+      "best_tp": 0,
+      "best_tn": 0,
+      "total_time": 371.998588,
+      "errors": [],
+      "success_rate": 0.0,
+      "timestamp": "2026-10-01T16:48:09.248762"
+    },
+    {
+      "commit_id": "36b8879154a1b9d22d2c0fde88053299d01517c7",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 3,
+      "successful_checkers": 3,
+      "perfect_checkers": 0,
+      "best_tp": 1,
+      "best_tn": 0,
+      "total_time": 525.762526,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-01T16:50:12.334706"
+    },
+    {
+      "commit_id": "0bc19591d613eb842c98bcbe4c6f3e171b242dbe",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 3,
+      "successful_checkers": 0,
+      "perfect_checkers": 0,
+      "best_tp": 0,
+      "best_tn": 0,
+      "total_time": 1042.267166,
+      "errors": [
+        "Failed to generate compilable checker 1"
+      ],
+      "success_rate": 0.0,
+      "timestamp": "2026-10-01T16:54:13.566113"
+    }
+  ],
+  "end_time": "2026-10-01T16:54:13.569575",
+  "success_rate": 0.6
+}

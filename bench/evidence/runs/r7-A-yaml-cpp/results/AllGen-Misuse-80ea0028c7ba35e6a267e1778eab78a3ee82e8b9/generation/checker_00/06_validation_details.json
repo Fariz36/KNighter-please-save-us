@@ -1,0 +1,92 @@
+{
+  "commit_id": "80ea0028c7ba35e6a267e1778eab78a3ee82e8b9",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-yaml-cpp/plugin-cache/plugins/63437b84ca7c19b85718/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/binary.cpp",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "DecodeBase64"
+        ],
+        "fixed_functions": [
+          "DecodeBase64"
+        ]
+      },
+      {
+        "path": "test/binary_test.cpp",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": [
+          "TEST"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/binary.cpp": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-yaml-cpp/work/src/2e6383d272f6/src/binary.cpp",
+          "line": 77,
+          "column": 3,
+          "function": "unknown",
+          "bug_type": "Missing Base64 validation",
+          "description": "DecodeBase64 does not reject truncated input: missing check for leftover characters after the decoding loop",
+          "issue_hash": "9f06a3bc824a26dee143def190c7921a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/80ea0028c7ba/e73cdf5b/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-yaml-cpp_work_src_2e6383d272f6_src_binary.cpp/report-9f06a3.html",
+          "relpath": "src/binary.cpp"
+        }
+      ]
+    },
+    "fixed": {
+      "src/binary.cpp": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-yaml-cpp/work/src/80ea0028c7ba/src/binary.cpp",
+          "line": 78,
+          "column": 3,
+          "function": "unknown",
+          "bug_type": "Missing Base64 validation",
+          "description": "DecodeBase64 does not reject truncated input: missing check for leftover characters after the decoding loop",
+          "issue_hash": "b9251a0165d556d37b5a7dbd709676c2",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/80ea0028c7ba/e73cdf5b/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-yaml-cpp_work_src_80ea0028c7ba_src_binary.cpp/report-b9251a.html",
+          "relpath": "src/binary.cpp"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 5.47,
+    "analysis_seconds": {
+      "buggy": 0.44,
+      "fixed": 0.33
+    },
+    "total_seconds": 6.26
+  },
+  "report_dir": "tmp/validation/80ea0028c7ba/e73cdf5b"
+}

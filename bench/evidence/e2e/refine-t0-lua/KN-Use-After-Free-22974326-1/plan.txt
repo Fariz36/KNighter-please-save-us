@@ -1,0 +1,29 @@
+1. **No Program State Needed**
+   - The checker is purely syntactic and stateless. It analyzes the AST at each `luaH_finishset` call site to determine whether the table argument has been anchored on the Lua stack before the call. No `REGISTER_MAP_WITH_PROGRAMSTATE` or `REGISTER_TRAIT_WITH_PROGRAMSTATE` is required.
+
+2. **Use `checkPreCall` Callback**
+   - Implement the detection logic inside `checkPreCall(const CallEvent &Call, CheckerContext &C)`.
+
+3. **Filter Calls to `luaH_finishset`**
+   - Obtain the callee identifier via `Call.getCalleeIdentifier()`. If it is null or its name is not `"luaH_finishset"`, return immediately.
+
+4. **Verify Enclosing Function**
+   - Get the enclosing declaration using `Call.getLocationContext()->getDecl()`. If it is not a `FunctionDecl` with name `"luaV_finishset"`, return. This restricts the check to the vulnerable function.
+
+5. **Extract the Table Argument**
+   - Retrieve the second argument (index 1) of the call: `const Expr *TableArg = Call.getArgExpr(1);`. If null, return.
+   - Determine the variable name referenced by `TableArg`. If it is a `DeclRefExpr` to a `VarDecl`, use `VarDecl::getNameAsString()`. Otherwise, use `Lexer::getSourceText` on `TableArg->getSourceRange()` to obtain its textual representation.
+
+6. **Locate the Call’s Statement and Its Block**
+   - Get the `CallExpr` from `Call.getOriginExpr()`. Use `findSpecificTypeInParents<ExprStmt>(CallExpr, C)` to find the immediate `ExprStmt` wrapping the call.
+   - Use `findSpecificTypeInParents<CompoundStmt>(ES, C)` to find the innermost `CompoundStmt` that directly contains this `ExprStmt`.
+
+7. **Scan Preceding Statements for Anchoring**
+   - Iterate over the children of the `CompoundStmt` from the beginning up to (but not including) the `ExprStmt` of the `luaH_finishset` call.
+   - For each previous statement, check if it is an `ExprStmt` whose expression is a `CallExpr` to `sethvalue2s`.
+   - If such a call is found, inspect its arguments. If any argument’s source text contains the table variable name obtained in Step 5, then the table is anchored. Return without reporting.
+
+8. **Report the Bug**
+   - If no anchoring `sethvalue2s` call is found, generate a non-fatal error node: `ExplodedNode *N = C.generateNonFatalErrorNode();`.
+   - Create a `PathSensitiveBugReport` (or `BasicBugReport`) with a short, clear message: `"Lua table not anchored before luaH_finishset; possible use-after-free due to emergency GC"`.
+   - Emit the report via `C.emitReport(std::move(Report));`.

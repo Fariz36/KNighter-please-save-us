@@ -1,0 +1,109 @@
+{
+  "commit_id": "ddcb79dc9934fd8a26263f6368c4eb7aa43f6d49",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libxml2/plugin-cache/plugins/f3973872bfd0ef3e7548/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 2,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "parserInternals.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlCtxtSetSaxHandler"
+        ],
+        "fixed_functions": [
+          "xmlCtxtSetSaxHandler"
+        ]
+      },
+      {
+        "path": "testparser.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "testSwitchDtd",
+          "testSwitchDtdExtSubset"
+        ],
+        "fixed_functions": [
+          "testSwitchDtd",
+          "testSwitchDtdExtSubset"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "parserInternals.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libxml2/work/build/c8eaf2236ff1-f6d22c8ac6c7/../../src/c8eaf2236ff1/parserInternals.c",
+          "line": 3202,
+          "column": 15,
+          "function": "xmlCtxtSetSaxHandler",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: overwriting owned pointer field 'ctxt->sax' without freeing previous allocation",
+          "issue_hash": "b26a9a08fd042d1ddba3971cf222bc1c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ddcb79dc9934/2f4c9b60/buggy/.._.._src_c8eaf2236ff1_parserInternals.c/report-b26a9a.html",
+          "relpath": "parserInternals.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libxml2/work/build/c8eaf2236ff1-f6d22c8ac6c7/../../src/c8eaf2236ff1/parserInternals.c",
+          "line": 2783,
+          "column": 12,
+          "function": "xmlInitSAXParserCtxt",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: overwriting owned pointer field 'ctxt->sax' without freeing previous allocation",
+          "issue_hash": "b7643ca92fb487ecf3833b1614034ee6",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ddcb79dc9934/2f4c9b60/buggy/.._.._src_c8eaf2236ff1_parserInternals.c/report-b7643c.html",
+          "relpath": "parserInternals.c"
+        }
+      ],
+      "testparser.c": []
+    },
+    "fixed": {
+      "parserInternals.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libxml2/work/build/ddcb79dc9934-f6d22c8ac6c7/../../src/ddcb79dc9934/parserInternals.c",
+          "line": 2783,
+          "column": 12,
+          "function": "xmlInitSAXParserCtxt",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: overwriting owned pointer field 'ctxt->sax' without freeing previous allocation",
+          "issue_hash": "b7643ca92fb487ecf3833b1614034ee6",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ddcb79dc9934/2f4c9b60/fixed/.._.._src_ddcb79dc9934_parserInternals.c/report-b7643c.html",
+          "relpath": "parserInternals.c"
+        }
+      ],
+      "testparser.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 12.2,
+      "fixed": 14.18
+    },
+    "total_seconds": 26.59
+  },
+  "report_dir": "tmp/validation/ddcb79dc9934/2f4c9b60"
+}

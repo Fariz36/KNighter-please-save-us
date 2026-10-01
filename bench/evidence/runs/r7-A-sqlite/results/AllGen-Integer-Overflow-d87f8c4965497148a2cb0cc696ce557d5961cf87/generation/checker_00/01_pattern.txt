@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked narrowing of a potentially oversized pointer difference to `int` when computing a string length. In `sqlite3_str_vappendf()`, the `%!.*s` conversion scans the input string for up to `precision` UTF-8 characters, then computes `length = (int)(z - (unsigned char*)bufpt)`. If the input string is longer than `INT_MAX` bytes, the `ptrdiff_t` result is truncated/wrapped into a negative or otherwise incorrect `int`. That corrupted `length` is later used in padding and `sqlite3_str_append()`, causing integer overflow and possible out-of-bounds access. The fix clamps the difference to `0x7ffffff0` before casting to `int`.

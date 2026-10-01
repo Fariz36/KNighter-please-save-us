@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is reading an uninitialized automatic local variable before any code path has assigned it a value. This occurs when a variable is used in a conditional expression or cleanup path (`required` in a self-referential assignment; `drv` in `if (drv && drv != *out)`) even though control flow may reach that use without the variable being set. In C, this is undefined behavior and can cause incorrect control flow or invalid pointer handling. The required fix is to initialize such locals to a safe default (`true`, `NULL`, etc.) before they can be read.

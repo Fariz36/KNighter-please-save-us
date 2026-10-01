@@ -1,0 +1,35 @@
+1. **Register Program State Map**
+   - Use `REGISTER_MAP_WITH_PROGRAMSTATE(NullCheckedParams, const ParmVarDecl *, bool)`.
+   - The map records whether a given output pointer parameter has been null-checked (`false` = unchecked, `true` = checked).
+   - No alias map is needed because the target bug pattern involves direct use of the parameter `n`.
+
+2. **Callback `checkBeginFunction`**
+   - Obtain the current function declaration from `C.getLocationContext()->getDecl()`.
+   - If the function is `curl_easy_send` or `curl_easy_recv`, iterate over its parameters.
+   - For the parameter named `n` (type `size_t *`), add an entry to `NullCheckedParams` with value `false`.
+   - Persist the updated state with `C.addTransition(State)`.
+
+3. **Callback `checkBranchCondition`**
+   - Inspect the branch condition.
+   - Detect null-check patterns on the parameter `n`: `!n`, `n == NULL`, `n != NULL`, or simply `n`.
+   - Extract the corresponding `ParmVarDecl *`.
+   - If this parameter exists in `NullCheckedParams`, set its value to `true` and add a transition.
+   - This marks the parameter as checked for subsequent paths, which is sufficient for the early-return null-check pattern used in the fix.
+
+4. **Callback `checkPreStmt(const BinaryOperator *BO)`**
+   - Handle only assignment operations (`BO_Assign`).
+   - Check whether the left-hand side is a dereference expression (`*n`) whose subexpression is a `DeclRefExpr` referring to a `ParmVarDecl`.
+   - If that parameter is in `NullCheckedParams` and its value is `false`, report a missing NULL check before dereferencing.
+   - Use the bug-reporting helper described below.
+
+5. **Callback `checkPreCall`**
+   - Check if the call is to `Curl_easy_recv`, which is known to write through its `n` argument.
+   - Iterate over the call arguments. If any argument is a `DeclRefExpr` referring to a `ParmVarDecl` that is in `NullCheckedParams` with value `false`, report a missing NULL check before passing the pointer to a function that writes through it.
+   - This catches the bug in `curl_easy_recv` where `n` is forwarded without validation.
+
+6. **Bug Reporting Helper**
+   - Implement a helper `reportMissingNullCheck(CheckerContext &C, const ParmVarDecl *PVD, StringRef Action)`.
+   - Generate a non-fatal error node using `C.generateNonFatalErrorNode()`.
+   - Create a `PathSensitiveBugReport` with a short message such as:
+     `"Missing NULL check for output pointer parameter 'n' before " + Action`.
+   - Emit the report with `C.emitReport(std::move(Report))`.

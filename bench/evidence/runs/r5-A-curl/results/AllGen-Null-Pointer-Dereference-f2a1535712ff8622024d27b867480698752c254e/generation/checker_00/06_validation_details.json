@@ -1,0 +1,80 @@
+{
+  "commit_id": "f2a1535712ff8622024d27b867480698752c254e",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-A-curl/plugin-cache/plugins/c005b553399fbd902f31/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/easy.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "curl_easy_recv",
+          "curl_easy_send"
+        ],
+        "fixed_functions": [
+          "curl_easy_recv",
+          "curl_easy_send"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/easy.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-A-curl/work/src/d87b4e460513/lib/easy.c",
+          "line": 1378,
+          "column": 5,
+          "function": "curl_easy_send",
+          "bug_type": "Missing NULL check",
+          "description": "Missing NULL check for 'n' before dereference",
+          "issue_hash": "56f6029e154911fb806d4a350b5ecd03",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r5/tmp/validation/f2a1535712ff/c11e0c16/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r5-A-curl_work_src_d87b4e460513_lib_easy.c/report-56f602.html",
+          "relpath": "lib/easy.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-A-curl/work/src/d87b4e460513/lib/easy.c",
+          "line": 1307,
+          "column": 14,
+          "function": "curl_easy_recv",
+          "bug_type": "Missing NULL check",
+          "description": "Missing NULL check for 'n' before forwarding",
+          "issue_hash": "bae7b4aed7d10e9c7efdc3964c51f437",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r5/tmp/validation/f2a1535712ff/c11e0c16/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r5-A-curl_work_src_d87b4e460513_lib_easy.c/report-bae7b4.html",
+          "relpath": "lib/easy.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/easy.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 66.98,
+    "analysis_seconds": {
+      "buggy": 0.71,
+      "fixed": 0.79
+    },
+    "total_seconds": 68.55
+  },
+  "report_dir": "tmp/validation/f2a1535712ff/c11e0c16"
+}

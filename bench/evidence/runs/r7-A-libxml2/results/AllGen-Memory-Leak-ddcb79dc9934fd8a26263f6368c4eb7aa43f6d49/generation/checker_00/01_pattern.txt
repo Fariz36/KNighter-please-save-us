@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Replacing an existing owned heap pointer with a newly allocated object without freeing the old value, causing a memory leak. In `xmlCtxtSetSaxHandler`, `ctxt->sax` already points to an allocated `xmlSAXHandler`; the buggy code allocates a new copy and assigns it to `ctxt->sax`, losing the previous allocation. The correct approach is to update the existing allocation in place, e.g. `*ctxt->sax = *sax`, rather than allocating a replacement.

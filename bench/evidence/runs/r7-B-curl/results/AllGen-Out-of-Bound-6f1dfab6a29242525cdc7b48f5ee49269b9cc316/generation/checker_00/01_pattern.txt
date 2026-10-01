@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The code performs unchecked lookahead on a C string after locating a delimiter: it reads `ptr[1]`, `ptr[2]`, and `ptr[3]` without first ensuring that `ptr[0]` is not the NUL terminator. If the delimiter is the last character before the terminator, `sep = ptr[0]` is `'\0'`, so `ptr[1]` reads one byte past the valid NUL-terminated buffer.
+
+The root cause is missing validation that enough characters remain after the matched delimiter before indexing ahead. The fix adds `sep &&` to short-circuit the condition and avoid out-of-bounds reads when the delimiter is at the end of the string.

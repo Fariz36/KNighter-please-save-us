@@ -1,0 +1,129 @@
+## Patch Description
+
+Make Regexp::Simplify() return a null pointer when stopped early.
+
+Change-Id: I19e447e6c7dec34201299a12104e72bf7e792a9e
+Reviewed-on: https://code-review.googlesource.com/c/re2/+/57570
+Reviewed-by: Paul Wankadia <junyer@google.com>
+
+## Buggy Code
+
+```c
+// Function: Regexp::SimplifyRegexp in re2/simplify.cc
+bool Regexp::SimplifyRegexp(const StringPiece& src, ParseFlags flags,
+                            std::string* dst, RegexpStatus* status) {
+  Regexp* re = Parse(src, flags, status);
+  if (re == NULL)
+    return false;
+  Regexp* sre = re->Simplify();
+  re->Decref();
+  if (sre == NULL) {
+    // Should not happen, since Simplify never fails.
+    LOG(ERROR) << "Simplify failed on " << src;
+    if (status) {
+      status->set_code(kRegexpInternalError);
+      status->set_error_arg(src);
+    }
+    return false;
+  }
+  *dst = sre->ToString();
+  sre->Decref();
+  return true;
+}
+```
+
+```c
+// Function: Prefilter::FromRegexp in re2/prefilter.cc
+Prefilter* Prefilter::FromRegexp(Regexp* re) {
+  if (re == NULL)
+    return NULL;
+
+  Regexp* simple = re->Simplify();
+  Prefilter::Info *info = BuildInfo(simple);
+
+  simple->Decref();
+  if (info == NULL)
+    return NULL;
+
+  Prefilter* m = info->TakeMatch();
+
+  delete info;
+  return m;
+}
+```
+
+```c
+// Function: Regexp::Simplify in re2/simplify.cc
+Regexp* Regexp::Simplify() {
+  CoalesceWalker cw;
+  Regexp* cre = cw.Walk(this, NULL);
+  if (cre == NULL)
+    return cre;
+  SimplifyWalker sw;
+  Regexp* sre = sw.Walk(cre, NULL);
+  cre->Decref();
+  return sre;
+}
+```
+
+## Bug Fix Patch
+
+```diff
+diff --git a/re2/prefilter.cc b/re2/prefilter.cc
+index f61d54b..a47b312 100644
+--- a/re2/prefilter.cc
++++ b/re2/prefilter.cc
+@@ -648,14 +648,15 @@ Prefilter* Prefilter::FromRegexp(Regexp* re) {
+     return NULL;
+ 
+   Regexp* simple = re->Simplify();
+-  Prefilter::Info *info = BuildInfo(simple);
++  if (simple == NULL)
++    return NULL;
+ 
++  Prefilter::Info* info = BuildInfo(simple);
+   simple->Decref();
+   if (info == NULL)
+     return NULL;
+ 
+   Prefilter* m = info->TakeMatch();
+-
+   delete info;
+   return m;
+ }
+diff --git a/re2/simplify.cc b/re2/simplify.cc
+index 270f0ff..663d5fc 100644
+--- a/re2/simplify.cc
++++ b/re2/simplify.cc
+@@ -28,8 +28,6 @@ bool Regexp::SimplifyRegexp(const StringPiece& src, ParseFlags flags,
+   Regexp* sre = re->Simplify();
+   re->Decref();
+   if (sre == NULL) {
+-    // Should not happen, since Simplify never fails.
+-    LOG(ERROR) << "Simplify failed on " << src;
+     if (status) {
+       status->set_code(kRegexpInternalError);
+       status->set_error_arg(src);
+@@ -180,10 +178,20 @@ Regexp* Regexp::Simplify() {
+   CoalesceWalker cw;
+   Regexp* cre = cw.Walk(this, NULL);
+   if (cre == NULL)
+-    return cre;
++    return NULL;
++  if (cw.stopped_early()) {
++    cre->Decref();
++    return NULL;
++  }
+   SimplifyWalker sw;
+   Regexp* sre = sw.Walk(cre, NULL);
+   cre->Decref();
++  if (sre == NULL)
++    return NULL;
++  if (sw.stopped_early()) {
++    sre->Decref();
++    return NULL;
++  }
+   return sre;
+ }
+ 
+```

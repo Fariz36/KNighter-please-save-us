@@ -1,0 +1,140 @@
+## Patch Description
+
+mime.c: avoid integer overflow in base64 size calculation
+
+Reported-by: xmoezzz on github
+Fixes #22320
+Closes #22322
+
+## Buggy Code
+
+```c
+// Function: encoder_base64_read in lib/mime.c
+static size_t encoder_base64_read(char *buffer, size_t size, bool ateof,
+                                  curl_mimepart *part)
+{
+  struct mime_encoder_state *st = &part->encstate;
+  size_t cursize = 0;
+  int i;
+  char *ptr = buffer;
+
+  while(st->bufbeg < st->bufend) {
+    /* Line full ? */
+    if(st->pos > MAX_ENCODED_LINE_LENGTH - 4) {
+      /* Yes, we need 2 characters for CRLF. */
+      if(size < 2) {
+        if(!cursize)
+          return STOP_FILLING;
+        break;
+      }
+      *ptr++ = '\r';
+      *ptr++ = '\n';
+      st->pos = 0;
+      cursize += 2;
+      size -= 2;
+    }
+
+    /* Be sure there is enough space and input data for a base64 group. */
+    if(size < 4) {
+      if(!cursize)
+        return STOP_FILLING;
+      break;
+    }
+    if(st->bufend - st->bufbeg < 3)
+      break;
+
+    /* Encode three bytes as four characters. */
+    i = st->buf[st->bufbeg++] & 0xFF;
+    i = (i << 8) | (st->buf[st->bufbeg++] & 0xFF);
+    i = (i << 8) | (st->buf[st->bufbeg++] & 0xFF);
+    *ptr++ = curlx_base64encdec[(i >> 18) & 0x3F];
+    *ptr++ = curlx_base64encdec[(i >> 12) & 0x3F];
+    *ptr++ = curlx_base64encdec[(i >> 6) & 0x3F];
+    *ptr++ = curlx_base64encdec[i & 0x3F];
+    cursize += 4;
+    st->pos += 4;
+    size -= 4;
+  }
+
+  /* If at eof, we have to flush the buffered data. */
+  if(ateof) {
+    if(size < 4) {
+      if(!cursize)
+        return STOP_FILLING;
+    }
+    else {
+      /* Buffered data size can only be 0, 1 or 2. */
+      ptr[2] = ptr[3] = '=';
+      i = 0;
+
+      /* If there is buffered data */
+      if(st->bufend != st->bufbeg) {
+
+        if(st->bufend - st->bufbeg == 2)
+          i = (st->buf[st->bufbeg + 1] & 0xFF) << 8;
+
+        i |= (st->buf[st->bufbeg] & 0xFF) << 16;
+        ptr[0] = curlx_base64encdec[(i >> 18) & 0x3F];
+        ptr[1] = curlx_base64encdec[(i >> 12) & 0x3F];
+        if(++st->bufbeg != st->bufend) {
+          ptr[2] = curlx_base64encdec[(i >> 6) & 0x3F];
+          st->bufbeg++;
+        }
+        cursize += 4;
+        st->pos += 4;
+      }
+    }
+  }
+
+  return cursize;
+}
+```
+
+```c
+// Function: encoder_base64_size in lib/mime.c
+static curl_off_t encoder_base64_size(curl_mimepart *part)
+{
+  curl_off_t size = part->datasize;
+
+  if(size <= 0)
+    return size;    /* Unknown size or no data. */
+
+  /* Compute base64 character count. */
+  size = 4 * (1 + ((size - 1) / 3));
+
+  /* Effective character count must include CRLFs. */
+  return size + (2 * ((size - 1) / MAX_ENCODED_LINE_LENGTH));
+}
+```
+
+## Bug Fix Patch
+
+```diff
+diff --git a/lib/mime.c b/lib/mime.c
+index 11eb66207d..638831d9c8 100644
+--- a/lib/mime.c
++++ b/lib/mime.c
+@@ -419,6 +419,11 @@ static size_t encoder_base64_read(char *buffer, size_t size, bool ateof,
+   return cursize;
+ }
+ 
++/* The maximum input size that does not cause an overflow. */
++#define BASE64_MAX_INPUT_SIZE                                           \
++  (((CURL_OFF_T_MAX / (MAX_ENCODED_LINE_LENGTH + 2)) *                  \
++    MAX_ENCODED_LINE_LENGTH / 4) * 3 - 3)
++
+ static curl_off_t encoder_base64_size(curl_mimepart *part)
+ {
+   curl_off_t size = part->datasize;
+@@ -426,6 +431,10 @@ static curl_off_t encoder_base64_size(curl_mimepart *part)
+   if(size <= 0)
+     return size;    /* Unknown size or no data. */
+ 
++  /* Prevent integer overflows */
++  if(size > BASE64_MAX_INPUT_SIZE)
++    return -1;
++
+   /* Compute base64 character count. */
+   size = 4 * (1 + ((size - 1) / 3));
+ 
+```

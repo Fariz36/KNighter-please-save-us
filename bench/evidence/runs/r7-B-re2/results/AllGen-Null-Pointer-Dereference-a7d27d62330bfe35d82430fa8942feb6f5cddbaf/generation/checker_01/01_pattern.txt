@@ -1,0 +1,3 @@
+## Bug Pattern
+
+`Prefilter::OrStrings()` returns `NULL` for an empty input set because the `Prefilter` object is allocated only when `ss` is non-empty. Callers expect a valid `Prefilter*` and may dereference it without a `NULL` check, causing a NULL pointer dereference. The fix is to always return a valid object representing an OR of zero strings (`Prefilter(NONE)`) instead of using `NULL` as an empty-set sentinel.

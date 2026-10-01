@@ -1,0 +1,92 @@
+{
+  "commit_id": "967b28f0e5e10a81021cf398bef9fba8b4c6774a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/plugin-cache/plugins/9ea02c8208fba5181bc5/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/libgit2/blame.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "dup_hunk"
+        ],
+        "fixed_functions": [
+          "dup_hunk"
+        ]
+      },
+      {
+        "path": "tests/libgit2/blame/buffer.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": [
+          "test_blame_buffer__reblame_buffer_result"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/libgit2/blame.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/work/src/36b8879154a1/src/libgit2/blame.c",
+          "line": 112,
+          "column": 26,
+          "function": "dup_hunk",
+          "bug_type": "Unchecked NULL summary passed to git__strdup",
+          "description": "Unchecked NULL summary passed to git__strdup",
+          "issue_hash": "6584ceac8f510cf04625a02d211bc28b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/967b28f0e5e1/42f07f98/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-libgit2_work_src_36b8879154a1_src_libgit2_blame.c/report-6584ce.html",
+          "relpath": "src/libgit2/blame.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/libgit2/blame.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libgit2/work/src/967b28f0e5e1/src/libgit2/blame.c",
+          "line": 117,
+          "column": 26,
+          "function": "dup_hunk",
+          "bug_type": "Unchecked NULL summary passed to git__strdup",
+          "description": "Unchecked NULL summary passed to git__strdup",
+          "issue_hash": "6584ceac8f510cf04625a02d211bc28b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/967b28f0e5e1/42f07f98/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-libgit2_work_src_967b28f0e5e1_src_libgit2_blame.c/report-6584ce.html",
+          "relpath": "src/libgit2/blame.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 4.68,
+      "fixed": 6.41
+    },
+    "total_seconds": 11.18
+  },
+  "report_dir": "tmp/validation/967b28f0e5e1/42f07f98"
+}

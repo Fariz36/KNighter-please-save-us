@@ -1,0 +1,101 @@
+{
+  "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/plugin-cache/plugins/e0e0c2be4b79e43e26b6/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/setopt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 2,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "Curl_setblobopt"
+        ],
+        "fixed_functions": [
+          "Curl_setblobopt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 111,
+          "column": 23,
+          "function": "unknown",
+          "bug_type": "Missing null check",
+          "description": "Missing null check on blob->data",
+          "issue_hash": "20d1c22b710c1ce7ce5ef2adec9d65a8",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f7d4e11f4b42/c3bbe3d1/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_b3675fe80a33_lib_setopt.c/report-20d1c2.html",
+          "relpath": "lib/setopt.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 111,
+          "column": 8,
+          "function": "unknown",
+          "bug_type": "Missing null check",
+          "description": "Missing null check on blob->data",
+          "issue_hash": "c681380a97cf60bdf2e5f0cee9546b5d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f7d4e11f4b42/c3bbe3d1/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_b3675fe80a33_lib_setopt.c/report-c68138.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/f7d4e11f4b42/lib/setopt.c",
+          "line": 111,
+          "column": 23,
+          "function": "unknown",
+          "bug_type": "Missing null check",
+          "description": "Missing null check on blob->data",
+          "issue_hash": "e1b48f86d3839b6aaeb7b0d188e22ccf",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f7d4e11f4b42/c3bbe3d1/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_f7d4e11f4b42_lib_setopt.c/report-e1b48f.html",
+          "relpath": "lib/setopt.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-curl/work/src/f7d4e11f4b42/lib/setopt.c",
+          "line": 111,
+          "column": 38,
+          "function": "unknown",
+          "bug_type": "Missing null check",
+          "description": "Missing null check on blob->data",
+          "issue_hash": "f8ba13bed700dd8313f469a2f00c3721",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/f7d4e11f4b42/c3bbe3d1/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-curl_work_src_f7d4e11f4b42_lib_setopt.c/report-f8ba13.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 55.53,
+    "analysis_seconds": {
+      "buggy": 0.84,
+      "fixed": 0.91
+    },
+    "total_seconds": 57.37
+  },
+  "report_dir": "tmp/validation/f7d4e11f4b42/c3bbe3d1"
+}

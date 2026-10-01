@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is an under-estimated output buffer size in a direct formatting path. The code computes `szBufNeeded` for floating-point conversions using a fixed `+8` slack, but that does not reserve space for the terminating NUL byte written later by `zOut[length] = 0` when the rendered text exactly fills the computed size (e.g. `%!.0e` with a large exponent). This causes a one-byte heap buffer overflow. The fix increases the slack to `+10`, ensuring the size calculation accounts for the terminator/extra required characters.

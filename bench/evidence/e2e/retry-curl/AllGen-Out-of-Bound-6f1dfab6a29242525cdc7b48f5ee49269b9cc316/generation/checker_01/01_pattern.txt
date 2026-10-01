@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The code parses a string by locating a delimiter, then performs fixed-offset lookahead accesses (`ptr[1]`, `ptr[2]`, `ptr[3]`) without first checking that the delimiter character is non-NUL and that enough string remains. If the delimiter is immediately followed by the NUL terminator (e.g. the EPSV reply contains a lone `"("`), `ptr` points at `'\0'`, `sep` becomes `'\0'`, and `ptr[1]` is read one byte past the NUL terminator.
+
+The root cause is missing validation before fixed-offset dereferences after a `strchr()`-style delimiter search, leading to an out-of-bounds read. The fix adds `sep &&` to ensure the separator is not the terminating NUL before inspecting subsequent bytes.

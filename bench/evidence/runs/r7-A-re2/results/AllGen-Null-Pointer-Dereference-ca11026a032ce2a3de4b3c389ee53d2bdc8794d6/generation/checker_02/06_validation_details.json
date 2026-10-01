@@ -1,0 +1,276 @@
+{
+  "commit_id": "ca11026a032ce2a3de4b3c389ee53d2bdc8794d6",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/plugin-cache/plugins/db2d4caacceb84d08313/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    2,
+    0
+  ],
+  "score": {
+    "tp": 2,
+    "tn": 0,
+    "legacy_tp": 2,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "re2/prefilter.cc",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 7,
+        "fixed_total": 7,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "Prefilter::FromRegexp"
+        ],
+        "fixed_functions": [
+          "Prefilter::FromRegexp"
+        ]
+      },
+      {
+        "path": "re2/simplify.cc",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 2,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "Regexp::Simplify",
+          "Regexp::SimplifyRegexp"
+        ],
+        "fixed_functions": [
+          "Regexp::Simplify",
+          "Regexp::SimplifyRegexp"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "re2/prefilter.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/fe8a81adc2ef/re2/prefilter.cc",
+          "line": 510,
+          "column": 27,
+          "function": "BuildInfo",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "050da73041d2dec2b69e8027ad56858d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-050da7.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/fe8a81adc2ef/re2/walker-inl.h",
+          "line": 166,
+          "column": 15,
+          "function": "WalkInternal",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "692cfb4555ac150f94cbd38081fbf94d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-692cfb.html",
+          "relpath": "re2/walker-inl.h"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/fe8a81adc2ef/re2/prefilter.cc",
+          "line": 508,
+          "column": 18,
+          "function": "BuildInfo",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "6e5587370130c1df6dac75e2c3881f36",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-6e5587.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/fe8a81adc2ef/re2/prefilter.cc",
+          "line": 651,
+          "column": 27,
+          "function": "FromRegexp",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "da40a6aa830e58b8e0431f1d22d9610e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-da40a6.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/fe8a81adc2ef/re2/prefilter.cc",
+          "line": 653,
+          "column": 3,
+          "function": "FromRegexp",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "e0e80cd10fbd215cc677e48a5daf02d0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-e0e80c.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/fe8a81adc2ef/re2/regexp.h",
+          "line": 325,
+          "column": 61,
+          "function": "parse_flags",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "e20cd14cbd1d33e1af9bce765546b65a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-e20cd1.html",
+          "relpath": "re2/regexp.h"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/fe8a81adc2ef/re2/walker-inl.h",
+          "line": 241,
+          "column": 10,
+          "function": "WalkExponential",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "fa8ff33d91fdbf431518e88760467177",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_fe8a81adc2ef_re2_prefilter.cc/report-fa8ff3.html",
+          "relpath": "re2/walker-inl.h"
+        }
+      ],
+      "re2/simplify.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/fe8a81adc2ef/re2/simplify.cc",
+          "line": 39,
+          "column": 10,
+          "function": "SimplifyRegexp",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "1ba2d13df4561feb9325c9a73ee63a80",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_fe8a81adc2ef_re2_simplify.cc/report-1ba2d1.html",
+          "relpath": "re2/simplify.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/fe8a81adc2ef/re2/simplify.cc",
+          "line": 40,
+          "column": 3,
+          "function": "SimplifyRegexp",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "6d381cb17cad7aa9002db4268e069284",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_fe8a81adc2ef_re2_simplify.cc/report-6d381c.html",
+          "relpath": "re2/simplify.cc"
+        }
+      ]
+    },
+    "fixed": {
+      "re2/prefilter.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/ca11026a032c/re2/prefilter.cc",
+          "line": 510,
+          "column": 27,
+          "function": "BuildInfo",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "050da73041d2dec2b69e8027ad56858d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_ca11026a032c_re2_prefilter.cc/report-050da7.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/ca11026a032c/re2/walker-inl.h",
+          "line": 166,
+          "column": 15,
+          "function": "WalkInternal",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "692cfb4555ac150f94cbd38081fbf94d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_ca11026a032c_re2_prefilter.cc/report-692cfb.html",
+          "relpath": "re2/walker-inl.h"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/ca11026a032c/re2/prefilter.cc",
+          "line": 508,
+          "column": 18,
+          "function": "BuildInfo",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "6e5587370130c1df6dac75e2c3881f36",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_ca11026a032c_re2_prefilter.cc/report-6e5587.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/ca11026a032c/re2/prefilter.cc",
+          "line": 654,
+          "column": 27,
+          "function": "FromRegexp",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "da40a6aa830e58b8e0431f1d22d9610e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_ca11026a032c_re2_prefilter.cc/report-da40a6.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/ca11026a032c/re2/prefilter.cc",
+          "line": 655,
+          "column": 3,
+          "function": "FromRegexp",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "e0e80cd10fbd215cc677e48a5daf02d0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_ca11026a032c_re2_prefilter.cc/report-e0e80c.html",
+          "relpath": "re2/prefilter.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/ca11026a032c/re2/regexp.h",
+          "line": 325,
+          "column": 61,
+          "function": "parse_flags",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "e20cd14cbd1d33e1af9bce765546b65a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_ca11026a032c_re2_prefilter.cc/report-e20cd1.html",
+          "relpath": "re2/regexp.h"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/ca11026a032c/re2/walker-inl.h",
+          "line": 241,
+          "column": 10,
+          "function": "WalkExponential",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "fa8ff33d91fdbf431518e88760467177",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_ca11026a032c_re2_prefilter.cc/report-fa8ff3.html",
+          "relpath": "re2/walker-inl.h"
+        }
+      ],
+      "re2/simplify.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/ca11026a032c/re2/simplify.cc",
+          "line": 37,
+          "column": 10,
+          "function": "SimplifyRegexp",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "1ba2d13df4561feb9325c9a73ee63a80",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_ca11026a032c_re2_simplify.cc/report-1ba2d1.html",
+          "relpath": "re2/simplify.cc"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-re2/work/src/ca11026a032c/re2/simplify.cc",
+          "line": 38,
+          "column": 3,
+          "function": "SimplifyRegexp",
+          "bug_type": "Unchecked NULL return from Regexp::Simplify()",
+          "description": "Unchecked NULL return from Regexp::Simplify()",
+          "issue_hash": "6d381cb17cad7aa9002db4268e069284",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/ca11026a032c/f12072fd/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-re2_work_src_ca11026a032c_re2_simplify.cc/report-6d381c.html",
+          "relpath": "re2/simplify.cc"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 6.56,
+    "analysis_seconds": {
+      "buggy": 15.99,
+      "fixed": 15.85
+    },
+    "total_seconds": 38.45
+  },
+  "report_dir": "tmp/validation/ca11026a032c/f12072fd"
+}

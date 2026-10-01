@@ -1,0 +1,26 @@
+1. **Register Program State Trait:**
+   - Use `REGISTER_TRAIT_WITH_PROGRAMSTATE(BlobDataChecked, bool)` to track whether `blob->data` has been NULL-checked in `Curl_setblobopt`.
+
+2. **Initialize State on Function Entry (`checkBeginFunction`):**
+   - If the current function is `Curl_setblobopt`, set `BlobDataChecked` to `false` in the program state.
+
+3. **Mark Check on Branch Condition (`checkBranchCondition`):**
+   - If not analyzing `Curl_setblobopt`, return.
+   - Recursively inspect the condition for a NULL check on `blob->data` (e.g., `!blob->data`, `blob->data == NULL`, `blob->data != NULL`, or direct use in boolean context).
+   - If found, update state: `State = State->set<BlobDataChecked>(true);` and add a transition.
+
+4. **Detect Missing Check Before `memcpy` (`checkPreCall`):**
+   - If not analyzing `Curl_setblobopt`, return.
+   - If the callee is `memcpy`, extract the source argument (index 1).
+   - If the source expression is a member access `blob->data` (helper `isBlobDataExpr`), check `BlobDataChecked`.
+   - If `false`, generate a non-fatal error node and emit a `PathSensitiveBugReport` with message “Missing NULL check on blob->data before memcpy.”
+
+5. **Detect Missing Check Before Struct Copy (`checkBind`):**
+   - If not analyzing `Curl_setblobopt`, return.
+   - If the statement is an assignment of the form `*nblob = *blob` (detect `BinaryOperator` with `BO_Assign`, RHS is `UnaryOperator` dereferencing the `blob` parameter), check `BlobDataChecked`.
+   - If `false`, report “Missing NULL check on blob->data before copy.”
+
+6. **Helper Functions:**
+   - `isCurlSetblobopt(CheckerContext &C)`: return true if the current function name is `Curl_setblobopt`.
+   - `isBlobDataExpr(const Expr *E)`: return true if `E` is a `MemberExpr` accessing field `data` on the `blob` parameter.
+   - `conditionChecksBlobData(const Expr *Cond)`: recursively inspect the condition for a NULL comparison or boolean test involving `blob->data`.

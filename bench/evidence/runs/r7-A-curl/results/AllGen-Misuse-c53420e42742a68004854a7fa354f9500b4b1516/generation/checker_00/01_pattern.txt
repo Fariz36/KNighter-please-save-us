@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Treating a length-delimited ASN1_STRING buffer as a NUL-terminated C string. The code uses `strlen()` and `%s` on `ASN1_STRING_get0_data()` while only its explicit `ASN1_STRING_length()` is valid, so if the data is not NUL-terminated, those operations read past the buffer. The correct pattern is to use the known length (`memchr()`, `%.*s`) instead of C-string functions.

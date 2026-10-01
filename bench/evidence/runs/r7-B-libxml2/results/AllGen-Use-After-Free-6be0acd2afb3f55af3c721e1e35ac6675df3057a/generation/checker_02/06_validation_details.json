@@ -1,0 +1,79 @@
+{
+  "commit_id": "6be0acd2afb3f55af3c721e1e35ac6675df3057a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libxml2/plugin-cache/plugins/d0712f3914777f4e9695/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "tree.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlAddChild"
+        ],
+        "fixed_functions": [
+          "xmlAddChild"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "tree.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libxml2/work/build/c2e233fc1b34-f6d22c8ac6c7/../../src/c2e233fc1b34/tree.c",
+          "line": 5430,
+          "column": 17,
+          "function": "xmlNodeAddContentLen",
+          "bug_type": "Freeing linked node",
+          "description": "Freeing linked node without xmlUnlinkNodeInternal",
+          "issue_hash": "981806f9a2a36b07df2216d9b3455b8e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6be0acd2afb3/adb8713f/buggy/.._.._src_c2e233fc1b34_tree.c/report-981806.html",
+          "relpath": "tree.c"
+        }
+      ]
+    },
+    "fixed": {
+      "tree.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-libxml2/work/build/6be0acd2afb3-f6d22c8ac6c7/../../src/6be0acd2afb3/tree.c",
+          "line": 5431,
+          "column": 17,
+          "function": "xmlNodeAddContentLen",
+          "bug_type": "Freeing linked node",
+          "description": "Freeing linked node without xmlUnlinkNodeInternal",
+          "issue_hash": "981806f9a2a36b07df2216d9b3455b8e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/6be0acd2afb3/adb8713f/fixed/.._.._src_6be0acd2afb3_tree.c/report-981806.html",
+          "relpath": "tree.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 38.82,
+      "fixed": 38.28
+    },
+    "total_seconds": 77.38
+  },
+  "report_dir": "tmp/validation/6be0acd2afb3/adb8713f"
+}

@@ -1,0 +1,4 @@
+ca11026a032ce2a3de4b3c389ee53d2bdc8794d6,Null-Pointer-Dereference,False
+a7d27d62330bfe35d82430fa8942feb6f5cddbaf,Null-Pointer-Dereference,True
+0f15a359c3227be878fd6dbeadd885867a4155e4,Out-of-Bound,True
+fadc34500b67414df452c54d980372242f3d7f57,Null-Pointer-Dereference,True

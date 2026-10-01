@@ -1,0 +1,6 @@
+f2a1535712ff8622024d27b867480698752c254e Null-Pointer-Dereference [(0, 1, 1)]
+f7d4e11f4b423a6db61ca86cf59483fad9f4bc13 Null-Pointer-Dereference [(0, 1, 0), (1, 1, 0), (2, 1, 0)]
+a0f08d6975d00c3ea04e1bd2fcf60dad446266ec Memory-Leak [(2, 1, 1), (0, 0, 0), (1, 0, 0)]
+bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a Integer-Overflow [(0, 1, 1)]
+6f1dfab6a29242525cdc7b48f5ee49269b9cc316 Out-of-Bound [(0, 0, 0), (1, 0, 0), (2, 0, 0)]
+c53420e42742a68004854a7fa354f9500b4b1516 Misuse [(1, 1, 1), (0, -2, -2)]

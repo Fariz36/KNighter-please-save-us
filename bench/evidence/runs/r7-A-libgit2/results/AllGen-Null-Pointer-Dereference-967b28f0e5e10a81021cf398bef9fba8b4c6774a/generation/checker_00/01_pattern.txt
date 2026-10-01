@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is unconditionally duplicating a possibly NULL string field by passing it directly to a string-duplication function such as `git__strdup()`. In `dup_hunk()`, `hunk->summary` can legitimately be NULL for hunks created by blaming a buffer, so calling `git__strdup(hunk->summary)` without a NULL check can cause a NULL pointer dereference. The correct pattern is to check the source pointer first and preserve NULL when duplicating nullable fields.

@@ -1,0 +1,145 @@
+_base_result_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r5-B-curl/results
+commit_id: a0f08d6975d00c3ea04e1bd2fcf60dad446266ec
+commit_type: Memory-Leak
+index: 1
+initial_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n#include \"llvm/ADT/APSInt.h\"\n#include \"llvm/ADT/StringRef.h\"\n#include <memory>\n\
+  \nusing namespace clang;\nusing namespace ento;\nusing namespace taint;\n\nREGISTER_SET_WITH_PROGRAMSTATE(ZeroedRegions,\
+  \ const MemRegion *)\n\nnamespace {\n\nclass SAGenTestChecker : public Checker<check::PostCall,\
+  \ check::PreCall> {\n  mutable std::unique_ptr<BugType> BT;\n\npublic:\n  SAGenTestChecker()\n\
+  \      : BT(new BugType(this, \"Unlink after memset\", \"Memory Management\")) {}\n\
+  \n  void checkPostCall(const CallEvent &Call, CheckerContext &C) const;\n  void\
+  \ checkPreCall(const CallEvent &Call, CheckerContext &C) const;\n};\n\nvoid SAGenTestChecker::checkPostCall(const\
+  \ CallEvent &Call,\n                                     CheckerContext &C) const\
+  \ {\n  const IdentifierInfo *Callee = Call.getCalleeIdentifier();\n  if (!Callee)\n\
+  \    return;\n\n  StringRef Name = Callee->getName();\n  if (Name != \"memset\"\
+  \ && Name != \"__builtin_memset\")\n    return;\n\n  if (Call.getNumArgs() < 3)\n\
+  \    return;\n\n  llvm::APSInt FillVal;\n  if (!EvaluateExprToInt(FillVal, Call.getArgExpr(1),\
+  \ C))\n    return;\n  if (!FillVal.isZero())\n    return;\n\n  const MemRegion *DestR\
+  \ = getMemRegionFromExpr(Call.getArgExpr(0), C);\n  if (!DestR)\n    return;\n\n\
+  \  ProgramStateRef State = C.getState();\n  State = State->add<ZeroedRegions>(DestR);\n\
+  \  C.addTransition(State);\n}\n\nvoid SAGenTestChecker::checkPreCall(const CallEvent\
+  \ &Call,\n                                    CheckerContext &C) const {\n  const\
+  \ IdentifierInfo *Callee = Call.getCalleeIdentifier();\n  if (!Callee)\n    return;\n\
+  \n  if (Callee->getName() != \"Curl_peer_unlink\")\n    return;\n\n  if (Call.getNumArgs()\
+  \ < 1)\n    return;\n\n  const MemRegion *ArgR = getMemRegionFromExpr(Call.getArgExpr(0),\
+  \ C);\n  if (!ArgR)\n    return;\n\n  ProgramStateRef State = C.getState();\n  bool\
+  \ Zeroed = State->contains<ZeroedRegions>(ArgR);\n  if (!Zeroed) {\n    const MemRegion\
+  \ *BaseR = ArgR->getBaseRegion();\n    if (BaseR)\n      Zeroed = State->contains<ZeroedRegions>(BaseR);\n\
+  \  }\n\n  if (!Zeroed)\n    return;\n\n  ExplodedNode *N = C.generateNonFatalErrorNode();\n\
+  \  if (!N)\n    return;\n\n  auto Report = std::make_unique<PathSensitiveBugReport>(\n\
+  \      *BT, \"Unlinking list node after memset zeroed its structure\", N);\n  Report->addRange(Call.getSourceRange());\n\
+  \  C.emitReport(std::move(Report));\n}\n\n} // end anonymous namespace\n\nextern\
+  \ \"C\" void clang_registerCheckers(CheckerRegistry &registry) {\n  registry.addChecker<SAGenTestChecker>(\n\
+  \      \"custom.SAGenTestChecker\",\n      \"Detects unlinking embedded list nodes\
+  \ after memset zeroed the containing structure\",\n      \"\");\n}\n\nextern \"\
+  C\" const char clang_analyzerAPIVersionString[] =\n    CLANG_ANALYZER_API_VERSION_STRING;\n"
+patch: "## Patch Description\n\ncf-h2-prox: fix peer leak\n\nThe unlinking of the\
+  \ new Curl_peer was happening too later after\nthe struct had been set to zero.\
+  \ Move the unlink to happen before\nthat.\n\nFixes #21602\nReported-by: Joshua Rogers\n\
+  Closes #21627\n\n## Buggy Code\n\n```c\n// Function: cf_h2_proxy_ctx_free in lib/cf-h2-proxy.c\n\
+  static void cf_h2_proxy_ctx_free(struct cf_h2_proxy_ctx *ctx)\n{\n  if(ctx) {\n\
+  \    cf_h2_proxy_ctx_clear(ctx);\n    Curl_peer_unlink(&ctx->dest);\n    curlx_free(ctx);\n\
+  \  }\n}\n```\n\n```c\n// Function: cf_h2_proxy_ctx_clear in lib/cf-h2-proxy.c\n\
+  static void cf_h2_proxy_ctx_clear(struct cf_h2_proxy_ctx *ctx)\n{\n  struct cf_call_data\
+  \ save = ctx->call_data;\n\n  if(ctx->h2) {\n    nghttp2_session_del(ctx->h2);\n\
+  \  }\n  Curl_bufq_free(&ctx->inbufq);\n  Curl_bufq_free(&ctx->outbufq);\n  tunnel_stream_clear(&ctx->tunnel);\n\
+  \  memset(ctx, 0, sizeof(*ctx));\n  ctx->call_data = save;\n}\n```\n\n## Bug Fix\
+  \ Patch\n\n```diff\ndiff --git a/lib/cf-h2-proxy.c b/lib/cf-h2-proxy.c\nindex 1dfd0a0a46..297afb3c8c\
+  \ 100644\n--- a/lib/cf-h2-proxy.c\n+++ b/lib/cf-h2-proxy.c\n@@ -190,6 +190,7 @@\
+  \ static void cf_h2_proxy_ctx_clear(struct cf_h2_proxy_ctx *ctx)\n   }\n   Curl_bufq_free(&ctx->inbufq);\n\
+  \   Curl_bufq_free(&ctx->outbufq);\n+  Curl_peer_unlink(&ctx->dest);\n   tunnel_stream_clear(&ctx->tunnel);\n\
+  \   memset(ctx, 0, sizeof(*ctx));\n   ctx->call_data = save;\n@@ -199,7 +200,6 @@\
+  \ static void cf_h2_proxy_ctx_free(struct cf_h2_proxy_ctx *ctx)\n {\n   if(ctx)\
+  \ {\n     cf_h2_proxy_ctx_clear(ctx);\n-    Curl_peer_unlink(&ctx->dest);\n    \
+  \ curlx_free(ctx);\n   }\n }\n```\n"
+pattern: "## Bug Pattern\n\nThe bug pattern is unlinking/removing an embedded list\
+  \ node **after** its containing structure has been zeroed with `memset()`. In the\
+  \ buggy code, `cf_h2_proxy_ctx_clear()` zeroes the entire `ctx`, including `ctx->dest`,\
+  \ and then `cf_h2_proxy_ctx_free()` calls `Curl_peer_unlink(&ctx->dest)` on the\
+  \ already-zeroed node. This loses the node\u2019s list linkage, so the peer is never\
+  \ actually removed from its list and remains leaked.\n\nThe cleanup order must be:\
+  \ unlink the embedded node first, then clear/zero the containing structure."
+plan: "1. **Program State Customization**\n   - Register a set to track memory regions\
+  \ zeroed by `memset`:\n     `REGISTER_SET_WITH_PROGRAMSTATE(ZeroedRegions, const\
+  \ MemRegion *)`\n   - This set stores the base region or field region that was zeroed.\
+  \ No alias map is needed because `MemRegion` identity already captures aliases of\
+  \ the same object. When checking an embedded field, also check its base region.\n\
+  \n2. **Callback: `checkPostCall` \u2014 Mark Regions Zeroed by `memset`**\n   -\
+  \ Implement `void checkPostCall(const CallEvent &Call, CheckerContext &C) const`.\n\
+  \   - Get the callee name via `Call.getCalleeIdentifier()`. Match `memset` or `__builtin_memset`.\n\
+  \   - Ensure the call has at least 3 arguments.\n   - Evaluate the second argument\
+  \ (the fill value) using `EvaluateExprToInt`. If it does not evaluate to `0`, return.\n\
+  \   - Obtain the destination region:\n     `const MemRegion *DestR = getMemRegionFromExpr(Call.getArgExpr(0),\
+  \ C);`\n   - If `DestR` is non-null, add it to the state:\n     `ProgramStateRef\
+  \ State = C.getState();`\n     `State = State->add<ZeroedRegions>(DestR);`\n   \
+  \  `C.addTransition(State);`\n   - This marks the struct (or a field) as zeroed.\n\
+  \n3. **Callback: `checkPreCall` \u2014 Detect Unlink After Zeroing**\n   - Implement\
+  \ `void checkPreCall(const CallEvent &Call, CheckerContext &C) const`.\n   - Get\
+  \ the callee name. For the target patch, match `Curl_peer_unlink`. For broader coverage,\
+  \ extend to other list-removal functions.\n   - Ensure the call has at least 1 argument.\n\
+  \   - Obtain the region of the first argument:\n     `const MemRegion *ArgR = getMemRegionFromExpr(Call.getArgExpr(0),\
+  \ C);`\n   - If `ArgR` is null, return.\n   - Retrieve the current state: `ProgramStateRef\
+  \ State = C.getState();`\n   - Check whether the region was previously zeroed:\n\
+  \     - `State->contains<ZeroedRegions>(ArgR)` OR\n     - if `ArgR` is a `FieldRegion`,\
+  \ `State->contains<ZeroedRegions>(ArgR->getBaseRegion())`.\n   - If true, the embedded\
+  \ list node is being unlinked after its containing structure was zeroed.\n\n4. **Report\
+  \ the Bug**\n   - In `checkPreCall`, when the condition is met:\n     - Generate\
+  \ an error node: `ExplodedNode *N = C.generateNonFatalErrorNode();`\n     - If `N`\
+  \ is null, return.\n     - Create a `PathSensitiveBugReport` with a short message,\
+  \ e.g., `\"Unlinking list node after memset zeroed its structure\"`.\n     - Call\
+  \ `C.emitReport(std::move(Report));`\n\n5. **Order Sensitivity**\n   - Because the\
+  \ program state is path-sensitive, an unlink before the `memset` will not see the\
+  \ region in `ZeroedRegions` and will not report. This correctly accepts the patched\
+  \ code where `Curl_peer_unlink` is moved before the zeroing."
+refined_plan: null
+repaired_checker_code: "#include \"clang/StaticAnalyzer/Core/BugReporter/BugReporter.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/BugReporter/BugType.h\"\n#include \"clang/StaticAnalyzer/Checkers/Taint.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/Checker.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/CheckerContext.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/Environment.h\"\n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h\"\
+  \n#include \"clang/StaticAnalyzer/Core/PathSensitive/ProgramStateTrait.h\"\n#include\
+  \ \"clang/StaticAnalyzer/Core/PathSensitive/SymExpr.h\"\n#include \"clang/StaticAnalyzer/Frontend/CheckerRegistry.h\"\
+  \n#include \"clang/AST/RecursiveASTVisitor.h\"\n#include \"clang/AST/StmtVisitor.h\"\
+  \n#include \"llvm/Support/raw_ostream.h\"\n#include \"clang/StaticAnalyzer/Checkers/utility.h\"\
+  \n#include \"llvm/ADT/APSInt.h\"\n#include \"llvm/ADT/StringRef.h\"\n#include <memory>\n\
+  \nusing namespace clang;\nusing namespace ento;\nusing namespace taint;\n\nREGISTER_SET_WITH_PROGRAMSTATE(ZeroedRegions,\
+  \ const MemRegion *)\n\nnamespace {\n\nclass SAGenTestChecker : public Checker<check::PostCall,\
+  \ check::PreCall> {\n  mutable std::unique_ptr<BugType> BT;\n\npublic:\n  SAGenTestChecker()\n\
+  \      : BT(new BugType(this, \"Unlink after memset\", \"Memory Management\")) {}\n\
+  \n  void checkPostCall(const CallEvent &Call, CheckerContext &C) const;\n  void\
+  \ checkPreCall(const CallEvent &Call, CheckerContext &C) const;\n};\n\nvoid SAGenTestChecker::checkPostCall(const\
+  \ CallEvent &Call,\n                                     CheckerContext &C) const\
+  \ {\n  const IdentifierInfo *Callee = Call.getCalleeIdentifier();\n  if (!Callee)\n\
+  \    return;\n\n  StringRef Name = Callee->getName();\n  if (Name != \"memset\"\
+  \ && Name != \"__builtin_memset\")\n    return;\n\n  if (Call.getNumArgs() < 3)\n\
+  \    return;\n\n  llvm::APSInt FillVal;\n  if (!EvaluateExprToInt(FillVal, Call.getArgExpr(1),\
+  \ C))\n    return;\n  if (!FillVal.isZero())\n    return;\n\n  const MemRegion *DestR\
+  \ = getMemRegionFromExpr(Call.getArgExpr(0), C);\n  if (!DestR)\n    return;\n\n\
+  \  ProgramStateRef State = C.getState();\n  State = State->add<ZeroedRegions>(DestR);\n\
+  \  C.addTransition(State);\n}\n\nvoid SAGenTestChecker::checkPreCall(const CallEvent\
+  \ &Call,\n                                    CheckerContext &C) const {\n  const\
+  \ IdentifierInfo *Callee = Call.getCalleeIdentifier();\n  if (!Callee)\n    return;\n\
+  \n  if (Callee->getName() != \"Curl_peer_unlink\")\n    return;\n\n  if (Call.getNumArgs()\
+  \ < 1)\n    return;\n\n  const MemRegion *ArgR = getMemRegionFromExpr(Call.getArgExpr(0),\
+  \ C);\n  if (!ArgR)\n    return;\n\n  ProgramStateRef State = C.getState();\n  bool\
+  \ Zeroed = State->contains<ZeroedRegions>(ArgR);\n  if (!Zeroed) {\n    const MemRegion\
+  \ *BaseR = ArgR->getBaseRegion();\n    if (BaseR)\n      Zeroed = State->contains<ZeroedRegions>(BaseR);\n\
+  \  }\n\n  if (!Zeroed)\n    return;\n\n  ExplodedNode *N = C.generateNonFatalErrorNode();\n\
+  \  if (!N)\n    return;\n\n  auto Report = std::make_unique<PathSensitiveBugReport>(\n\
+  \      *BT, \"Unlinking list node after memset zeroed its structure\", N);\n  Report->addRange(Call.getSourceRange());\n\
+  \  C.emitReport(std::move(Report));\n}\n\n} // end anonymous namespace\n\nextern\
+  \ \"C\" void clang_registerCheckers(CheckerRegistry &registry) {\n  registry.addChecker<SAGenTestChecker>(\n\
+  \      \"custom.SAGenTestChecker\",\n      \"Detects unlinking embedded list nodes\
+  \ after memset zeroed the containing structure\",\n      \"\");\n}\n\nextern \"\
+  C\" const char clang_analyzerAPIVersionString[] =\n    CLANG_ANALYZER_API_VERSION_STRING;\n"
+tn_score: 0
+tp_score: 0

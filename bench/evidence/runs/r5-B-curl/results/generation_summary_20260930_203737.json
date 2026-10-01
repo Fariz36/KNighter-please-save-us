@@ -1,0 +1,88 @@
+{
+  "start_time": "2026-09-30T20:37:37.282865",
+  "total_commits": 6,
+  "successful_commits": 4,
+  "workers": 4,
+  "results": [
+    {
+      "commit_id": "f2a1535712ff8622024d27b867480698752c254e",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 242.270385,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-09-30T20:41:39.557441"
+    },
+    {
+      "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+      "commit_type": "Null-Pointer-Dereference",
+      "total_checkers": 3,
+      "successful_checkers": 3,
+      "perfect_checkers": 0,
+      "best_tp": 1,
+      "best_tn": 0,
+      "total_time": 355.976941,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-09-30T20:43:33.266110"
+    },
+    {
+      "commit_id": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+      "commit_type": "Memory-Leak",
+      "total_checkers": 3,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 588.718254,
+      "errors": [],
+      "success_rate": 0.3333333333333333,
+      "timestamp": "2026-09-30T20:47:26.007361"
+    },
+    {
+      "commit_id": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+      "commit_type": "Integer-Overflow",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 454.738434,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-09-30T20:49:14.298062"
+    },
+    {
+      "commit_id": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+      "commit_type": "Out-of-Bound",
+      "total_checkers": 3,
+      "successful_checkers": 0,
+      "perfect_checkers": 0,
+      "best_tp": 0,
+      "best_tn": 0,
+      "total_time": 727.890286,
+      "errors": [],
+      "success_rate": 0.0,
+      "timestamp": "2026-09-30T20:49:45.180585"
+    },
+    {
+      "commit_id": "c53420e42742a68004854a7fa354f9500b4b1516",
+      "commit_type": "Misuse",
+      "total_checkers": 2,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 453.236657,
+      "errors": [],
+      "success_rate": 0.5,
+      "timestamp": "2026-09-30T20:51:06.504978"
+    }
+  ],
+  "end_time": "2026-09-30T20:51:06.507659",
+  "success_rate": 0.6666666666666666
+}

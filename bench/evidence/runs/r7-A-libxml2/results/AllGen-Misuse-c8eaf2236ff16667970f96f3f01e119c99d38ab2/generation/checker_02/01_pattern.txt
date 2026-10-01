@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The bug pattern is using an externally settable value as a divisor without validating that it is non-zero. Specifically, a public/config API stores `maxAmpl` directly, and a later arithmetic expression performs `... / ctxt->maxAmpl` without checking whether `ctxt->maxAmpl` could be `0`, leading to division by zero and SIGFPE.
+
+The root cause is missing validation at both the setter boundary and the division site for a value that may legitimately be set to zero. The fix rejects `maxAmpl == 0` in the setter and adds a defensive `ctxt->maxAmpl > 0` guard before dividing.

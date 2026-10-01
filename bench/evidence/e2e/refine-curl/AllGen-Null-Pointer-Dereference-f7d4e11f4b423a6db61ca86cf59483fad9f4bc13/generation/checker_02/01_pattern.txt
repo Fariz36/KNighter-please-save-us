@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The code validates the size field (`blob->len`) but fails to validate the associated data pointer (`blob->data`) before using it. When `blob->data` is NULL with a non-zero length, the code later calls `memcpy()` from that NULL pointer when `CURL_BLOB_COPY` is set, or stores the NULL pointer for later dereference when the flag is unset. This is a missing NULL-pointer validation pattern for a pointer field passed into an API.

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The `NXT(index)` macro performs an unchecked lookahead read via `ctxt->cur[index]`. Since the parser context does not store the length of the input string, the macro can index past the end of the allocated string buffer, causing an out-of-bounds read.

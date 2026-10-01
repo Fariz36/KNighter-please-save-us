@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Clearing/zeroing a containing structure with `memset()` before unlinking an embedded list/link node (`ctx->dest`) invalidates the node’s linkage. The later `Curl_peer_unlink(&ctx->dest)` operates on zeroed fields instead of the original peer, so the peer is never removed from its list and leaks. The cleanup order must unlink the embedded peer before the containing context is cleared.

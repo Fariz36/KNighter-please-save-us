@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Missing NULL validation of an input pointer field before it is copied or stored for later use. In `Curl_setblobopt()`, `blob->data` is dereferenced by `memcpy()` when `CURL_BLOB_COPY` is set, and is otherwise stored in `nblob->data` for use outside the function, but only `blob->len` was validated. A caller can pass a `struct curl_blob` with `data == NULL`, causing a NULL pointer dereference. The fix adds an explicit `!blob->data` check before using or retaining the pointer.

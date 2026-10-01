@@ -1,0 +1,67 @@
+{
+  "commit_id": "a7d27d62330bfe35d82430fa8942feb6f5cddbaf",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/plugin-cache/plugins/1e46f8ecdeea5e9b162c/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "re2/prefilter.cc",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Prefilter::OrStrings"
+        ],
+        "fixed_functions": [
+          "Prefilter::OrStrings"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "re2/prefilter.cc": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-B-re2/work/src/6e70e9e8556f/re2/prefilter.cc",
+          "line": 174,
+          "column": 3,
+          "function": "OrStrings",
+          "bug_type": "Conditional NULL return",
+          "description": "Return value may be NULL when set is empty",
+          "issue_hash": "3872991b1d49fce083f670950d03ca67",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/a7d27d62330b/edcbdf70/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-B-re2_work_src_6e70e9e8556f_re2_prefilter.cc/report-387299.html",
+          "relpath": "re2/prefilter.cc"
+        }
+      ]
+    },
+    "fixed": {
+      "re2/prefilter.cc": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 5.55,
+      "fixed": 7.08
+    },
+    "total_seconds": 12.65
+  },
+  "report_dir": "tmp/validation/a7d27d62330b/edcbdf70"
+}

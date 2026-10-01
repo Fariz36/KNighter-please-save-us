@@ -1,0 +1,8 @@
+f2a1535712ff8622024d27b867480698752c254e,Null-Pointer-Dereference,True
+a0f08d6975d00c3ea04e1bd2fcf60dad446266ec,Memory-Leak,True
+f7d4e11f4b423a6db61ca86cf59483fad9f4bc13,Null-Pointer-Dereference,True
+bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a,Integer-Overflow,True
+6f1dfab6a29242525cdc7b48f5ee49269b9cc316,Out-of-Bound,False
+c53420e42742a68004854a7fa354f9500b4b1516,Misuse,True
+466c06cf706bd92ff77beb402934f7265183f8ff,Null-Pointer-Dereference,True
+c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13,Integer-Overflow,False

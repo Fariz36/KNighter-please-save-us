@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The Base64 decoder processes input in 4-character groups but does not validate that the total number of non-whitespace characters is a multiple of 4. After the decode loop, any trailing 1–3 characters forming an incomplete Base64 quantum are silently ignored, so truncated or malformed input can be accepted and produce partial decoded output instead of being rejected. The fix tracks the modulo-4 progress and returns an empty result if a nonzero incomplete group remains after the loop.

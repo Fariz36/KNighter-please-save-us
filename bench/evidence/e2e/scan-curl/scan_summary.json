@@ -1,0 +1,22 @@
+{
+  "KN-Integer-Overflow-bc440a89-0": {
+    "checker": "e2e/scan-curl/KN-Integer-Overflow-bc440a89-0/checker-repaired.cpp",
+    "reports": 1,
+    "output": "e2e/scan-curl/KN-Integer-Overflow-bc440a89-0/scan-reports-1/main-report"
+  },
+  "KN-Memory-Leak-a0f08d69-2": {
+    "checker": "e2e/scan-curl/KN-Memory-Leak-a0f08d69-2/refinements/latest_refined.cpp",
+    "reports": 0,
+    "output": "e2e/scan-curl/KN-Memory-Leak-a0f08d69-2/scan-reports-3/main-report"
+  },
+  "KN-Misuse-c53420e4-1": {
+    "checker": "e2e/scan-curl/KN-Misuse-c53420e4-1/checker-repaired.cpp",
+    "reports": 1,
+    "output": "e2e/scan-curl/KN-Misuse-c53420e4-1/scan-reports-1/main-report"
+  },
+  "KN-Null-Pointer-Dereference-f2a15357-0": {
+    "checker": "e2e/scan-curl/KN-Null-Pointer-Dereference-f2a15357-0/checker-repaired.cpp",
+    "reports": 3,
+    "output": "e2e/scan-curl/KN-Null-Pointer-Dereference-f2a15357-0/scan-reports-1/main-report"
+  }
+}

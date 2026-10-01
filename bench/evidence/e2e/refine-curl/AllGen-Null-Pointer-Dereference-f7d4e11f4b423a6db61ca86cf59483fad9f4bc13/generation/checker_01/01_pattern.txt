@@ -1,0 +1,5 @@
+## Bug Pattern
+
+The code validates the input length (`blob->len`) but does not validate the input data pointer (`blob->data`) before using it. When `CURL_BLOB_COPY` is set, `memcpy(nblob->data, blob->data, blob->len)` dereferences `blob->data`; if it is NULL while `len` is nonzero, this causes a NULL pointer dereference. When `CURL_BLOB_COPY` is unset, the unchecked NULL pointer is stored in `nblob->data` and can be dereferenced later outside the function.
+
+The bug pattern is missing NULL validation of a caller-supplied data pointer before copying it or passing it on for later use.

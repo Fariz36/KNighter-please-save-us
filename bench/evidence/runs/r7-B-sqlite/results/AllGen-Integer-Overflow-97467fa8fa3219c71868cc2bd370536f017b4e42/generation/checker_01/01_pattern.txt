@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Accumulating an untrusted decoded length (`n`) and its multiplier (`mult`) in a fixed-width signed `int`, then using the result in a bounds check (`j+n>nOut`) and later in `memset(&aOut[j], 0, n)`. Corrupt input can overflow `n` or `mult` before the bounds check, causing the check to be bypassed or producing a negative/huge size, leading to out-of-bounds memory writes. The fix uses a wider type (`sqlite3_int64`) and checks `n > nOut` during accumulation to prevent overflow before it is used.

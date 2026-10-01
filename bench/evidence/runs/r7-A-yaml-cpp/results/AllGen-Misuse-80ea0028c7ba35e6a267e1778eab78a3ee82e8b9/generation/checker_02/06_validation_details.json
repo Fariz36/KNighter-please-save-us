@@ -1,0 +1,80 @@
+{
+  "commit_id": "80ea0028c7ba35e6a267e1778eab78a3ee82e8b9",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-yaml-cpp/plugin-cache/plugins/def5417bc626a8383d5d/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/binary.cpp",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "DecodeBase64"
+        ],
+        "fixed_functions": [
+          "DecodeBase64"
+        ]
+      },
+      {
+        "path": "test/binary_test.cpp",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": [
+          "TEST"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/binary.cpp": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-yaml-cpp/work/src/2e6383d272f6/src/binary.cpp",
+          "line": 77,
+          "column": 3,
+          "function": "unknown",
+          "bug_type": "Base64 Decoder",
+          "description": "Base64 decoder does not reject truncated input; missing final check for incomplete 4-character group",
+          "issue_hash": "4485c9fdd9ee98e7ae63abe0ff8b09f0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/80ea0028c7ba/b6dddfb1/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r7-A-yaml-cpp_work_src_2e6383d272f6_src_binary.cpp/report-4485c9.html",
+          "relpath": "src/binary.cpp"
+        }
+      ]
+    },
+    "fixed": {
+      "src/binary.cpp": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 4.7,
+    "analysis_seconds": {
+      "buggy": 0.39,
+      "fixed": 0.36
+    },
+    "total_seconds": 5.46
+  },
+  "report_dir": "tmp/validation/80ea0028c7ba/b6dddfb1"
+}

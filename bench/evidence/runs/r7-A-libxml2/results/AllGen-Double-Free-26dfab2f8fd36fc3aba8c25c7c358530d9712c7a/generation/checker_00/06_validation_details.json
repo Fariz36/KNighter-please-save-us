@@ -1,0 +1,67 @@
+{
+  "commit_id": "26dfab2f8fd36fc3aba8c25c7c358530d9712c7a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/plugin-cache/plugins/86436245140061a73016/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "parser.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlIOParseDTD"
+        ],
+        "fixed_functions": [
+          "xmlIOParseDTD"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "parser.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r7-A-libxml2/work/build/c71154dad39f-f6d22c8ac6c7-1790823772005453515/../../src/c71154dad39f/parser.c",
+          "line": 11571,
+          "column": 9,
+          "function": "xmlIOParseDTD",
+          "bug_type": "Double Free",
+          "description": "Double free: buffer already freed by xmlNewIOInputStream on failure",
+          "issue_hash": "76477c8982d970f0be8e59afa8feb96e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r7/tmp/validation/26dfab2f8fd3/926a4bdd/buggy/.._.._src_c71154dad39f_parser.c/report-76477c.html",
+          "relpath": "parser.c"
+        }
+      ]
+    },
+    "fixed": {
+      "parser.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 9.06,
+    "analysis_seconds": {
+      "buggy": 48.93,
+      "fixed": 51.85
+    },
+    "total_seconds": 110.38
+  },
+  "report_dir": "tmp/validation/26dfab2f8fd3/926a4bdd"
+}

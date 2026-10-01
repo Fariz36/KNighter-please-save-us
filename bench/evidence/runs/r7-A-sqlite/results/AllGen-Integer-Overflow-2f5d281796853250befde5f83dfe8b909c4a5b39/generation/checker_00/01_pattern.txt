@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The bug pattern is using a 32-bit `int` type for loop counter variables that accumulate values derived from potentially extra-large input sizes (such as `SQLITE_MAX_LENGTH`). When the input sizes can exceed the range of a 32-bit signed integer, arithmetic on the `int` counters can overflow, leading to undefined behavior or incorrect results in debug assertions (e.g., `assert( j+nStr-i+1<=nOut )`). The root cause is a type mismatch between a wide size/limit variable (e.g., `i64 nOut` or `SQLITE_MAX_LENGTH`) and narrow `int` loop indices used in the same expression, which allows overflow in the counters before the check is performed. The fix is to promote the loop counters to a width (e.g., `i64`) matching the size/limit variables.

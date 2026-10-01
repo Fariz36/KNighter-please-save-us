@@ -1,0 +1,5 @@
+## Bug Pattern
+
+Parsing a C string by locating a delimiter, advancing the pointer past it, and then reading fixed forward offsets without first checking that the current byte is not the NUL terminator. If the delimiter is the last character before the terminating NUL, the code reads beyond the end of the string, causing an out-of-bounds read.
+
+In the patch, `ptr++` points at the NUL when the EPSV response ends with `(`, and then `ptr[1]`, `ptr[2]`, `ptr[3]` are read before verifying `sep` is non-zero. The fix checks `sep && ...` to avoid lookahead past the NUL.

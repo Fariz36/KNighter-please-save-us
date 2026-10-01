@@ -1,0 +1,6 @@
+checker.cpp: In member function ‘bool {anonymous}::SAGenTestChecker::evalCall(const clang::ento::CallEvent&, clang::ento::CheckerContext&) const’:
+checker.cpp:208:45: error: cannot convert ‘std::optional<clang::ento::Loc>’ to ‘const clang::ento::Loc*’ in initialization
+  208 |     const Loc *OutLoc = OutLocVal.getAs<Loc>();
+      |                         ~~~~~~~~~~~~~~~~~~~~^~
+      |                                             |
+      |                                             std::optional<clang::ento::Loc>

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The function dereferences the pointer parameter `capacity` via `*capacity` without first validating that `capacity` is non-NULL. If a caller passes `NULL`, this causes a NULL pointer dereference. The bug pattern is **missing NULL-pointer validation before dereferencing a pointer parameter**. The fix adds an early `if (capacity == NULL) return NULL;` guard.

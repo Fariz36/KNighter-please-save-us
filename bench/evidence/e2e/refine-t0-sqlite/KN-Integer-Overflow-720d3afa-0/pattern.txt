@@ -1,0 +1,9 @@
+## Bug Pattern
+
+The number of overflow pages is computed using 32-bit arithmetic:
+
+```c
+int nOvfl = (pCur->info.nPayload - pCur->info.nLocal + ovflSize - 1) / ovflSize;
+```
+
+Because the operands are 32-bit unsigned values, the intermediate expression can overflow/wrap before the division, and the result can be truncated into an `int`. The incorrect `nOvfl` is then used to size/reallocate and `memset()` the overflow-page cache, which can lead to under-allocation and out-of-bounds writes. The fix avoids this by forcing a 64-bit intermediate type (`i64 nOvfl`) for the computation.

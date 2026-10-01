@@ -1,0 +1,90 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-01 17:05:49.791 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+2026-10-01 17:05:49.792 | DEBUG    | __main__:init_config:28 - Config file: e2e/retry-curl.yaml
+2026-10-01 17:05:49.793 | DEBUG    | __main__:init_config:29 - Result dir: e2e/retry-curl
+2026-10-01 17:05:49.793 | DEBUG    | __main__:init_config:30 - Analysis backend: Analysis Backend Path: /home/faris/RA-MrYudis/Knight/KNighter/llvm
+2026-10-01 17:05:49.793 | DEBUG    | __main__:init_config:31 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl
+2026-10-01 17:05:49.848 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-4a6799b557144bb0)
+2026-10-01 17:05:49.849 | INFO     | __main__:main:90 - Generate new checkers
+2026-10-01 17:05:49.849 | INFO     | checker_gen:gen_checker:213 - Starting batch generation with multi=True, workers=1
+2026-10-01 17:05:50.097 | INFO     | checker_gen:gen_checker_worker:389 - AllGen-Out-of-Bound-6f1dfab6a29242525cdc7b48f5ee49269b9cc316: 3 attempts without a perfect checker; retrying attempts 3..3
+2026-10-01 17:05:50.100 | INFO     | checker_gen:start_step:58 - [ 16.7%] 🧩 Pattern Extraction
+2026-10-01 17:05:50.101 | INFO     | agent:patch2pattern:226 - start generating patch2pattern prompts
+2026-10-01 17:05:50.104 | INFO     | agent:patch2pattern:243 - finish patch2pattern generation
+2026-10-01 17:05:50.105 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [patch2pattern]
+2026-10-01 17:05:50.140 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 67ce67284258
+2026-10-01 17:05:50.162 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 6f1dfab6a292
+2026-10-01 17:05:57.867 | INFO     | model:invoke_llm:332 - Finish LLM process [patch2pattern] in 7.8s
+2026-10-01 17:05:57.869 | INFO     | checker_gen:complete_step:75 - Completed: 🧩 Pattern Extraction in 7.8s - Extracted 438 chars
+2026-10-01 17:05:57.869 | INFO     | checker_gen:start_step:58 - [ 33.3%] 📋 Plan Generation
+2026-10-01 17:05:57.870 | INFO     | agent:pattern2plan:274 - start generating pattern2plan prompts
+2026-10-01 17:05:57.871 | INFO     | agent:pattern2plan:336 - finish pattern2plan generation
+2026-10-01 17:05:57.871 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [pattern2plan]
+2026-10-01 17:06:48.631 | INFO     | model:invoke_llm:332 - Finish LLM process [pattern2plan] in 50.8s
+2026-10-01 17:06:48.654 | INFO     | checker_gen:complete_step:75 - Completed: 📋 Plan Generation in 50.8s - Generated 41 line plan
+2026-10-01 17:06:48.655 | INFO     | checker_gen:start_step:58 - [ 50.0%] 💻 Code Generation
+2026-10-01 17:06:48.655 | INFO     | agent:plan2checker:354 - start generating plan2checker prompts
+2026-10-01 17:06:48.656 | INFO     | agent:plan2checker:392 - finish plan2checker generation
+2026-10-01 17:06:48.656 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [plan2checker]
+2026-10-01 17:09:03.954 | INFO     | model:invoke_llm:332 - Finish LLM process [plan2checker] in 135.3s
+2026-10-01 17:09:03.958 | INFO     | checker_gen:complete_step:75 - Completed: 💻 Code Generation in 135.3s - Generated 298 lines
+2026-10-01 17:09:03.961 | INFO     | checker_gen:start_step:58 - [ 66.7%] 🔧 Syntax Repair
+2026-10-01 17:09:04.076 | INFO     | checker_repair:repair_checker:51 - Compilation attempt 1/5
+2026-10-01 17:09:20.049 | INFO     | backends.plugin_builder:build:338 - Plugin 5b7576b80263ac599ce8 compile failed (16.0s)
+2026-10-01 17:09:20.070 | WARNING  | checker_repair:repair_checker:66 - Compilation attempt 1 failed with return code 1.
+2026-10-01 17:09:20.071 | INFO     | checker_repair:repair_checker:77 - Attempting repair 1 using LLM...
+2026-10-01 17:09:20.071 | INFO     | agent:repair_syntax:500 - start generating repair_syntax prompts
+2026-10-01 17:09:20.086 | INFO     | agent:repair_syntax:517 - finish repair_syntax generation
+2026-10-01 17:09:20.087 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [repair_syntax]
+2026-10-01 17:10:16.404 | INFO     | model:invoke_llm:332 - Finish LLM process [repair_syntax] in 56.3s
+2026-10-01 17:10:16.423 | INFO     | checker_repair:repair_checker:51 - Compilation attempt 2/5
+2026-10-01 17:10:36.656 | INFO     | backends.plugin_builder:build:364 - Built plugin 12b9fe0466c790bf1d63 (compile 16.2s, link 4.0s)
+2026-10-01 17:10:36.660 | INFO     | checker_repair:repair_checker:60 - Syntax repair successful!
+2026-10-01 17:10:36.660 | INFO     | checker_gen:complete_step:75 - Completed: 🔧 Syntax Repair in 92.7s - Compilation successful
+2026-10-01 17:10:36.669 | INFO     | checker_gen:start_step:58 - [ 83.3%] ✅ Validation
+2026-10-01 17:10:36.670 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 12b9fe0466c790bf1d63
+2026-10-01 17:11:09.590 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-01 17:11:09.592 | INFO     | checker_gen:complete_step:75 - Completed: ✅ Validation in 32.9s - TP: 0, TN: 0
+2026-10-01 17:11:09.593 | INFO     | checker_gen:start_step:58 - [100.0%] 📊 Summary Generation
+2026-10-01 17:11:09.651 | INFO     | checker_gen:complete_step:75 - Completed: 📊 Summary Generation in 0.1s - Generated summary for 4 checkers
+🚀 Starting Checker Generation
+📁 Config: multi=True, general=False, utility=True, workers=1, retry_failed=True
+
+📦 Processing commit 1: 6f1dfab6a29242525cdc7b48f5ee49269b9cc316 (Out-of-Bound)
+
+🔄 Generating checker 4/4 for 6f1dfab6a292
+⏳ [ 16.7%] 🧩 Pattern Extraction...
+✅ 🧩 Pattern Extraction (7.8s)
+   └── Extracted 438 chars
+⏳ [ 33.3%] 📋 Plan Generation...
+✅ 📋 Plan Generation (50.8s)
+   └── Generated 41 line plan
+⏳ [ 50.0%] 💻 Code Generation...
+✅ 💻 Code Generation (135.3s)
+   └── Generated 298 lines
+⏳ [ 66.7%] 🔧 Syntax Repair...
+✅ 🔧 Syntax Repair (92.7s)
+   └── Compilation successful
+⏳ [ 83.3%] ✅ Validation...
+✅ ✅ Validation (32.9s)
+   └── TP: 0, TN: 0
+⏳ [100.0%] 📊 Summary Generation...
+✅ 📊 Summary Generation (0.1s)
+   └── Generated summary for 4 checkers
+
+============================================================
+🎯 GENERATION SUMMARY
+============================================================
+📋 Commit: 6f1dfab6a29242525cdc7b48f5ee49269b9cc316 (Out-of-Bound)
+⏱️  Total Time: 319.8s
+🔢 Checkers Generated: 4
+✅ Successful: 0/4
+🎉 Perfect: 0
+🏆 Best Scores: TP=0, TN=0
+⚠️  Low generation rate - consider reviewing parameters
+============================================================
+
+🎊 Batch Complete!
+📊 Success Rate: 0/1
+📄 Summary saved to: e2e/retry-curl/generation_summary_20261001_170549.json

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Uninitialized local variable use caused by relying on a value that is only conditionally assigned before it is read. In one case, a loop-carried boolean (`required`) is read inside the expression that assigns it before it has ever been set; in the other, a cleanup pointer (`drv`) is tested and potentially freed on an error path even though the allocator that would assign it failed and left it unset. The fix is to initialize such variables to safe defaults (`true` / `NULL`) so every path that reads them sees a defined value.

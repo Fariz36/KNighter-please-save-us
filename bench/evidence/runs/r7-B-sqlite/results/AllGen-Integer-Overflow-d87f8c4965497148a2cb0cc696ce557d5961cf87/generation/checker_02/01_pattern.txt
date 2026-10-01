@@ -1,0 +1,3 @@
+## Bug Pattern
+
+Unchecked narrowing of a pointer-difference/byte-length to `int`. In `sqlite3_str_vappendf`, the `%!.*s` path advances a UTF-8 pointer according to `precision`, then computes the byte length as `(int)(z - (unsigned char*)bufpt)`. Since UTF-8 skipping can advance the pointer well past `INT_MAX` bytes, this cast overflows/truncates and produces an invalid `length`. That bogus length is later passed to `sqlite3_str_append()`, leading to out-of-bounds access or memory corruption. The fix clamps the computed byte length to `0x7ffffff0` before converting it to `int`.

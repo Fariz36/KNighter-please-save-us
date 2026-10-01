@@ -1,0 +1,15 @@
+{
+  "commit_id": "0bc19591d613eb842c98bcbe4c6f3e171b242dbe",
+  "commit_type": "Null-Pointer-Dereference",
+  "total_checkers": 3,
+  "successful_checkers": 0,
+  "perfect_checkers": 0,
+  "best_tp": 0,
+  "best_tn": 0,
+  "total_time": 1436.735494,
+  "errors": [
+    "Failed to generate compilable checker 2"
+  ],
+  "success_rate": 0.0,
+  "timestamp": "2026-10-01T16:01:12.247406"
+}

@@ -1,0 +1,3 @@
+## Bug Pattern
+
+The public API functions `curl_easy_send()` and `curl_easy_recv()` accept an output pointer argument (`n`) and use it without validating that it is non-NULL. `curl_easy_send()` directly dereferences it (`*n = written`), and `curl_easy_recv()` forwards it to an internal function that writes through it. If the caller passes `NULL`, this causes a NULL pointer dereference. The pattern is missing NULL checks for required pointer arguments before dereferencing or forwarding them.
