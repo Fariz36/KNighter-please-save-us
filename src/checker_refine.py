@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Dict, List, Optional, Set
 
@@ -1099,10 +1100,11 @@ def _process_reports(
             kernel_report_dir.parent / "reports",
             seed=seed,
             sampled_num=global_config.max_fp_reports_for_refinement,
+            stop_num=global_config.min_reports_for_triage,
         )
 
         logger.info(f"Total reports: {total_report}")
-        if not reports or total_report <= 10:
+        if not reports or total_report <= global_config.perfect_report_threshold:
             logger.info("Checker is perfect!")
             return []
 
@@ -1128,6 +1130,7 @@ def _process_reports_with_count(
             kernel_report_dir.parent / "reports",
             seed=seed,
             sampled_num=global_config.max_fp_reports_for_refinement,
+            stop_num=global_config.min_reports_for_triage,
         )
 
         logger.info(f"Backend found {total_reports_in_backend} total reports")
@@ -1135,7 +1138,7 @@ def _process_reports_with_count(
             f"Extracted {len(reports) if reports else 0} reports for processing"
         )
 
-        if not reports or total_reports_in_backend <= 10:
+        if not reports or total_reports_in_backend <= global_config.perfect_report_threshold:
             logger.info("Checker is perfect - very few reports found!")
             return [], total_reports_in_backend
 
@@ -1177,32 +1180,39 @@ def _triage_reports(
     It will update the refine_result.num_FP, refine_reuslt.num_TP, refine_result.error_objects.
     Store the error objects in refine_result.error_objects.
     """
-    for report_data in reports:
+    def triage_one(report_data: ReportData) -> bool:
+        """Triage one report (an independent LLM call). True if triaged."""
         try:
-            objects = global_config.backend.get_objects_from_report(
+            report_data.report_objects = global_config.backend.get_objects_from_report(
                 report_data.report_content, global_config.target
             )
-            report_data.report_objects = objects
-
-            check_res = check_report(
+            report_data.report_triage = check_report(
                 checker_data.checker_id,
                 attempt_id,
                 report_id=report_data.report_id,
                 report_md=report_data.report_content,
                 pattern=checker_data.pattern,
-                patch=checker_data.pattern,
+                # Upstream passed the pattern here too, so triage never saw the fix.
+                patch=checker_data.patch,
             )
-            report_data.report_triage = check_res
-
-            if "NotABug" in check_res:
-                refine_result.num_FP += 1
-                refine_result.error_objects.update(objects)
-            else:
-                refine_result.num_TP += 1
-
+            return True
         except Exception as e:
             logger.error(f"Error triaging report {report_data.report_id}: {e}")
+            return False
+
+    workers = max(1, int(global_config.get("triage_workers", 4)))
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        triaged = list(pool.map(triage_one, reports))
+
+    # Tally in report order so results do not depend on completion order.
+    for report_data, ok in zip(reports, triaged):
+        if not ok:
             continue
+        if "NotABug" in report_data.report_triage:
+            refine_result.num_FP += 1
+            refine_result.error_objects.update(report_data.report_objects)
+        else:
+            refine_result.num_TP += 1
 
     logger.info(f"TP: {refine_result.num_TP}, FP: {refine_result.num_FP}")
     return True

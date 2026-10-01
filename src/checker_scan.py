@@ -1,3 +1,4 @@
+import json
 import re
 import subprocess
 from collections import defaultdict
@@ -9,6 +10,7 @@ from agent import check_report
 from checker_data import CheckerData
 from global_config import global_config, logger
 from kernel_commands import generate_command
+from targets.factory import CompileDBTargetBase
 from tools import monitor_build_output, remove_text_section
 
 
@@ -20,6 +22,9 @@ def scan(valid_chekcer_meta_dir, arch="x86"):
         valid_chekcer_meta_dir: Directory containing checker subdirectories
         arch: Target architecture (default: x86)
     """
+    if isinstance(global_config.target, CompileDBTargetBase):
+        return scan_compiledb(valid_chekcer_meta_dir)
+
     # FIXME: THIS SHOULD BE REFACTORED
     valid_chekcer_meta_dir = Path(valid_chekcer_meta_dir)
     checker_dir = {}
@@ -34,6 +39,69 @@ def scan(valid_chekcer_meta_dir, arch="x86"):
             checker_dir[name] = checker_code
     logger.info(f"Scanning with {len(checker_dir)} checkers for {arch}...")
     scan_batch_checkers(checker_dir, arch=arch)
+
+
+def _checker_file(checker_dir: Path):
+    """The checker to scan with, most refined first.
+
+    ``checker1.cpp`` (upstream refine output) > ``refinements/latest_refined.cpp``
+    (refine output in a KN-* dir) > the non-empty final/repaired checker of a
+    KN-* dir whose ``score.txt`` is valid > the best perfect attempt of an
+    AllGen-* dir.
+    """
+    for candidate in ("checker1.cpp", "refinements/latest_refined.cpp"):
+        if (checker_dir / candidate).exists():
+            return checker_dir / candidate
+    score = checker_dir / "score.txt"
+    if score.exists():
+        values = dict(re.findall(r"(TP|TN): (-?\d+)", score.read_text()))
+        if int(values.get("TP", 0)) > 0 and int(values.get("TN", 0)) > 0:
+            # checker-final.cpp stays empty until refinement writes it; the
+            # validated code is checker-repaired.cpp.
+            for name in ("checker-final.cpp", "checker-repaired.cpp"):
+                candidate = checker_dir / name
+                if candidate.exists() and candidate.read_text().strip():
+                    return candidate
+    ranking = checker_dir / "ranking.txt"
+    if ranking.exists():
+        from checker_gen import load_ranking
+
+        for index, tp, tn in load_ranking(ranking):  # sorted best-first
+            candidate = checker_dir / "checkers" / f"checker_{index:02d}.cpp"
+            if tp > 0 and tn > 0 and candidate.exists():
+                return candidate
+    return None
+
+
+def scan_compiledb(checker_root):
+    """Scan the whole target with every valid checker under ``checker_root``.
+
+    Each checker is a separate plugin, so no LLVM rebuild is involved. Reports
+    go to ``<checker_dir>/scan-reports-<n>/main-report`` (the layout
+    ``triage_report`` reads), with ``n`` the next free index.
+    """
+    checker_root = Path(checker_root)
+    commit = global_config.scan_commit
+    summary = {}
+    for checker_dir in sorted(p for p in checker_root.iterdir() if p.is_dir()):
+        checker_file = _checker_file(checker_dir)
+        if checker_file is None:
+            logger.info(f"No valid checker in {checker_dir.name}, skipping")
+            continue
+        index = next(i for i in range(0, 1000) if not (checker_dir / f"scan-reports-{i}").exists())
+        output_dir = checker_dir / f"scan-reports-{index}" / "main-report"
+        count = global_config.backend.run_checker(
+            checker_file.read_text(),
+            commit_id=commit,
+            target=global_config.target,
+            jobs=global_config.get("analysis_jobs", 8),
+            output_dir=str(output_dir),
+        )
+        summary[checker_dir.name] = {"checker": str(checker_file), "reports": count,
+                                     "output": str(output_dir)}
+        logger.info(f"Scanned {commit} with {checker_dir.name}: {count} reports")
+    (checker_root / "scan_summary.json").write_text(json.dumps(summary, indent=2))
+    return summary
 
 
 def scan_batch_checkers(checker_dict, arch="x86"):
@@ -281,7 +349,10 @@ def collect_reports(commit_report_dir: str, max_num_reports=100) -> tuple[dict, 
             continue
 
         html_content = report_file.read_text()
-        md_content = html2text(html_content)
+        # bodywidth=0: no line wrapping. Wrapped output split long file paths
+        # ("File:| .../.knighter-" / "work/..."), so refinement could not map a
+        # report back to its source file ("Failed to validate on objects").
+        md_content = html2text(html_content, bodywidth=0)
         md_content = remove_text_section(md_content, html_content)
 
         # Extract filename from the title tag

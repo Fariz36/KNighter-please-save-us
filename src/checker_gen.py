@@ -1,5 +1,8 @@
+import ast
 import json
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -7,10 +10,14 @@ from typing import Any, Dict, List
 
 from agent import patch2checker, patch2pattern, pattern2plan, plan2checker
 from checker_data import CheckerData
-from checker_example import init_example
 from checker_repair import repair_checker
 from global_config import global_config, logger
+from targets.compiledb import TargetSetupError
+from targets.factory import CompileDBTargetBase
 from tools import extract_checker_code
+
+# Ranking scores besides TP/TN: -10 no compilable checker; -20 target setup failed.
+SETUP_FAILED = -20
 
 
 @dataclass
@@ -73,6 +80,31 @@ class GenerationProgress:
     def get_total_time(self) -> float:
         """Get total elapsed time."""
         return (datetime.now() - self.start_time).total_seconds()
+
+    def new_attempt(self):
+        """Restart the step counter for the next checker attempt."""
+        self.current_step = 0
+
+
+def load_ranking(ranking_file: Path) -> List[tuple]:
+    """Read ranking.txt: JSON (current) or a Python literal (older runs). Never eval()."""
+    text = ranking_file.read_text().strip()
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError:
+        data = ast.literal_eval(text)
+    return [tuple(item) for item in data]
+
+
+def parse_commit_line(line: str):
+    """``sha,Type`` -> (sha, type); None for blank/comment lines. Extra fields are ignored."""
+    line = line.strip()
+    if not line or line.startswith("#"):
+        return None
+    parts = [part.strip() for part in line.split(",")]
+    if len(parts) < 2 or not parts[0] or not parts[1]:
+        raise ValueError(f"Expected 'sha,Type', got: {line!r}")
+    return parts[0], parts[1]
 
 
 @dataclass
@@ -140,14 +172,37 @@ def gen_checker(
     use_general=False,
     no_utility=False,
     sample_examples=False,
+    retry_failed=False,
+    workers=None,
 ):
-    """Generate checkers for multiple commits with improved output format."""
+    """Generate checkers for multiple commits with improved output format.
+
+    Args:
+        retry_failed: For commits whose earlier run used up all attempts without
+            a perfect checker, generate ``checker_nums`` more attempts instead of
+            skipping them.
+        workers: Commits processed concurrently (default: config ``gen_workers``, 1).
+    """
+
+    workers = int(workers or global_config.get("gen_workers", 1))
+    if workers > 1 and global_config.get("plugin_build", "standalone") == "legacy":
+        # Legacy builds share one in-tree plugin: concurrent commits would
+        # validate each other's checkers.
+        logger.warning("plugin_build=legacy: forcing gen workers to 1")
+        workers = 1
+    if workers > 1 and not isinstance(global_config.target, CompileDBTargetBase):
+        # Linux/V8 check out and build in one shared working tree.
+        logger.warning(
+            f"target {global_config.target._target_type}: forcing gen workers to 1"
+        )
+        workers = 1
 
     print("🚀 Starting Checker Generation")
     print(
-        f"📁 Config: multi={use_multi}, general={use_general}, utility={not no_utility}"
+        f"📁 Config: multi={use_multi}, general={use_general}, utility={not no_utility}, "
+        f"workers={workers}, retry_failed={retry_failed}"
     )
-    logger.info(f"Starting batch generation with multi={use_multi}")
+    logger.info(f"Starting batch generation with multi={use_multi}, workers={workers}")
 
     content = Path(commit_file).read_text()
     result_dir = Path(global_config.result_dir)
@@ -160,6 +215,8 @@ def gen_checker(
     # Init example checkers if needed
     if sample_examples:
         print("📚 Initializing example checkers...")
+        from checker_example import init_example  # imports torch
+
         init_example()
 
     # Setup output files
@@ -172,26 +229,32 @@ def gen_checker(
         "start_time": datetime.now().isoformat(),
         "total_commits": 0,
         "successful_commits": 0,
+        "workers": workers,
         "results": [],
     }
+    stats_lock = threading.Lock()
 
+    jobs = []
     for line_num, line in enumerate(content.splitlines(), 1):
         if result_content and line in result_content:
-            if line + ",False" in result_content or line + ",True" in result_content:
+            done_markers = [",True"] if retry_failed else [",False", ",True"]
+            if any(line + marker in result_content for marker in done_markers):
                 print(f"⏭️  Skipping {line} (already processed)")
                 logger.info(f"Skip {line}")
                 continue
-
-        if not line.strip():
-            # Skip empty lines
+        try:
+            parsed = parse_commit_line(line)
+        except ValueError as e:
+            logger.error(f"Line {line_num}: {e}")
+            with open(result_file, "a") as fres:
+                fres.write(f"{line.strip()},InvalidLine\n")
             continue
+        if parsed is not None:
+            jobs.append((line_num, *parsed))
 
-        commit_id, commit_type = line.split(",")
-        batch_summary["total_commits"] += 1
-
-        print(f"\n📦 Processing commit {line_num}: {commit_id}")
-        print(f"🏷️  Type: {commit_type}")
-
+    def process(job):
+        line_num, commit_id, commit_type = job
+        print(f"\n📦 Processing commit {line_num}: {commit_id} ({commit_type})")
         try:
             checker_results, summary = gen_checker_worker(
                 commit_id,
@@ -200,31 +263,37 @@ def gen_checker(
                 use_general=use_general,
                 no_utility=no_utility,
                 sample_examples=sample_examples,
+                retry_failed=retry_failed,
             )
-
-            # Log results
-            with open(log_file, "a") as flog:
-                flog.write(f"{commit_id} {commit_type} {checker_results}\n")
-
-            with open(result_file, "a") as fres:
-                correct = any([TP > 0 and TN > 0 for _, TP, TN in checker_results])
-                fres.write(f"{commit_id},{commit_type},{correct}\n")
-
-            batch_summary["results"].append(summary.to_dict())
-            if summary.perfect_checkers > 0:
-                batch_summary["successful_commits"] += 1
-
-            summary.print_summary()
+            with stats_lock:
+                batch_summary["total_commits"] += 1
+                with open(log_file, "a") as flog:
+                    flog.write(f"{commit_id} {commit_type} {checker_results}\n")
+                with open(result_file, "a") as fres:
+                    correct = any([TP > 0 and TN > 0 for _, TP, TN in checker_results])
+                    fres.write(f"{commit_id},{commit_type},{correct}\n")
+                batch_summary["results"].append(summary.to_dict())
+                if summary.perfect_checkers > 0:
+                    batch_summary["successful_commits"] += 1
+                summary.print_summary()
 
         except Exception as e:
             error_msg = str(e).replace("\n", " ")
             print(f"❌ Error processing {commit_id}: {error_msg}")
-            logger.error(f"Error processing {commit_id}: {e}")
+            logger.exception(f"Error processing {commit_id}: {e}")
+            with stats_lock:
+                batch_summary["total_commits"] += 1
+                with open(log_file, "a") as flog:
+                    flog.write(f"{commit_id} {commit_type} ERROR: {error_msg}\n")
+                with open(result_file, "a") as fres:
+                    fres.write(f"{commit_id},{commit_type},Exception\n")
 
-            with open(log_file, "a") as flog:
-                flog.write(f"{commit_id} {commit_type} ERROR: {error_msg}\n")
-            with open(result_file, "a") as fres:
-                fres.write(f"{commit_id},{commit_type},Exception\n")
+    if workers > 1:
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            list(pool.map(process, jobs))
+    else:
+        for job in jobs:
+            process(job)
 
     # Save batch summary
     batch_summary["end_time"] = datetime.now().isoformat()
@@ -250,6 +319,7 @@ def gen_checker_worker(
     use_general=False,
     no_utility=False,
     sample_examples=False,
+    retry_failed=False,
 ):
     """Generate checkers for one commit with improved progress tracking."""
 
@@ -291,11 +361,31 @@ def gen_checker_worker(
     (output_dir / "commit_id.txt").write_text(commit_id)
     (output_dir / "patch.md").write_text(patch)
 
+    if not target.get_objects_from_patch(patch):
+        # No checker can ever be validated on this commit: fail before any LLM call.
+        raise ValueError(f"Patch of {commit_id} touches no analyzable source file")
+    if isinstance(target, CompileDBTargetBase):
+        # Configure commit^ and commit while the LLM stages run.
+        target.prefetch(commit_id)
+
     # Check for existing results
     ranking_file = output_dir / "ranking.txt"
+    attempts_end = checker_nums
     if ranking_file.exists():
-        checker_results = eval(ranking_file.read_text())
+        checker_results = load_ranking(ranking_file)
         has_perfect = any([TP > 0 and TN > 0 for _, TP, TN in checker_results])
+        done = max((i for i, _, _ in checker_results), default=-1) + 1
+        if not has_perfect and done >= checker_nums:
+            if retry_failed:
+                attempts_end = done + checker_nums
+                logger.info(
+                    f"{id}: {done} attempts without a perfect checker; "
+                    f"retrying attempts {done}..{attempts_end - 1}"
+                )
+            else:
+                # Upstream silently regenerated nothing here (range(n, n) is empty).
+                print(f"⏭️  {id}: all {done} attempts done, none perfect (use --retry_failed)")
+                logger.warning(f"{id}: skipped, {done} attempts without a perfect checker")
         if has_perfect:
             print("🎉 Perfect checker already exists!")
             logger.info(f"Perfect checker found for {id}")
@@ -318,8 +408,10 @@ def gen_checker_worker(
 
     # Generate checkers
     errors = []
-    for i in range(len(checker_results), checker_nums):
-        print(f"\n🔄 Generating checker {i+1}/{checker_nums}")
+    first_attempt = max((i for i, _, _ in checker_results), default=-1) + 1
+    for i in range(first_attempt, attempts_end):
+        print(f"\n🔄 Generating checker {i+1}/{attempts_end} for {commit_id[:12]}")
+        progress.new_attempt()
 
         checker_data = CheckerData(commit_id, commit_type, result_dir, i, patch)
 
@@ -399,6 +491,7 @@ def gen_checker_worker(
             if not ret:
                 error_msg = f"Failed to generate compilable checker {i}"
                 progress.fail_step(step_name, error_msg)
+                _dump_step_times(progress, intermediate_dir, failed_step=step_name)
                 errors.append(error_msg)
                 checker_results.append((i, -10, -10))
                 checker_data_list.append(checker_data)
@@ -419,12 +512,15 @@ def gen_checker_worker(
 
             # Step 5: Validation
             step_name = progress.start_step("✅ Validation")
+            # The backend resolves the plugin built from exactly this code
+            # (content-addressed), so a concurrent build cannot be validated here.
             TP, TN = analysis_backend.validate_checker(
                 repaired_checker_code,
                 commit_id,
                 patch,
                 target,
                 skip_build_checker=True,
+                details_out=intermediate_dir / "06_validation_details.json",
             )
 
             # Update checker data
@@ -446,6 +542,7 @@ def gen_checker_worker(
             (intermediate_dir / "06_validation.json").write_text(
                 json.dumps(validation_result, indent=2)
             )
+            _dump_step_times(progress, intermediate_dir)
 
             if TP > 0 and TN > 0:
                 print(f"🎉 Perfect checker {i} found!")
@@ -457,10 +554,20 @@ def gen_checker_worker(
                 logger.error(error_msg)
                 break
 
+        except TargetSetupError as e:
+            # Infrastructure (checkout/configure) failure: every further attempt
+            # would fail identically, so stop instead of spending LLM calls.
+            error_msg = f"Target setup failed for {commit_id}: {e}"
+            errors.append(error_msg)
+            logger.error(error_msg)
+            _dump_step_times(progress, intermediate_dir, failed_step="target_setup")
+            checker_results.append((i, SETUP_FAILED, SETUP_FAILED))
+            break
         except Exception as e:
             error_msg = f"Error generating checker {i}: {str(e)}"
             errors.append(error_msg)
-            logger.error(error_msg)
+            logger.exception(error_msg)
+            _dump_step_times(progress, intermediate_dir, failed_step=f"exception: {e}"[:200])
             checker_results.append((i, -10, -10))
             continue
 
@@ -474,7 +581,7 @@ def gen_checker_worker(
 
     # Sort and save results
     checker_results = sorted(checker_results, key=lambda x: (x[1], x[2]), reverse=True)
-    ranking_file.write_text(str(checker_results))
+    ranking_file.write_text(json.dumps(checker_results))
 
     # Create comprehensive summary
     summary = GenerationSummary(
@@ -497,6 +604,19 @@ def gen_checker_worker(
     )
 
     return checker_results, summary
+
+
+def _dump_step_times(progress: GenerationProgress, intermediate_dir: Path, failed_step=None):
+    """Save this attempt's step durations (seconds) for speed analysis."""
+    now = time.time()
+    times = {}
+    for name, value in progress.step_times.items():
+        # Completed steps hold a duration; a step still running holds its start time.
+        times[name] = round(now - value if value > 1e9 else value, 2)
+    (intermediate_dir / "07_step_times.json").write_text(
+        json.dumps({"steps": times, "failed_step": failed_step}, indent=2)
+    )
+    progress.step_times.clear()
 
 
 def _build_directory(id: str):
