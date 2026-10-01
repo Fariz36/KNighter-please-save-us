@@ -87,6 +87,9 @@ def export_bundle(checker_dir: Path, out_dir: Path) -> Optional[Path]:
     (bundle / "include" / "clang" / "StaticAnalyzer" / "Checkers").mkdir(parents=True)
 
     (bundle / "checker.cpp").write_text(code)
+    if (checker_dir / "patch.txt").exists():
+        # The fix the checker was generated from; triage on other projects compares against it.
+        shutil.copy2(checker_dir / "patch.txt", bundle / "patch.md")
     shutil.copy2(plugin, bundle / "plugin.so")
     shutil.copy2(SRC / "backends" / "direct_analysis.py", bundle / "knighter_analysis.py")
     shutil.copy2(TEMPLATE / "run_bundle.py", bundle / "run_bundle.py")
