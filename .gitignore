@@ -28,3 +28,13 @@ llvm-*
 *.zip
 
 */tmp
+
+# Generated: logs, tree-sitter build, benchmark runs
+logs/
+src/kparser/build/
+bench/runs/
+bench/replay/
+bench/*.out
+bench/snapshots/
+.venv/
+e2e/

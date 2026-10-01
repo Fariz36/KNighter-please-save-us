@@ -1,0 +1,3 @@
+# Build tools for benchmark targets (not needed by KNighter itself)
+meson
+ninja

@@ -1,0 +1,2 @@
+# Only for embedding-based example sampling (gen --sample_examples=True)
+torch

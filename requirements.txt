@@ -7,8 +7,11 @@ rich
 html2text
 fire
 pre-commit
-torch
 azure-ai-inference
 google-genai
 bs4
 psutil
+pyyaml
+httpx
+pydantic
+setuptools  # tree-sitter 0.21 builds grammars via distutils (removed from the stdlib in Python 3.12)
