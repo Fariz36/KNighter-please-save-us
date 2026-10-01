@@ -54,6 +54,23 @@ def _project(prompt: str) -> str:
     return prompt.replace("{{project_description}}", global_config.project_description)
 
 
+def role_based() -> bool:
+    """Section 3.1-A: generate checkers that refer to project APIs only through roles."""
+    return bool(global_config.get("role_based_checkers", False))
+
+
+def _roles(prompt: str, kind: str) -> str:
+    """Insert the project-roles guidance ("pattern" or "checker") before `# Formatting`."""
+    if not role_based():
+        return prompt
+    guidance = (prompt_template_dir / "knowledge" / f"roles-{kind}.md").read_text().strip()
+    marker = "\n# Formatting"
+    if marker in prompt:
+        head, tail = prompt.split(marker, 1)
+        return f"{head}\n{guidance}\n{marker}{tail}"
+    return f"{prompt}\n\n{guidance}\n"
+
+
 for checker_dir in sorted(example_dir.iterdir()):
     if not checker_dir.is_dir():
         continue
@@ -221,6 +238,7 @@ def patch2pattern(id: str, iter: int, patch_info: str, use_general=False):
     path2store = prompt_history_dir / "patch2pattern.md"
     prompt_history_dir.mkdir(parents=True, exist_ok=True)
 
+    patch2pattern_prompt = _roles(patch2pattern_prompt, "pattern")
     path2store.write_text(patch2pattern_prompt)
     logger.info("finish patch2pattern generation")
 
@@ -313,6 +331,7 @@ def pattern2plan(
     path2store = prompt_history_dir / "pattern2plan.md"
     prompt_history_dir.mkdir(parents=True, exist_ok=True)
 
+    pattern2plan_prompt = _roles(pattern2plan_prompt, "checker")
     path2store.write_text(pattern2plan_prompt)
     logger.info("finish pattern2plan generation")
 
@@ -368,6 +387,7 @@ def plan2checker(
     path2store = prompt_history_dir / "plan2checker.md"
     prompt_history_dir.mkdir(parents=True, exist_ok=True)
 
+    plan2checker_prompt = _roles(plan2checker_prompt, "checker")
     path2store.write_text(plan2checker_prompt)
     logger.info("finish plan2checker generation")
 
@@ -465,6 +485,7 @@ def repair_FP(
     path2store = prompt_history_dir / f"repair_FP-{commit_id}.md"
     prompt_history_dir.mkdir(parents=True, exist_ok=True)
 
+    repair_FP_prompt = _roles(repair_FP_prompt, "checker")
     path2store.write_text(repair_FP_prompt)
     logger.info("finish repair_FP generation")
 
@@ -491,6 +512,7 @@ def repair_syntax(id: str, iter: int, times, checker_code, error_content):
     path2store = prompt_history_dir / f"repair_syntax-{times}.md"
     prompt_history_dir.mkdir(parents=True, exist_ok=True)
 
+    prompt = _roles(prompt, "checker")
     path2store.write_text(prompt)
     logger.info("finish repair_syntax generation")
 
@@ -501,4 +523,28 @@ def repair_syntax(id: str, iter: int, times, checker_code, error_content):
 
     response_store = prompt_history_dir / f"response_repair_syntax-{times}.md"
     response_store.write_text(response)
+    return response
+
+
+def repair_roles(id: str, iter: int, times, checker_code: str, findings) -> str:
+    """Section 3.1-A: move hardcoded project identifiers into the KNIGHTER_ROLES block."""
+    logger.info("start generating repair_roles prompts")
+    template = (prompt_template_dir / "repair_roles.md").read_text()
+    guidance = (prompt_template_dir / "knowledge" / "roles-checker.md").read_text().strip()
+    listing = "\n".join(f"- `{f.name}` (line {f.line})" for f in findings)
+    prompt = (
+        template.replace("{{roles_guidance}}", guidance)
+        .replace("{{findings}}", listing)
+        .replace("{{checker_code}}", checker_code)
+    )
+
+    prompt_history_dir = Path(global_config.result_dir) / id / "prompt_history" / str(iter)
+    prompt_history_dir.mkdir(parents=True, exist_ok=True)
+    (prompt_history_dir / f"repair_roles-{times}.md").write_text(prompt)
+
+    response = invoke_llm(prompt, stage="repair_roles")
+    if response is None:
+        logger.error("Empty response")
+        response = "SKIP"
+    (prompt_history_dir / f"response_repair_roles-{times}.md").write_text(response)
     return response

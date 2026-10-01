@@ -3,6 +3,9 @@
 Also parses the metadata header clang writes into every HTML report
 (``<!-- BUGFILE ... -->`` etc.). scan-build reports carry the same header, so
 the parser works for every target type.
+
+Standard library only (loguru optional): checker bundles ship this file
+verbatim as their analysis runtime (see checker_bundle.py).
 """
 
 import os
@@ -15,7 +18,12 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Iterable, List, Optional
 
-from loguru import logger
+try:
+    from loguru import logger
+except ImportError:  # shipped standalone inside checker bundles (stdlib only)
+    import logging
+
+    logger = logging.getLogger("knighter")
 
 # Built-in checker packages disabled so only the generated checker reports.
 # Same list as the scan-build path (ClangBackend._default_args).
@@ -169,6 +177,7 @@ def analyze_entry(
     output_dir: Path,
     timeout: int = 600,
     max_loop: int = 4,
+    roles_file: Optional[Path] = None,
 ) -> FileAnalysis:
     # clang runs in the entry's directory, so a relative -o would land there.
     output_dir = Path(output_dir).absolute()
@@ -176,6 +185,11 @@ def analyze_entry(
     argv = analyzer_argv(
         Path(clang).absolute(), Path(plugin).absolute(), entry, output_dir, max_loop=max_loop
     )
+    env = dict(os.environ)
+    roles_file = roles_file or Path(plugin).parent / "roles.json"
+    if "KNIGHTER_ROLES" not in env and Path(roles_file).exists():
+        # Role-based checkers read project API names from this file (knighter/roles.h).
+        env["KNIGHTER_ROLES"] = str(Path(roles_file).absolute())
     start = time.time()
     try:
         res = sp.run(
@@ -184,6 +198,7 @@ def analyze_entry(
             capture_output=True,
             text=True,
             timeout=timeout,
+            env=env,
         )
     except sp.TimeoutExpired:
         return FileAnalysis(
@@ -214,6 +229,7 @@ def analyze_entries(
     jobs: int = 4,
     timeout: int = 600,
     max_loop: int = 4,
+    roles_file: Optional[Path] = None,
 ) -> List[FileAnalysis]:
     """Analyze entries in parallel, each into ``output_dir/<file>/``.
 
@@ -224,7 +240,8 @@ def analyze_entries(
 
     def run(entry):
         out = Path(output_dir) / _safe_name(entry["file"])
-        return analyze_entry(clang, plugin, entry, out, timeout=timeout, max_loop=max_loop)
+        return analyze_entry(clang, plugin, entry, out, timeout=timeout, max_loop=max_loop,
+                             roles_file=roles_file)
 
     if not entries:
         return []

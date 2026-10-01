@@ -50,6 +50,22 @@ def grab_cpp_code(llm_response: str) -> str:
     return None
 
 
+def extract_json_block(llm_response: str) -> dict:
+    """The JSON object in a ```json block (or the first {...} span); {} if none parses."""
+    candidates = re.findall(r"```(?:json)?\s*(\{.*?\})\s*```", llm_response, re.DOTALL)
+    start, end = llm_response.find("{"), llm_response.rfind("}")
+    if start != -1 and end > start:
+        candidates.append(llm_response[start : end + 1])
+    for text in candidates:
+        try:
+            value = json.loads(text)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(value, dict):
+            return value
+    return {}
+
+
 def extract_checker_code(llm_response: str) -> str:
     checker_code = grab_cpp_code(llm_response)
     if checker_code is None:

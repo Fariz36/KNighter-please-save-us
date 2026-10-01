@@ -1078,3 +1078,13 @@ is ≤40%). **1029 reports in both, identical sets** (keyed by file, line, issue
   - Caveat: n=4 repairs. Most curl/libxml2/... checkers are silent at HEAD, so the triage/repair path is
     exercised only where a checker over-reports.
 - `docs/RESULTS_SECTIONS_0_2.md` written: every acceptance criterion with its result and evidence path.
+
+## 2026-10-01 17:50 — Sections 0–2 pushed
+
+- Commit `3d2489a` (results report + 2,059-file / 4.1 MB evidence bundle `bench/evidence/`) on top of the 7
+  section 0–2 commits. Pushed `general-c-speed` to `origin` (Fariz36/KNighter-please-save-us).
+  Secret scan: staged diff and `git log -p main..HEAD` have 0 hits for the key; the only `oc_sk_`
+  occurrence is this log's sentence describing the scan.
+- `.gitignore` fixes found while staging: the upstream `result*` rule silently dropped every `results/`
+  folder and `results.jsonl` in the evidence (negations added for `bench/evidence/**`), and my `e2e/`
+  rule matched `bench/evidence/e2e/` (anchored to `/e2e/`).

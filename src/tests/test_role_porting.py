@@ -1,0 +1,55 @@
+import tempfile
+import unittest
+from pathlib import Path
+
+from role_porting import extract_candidates, rank_candidates, split_words
+from tools import extract_json_block
+
+HEADER = """
+#define XML_ALLOC(n) xmlMalloc(n)
+XMLPUBFUN void * xmlMalloc(size_t size);
+XMLPUBFUN void * xmlMallocAtomic(size_t size);
+XMLPUBFUN void * xmlRealloc(void *ptr, size_t size);
+XMLPUBFUN void xmlFree(void *ptr);
+int xmlStrlen(const xmlChar *str);
+static int helper(int x) { return x; }
+void *malloc(size_t n);
+"""
+
+
+class PortingTest(unittest.TestCase):
+    def test_split_words(self):
+        self.assertEqual(["xml", "malloc", "atomic"], split_words("xmlMallocAtomic"))
+        self.assertEqual(["git", "free"], split_words("git__free"))
+
+    def test_extract_and_rank(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "include" / "libxml").mkdir(parents=True)
+            (root / "include" / "libxml" / "xmlmemory.h").write_text(HEADER)
+            (root / "tests").mkdir()
+            (root / "tests" / "t.h").write_text("void testOnlyAlloc(void);\n")
+            cands = extract_candidates(root)
+        self.assertIn("xmlMalloc", cands)
+        self.assertIn("xmlFree", cands)
+        self.assertIn("XML_ALLOC", cands)
+        self.assertNotIn("malloc", cands)          # standard name
+        self.assertNotIn("helper", cands)          # definition, not a declaration
+        self.assertNotIn("testOnlyAlloc", cands)   # tests/ skipped
+        ranked = rank_candidates("allocator", "returns newly allocated heap memory",
+                                 ["git__malloc"], cands)
+        # Ranking only pre-selects for the LLM: both allocator spellings lead.
+        self.assertEqual({"xmlMalloc", "XML_ALLOC"}, set(ranked[:2]))
+        self.assertNotIn("xmlStrlen", ranked)
+        free_ranked = rank_candidates("deallocator", "releases heap memory", ["git__free"], cands)
+        self.assertEqual("xmlFree", free_ranked[0])
+
+    def test_extract_json_block(self):
+        text = 'Here:\n```json\n{"allocator": {"names": ["xmlMalloc"]}}\n```\n'
+        self.assertEqual({"allocator": {"names": ["xmlMalloc"]}}, extract_json_block(text))
+        self.assertEqual({"a": [1]}, extract_json_block('prefix {"a": [1]} suffix'))
+        self.assertEqual({}, extract_json_block("no json"))
+
+
+if __name__ == "__main__":
+    unittest.main()

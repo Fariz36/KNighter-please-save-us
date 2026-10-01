@@ -1,0 +1,146 @@
+"""Port a checker bundle's roles to another project (section 3.1-B).
+
+The only new LLM step for cross-project use. Deterministic parts around it:
+candidate extraction from the target's headers, ranking by word overlap with
+each role, and validation that every chosen name really exists in the target.
+
+    main.py port_roles --config_file=<target.yaml> --bundle_dir=<bundle>
+"""
+
+import json
+import re
+import time
+from pathlib import Path
+from typing import Dict, List
+
+import yaml
+
+from checker_lint import standard_names
+from global_config import global_config, logger
+from model import invoke_llm
+from tools import extract_json_block
+
+PROMPT = Path(__file__).resolve().parent.parent / "prompt_template" / "port_roles.md"
+HEADER_EXTENSIONS = (".h", ".hh", ".hpp", ".hxx")
+SKIP_DIRS = ("test", "tests", "testing", "doc", "docs", "example", "examples", "fuzz", "fuzzing")
+
+_FUNC_DECL = re.compile(
+    r"^[ \t]*(?:[A-Za-z_][\w \t\*&:<>,]*?[\s\*&])([A-Za-z_]\w*)[ \t]*\(([^;{]*?)\)[ \t]*(?:;|$)",
+    re.MULTILINE,
+)
+_MACRO = re.compile(r"^[ \t]*#[ \t]*define[ \t]+([A-Za-z_]\w*)\(([^)]*)\)", re.MULTILINE)
+_KEYWORDS = {"if", "for", "while", "switch", "return", "sizeof", "defined", "else", "do"}
+
+
+def split_words(name: str) -> List[str]:
+    """xmlMallocAtomic -> [xml, malloc, atomic]; git__free -> [git, free]."""
+    spaced = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", name)
+    return [w.lower() for w in re.split(r"[^A-Za-z0-9]+", spaced) if w]
+
+
+def extract_candidates(root: Path) -> Dict[str, str]:
+    """{name: one-line signature} for functions/macros declared in the target's headers."""
+    candidates: Dict[str, str] = {}
+    stdlib = standard_names()
+    for header in sorted(root.rglob("*")):
+        if header.suffix not in HEADER_EXTENSIONS or not header.is_file():
+            continue
+        rel = header.relative_to(root)
+        if any(part.lower() in SKIP_DIRS for part in rel.parts[:-1]) or rel.parts[0].startswith("."):
+            continue
+        try:
+            text = header.read_text(errors="replace")
+        except OSError:
+            continue
+        for regex, kind in ((_FUNC_DECL, "function"), (_MACRO, "macro")):
+            for match in regex.finditer(text):
+                name = match.group(1)
+                if name in _KEYWORDS or name in stdlib or name in candidates:
+                    continue
+                signature = " ".join(match.group(0).split())[:160]
+                candidates[name] = f"{kind} in {rel}: {signature}"
+    return candidates
+
+
+def rank_candidates(role: str, description: str, source_names: List[str],
+                    candidates: Dict[str, str], top_k: int = 40) -> List[str]:
+    """Candidates sharing the most words with the role, its description and source names."""
+    words = set(split_words(role)) | set(split_words(" ".join(source_names)))
+    words |= {w for w in split_words(description) if len(w) > 3}
+    # Project prefixes (git, xml, curl, sqlite3) say nothing about the role.
+    words -= {w for name in source_names for w in split_words(name)[:1]}
+    scored = []
+    for name in candidates:
+        parts = split_words(name)
+        score = sum(2 if p in words else 0 for p in parts)
+        score += sum(1 for w in words if len(w) > 3 and any(w in p or p in w for p in parts))
+        if score:
+            scored.append((-score, len(name), name))
+    return [name for _, _, name in sorted(scored)[:top_k]]
+
+
+def _target_name() -> str:
+    return (global_config.get("target_options") or {}).get("name") or global_config.get("target_type")
+
+
+def port_roles(bundle_dir, commit=None, top_k: int = 40):
+    bundle = Path(bundle_dir)
+    manifest = yaml.safe_load((bundle / "manifest.yaml").read_text())
+    roles = manifest.get("roles") or {}
+    target = _target_name()
+    if not roles:
+        raise ValueError(f"{bundle.name} has no roles: nothing to port (not role-based)")
+
+    checkout = global_config.target.prepare(commit or global_config.scan_commit)
+    candidates = extract_candidates(checkout.src)
+    logger.info(f"{target}: {len(candidates)} candidate API names from headers")
+
+    sections, offered = [], {}
+    for role, value in roles.items():
+        ranked = rank_candidates(role, value.get("description", ""), value.get("names", []),
+                                 candidates, top_k)
+        offered[role] = ranked
+        listing = "\n".join(f"  - `{n}` ({candidates[n]})" for n in ranked) or "  - (no candidates)"
+        sections.append(
+            f"## `{role}`\n\n- Meaning: {value.get('description') or '(none given)'}\n"
+            f"- Names in {manifest['source']['project']}: "
+            f"{', '.join(f'`{n}`' for n in value.get('names', [])) or '(none)'}\n"
+            f"- Candidates in {target}:\n{listing}\n"
+        )
+    prompt = (
+        PROMPT.read_text()
+        .replace("{{source_project}}", manifest["source"].get("description") or manifest["source"]["project"])
+        .replace("{{target_project}}", global_config.project_description)
+        .replace("{{pattern}}", manifest.get("pattern") or "(not recorded)")
+        .replace("{{roles}}", "\n".join(sections))
+    )
+    out = bundle / "ports"
+    out.mkdir(exist_ok=True)
+    (out / f"{target}.prompt.md").write_text(prompt)
+
+    start = time.monotonic()
+    response = invoke_llm(prompt, stage="port_roles", temperature=0.01)
+    answer = extract_json_block(response or "")
+    mapping, dropped, rationale = {}, {}, {}
+    for role in roles:
+        entry = answer.get(role) or {}
+        names = entry.get("names", []) if isinstance(entry, dict) else entry
+        valid = [n for n in names if n in offered[role] or n in candidates]
+        mapping[role] = valid
+        dropped[role] = [n for n in names if n not in valid]
+        rationale[role] = entry.get("rationale", "") if isinstance(entry, dict) else ""
+
+    (bundle / "roles" / f"{target}.json").write_text(json.dumps(mapping, indent=2))
+    report = {
+        "target": target,
+        "commit": checkout.revision,
+        "candidates": len(candidates),
+        "offered": offered,
+        "mapping": mapping,
+        "dropped_not_in_target": dropped,
+        "rationale": rationale,
+        "llm_seconds": round(time.monotonic() - start, 1),
+    }
+    (out / f"{target}.json").write_text(json.dumps(report, indent=2))
+    logger.info(f"Ported {bundle.name} roles to {target}: {mapping}")
+    return mapping

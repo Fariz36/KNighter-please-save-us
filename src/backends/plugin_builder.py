@@ -18,6 +18,7 @@ build and reused, which roughly halves compile time (see docs/RESEARCH_LOG.md).
 import fcntl
 import hashlib
 import json
+import re
 import shlex
 import subprocess as sp
 import threading
@@ -27,6 +28,10 @@ from pathlib import Path
 from typing import List, Optional, Tuple
 
 from loguru import logger
+
+# Headers KNighter provides to checkers (knighter/roles.h).
+KNIGHTER_INCLUDE = Path(__file__).resolve().parent.parent / "knighter_include"
+ROLES_BLOCK = re.compile(r"/\*\s*KNIGHTER_ROLES\s*(\{.*?\})\s*\*/", re.DOTALL)
 
 PLUGIN_SOURCE_SUFFIX = "plugins/SAGenTestHandling/SAGenTestChecker.cpp"
 PLUGIN_BUILD_SUBDIR = "tools/clang/lib/Analysis/plugins/SAGenTestHandling"
@@ -109,8 +114,11 @@ class PluginBuilder:
 
         self._compile_base = self._load_compile_template()
         self._link_template = self._load_link_template()
+        knighter_headers = "".join(
+            p.read_text() for p in sorted(KNIGHTER_INCLUDE.rglob("*.h"))
+        )
         self._flags_hash = hashlib.sha256(
-            json.dumps([self._compile_base, self._link_template]).encode()
+            json.dumps([self._compile_base, self._link_template, knighter_headers]).encode()
         ).hexdigest()[:16]
 
         self._locks_guard = threading.Lock()
@@ -170,7 +178,7 @@ class PluginBuilder:
         return result
 
     def _compile_argv(self, source: Path, output: Path, pch_dir: Optional[Path]) -> List[str]:
-        argv = list(self._compile_base) + [self.opt_level]
+        argv = list(self._compile_base) + [self.opt_level, f"-I{KNIGHTER_INCLUDE}"]
         if pch_dir is not None:
             argv += [f"-I{pch_dir}", "-include", "knighter_pch.h", "-Winvalid-pch"]
         elif self.preamble:
@@ -277,6 +285,10 @@ class PluginBuilder:
                 "clang_registerCheckers(CheckerRegistry &registry)`, so the plugin would "
                 "register no checker"
             ), self.plugin_path(checker_code)
+        try:
+            extract_roles(checker_code)
+        except (ValueError, json.JSONDecodeError) as error:
+            return 1, f"error: invalid KNIGHTER_ROLES block: {error}", self.plugin_path(checker_code)
         key = self.key(checker_code)
         work = self.cache_dir / "plugins" / key
         plugin = work / "plugin.so"
@@ -288,6 +300,7 @@ class PluginBuilder:
                 failure.unlink(missing_ok=True)
             if plugin.exists():
                 logger.debug(f"Plugin cache hit {key}")
+                write_roles_file(checker_code, work)
                 return 0, "", plugin
             if failure.exists():
                 cached = json.loads(failure.read_text())
@@ -345,6 +358,7 @@ class PluginBuilder:
                         json.dumps({"returncode": proc.returncode, "stderr": proc.stderr})
                     )
                 return proc.returncode, proc.stderr or "link failed", plugin
+            write_roles_file(checker_code, work)
             tmp_plugin.rename(plugin)
             obj.unlink(missing_ok=True)
             logger.info(
@@ -361,6 +375,52 @@ class PluginBuilder:
                 )
             )
             return 0, "", plugin
+
+
+def parse_roles_block(checker_code: str) -> Optional[dict]:
+    """The checker's `/* KNIGHTER_ROLES {...} */` block as {role: {"names", "description"}}.
+
+    Each role is either a list of names or {"names": [...], "description": "..."}.
+    Returns None without a block; raises ValueError for a malformed block.
+    """
+    match = ROLES_BLOCK.search(checker_code)
+    if not match:
+        return None
+    data = json.loads(match.group(1))
+    if not isinstance(data, dict):
+        raise ValueError("KNIGHTER_ROLES must be a JSON object")
+    roles = {}
+    for role, value in data.items():
+        if isinstance(value, dict):
+            names, description = value.get("names", []), value.get("description", "")
+        else:
+            names, description = value, ""
+        if not isinstance(names, list) or not all(isinstance(n, str) for n in names):
+            raise ValueError(f"role {role!r}: names must be a list of strings")
+        roles[role] = {"names": names, "description": str(description)}
+    return roles
+
+
+def extract_roles(checker_code: str) -> Optional[dict]:
+    """{role: [names]} as knighter/roles.h reads it, or None without a block."""
+    roles = parse_roles_block(checker_code)
+    if roles is None:
+        return None
+    return {role: value["names"] for role, value in roles.items()}
+
+
+def strip_roles_block(checker_code: str) -> str:
+    return ROLES_BLOCK.sub("", checker_code)
+
+
+def write_roles_file(checker_code: str, directory: Path) -> Optional[Path]:
+    """Write roles.json next to the plugin (analysis exports it as KNIGHTER_ROLES)."""
+    roles = extract_roles(checker_code)
+    if roles is None:
+        return None
+    path = directory / "roles.json"
+    path.write_text(json.dumps(roles, indent=2))
+    return path
 
 
 def _is_deterministic_failure(returncode: int, stderr: str) -> bool:

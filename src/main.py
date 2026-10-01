@@ -10,7 +10,9 @@ from checker_refine import (
     refine_checker,
     refine_unrefined_checkers,
 )
+from checker_bundle import export_bundles
 from checker_scan import scan, scan_single_checker, triage_report
+from role_porting import port_roles
 from commit_label import label_commits
 from global_config import global_config, logger
 from model import init_llm
@@ -62,6 +64,14 @@ def main(mode: str, *args, **kwargs):
         "scan_single": (scan_single_checker, "Scan with a single checker from file"),
         "triage": (triage_report, "Triage the report"),
         "label": (label_commits, "Label commits"),
+        "export": (
+            lambda checker_dir, out_dir=None: export_bundles(checker_dir, out_dir),
+            "Export valid checkers as standalone bundles",
+        ),
+        "port_roles": (
+            lambda bundle_dir, commit=None: port_roles(bundle_dir, commit),
+            "Map a bundle's roles to the configured target project (LLM)",
+        ),
     }
 
     if mode not in modes:

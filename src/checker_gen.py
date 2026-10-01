@@ -8,7 +8,15 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List
 
-from agent import patch2checker, patch2pattern, pattern2plan, plan2checker
+from agent import (
+    patch2checker,
+    patch2pattern,
+    pattern2plan,
+    plan2checker,
+    repair_roles,
+    role_based,
+)
+from checker_lint import find_hardcoded_identifiers
 from checker_data import CheckerData
 from checker_repair import repair_checker
 from global_config import global_config, logger
@@ -498,6 +506,9 @@ def gen_checker_worker(
                 continue
 
             progress.complete_step(step_name, "Compilation successful")
+            repaired_checker_code = _enforce_roles(
+                id, i, repaired_checker_code, intermediate_dir
+            )
             checker_data.repaired_checker_code = repaired_checker_code
 
             # Save repaired code
@@ -604,6 +615,58 @@ def gen_checker_worker(
     )
 
     return checker_results, summary
+
+
+def _enforce_roles(id: str, i: int, checker_code: str, intermediate_dir: Path) -> str:
+    """Section 3.1-A: measure (always) and, for role-based runs, repair hardcoded
+    project identifiers. Never rejects a working checker: if the names cannot be
+    moved into roles, the compiled code is kept and the leftovers are recorded."""
+    initial = find_hardcoded_identifiers(checker_code)
+    record = {
+        "role_based": role_based(),
+        "initial_findings": sorted({f.name for f in initial}),
+        "rounds": [],
+    }
+    max_rounds = int(global_config.get("roles_repair_attempts", 2))
+    current, findings = checker_code, initial
+    if role_based():
+        for round_no in range(1, max_rounds + 1):
+            if not findings:
+                break
+            response = repair_roles(id, i, round_no, current, findings)
+            candidate = extract_checker_code(response)
+            if not candidate:
+                record["rounds"].append({"round": round_no, "result": "no code"})
+                continue
+            ok, compiled = repair_checker(
+                id=id,
+                repair_name=f"roles-repair-{i:02d}-{round_no}",
+                max_idx=2,
+                intermediate_dir=intermediate_dir,
+                checker_code=candidate,
+            )
+            if not ok:
+                record["rounds"].append({"round": round_no, "result": "does not compile"})
+                continue
+            current, findings = compiled, find_hardcoded_identifiers(compiled)
+            record["rounds"].append(
+                {"round": round_no, "result": "compiled",
+                 "remaining": sorted({f.name for f in findings})}
+            )
+    record["final_findings"] = sorted({f.name for f in findings})
+    try:
+        from backends.plugin_builder import parse_roles_block
+
+        record["roles"] = parse_roles_block(current)
+    except ValueError as error:
+        record["roles_error"] = str(error)
+    (intermediate_dir / "08_roles.json").write_text(json.dumps(record, indent=2))
+    if record["initial_findings"]:
+        logger.info(
+            f"{id} checker {i}: hardcoded identifiers {record['initial_findings']} -> "
+            f"{record['final_findings']}"
+        )
+    return current
 
 
 def _dump_step_times(progress: GenerationProgress, intermediate_dir: Path, failed_step=None):
