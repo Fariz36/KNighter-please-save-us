@@ -7,11 +7,31 @@ import yaml
 
 from backends.csa import ClangBackend
 from backends.factory import AnalysisBackendFactory
+from targets.compiledb import CompileDBTarget
 from targets.factory import TargetFactory
 from targets.linux import Linux
 from targets.v8 import V8
 
 logger = loguru.logger
+
+
+def _compiledb_target(config: "GlobalConfig") -> CompileDBTarget:
+    options = dict(config.get("target_options") or {})
+    if "repo_dir" not in options or "setup" not in options:
+        raise ValueError("compiledb target needs `target_options.repo_dir` and `target_options.setup`")
+    options.setdefault("llvm_bin", str(Path(config.get("LLVM_dir")) / "build" / "bin"))
+    options.setdefault("jobs", config.get("analysis_jobs", 8))
+    return CompileDBTarget(**options)
+
+
+# target_type -> constructor. Add new target kinds here.
+TARGET_BUILDERS = {
+    "linux": lambda config: Linux(
+        config.get("linux_dir"), incremental=config.get("linux_incremental", False)
+    ),
+    "v8": lambda config: V8(config.get("v8_dir")),
+    "compiledb": _compiledb_target,
+}
 
 
 class GlobalConfig:
@@ -44,19 +64,37 @@ class GlobalConfig:
         self._init_logger()
 
         # Init the target and backend
-        # FIXME: This should be extended to support other targets and backends
         target_type = self.get("target_type", "linux")
+        if target_type not in TARGET_BUILDERS:
+            raise ValueError(
+                f"Unknown target_type '{target_type}'. "
+                f"Known: {', '.join(sorted(TARGET_BUILDERS))}"
+            )
+        self._config["target"] = TARGET_BUILDERS[target_type](self)
 
-        if "v8_dir" in self._config:
-            self._config["v8"] = V8(self.get("v8_dir"))
-        if "linux_dir" in self._config:
-            self._config["linux"] = Linux(self.get("linux_dir"))
-
-        if target_type == "v8":
-            self._config["target"] = self._config["v8"]
-        else:
-            self._config["target"] = self._config["linux"]
-        self._config["backend"] = ClangBackend(self.get("LLVM_dir"))
+        plugin_build = self.get("plugin_build", "standalone")
+        if target_type == "v8" and plugin_build != "legacy":
+            # The V8 analysis path hardcodes the in-tree plugin location.
+            logger.warning("V8 target: forcing plugin_build=legacy")
+            plugin_build = "legacy"
+        self._config["backend"] = ClangBackend(
+            self.get("LLVM_dir"),
+            plugin_build=plugin_build,
+            plugin_cache_dir=self.get("plugin_cache_dir", "tmp/plugin-cache"),
+            plugin_opt_level=self.get("plugin_opt_level", "-O1"),
+            plugin_pch=self.get("plugin_pch", True),
+            max_parallel_plugin_builds=self.get("max_parallel_plugin_builds", 4),
+            plugin_cache=self.get("plugin_cache", True),
+            plugin_preamble=self.get("plugin_preamble", True),
+            analysis_jobs=self.get("analysis_jobs", 8),
+            analysis_timeout=self.get("analysis_timeout", 600),
+            max_loop=self.get("max_loop", 4),
+            validation_scoring=self.get("validation_scoring", "strict"),
+        )
+        logger.info(
+            f"Target: {self._config['target']}; plugin_build={plugin_build}; "
+            f"validation_scoring={self.get('validation_scoring', 'strict')}"
+        )
 
     def _init_logger(self):
         """Initialize the logger."""
@@ -146,6 +184,38 @@ class GlobalConfig:
     def group_scan_jobs(self) -> int:
         """Get the number of parallel jobs for group scanning."""
         return self.get("group_scan_jobs", 32)
+
+    @property
+    def project_description(self) -> str:
+        """How prompts name the analyzed project ("a patch to <this>")."""
+        project = self.get("project") or {}
+        if project.get("description"):
+            return project["description"]
+        target_type = self.get("target_type", "linux")
+        if target_type == "linux":
+            return "the Linux kernel"
+        if target_type == "v8":
+            return "the V8 JavaScript engine"
+        name = (self.get("target_options") or {}).get("name", "the target project")
+        return f"{name}, a C project"
+
+    @property
+    def project_feasibility(self) -> str:
+        """Name of the NULL-feasibility guidance for triage (prompt_template/knowledge/feasibility-<name>.md)."""
+        project = self.get("project") or {}
+        if project.get("feasibility"):
+            return project["feasibility"]
+        return "linux" if self.get("target_type", "linux") == "linux" else "generic"
+
+    @property
+    def min_reports_for_triage(self) -> int:
+        """Fewer scan reports than this skips triage (kernel default: 5)."""
+        return self.get("min_reports_for_triage", 5)
+
+    @property
+    def perfect_report_threshold(self) -> int:
+        """A scan with at most this many reports counts as "perfect" (kernel default: 10)."""
+        return self.get("perfect_report_threshold", 10)
 
     @property
     def jobs(self) -> int:

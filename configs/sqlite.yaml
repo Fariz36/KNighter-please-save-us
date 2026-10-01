@@ -1,0 +1,38 @@
+# KNighter on SQLite (generic compile-DB target). Paths are for this machine.
+# Revisions before the autosetup switch (2024-09-24) need a real tclsh to build.
+result_dir: "results/sqlite"
+LLVM_dir: "/home/faris/RA-MrYudis/Knight/KNighter/llvm"
+key_file: "llm_keys.yaml"
+model: "opencode-go:deepseek-v4.1-flash"
+checker_nums: 3
+# Output budget includes reasoning tokens; 16000 (upstream default) was exhausted
+# by reasoning alone in plan2checker (empty content). See docs/RESEARCH_LOG.md.
+max_tokens: 65536
+llm_timeout: 600
+
+# How prompts name the project ("a patch to <description>").
+project:
+  description: "SQLite, an embedded SQL database engine written in C"
+
+target_type: compiledb
+target_options:
+  name: sqlite
+  repo_dir: "/home/faris/RA-MrYudis/Knight/targets/sqlite"
+  work_dir: "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite"
+  setup:
+    - "{src}/configure --disable-tcl CC={clang}"
+    # Compile each src/*.c separately (not the amalgamation) and record the commands.
+    - "intercept-build --cdb {build}/compile_commands.json make USE_AMALGAMATION=0 -j{jobs} libsqlite3.a"
+  source_extensions: [".c"]
+  scan_include: ["src/", "ext/"]
+
+plugin_build: standalone
+validation_scoring: strict
+analysis_jobs: 8
+analysis_timeout: 600
+max_parallel_plugin_builds: 4
+
+scan_commit: "HEAD"
+min_reports_for_triage: 1
+perfect_report_threshold: 3
+jobs: 8

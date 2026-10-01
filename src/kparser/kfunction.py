@@ -11,6 +11,14 @@ from .kparser import KParser
 
 CURR = Path(__file__).parent
 
+NAME_NODES = (
+    "identifier",
+    "qualified_identifier",
+    "field_identifier",
+    "destructor_name",
+    "operator_name",
+)
+
 
 @dataclass
 class KernelFunction:
@@ -40,20 +48,25 @@ class KernelFunction:
         if "function_declarator" in types:
             decl = children[types.index("function_declarator")]
             for c in decl.children:
-                if c.type == "identifier":
+                # C: identifier. C++: Class::method, member, ~Dtor, operator==.
+                if c.type in NAME_NODES:
                     return c.text.decode("utf-8")
             # If no identifier found, return empty string
             return ""
-        elif "pointer_declarator" in types:
-            return self.__find_name(children[types.index("pointer_declarator")])
-        else:
-            return ""
+        for wrapper in ("pointer_declarator", "reference_declarator"):
+            if wrapper in types:
+                return self.__find_name(children[types.index(wrapper)])
+        return ""
 
     def __is_function(node: Node) -> bool:
         if node.type != "function_definition":
             return False
         types = [c.type for c in node.children]
-        return "function_declarator" in types or "pointer_declarator" in types
+        return (
+            "function_declarator" in types
+            or "pointer_declarator" in types
+            or "reference_declarator" in types
+        )
 
     def get_line_numbers(self) -> int:
         return self.start_line, self.end_line

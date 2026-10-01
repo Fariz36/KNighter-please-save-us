@@ -10,6 +10,7 @@ import time
 from pathlib import Path
 from queue import Queue
 
+import git
 from bs4 import BeautifulSoup
 from loguru import logger
 
@@ -523,6 +524,10 @@ def get_changed_lines_in_diff(diff):
     return lines
 
 
+# C and C++ sources/headers whose patched functions are shown to the LLM.
+C_FAMILY_EXTENSIONS = (".c", ".h", ".cc", ".cpp", ".cxx", ".hh", ".hpp", ".hxx")
+
+
 def get_function_codes(commit, include_whole_file_fallback=True, max_file_size_kb=100):
     """
     Extract function codes from commit diffs using tree-sitter.
@@ -539,10 +544,15 @@ def get_function_codes(commit, include_whole_file_fallback=True, max_file_size_k
     diffs = commit.diff(commit.hexsha + "^", create_patch=True)
 
     for diff in diffs:
-        if diff.a_path.endswith(".c") or diff.a_path.endswith(".h"):
-            file_content_before = commit.repo.git.show(
-                f"{commit.hexsha}^:{diff.a_path}"
-            )
+        if diff.a_path.endswith(C_FAMILY_EXTENSIONS):
+            try:
+                file_content_before = commit.repo.git.show(
+                    f"{commit.hexsha}^:{diff.a_path}"
+                )
+            except git.exc.GitCommandError:
+                # File added by the commit: there is no buggy version to show.
+                logger.info(f"Skip {diff.a_path}: not present before the commit")
+                continue
             changed_lines = get_changed_lines_in_diff(diff.diff.decode("utf-8"))
 
             # Try to extract functions using tree-sitter

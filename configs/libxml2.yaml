@@ -1,0 +1,34 @@
+# KNighter on libxml2 (Meson build system; fourth build system in the evaluation).
+result_dir: "results/libxml2"
+LLVM_dir: "/home/faris/RA-MrYudis/Knight/KNighter/llvm"
+key_file: "llm_keys.yaml"
+model: "opencode-go:deepseek-v4.1-flash"
+checker_nums: 3
+max_tokens: 65536
+llm_timeout: 600
+
+project:
+  description: "libxml2, the XML parsing and manipulation library written in C"
+
+target_type: compiledb
+target_options:
+  name: libxml2
+  repo_dir: "/home/faris/RA-MrYudis/Knight/targets/libxml2"
+  work_dir: "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2"
+  env:
+    PATH: "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/bin:/usr/local/bin:/usr/bin:/bin"
+  setup:
+    # meson setup writes config.h, xmlversion.h and compile_commands.json; no build needed.
+    - "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/bin/meson setup {build} {src} -Dpython=disabled -Dicu=disabled -Dhttp=disabled"
+  source_extensions: [".c"]
+
+plugin_build: standalone
+validation_scoring: strict
+analysis_jobs: 8
+analysis_timeout: 600
+max_parallel_plugin_builds: 4
+
+scan_commit: "HEAD"
+min_reports_for_triage: 1
+perfect_report_threshold: 3
+jobs: 8

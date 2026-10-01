@@ -16,6 +16,17 @@ class Linux(TargetFactory):
     _target_type = "linux"
     _build_commands = (Path(__file__).parent / "linux-build-commands.txt").read_text()
 
+    def __init__(self, repo_path: str, incremental: bool = False):
+        """
+        Args:
+            incremental: Skip `make clean` and reuse an existing .config when the
+                caller only needs specific objects rebuilt (validation deletes
+                those objects itself so scan-build still analyzes them).
+                UNTESTED: no kernel tree was available when this was added.
+        """
+        super().__init__(repo_path)
+        self.incremental = incremental
+
     def checkout_commit(self, commit_id, is_before=False, **kwargs):
         """
         Checkout a specific commit in the Linux kernel repository and prepare the build environment.
@@ -30,24 +41,32 @@ class Linux(TargetFactory):
             f"Checking out commit {commit_id} {'before' if is_before else 'after'}"
         )
 
-        res = sp.run(["make", "clean"], cwd=self.repo.working_dir, capture_output=True)
-        if res.returncode != 0:
-            logger.error(f"Failed to clean the repository: {res.stderr.decode()}")
-            raise RuntimeError(f"Failed to clean the repository: {res.stderr.decode()}")
+        # A full-tree scan needs every object rebuilt, so only callers that
+        # rebuild specific objects may pass clean=False.
+        clean = kwargs.get("clean", True) or not self.incremental
+        if clean:
+            res = sp.run(["make", "clean"], cwd=self.repo.working_dir, capture_output=True)
+            if res.returncode != 0:
+                logger.error(f"Failed to clean the repository: {res.stderr.decode()}")
+                raise RuntimeError(
+                    f"Failed to clean the repository: {res.stderr.decode()}"
+                )
 
         if is_before:
             commit_id = commit_id + "^"
 
         self.repo.git.checkout(commit_id)
 
-        res = sp.run(
-            ["make", "LLVM=1", f"ARCH={kwargs.get('arch', 'x86')}", "allyesconfig"],
-            cwd=self.repo.working_dir,
-            capture_output=True,
-        )
-        if res.returncode != 0:
-            logger.error(f"Failed to run allyesconfig: {res.stderr.decode()}")
-            raise RuntimeError(f"Failed to run allyesconfig: {res.stderr.decode()}")
+        config_exists = (Path(self.repo.working_dir) / ".config").exists()
+        if clean or not config_exists:
+            res = sp.run(
+                ["make", "LLVM=1", f"ARCH={kwargs.get('arch', 'x86')}", "allyesconfig"],
+                cwd=self.repo.working_dir,
+                capture_output=True,
+            )
+            if res.returncode != 0:
+                logger.error(f"Failed to run allyesconfig: {res.stderr.decode()}")
+                raise RuntimeError(f"Failed to run allyesconfig: {res.stderr.decode()}")
 
         olddefcmd = kwargs.get("olddefcmd")
         if olddefcmd:

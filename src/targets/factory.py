@@ -1,11 +1,18 @@
+import json
 import os
+import threading
 from abc import ABC, abstractmethod
+from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 import git
 
 from tools import get_function_codes_with_config, truncate_large_file
+
+# GitPython object reads are not thread-safe (concurrent `get_patch` calls hit
+# "read of closed file"), so all repository reads/writes share this lock.
+git_lock = threading.RLock()
 
 
 class TargetFactory(ABC):
@@ -76,9 +83,13 @@ class TargetFactory(ABC):
         Raises:
             ValueError: If commit_id does not exist in the repository.
         """
+        with git_lock:
+            return self._get_patch_locked(commit_id)
+
+    def _get_patch_locked(self, commit_id: str) -> str:
         try:
             commit = self.repo.commit(commit_id)
-        except git.exc.BadName:
+        except (git.exc.BadName, ValueError):
             raise ValueError(f"Commit '{commit_id}' not found in repository")
 
         message = commit.message.strip()
@@ -138,3 +149,68 @@ class TargetFactory(ABC):
 
         # Simple ratio of common components to total unique components
         return common_components / total_components
+
+
+@dataclass
+class Checkout:
+    """A configured revision: source tree + build dir + compilation database."""
+
+    revision: str
+    src: Path
+    build: Path
+    compile_db: Path
+    _entries: Optional[List[dict]] = field(default=None, repr=False)
+
+    def entries(self) -> List[dict]:
+        if self._entries is None:
+            self._entries = json.loads(self.compile_db.read_text())
+        return self._entries
+
+    def abs_file(self, entry: dict) -> Path:
+        path = Path(entry["file"])
+        if not path.is_absolute():
+            path = Path(entry.get("directory", "")) / path
+        return Path(os.path.normpath(path))
+
+    def relpath(self, path: str) -> Optional[str]:
+        """Repo-relative path of ``path`` if it lies inside this source tree."""
+        path = os.path.normpath(path)
+        root = str(self.src) + os.sep
+        if path.startswith(root):
+            return path[len(root):]
+        return None
+
+    def entry_for(self, relpath: str) -> Optional[dict]:
+        target = os.path.normpath(self.src / relpath)
+        for entry in self.entries():
+            if str(self.abs_file(entry)) == target:
+                return entry
+        return None
+
+
+class CompileDBTargetBase(TargetFactory):
+    """A target that can produce a compilation database for any revision.
+
+    The CSA backend analyzes such targets generically (clang --analyze per
+    compile entry), so a new kind of C project only needs to implement this
+    interface -- no backend changes. ``targets.compiledb.CompileDBTarget`` is
+    the config-driven implementation.
+    """
+
+    source_extensions = (".c",)
+
+    @abstractmethod
+    def prepare(self, commit_id: str, is_before: bool = False) -> Checkout:
+        """Check out and configure ``commit_id`` (or its parent); must be thread-safe."""
+
+    @abstractmethod
+    def relpath_of(self, path: str) -> Optional[str]:
+        """Map an absolute path from any prepared revision to a repo-relative path."""
+
+    def in_scan_scope(self, relpath: str) -> bool:
+        """Whether a whole-project scan analyzes this file."""
+        return relpath.endswith(self.source_extensions)
+
+    def prefetch(self, commit_id: str):
+        """Optionally start preparing both revisions of a commit in the background."""
+        return None
