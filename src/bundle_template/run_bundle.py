@@ -31,13 +31,16 @@ def main():
     ap.add_argument("--plugin", default=str(HERE / "plugin.so"))
     ap.add_argument("--jobs", type=int, default=os.cpu_count() or 4)
     ap.add_argument("--timeout", type=int, default=600, help="per-file analysis timeout (s)")
-    ap.add_argument("--files", nargs="*", help="only analyze entries whose path ends with one of these")
+    ap.add_argument("--files", nargs="*",
+                    help="only analyze entries whose path contains one of these (e.g. lib/ or src/foo.c)")
     args = ap.parse_args()
 
     entries = json.loads(Path(args.compile_db).read_text())
     entries = [e for e in entries if e["file"].endswith((".c", ".cc", ".cpp", ".cxx"))]
     if args.files:
-        entries = [e for e in entries if e["file"].endswith(tuple(args.files))]
+        entries = [e for e in entries if any(f in e["file"] for f in args.files)]
+    if not entries:
+        sys.exit("no compile entries selected (check --compile-db and --files)")
     if args.roles:
         os.environ["KNIGHTER_ROLES"] = str(Path(args.roles).resolve())
 
@@ -50,6 +53,7 @@ def main():
         clang = Path(found)
 
     out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
     results = analyze_entries(clang, Path(args.plugin), entries, out, jobs=args.jobs,
                               timeout=args.timeout)
     reports = collect_reports(out, delete_duplicates=True)
