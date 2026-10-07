@@ -1,0 +1,79 @@
+{
+  "commit_id": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-libxml2/plugin-cache/plugins/798b04e205f5dd8425a1/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlregexp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "xmlRegNewParserCtxt"
+        ],
+        "fixed_functions": [
+          "xmlRegNewParserCtxt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 740,
+          "column": 13,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "Null pointer passed to length operation before null check",
+          "description": "Null pointer passed to length operation before null check",
+          "issue_hash": "c0d449e80c3eb1b55abea5f0588b9402",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/79c6eef0a1a9/d524ee84/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-c0d449.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 744,
+          "column": 20,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "Null pointer passed to length operation before null check",
+          "description": "Null pointer passed to length operation before null check",
+          "issue_hash": "681801e09ed5219eda40edbcfd9c7c86",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/79c6eef0a1a9/d524ee84/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-681801.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 49.75,
+      "fixed": 48.78
+    },
+    "total_seconds": 98.77
+  },
+  "report_dir": "tmp/validation/79c6eef0a1a9/d524ee84"
+}

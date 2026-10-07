@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "divisor_setter": {
+      "names": [
+        "xmlCtxtSetMaxAmplification"
+      ],
+      "description": "setter function that stores a value into a divisor field/object, possibly allowing zero"
+    },
+    "divisor": {
+      "names": [
+        "maxAmpl"
+      ],
+      "description": "field or variable that is used as a divisor in a division expression"
+    }
+  }
+}

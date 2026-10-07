@@ -1,0 +1,40 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "gc_triggering_call": {
+      "names": [
+        "luaH_finishset"
+      ],
+      "description": "call that can allocate memory and trigger an emergency garbage collection"
+    },
+    "gc_anchor": {
+      "names": [
+        "sethvalue2s"
+      ],
+      "description": "function/macro that roots a GC object on the Lua stack before a GC-triggering call"
+    },
+    "weakly_referenced_object": {
+      "names": [
+        "h"
+      ],
+      "description": "local variable holding the GC object (table) that may be weakly referenced and is updated after a GC-triggering call"
+    },
+    "weak_reference_lookup": {
+      "names": [
+        "fasttm",
+        "luaT_gettmbyobj"
+      ],
+      "description": "retrieves a metamethod value from a possibly weak metatable"
+    },
+    "use_after_free_site": {
+      "names": [
+        "invalidateTMcache",
+        "luaC_barrierback"
+      ],
+      "description": "operations that access the object after the GC-triggering call"
+    }
+  }
+}

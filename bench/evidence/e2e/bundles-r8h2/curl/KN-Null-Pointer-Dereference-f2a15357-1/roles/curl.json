@@ -1,0 +1,12 @@
+{
+  "api_entry_point": [
+    "curl_easy_recv",
+    "curl_easy_send"
+  ],
+  "out_param": [
+    "n"
+  ],
+  "out_param_writer": [
+    "Curl_easy_recv"
+  ]
+}

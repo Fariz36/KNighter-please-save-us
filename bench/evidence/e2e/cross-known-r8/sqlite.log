@@ -1,0 +1,192 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 15:42:43.541 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (sqlite), Repository Path: /home/faris/RA-MrYudis/Knight/targets/sqlite; plugin_build=standalone; validation_scoring=strict
+2026-10-07 15:42:44.474 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-97cb9e27578047b2)
+2026-10-07 15:42:45.349 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 1f7010d4ec42
+2026-10-07 15:42:46.589 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 15:42:46.744 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:45:15.249 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 148.5s
+2026-10-07 15:45:15.256 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-bc440a89-1 roles to sqlite: {'encoded_size_calculator': [], 'input_length': ['nIn'], 'max_input_size': ['SQLITE_MAX_LENGTH'], 'error_sentinel': []}
+2026-10-07 15:45:15.266 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:45:15.278 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 73937f0ca880
+2026-10-07 15:45:15.285 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 7b60ed803b8d
+2026-10-07 15:45:37.541 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 7b60ed803b8d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:45:37.543 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:45:37.553 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 0d979c217fd5
+2026-10-07 15:45:37.558 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision a7200804eb4a
+2026-10-07 15:45:43.720 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7200804eb4a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:45:43.721 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:45:43.732 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision b1541d2f1713
+2026-10-07 15:45:43.737 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision d87f8c496549
+2026-10-07 15:45:49.576 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation d87f8c496549: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:45:49.578 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:45:49.587 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 79837b6ee5d4
+2026-10-07 15:45:49.594 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 1bc183a93579
+2026-10-07 15:46:37.955 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 1bc183a93579: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:46:37.957 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:46:37.969 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision fb41f57de460
+2026-10-07 15:46:37.977 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 97467fa8fa32
+2026-10-07 15:46:38.302 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 97467fa8fa32: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:46:38.304 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:46:38.314 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 4cc2dbd54dba
+2026-10-07 15:46:38.320 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 720d3afa7eb0
+2026-10-07 15:48:47.355 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 720d3afa7eb0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:48:47.357 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:48:47.366 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 6a1efec20af4
+2026-10-07 15:48:47.373 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 2f5d28179685
+2026-10-07 15:49:20.442 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 2f5d28179685: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Integer-Overflow-bc440a89-1", "source": "curl", "target": "sqlite", "roles_mapped": 2, "roles_total": 4, "detected": [], "perfect": []}
+2026-10-07 15:49:21.766 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 15:49:22.025 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:54:18.175 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 296.1s
+2026-10-07 15:54:18.178 | INFO     | role_porting:port_roles:226 - Ported KN-Memory-Leak-a0f08d69-0 roles to sqlite: {'cleanup': ['sqlite3SchemaClear'], 'destructor': ['sqlite3FreeIndex', 'sqlite3DeleteTable', 'sqlite3DeleteTrigger'], 'state_reset': ['memset', 'sqlite3HashClear'], 'link_detach': ['sqlite3UnlinkAndDeleteIndex', 'sqlite3UnlinkAndDeleteTable', 'sqlite3UnlinkAndDeleteTrigger'], 'link_storage': ['idxHash', 'tblHash', 'trigHash']}
+2026-10-07 15:54:18.192 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 15:54:47.665 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 7b60ed803b8d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:54:47.667 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 15:54:56.041 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7200804eb4a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:54:56.043 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 15:55:04.553 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation d87f8c496549: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:55:04.555 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 15:56:08.006 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 1bc183a93579: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:56:08.007 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 15:56:08.385 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 97467fa8fa32: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:56:08.387 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 15:59:04.742 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 720d3afa7eb0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:59:04.746 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 15:59:45.474 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 2f5d28179685: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Memory-Leak-a0f08d69-0", "source": "curl", "target": "sqlite", "roles_mapped": 5, "roles_total": 5, "detected": [], "perfect": []}
+2026-10-07 15:59:46.794 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 15:59:47.039 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 16:01:58.481 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 131.4s
+2026-10-07 16:01:58.485 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c53420e4-0 roles to sqlite: {'data_provider': ['sqlite3_column_blob', 'sqlite3_value_blob'], 'length_provider': ['sqlite3_column_bytes', 'sqlite3_value_bytes'], 'unbounded_string_consumer': ['strlen', 'sqlite3StrICmp', 'sqlite3DbStrDup', 'sqlite3StrIHash', 'sqlite3SetString', 'sqlite3_bind_text', 'sqlite3_bind_text16', 'sqlite3_result_text', 'sqlite3_str_appendf', 'sqlite3_str_vappendf', 'sqlite3VdbeLoadString', 'sqlite3TestTextToPtr', 'sqlite3_mprintf', 'sqlite3_vmprintf', 'sqlite3_snprintf', 'sqlite3_vsnprintf'], 'bounded_nul_scanner': ['memchr'], 'bounded_string_formatter': ['sqlite3_str_appendf', 'sqlite3_str_vappendf', 'sqlite3_mprintf', 'sqlite3_vmprintf', 'sqlite3_snprintf', 'sqlite3_vsnprintf']}
+2026-10-07 16:01:58.496 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:02:27.354 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 7b60ed803b8d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:02:27.356 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:02:35.845 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7200804eb4a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:02:35.848 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:02:44.042 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation d87f8c496549: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:02:44.044 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:03:45.935 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 1bc183a93579: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:03:45.938 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:03:46.262 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 97467fa8fa32: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:03:46.264 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:06:37.153 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 720d3afa7eb0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:06:37.156 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:07:14.693 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 2f5d28179685: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Misuse-c53420e4-0", "source": "curl", "target": "sqlite", "roles_mapped": 5, "roles_total": 5, "detected": [], "perfect": []}
+2026-10-07 16:07:15.940 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 16:07:16.123 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 16:11:44.478 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 268.4s
+2026-10-07 16:11:44.481 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-466c06cf-1 roles to sqlite: {'duplicator': ['sqlite3ExprDup', 'sqlite3IdListDup', 'sqlite3WithDup'], 'source_handle': ['p'], 'destination_allocator': ['sqlite3ExprAlloc', 'sqlite3DbMallocRaw'], 'field_copier': ['sqlite3ExprListDup', 'sqlite3DbStrDup']}
+2026-10-07 16:11:44.487 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:12:09.508 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 7b60ed803b8d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:12:09.510 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:12:17.595 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7200804eb4a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:12:17.596 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:12:24.930 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation d87f8c496549: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:12:24.933 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:13:20.947 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 1bc183a93579: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:13:20.950 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:13:21.270 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 97467fa8fa32: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:13:21.273 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:15:49.399 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 720d3afa7eb0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:15:49.401 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:16:23.555 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 2f5d28179685: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Null-Pointer-Dereference-466c06cf-1", "source": "curl", "target": "sqlite", "roles_mapped": 4, "roles_total": 4, "detected": [], "perfect": []}
+2026-10-07 16:16:24.902 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 16:16:25.007 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 16:20:14.176 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 229.2s
+2026-10-07 16:20:14.179 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-f2a15357-1 roles to sqlite: {'api_entry_point': ['sqlite3changegroup_output', 'sqlite3session_changeset', 'sqlite3session_patchset', 'sqlite3_wal_checkpoint_v2', 'sqlite3Fts5HashScanEntry'], 'out_param': ['pnData', 'ppData', 'pnChangeset', 'ppChangeset', 'pnPatchset', 'ppPatchset', 'pnLog', 'pnCkpt', 'pzTerm', 'pnTerm', 'ppDoclist'], 'out_param_writer': ['sqlite3Fts5IterToken', 'sqlite3Fts5IterTerm']}
+2026-10-07 16:20:14.189 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:20:38.624 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 7b60ed803b8d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:20:38.628 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:20:45.615 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7200804eb4a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:20:45.617 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:20:52.661 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation d87f8c496549: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:20:52.662 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:21:42.906 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 1bc183a93579: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:21:42.909 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:21:43.179 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 97467fa8fa32: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:21:43.181 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:24:31.171 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 720d3afa7eb0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:24:31.174 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:25:04.886 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 2f5d28179685: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Null-Pointer-Dereference-f2a15357-1", "source": "curl", "target": "sqlite", "roles_mapped": 3, "roles_total": 3, "detected": [], "perfect": []}
+2026-10-07 16:25:06.022 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 16:25:06.347 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 16:29:07.734 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 241.4s
+2026-10-07 16:29:07.770 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-f7d4e11f-2 roles to sqlite: {'length_field': ['n'], 'data_pointer': ['data', 'pData'], 'buffer_copy': ['memcpy'], 'error_return': ['SQLITE_CORRUPT', 'SQLITE_NOMEM'], 'copy_flag': [], 'allocator': ['sqlite3_realloc'], 'deallocator': ['sqlite3_free', 'sqlite3Fts5BufferFree'], 'validation_guard': []}
+2026-10-07 16:29:07.777 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:29:36.188 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 7b60ed803b8d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:29:36.191 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:29:44.473 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7200804eb4a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:29:44.475 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:29:52.355 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation d87f8c496549: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:29:52.357 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:30:52.559 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 1bc183a93579: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:30:52.563 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:30:52.858 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 97467fa8fa32: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:30:52.860 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:33:31.333 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 720d3afa7eb0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:33:31.335 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:34:09.931 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 2f5d28179685: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2", "source": "curl", "target": "sqlite", "roles_mapped": 6, "roles_total": 8, "detected": [], "perfect": []}
+2026-10-07 16:34:11.338 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 16:34:11.649 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 16:37:38.202 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 206.6s
+2026-10-07 16:37:38.213 | INFO     | role_porting:port_roles:226 - Ported KN-Double-Free-26dfab2f-1 roles to sqlite: {'resource': [], 'ownership_consumer_frees_on_failure': ['sqlite3_create_function_v2', 'sqlite3_create_window_function'], 'deallocator': ['sqlite3_free'], 'null_on_failure': ['sqlite3_create_function_v2', 'sqlite3_create_window_function'], 'duplicate_cleanup': ['sqlite3_free'], 'context_cleanup': ['sqlite3_close']}
+2026-10-07 16:37:38.222 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 16:38:04.404 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 7b60ed803b8d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:38:04.407 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 16:38:12.477 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7200804eb4a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:38:12.479 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 16:38:20.171 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation d87f8c496549: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:38:20.174 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 16:39:15.686 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 1bc183a93579: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:39:15.689 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 16:39:15.991 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 97467fa8fa32: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:39:15.993 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 16:41:59.423 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 720d3afa7eb0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:41:59.425 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 16:42:35.960 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 2f5d28179685: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Double-Free-26dfab2f-1", "source": "libxml2", "target": "sqlite", "roles_mapped": 5, "roles_total": 6, "detected": [], "perfect": []}
+2026-10-07 16:42:37.320 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 16:42:37.488 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 16:46:31.388 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 233.9s
+2026-10-07 16:46:31.390 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c8eaf223-2 roles to sqlite: {'config_setter': ['sqlite3Fts5ConfigSetValue', 'sqlite3Fts5StorageConfigValue', 'sqlite3_config', 'sqlite3PagerSetPagesize', 'sqlite3BtreeSetPageSize'], 'divisor_field': ['nAutomerge', 'nUsermerge', 'pgsz', 'mnReq', 'pageSize']}
+2026-10-07 16:46:31.398 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 16:47:00.985 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 7b60ed803b8d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:47:00.987 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 16:47:09.258 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7200804eb4a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:47:09.260 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 16:47:17.579 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation d87f8c496549: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:47:17.580 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 16:48:19.581 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 1bc183a93579: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:48:19.584 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 16:48:19.898 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 97467fa8fa32: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:48:19.899 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 16:51:08.700 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 720d3afa7eb0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:51:08.703 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 16:51:45.611 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 2f5d28179685: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Misuse-c8eaf223-2", "source": "libxml2", "target": "sqlite", "roles_mapped": 2, "roles_total": 2, "detected": [], "perfect": []}
+2026-10-07 16:51:47.049 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 16:51:47.148 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 16:55:18.965 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 211.8s
+2026-10-07 16:55:18.991 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-79c6eef0-2 roles to sqlite: {'null_on_failure': ['sqlite3ExprAlloc', 'sqlite3MutexAlloc', 'sqlite3ParserAlloc', 'sqlite3WindowAlloc', 'sqlite3KeyInfoAlloc', 'sqlite3_mutex_alloc', 'sqlite3Malloc', 'sqlite3Realloc', 'sqlite3StackAllocRaw', 'sqlite3StackAllocRawNN', 'sqlite3ExprDup', 'sqlite3WithDup', 'sqlite3CteNew', 'sqlite3VdbeAllocUnpackedRecord', 'sqlite3_fopen', 'sqlite3_popen'], 'length_of': ['strlen', 'MergeCount', 'MX_CELL_SIZE', 'fts3HashCount', 'ExprIsFullSize', 'fts3HashKeysize', 'sqliteHashCount', 'sqlite3WalDbsize', 'sqlite3BitvecSize', 'sqlite3BtreeCount', 'sqlite3OsFileSize', 'sqlite3SectorSize', 'sqlite3CodeRhsOfIN', 'sqlite3JournalSize', 'sqlite3Utf8CharLen', 'sqlite3OsSectorSize', 'sqlite3Utf16ByteLen', 'sqlite3WalFramesize', 'sqlite3PagerRefcount', 'sqlite3BtreeSeekCount', 'sqlite3ExprVectorSize', 'sqlite3Fts5BufferSize', 'sqlite3KeyInfoOfIndex']}
+2026-10-07 16:55:19.017 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 16:56:01.270 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 7b60ed803b8d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:56:01.273 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 16:56:09.668 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7200804eb4a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:56:09.671 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 16:56:17.703 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation d87f8c496549: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:56:17.705 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 16:57:16.917 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 1bc183a93579: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:57:16.918 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 16:57:17.202 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 97467fa8fa32: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:57:17.204 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 17:00:19.642 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 720d3afa7eb0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 17:00:19.647 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 17:00:59.580 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 2f5d28179685: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Null-Pointer-Dereference-79c6eef0-2", "source": "libxml2", "target": "sqlite", "roles_mapped": 2, "roles_total": 2, "detected": [], "perfect": []}
+2026-10-07 17:01:01.015 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 17:01:01.300 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]

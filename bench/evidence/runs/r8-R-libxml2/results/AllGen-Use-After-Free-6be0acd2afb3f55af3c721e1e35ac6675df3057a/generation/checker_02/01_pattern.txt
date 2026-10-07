@@ -1,0 +1,11 @@
+## Bug Pattern
+
+A node object that may still be linked into an XML tree/list is freed by a `deallocator` without first invoking the matching `unlinker`/`remover`. This leaves the old parent/sibling/child links pointing to freed memory, causing dangling references and use-after-free/double-free-style corruption. The fix is to unlink the node before freeing it.
+
+Roles in this patch:
+- `linked_object`: `cur`
+- `deallocator`: `xmlFreeNode`
+- `unlinker` / `remover`: `xmlUnlinkNodeInternal` (missing in the buggy path)
+- `linked_structure`: the XML node tree/list that may still contain `cur` via `parent`, `children`, `last`, `next`, `prev`
+- `content_merger`: `xmlTextAddContent` (merges `cur->content` into the text parent)
+- `api_entry`: `xmlAddChild`

@@ -1,0 +1,9 @@
+## Bug Pattern
+
+The code invokes a **`deallocator`** on an object that may still be linked into its owning container, without first invoking a **`container_remove`** operation. This leaves dangling references from the container to freed memory, causing use-after-free or double-free corruption.
+
+In this patch, `xmlFreeNode(cur)` is called after its content is appended to the text node, but `cur` is not unlinked from its old tree/list first. The fix inserts `xmlUnlinkNodeInternal(cur)` before the deallocation.
+
+Roles:
+- `deallocator`: `xmlFreeNode` — frees an object; the object must no longer be reachable from any container afterward.
+- `container_remove`: `xmlUnlinkNodeInternal` — removes/unlinks an object from its parent/sibling structure before it is freed.

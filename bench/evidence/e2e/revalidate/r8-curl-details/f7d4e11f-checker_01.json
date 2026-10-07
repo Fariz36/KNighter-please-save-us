@@ -1,0 +1,55 @@
+{
+  "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/19a8bf425dd762af43bf/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/setopt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Curl_setblobopt"
+        ],
+        "fixed_functions": [
+          "Curl_setblobopt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/setopt.c": []
+    },
+    "fixed": {
+      "lib/setopt.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 24.37,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 1.22,
+      "fixed": 1.28
+    },
+    "total_seconds": 27.0
+  },
+  "report_dir": "tmp/validation/f7d4e11f4b42/43b3e05b"
+}

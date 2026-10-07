@@ -1,0 +1,12 @@
+{
+  "commit_id": "6d05f9af814503db015a83627f3a80a77494c5a2",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/fts5/fts5_tcl.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/fts5/fts5_tcl.c": "no compile entry"
+    }
+  }
+}

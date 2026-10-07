@@ -1,0 +1,55 @@
+{
+  "commit_id": "fbc4d59151dc4a56052f3a92da3682dc97b32148",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/15fa3cb7c17f26f8b0e0/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/conncache.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Curl_cpool_conn_now_idle"
+        ],
+        "fixed_functions": [
+          "Curl_cpool_conn_now_idle"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/conncache.c": []
+    },
+    "fixed": {
+      "lib/conncache.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 55.66,
+    "analysis_seconds": {
+      "buggy": 11.83,
+      "fixed": 11.59
+    },
+    "total_seconds": 79.12
+  },
+  "report_dir": "tmp/validation/fbc4d59151dc/f845124c"
+}

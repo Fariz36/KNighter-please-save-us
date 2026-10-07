@@ -1,0 +1,12 @@
+## Bug Pattern
+
+The code uses a `delimiter_finder` result to locate `(`, advances the cursor past it, and then performs fixed-offset lookahead reads (`ptr[1]`, `ptr[2]`, `ptr[3]`) without first checking that the character after `(` is not the string terminator. If the delimiter is the final character, `sep = ptr[0]` is `'\0'`, and the first lookahead comparison `ptr[1] == sep` reads one byte past the terminating NUL, causing an out-of-bounds read.
+
+The missing check is a `non_empty_token_check` / `sufficient_token_length` guard before the fixed-offset dereferences.
+
+Roles:
+- `delimiter_finder`: `strchr`
+- `cursor_advance`: `ptr++`
+- `separator_or_empty_marker`: `sep = ptr[0]`
+- `fixed_offset_lookahead_read`: `ptr[1]`, `ptr[2]`, `ptr[3]`
+- `missing_non_empty_token_check`: should test `sep` / `ptr[0] != '\0'` before reading `ptr[1]` and beyond.

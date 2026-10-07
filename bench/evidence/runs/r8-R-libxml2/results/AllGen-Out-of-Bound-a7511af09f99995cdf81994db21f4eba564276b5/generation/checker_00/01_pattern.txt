@@ -1,0 +1,13 @@
+## Bug Pattern
+
+An unchecked lookahead read from a string buffer: a macro/accessor computes `buffer[cursor + index]` without checking the effective offset against the buffer length. The parser context has no stored `buffer_length` for the duplicated input string, so the lookahead can read past the end of the allocation. The fix adds the length field and makes the accessor a bounds-checked read.
+
+Roles:
+- `buffer_start`: `ctxt->string`
+- `cursor`: `ctxt->cur`
+- `buffer_length`: `ctxt->len` (missing before the fix; added by the patch)
+- `unchecked_lookahead_read`: `NXT(index)` / `ctxt->cur[index]`
+- `bounds_checked_lookahead_read`: fixed `NXT(index)` conditional using `(ctxt->cur + index - ctxt->string) < ctxt->len`
+- `duplicator`: `xmlStrdup`
+- `length_of`: `strlen`
+- `null_check`: `if (ret->string == NULL)`

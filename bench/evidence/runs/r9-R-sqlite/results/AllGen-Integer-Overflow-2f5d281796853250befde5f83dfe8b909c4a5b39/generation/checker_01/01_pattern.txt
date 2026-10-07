@@ -1,0 +1,11 @@
+## Bug Pattern
+
+An `aborting_assert` condition performs arithmetic using narrow loop/index counters, while the bound it is compared against is a wider 64-bit accumulated length. Because the counters and the `length_of` result have a narrower type, the add/sub expression is evaluated in that narrow type before the comparison, so it can overflow. Signed overflow is undefined and can make the assertion misfire in debug builds. The fix widens the loop counters so the assertion arithmetic is performed in 64 bits.
+
+Roles:
+- `aborting_assert`: `assert`
+- `length_of`: `sqlite3_value_bytes`
+- `allocator`: `contextMalloc`
+- `reallocator`: `sqlite3Realloc`
+- `deallocator`: `sqlite3_free`
+- `buffer_copy`: `memcpy`

@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "null_on_failure": {
+      "names": [
+        "xmlNewIOInputStream"
+      ],
+      "description": "initializer/factory that may return NULL; on failure it takes ownership of and deallocates a resource passed as an argument"
+    },
+    "deallocator": {
+      "names": [
+        "xmlFreeParserInputBuffer"
+      ],
+      "description": "frees a resource/object; the pointer must not be used or freed again afterwards"
+    }
+  }
+}

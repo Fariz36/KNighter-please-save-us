@@ -1,0 +1,18 @@
+## Bug Pattern
+
+A `required_capacity` calculation for an `output_buffer` underestimates the number of bytes that the subsequent formatting/write path can emit. The calculation adds a fixed `overhead_slack` to variable-size terms, but optional formatting bytes are not fully accounted for. The `buffer_grow` operation only guarantees the underestimated size, and later raw stores through a `write_pointer` plus a terminator store overflow the buffer.
+
+Roles in this patch:
+
+- `output_buffer`: `pAccum->zText`, `zOut`
+- `required_capacity`: `szBufNeeded`
+- `buffer_grow` / `capacity_reserver`: `sqlite3StrAccumEnlargeIfNeeded`
+- `variable_size_terms`: `MAX(e2,0)`, `precision`, `width`, and the `cThousand` adjustment
+- `fixed_overhead_slack`: the literal `+8` in the buggy code, changed to `+10`
+- `optional_format_bytes`: `prefix`, decimal point via `flag_dp`, forced trailing zero via `flag_rtz`/`flag_altform2`, and exponent suffix like `e+NNN`
+- `write_pointer`: `bufpt`
+- `raw_store`: `*(bufpt++) = ...`, `memcpy(...)`, `memset(...)`
+- `terminator_store`: `zOut[length] = 0`
+- `write_length`: `length`
+
+Concretely, `%!.0e` on `-1e100` requests only 8 bytes of rendering space, but the formatter writes `-1.0e+100` before the terminator. The buffer is therefore too small for the actual formatted output, causing a buffer overflow.

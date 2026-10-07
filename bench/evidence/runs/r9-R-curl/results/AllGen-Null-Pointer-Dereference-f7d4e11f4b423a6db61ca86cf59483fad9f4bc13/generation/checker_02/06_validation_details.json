@@ -1,0 +1,79 @@
+{
+  "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/plugin-cache/plugins/f57eafbbf1dfe9f77b59/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/setopt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "Curl_setblobopt"
+        ],
+        "fixed_functions": [
+          "Curl_setblobopt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/work/src/b3675fe80a33/lib/setopt.c",
+          "line": 122,
+          "column": 7,
+          "function": "Curl_setblobopt",
+          "bug_type": "Unchecked NULL Buffer Copy",
+          "description": "Unchecked NULL pointer from input struct used as buffer_copy source",
+          "issue_hash": "fe430641fc19eaf398191b9936ddf477",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/f7d4e11f4b42/47138bd5/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-curl_work_src_b3675fe80a33_lib_setopt.c/report-fe4306.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/work/src/f7d4e11f4b42/lib/setopt.c",
+          "line": 122,
+          "column": 7,
+          "function": "Curl_setblobopt",
+          "bug_type": "Unchecked NULL Buffer Copy",
+          "description": "Unchecked NULL pointer from input struct used as buffer_copy source",
+          "issue_hash": "fe430641fc19eaf398191b9936ddf477",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/f7d4e11f4b42/47138bd5/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-curl_work_src_f7d4e11f4b42_lib_setopt.c/report-fe4306.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 0.42,
+      "fixed": 0.39
+    },
+    "total_seconds": 0.86
+  },
+  "report_dir": "tmp/validation/f7d4e11f4b42/47138bd5"
+}

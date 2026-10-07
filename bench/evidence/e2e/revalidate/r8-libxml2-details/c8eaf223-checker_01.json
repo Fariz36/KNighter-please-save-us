@@ -1,0 +1,57 @@
+{
+  "commit_id": "c8eaf2236ff16667970f96f3f01e119c99d38ab2",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/07d667f7e05f418518bd/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "parser.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlCtxtSetMaxAmplification",
+          "xmlParserEntityCheck"
+        ],
+        "fixed_functions": [
+          "xmlCtxtSetMaxAmplification",
+          "xmlParserEntityCheck"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "parser.c": []
+    },
+    "fixed": {
+      "parser.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 46.46,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 67.45,
+      "fixed": 68.42
+    },
+    "total_seconds": 182.86
+  },
+  "report_dir": "tmp/validation/c8eaf2236ff1/787263dc"
+}

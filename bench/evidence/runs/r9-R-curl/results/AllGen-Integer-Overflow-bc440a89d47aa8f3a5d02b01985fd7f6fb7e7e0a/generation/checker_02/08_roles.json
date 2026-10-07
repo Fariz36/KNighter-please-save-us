@@ -1,0 +1,14 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "length_of": {
+      "names": [
+        "encoder_base64_size"
+      ],
+      "description": "computes a derived length from an input size; performs arithmetic on an untrusted input size and must validate it against a maximum safe bound before calculating"
+    }
+  }
+}

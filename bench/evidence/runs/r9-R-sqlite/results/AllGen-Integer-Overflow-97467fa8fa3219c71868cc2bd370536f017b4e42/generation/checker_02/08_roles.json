@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "kvvfsDecode"
+      ],
+      "description": "function that parses or decodes untrusted input; its input can drive computed lengths or values"
+    },
+    "memory_writer": {
+      "names": [
+        "memset"
+      ],
+      "description": "writes bytes to a destination using a length/count argument; the count must not be overflowed or negative"
+    }
+  }
+}

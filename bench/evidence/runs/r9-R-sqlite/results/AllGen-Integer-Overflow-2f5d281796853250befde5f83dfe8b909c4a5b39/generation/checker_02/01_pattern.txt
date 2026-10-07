@@ -1,0 +1,10 @@
+## Bug Pattern
+
+The bug pattern is a 32-bit arithmetic overflow in an `aborting_assert` condition: loop counters/offsets are kept in a narrower signed integer type, but the assertion combines them with a length result and compares the expression to a 64-bit size/limit. Because the arithmetic is evaluated in the narrow type before the comparison, it can overflow; widening the counters to 64 bits forces the whole expression to be evaluated in 64 bits.
+
+Roles:
+- `aborting_assert`: `assert`
+- `length_of`: `sqlite3_value_bytes`
+- `buffer_copy`: `memcpy`
+- `allocator`: `contextMalloc`
+- `reallocator`: `sqlite3Realloc`

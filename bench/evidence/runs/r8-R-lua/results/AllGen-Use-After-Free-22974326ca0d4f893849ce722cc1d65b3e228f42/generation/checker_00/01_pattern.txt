@@ -1,0 +1,11 @@
+## Bug Pattern
+
+The pattern is a **weak-reference lifetime violation across a GC-triggering operation**: a GC-managed object is reachable only through a weak container, but it is used as the target of an operation that may allocate and trigger an emergency collection without first being rooted/anchored in a strong root. The GC can collect the object while it is still being used, causing a use-after-free.
+
+Roles:
+- `weak_container`: weak table / metatable whose values are not strongly marked; in this patch, the metatable with `__mode='v'` holding `__newindex`.
+- `weakly_referenced_object`: the `Table` reached via `__newindex` (`tm` / `t` / `h`).
+- `gc_triggering_operation`: `luaH_finishset`, which can allocate/rehash and trigger emergency GC.
+- `missing_root`: local C pointer `Table *h` / `const TValue *t` is not a GC root.
+- `root_anchor`: stack anchoring via `sethvalue2s(L, L->top.p, h); L->top.p++;` before the GC-triggering call, and `L->top.p--` afterward.
+- `use_after_free_sites`: `luaH_finishset`, `invalidateTMcache`, `luaC_barrierback`, which continue to use `h`.

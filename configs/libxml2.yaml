@@ -21,6 +21,8 @@ target_options:
     # meson setup writes config.h, xmlversion.h and compile_commands.json; no build needed.
     - "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/bin/meson setup {build} {src} -Dpython=disabled -Dicu=disabled -Dhttp=disabled"
   source_extensions: [".c"]
+  # Revisions without it predate the build system the setup uses (bench/matched_pairs.py).
+  build_marker: "meson.build"
 
 plugin_build: standalone
 validation_scoring: strict

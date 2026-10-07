@@ -1,0 +1,67 @@
+{
+  "commit_id": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/plugin-cache/plugins/0af93956b3c44168f804/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/mime.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "encoder_base64_size"
+        ],
+        "fixed_functions": [
+          "encoder_base64_size"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/mime.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/6546ffeda4f1/lib/mime.c",
+          "line": 430,
+          "column": 10,
+          "function": "unknown",
+          "bug_type": "Integer Overflow",
+          "description": "Potential integer overflow in encoded size calculation",
+          "issue_hash": "11736259541c724027e9ab2a0f34783a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/bc440a89d47a/71d670bc/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_6546ffeda4f1_lib_mime.c/report-117362.html",
+          "relpath": "lib/mime.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/mime.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 9.58,
+      "fixed": 14.32
+    },
+    "total_seconds": 23.94
+  },
+  "report_dir": "tmp/validation/bc440a89d47a/71d670bc"
+}

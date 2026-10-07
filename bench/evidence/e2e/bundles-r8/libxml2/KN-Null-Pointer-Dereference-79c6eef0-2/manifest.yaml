@@ -1,0 +1,53 @@
+id: KN-Null-Pointer-Dereference-79c6eef0-2
+bug_type: Null-Pointer-Dereference
+source:
+  project: libxml2
+  description: libxml2, the XML parsing and manipulation library written in C
+  commit: 79c6eef0a1a9462e9c0b80a417406c8656c28eb1
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  The result of a `null_on_failure` allocation/duplication call is used by a function that dereferences
+  it, such as a `length_of` function, **before** the required NULL check. If the allocation/duplication
+  fails and returns NULL, the subsequent use causes a NULL pointer dereference. The fix is to reorder
+  the code so the NULL check happens before any operation that requires a valid pointer.
+
+
+  Roles in this patch:
+
+  - `null_on_failure` / `allocator` / `duplicator`: `xmlStrdup` (and `xmlMalloc`, though it is checked
+  correctly)
+
+  - `length_of` / pointer-dereferencing operation: `strlen`
+
+  - `null_check`: `if (ret->string == NULL)`
+
+  - `deallocator` / cleanup: `xmlFree`
+
+
+  Specifically, `ret->string = xmlStrdup(string);` may return NULL, but `ret->len = strlen((const char
+  *) ret->string);` is executed before the check `if (ret->string == NULL)`. If `xmlStrdup` fails, `strlen`
+  dereferences NULL.'
+roles:
+  null_on_failure:
+    names:
+    - xmlStrdup
+    - xmlMalloc
+    description: allocation or duplication function that may return NULL on failure; its result must be
+      NULL-checked before dereference
+  length_of:
+    names:
+    - strlen
+    description: function that dereferences its pointer argument, e.g., computes string length
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: 3c44401b20c9b0cfdf2951dd290b1bc9192d6362
+exported: 2026-10-01T20:44:00+0700

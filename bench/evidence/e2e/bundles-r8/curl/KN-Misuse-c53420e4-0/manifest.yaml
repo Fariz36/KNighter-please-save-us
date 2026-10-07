@@ -1,0 +1,55 @@
+id: KN-Misuse-c53420e4-0
+bug_type: Misuse
+source:
+  project: curl
+  description: curl, the C library (libcurl) for transferring data with URLs
+  commit: c53420e42742a68004854a7fa354f9500b4b1516
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: "## Bug Pattern\n\nA length-delimited byte buffer (`data_provider` + `length_provider`) is treated\
+  \ as a NUL-terminated C string (`unbounded_string_consumer`). Here `cn` may be obtained from an ASN.1\
+  \ string with an explicit `cnlen`, but no NUL terminator is guaranteed within that length. The buggy\
+  \ code calls `strlen((char *)cn)` and later formats `cn` with `%s`, so if no NUL byte exists inside\
+  \ the buffer, both reads continue past the allocated data, causing an out-of-bounds read. The fix uses\
+  \ length-bounded operations: `memchr(cn, '\\0', cnlen)` and `%.*s` with `cnlen`.\n\nRoles:\n- `data_provider`\
+  \ (returns pointer, no NUL-termination guarantee): `ASN1_STRING_get0_data`, `ASN1_STRING_to_UTF8`\n\
+  - `length_provider` (returns byte count for the same data): `ASN1_STRING_length`, `ASN1_STRING_to_UTF8`\
+  \ \u2192 `cnlen`\n- `unbounded_string_consumer` (requires NUL termination): `strlen`, `%s` in `failf`,\
+  \ `%s` in `infof`\n- `bounded_nul_scanner` (fix): `memchr(cn, '\\0', cnlen)`\n- `bounded_string_formatter`\
+  \ (fix): `%.*s` with `cnlen`"
+roles:
+  data_provider:
+    names:
+    - ASN1_STRING_get0_data
+    - ASN1_STRING_to_UTF8
+    description: returns or writes back a pointer to a length-delimited byte buffer without guaranteeing
+      a NUL terminator within the buffer length
+  length_provider:
+    names:
+    - ASN1_STRING_length
+    - ASN1_STRING_to_UTF8
+    description: returns the byte length associated with a length-delimited buffer
+  unbounded_string_consumer:
+    names:
+    - strlen
+    - failf
+    - infof
+    description: function or printf-style formatter that consumes a C string and requires NUL termination
+  bounded_nul_scanner:
+    names:
+    - memchr
+    description: scans a buffer within an explicit length for a NUL byte
+  bounded_string_formatter:
+    names: []
+    description: printf-style formatting that bounds the consumed string by an explicit precision, e.g.
+      %.*s
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: 3c44401b20c9b0cfdf2951dd290b1bc9192d6362
+exported: 2026-10-01T20:42:12+0700

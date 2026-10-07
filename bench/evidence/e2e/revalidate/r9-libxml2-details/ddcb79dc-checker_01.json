@@ -1,0 +1,153 @@
+{
+  "commit_id": "ddcb79dc9934fd8a26263f6368c4eb7aa43f6d49",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/88bf074a149b79132ee2/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 2,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "parserInternals.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 4,
+        "fixed_total": 3,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlCtxtSetSaxHandler"
+        ],
+        "fixed_functions": [
+          "xmlCtxtSetSaxHandler"
+        ]
+      },
+      {
+        "path": "testparser.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "testSwitchDtd",
+          "testSwitchDtdExtSubset"
+        ],
+        "fixed_functions": [
+          "testSwitchDtd",
+          "testSwitchDtdExtSubset"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "parserInternals.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/c8eaf2236ff1-f6d22c8ac6c7/../../src/c8eaf2236ff1/parserInternals.c",
+          "line": 2858,
+          "column": 17,
+          "function": "xmlInitSAXParserCtxt",
+          "bug_type": "Memory Leak",
+          "description": "Potential memory leak: overwriting owned pointer without freeing previous value",
+          "issue_hash": "b0fe62e43998faaa115b57f303d60820",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ddcb79dc9934/015dd4f6/buggy/.._.._src_c8eaf2236ff1_parserInternals.c/report-b0fe62.html",
+          "relpath": "parserInternals.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/c8eaf2236ff1-f6d22c8ac6c7/../../src/c8eaf2236ff1/parserInternals.c",
+          "line": 3202,
+          "column": 15,
+          "function": "xmlCtxtSetSaxHandler",
+          "bug_type": "Memory Leak",
+          "description": "Potential memory leak: overwriting owned pointer without freeing previous value",
+          "issue_hash": "b26a9a08fd042d1ddba3971cf222bc1c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ddcb79dc9934/015dd4f6/buggy/.._.._src_c8eaf2236ff1_parserInternals.c/report-b26a9a.html",
+          "relpath": "parserInternals.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/c8eaf2236ff1-f6d22c8ac6c7/../../src/c8eaf2236ff1/parserInternals.c",
+          "line": 2897,
+          "column": 26,
+          "function": "xmlInitSAXParserCtxt",
+          "bug_type": "Memory Leak",
+          "description": "Potential memory leak: overwriting owned pointer without freeing previous value",
+          "issue_hash": "d295377ab57887203b256df284dba4c4",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ddcb79dc9934/015dd4f6/buggy/.._.._src_c8eaf2236ff1_parserInternals.c/report-d29537.html",
+          "relpath": "parserInternals.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/c8eaf2236ff1-f6d22c8ac6c7/../../src/c8eaf2236ff1/parserInternals.c",
+          "line": 2789,
+          "column": 24,
+          "function": "xmlInitSAXParserCtxt",
+          "bug_type": "Memory Leak",
+          "description": "Potential memory leak: overwriting owned pointer without freeing previous value",
+          "issue_hash": "f4bb72d4b69625da18e3fed2f4b3d82d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ddcb79dc9934/015dd4f6/buggy/.._.._src_c8eaf2236ff1_parserInternals.c/report-f4bb72.html",
+          "relpath": "parserInternals.c"
+        }
+      ],
+      "testparser.c": []
+    },
+    "fixed": {
+      "parserInternals.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/ddcb79dc9934-f6d22c8ac6c7/../../src/ddcb79dc9934/parserInternals.c",
+          "line": 2858,
+          "column": 17,
+          "function": "xmlInitSAXParserCtxt",
+          "bug_type": "Memory Leak",
+          "description": "Potential memory leak: overwriting owned pointer without freeing previous value",
+          "issue_hash": "b0fe62e43998faaa115b57f303d60820",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ddcb79dc9934/015dd4f6/fixed/.._.._src_ddcb79dc9934_parserInternals.c/report-b0fe62.html",
+          "relpath": "parserInternals.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/ddcb79dc9934-f6d22c8ac6c7/../../src/ddcb79dc9934/parserInternals.c",
+          "line": 2897,
+          "column": 26,
+          "function": "xmlInitSAXParserCtxt",
+          "bug_type": "Memory Leak",
+          "description": "Potential memory leak: overwriting owned pointer without freeing previous value",
+          "issue_hash": "d295377ab57887203b256df284dba4c4",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ddcb79dc9934/015dd4f6/fixed/.._.._src_ddcb79dc9934_parserInternals.c/report-d29537.html",
+          "relpath": "parserInternals.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/ddcb79dc9934-f6d22c8ac6c7/../../src/ddcb79dc9934/parserInternals.c",
+          "line": 2789,
+          "column": 24,
+          "function": "xmlInitSAXParserCtxt",
+          "bug_type": "Memory Leak",
+          "description": "Potential memory leak: overwriting owned pointer without freeing previous value",
+          "issue_hash": "f4bb72d4b69625da18e3fed2f4b3d82d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ddcb79dc9934/015dd4f6/fixed/.._.._src_ddcb79dc9934_parserInternals.c/report-f4bb72.html",
+          "relpath": "parserInternals.c"
+        }
+      ],
+      "testparser.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 13.95,
+    "setup_seconds": 0.04,
+    "analysis_seconds": {
+      "buggy": 17.99,
+      "fixed": 17.25
+    },
+    "total_seconds": 49.48
+  },
+  "report_dir": "tmp/validation/ddcb79dc9934/015dd4f6"
+}

@@ -1,0 +1,67 @@
+{
+  "commit_id": "a7511af09f99995cdf81994db21f4eba564276b5",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/12c04fdd13fe828b3a14/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlregexp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlRegNewParserCtxt"
+        ],
+        "fixed_functions": [
+          "xmlRegNewParserCtxt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 51,
+          "column": 9,
+          "function": "unknown",
+          "bug_type": "Unchecked indexed read",
+          "description": "Unchecked indexed read: macro does not verify the index is within the buffer length",
+          "issue_hash": "05049b30589f4a54f03eec69865101ea",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7511af09f99/d4ace134/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-05049b.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlregexp.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 10.21,
+    "setup_seconds": 0.03,
+    "analysis_seconds": {
+      "buggy": 46.9,
+      "fixed": 45.91
+    },
+    "total_seconds": 103.33
+  },
+  "report_dir": "tmp/validation/a7511af09f99/d4ace134"
+}

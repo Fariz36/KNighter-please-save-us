@@ -1,0 +1,25 @@
+{
+  "combined_create_and_publish": [
+    "sqlite3StartTable",
+    "sqlite3VtabEponymousTableInit"
+  ],
+  "object_initializer": [
+    "sqlite3AddColumn",
+    "sqlite3AddNotNull",
+    "sqlite3AddPrimaryKey",
+    "sqlite3AddCheckConstraint",
+    "sqlite3AddDefaultValue",
+    "sqlite3AddCollateType",
+    "sqlite3AddGenerated",
+    "sqlite3VtabCallCreate",
+    "sqlite3VtabCallConnect"
+  ],
+  "persistent_registry_lookup": [
+    "sqlite3FindTable"
+  ],
+  "object_allocator": [],
+  "registry_store": [
+    "sqlite3HashInsert"
+  ],
+  "registry_key": []
+}

@@ -1,0 +1,33 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 17:24:50.910 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (lua), Repository Path: /home/faris/RA-MrYudis/Knight/targets/lua; plugin_build=standalone; validation_scoring=strict
+2026-10-07 17:24:51.128 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for lapi.c, including whole file (35.7KB)
+2026-10-07 17:24:51.286 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for lauxlib.c, including whole file (35.1KB)
+2026-10-07 17:24:51.404 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for lstrlib.c, including whole file (56.8KB)
+2026-10-07 17:25:02.151 | INFO     | backends.plugin_builder:build:364 - Built plugin 3afa90f2d2f566039a37 (compile 7.3s, link 3.4s)
+2026-10-07 17:25:02.164 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision 40b76de2d77e
+2026-10-07 17:25:02.168 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision bc4bbcef651b
+2026-10-07 17:25:02.567 | INFO     | backends.plugin_builder:build:364 - Built plugin 1c2623ac704dcb34ccfd (compile 7.7s, link 3.4s)
+2026-10-07 17:25:02.576 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision c931d86e98da
+2026-10-07 17:25:02.585 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision 22974326ca0d
+2026-10-07 17:25:03.910 | INFO     | backends.plugin_builder:build:364 - Built plugin 48ceadf3bc80ac325ba7 (compile 9.1s, link 3.3s)
+2026-10-07 17:25:17.967 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 22974326ca0d: TP=0 TN=0 (strict); strict=0/0 legacy=0/2
+{"commit": "22974326", "attempt": "checker_01", "old_tp": 0, "old_tn": 0, "old_perfect": false, "tp": 0, "tn": 0, "perfect": false}
+2026-10-07 17:25:19.106 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 22974326ca0d: TP=1 TN=0 (strict); strict=1/0 legacy=1/1
+{"commit": "22974326", "attempt": "checker_00", "old_tp": 1, "old_tn": 0, "old_perfect": false, "tp": 1, "tn": 0, "perfect": false}
+2026-10-07 17:25:19.617 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc4bbcef651b: TP=1 TN=1 (strict); strict=1/1 legacy=1/1
+{"commit": "bc4bbcef", "attempt": "checker_00", "old_tp": 1, "old_tn": 1, "old_perfect": true, "tp": 1, "tn": 1, "perfect": true}
+2026-10-07 17:25:29.696 | INFO     | backends.plugin_builder:build:364 - Built plugin 119a44a991c69042c262 (compile 8.1s, link 3.6s)
+2026-10-07 17:25:39.485 | INFO     | backends.plugin_builder:build:364 - Built plugin 054ca21d9b0fb4112e69 (compile 17.1s, link 3.3s)
+2026-10-07 17:25:39.529 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision efddc2309c5f
+2026-10-07 17:25:39.529 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision f1bb2773bba8
+2026-10-07 17:25:44.972 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 22974326ca0d: TP=1 TN=1 (strict); strict=1/1 legacy=1/2
+{"commit": "22974326", "attempt": "checker_02", "old_tp": 1, "old_tn": 1, "old_perfect": true, "tp": 1, "tn": 1, "perfect": true}
+2026-10-07 17:26:10.603 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation efddc2309c5f: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"commit": "efddc230", "attempt": "checker_00", "old_tp": 0, "old_tn": 0, "old_perfect": false, "tp": 0, "tn": 0, "perfect": false}
+2026-10-07 17:26:16.447 | INFO     | backends.plugin_builder:build:364 - Built plugin caf9a2fcb9236df2beab (compile 81.9s, link 3.1s)
+2026-10-07 17:26:16.459 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision 7c40c5edb236
+2026-10-07 17:26:16.467 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision 10eb89d1141d
+2026-10-07 17:26:17.320 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 10eb89d1141d: TP=1 TN=1 (strict); strict=1/1 legacy=1/1
+{"commit": "10eb89d1", "attempt": "checker_00", "old_tp": 1, "old_tn": 1, "old_perfect": true, "tp": 1, "tn": 1, "perfect": true}
+{"run": "r8-R-lua", "attempts": 6, "unchanged": 6, "perfect_before": 3, "perfect_after": 3, "commits_perfect_before": 3, "commits_perfect_after": 3}

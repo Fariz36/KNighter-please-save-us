@@ -1,0 +1,67 @@
+{
+  "commit_id": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/432731adf76769d52b0e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/mime.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "encoder_base64_size"
+        ],
+        "fixed_functions": [
+          "encoder_base64_size"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/mime.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/6546ffeda4f1/lib/mime.c",
+          "line": 430,
+          "column": 26,
+          "function": "encoder_base64_size",
+          "bug_type": "Integer Overflow in Length Calculation",
+          "description": "Unchecked arithmetic on untrusted size may overflow",
+          "issue_hash": "9caf7109c0c127452419307885d39146",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc440a89d47a/5a3fe46f/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_6546ffeda4f1_lib_mime.c/report-9caf71.html",
+          "relpath": "lib/mime.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/mime.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 12.21,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 26.5,
+      "fixed": 29.11
+    },
+    "total_seconds": 67.98
+  },
+  "report_dir": "tmp/validation/bc440a89d47a/5a3fe46f"
+}

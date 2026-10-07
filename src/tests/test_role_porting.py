@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from role_porting import extract_candidates, rank_candidates, split_words
+from role_porting import extract_candidates, identifier_index, rank_candidates, split_words
 from tools import extract_json_block
 
 HEADER = """
@@ -58,6 +58,26 @@ class PortingTest(unittest.TestCase):
                                  ["xmlFreeDoc"], cands)
         self.assertEqual({"sqlite3_free", "sqlite3ExprListDelete"}, set(ranked[:2]))
         self.assertNotIn("sqlite3ExprCompare", ranked)
+
+    def test_lua_and_libxml2_declaration_styles(self):
+        # Both styles were missed before: the LLM's correct picks were then rejected as
+        # "not in target" in the self-port control (lua luaL_setfuncs, libxml2 xmlNewIOInputStream).
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "lauxlib.h").write_text(
+                "LUALIB_API void (luaL_setfuncs) (lua_State *L, const luaL_Reg *l, int nup);\n"
+                "LUA_API int   (lua_gettop) (lua_State *L);\n")
+            (root / "parserInternals.h").write_text(
+                "XMLPUBFUN xmlParserInputPtr\n\t\txmlNewIOInputStream\t(xmlParserCtxtPtr ctxt,\n"
+                "\t\t\t\t\t xmlParserInputBufferPtr buf);\n")
+            (root / "lauxlib.c").write_text("static int newbox (lua_State *L) { return 0; }\n")
+            cands = extract_candidates(root)
+            known = identifier_index(root)
+        self.assertIn("luaL_setfuncs", cands)
+        self.assertIn("lua_gettop", cands)
+        self.assertIn("xmlNewIOInputStream", cands)
+        self.assertIn("newbox", known)            # static function: validated by existence
+        self.assertNotIn("luaL_doesNotExist", known)
 
     def test_extract_json_block(self):
         text = 'Here:\n```json\n{"allocator": {"names": ["xmlMalloc"]}}\n```\n'

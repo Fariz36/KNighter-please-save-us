@@ -1,0 +1,69 @@
+{
+  "commit_id": "c8eaf2236ff16667970f96f3f01e119c99d38ab2",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/plugin-cache/plugins/41986670259a82a39009/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "parser.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlCtxtSetMaxAmplification",
+          "xmlParserEntityCheck"
+        ],
+        "fixed_functions": [
+          "xmlCtxtSetMaxAmplification",
+          "xmlParserEntityCheck"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "parser.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/87c77060fbd6-f6d22c8ac6c7/../../src/87c77060fbd6/parser.c",
+          "line": 470,
+          "column": 25,
+          "function": "unknown",
+          "bug_type": "Division by zero",
+          "description": "Potential division by zero: divisor may be zero because config setter does not reject zero",
+          "issue_hash": "137008a3d7f738f65ecc157321836fa7",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/c8eaf2236ff1/f89eb5bf/buggy/.._.._src_87c77060fbd6_parser.c/report-137008.html",
+          "relpath": "parser.c"
+        }
+      ]
+    },
+    "fixed": {
+      "parser.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 43.91,
+      "fixed": 42.68
+    },
+    "total_seconds": 86.98
+  },
+  "report_dir": "tmp/validation/c8eaf2236ff1/f89eb5bf"
+}

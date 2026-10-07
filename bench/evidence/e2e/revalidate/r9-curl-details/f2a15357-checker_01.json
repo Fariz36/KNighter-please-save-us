@@ -1,0 +1,80 @@
+{
+  "commit_id": "f2a1535712ff8622024d27b867480698752c254e",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/34e0db0a07ac898e67bb/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/easy.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "curl_easy_recv",
+          "curl_easy_send"
+        ],
+        "fixed_functions": [
+          "curl_easy_recv",
+          "curl_easy_send"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/easy.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/d87b4e460513/lib/easy.c",
+          "line": 1378,
+          "column": 8,
+          "function": "curl_easy_send",
+          "bug_type": "Out-parameter written without NULL check",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "issue_hash": "37d2ac9c6d9ff24f22fa91f155eadd3c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f2a1535712ff/8920b8f9/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_d87b4e460513_lib_easy.c/report-37d2ac.html",
+          "relpath": "lib/easy.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/d87b4e460513/lib/easy.c",
+          "line": 1307,
+          "column": 14,
+          "function": "curl_easy_recv",
+          "bug_type": "Out-parameter written without NULL check",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "issue_hash": "b6f1b1049c1bb2848122736458afb271",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f2a1535712ff/8920b8f9/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_d87b4e460513_lib_easy.c/report-b6f1b1.html",
+          "relpath": "lib/easy.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/easy.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 25.88,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 0.63,
+      "fixed": 0.66
+    },
+    "total_seconds": 27.26
+  },
+  "report_dir": "tmp/validation/f2a1535712ff/8920b8f9"
+}

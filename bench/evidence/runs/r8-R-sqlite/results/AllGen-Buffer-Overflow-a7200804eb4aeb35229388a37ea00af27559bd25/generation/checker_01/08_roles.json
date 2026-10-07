@@ -1,0 +1,38 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "buffer_grow": {
+      "names": [
+        "sqlite3StrAccumEnlargeIfNeeded"
+      ],
+      "description": "Function that ensures the output buffer has at least the requested capacity."
+    },
+    "required_capacity": {
+      "names": [
+        "szBufNeeded"
+      ],
+      "description": "Variable holding the computed required capacity for an output buffer, passed to a buffer grow function."
+    },
+    "write_pointer": {
+      "names": [
+        "bufpt"
+      ],
+      "description": "Pointer used to write characters into the output buffer."
+    },
+    "digit_set": {
+      "names": [
+        "aDigits"
+      ],
+      "description": "Array of digit characters used by the formatter."
+    },
+    "output_buffer": {
+      "names": [
+        "zOut"
+      ],
+      "description": "Pointer to the output buffer being written to."
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "commit_id": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-lua/plugin-cache/plugins/56212d503149f29b02f2/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 2,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lapi.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": []
+      },
+      {
+        "path": "lvm.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "luaV_finishset"
+        ],
+        "fixed_functions": [
+          "luaV_finishset"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lapi.c": [],
+      "lvm.c": []
+    },
+    "fixed": {
+      "lapi.c": [],
+      "lvm.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 5.67,
+      "fixed": 5.88
+    },
+    "total_seconds": 11.75
+  },
+  "report_dir": "tmp/validation/22974326ca0d/acc39304"
+}

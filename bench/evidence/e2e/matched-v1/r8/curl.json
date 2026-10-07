@@ -1,0 +1,677 @@
+[
+  {
+    "bundle": "KN-Double-Free-26dfab2f-1",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Double-Free",
+    "mapping": {
+      "resource": [],
+      "ownership_consumer_frees_on_failure": [
+        "Curl_cf_create"
+      ],
+      "deallocator": [
+        "curl_free",
+        "curlx_free",
+        "curl_dbg_free",
+        "free",
+        "curlx_safefree",
+        "Curl_cf_ngtcp2_h3_stream_ctx_free"
+      ],
+      "null_on_failure": [
+        "Curl_cf_create"
+      ],
+      "duplicate_cleanup": [
+        "free",
+        "curlx_free",
+        "curl_free",
+        "curl_dbg_free",
+        "curlx_safefree"
+      ],
+      "context_cleanup": []
+    },
+    "same_type_candidates": 10,
+    "api_matched_candidates": 4,
+    "pairs": [
+      {
+        "commit": "74f7505974836f633c955dbce7514f12f78ddc5b",
+        "subject": "asyn-ares: remove hostname free on OOM",
+        "files": [
+          "lib/asyn-ares.c"
+        ],
+        "api_hits": [
+          "free"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "aba8043075f6df09e489379f19f99cbc377b25d4",
+        "subject": "tool: follow-up getenv fix",
+        "files": [
+          "src/tool_ipfs.c",
+          "src/tool_operate.c"
+        ],
+        "api_hits": [
+          "curl_free"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of aba8043075f6df09e489379f19f99cbc377b25d4 could be analyzed: no compile entry no compile entry no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "68ffe6c17d6e44b459d60805813f646d244a186b",
+        "subject": "ntlm_wb: fix double-free in OOM",
+        "files": [
+          "lib/curl_ntlm_wb.c"
+        ],
+        "api_hits": [
+          "free"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "<min> value.  Or, use the <min>...<max> syntax\n  to tell CMake that the project requires at least <min> but has been updated\n  to work with policies introduced by <max> or earlier.\n\n  Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.\n\n\n-- Configuring incomplete, errors occurred!\n",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "c4c9e070f35c113b8b9c4d79ca1b9c1afe87d0e4",
+        "subject": "Curl_fillreadbuffer: avoid double-free trailer buf on error",
+        "files": [
+          "lib/http.c",
+          "lib/transfer.c"
+        ],
+        "api_hits": [
+          "free"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "<min> value.  Or, use the <min>...<max> syntax\n  to tell CMake that the project requires at least <min> but has been updated\n  to work with policies introduced by <max> or earlier.\n\n  Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.\n\n\n-- Configuring incomplete, errors occurred!\n",
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 299.0
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Misuse",
+    "mapping": {
+      "config_setter": [],
+      "divisor_field": [
+        "max_recv_speed",
+        "max_send_speed",
+        "rate"
+      ]
+    },
+    "same_type_candidates": 1023,
+    "api_matched_candidates": 3,
+    "pairs": [
+      {
+        "commit": "fc273027f16df2dd1eb66ffc7df417f605199e35",
+        "subject": "transfer: speed limiting fix for 32bit systems",
+        "files": [
+          "lib/transfer.c"
+        ],
+        "api_hits": [
+          "max_recv_speed"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "e492c7c524263e47844ec9354102fcf200e686a8",
+        "subject": "transfer: fix upload rate limiting, add test cases",
+        "files": [
+          "lib/transfer.c"
+        ],
+        "api_hits": [
+          "max_recv_speed"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "0e4c1434ae3d33f4f91a0d55d6a2b58e03773ccb",
+        "subject": "http2: fix variable type",
+        "files": [
+          "lib/http2.c"
+        ],
+        "api_hits": [
+          "max_recv_speed"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 537.0
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "null_on_failure": [
+        "curlx_malloc",
+        "curlx_calloc",
+        "curlx_realloc",
+        "curlx_strdup",
+        "curl_easy_init",
+        "curl_mime_init",
+        "curl_url_dup",
+        "Curl_fileinfo_alloc",
+        "Curl_ftp_parselist_data_alloc",
+        "Curl_MD5_init",
+        "Curl_HMAC_init",
+        "Curl_hsts_init",
+        "config_alloc",
+        "new_getout",
+        "curlx_fopen",
+        "curlx_fdopen",
+        "curlx_freopen",
+        "curl_dbg_fopen"
+      ],
+      "length_of": [
+        "strlen",
+        "Curl_bufq_len",
+        "curlx_dyn_len",
+        "Curl_bufref_len",
+        "Curl_hash_count",
+        "Curl_llist_count",
+        "GetSizeParameter",
+        "Curl_dynhds_count",
+        "Curl_cshutdn_count",
+        "Curl_cwriter_count",
+        "Curl_bump_headersize",
+        "Curl_u8_strset_count",
+        "Curl_u32_ptrset_count",
+        "Curl_uint32_tbl_count",
+        "Curl_pgrsSetUploadSize",
+        "Curl_uint32_bset_count",
+        "Curl_uint32_tbl_resize",
+        "Curl_cshutdn_dest_count",
+        "Curl_uint32_bset_resize",
+        "Curl_pgrsSetDownloadSize",
+        "Curl_uint32_spbset_count",
+        "Curl_creader_total_length",
+        "Curl_pgrsSetUploadCounter",
+        "Curl_creader_client_length",
+        "Curl_ssl_push_certinfo_len",
+        "Curl_pgrsResetTransferSizes",
+        "Curl_creader_def_total_length",
+        "file2string",
+        "jsonWriteString",
+        "__crt0_glob_function"
+      ]
+    },
+    "same_type_candidates": 177,
+    "api_matched_candidates": 15,
+    "pairs": [
+      {
+        "commit": "c2676bf9e639e31e44b12a2cc82cf2046231b056",
+        "subject": "vssh: silence gcc-11 `-Wnull-dereference`, dedupe `CURL_EASY_STR()` calls",
+        "files": [
+          "lib/vssh/vssh.c"
+        ],
+        "api_hits": [
+          "curlx_strdup"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "014be82a66f62972a68c4c9ae5300edc84e9b0df",
+        "subject": "tidy-up: drop redundant `== NULL` syntax",
+        "files": [
+          "lib/easy.c",
+          "lib/ftplistparser.c",
+          "lib/multi.c",
+          "lib/pingpong.c",
+          "lib/url.c",
+          "lib/vssh/libssh.c",
+          "lib/vssh/libssh2.c",
+          "lib/vtls/rustls.c",
+          "src/tool_doswin.c"
+        ],
+        "api_hits": [
+          "strlen"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "b825417043faa016a52ee400ce3a1c94f719a6e4",
+        "subject": "tool_operhlp: avoid NULL to %s",
+        "files": [
+          "src/tool_operhlp.c"
+        ],
+        "api_hits": [
+          "curlx_strdup"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of b825417043faa016a52ee400ce3a1c94f719a6e4 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "69efbcaa03b99b927806af43752bcd5d667a676d",
+        "subject": "ldap: avoid null ptr deref on failure",
+        "files": [
+          "lib/ldap.c"
+        ],
+        "api_hits": [
+          "strlen"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 499.7
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "nullable_inout_capacity_ptr": [
+        "capacity"
+      ],
+      "capacity_computer": [
+        "Curl_uint32_tbl_resize",
+        "Curl_uint32_bset_resize"
+      ],
+      "reallocator": [
+        "curlx_realloc",
+        "curl_dbg_realloc",
+        "Curl_nghttp2_realloc"
+      ],
+      "deref_read": [],
+      "deref_write": [],
+      "null_guard": [],
+      "null_on_failure": [
+        "curlx_realloc",
+        "curl_dbg_realloc",
+        "Curl_nghttp2_realloc",
+        "Curl_uint32_tbl_resize",
+        "Curl_uint32_bset_resize"
+      ]
+    },
+    "same_type_candidates": 177,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 234.8
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-2",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Out-of-Bound",
+    "mapping": {
+      "lookahead": [],
+      "length_of": [
+        "buflen"
+      ]
+    },
+    "same_type_candidates": 11,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 156.4
+  },
+  {
+    "bundle": "KN-Integer-Overflow-10eb89d1-0",
+    "source": "lua",
+    "target": "curl",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "decoder_function": [],
+      "input_byte": [
+        "c"
+      ],
+      "continuation_count": [
+        "count"
+      ]
+    },
+    "same_type_candidates": 17,
+    "api_matched_candidates": 1,
+    "pairs": [
+      {
+        "commit": "fef318553b971142aaea3fe42d927408d06472c4",
+        "subject": "tool_urlglob: add integer overflow protection",
+        "files": [
+          "src/tool_urlglob.c"
+        ],
+        "api_hits": [
+          "c"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of fef318553b971142aaea3fe42d927408d06472c4 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 231.7
+  },
+  {
+    "bundle": "KN-Misuse-bc4bbcef-0",
+    "source": "lua",
+    "target": "curl",
+    "bug_type": "Misuse",
+    "mapping": {
+      "combined_create_and_publish": [
+        "Curl_peer_create"
+      ],
+      "object_initializer": [
+        "Curl_MD5_init",
+        "Curl_HMAC_init",
+        "Curl_hsts_init",
+        "curl_easy_init",
+        "curl_mime_init",
+        "Curl_altsvc_init",
+        "Curl_cookie_init",
+        "Curl_cf_create",
+        "Curl_peer_create"
+      ],
+      "persistent_registry_lookup": [
+        "Curl_meta_get",
+        "Curl_conn_meta_get",
+        "Curl_altsvc_lookup"
+      ],
+      "object_allocator": [
+        "ALLOC_SIZE",
+        "ALLOC_SIZE2",
+        "config_alloc",
+        "Curl_fileinfo_alloc",
+        "Curl_ftp_parselist_data_alloc"
+      ],
+      "registry_store": [
+        "Curl_ssl_setup_x509_store",
+        "Curl_wssl_setup_x509_store",
+        "Curl_schannel_set_cached_cert_store"
+      ],
+      "registry_key": [
+        "Curl_ssl_peer_key_make"
+      ]
+    },
+    "same_type_candidates": 1023,
+    "api_matched_candidates": 1,
+    "pairs": [
+      {
+        "commit": "0f2876b2c33f6784a27b6f7345bd8cd95b46352a",
+        "subject": "wolfssl: CA store share fix",
+        "files": [
+          "lib/vtls/wolfssl.c"
+        ],
+        "api_hits": [
+          "Curl_wssl_setup_x509_store"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 305.1
+  },
+  {
+    "bundle": "KN-Use-After-Free-22974326-2",
+    "source": "lua",
+    "target": "curl",
+    "bug_type": "Use-After-Free",
+    "mapping": {
+      "gc_managed_object": [],
+      "potential_gc_trigger": [],
+      "gc_root_anchor": [],
+      "weak_reference_container": [],
+      "use_after_free_use": []
+    },
+    "same_type_candidates": 9,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 38.7
+  },
+  {
+    "bundle": "KN-Buffer-Overflow-a7200804-1",
+    "source": "sqlite",
+    "target": "curl",
+    "bug_type": "Buffer-Overflow",
+    "mapping": {
+      "buffer_grow": [],
+      "required_capacity": [],
+      "write_pointer": [],
+      "digit_set": [
+        "digits"
+      ],
+      "output_buffer": []
+    },
+    "same_type_candidates": 8,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 224.6
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "curl",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "payload_length": [
+        "Curl_creader_total_length",
+        "Curl_creader_client_length",
+        "Curl_creader_def_total_length"
+      ],
+      "local_payload_length": [
+        "Curl_bufq_len",
+        "curlx_dyn_len",
+        "Curl_bufref_len"
+      ],
+      "overflow_chunk_size": [],
+      "overflow_page_cache": [
+        "Curl_dnscache_add",
+        "Curl_dnscache_get",
+        "Curl_dnscache_init",
+        "Curl_dnscache_clear",
+        "Curl_dnscache_prune",
+        "Curl_dnscache_destroy",
+        "Curl_dnscache_add_negative",
+        "Curl_ssl_scache_put",
+        "Curl_ssl_scache_use",
+        "Curl_ssl_scache_lock",
+        "Curl_ssl_scache_take",
+        "Curl_ssl_scache_create",
+        "Curl_ssl_scache_return",
+        "Curl_ssl_scache_unlock",
+        "Curl_ssl_scache_add_obj",
+        "Curl_ssl_scache_destroy",
+        "Curl_ssl_scache_get_obj",
+        "Curl_ssl_scache_remove_all",
+        "Curl_ssl_scache_is_locked_by_current_thread",
+        "Curl_gtls_cache_session",
+        "Curl_wssl_cache_session",
+        "Curl_schannel_get_cached_cert_store",
+        "Curl_schannel_set_cached_cert_store",
+        "CURL_SHARE_ssl_scache"
+      ],
+      "reallocator": [
+        "curlx_realloc",
+        "curl_dbg_realloc",
+        "Curl_nghttp2_realloc",
+        "Curl_uint32_tbl_resize",
+        "Curl_uint32_bset_resize"
+      ],
+      "allocated_size_query": [],
+      "zero_initializer": [
+        "memset",
+        "curlx_memzero",
+        "curlx_strzero"
+      ],
+      "cache_index": [],
+      "too_narrow_arithmetic_type": [
+        "size_t",
+        "uint32_t",
+        "int"
+      ]
+    },
+    "same_type_candidates": 17,
+    "api_matched_candidates": 4,
+    "pairs": [
+      {
+        "commit": "248b92939aa6efeff5d58e973b63b50f36337913",
+        "subject": "cf-socket: avoid low risk integer overflow on ancient Solaris",
+        "files": [
+          "lib/cf-socket.c"
+        ],
+        "api_hits": [
+          "int"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "fbc4d59151dc4a56052f3a92da3682dc97b32148",
+        "subject": "conncache: prevent integer overflow in maxconnects calculation",
+        "files": [
+          "lib/conncache.c"
+        ],
+        "api_hits": [
+          "int"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "fef318553b971142aaea3fe42d927408d06472c4",
+        "subject": "tool_urlglob: add integer overflow protection",
+        "files": [
+          "src/tool_urlglob.c"
+        ],
+        "api_hits": [
+          "size_t"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of fef318553b971142aaea3fe42d927408d06472c4 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "59fec5ac43ade98b31093e707b5ac2aba305bd2a",
+        "subject": "mprintf: fix the integer overflow checks",
+        "files": [
+          "lib/mprintf.c"
+        ],
+        "api_hits": [
+          "int"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 387.1
+  },
+  {
+    "bundle": "KN-Integer-Overflow-d87f8c49-0",
+    "source": "sqlite",
+    "target": "curl",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "length_of": [],
+      "character_count_bound": [
+        "precision"
+      ],
+      "iterator_advance": [],
+      "output_length": [
+        "length"
+      ],
+      "narrowing_cast": [],
+      "safe_cap": [
+        "CURLMIN"
+      ],
+      "buffer_append": [
+        "curlx_dyn_addn"
+      ]
+    },
+    "same_type_candidates": 17,
+    "api_matched_candidates": 1,
+    "pairs": [
+      {
+        "commit": "59fec5ac43ade98b31093e707b5ac2aba305bd2a",
+        "subject": "mprintf: fix the integer overflow checks",
+        "files": [
+          "lib/mprintf.c"
+        ],
+        "api_hits": [
+          "precision"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 129.2
+  },
+  {
+    "bundle": "KN-Misuse-1bc183a9-1",
+    "source": "sqlite",
+    "target": "curl",
+    "bug_type": "Misuse",
+    "mapping": {
+      "tokenizer": [
+        "curlx_str_quotedword"
+      ],
+      "dequote_helper": [
+        "parse_cert_parameter"
+      ],
+      "illegal_token_sentinel": [],
+      "dequoter_with_precondition": [
+        "curlx_str_quotedword"
+      ],
+      "caller_ignoring_sentinel": [
+        "parse_cert_parameter"
+      ]
+    },
+    "same_type_candidates": 1023,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 288.1
+  }
+]

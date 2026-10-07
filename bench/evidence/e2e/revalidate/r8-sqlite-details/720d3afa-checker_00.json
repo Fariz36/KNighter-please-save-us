@@ -1,0 +1,67 @@
+{
+  "commit_id": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/15fa3cb7c17f26f8b0e0/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/btree.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "accessPayload"
+        ],
+        "fixed_functions": [
+          "accessPayload"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/btree.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/4cc2dbd54dba/src/btree.c",
+          "line": 5198,
+          "column": 19,
+          "function": "accessPayload",
+          "bug_type": "Integer overflow in overflow page count",
+          "description": "Overflow page count computed in 32-bit arithmetic; promote to 64-bit before subtraction/addition/division",
+          "issue_hash": "c285609ec3f4a50b6a5e35ac223ef4e8",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/720d3afa7eb0/5a894b99/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_4cc2dbd54dba_src_btree.c/report-c28560.html",
+          "relpath": "src/btree.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/btree.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 22.29,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 82.16,
+      "fixed": 76.57
+    },
+    "total_seconds": 181.6
+  },
+  "report_dir": "tmp/validation/720d3afa7eb0/5a894b99"
+}

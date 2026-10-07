@@ -1,0 +1,11 @@
+## Bug Pattern
+
+A duplication/clone routine accepts a nullable source object pointer, then dereferences that source pointer through field-copy operations before validating it. The destination allocation result is checked, but the source handle itself is not checked, so passing NULL reaches an expression like `in->scheme` and causes a NULL-pointer dereference.
+
+Roles:
+- `duplicator`: `curl_url_dup`
+- `source_handle`: parameter `in`
+- `destination_allocator`: `curlx_calloc`
+- `field_copier` / `source_dereferencer`: `DUP(u, in, ...)`, which dereferences `in->scheme`, `in->user`, etc.
+- `missing_null_guard`: no `if(!in) return NULL;` before the `DUP` calls
+- `null_on_invalid_input`: the return value added by the fix, `NULL` when `in == NULL`

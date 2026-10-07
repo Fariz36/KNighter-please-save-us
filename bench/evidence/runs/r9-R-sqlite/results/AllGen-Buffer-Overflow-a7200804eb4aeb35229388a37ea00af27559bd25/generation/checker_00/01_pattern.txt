@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The capacity passed to a buffer-growth routine is computed by a hand-written formula that does not account for every byte a later formatter can write. The growth routine (`reallocator`) reserves too little space, and subsequent unbounded writes into that buffer (`buffer_copy` via `memcpy`/`memmove`, plus `memset` and direct stores through the output pointer) can overflow it. In this patch the exponential floating-point path can emit extra characters such as a decimal point and a forced trailing zero when the `!` flag is present; the old size formula undercounted the required bytes, so a value like `-1.0e+100` plus its NUL terminator needed 10 bytes while only 8 were requested.
+
+Roles:
+- `reallocator`: `sqlite3StrAccumEnlargeIfNeeded`
+- `buffer_copy`: `memcpy`, `memmove`
+- raw buffer write/fill: `memset`, direct stores through the output pointer

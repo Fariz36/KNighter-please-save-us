@@ -1,0 +1,80 @@
+{
+  "commit_id": "f2a1535712ff8622024d27b867480698752c254e",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/plugin-cache/plugins/d6ea521459fb71966e2a/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/easy.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "curl_easy_recv",
+          "curl_easy_send"
+        ],
+        "fixed_functions": [
+          "curl_easy_recv",
+          "curl_easy_send"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/easy.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/d87b4e460513/lib/easy.c",
+          "line": 1307,
+          "column": 14,
+          "function": "curl_easy_recv",
+          "bug_type": "Missing null check for out parameter",
+          "description": "Missing null check for out parameter before use",
+          "issue_hash": "6c5239e35dc97886e7dd7a797d00a2e5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/f2a1535712ff/7a4c8388/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_d87b4e460513_lib_easy.c/report-6c5239.html",
+          "relpath": "lib/easy.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/d87b4e460513/lib/easy.c",
+          "line": 1378,
+          "column": 8,
+          "function": "curl_easy_send",
+          "bug_type": "Missing null check for out parameter",
+          "description": "Missing null check for out parameter before use",
+          "issue_hash": "feb193b880566d4a42de300ea93bdc81",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/f2a1535712ff/7a4c8388/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_d87b4e460513_lib_easy.c/report-feb193.html",
+          "relpath": "lib/easy.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/easy.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 1.01,
+      "fixed": 0.8
+    },
+    "total_seconds": 1.9
+  },
+  "report_dir": "tmp/validation/f2a1535712ff/7a4c8388"
+}

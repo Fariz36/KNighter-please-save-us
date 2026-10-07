@@ -1,0 +1,33 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "getConstraintToken",
+        "sqlite3GetToken"
+      ],
+      "description": "returns a token length and writes a token type through an out-parameter; the token type distinguishes illegal/error tokens"
+    },
+    "buffer_copy": {
+      "names": [
+        "memcpy"
+      ],
+      "description": "copies a number of bytes from a source pointer to a destination buffer"
+    },
+    "dequoter": {
+      "names": [
+        "sqlite3Dequote"
+      ],
+      "description": "removes quoting/escaping from a token string; requires a valid quoted token and may assert on illegal input"
+    },
+    "aborting_assert": {
+      "names": [
+        "assert"
+      ],
+      "description": "stops execution when its condition is false, so the dequoter's precondition must be satisfied"
+    }
+  }
+}

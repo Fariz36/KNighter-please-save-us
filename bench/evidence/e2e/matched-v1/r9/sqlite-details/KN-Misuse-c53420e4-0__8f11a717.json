@@ -1,0 +1,55 @@
+{
+  "commit_id": "8f11a71722ca0de70887462c2550ddafb589981a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/64aba4da6972615f614e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/select.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "sqlite3SubqueryColumnTypes"
+        ],
+        "fixed_functions": [
+          "sqlite3SubqueryColumnTypes"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/select.c": []
+    },
+    "fixed": {
+      "src/select.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 41.77,
+    "analysis_seconds": {
+      "buggy": 28.06,
+      "fixed": 24.75
+    },
+    "total_seconds": 94.97
+  },
+  "report_dir": "tmp/validation/8f11a71722ca/a911ddd7"
+}

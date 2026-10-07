@@ -1,0 +1,12 @@
+## Bug Pattern
+
+A public API wrapper accepts a pointer parameter intended as an **output/write destination**, but does not validate that the pointer is non-NULL before it writes through it directly or forwards it to an internal function that writes through it. Calling the API with `n == NULL` therefore causes a NULL-pointer dereference. The fix adds a `null_check_guard` and reports an `error_result` before the write/forward.
+
+Roles:
+- `out_parameter` / `write_destination`: `n` in `curl_easy_recv`, `curl_easy_send`
+- `dereference_write`: `*n = written` in `curl_easy_send`; `n` forwarded to `Curl_easy_recv` in `curl_easy_recv`
+- `null_check_guard`: `if(!n)` added in both functions
+- `error_setter`: `result = CURLE_BAD_FUNCTION_ARGUMENT`, returned through `CURLcode`
+- `api_wrapper`: `curl_easy_recv`, `curl_easy_send`
+- `internal_worker`: `Curl_easy_recv`, `Curl_senddata`
+- `guard_enter_leave`: `CURL_EAPI_ENTER`, `CURL_EAPI_LEAVE` (context, not root cause)

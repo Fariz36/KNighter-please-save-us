@@ -45,3 +45,4 @@ bench/snapshots/
 !bench/evidence/**/results-*
 !bench/evidence/**/results-*/**
 !bench/evidence/**/results.jsonl
+/bench/aborted/

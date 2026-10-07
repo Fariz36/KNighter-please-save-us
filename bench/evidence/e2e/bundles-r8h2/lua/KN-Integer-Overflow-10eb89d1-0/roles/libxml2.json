@@ -1,0 +1,17 @@
+{
+  "decoder_function": [
+    "xmlGetUTF8Char",
+    "xmlStringCurrentChar",
+    "xmlCurrentChar"
+  ],
+  "input_byte": [
+    "c"
+  ],
+  "continuation_count": [
+    "count",
+    "l",
+    "len",
+    "xmlUTF8Size",
+    "xmlUTF8Strsize"
+  ]
+}

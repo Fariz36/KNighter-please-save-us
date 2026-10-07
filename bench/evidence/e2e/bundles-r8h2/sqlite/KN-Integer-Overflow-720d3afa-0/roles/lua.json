@@ -1,0 +1,27 @@
+{
+  "payload_length": [],
+  "local_payload_length": [],
+  "overflow_chunk_size": [],
+  "overflow_page_cache": [],
+  "reallocator": [
+    "luaM_realloc_",
+    "luaM_saferealloc_",
+    "luaL_alloc",
+    "debug_realloc",
+    "luaM_growaux_",
+    "luaM_growvector",
+    "luaM_reallocvchar",
+    "luaM_reallocvector",
+    "luaZ_resizebuffer"
+  ],
+  "allocated_size_query": [],
+  "zero_initializer": [
+    "memset"
+  ],
+  "cache_index": [],
+  "too_narrow_arithmetic_type": [
+    "int",
+    "unsigned",
+    "l_uint32"
+  ]
+}

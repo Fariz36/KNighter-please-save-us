@@ -1,0 +1,106 @@
+{
+  "commit_id": "d3a7e571571d6d63039c5d75180f3bcfc4a632ce",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/c225e43484da7fb76c9e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 4,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/cf-ip-happy.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "cf_ip_happy_insert_after"
+        ],
+        "fixed_functions": [
+          "Curl_cf_ip_happy_insert_after"
+        ]
+      },
+      {
+        "path": "lib/cf-setup.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "cf_setup_add_ip_happy"
+        ],
+        "fixed_functions": [
+          "cf_setup_add_ip_happy"
+        ]
+      },
+      {
+        "path": "lib/ftp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "ftp_conns_match"
+        ],
+        "fixed_functions": [
+          "Curl_ftp_conns_match"
+        ]
+      },
+      {
+        "path": "lib/url.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "url_match_proto_config"
+        ],
+        "fixed_functions": [
+          "url_match_proto_config"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/cf-ip-happy.c": [],
+      "lib/cf-setup.c": [],
+      "lib/ftp.c": [],
+      "lib/url.c": []
+    },
+    "fixed": {
+      "lib/cf-ip-happy.c": [],
+      "lib/cf-setup.c": [],
+      "lib/ftp.c": [],
+      "lib/url.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 57.82,
+    "analysis_seconds": {
+      "buggy": 12.88,
+      "fixed": 11.14
+    },
+    "total_seconds": 82.14
+  },
+  "report_dir": "tmp/validation/d3a7e571571d/6d6242a6"
+}

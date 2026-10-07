@@ -1,0 +1,54 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "cursor": {
+      "names": [
+        "cur"
+      ],
+      "description": "field holding the current read cursor into the input string"
+    },
+    "buffer_start": {
+      "names": [
+        "string"
+      ],
+      "description": "field holding the start of the input string buffer"
+    },
+    "buffer_length": {
+      "names": [
+        "len"
+      ],
+      "description": "field holding the length of the input string buffer"
+    },
+    "unchecked_lookahead_read": {
+      "names": [
+        "NXT"
+      ],
+      "description": "macro/accessor that performs a lookahead read from the cursor without bounds checking"
+    },
+    "bounds_checked_lookahead_read": {
+      "names": [
+        "NXT"
+      ],
+      "description": "macro/accessor that performs a bounds-checked lookahead read from the cursor"
+    },
+    "duplicator": {
+      "names": [
+        "xmlStrdup"
+      ],
+      "description": "function that duplicates a C string into a newly allocated buffer"
+    },
+    "length_of": {
+      "names": [
+        "strlen"
+      ],
+      "description": "standard C library function returning the length of a null-terminated string"
+    },
+    "null_check": {
+      "names": [],
+      "description": "explicit null check on the duplicated buffer pointer"
+    }
+  }
+}

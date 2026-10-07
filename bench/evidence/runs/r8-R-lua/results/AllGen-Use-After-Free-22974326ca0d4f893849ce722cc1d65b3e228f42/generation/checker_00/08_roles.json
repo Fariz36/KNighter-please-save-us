@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "gc_triggering_operation": {
+      "names": [
+        "luaH_finishset"
+      ],
+      "description": "operation that may allocate/rehash and trigger an emergency GC while using a GC-managed object"
+    },
+    "root_anchor": {
+      "names": [
+        "sethvalue2s"
+      ],
+      "description": "anchors a GC-managed object in a strong root (e.g., on the Lua stack) so it cannot be collected during a GC-triggering operation"
+    },
+    "weakly_referenced_object": {
+      "names": [
+        "Table"
+      ],
+      "description": "type of GC-managed object that can be reachable only through a weak container and may be collected during an emergency GC"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+## Bug Pattern
+
+A length-delimited byte buffer (`data_provider` + `length_provider`) is treated as a NUL-terminated C string (`unbounded_string_consumer`). Here `cn` may be obtained from an ASN.1 string with an explicit `cnlen`, but no NUL terminator is guaranteed within that length. The buggy code calls `strlen((char *)cn)` and later formats `cn` with `%s`, so if no NUL byte exists inside the buffer, both reads continue past the allocated data, causing an out-of-bounds read. The fix uses length-bounded operations: `memchr(cn, '\0', cnlen)` and `%.*s` with `cnlen`.
+
+Roles:
+- `data_provider` (returns pointer, no NUL-termination guarantee): `ASN1_STRING_get0_data`, `ASN1_STRING_to_UTF8`
+- `length_provider` (returns byte count for the same data): `ASN1_STRING_length`, `ASN1_STRING_to_UTF8` → `cnlen`
+- `unbounded_string_consumer` (requires NUL termination): `strlen`, `%s` in `failf`, `%s` in `infof`
+- `bounded_nul_scanner` (fix): `memchr(cn, '\0', cnlen)`
+- `bounded_string_formatter` (fix): `%.*s` with `cnlen`

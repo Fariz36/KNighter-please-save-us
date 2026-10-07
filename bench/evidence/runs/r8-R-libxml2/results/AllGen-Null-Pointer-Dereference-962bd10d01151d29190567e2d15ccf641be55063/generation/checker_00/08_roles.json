@@ -1,0 +1,14 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "inout_capacity_pointer": {
+      "names": [
+        "capacity"
+      ],
+      "description": "Pointer parameter that is read and written via dereference; must be validated non-NULL before any dereference."
+    }
+  }
+}

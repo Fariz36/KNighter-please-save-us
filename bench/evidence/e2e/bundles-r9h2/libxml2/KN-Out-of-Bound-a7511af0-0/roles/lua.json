@@ -1,0 +1,9 @@
+{
+  "indexed_read": [
+    "zgetc"
+  ],
+  "length_of": [
+    "strlen",
+    "luaZ_bufflen"
+  ]
+}

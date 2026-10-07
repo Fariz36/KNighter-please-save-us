@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A derived-length calculation performs unchecked signed integer arithmetic (`*`, `/`, `+`) on an `untrusted_size` value before validating that the value is within the safe range for the result type. A sufficiently large input overflows the calculation, producing a wrapped or negative encoded size. The fix adds a maximum safe input bound derived from the type maximum (`CURL_OFF_T_MAX`) and rejects inputs above it.
+
+Roles:
+- `untrusted_size`: the input size value consumed by the size-calculation function (the `part->datasize` field read in `encoder_base64_size`).
+- `length_of`: `encoder_base64_size` (computes a derived encoded length from an input size).

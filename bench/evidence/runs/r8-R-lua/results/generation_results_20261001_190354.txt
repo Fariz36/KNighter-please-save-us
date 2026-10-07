@@ -1,0 +1,4 @@
+bc4bbcef651ba2870d6c68db16dc7d6ce6f68636,Misuse,True
+10eb89d1141dc528806b32401e408e36fb2f3bf5,Integer-Overflow,True
+22974326ca0d4f893849ce722cc1d65b3e228f42,Use-After-Free,True
+efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60,Use-Before-Initialization,False

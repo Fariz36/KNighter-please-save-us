@@ -1,0 +1,491 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-1",
+    "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+    "files": [
+      "lib/mime.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "lib/mime.c",
+        430,
+        "unknown"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "lib/mime.c",
+        430,
+        "unknown"
+      ]
+    ],
+    "mapping_original": {
+      "encoded_size_calculator": [
+        "encoder_base64_size"
+      ],
+      "input_length": [
+        "datasize"
+      ],
+      "max_input_size": [
+        "BASE64_MAX_INPUT_SIZE"
+      ],
+      "error_sentinel": [
+        "-1"
+      ]
+    },
+    "mapping_ported": {
+      "encoded_size_calculator": [
+        "encoder_base64_size"
+      ],
+      "input_length": [
+        "datasize"
+      ],
+      "max_input_size": [],
+      "error_sentinel": []
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+    "files": [
+      "lib/cf-h2-proxy.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "lib/cf-h2-proxy.c",
+        202,
+        "cf_h2_proxy_ctx_free"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "lib/cf-h2-proxy.c",
+        202,
+        "cf_h2_proxy_ctx_free"
+      ]
+    ],
+    "mapping_original": {
+      "cleanup": [
+        "cf_h2_proxy_ctx_clear"
+      ],
+      "destructor": [
+        "cf_h2_proxy_ctx_free"
+      ],
+      "state_reset": [
+        "memset"
+      ],
+      "link_detach": [
+        "Curl_peer_unlink"
+      ],
+      "link_storage": [
+        "dest"
+      ]
+    },
+    "mapping_ported": {
+      "cleanup": [
+        "cf_h2_proxy_ctx_clear"
+      ],
+      "destructor": [
+        "cf_h2_proxy_ctx_free",
+        "cf_haproxy_ctx_free"
+      ],
+      "state_reset": [
+        "memset"
+      ],
+      "link_detach": [
+        "Curl_peer_unlink"
+      ],
+      "link_storage": [
+        "dest"
+      ]
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+    "files": [
+      "lib/vtls/openssl.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "lib/vtls/openssl.c",
+        2169,
+        "ossl_verifyhost"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "lib/vtls/openssl.c",
+        2169,
+        "ossl_verifyhost"
+      ]
+    ],
+    "mapping_original": {
+      "data_provider": [
+        "ASN1_STRING_get0_data",
+        "ASN1_STRING_to_UTF8"
+      ],
+      "length_provider": [
+        "ASN1_STRING_length",
+        "ASN1_STRING_to_UTF8"
+      ],
+      "unbounded_string_consumer": [
+        "strlen",
+        "failf",
+        "infof"
+      ],
+      "bounded_nul_scanner": [
+        "memchr"
+      ],
+      "bounded_string_formatter": []
+    },
+    "mapping_ported": {
+      "data_provider": [
+        "ASN1_STRING_get0_data",
+        "ASN1_STRING_to_UTF8"
+      ],
+      "length_provider": [
+        "ASN1_STRING_length",
+        "ASN1_STRING_to_UTF8"
+      ],
+      "unbounded_string_consumer": [
+        "strlen",
+        "failf",
+        "infof"
+      ],
+      "bounded_nul_scanner": [
+        "memchr"
+      ],
+      "bounded_string_formatter": []
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-1",
+    "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+    "files": [
+      "lib/urlapi.c",
+      "tests/libtest/lib1560.c"
+    ],
+    "reports_original": 14,
+    "locations_original": [
+      [
+        "lib/urlapi.c",
+        1445,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1447,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1438,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1444,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1442,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1450,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1446,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1439,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1449,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1451,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1440,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1441,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1448,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1443,
+        "curl_url_dup"
+      ]
+    ],
+    "reports_ported": 14,
+    "locations_ported": [
+      [
+        "lib/urlapi.c",
+        1445,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1447,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1438,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1444,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1442,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1450,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1446,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1439,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1449,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1451,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1440,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1441,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1448,
+        "curl_url_dup"
+      ],
+      [
+        "lib/urlapi.c",
+        1443,
+        "curl_url_dup"
+      ]
+    ],
+    "mapping_original": {
+      "duplicator": [
+        "curl_url_dup"
+      ],
+      "source_handle": [
+        "in"
+      ],
+      "destination_allocator": [
+        "curlx_calloc"
+      ],
+      "field_copier": [
+        "DUP"
+      ]
+    },
+    "mapping_ported": {
+      "duplicator": [
+        "curl_url_dup"
+      ],
+      "source_handle": [
+        "in"
+      ],
+      "destination_allocator": [
+        "curlx_calloc"
+      ],
+      "field_copier": [
+        "DUP"
+      ]
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "commit": "f2a1535712ff8622024d27b867480698752c254e",
+    "files": [
+      "lib/easy.c"
+    ],
+    "reports_original": 2,
+    "locations_original": [
+      [
+        "lib/easy.c",
+        1307,
+        "curl_easy_recv"
+      ],
+      [
+        "lib/easy.c",
+        1378,
+        "curl_easy_send"
+      ]
+    ],
+    "reports_ported": 2,
+    "locations_ported": [
+      [
+        "lib/easy.c",
+        1307,
+        "curl_easy_recv"
+      ],
+      [
+        "lib/easy.c",
+        1378,
+        "curl_easy_send"
+      ]
+    ],
+    "mapping_original": {
+      "api_entry_point": [
+        "curl_easy_recv",
+        "curl_easy_send"
+      ],
+      "out_param": [
+        "n"
+      ],
+      "out_param_writer": [
+        "Curl_easy_recv"
+      ]
+    },
+    "mapping_ported": {
+      "api_entry_point": [
+        "curl_easy_recv",
+        "curl_easy_send",
+        "curl_ws_recv",
+        "curl_ws_send"
+      ],
+      "out_param": [
+        "n",
+        "recv",
+        "sent"
+      ],
+      "out_param_writer": [
+        "Curl_easy_recv",
+        "Curl_conn_recv"
+      ]
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2",
+    "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+    "files": [
+      "lib/setopt.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "lib/setopt.c",
+        111,
+        "unknown"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "lib/setopt.c",
+        111,
+        "unknown"
+      ]
+    ],
+    "mapping_original": {
+      "length_field": [
+        "len"
+      ],
+      "data_pointer": [
+        "data"
+      ],
+      "buffer_copy": [
+        "memcpy"
+      ],
+      "error_return": [
+        "CURLE_BAD_FUNCTION_ARGUMENT",
+        "CURLE_OUT_OF_MEMORY"
+      ],
+      "copy_flag": [
+        "CURL_BLOB_COPY"
+      ],
+      "allocator": [
+        "curlx_malloc"
+      ],
+      "deallocator": [
+        "curlx_safefree"
+      ],
+      "validation_guard": []
+    },
+    "mapping_ported": {
+      "length_field": [
+        "len"
+      ],
+      "data_pointer": [
+        "data"
+      ],
+      "buffer_copy": [
+        "memcpy"
+      ],
+      "error_return": [
+        "CURLE_BAD_FUNCTION_ARGUMENT",
+        "CURLE_OUT_OF_MEMORY"
+      ],
+      "copy_flag": [
+        "CURL_BLOB_COPY"
+      ],
+      "allocator": [
+        "curlx_malloc"
+      ],
+      "deallocator": [
+        "curlx_safefree"
+      ],
+      "validation_guard": []
+    },
+    "preserved": true
+  }
+]

@@ -1,0 +1,67 @@
+{
+  "commit_id": "a7511af09f99995cdf81994db21f4eba564276b5",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/82298884b52cb4fdf2cf/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlregexp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlRegNewParserCtxt"
+        ],
+        "fixed_functions": [
+          "xmlRegNewParserCtxt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 51,
+          "column": 9,
+          "function": "unknown",
+          "bug_type": "Unchecked Lookahead Read",
+          "description": "Lookahead macro lacks bounds check against length",
+          "issue_hash": "72f0b3460f63e970cd07b1af53deb70c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7511af09f99/1afcbae6/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-72f0b3.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlregexp.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 9.94,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 46.02,
+      "fixed": 45.96
+    },
+    "total_seconds": 102.15
+  },
+  "report_dir": "tmp/validation/a7511af09f99/1afcbae6"
+}

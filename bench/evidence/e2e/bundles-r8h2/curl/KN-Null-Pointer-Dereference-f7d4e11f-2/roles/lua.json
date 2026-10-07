@@ -1,0 +1,48 @@
+{
+  "length_field": [
+    "luaZ_sizebuffer",
+    "luaL_bufflen"
+  ],
+  "data_pointer": [
+    "data",
+    "luaZ_buffer",
+    "luaL_buffaddr"
+  ],
+  "buffer_copy": [
+    "memcpy"
+  ],
+  "error_return": [
+    "luaL_error",
+    "luaL_argerror",
+    "luaL_typeerror",
+    "luaM_error",
+    "luaG_runerror",
+    "lua_error"
+  ],
+  "copy_flag": [],
+  "allocator": [
+    "luaM_malloc_",
+    "luaM_realloc_",
+    "luaL_alloc",
+    "luaM_new",
+    "luaM_newvector"
+  ],
+  "deallocator": [
+    "luaM_free_",
+    "luaM_free",
+    "luaM_realloc_",
+    "luaL_alloc",
+    "luaH_free",
+    "luaF_freeproto"
+  ],
+  "validation_guard": [
+    "luaL_argcheck",
+    "luaL_checklstring",
+    "luaL_checkstring",
+    "luaL_checktype",
+    "luaL_checkany",
+    "luaL_checkudata",
+    "api_check",
+    "luaM_checksize"
+  ]
+}

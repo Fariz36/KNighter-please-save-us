@@ -1,0 +1,601 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-2",
+    "source": "curl",
+    "target": "sqlite",
+    "mapping": {
+      "length_of": [
+        "hexFunc",
+        "quoteFunc",
+        "sqlite3Fts5BufferSize",
+        "sqlite3RCStrResize",
+        "sqlite3JournalSize"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 511.5
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "sqlite",
+    "mapping": {
+      "cleanup": [
+        "sqlite3HashClear",
+        "sqlite3VtabClear",
+        "sqlite3PcacheClear",
+        "sqlite3RowSetClear",
+        "sqlite3SchemaClear",
+        "sqlite3Fts3HashClear",
+        "sqlite3Fts5HashClear",
+        "sqlite3ClearOnOrUsing",
+        "sqlite3BtreeClearCache",
+        "sqlite3PagerClearCache",
+        "sqlite3BtreeClearCursor",
+        "sqlite3WhereClauseClear",
+        "sqlite3ClearTempRegCache",
+        "sqlite3FkClearTriggerCache",
+        "sqlite3Fts5ExprClearTokens",
+        "sqlite3Fts3PendingTermsClear",
+        "sqlite3Fts5ExprClearPoslists",
+        "sqlite3VdbeMemClearAndResize",
+        "sqlite3BtreeClearTableOfCursor",
+        "sqlite3VtabEponymousTableClear",
+        "sqlite3Fts5IndexIterClearTokendata",
+        "sqlite3BitvecClear",
+        "sqlite3ErrorClear",
+        "sqlite3OomClear",
+        "sqlite3_clear_bindings",
+        "sqlite3Fts5ClearLocale",
+        "sqlite3PcacheClearWritable",
+        "sqlite3PcacheClearSyncFlags",
+        "sqlite3ParseObjectReset",
+        "sqlite3VdbeReset"
+      ],
+      "container_remove": [
+        "sqlite3WindowUnlinkFromSelect",
+        "sqlite3UnlinkAndDeleteIndex",
+        "sqlite3UnlinkAndDeleteTable",
+        "sqlite3UnlinkAndDeleteTrigger"
+      ],
+      "deallocator": [
+        "sqlite3OsCloseFree",
+        "sqlite3_free",
+        "sqlite3DbFree",
+        "fts5BufferFree",
+        "sqlite3DbFreeNN",
+        "sqlite3PageFree",
+        "sqlite3FreeIndex",
+        "sqlite3StackFree",
+        "sqlite3ValueFree",
+        "sqlite3_str_free",
+        "sqlite3ParserFree",
+        "sqlite3StackFreeNN",
+        "sqlite3_free_table",
+        "sqlite3_mutex_free",
+        "sqlite3_value_free",
+        "sqlite3Fts3ExprFree",
+        "sqlite3Fts5ExprFree",
+        "sqlite3Fts5HashFree",
+        "sqlite3Fts5BufferFree",
+        "sqlite3Fts5ConfigFree",
+        "sqlite3Stat4ProbeFree",
+        "sqlite3VdbeFreeCursor",
+        "sqlite3_free_filename",
+        "sqlite3_snapshot_free",
+        "sqlite3DbReallocOrFree",
+        "sqlite3Fts5TermsetFree",
+        "sqlite3Fts3MIBufferFree",
+        "sqlite3VdbeFreeCursorNN",
+        "sqlite3Fts3SegReaderFree",
+        "sqlite3Fts5ParseNodeFree",
+        "sqlite3VdbeValueListFree",
+        "sqlite3Fts5ParsePhraseFree",
+        "sqlite3Fts5ParseNearsetFree",
+        "sqlite3Fts3FreeDeferredTokens",
+        "sqlite3Fts3FreeDeferredDoclists"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 349.2
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "sqlite",
+    "mapping": {
+      "length_of": [
+        "strlen",
+        "sqlite3Strlen30"
+      ],
+      "untrusted_size": [
+        "sqlite3_column_bytes",
+        "sqlite3_value_bytes",
+        "sqlite3_column_bytes16",
+        "sqlite3_value_bytes16",
+        "sqlite3_str_length",
+        "sqlite3_blob_bytes",
+        "sqlite3BtreePayloadFetch",
+        "sqlite3BtreeGetPageSize",
+        "fts3HashKeysize",
+        "sqliteHashKeysize"
+      ],
+      "untrusted_data_accessor": [
+        "sqlite3_column_blob",
+        "sqlite3_value_blob",
+        "sqlite3BtreePayloadFetch",
+        "sqlite3PagerGetData",
+        "fts3HashData",
+        "sqliteHashData"
+      ],
+      "allocator": [
+        "sqlite3_malloc",
+        "sqlite3_malloc64",
+        "sqlite3_realloc",
+        "sqlite3_realloc64",
+        "sqlite3DbMallocRaw",
+        "sqlite3DbMallocRawNN",
+        "sqlite3DbMallocZero",
+        "sqlite3DbRealloc",
+        "sqlite3_str_new",
+        "sqlite3_mprintf",
+        "sqlite3_vmprintf",
+        "sqlite3_str_finish",
+        "sqlite3DbStrNDup",
+        "sqlite3DbStrDup",
+        "sqlite3_value_dup",
+        "sqlite3ExprAlloc",
+        "sqlite3KeyInfoAlloc",
+        "sqlite3WindowAlloc",
+        "sqlite3VdbeAllocUnpackedRecord",
+        "sqlite3ParserAlloc",
+        "sqlite3MutexAlloc",
+        "sqlite3_mutex_alloc",
+        "sqlite3StackAllocRaw",
+        "sqlite3StackAllocRawNN",
+        "sqlite3HexToBlob"
+      ],
+      "deallocator": [
+        "sqlite3_free",
+        "sqlite3_free_table",
+        "sqlite3DbFree",
+        "sqlite3DbFreeNN",
+        "sqlite3PageFree",
+        "sqlite3FreeIndex",
+        "sqlite3ValueFree",
+        "sqlite3_str_free",
+        "sqlite3ParserFree",
+        "sqlite3StackFree",
+        "sqlite3StackFreeNN",
+        "sqlite3_mutex_free",
+        "sqlite3_value_free",
+        "sqlite3Fts3ExprFree",
+        "sqlite3Fts5ExprFree",
+        "sqlite3Fts5HashFree",
+        "sqlite3Fts5BufferFree",
+        "sqlite3Fts5ConfigFree",
+        "sqlite3Stat4ProbeFree",
+        "sqlite3VdbeFreeCursor",
+        "sqlite3_free_filename",
+        "sqlite3_snapshot_free",
+        "sqlite3DbReallocOrFree",
+        "sqlite3Fts5TermsetFree",
+        "sqlite3_release_memory",
+        "sqlite3Fts3MIBufferFree",
+        "sqlite3VdbeFreeCursorNN",
+        "sqlite3Fts3SegReaderFree",
+        "sqlite3Fts5ParseNodeFree",
+        "sqlite3VdbeValueListFree",
+        "sqlite3_db_release_memory",
+        "sqlite3Fts5ParsePhraseFree",
+        "sqlite3PcacheReleaseMemory",
+        "sqlite3Fts5ParseNearsetFree",
+        "sqlite3Fts3FreeDeferredTokens",
+        "sqlite3Fts3FreeDeferredDoclists",
+        "sqlite3OsCloseFree",
+        "fts5BufferFree",
+        "sqlite3Fts5StorageReleaseDeleteRow"
+      ],
+      "error_setter": [
+        "sqlite3ErrorMsg",
+        "sqlite3VdbeError",
+        "sqlite3Fts3ErrMsg",
+        "sqlite3_log"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 262.5
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-0",
+    "source": "curl",
+    "target": "sqlite",
+    "mapping": {
+      "duplicator": [
+        "sqlite3_value_dup",
+        "sqlite3ExprDup",
+        "sqlite3ExprListDup",
+        "sqlite3SrcListDup",
+        "sqlite3IdListDup",
+        "sqlite3SelectDup",
+        "sqlite3WithDup",
+        "sqlite3WindowDup",
+        "sqlite3DbStrDup",
+        "sqlite3DbStrNDup"
+      ],
+      "allocator": [
+        "sqlite3_malloc",
+        "sqlite3_malloc64",
+        "sqlite3_realloc",
+        "sqlite3_realloc64",
+        "sqlite3Malloc",
+        "sqlite3MallocZero",
+        "sqlite3Realloc",
+        "sqlite3DbMallocRaw",
+        "sqlite3DbMallocRawNN",
+        "sqlite3DbMallocZero",
+        "sqlite3DbRealloc",
+        "sqlite3DbReallocOrFree",
+        "sqlite3StackAllocRaw",
+        "sqlite3StackAllocRawNN",
+        "sqlite3ArrayAllocate",
+        "sqlite3ParserAlloc",
+        "sqlite3KeyInfoAlloc",
+        "sqlite3WindowAlloc",
+        "sqlite3ExprAlloc",
+        "sqlite3AllocateIndexObject",
+        "sqlite3VdbeAllocUnpackedRecord",
+        "sqlite3CteNew",
+        "sqlite3MutexAlloc",
+        "sqlite3_mutex_alloc"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 17,
+    "triage": [
+      {
+        "file": "src/expr.c",
+        "line": 2004,
+        "function": "sqlite3SelectDup",
+        "description": "NULL pointer dereference: duplicator source pointer not checked",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "src/expr.c",
+        "line": 1984,
+        "function": "sqlite3SelectDup",
+        "description": "NULL pointer dereference: duplicator source pointer not checked",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "src/expr.c",
+        "line": 1987,
+        "function": "sqlite3SelectDup",
+        "description": "NULL pointer dereference: duplicator source pointer not checked",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "src/expr.c",
+        "line": 1990,
+        "function": "sqlite3SelectDup",
+        "description": "NULL pointer dereference: duplicator source pointer not checked",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "src/expr.c",
+        "line": 1991,
+        "function": "sqlite3SelectDup",
+        "description": "NULL pointer dereference: duplicator source pointer not checked",
+        "verdict": "NotABug"
+      }
+    ],
+    "status": "scanned",
+    "seconds": 896.0
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "sqlite",
+    "mapping": {
+      "out_param_api": [
+        "sqlite3_open",
+        "sqlite3_open_v2",
+        "sqlite3_open16",
+        "sqlite3_prepare",
+        "sqlite3_prepare_v2",
+        "sqlite3_prepare_v3",
+        "sqlite3_prepare16",
+        "sqlite3_prepare16_v2",
+        "sqlite3_prepare16_v3",
+        "sqlite3_get_table",
+        "sqlite3_table_column_metadata",
+        "sqlite3_blob_open",
+        "sqlite3_snapshot_get",
+        "sqlite3_status",
+        "sqlite3_db_status",
+        "sqlite3_stmt_scanstatus",
+        "sqlite3_stmt_scanstatus_v2",
+        "sqlite3_serialize",
+        "sqlite3_exec",
+        "sqlite3_load_extension",
+        "sqlite3_vtab_rhs_value",
+        "sqlite3_vtab_in_first",
+        "sqlite3_vtab_in_next"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 33,
+    "triage": [
+      {
+        "file": "src/legacy.c",
+        "line": 60,
+        "function": "sqlite3_exec",
+        "description": "Out-parameter may be NULL and is written without a NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "src/legacy.c",
+        "line": 44,
+        "function": "sqlite3_exec",
+        "description": "Out-parameter may be NULL and is written without a NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "src/legacy.c",
+        "line": 113,
+        "function": "sqlite3_exec",
+        "description": "Out-parameter may be NULL and is written without a NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "src/loadext.c",
+        "line": 739,
+        "function": "sqlite3_load_extension",
+        "description": "Out-parameter may be NULL and is written without a NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "src/main.c",
+        "line": 3794,
+        "function": "sqlite3_open16",
+        "description": "Out-parameter may be NULL and is written without a NULL check",
+        "verdict": "NotABug"
+      }
+    ],
+    "status": "scanned",
+    "seconds": 1228.8
+  },
+  {
+    "bundle": "KN-Double-Free-26dfab2f-2",
+    "source": "libxml2",
+    "target": "sqlite",
+    "mapping": {
+      "parser_input": [
+        "sqlite3_str_finish"
+      ],
+      "null_on_failure": [
+        "sqlite3_str_finish"
+      ],
+      "deallocator": [
+        "sqlite3_str_free"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 363.1
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "sqlite",
+    "mapping": {
+      "init": [
+        "sqlite3Fts5ConfigSetValue"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 308.1
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-2",
+    "source": "libxml2",
+    "target": "sqlite",
+    "mapping": {
+      "allocator": [
+        "sqlite3_malloc",
+        "sqlite3_malloc64",
+        "sqlite3Malloc",
+        "sqlite3MallocZero",
+        "sqlite3DbMallocRaw",
+        "sqlite3DbMallocZero",
+        "sqlite3DbMallocRawNN",
+        "sqlite3StackAllocRaw",
+        "sqlite3StackAllocRawNN",
+        "sqlite3MutexAlloc",
+        "sqlite3_mutex_alloc",
+        "sqlite3ParserAlloc",
+        "sqlite3ExprAlloc",
+        "sqlite3WindowAlloc",
+        "sqlite3KeyInfoAlloc",
+        "sqlite3VdbeAllocUnpackedRecord",
+        "sqlite3CarrayRegister",
+        "sqlite3VdbeExpandSql",
+        "sqlite3_expanded_sql",
+        "sqlite3ArrayAllocate",
+        "fts5BufferGrow",
+        "sqlite3VdbeMemGrow"
+      ],
+      "reallocator": [
+        "sqlite3Realloc",
+        "sqlite3_realloc",
+        "sqlite3_realloc64",
+        "sqlite3DbRealloc",
+        "sqlite3DbReallocOrFree",
+        "sqlite3WhereRealloc",
+        "sqlite3RCStrResize"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 13,
+    "triage": [
+      {
+        "file": "src/build.c",
+        "line": 4768,
+        "function": "sqlite3ArrayAllocate",
+        "description": "Pointer parameter dereferenced before NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "src/build.c",
+        "line": 4780,
+        "function": "sqlite3ArrayAllocate",
+        "description": "Pointer parameter dereferenced before NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "src/build.c",
+        "line": 4773,
+        "function": "sqlite3ArrayAllocate",
+        "description": "Pointer parameter dereferenced before NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "src/vdbemem.c",
+        "line": 271,
+        "function": "sqlite3VdbeMemGrow",
+        "description": "Pointer parameter dereferenced before NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "src/vdbemem.c",
+        "line": 276,
+        "function": "sqlite3VdbeMemGrow",
+        "description": "Pointer parameter dereferenced before NULL check",
+        "verdict": "NotABug"
+      }
+    ],
+    "status": "scanned",
+    "seconds": 1192.4
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-0",
+    "source": "libxml2",
+    "target": "sqlite",
+    "mapping": {
+      "indexed_read": [
+        "CC"
+      ],
+      "length_of": [
+        "sqlite3Strlen30",
+        "strlen"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 193.0
+  },
+  {
+    "bundle": "KN-Misuse-bc4bbcef-0",
+    "source": "lua",
+    "target": "sqlite",
+    "mapping": {
+      "allocator": [
+        "sqlite3StartTable",
+        "sqlite3Fts5CreateTable",
+        "sqlite3BtreeCreateTable",
+        "sqlite3Fts3CreateStatTable",
+        "sqlite3ExprAlloc",
+        "sqlite3KeyInfoAlloc",
+        "sqlite3MutexAlloc",
+        "sqlite3_mutex_alloc",
+        "sqlite3ParserAlloc",
+        "sqlite3StackAllocRaw",
+        "sqlite3StackAllocRawNN",
+        "sqlite3WindowAlloc"
+      ],
+      "container_insert": [
+        "sqlite3HashInsert",
+        "sqlite3Fts3HashInsert",
+        "sqlite3StartTable",
+        "sqlite3Fts5CreateTable"
+      ],
+      "lookup": [
+        "sqlite3FindTable",
+        "sqlite3LocateTable",
+        "sqlite3LocateTableItem",
+        "sqlite3SrcListLookup",
+        "sqlite3IndexedByLookup",
+        "sqlite3PagerLookup",
+        "sqlite3Fts5TableFromCsrid",
+        "sqlite3StartTable",
+        "sqlite3HashFind",
+        "sqlite3Fts3HashFind"
+      ],
+      "init": [
+        "sqlite3EndTable",
+        "sqlite3VtabCallCreate",
+        "sqlite3CreateFunc",
+        "sqlite3Init",
+        "sqlite3InitOne",
+        "sqlite3MallocInit",
+        "sqlite3_initialize",
+        "sqlite3Fts3Init",
+        "sqlite3Fts5IndexInit",
+        "sqlite3Fts5ExprInit",
+        "sqlite3Fts5VocabInit",
+        "sqlite3RtreeInit",
+        "sqlite3IcuInit",
+        "sqlite3KvvfsInit",
+        "sqlite3MemdbInit",
+        "sqlite3OsInit",
+        "sqlite3_os_init",
+        "sqlite3MutexInit",
+        "sqlite3_wsd_init",
+        "sqlite3Fts3InitAux",
+        "sqlite3Fts3InitTok",
+        "sqlite3Fts3InitTerm",
+        "sqlite3Fts5AuxInit",
+        "sqlite3RowSetInit",
+        "sqlite3_backup_init",
+        "sqlite3_recover_init",
+        "sqlite3VdbeSorterInit",
+        "sqlite3InitCallback"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 319.4
+  },
+  {
+    "bundle": "KN-Use-After-Free-22974326-2",
+    "source": "lua",
+    "target": "sqlite",
+    "mapping": {
+      "gc_trigger": [],
+      "ref_get": []
+    },
+    "unmapped_roles": [
+      "gc_trigger",
+      "ref_get"
+    ],
+    "status": "no equivalent roles in target"
+  }
+]

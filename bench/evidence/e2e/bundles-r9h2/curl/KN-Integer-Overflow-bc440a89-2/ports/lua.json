@@ -1,0 +1,63 @@
+{
+  "target": "lua",
+  "commit": "0b29f408433e92953cc72b1d3e06c7ac8139e439",
+  "candidates": 845,
+  "identifiers": 7300,
+  "offered": {
+    "length_of": [
+      "lua_len",
+      "cast_num",
+      "luaL_len",
+      "sizenode",
+      "luaH_size",
+      "sizeudata",
+      "stacksize",
+      "cast_sizet",
+      "sizestrshr",
+      "luaH_resize",
+      "luaS_resize",
+      "luaL_addsize",
+      "luaopen_base",
+      "sizeCclosure",
+      "sizeLclosure",
+      "allocsizenode",
+      "luaM_testsize",
+      "luaF_protosize",
+      "luaM_checksize",
+      "resethookcount",
+      "luaE_threadsize",
+      "luaS_sizelngstr",
+      "luaZ_sizebuffer",
+      "luaH_resizearray",
+      "lua_gethookcount",
+      "luaK_settablesize",
+      "luaL_buffinitsize",
+      "luaL_prepbuffsize",
+      "luaZ_resizebuffer",
+      "luaL_pushresultsize",
+      "cast_Inst",
+      "lua_arith",
+      "luaO_arith",
+      "nodefromval",
+      "luaX_setinput",
+      "invalidateTMcache",
+      "luaM_saferealloc_"
+    ]
+  },
+  "mapping": {
+    "length_of": [
+      "sizeudata",
+      "sizestrshr",
+      "sizeCclosure",
+      "sizeLclosure",
+      "luaS_sizelngstr"
+    ]
+  },
+  "dropped_not_in_target": {
+    "length_of": []
+  },
+  "rationale": {
+    "length_of": "These macros/functions compute derived object sizes from input element counts or byte lengths, performing unchecked arithmetic that can overflow if the input size is not bounded."
+  },
+  "llm_seconds": 183.0
+}

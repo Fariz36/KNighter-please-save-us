@@ -1,0 +1,46 @@
+id: KN-Integer-Overflow-720d3afa-0
+bug_type: Integer-Overflow
+source:
+  project: sqlite
+  description: SQLite, an embedded SQL database engine written in C
+  commit: 720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: "## Bug Pattern\n\nThe element count used to size/initialize a dynamically grown cache is computed\
+  \ with narrow (32-bit) integer arithmetic before being multiplied by the element size and passed to\
+  \ a `reallocator`. That arithmetic can wrap or truncate for large length values, so the cache is allocated\
+  \ and initialized for fewer elements than later indexing (derived from the same length) will access,\
+  \ causing an out-of-bounds access. The fix widens the count computation to 64-bit.\n\nRoles:\n- `reallocator`:\
+  \ `sqlite3Realloc` \u2014 resizes the cache; its size argument depends on the overflow-prone count.\n\
+  - `null_on_failure`: `sqlite3Realloc` \u2014 may return NULL and is checked before use.\n- `initializer`:\
+  \ `memset` \u2014 clears the cache using the same under-computed count.\n- `length_of`/`allocated_size`:\
+  \ `sqlite3MallocSize` \u2014 returns the current allocation size used to decide whether a resize is\
+  \ needed."
+roles:
+  allocated_size:
+    names:
+    - sqlite3MallocSize
+    description: returns the current allocated size of a memory region; used to decide whether a resize
+      is needed
+  reallocator:
+    names:
+    - sqlite3Realloc
+    description: resizes a memory region; its size argument must be large enough for the element count
+  null_on_failure:
+    names:
+    - sqlite3Realloc
+    description: may return NULL on failure; its result is checked before use
+  initializer:
+    names:
+    - memset
+    description: initializes a memory region to zero; the size must match the allocated size
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:46+0700

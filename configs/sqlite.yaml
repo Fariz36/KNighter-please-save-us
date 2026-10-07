@@ -24,6 +24,8 @@ target_options:
     # Compile each src/*.c separately (not the amalgamation) and record the commands.
     - "intercept-build --cdb {build}/compile_commands.json make USE_AMALGAMATION=0 -j{jobs} libsqlite3.a"
   source_extensions: [".c"]
+  # Revisions without it predate the build system the setup uses (bench/matched_pairs.py).
+  build_marker: "autosetup"
   scan_include: ["src/", "ext/"]
 
 plugin_build: standalone

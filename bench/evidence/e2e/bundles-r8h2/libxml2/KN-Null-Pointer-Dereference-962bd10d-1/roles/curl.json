@@ -1,0 +1,24 @@
+{
+  "nullable_inout_capacity_ptr": [
+    "capacity"
+  ],
+  "capacity_computer": [
+    "Curl_uint32_tbl_resize",
+    "Curl_uint32_bset_resize"
+  ],
+  "reallocator": [
+    "curlx_realloc",
+    "curl_dbg_realloc",
+    "Curl_nghttp2_realloc"
+  ],
+  "deref_read": [],
+  "deref_write": [],
+  "null_guard": [],
+  "null_on_failure": [
+    "curlx_realloc",
+    "curl_dbg_realloc",
+    "Curl_nghttp2_realloc",
+    "Curl_uint32_tbl_resize",
+    "Curl_uint32_bset_resize"
+  ]
+}

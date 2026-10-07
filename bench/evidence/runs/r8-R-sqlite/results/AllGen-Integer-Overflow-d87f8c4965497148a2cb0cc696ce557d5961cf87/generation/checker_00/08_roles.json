@@ -1,0 +1,46 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "length_of": {
+      "names": [],
+      "description": "pointer difference measuring the byte length after a UTF-8 character scan"
+    },
+    "character_count_bound": {
+      "names": [
+        "precision"
+      ],
+      "description": "integer precision bound controlling the number of logical characters scanned"
+    },
+    "iterator_advance": {
+      "names": [
+        "SQLITE_SKIP_UTF8"
+      ],
+      "description": "macro/function that advances a byte pointer past one UTF-8 character; may advance 1-4 bytes"
+    },
+    "output_length": {
+      "names": [
+        "length"
+      ],
+      "description": "signed int variable that receives the measured byte length for later append/copy"
+    },
+    "narrowing_cast": {
+      "names": [],
+      "description": "C integer cast that narrows the pointer difference to signed int"
+    },
+    "safe_cap": {
+      "names": [
+        "MIN"
+      ],
+      "description": "macro/function that clamps a value to a safe maximum before narrowing"
+    },
+    "buffer_append": {
+      "names": [
+        "sqlite3_str_append"
+      ],
+      "description": "function that appends a bounded byte buffer to an output accumulator using a signed int length"
+    }
+  }
+}

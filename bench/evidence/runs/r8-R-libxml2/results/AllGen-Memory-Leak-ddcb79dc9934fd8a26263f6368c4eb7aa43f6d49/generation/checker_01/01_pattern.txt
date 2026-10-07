@@ -1,0 +1,12 @@
+## Bug Pattern
+
+The bug pattern is replacing the value of an existing owned resource slot with the result of an `allocator` call, without first releasing the previously stored resource through its `deallocator`. The old allocation becomes unreachable and is leaked.
+
+Roles in this patch:
+- `allocator`: `xmlMalloc`
+- `owned_resource_slot`: `ctxt->sax`
+- `old_resource_releaser` / `deallocator`: `xmlFree` (not called before the overwrite)
+- `overwriting_setter`: `xmlCtxtSetSaxHandler`
+- `copy_into_existing_slot`: `*ctxt->sax = *sax` in the fix, avoiding a new allocation and preserving ownership of the existing slot
+
+In other words: a setter allocates a fresh copy of an object and stores it into an owning pointer field, but fails to free or reuse the object already held there, causing a memory leak.

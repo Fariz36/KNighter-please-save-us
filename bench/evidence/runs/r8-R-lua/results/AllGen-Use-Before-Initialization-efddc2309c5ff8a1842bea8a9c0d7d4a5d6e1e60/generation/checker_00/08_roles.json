@@ -1,0 +1,55 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "state_object": {
+      "names": [
+        "MatchState",
+        "GMatchState"
+      ],
+      "description": "struct that holds reusable matching state"
+    },
+    "state_initializer": {
+      "names": [
+        "prepstate"
+      ],
+      "description": "one-time initializer for the reusable state object"
+    },
+    "per_match_state_resetter": {
+      "names": [
+        "reprepstate"
+      ],
+      "description": "routine that resets per-match fields on a reused state object"
+    },
+    "transient_guard_counter": {
+      "names": [
+        "matchdepth"
+      ],
+      "description": "field that tracks recursion/stack-depth and is decremented before recursive calls and incremented on normal exit"
+    },
+    "guard_check": {
+      "names": [],
+      "description": "condition that checks the transient guard counter before recursion"
+    },
+    "guard_restore": {
+      "names": [],
+      "description": "operation that restores the transient guard counter on normal exit"
+    },
+    "non_local_error_abort": {
+      "names": [
+        "luaL_error",
+        "lua_error"
+      ],
+      "description": "function/macro that aborts via non-local error, skipping cleanup"
+    },
+    "reusing_iterator": {
+      "names": [
+        "gmatch_aux",
+        "gmatch"
+      ],
+      "description": "iterator/closure that reuses the state object across multiple matches"
+    }
+  }
+}

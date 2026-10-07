@@ -1,0 +1,24 @@
+{
+  "out_param_api": [
+    "lua_tonumberx",
+    "lua_tointegerx",
+    "lua_tolstring",
+    "lua_getallocf",
+    "lua_getstack",
+    "lua_getinfo",
+    "lua_resume",
+    "luaL_tolstring",
+    "luaL_buffinitsize",
+    "luaL_prepbuffsize",
+    "luaL_addlstring",
+    "luaL_addstring",
+    "luaL_addvalue",
+    "luaL_pushresult",
+    "luaL_pushresultsize",
+    "luaL_addgsub",
+    "luaL_buffinit",
+    "luaL_prepbuffer",
+    "luaL_addchar",
+    "luaL_addsize"
+  ]
+}

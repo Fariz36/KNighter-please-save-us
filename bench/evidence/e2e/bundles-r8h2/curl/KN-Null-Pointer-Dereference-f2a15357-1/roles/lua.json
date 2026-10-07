@@ -1,0 +1,26 @@
+{
+  "api_entry_point": [
+    "lua_tonumberx",
+    "lua_tointegerx",
+    "lua_tolstring",
+    "lua_getallocf",
+    "lua_resume",
+    "lua_getstack",
+    "lua_getinfo",
+    "luaL_checklstring",
+    "luaL_optlstring",
+    "luaL_tolstring"
+  ],
+  "out_param": [
+    "isnum",
+    "len",
+    "ud",
+    "nresults",
+    "ar",
+    "l"
+  ],
+  "out_param_writer": [
+    "lua_tolstring",
+    "auxgetinfo"
+  ]
+}

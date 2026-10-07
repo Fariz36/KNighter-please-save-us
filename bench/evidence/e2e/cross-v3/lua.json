@@ -1,0 +1,502 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-2",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "length_of": [
+        "sizeudata",
+        "sizestrshr",
+        "sizeCclosure",
+        "sizeLclosure",
+        "luaS_sizelngstr"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 222.7
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "cleanup": [
+        "luaF_closeupval",
+        "luaF_close",
+        "lua_closethread",
+        "lua_close",
+        "luaD_closeprotected"
+      ],
+      "container_remove": [
+        "luaF_unlinkupval",
+        "luaS_remove"
+      ],
+      "deallocator": [
+        "luaM_free",
+        "luaM_free_",
+        "luaM_freemem",
+        "luaM_freearray",
+        "luaH_free",
+        "luaF_freeproto",
+        "luaE_freethread",
+        "luaZ_freebuffer",
+        "luaC_freeallobjects",
+        "lua_close",
+        "luai_userstatefree",
+        "luaL_alloc"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 276.5
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "length_of": [
+        "strlen"
+      ],
+      "untrusted_size": [
+        "lua_tolstring",
+        "luaL_checklstring",
+        "luaL_optlstring",
+        "luaL_tolstring",
+        "luaL_len"
+      ],
+      "untrusted_data_accessor": [
+        "lua_tolstring",
+        "luaL_checklstring",
+        "luaL_optlstring",
+        "luaL_tolstring",
+        "lua_touserdata",
+        "luaL_testudata",
+        "luaL_checkudata",
+        "getudatamem",
+        "lua_getextraspace",
+        "luaL_prepbuffsize",
+        "luaL_buffinitsize"
+      ],
+      "allocator": [
+        "lua_pushlstring",
+        "lua_pushfstring",
+        "luaO_pushfstring",
+        "lua_pushvfstring",
+        "luaO_pushvfstring",
+        "luaX_newstring",
+        "luaL_tolstring",
+        "lua_newuserdatauv",
+        "luaL_buffinitsize",
+        "luaL_prepbuffsize",
+        "luaM_malloc_",
+        "luaM_realloc_",
+        "luaM_new",
+        "luaM_newvector",
+        "luaM_newobject",
+        "luaM_growvector",
+        "luaM_reallocvector",
+        "luaL_alloc"
+      ],
+      "deallocator": [
+        "luaM_free",
+        "luaM_free_",
+        "luaM_freemem",
+        "luaM_freearray",
+        "luaH_free",
+        "luaF_freeproto",
+        "luaE_freethread",
+        "luaZ_freebuffer"
+      ],
+      "error_setter": [
+        "luaL_error",
+        "luaG_runerror",
+        "luaK_semerror"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 11,
+    "triage": [
+      {
+        "file": "lauxlib.c",
+        "line": 192,
+        "function": "luaL_argerror",
+        "description": "Length-delimited buffer passed to %s; may read past end",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "liolib.c",
+        "line": 42,
+        "function": "l_checkmode",
+        "description": "Length-delimited buffer passed to strlen; may read past end",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "liolib.c",
+        "line": 264,
+        "function": "opencheck",
+        "description": "Length-delimited buffer passed to %s; may read past end",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "liolib.c",
+        "line": 649,
+        "function": "io_readline",
+        "description": "Length-delimited buffer passed to %s; may read past end",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "loadlib.c",
+        "line": 633,
+        "function": "findloader",
+        "description": "Length-delimited buffer passed to %s; may read past end",
+        "verdict": "NotABug"
+      }
+    ],
+    "status": "scanned",
+    "seconds": 742.2
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-0",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "duplicator": [
+        "luaS_new",
+        "luaS_newlstr"
+      ],
+      "allocator": [
+        "luaM_malloc_",
+        "luaM_realloc_",
+        "luaM_new",
+        "luaM_newvector",
+        "luaM_newobject",
+        "luaL_alloc",
+        "luaH_new",
+        "luaS_new",
+        "luaS_newlstr",
+        "debug_realloc"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 1,
+    "triage": [
+      {
+        "file": "lstring.c",
+        "line": 272,
+        "function": "luaS_new",
+        "description": "NULL pointer dereference: duplicator source pointer not checked",
+        "verdict": "NotABug"
+      }
+    ],
+    "status": "scanned",
+    "seconds": 277.7
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "out_param_api": [
+        "lua_tonumberx",
+        "lua_tointegerx",
+        "lua_tolstring",
+        "lua_getallocf",
+        "lua_getstack",
+        "lua_getinfo",
+        "lua_resume",
+        "luaL_tolstring",
+        "luaL_buffinitsize",
+        "luaL_prepbuffsize",
+        "luaL_addlstring",
+        "luaL_addstring",
+        "luaL_addvalue",
+        "luaL_pushresult",
+        "luaL_pushresultsize",
+        "luaL_addgsub",
+        "luaL_buffinit",
+        "luaL_prepbuffer",
+        "luaL_addchar",
+        "luaL_addsize"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 30,
+    "triage": [
+      {
+        "file": "lapi.c",
+        "line": 427,
+        "function": "lua_tolstring",
+        "description": "Out-parameter may be NULL and is written without a NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "lapi.c",
+        "line": 418,
+        "function": "lua_tolstring",
+        "description": "Out-parameter may be NULL and is written without a NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "lapi.c",
+        "line": 401,
+        "function": "lua_tointegerx",
+        "description": "Out-parameter may be NULL and is written without a NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "lapi.c",
+        "line": 391,
+        "function": "lua_tonumberx",
+        "description": "Out-parameter may be NULL and is written without a NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "lauxlib.c",
+        "line": 677,
+        "function": "luaL_buffinit",
+        "description": "Out-parameter may be NULL and is written without a NULL check",
+        "verdict": "NotABug"
+      }
+    ],
+    "status": "scanned",
+    "seconds": 667.7
+  },
+  {
+    "bundle": "KN-Double-Free-26dfab2f-2",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "parser_input": [],
+      "null_on_failure": [],
+      "deallocator": [
+        "luaZ_freebuffer",
+        "luaM_free",
+        "luaM_free_",
+        "luaM_freemem",
+        "luaM_freearray"
+      ]
+    },
+    "unmapped_roles": [
+      "parser_input",
+      "null_on_failure"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 284.6
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "init": []
+    },
+    "unmapped_roles": [
+      "init"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-2",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "allocator": [
+        "luaD_growstack",
+        "luaH_resize",
+        "luaS_resize",
+        "luaM_growaux_",
+        "luaM_growvector",
+        "luaH_resizearray",
+        "luaD_reallocstack",
+        "luaZ_resizebuffer"
+      ],
+      "reallocator": [
+        "luaM_realloc_",
+        "luaM_saferealloc_",
+        "luaM_reallocvchar",
+        "luaM_reallocvector",
+        "luaL_alloc",
+        "debug_realloc"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 3,
+    "triage": [
+      {
+        "file": "lmem.c",
+        "line": 117,
+        "function": "luaM_growaux_",
+        "description": "Pointer parameter dereferenced before NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "ltable.c",
+        "line": 739,
+        "function": "luaH_resize",
+        "description": "Pointer parameter dereferenced before NULL check",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "ltable.c",
+        "line": 740,
+        "function": "luaH_resize",
+        "description": "Pointer parameter dereferenced before NULL check",
+        "verdict": "NotABug"
+      }
+    ],
+    "status": "scanned",
+    "seconds": 320.2
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-0",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "indexed_read": [
+        "zgetc"
+      ],
+      "length_of": [
+        "strlen",
+        "luaZ_bufflen"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 183.6
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "lua",
+    "mapping": {
+      "allocated_size": [
+        "stacksize"
+      ],
+      "reallocator": [
+        "luaM_realloc_",
+        "luaM_saferealloc_",
+        "luaM_growaux_",
+        "luaM_reallocvector",
+        "luaM_growvector",
+        "luaM_reallocvchar",
+        "luaH_resize",
+        "luaH_resizearray",
+        "luaS_resize",
+        "luaD_reallocstack",
+        "luaD_growstack",
+        "luaZ_resizebuffer",
+        "luaK_reserveregs",
+        "luaL_prepbuffsize",
+        "luaL_buffinitsize"
+      ],
+      "null_on_failure": [
+        "lua_Alloc",
+        "luaL_alloc",
+        "debug_realloc"
+      ],
+      "initializer": [
+        "memset"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 346.7
+  },
+  {
+    "bundle": "KN-Memory-Leak-7b60ed80-1",
+    "source": "sqlite",
+    "target": "lua",
+    "mapping": {
+      "allocator": [
+        "luaM_new",
+        "luaM_newobject",
+        "luaM_malloc_",
+        "luaM_realloc_",
+        "luaH_new",
+        "luaS_new",
+        "allocsizenode",
+        "luaL_alloc",
+        "debug_realloc"
+      ],
+      "duplicator": [],
+      "null_on_failure": [
+        "luaL_alloc",
+        "debug_realloc",
+        "lua_newstate",
+        "luaL_newstate"
+      ],
+      "container_insert": [
+        "luaH_set",
+        "luaH_setint"
+      ],
+      "deallocator": [
+        "luaM_free",
+        "luaM_free_",
+        "luaM_freemem",
+        "luaM_freearray",
+        "luaH_free",
+        "luaF_freeproto",
+        "luaE_freethread",
+        "luaZ_freebuffer",
+        "luaC_freeallobjects",
+        "lua_close",
+        "luaL_alloc"
+      ]
+    },
+    "unmapped_roles": [
+      "duplicator"
+    ],
+    "reports": 16,
+    "triage": [
+      {
+        "file": "lapi.c",
+        "line": 802,
+        "function": "lua_createtable",
+        "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "lapi.c",
+        "line": 682,
+        "function": "auxgetstr",
+        "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "lapi.c",
+        "line": 583,
+        "function": "lua_pushstring",
+        "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "lapi.c",
+        "line": 874,
+        "function": "auxsetstr",
+        "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+        "verdict": "NotABug"
+      },
+      {
+        "file": "ldebug.c",
+        "line": 303,
+        "function": "collectvalidlines",
+        "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+        "verdict": "NotABug"
+      }
+    ],
+    "status": "scanned",
+    "seconds": 569.6
+  }
+]

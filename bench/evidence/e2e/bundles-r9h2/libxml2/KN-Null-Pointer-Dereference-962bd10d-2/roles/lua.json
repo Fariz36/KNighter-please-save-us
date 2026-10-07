@@ -1,0 +1,20 @@
+{
+  "allocator": [
+    "luaD_growstack",
+    "luaH_resize",
+    "luaS_resize",
+    "luaM_growaux_",
+    "luaM_growvector",
+    "luaH_resizearray",
+    "luaD_reallocstack",
+    "luaZ_resizebuffer"
+  ],
+  "reallocator": [
+    "luaM_realloc_",
+    "luaM_saferealloc_",
+    "luaM_reallocvchar",
+    "luaM_reallocvector",
+    "luaL_alloc",
+    "debug_realloc"
+  ]
+}

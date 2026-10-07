@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A value obtained from a `parser_input` (untrusted length/offset) is stored in a narrow integer variable (`unsigned short`). That narrow value is then used in arithmetic for a bounds check (`offset + header_size + length > available`). Because the arithmetic is performed on limited-width types, it can overflow/wrap, so the check may pass even when the requested offset+length exceeds the available buffer. The unchecked offset/length then flows to a `buffer_copy`-like sink, causing an out-of-bounds access. The fix is to store untrusted sizes/offsets in a wide unsigned size type (`size_t`) so the check and subsequent pointer/length arithmetic cannot be bypassed by integer overflow.
+
+Roles:
+- `parser_input`: `Curl_read16_le` — decodes untrusted bytes into integer length/offset values.
+- `buffer_copy`: `Curl_client_write` — consumes a buffer pointer and a length, assuming the length is within the buffer.
+- `length_of`: `sizeof` — produces a size value added to the offset in the bounds check.
+- `error_setter`: `failf` — reports the invalid packet condition.

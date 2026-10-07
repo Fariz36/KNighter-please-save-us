@@ -1,0 +1,28 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "ref_get": {
+      "names": [
+        "fasttm",
+        "gfasttm",
+        "luaT_gettmbyobj"
+      ],
+      "description": "Obtains a reference to an object that may be only weakly referenced (e.g., from a weak table/metatable) without making it strongly reachable."
+    },
+    "cleanup": {
+      "names": [
+        "luaH_finishset"
+      ],
+      "description": "Performs a memory management or garbage collection operation that can trigger an emergency collection and reclaim weakly referenced objects."
+    },
+    "container_insert": {
+      "names": [
+        "sethvalue2s"
+      ],
+      "description": "Inserts/roots an object into a strong container (e.g., a stack), making it reachable during subsequent operations."
+    }
+  }
+}

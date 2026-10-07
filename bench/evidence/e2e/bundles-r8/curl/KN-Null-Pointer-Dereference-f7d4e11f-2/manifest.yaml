@@ -1,0 +1,79 @@
+id: KN-Null-Pointer-Dereference-f7d4e11f-2
+bug_type: Null-Pointer-Dereference
+source:
+  project: curl
+  description: curl, the C library (libcurl) for transferring data with URLs
+  commit: f7d4e11f4b423a6db61ca86cf59483fad9f4bc13
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  The function validates the **length field** of an input buffer but fails to validate the associated
+  **data pointer** before using it. Specifically, when a **copy flag** is set, the unchecked data pointer
+  is passed as the source to a **buffer copy** operation (`memcpy`); when the flag is unset, the unchecked
+  NULL pointer is stored in the output structure for later dereference. The root cause is a missing NULL
+  check on a required buffer pointer before copying/storing it.
+
+
+  ## Roles
+
+
+  - `data_pointer`: `blob->data`
+
+  - `length_field`: `blob->len`
+
+  - `copy_flag`: `CURL_BLOB_COPY`
+
+  - `buffer_copy`: `memcpy`
+
+  - `allocator`: `curlx_malloc`
+
+  - `deallocator`: `curlx_safefree`
+
+  - `error_return`: `CURLE_BAD_FUNCTION_ARGUMENT`, `CURLE_OUT_OF_MEMORY`
+
+  - `validation_guard`: missing check `!blob->data` before using `blob->data`'
+roles:
+  length_field:
+    names:
+    - len
+    description: field storing the length of a buffer
+  data_pointer:
+    names:
+    - data
+    description: pointer to the buffer data
+  buffer_copy:
+    names:
+    - memcpy
+    description: function that copies memory from a source to a destination
+  error_return:
+    names:
+    - CURLE_BAD_FUNCTION_ARGUMENT
+    - CURLE_OUT_OF_MEMORY
+    description: error code returned when validation fails
+  copy_flag:
+    names:
+    - CURL_BLOB_COPY
+    description: flag indicating that the buffer data should be copied
+  allocator:
+    names:
+    - curlx_malloc
+    description: memory allocation function
+  deallocator:
+    names:
+    - curlx_safefree
+    description: memory deallocation function
+  validation_guard:
+    names: []
+    description: conditional check that validates input arguments; missing data pointer check is the bug
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: 3c44401b20c9b0cfdf2951dd290b1bc9192d6362
+exported: 2026-10-01T20:43:12+0700

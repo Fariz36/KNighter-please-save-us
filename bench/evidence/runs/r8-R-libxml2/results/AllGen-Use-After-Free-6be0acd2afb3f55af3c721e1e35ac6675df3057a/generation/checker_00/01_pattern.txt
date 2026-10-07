@@ -1,0 +1,11 @@
+## Bug Pattern
+
+A `deallocator` is called on a node that is still linked into a tree/list, without first invoking the corresponding `unlinker`. Freeing a still-linked node leaves dangling `parent`/`children`/`last`/`prev`/`next` references, causing use-after-free or double-free when the old container is later traversed or freed. In this patch, `xmlAddChild` merges `cur`’s text content into the text parent and then directly calls `xmlFreeNode(cur)`, but `cur` may still be attached somewhere in the tree. The fix inserts `xmlUnlinkNodeInternal(cur)` before `xmlFreeNode(cur)`.
+
+Roles:
+- `deallocator`: `xmlFreeNode`
+- `unlinker`: `xmlUnlinkNodeInternal` — missing before deallocation
+- `linked_container`: XML tree links such as `parent`, `children`, `last`, `prev`, `next`
+- `linked_node`: `cur`
+- `content_merger`: `xmlTextAddContent` — consumes the node’s content before the node is freed
+- `wrapper`: `xmlAddChild` — performs merge-and-free without unlinking first

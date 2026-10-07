@@ -1,0 +1,27 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "getConstraintToken",
+        "sqlite3GetToken"
+      ],
+      "description": "parses input and returns a token length while setting a token type via an out-parameter"
+    },
+    "dequoter": {
+      "names": [
+        "sqlite3Dequote"
+      ],
+      "description": "removes quote delimiters in place, assuming balanced/valid quoting"
+    },
+    "aborting_assert": {
+      "names": [
+        "assert"
+      ],
+      "description": "macro that aborts execution when its condition is false"
+    }
+  }
+}

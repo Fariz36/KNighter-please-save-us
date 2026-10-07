@@ -1,0 +1,27 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 14:42:35.912 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (sqlite), Repository Path: /home/faris/RA-MrYudis/Knight/targets/sqlite; plugin_build=standalone; validation_scoring=strict
+2026-10-07 14:42:37.660 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-db160dd2f8754485)
+2026-10-07 14:42:37.730 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 0d979c217fd5
+2026-10-07 14:42:37.918 | INFO     | role_porting:port_roles:140 - sqlite: 2062 candidate API names from headers
+2026-10-07 14:42:38.100 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:43:40.712 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 62.6s
+2026-10-07 14:43:40.717 | INFO     | role_porting:port_roles:189 - Ported KN-Buffer-Overflow-a7200804-1 roles to sqlite: {'buffer_grow': ['sqlite3StrAccumEnlargeIfNeeded'], 'required_capacity': [], 'write_pointer': [], 'digit_set': [], 'output_buffer': []}
+2026-10-07 14:43:40.720 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-07 14:43:44.482 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '0d979c217fd5a3afc675eb763d468c0cf4d3fec4', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/6dde839323642fec9c86/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 3.75, 'jobs': 32}
+2026-10-07 14:43:44.483 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-07 14:43:48.296 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '0d979c217fd5a3afc675eb763d468c0cf4d3fec4', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/6dde839323642fec9c86/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 3.8, 'jobs': 32}
+{"bundle": "KN-Buffer-Overflow-a7200804-1", "reports_original": 1, "reports_ported": 0, "preserved": false}
+2026-10-07 14:43:48.320 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 4cc2dbd54dba
+2026-10-07 14:43:48.474 | INFO     | role_porting:port_roles:140 - sqlite: 2063 candidate API names from headers
+2026-10-07 14:43:48.814 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:45:15.395 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 86.6s
+2026-10-07 14:45:15.398 | INFO     | role_porting:port_roles:189 - Ported KN-Integer-Overflow-720d3afa-0 roles to sqlite: {'payload_length': ['sqlite3BtreePayloadSize'], 'local_payload_length': ['sqlite3BtreePayloadFetch'], 'overflow_chunk_size': [], 'overflow_page_cache': [], 'reallocator': ['sqlite3Realloc', 'sqlite3_realloc', 'sqlite3DbRealloc', 'sqlite3WhereRealloc', 'sqlite3DbReallocOrFree', 'sqlite3_realloc64', 'sqlite3RCStrResize', 'sqlite3VdbeMemGrow', 'fts5BufferGrow'], 'allocated_size_query': ['sqlite3MallocSize', 'sqlite3DbMallocSize', 'sqlite3_msize'], 'zero_initializer': [], 'cache_index': [], 'too_narrow_arithmetic_type': []}
+2026-10-07 14:45:15.400 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-07 14:46:28.010 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '4cc2dbd54dba0271d3762ca124ab7f1edeb8d7dd', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/d77e494db6ccfb6a1054/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 72.6, 'jobs': 32}
+2026-10-07 14:46:28.015 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-07 14:47:44.135 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '4cc2dbd54dba0271d3762ca124ab7f1edeb8d7dd', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/d77e494db6ccfb6a1054/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 76.11, 'jobs': 32}
+{"bundle": "KN-Integer-Overflow-720d3afa-0", "reports_original": 1, "reports_ported": 0, "preserved": false}
+2026-10-07 14:47:44.146 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision b1541d2f1713
+2026-10-07 14:47:44.228 | INFO     | role_porting:port_roles:140 - sqlite: 2065 candidate API names from headers
+2026-10-07 14:47:44.339 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]

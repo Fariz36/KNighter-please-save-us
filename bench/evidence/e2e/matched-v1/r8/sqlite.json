@@ -1,0 +1,1135 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-1",
+    "source": "curl",
+    "target": "sqlite",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "encoded_size_calculator": [],
+      "input_length": [
+        "nIn",
+        "sqlite3_value_bytes"
+      ],
+      "max_input_size": [
+        "SQLITE_MAX_LENGTH"
+      ],
+      "error_sentinel": []
+    },
+    "same_type_candidates": 52,
+    "api_matched_candidates": 4,
+    "pairs": [
+      {
+        "commit": "6c218ba0ad8942ae1e7f24594349860415680d95",
+        "subject": "Extra defenses against integer overflows in the untested, unused, and unsupported transliterate() SQL extension function found in the ext/misc/spellfix.c extension. [bugs:/info/2026-06-01T10:34:57Z|Bug 2026-06-01T10:34:57Z].",
+        "files": [
+          "ext/misc/spellfix.c"
+        ],
+        "api_hits": [
+          "nIn"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 6c218ba0ad8942ae1e7f24594349860415680d95 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "ffbfc27fab6b27123e83922413cd7102bbc77917",
+        "subject": "Fix an signed integer overflow problem that can occur when using an oversize value for the SQLITE_MAX_LENGTH compile-time option together with multi-gigabyte operands to the OP_Concat operator.",
+        "files": [
+          "src/vdbe.c"
+        ],
+        "api_hits": [
+          "SQLITE_MAX_LENGTH"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "9b6bc61dbd9744ca01e1d25e31745858dbf4feb7",
+        "subject": "Fix some integer overflow warnings in the base64 and base85 extensions.",
+        "files": [
+          "ext/misc/base64.c",
+          "ext/misc/base85.c",
+          "src/func.c"
+        ],
+        "api_hits": [
+          "sqlite3_value_bytes"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "2b918dbb01d4e3ec9bf46d00fb1362107a82995e",
+        "subject": "Increase the size of a variable in FTS3 to help static analyzers see that there are no integer overflow problems.",
+        "files": [
+          "ext/fts3/fts3_tokenize_vtab.c"
+        ],
+        "api_hits": [
+          "sqlite3_value_bytes"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 357.4
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "sqlite",
+    "bug_type": "Memory-Leak",
+    "mapping": {
+      "cleanup": [
+        "sqlite3Fts5StorageReset",
+        "sqlite3HashClear",
+        "sqlite3VtabClear",
+        "sqlite3ErrorClear",
+        "sqlite3BitvecClear",
+        "sqlite3PcacheClear",
+        "sqlite3RowSetClear",
+        "sqlite3SchemaClear",
+        "sqlite3Fts3HashClear",
+        "sqlite3Fts5HashClear",
+        "sqlite3BtreeClearCache",
+        "sqlite3BtreeClearTable",
+        "sqlite3Fts5ClearLocale",
+        "sqlite3PagerClearCache",
+        "sqlite3_clear_bindings",
+        "sqlite3BtreeClearCursor",
+        "sqlite3WhereClauseClear",
+        "sqlite3ClearTempRegCache",
+        "sqlite3FkClearTriggerCache",
+        "sqlite3Fts5ExprClearTokens",
+        "sqlite3PcacheClearWritable",
+        "sqlite3PcacheClearSyncFlags",
+        "sqlite3Fts3PendingTermsClear",
+        "sqlite3Fts5ExprClearPoslists",
+        "sqlite3VdbeMemClearAndResize",
+        "sqlite3BtreeClearTableOfCursor",
+        "sqlite3VtabEponymousTableClear"
+      ],
+      "destructor": [
+        "sqlite3_free",
+        "sqlite3DbFree",
+        "sqlite3DbFreeNN",
+        "sqlite3PageFree",
+        "sqlite3ValueFree",
+        "sqlite3_str_free",
+        "sqlite3ParserFree",
+        "sqlite3StackFree",
+        "sqlite3StackFreeNN",
+        "sqlite3_free_table",
+        "sqlite3_mutex_free",
+        "sqlite3_value_free",
+        "sqlite3Fts3ExprFree",
+        "sqlite3Fts5ExprFree",
+        "sqlite3Fts5HashFree",
+        "sqlite3BitvecDestroy",
+        "sqlite3Fts5BufferFree",
+        "sqlite3Fts5ConfigFree",
+        "sqlite3Stat4ProbeFree",
+        "sqlite3VdbeFreeCursor",
+        "sqlite3_free_filename",
+        "sqlite3_snapshot_free",
+        "sqlite3Fts5TermsetFree",
+        "sqlite3_expert_destroy",
+        "sqlite3rbu_destroy_vfs",
+        "sqlite3Fts3MIBufferFree",
+        "sqlite3VdbeFreeCursorNN",
+        "sqlite3Fts3SegReaderFree",
+        "sqlite3Fts5ParseNodeFree",
+        "sqlite3VdbeValueListFree",
+        "sqlite3Fts5ParsePhraseFree",
+        "sqlite3Fts5ParseNearsetFree",
+        "sqlite3WindowListDelete"
+      ],
+      "state_reset": [
+        "memset",
+        "sqlite3Fts5StorageReset",
+        "sqlite3_reset",
+        "sqlite3VdbeReset",
+        "sqlite3_str_reset",
+        "sqlite3Fts5IndexReset",
+        "sqlite3ResetOneSchema",
+        "sqlite3VdbeSorterReset",
+        "sqlite3ParseObjectReset",
+        "sqlite3VdbeResetStepResult",
+        "sqlite3_reset_auto_extension",
+        "sqlite3_stmt_scanstatus_reset",
+        "sqlite3ResetAllSchemasOfConnection"
+      ],
+      "link_detach": [
+        "sqlite3WindowUnlinkFromSelect",
+        "sqlite3Detach",
+        "sqlite3SubqueryDetach",
+        "sqlite3UnlinkAndDeleteIndex",
+        "sqlite3UnlinkAndDeleteTable",
+        "sqlite3UnlinkAndDeleteTrigger",
+        "sqlite3Fts5StorageReleaseDeleteRow"
+      ],
+      "link_storage": [
+        "pSel",
+        "pNextWin"
+      ]
+    },
+    "same_type_candidates": 8,
+    "api_matched_candidates": 2,
+    "pairs": [
+      {
+        "commit": "1af2607177ac5e0ef0c82d783ce7d8221632c325",
+        "subject": "Fix a memory leak in the fileio extension on windows.",
+        "files": [
+          "ext/misc/fileio.c"
+        ],
+        "api_hits": [
+          "sqlite3_free"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 1af2607177ac5e0ef0c82d783ce7d8221632c325 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "0aa95099f5003dc99f599ab77ac0004950b281ef",
+        "subject": "Fix a memory leak in sqlite3session_diff().",
+        "files": [
+          "ext/session/sqlite3session.c"
+        ],
+        "api_hits": [
+          "sqlite3_free"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 222.1
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "sqlite",
+    "bug_type": "Misuse",
+    "mapping": {
+      "data_provider": [
+        "sqlite3_column_blob",
+        "sqlite3_value_blob"
+      ],
+      "length_provider": [
+        "sqlite3_column_bytes",
+        "sqlite3_value_bytes"
+      ],
+      "unbounded_string_consumer": [
+        "strlen",
+        "strcmp",
+        "strcpy",
+        "strcat",
+        "strchr",
+        "strstr",
+        "sscanf",
+        "printf",
+        "fprintf",
+        "sprintf",
+        "snprintf",
+        "sqlite3StrICmp",
+        "sqlite3_stricmp",
+        "sqlite3DbStrDup",
+        "sqlite3SetString",
+        "sqlite3StrIHash",
+        "sqlite3_str_appendf",
+        "sqlite3_str_vappendf",
+        "sqlite3VdbeLoadString",
+        "sqlite3TestTextToPtr",
+        "sqlite3_mprintf",
+        "sqlite3_vmprintf",
+        "sqlite3_snprintf",
+        "sqlite3_vsnprintf",
+        "sqlite3_log",
+        "sqlite3DebugPrintf",
+        "sqlite3Strlen30"
+      ],
+      "bounded_nul_scanner": [
+        "memchr"
+      ],
+      "bounded_string_formatter": []
+    },
+    "same_type_candidates": 499,
+    "api_matched_candidates": 40,
+    "pairs": [
+      {
+        "commit": "c59cf28db7eb7da5cce0933d77f339d8726a386f",
+        "subject": "Do not allow the (obsolete and unsupported) closure extension to use itself as its own reference table. [bugs:/info/2026-08-02T13:07:40Z|Bug 2026-08-02T13:07:40Z].",
+        "files": [
+          "ext/misc/closure.c"
+        ],
+        "api_hits": [
+          "sqlite3_mprintf",
+          "sqlite3_stricmp"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of c59cf28db7eb7da5cce0933d77f339d8726a386f could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "b1bbff20a047c9eeefb1178fcf13457c94bb8683",
+        "subject": "Revert the native impl of kvvfs's xOpen() (as distinct from the JS impl which the wasm build uses) to the historical db name restrictions of 'local' or 'session', failing with SQLITE_CANTOPEN if passed another name. [ec866b04d088e53b] overhauled support for kvvfs db names in JS but it turns out that the native impl still relies on those names in order to match journals to databases. Correct a related too-lenient assert() in the WASM pieces.",
+        "files": [
+          "ext/wasm/api/sqlite3-wasm.c",
+          "src/os_kv.c"
+        ],
+        "api_hits": [
+          "strcmp",
+          "strlen"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "76ad3be617e8abc232ce2b6dcd2f35ac4da99beb",
+        "subject": "Add the --raw option to the dbtotxt command-line tool, for debugging.",
+        "files": [
+          "tool/dbtotxt.c"
+        ],
+        "api_hits": [
+          "fprintf",
+          "strcmp"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 76ad3be617e8abc232ce2b6dcd2f35ac4da99beb could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "8f11a71722ca0de70887462c2550ddafb589981a",
+        "subject": "Avoid an assert() failure caused by processing a CREATE TABLE AS ... command that generates very long column names.",
+        "files": [
+          "src/select.c"
+        ],
+        "api_hits": [
+          "sqlite3Strlen30",
+          "strlen"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "21769e1d851de343b67c3e05d8400b4429130445",
+        "subject": "Fix a va_list misuse.",
+        "files": [
+          "ext/misc/resfmt.c"
+        ],
+        "api_hits": [
+          "sqlite3_mprintf",
+          "sqlite3_vmprintf"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 21769e1d851de343b67c3e05d8400b4429130445 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "6a5e74cbf04e79dd7971e6dff723ef1499eddfe4",
+        "subject": "Fix a problem with UPDATEs on fts5 tables that contain blob values.",
+        "files": [
+          "ext/fts5/fts5_storage.c"
+        ],
+        "api_hits": [
+          "sqlite3_column_bytes",
+          "sqlite3_value_bytes"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 6a5e74cbf04e79dd7971e6dff723ef1499eddfe4 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "6d05f9af814503db015a83627f3a80a77494c5a2",
+        "subject": "Fix build errors in fts5_tcl.c on Mac.",
+        "files": [
+          "ext/fts5/fts5_tcl.c"
+        ],
+        "api_hits": [
+          "sqlite3Strlen30",
+          "strlen"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 6d05f9af814503db015a83627f3a80a77494c5a2 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "2c723787f9edb9c65f6f3ab36e73fbfa3a0312d5",
+        "subject": "Have RBU refuse to update any table with GENERATED columns. Bug report [bugs:/info/2026-09-25T10:43:02Z | 2026-09-25T10:43:02Z].",
+        "files": [
+          "ext/rbu/sqlite3rbu.c"
+        ],
+        "api_hits": [
+          "sqlite3_mprintf"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 497.7
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-1",
+    "source": "curl",
+    "target": "sqlite",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "duplicator": [
+        "sqlite3ExprDup",
+        "sqlite3ExprListDup",
+        "sqlite3IdListDup",
+        "sqlite3SrcListDup",
+        "sqlite3SelectDup",
+        "sqlite3WithDup",
+        "sqlite3WindowDup",
+        "sqlite3_value_dup"
+      ],
+      "source_handle": [
+        "p",
+        "pOrig"
+      ],
+      "destination_allocator": [
+        "sqlite3DbMallocRaw",
+        "sqlite3DbMallocZero",
+        "sqlite3DbMallocRawNN",
+        "sqlite3Malloc",
+        "sqlite3MallocZero",
+        "sqlite3_malloc",
+        "sqlite3_malloc64"
+      ],
+      "field_copier": []
+    },
+    "same_type_candidates": 39,
+    "api_matched_candidates": 8,
+    "pairs": [
+      {
+        "commit": "ac70487e12adc0633dda9ef1598a6803d819f614",
+        "subject": "New assert()s added to demonstrate that calls to sqlite3_aggregate_context() within an xInverse() callback never return NULL.",
+        "files": [
+          "src/window.c"
+        ],
+        "api_hits": [
+          "p"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "9173c2f1b6ce8a26becc19d39e5fe6bd7844aeff",
+        "subject": "When looking up a text key in a temporary index, use the fast memcmp-based comparison if the index uses the built-in BINARY collation. Indexes in the schema already got this fast path because they record BINARY as a NULL collation pointer.",
+        "files": [
+          "src/main.c",
+          "src/vdbeaux.c"
+        ],
+        "api_hits": [
+          "p"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "09c84c70ee2e5355b6bca3085b7a6c616909b197",
+        "subject": "Fix a possible call to memcpy() with a NULL source pointer when the size parameter is zero (which is technically undefined behavior but in practice is completely harmless) in the sha1_query() extension function. [bugs:/info/2026-06-16T07:42:23Z|Bug 2026-06-16T07:42:23Z].",
+        "files": [
+          "ext/misc/sha1.c"
+        ],
+        "api_hits": [
+          "p"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 09c84c70ee2e5355b6bca3085b7a6c616909b197 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "03aa9a7b500705c549b7cb0041eaefae1f9a15cd",
+        "subject": "For expressions of the form \"(x, y...) IN (SELECT a, b ...)\" where the result is not true, consider the collation sequences of columns \"a\" and \"b\" when determinining if the result should be false or NULL. Bug report [bugs:/info/0785f45e67 | 2026-05-31T02:10:44Z].",
+        "files": [
+          "src/expr.c"
+        ],
+        "api_hits": [
+          "p"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 449.3
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "sqlite",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "api_entry_point": [
+        "sqlite3session_changeset",
+        "sqlite3session_patchset",
+        "sqlite3changegroup_output",
+        "sqlite3rebaser_rebase",
+        "sqlite3changeset_start",
+        "sqlite3changeset_op",
+        "sqlite3changeset_new",
+        "sqlite3changeset_old",
+        "sqlite3rebaser_create"
+      ],
+      "out_param": [
+        "pnChangeset",
+        "ppChangeset",
+        "pnPatchset",
+        "ppPatchset",
+        "pnData",
+        "ppData",
+        "pnOut",
+        "ppOut",
+        "pp",
+        "pzTab",
+        "pnCol",
+        "pOp",
+        "pbIndirect",
+        "ppValue",
+        "ppNew"
+      ],
+      "out_param_writer": [
+        "sessionChangegroupOutput",
+        "sessionChangesetStart"
+      ]
+    },
+    "same_type_candidates": 39,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 214.6
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2",
+    "source": "curl",
+    "target": "sqlite",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "length_field": [
+        "n",
+        "sqlite3_value_bytes",
+        "sqlite3_column_bytes",
+        "sqlite3_blob_bytes",
+        "sqlite3_str_length",
+        "sqlite3_msize",
+        "sqlite3MallocSize",
+        "sqlite3DbMallocSize",
+        "sqlite3Fts5BufferSize"
+      ],
+      "data_pointer": [
+        "data",
+        "z",
+        "p",
+        "sqlite3_value_blob",
+        "sqlite3_column_blob",
+        "sqlite3_value_pointer",
+        "sqlite3_bind_pointer",
+        "sqlite3_result_pointer",
+        "sqlite3VdbeMemSetPointer",
+        "sqlite3Fts5BufferSet",
+        "fts5BufferSet",
+        "sqlite3Fts5BufferAppendBlob",
+        "fts5BufferAppendBlob"
+      ],
+      "buffer_copy": [
+        "memcpy",
+        "memmove"
+      ],
+      "error_return": [
+        "SQLITE_NOMEM",
+        "SQLITE_MISUSE",
+        "SQLITE_ERROR"
+      ],
+      "copy_flag": [
+        "SQLITE_TRANSIENT",
+        "SQLITE_STATIC"
+      ],
+      "allocator": [
+        "sqlite3Malloc",
+        "sqlite3MallocZero",
+        "sqlite3DbMallocRaw",
+        "sqlite3DbMallocRawNN",
+        "sqlite3DbMallocZero",
+        "sqlite3_malloc",
+        "sqlite3_malloc64",
+        "sqlite3_realloc",
+        "sqlite3_realloc64",
+        "sqlite3Realloc",
+        "sqlite3DbRealloc",
+        "sqlite3DbReallocOrFree",
+        "sqlite3DbStrDup"
+      ],
+      "deallocator": [
+        "sqlite3_free",
+        "sqlite3DbFree",
+        "sqlite3DbFreeNN",
+        "sqlite3PageFree",
+        "sqlite3ValueFree",
+        "sqlite3_str_free",
+        "sqlite3_free_table",
+        "sqlite3_free_filename",
+        "sqlite3_snapshot_free",
+        "sqlite3Fts5BufferFree",
+        "sqlite3Fts3ExprFree",
+        "sqlite3Fts5ExprFree",
+        "sqlite3Fts5HashFree",
+        "sqlite3Fts5ConfigFree",
+        "sqlite3Fts5TermsetFree",
+        "sqlite3Fts3MIBufferFree",
+        "sqlite3Fts3SegReaderFree",
+        "sqlite3Fts5ParseNodeFree",
+        "sqlite3VdbeFreeCursor",
+        "sqlite3VdbeValueListFree"
+      ],
+      "validation_guard": []
+    },
+    "same_type_candidates": 39,
+    "api_matched_candidates": 21,
+    "pairs": [
+      {
+        "commit": "09c84c70ee2e5355b6bca3085b7a6c616909b197",
+        "subject": "Fix a possible call to memcpy() with a NULL source pointer when the size parameter is zero (which is technically undefined behavior but in practice is completely harmless) in the sha1_query() extension function. [bugs:/info/2026-06-16T07:42:23Z|Bug 2026-06-16T07:42:23Z].",
+        "files": [
+          "ext/misc/sha1.c"
+        ],
+        "api_hits": [
+          "data",
+          "memcpy",
+          "p"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 09c84c70ee2e5355b6bca3085b7a6c616909b197 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "112122c2f914ead94d3ac4dab46d194695fbea24",
+        "subject": "Avoid a possible NULL pointer dereference in the QRF sublibrary when compiled with SQLITE_ENABLE_STMT_SCANSTATUS.",
+        "files": [
+          "ext/qrf/qrf.c"
+        ],
+        "api_hits": [
+          "n",
+          "z"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 112122c2f914ead94d3ac4dab46d194695fbea24 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "3a697a26de4d698633d3ca8d3bb83fb4b5dceca3",
+        "subject": "Fix the format() SQL function so that it returns an empty string not a NULL if the first argument is an empty string. [bugs:/info/2026-06-19T16:40:04Z|Bug 2026-06-19T16:40:04Z]",
+        "files": [
+          "src/func.c"
+        ],
+        "api_hits": [
+          "SQLITE_STATIC",
+          "n"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "03aa9a7b500705c549b7cb0041eaefae1f9a15cd",
+        "subject": "For expressions of the form \"(x, y...) IN (SELECT a, b ...)\" where the result is not true, consider the collation sequences of columns \"a\" and \"b\" when determinining if the result should be false or NULL. Bug report [bugs:/info/0785f45e67 | 2026-05-31T02:10:44Z].",
+        "files": [
+          "src/expr.c"
+        ],
+        "api_hits": [
+          "p",
+          "z"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "cf632ddb7eb75c0bffc174b5ba0ab7e5ed17212e",
+        "subject": "Fix the sqlite3changegroup_change_finish() API so that it correctly handles NULL being passed for the pzErr parameter.",
+        "files": [
+          "ext/session/sqlite3session.c",
+          "ext/session/test_session.c"
+        ],
+        "api_hits": [
+          "p",
+          "sqlite3_free"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 394.5
+  },
+  {
+    "bundle": "KN-Double-Free-26dfab2f-1",
+    "source": "libxml2",
+    "target": "sqlite",
+    "bug_type": "Double-Free",
+    "mapping": {
+      "resource": [],
+      "ownership_consumer_frees_on_failure": [
+        "sqlite3DbReallocOrFree"
+      ],
+      "deallocator": [
+        "sqlite3_free",
+        "sqlite3DbFree",
+        "sqlite3DbFreeNN",
+        "sqlite3ValueFree",
+        "sqlite3_value_free",
+        "sqlite3_str_free",
+        "sqlite3_free_table",
+        "sqlite3_free_filename",
+        "sqlite3_snapshot_free",
+        "sqlite3_mutex_free",
+        "sqlite3ParserFree",
+        "sqlite3OsCloseFree",
+        "sqlite3PageFree",
+        "sqlite3FreeIndex",
+        "sqlite3Fts5BufferFree",
+        "sqlite3Fts3MIBufferFree",
+        "sqlite3Fts5ParseNodeFree",
+        "sqlite3Fts5ParsePhraseFree",
+        "sqlite3Fts5ParseNearsetFree",
+        "sqlite3Fts5ExprFree",
+        "sqlite3Fts5HashFree",
+        "sqlite3Fts5ConfigFree",
+        "sqlite3Fts3ExprFree",
+        "sqlite3Fts3SegReaderFree",
+        "sqlite3VdbeFreeCursor",
+        "sqlite3VdbeFreeCursorNN",
+        "sqlite3VdbeMemRelease",
+        "sqlite3Stat4ProbeFree",
+        "fts5BufferFree",
+        "sqlite3StackFree",
+        "sqlite3StackFreeNN",
+        "sqlite3Fts5TermsetFree"
+      ],
+      "null_on_failure": [
+        "sqlite3DbReallocOrFree"
+      ],
+      "duplicate_cleanup": [
+        "sqlite3_free",
+        "sqlite3DbFree",
+        "sqlite3DbFreeNN",
+        "sqlite3ValueFree",
+        "sqlite3_value_free",
+        "sqlite3_str_free",
+        "sqlite3_free_table",
+        "sqlite3_free_filename",
+        "sqlite3_snapshot_free",
+        "sqlite3_mutex_free",
+        "sqlite3ParserFree",
+        "sqlite3OsCloseFree",
+        "sqlite3PageFree",
+        "sqlite3FreeIndex",
+        "sqlite3Fts5BufferFree",
+        "sqlite3Fts3MIBufferFree",
+        "sqlite3Fts5ParseNodeFree",
+        "sqlite3Fts5ParsePhraseFree",
+        "sqlite3Fts5ParseNearsetFree",
+        "sqlite3Fts5ExprFree",
+        "sqlite3Fts5HashFree",
+        "sqlite3Fts5ConfigFree",
+        "sqlite3Fts3ExprFree",
+        "sqlite3Fts3SegReaderFree",
+        "sqlite3VdbeFreeCursor",
+        "sqlite3VdbeFreeCursorNN",
+        "sqlite3VdbeMemRelease",
+        "sqlite3Stat4ProbeFree",
+        "fts5BufferFree",
+        "sqlite3StackFree",
+        "sqlite3StackFreeNN",
+        "sqlite3Fts5TermsetFree"
+      ],
+      "context_cleanup": [
+        "sqlite3_close",
+        "sqlite3_close_v2"
+      ]
+    },
+    "same_type_candidates": 1,
+    "api_matched_candidates": 1,
+    "pairs": [
+      {
+        "commit": "b943fa12887b5565b21be3f0bbae052d71fa9933",
+        "subject": "Fix a possible double-free in the (unused) sqlite3_intck_test_sql() test interface to the intck extension. [bugs:/info/2026-09-22T22:05:25Z|Bug 2026-09-22T22:05:25Z]",
+        "files": [
+          "ext/intck/sqlite3intck.c"
+        ],
+        "api_hits": [
+          "sqlite3_free"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of b943fa12887b5565b21be3f0bbae052d71fa9933 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 172.0
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "sqlite",
+    "bug_type": "Misuse",
+    "mapping": {
+      "config_setter": [
+        "sqlite3_config",
+        "sqlite3_db_config",
+        "sqlite3_vtab_config",
+        "sqlite3_expert_config",
+        "sqlite3session_config",
+        "sqlite3changegroup_config",
+        "sqlite3_recover_config",
+        "sqlite3session_object_config",
+        "sqlite3Fts5ConfigSetValue",
+        "sqlite3Fts5ConfigParse",
+        "sqlite3BtreeSetPageSize",
+        "sqlite3PagerSetPagesize"
+      ],
+      "divisor_field": [
+        "pageSize"
+      ]
+    },
+    "same_type_candidates": 499,
+    "api_matched_candidates": 3,
+    "pairs": [
+      {
+        "commit": "e28c7bfec9fcf17a4ea04d4fa3c17fba69b6dbcf",
+        "subject": "Improved detection of corrupt freelist chains on btree pages. Plus, add assert()s to verify that the min-heap does not overflow inside of PRAGMA integrity_check.",
+        "files": [
+          "src/btree.c"
+        ],
+        "api_hits": [
+          "pageSize"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "7459c016899b611d27f164b091a838c24c52327d",
+        "subject": "Fix errors in comments on this branch. Also prefer SQLITE_NOMEM_BKPT to SQLITE_NOMEM.",
+        "files": [
+          "src/pager.c"
+        ],
+        "api_hits": [
+          "pageSize"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "f453e8d84eed8d9aec0d0719cdb3b253ea803307",
+        "subject": "Fix a harmless compiler warning injected by [c978aed3b6f82b3d].",
+        "files": [
+          "src/btree.c"
+        ],
+        "api_hits": [
+          "pageSize"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 628.1
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+    "source": "libxml2",
+    "target": "sqlite",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "null_on_failure": [
+        "sqlite3Malloc",
+        "sqlite3MallocZero",
+        "sqlite3Realloc",
+        "sqlite3_malloc",
+        "sqlite3_malloc64",
+        "sqlite3_realloc",
+        "sqlite3_realloc64",
+        "sqlite3DbMallocRaw",
+        "sqlite3DbMallocZero",
+        "sqlite3DbMallocRawNN",
+        "sqlite3DbRealloc",
+        "sqlite3DbReallocOrFree",
+        "sqlite3DbStrDup",
+        "sqlite3DbStrNDup",
+        "sqlite3ExprAlloc",
+        "sqlite3ExprDup",
+        "sqlite3WithDup",
+        "sqlite3CteNew",
+        "sqlite3KeyInfoAlloc",
+        "sqlite3WindowAlloc",
+        "sqlite3VdbeAllocUnpackedRecord",
+        "sqlite3ParserAlloc",
+        "sqlite3MutexAlloc",
+        "sqlite3_mutex_alloc",
+        "sqlite3StackAllocRaw",
+        "sqlite3StackAllocRawNN",
+        "sqlite3_str_new",
+        "sqlite3_mprintf",
+        "sqlite3_vmprintf"
+      ],
+      "length_of": [
+        "strlen",
+        "sqlite3Utf8CharLen",
+        "sqlite3Utf16ByteLen",
+        "sqlite3_str_length",
+        "sqlite3ExprVectorSize"
+      ]
+    },
+    "same_type_candidates": 39,
+    "api_matched_candidates": 3,
+    "pairs": [
+      {
+        "commit": "112122c2f914ead94d3ac4dab46d194695fbea24",
+        "subject": "Avoid a possible NULL pointer dereference in the QRF sublibrary when compiled with SQLITE_ENABLE_STMT_SCANSTATUS.",
+        "files": [
+          "ext/qrf/qrf.c"
+        ],
+        "api_hits": [
+          "strlen"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 112122c2f914ead94d3ac4dab46d194695fbea24 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "7aad2942c232c9d28f37dc20a7b34b02267e84f3",
+        "subject": "Harden the diskused.c extension against NULL pointer deferences that might have previously occurred when given a corrupt database file. [bug:/info/2026-05-30T07:08:55Z|Bug 2026-05-30T07:08:55Z].",
+        "files": [
+          "ext/misc/diskused.c"
+        ],
+        "api_hits": [
+          "strlen"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 7aad2942c232c9d28f37dc20a7b34b02267e84f3 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "cf632ddb7eb75c0bffc174b5ba0ab7e5ed17212e",
+        "subject": "Fix the sqlite3changegroup_change_finish() API so that it correctly handles NULL being passed for the pzErr parameter.",
+        "files": [
+          "ext/session/sqlite3session.c",
+          "ext/session/test_session.c"
+        ],
+        "api_hits": [
+          "sqlite3_mprintf"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 267.4
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+    "source": "libxml2",
+    "target": "sqlite",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "nullable_inout_capacity_ptr": [
+        "capacity"
+      ],
+      "capacity_computer": [
+        "sqlite3VdbeMemGrow",
+        "sqlite3Fts5BufferSize",
+        "fts5BufferGrow",
+        "sqlite3StrAccumEnlarge"
+      ],
+      "reallocator": [
+        "sqlite3Realloc",
+        "sqlite3_realloc",
+        "sqlite3_realloc64",
+        "sqlite3DbRealloc",
+        "sqlite3DbReallocOrFree",
+        "sqlite3WhereRealloc",
+        "sqlite3RCStrResize"
+      ],
+      "deref_read": [],
+      "deref_write": [],
+      "null_guard": [],
+      "null_on_failure": []
+    },
+    "same_type_candidates": 39,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 287.2
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-2",
+    "source": "libxml2",
+    "target": "sqlite",
+    "bug_type": "Out-of-Bound",
+    "mapping": {
+      "lookahead": [],
+      "length_of": [
+        "nPattern"
+      ]
+    },
+    "same_type_candidates": 62,
+    "api_matched_candidates": 1,
+    "pairs": [
+      {
+        "commit": "ce512d422953512e4e9a55e83ae688671da1697e",
+        "subject": "Fix an OOB read on the unused spellfix1 extension.  The OOB read is one byte prior to the start of an allocation, which is almost always harmless.  [bugs:/info/2026-06-23T18:48:40Z|Bug 2026-06-23T18:48:40Z].",
+        "files": [
+          "ext/misc/spellfix.c"
+        ],
+        "api_hits": [
+          "nPattern"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of ce512d422953512e4e9a55e83ae688671da1697e could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 149.8
+  },
+  {
+    "bundle": "KN-Integer-Overflow-10eb89d1-0",
+    "source": "lua",
+    "target": "sqlite",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "decoder_function": [
+        "sqlite3Utf8Read"
+      ],
+      "input_byte": [
+        "c"
+      ],
+      "continuation_count": [
+        "count"
+      ]
+    },
+    "same_type_candidates": 52,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 277.6
+  },
+  {
+    "bundle": "KN-Misuse-bc4bbcef-0",
+    "source": "lua",
+    "target": "sqlite",
+    "bug_type": "Misuse",
+    "mapping": {
+      "combined_create_and_publish": [
+        "sqlite3StartTable",
+        "sqlite3VtabEponymousTableInit"
+      ],
+      "object_initializer": [
+        "sqlite3AddColumn",
+        "sqlite3AddNotNull",
+        "sqlite3AddPrimaryKey",
+        "sqlite3AddCheckConstraint",
+        "sqlite3AddDefaultValue",
+        "sqlite3AddCollateType",
+        "sqlite3AddGenerated",
+        "sqlite3VtabCallCreate",
+        "sqlite3VtabCallConnect"
+      ],
+      "persistent_registry_lookup": [
+        "sqlite3FindTable"
+      ],
+      "object_allocator": [],
+      "registry_store": [
+        "sqlite3HashInsert"
+      ],
+      "registry_key": []
+    },
+    "same_type_candidates": 499,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 246.1
+  },
+  {
+    "bundle": "KN-Use-After-Free-22974326-2",
+    "source": "lua",
+    "target": "sqlite",
+    "bug_type": "Use-After-Free",
+    "mapping": {
+      "gc_managed_object": [],
+      "potential_gc_trigger": [],
+      "gc_root_anchor": [],
+      "weak_reference_container": [],
+      "use_after_free_use": []
+    },
+    "same_type_candidates": 7,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 57.1
+  }
+]

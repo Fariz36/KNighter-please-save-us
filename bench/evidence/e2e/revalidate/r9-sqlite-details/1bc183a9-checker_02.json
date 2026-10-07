@@ -1,0 +1,83 @@
+{
+  "commit_id": "1bc183a935799050919eecf4f5deffb6d98e7905",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/7099719cc4ec602ec71a/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/alter.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ],
+        "fixed_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/79837b6ee5d4/src/alter.c",
+          "line": 2465,
+          "column": 3,
+          "function": "quotedCompare",
+          "bug_type": "Dequote of unchecked token",
+          "description": "Dequote of unchecked token may assert on illegal token",
+          "issue_hash": "de7d79018407c4aa8e6e02fc9774245b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/1bc183a93579/f780690a/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_79837b6ee5d4_src_alter.c/report-de7d79.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/1bc183a93579/src/alter.c",
+          "line": 2470,
+          "column": 3,
+          "function": "quotedCompare",
+          "bug_type": "Dequote of unchecked token",
+          "description": "Dequote of unchecked token may assert on illegal token",
+          "issue_hash": "13b3069b456cb12e610fda993796b42b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/1bc183a93579/f780690a/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_1bc183a93579_src_alter.c/report-13b306.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 13.05,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 30.25,
+      "fixed": 30.12
+    },
+    "total_seconds": 73.58
+  },
+  "report_dir": "tmp/validation/1bc183a93579/f780690a"
+}

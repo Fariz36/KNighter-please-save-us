@@ -1,0 +1,10 @@
+## Bug Pattern
+
+A GC-managed object that is only weakly reachable — here a table obtained through a weak metatable’s `__newindex` field — is used as a raw pointer across a call that can trigger an emergency garbage collection. The code fails to root/anchor the object before that call, so the collector may free it; the saved pointer is then still used, causing a use-after-free.
+
+Roles:
+- weak lookup / non-owning reference: `fasttm` may return a metamethod stored in a weak table, so the returned table is not strongly referenced.
+- GC-triggering operation: `luaH_finishset` can allocate/rehash and thereby trigger an emergency collection.
+- missing `ref_get` / root operation: stack anchoring via `sethvalue2s` plus `L->top.p++` before `luaH_finishset`; the fix adds this to keep `h` alive.
+- deallocator: the emergency GC can reclaim the unanchored table.
+- later use of stale pointer: `invalidateTMcache(h)` / `luaC_barrierback(... h ...)` after `luaH_finishset` still assume `h` is valid.

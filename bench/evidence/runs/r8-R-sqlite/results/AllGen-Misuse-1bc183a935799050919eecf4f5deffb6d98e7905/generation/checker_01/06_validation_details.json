@@ -1,0 +1,82 @@
+{
+  "commit_id": "1bc183a935799050919eecf4f5deffb6d98e7905",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-sqlite/plugin-cache/plugins/298659bc240eb4098320/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/alter.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ],
+        "fixed_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 2557,
+          "column": 15,
+          "function": "dropConstraintFunc",
+          "bug_type": "Missing illegal-token guard",
+          "description": "token type may be illegal; missing guard before dequoting",
+          "issue_hash": "1a43f7d13e97ca14d0ea31690d127efe",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/1bc183a93579/8fadf0d2/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-sqlite_work_src_79837b6ee5d4_src_alter.c/report-1a43f7.html",
+          "relpath": "src/alter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 2951,
+          "column": 11,
+          "function": "findConstraintFunc",
+          "bug_type": "Missing illegal-token guard",
+          "description": "token type may be illegal; missing guard before dequoting",
+          "issue_hash": "90f36dffd4315ce15321be1b0aa5c057",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/1bc183a93579/8fadf0d2/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-sqlite_work_src_79837b6ee5d4_src_alter.c/report-90f36d.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/alter.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 25.85,
+      "fixed": 23.33
+    },
+    "total_seconds": 49.32
+  },
+  "report_dir": "tmp/validation/1bc183a93579/8fadf0d2"
+}

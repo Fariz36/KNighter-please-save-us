@@ -1,0 +1,225 @@
+{
+  "commit_id": "466c06cf706bd92ff77beb402934f7265183f8ff",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/plugin-cache/plugins/98f2b5c545771ef2fecd/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/urlapi.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 14,
+        "fixed_total": 0,
+        "buggy_on_target": 14,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "curl_url_dup"
+        ],
+        "fixed_functions": [
+          "curl_url_dup"
+        ]
+      },
+      {
+        "path": "tests/libtest/lib1560.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "test_api_errors"
+        ],
+        "fixed_functions": [
+          "test_api_errors"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/urlapi.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1445,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "01154b34672914e8ec680f6fa95c97e0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-01154b.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1447,
+          "column": 18,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "042b94ee61fc5c8ee90b530532c4563c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-042b94.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1438,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "185852fa2dc37db7ac10410beb00676b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-185852.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1444,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "3fed636015f1718e02ab93ac2d657b16",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-3fed63.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1442,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "467669509002c249a86c1edc671b39eb",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-467669.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1450,
+          "column": 24,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "505488bbe30954d5d9b146cefe73b258",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-505488.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1446,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "53dfc898ec05e1e55db529e016b5a4f7",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-53dfc8.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1439,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "5a4c618e5e0338f2b723c1293f4c840a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-5a4c61.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1449,
+          "column": 27,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "6534494286d5bcdd63ec5e6f613e55bf",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-653449.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1451,
+          "column": 25,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "7a426a491d84b197507b7369747a6d00",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-7a426a.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1440,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "ca9a93cace307fe7905474f240154352",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-ca9a93.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1441,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "d688b602408bff7715efb46e4872366b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-d688b6.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1448,
+          "column": 23,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "f3694c76477c6e74d35b4101c932d61b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-f3694c.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-curl/work/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1443,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "f8b364f37cc74418777812f02ea4a036",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/466c06cf706b/36d039bb/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-curl_work_src_1750c4b27fc1_lib_urlapi.c/report-f8b364.html",
+          "relpath": "lib/urlapi.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/urlapi.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 3.6,
+      "fixed": 2.91
+    },
+    "total_seconds": 6.6
+  },
+  "report_dir": "tmp/validation/466c06cf706b/36d039bb"
+}

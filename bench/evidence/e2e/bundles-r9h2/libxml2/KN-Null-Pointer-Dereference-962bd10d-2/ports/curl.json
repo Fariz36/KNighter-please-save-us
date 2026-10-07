@@ -1,0 +1,95 @@
+{
+  "target": "curl",
+  "commit": "bb348b35e84c40c9564783d7585762b65038e8c5",
+  "candidates": 1820,
+  "identifiers": 38441,
+  "offered": {
+    "allocator": [
+      "ALLOC_SIZE",
+      "ALLOC_SIZE2",
+      "config_alloc",
+      "Curl_fileinfo_alloc",
+      "Curl_ftp_parselist_data_alloc",
+      "varexpand",
+      "ISUNRESERVED",
+      "curlx_realloc",
+      "CURL_ARRAYSIZE",
+      "GetSizeParameter",
+      "curl_dbg_realloc",
+      "Curl_nghttp2_realloc",
+      "Curl_pgrsSetUploadSize",
+      "Curl_uint32_tbl_resize",
+      "Curl_uint32_bset_resize",
+      "Curl_pgrsSetDownloadSize",
+      "file2memory",
+      "curlcheck_NULL",
+      "Curl_cpool_return",
+      "file2memory_range",
+      "CURL_THREAD_RETURN_T",
+      "Curl_cpool_return_cb",
+      "Curl_creader_set_null",
+      "Curl_ssl_scache_return",
+      "Curl_thrdpool_return_item_cb"
+    ],
+    "reallocator": [
+      "ALLOC_SIZE",
+      "ALLOC_SIZE2",
+      "config_alloc",
+      "curlx_realloc",
+      "curl_dbg_realloc",
+      "Curl_fileinfo_alloc",
+      "Curl_nghttp2_realloc",
+      "Curl_ftp_parselist_data_alloc",
+      "varexpand",
+      "ISUNRESERVED",
+      "GetSizeParameter",
+      "Curl_pgrsSetUploadSize",
+      "Curl_uint32_tbl_resize",
+      "Curl_uint32_bset_resize",
+      "Curl_pgrsSetDownloadSize",
+      "file2memory",
+      "curlcheck_NULL",
+      "Curl_cpool_return",
+      "file2memory_range",
+      "CURL_THREAD_RETURN_T",
+      "Curl_cpool_return_cb",
+      "Curl_creader_set_null",
+      "Curl_ssl_scache_return",
+      "Curl_thrdpool_return_item_cb"
+    ]
+  },
+  "mapping": {
+    "allocator": [
+      "Curl_cmalloc",
+      "Curl_ccalloc",
+      "Curl_cstrdup",
+      "curl_dbg_malloc",
+      "curl_dbg_calloc",
+      "curl_dbg_strdup",
+      "Curl_nghttp2_malloc",
+      "Curl_nghttp2_calloc",
+      "config_alloc",
+      "Curl_fileinfo_alloc",
+      "Curl_ftp_parselist_data_alloc",
+      "Curl_uint32_tbl_resize",
+      "Curl_uint32_bset_resize",
+      "file2memory",
+      "file2memory_range"
+    ],
+    "reallocator": [
+      "Curl_crealloc",
+      "curlx_realloc",
+      "curl_dbg_realloc",
+      "Curl_nghttp2_realloc"
+    ]
+  },
+  "dropped_not_in_target": {
+    "allocator": [],
+    "reallocator": []
+  },
+  "rationale": {
+    "allocator": "These are curl's general-purpose memory allocation wrappers and object-specific allocators/growers, analogous to libxml2's xmlGrowArray.",
+    "reallocator": "These are curl's realloc wrappers and variants, analogous to libxml2's xmlRealloc."
+  },
+  "llm_seconds": 150.0
+}

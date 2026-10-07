@@ -1,0 +1,68 @@
+{
+  "target": "sqlite",
+  "commit": "1f7010d4ec424169c68b4299dc0c43ef3d11ea93",
+  "candidates": 2098,
+  "identifiers": 48606,
+  "offered": {
+    "length_of": [
+      "sizeof64",
+      "ArraySize",
+      "MergeCount",
+      "OpenCounter",
+      "SizeofArray",
+      "IsPowerOfTwo",
+      "MX_CELL_SIZE",
+      "fts3HashCount",
+      "sqlite3_msize",
+      "ExprIsFullSize",
+      "fts3HashKeysize",
+      "sqliteHashCount",
+      "sqlite3VarintLen",
+      "sqlite3WalDbsize",
+      "sqlite3BitvecSize",
+      "sqlite3BtreeCount",
+      "sqlite3MallocSize",
+      "sqlite3OsFileSize",
+      "sqlite3PcacheSize",
+      "sqlite3SectorSize",
+      "sqlite3CodeRhsOfIN",
+      "sqlite3JournalSize",
+      "sqlite3RCStrResize",
+      "sqlite3Utf8CharLen",
+      "sqlite3_data_count",
+      "sqlite3_str_length",
+      "sqlite3DbMallocSize",
+      "sqlite3OsSectorSize",
+      "sqlite3Utf16ByteLen",
+      "sqlite3WalFramesize",
+      "sqlite3Fts3VarintLen",
+      "sqlite3PagerRefcount",
+      "sqlite3UpsertOfIndex",
+      "sqlite3_column_count",
+      "sqlite3_expert_count",
+      "sqlite3rbu_temp_size",
+      "sqlite3BtreeSeekCount",
+      "sqlite3ExprVectorSize",
+      "sqlite3Fts5BufferSize",
+      "sqlite3KeyInfoOfIndex"
+    ]
+  },
+  "mapping": {
+    "length_of": [
+      "hexFunc",
+      "quoteFunc",
+      "sqlite3Fts5BufferSize",
+      "sqlite3RCStrResize",
+      "sqlite3JournalSize"
+    ]
+  },
+  "dropped_not_in_target": {
+    "length_of": [
+      "base64Func"
+    ]
+  },
+  "rationale": {
+    "length_of": "These SQLite functions compute a derived encoded or buffer length from an input size using unchecked signed integer arithmetic before any maximum safe bound validation."
+  },
+  "llm_seconds": 290.3
+}

@@ -1,0 +1,8 @@
+## Bug Pattern
+
+An unchecked pointer from a caller-supplied input structure is used as the source of a `buffer_copy` (or stored for later dereference). The code validates the associated length but never checks the pointer itself for NULL, so a non-empty input with a NULL data pointer causes a NULL dereference.
+
+Roles:
+- `buffer_copy`: `memcpy`
+- `allocator`: `curlx_malloc`
+- `deallocator`: `curlx_safefree`

@@ -1,0 +1,642 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-1",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Integer-Overflow",
+    "commits": [
+      {
+        "commit": "ddcb79dc9934fd8a26263f6368c4eb7aa43f6d49",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "962bd10d01151d29190567e2d15ccf641be55063",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "26dfab2f8fd36fc3aba8c25c7c358530d9712c7a",
+        "bug_type": "Double-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6be0acd2afb3f55af3c721e1e35ac6675df3057a",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7511af09f99995cdf81994db21f4eba564276b5",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c8eaf2236ff16667970f96f3f01e119c99d38ab2",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "encoded_size_calculator": [],
+      "input_length": [
+        "len"
+      ],
+      "max_input_size": [],
+      "error_sentinel": [
+        "NULL"
+      ]
+    },
+    "roles_mapped": 2,
+    "roles_total": 4,
+    "detected": [],
+    "perfect": [],
+    "seconds": 743.5
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Memory-Leak",
+    "commits": [
+      {
+        "commit": "ddcb79dc9934fd8a26263f6368c4eb7aa43f6d49",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "962bd10d01151d29190567e2d15ccf641be55063",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "26dfab2f8fd36fc3aba8c25c7c358530d9712c7a",
+        "bug_type": "Double-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6be0acd2afb3f55af3c721e1e35ac6675df3057a",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7511af09f99995cdf81994db21f4eba564276b5",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c8eaf2236ff16667970f96f3f01e119c99d38ab2",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "cleanup": [
+        "xmlListClear",
+        "xmlClearParserCtxt",
+        "xmlClearNodeInfoSeq",
+        "xmlCtxtReset",
+        "htmlCtxtReset",
+        "xmlResetError",
+        "xmlRegExecClearErrors",
+        "xmlRelaxNGValidCtxtClearErrors",
+        "xmlBufferEmpty",
+        "xmlDictCleanup",
+        "xmlCleanupMemory",
+        "xmlCleanupMutex"
+      ],
+      "destructor": [
+        "xmlListDelete",
+        "xmlFreeParserCtxt",
+        "htmlFreeParserCtxt",
+        "xmlFreeDoc",
+        "xmlFreeNode",
+        "xmlFreeNodeList",
+        "xmlFreeProp",
+        "xmlFreePropList",
+        "xmlFreeNs",
+        "xmlFreeNsList",
+        "xmlFreeDtd",
+        "xmlFreeEntity",
+        "xmlFreeURI",
+        "xmlFreeInputStream",
+        "xmlBufferFree",
+        "xmlBufFree",
+        "xmlHashFree",
+        "xmlDictFree",
+        "xmlSchemaFree",
+        "xmlRelaxNGFree",
+        "xmlSchematronFree",
+        "xmlFreeTextReader",
+        "xmlFreeTextWriter",
+        "xmlFreePattern",
+        "xmlFreePatternList",
+        "xmlFreeStreamCtxt",
+        "xmlFreeAutomata",
+        "xmlFreeValidCtxt",
+        "xmlFreeCatalog",
+        "xmlFreeIDTable",
+        "xmlFreeRefTable",
+        "xmlRegFreeRegexp",
+        "xmlFreeEnumeration",
+        "xmlDOMWrapFreeCtxt",
+        "xmlSchemaFreeType",
+        "xmlModuleFree",
+        "xmlFreeMutex",
+        "xmlFreeRMutex",
+        "xmlParserNsFree"
+      ],
+      "state_reset": [
+        "memset",
+        "xmlCtxtReset",
+        "htmlCtxtReset",
+        "xmlResetError",
+        "xmlClearParserCtxt",
+        "xmlClearNodeInfoSeq",
+        "xmlListClear",
+        "xmlBufferEmpty",
+        "xmlResetLastError",
+        "xmlCtxtResetLastError",
+        "xmlRegExecClearErrors",
+        "xmlRelaxNGValidCtxtClearErrors"
+      ],
+      "link_detach": [
+        "xmlUnlinkNode",
+        "xmlListRemoveFirst",
+        "xmlBufferDetach",
+        "xmlBufDetach",
+        "xmlHashRemoveEntry",
+        "xmlHashRemoveEntry2",
+        "xmlHashRemoveEntry3",
+        "xmlPopInput",
+        "xmlFreeInputStream"
+      ],
+      "link_storage": [
+        "parent",
+        "next",
+        "prev",
+        "children",
+        "last",
+        "content",
+        "link",
+        "input",
+        "inputTab",
+        "inputNr",
+        "table"
+      ]
+    },
+    "roles_mapped": 5,
+    "roles_total": 5,
+    "detected": [],
+    "perfect": [],
+    "seconds": 860.8
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Misuse",
+    "commits": [
+      {
+        "commit": "ddcb79dc9934fd8a26263f6368c4eb7aa43f6d49",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "962bd10d01151d29190567e2d15ccf641be55063",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "26dfab2f8fd36fc3aba8c25c7c358530d9712c7a",
+        "bug_type": "Double-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6be0acd2afb3f55af3c721e1e35ac6675df3057a",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7511af09f99995cdf81994db21f4eba564276b5",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c8eaf2236ff16667970f96f3f01e119c99d38ab2",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "data_provider": [
+        "xmlBufferContent",
+        "xmlOutputBufferGetContent",
+        "htmlUTF8ToHtml",
+        "xmlIsolat1ToUTF8",
+        "xmlUTF8ToIsolat1"
+      ],
+      "length_provider": [
+        "xmlBufferLength",
+        "xmlOutputBufferGetSize",
+        "htmlUTF8ToHtml",
+        "xmlIsolat1ToUTF8",
+        "xmlUTF8ToIsolat1"
+      ],
+      "unbounded_string_consumer": [
+        "strlen",
+        "xmlStrlen",
+        "xmlStrPrintf",
+        "xmlStrVPrintf",
+        "xmlStrASPrintf",
+        "xmlStrVASPrintf",
+        "xmlTextWriterWriteFormatString",
+        "xmlTextWriterWriteVFormatString",
+        "xmlTextWriterWriteFormatPI",
+        "xmlTextWriterWriteFormatDTD",
+        "xmlTextWriterWriteFormatRaw",
+        "xmlTextWriterWriteFormatCDATA",
+        "xmlTextWriterWriteFormatComment",
+        "xmlTextWriterWriteFormatElement",
+        "xmlTextWriterWriteFormatAttribute",
+        "xmlTextWriterWriteFormatElementNS",
+        "xmlTextWriterWriteFormatDTDAttlist",
+        "xmlTextWriterWriteFormatDTDElement",
+        "xmlTextWriterWriteFormatAttributeNS",
+        "xmlTextWriterWriteFormatDTDInternalEntity",
+        "xmlTextWriterWriteString",
+        "xmlTextWriterSetIndentString",
+        "xmlTextReaderConstString",
+        "xmlNewText",
+        "xmlNewDocText",
+        "xmlStrEqual",
+        "xmlStrQEqual",
+        "xmlEscapeText",
+        "xmlEscapeFormatString"
+      ],
+      "bounded_nul_scanner": [
+        "memchr"
+      ],
+      "bounded_string_formatter": []
+    },
+    "roles_mapped": 4,
+    "roles_total": 5,
+    "detected": [],
+    "perfect": [],
+    "seconds": 664.2
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-1",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "ddcb79dc9934fd8a26263f6368c4eb7aa43f6d49",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "962bd10d01151d29190567e2d15ccf641be55063",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "26dfab2f8fd36fc3aba8c25c7c358530d9712c7a",
+        "bug_type": "Double-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6be0acd2afb3f55af3c721e1e35ac6675df3057a",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7511af09f99995cdf81994db21f4eba564276b5",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c8eaf2236ff16667970f96f3f01e119c99d38ab2",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "duplicator": [
+        "xmlXPathObjectCopy"
+      ],
+      "source_handle": [
+        "val"
+      ],
+      "destination_allocator": [
+        "xmlMalloc"
+      ],
+      "field_copier": [
+        "memcpy"
+      ]
+    },
+    "roles_mapped": 4,
+    "roles_total": 4,
+    "detected": [],
+    "perfect": [],
+    "seconds": 749.4
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "ddcb79dc9934fd8a26263f6368c4eb7aa43f6d49",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "962bd10d01151d29190567e2d15ccf641be55063",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "26dfab2f8fd36fc3aba8c25c7c358530d9712c7a",
+        "bug_type": "Double-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6be0acd2afb3f55af3c721e1e35ac6675df3057a",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7511af09f99995cdf81994db21f4eba564276b5",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c8eaf2236ff16667970f96f3f01e119c99d38ab2",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "api_entry_point": [
+        "xmlHashAddEntry",
+        "xmlHashAddEntry2",
+        "xmlHashAddEntry3",
+        "xmlHashRemoveEntry",
+        "xmlHashUpdateEntry",
+        "xmlHashRemoveEntry2",
+        "xmlHashRemoveEntry3",
+        "xmlHashUpdateEntry2",
+        "xmlHashUpdateEntry3",
+        "xmlSAX2GetPublicId",
+        "xmlCatalogGetPublic",
+        "xmlGetParameterEntity",
+        "xmlCatalogResolvePublic",
+        "xmlACatalogResolvePublic",
+        "xmlSAX2GetParameterEntity"
+      ],
+      "out_param": [
+        "out",
+        "n"
+      ],
+      "out_param_writer": [
+        "xmlTextWriterWritePI",
+        "xmlTextWriterWriteDTD",
+        "xmlTextWriterWriteRaw",
+        "xmlTextWriterWriteCDATA",
+        "xmlTextWriterWriteBase64",
+        "xmlTextWriterWriteBinHex",
+        "xmlTextWriterWriteRawLen",
+        "xmlTextWriterWriteString",
+        "xmlTextWriterWriteComment",
+        "xmlTextWriterWriteElement",
+        "xmlTextWriterWriteFormatPI",
+        "xmlTextWriterWriteAttribute",
+        "xmlTextWriterWriteDTDEntity",
+        "xmlTextWriterWriteElementNS",
+        "xmlTextWriterWriteFormatDTD",
+        "xmlTextWriterWriteFormatRaw",
+        "xmlTextWriterWriteVFormatPI",
+        "xmlTextWriterWriteDTDAttlist",
+        "xmlTextWriterWriteDTDElement",
+        "xmlTextWriterWriteVFormatDTD",
+        "xmlTextWriterWriteVFormatRaw",
+        "xmlTextWriterWriteAttributeNS",
+        "xmlTextWriterWriteDTDNotation",
+        "xmlTextWriterWriteFormatCDATA",
+        "xmlTextWriterWriteFormatString",
+        "xmlTextWriterWriteVFormatCDATA",
+        "xmlTextWriterWriteFormatComment",
+        "xmlTextWriterWriteFormatElement",
+        "xmlTextWriterWriteVFormatString",
+        "xmlTextWriterWriteVFormatComment",
+        "xmlTextWriterWriteVFormatElement",
+        "xmlTextWriterWriteFormatAttribute",
+        "xmlTextWriterWriteFormatElementNS",
+        "xmlTextWriterWriteFormatDTDAttlist",
+        "xmlTextWriterWriteFormatDTDElement",
+        "xmlTextWriterWriteVFormatAttribute",
+        "xmlTextWriterWriteVFormatElementNS",
+        "xmlTextWriterWriteDTDExternalEntity",
+        "xmlTextWriterWriteDTDInternalEntity",
+        "xmlTextWriterWriteFormatAttributeNS"
+      ]
+    },
+    "roles_mapped": 3,
+    "roles_total": 3,
+    "detected": [],
+    "perfect": [],
+    "seconds": 870.2
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "ddcb79dc9934fd8a26263f6368c4eb7aa43f6d49",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "962bd10d01151d29190567e2d15ccf641be55063",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "26dfab2f8fd36fc3aba8c25c7c358530d9712c7a",
+        "bug_type": "Double-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6be0acd2afb3f55af3c721e1e35ac6675df3057a",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7511af09f99995cdf81994db21f4eba564276b5",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c8eaf2236ff16667970f96f3f01e119c99d38ab2",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "length_field": [
+        "xmlBufferLength",
+        "xmlBufUse",
+        "xmlOutputBufferGetSize"
+      ],
+      "data_pointer": [
+        "data",
+        "xmlBufferContent",
+        "xmlBufContent"
+      ],
+      "buffer_copy": [
+        "memcpy",
+        "xmlBufferAdd",
+        "xmlBufAdd",
+        "xmlBufferCat",
+        "xmlBufCat"
+      ],
+      "error_return": [
+        "XML_ERR_NO_MEMORY"
+      ],
+      "copy_flag": [],
+      "allocator": [
+        "xmlMalloc",
+        "xmlMallocAtomic",
+        "xmlMemMalloc"
+      ],
+      "deallocator": [
+        "xmlFree",
+        "xmlMemFree"
+      ],
+      "validation_guard": []
+    },
+    "roles_mapped": 6,
+    "roles_total": 8,
+    "detected": [],
+    "perfect": [],
+    "seconds": 753.4
+  }
+]

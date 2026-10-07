@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A run-length decoded from untrusted parser input is accumulated in a signed integer that is too narrow for the eventual memory-write size. The accumulation/multiplication can overflow before the bounds check, so the check can be bypassed and a wrapped or negative length is passed as the size argument to a `memory_writer` call, causing an out-of-bounds write. The fix widens the accumulator to the project’s 64-bit size type and rejects the value as soon as it exceeds the output bound.
+
+Roles:
+- `parser_input`: `kvvfsDecode` — parses/decodes the corrupt kvvfs block.
+- `memory_writer`: `memset` — writes the decoded zero-run using the computed length.

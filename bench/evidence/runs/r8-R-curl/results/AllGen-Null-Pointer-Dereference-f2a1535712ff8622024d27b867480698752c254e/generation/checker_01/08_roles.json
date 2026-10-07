@@ -1,0 +1,27 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "api_entry_point": {
+      "names": [
+        "curl_easy_recv",
+        "curl_easy_send"
+      ],
+      "description": "public API entry point that may accept an out parameter"
+    },
+    "out_param": {
+      "names": [
+        "n"
+      ],
+      "description": "pointer parameter used as an output parameter"
+    },
+    "out_param_writer": {
+      "names": [
+        "Curl_easy_recv"
+      ],
+      "description": "function that writes through a pointer argument"
+    }
+  }
+}

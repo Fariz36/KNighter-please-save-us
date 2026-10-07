@@ -1,0 +1,24 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "xmlMalloc"
+      ],
+      "description": "allocates memory and returns a pointer to it, which the caller owns and must later release"
+    },
+    "deallocator": {
+      "names": [
+        "xmlFree"
+      ],
+      "description": "frees dynamically allocated memory; the pointer must not be used afterwards"
+    },
+    "ref_put": {
+      "names": [],
+      "description": "decrements a reference count and may free the object when it reaches zero"
+    }
+  }
+}

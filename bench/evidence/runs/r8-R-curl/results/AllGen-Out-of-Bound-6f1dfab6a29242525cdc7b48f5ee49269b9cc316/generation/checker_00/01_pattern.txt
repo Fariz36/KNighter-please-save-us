@@ -1,0 +1,13 @@
+## Bug Pattern
+
+A `cursor` is advanced past a delimiter found by a `substring_finder`, then fixed-offset `lookahead_read`s are performed on the cursor before checking that the cursor’s current byte is not the `string_terminator`. If the delimiter is the final character, the current byte is `'\0'`, and the first lookahead reads one byte past the NUL terminator. The missing guard is a `non_terminator_guard` on the current byte before any lookahead.
+
+Roles in this patch:
+- `substring_finder`: `strchr`
+- `delimiter`: `'('`
+- `cursor_after_delimiter`: `ptr` after `ptr++`
+- `current_byte`: `sep` / `ptr[0]`
+- `string_terminator`: `'\0'`
+- `lookahead_read`: `ptr[1]`, `ptr[2]`, `ptr[3]`
+- `classification`: `ISDIGIT(ptr[3])`
+- missing `non_terminator_guard`: the added `sep && ...` check

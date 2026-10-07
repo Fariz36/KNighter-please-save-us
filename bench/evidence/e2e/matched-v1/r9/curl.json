@@ -1,0 +1,519 @@
+[
+  {
+    "bundle": "KN-Double-Free-26dfab2f-2",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Double-Free",
+    "mapping": {
+      "parser_input": [
+        "Curl_cf_create"
+      ],
+      "null_on_failure": [
+        "Curl_cf_create"
+      ],
+      "deallocator": [
+        "curl_free",
+        "curlx_free",
+        "curl_dbg_free",
+        "Curl_vquic_ctx_free",
+        "Curl_cf_ngtcp2_h3_stream_ctx_free"
+      ]
+    },
+    "same_type_candidates": 10,
+    "api_matched_candidates": 1,
+    "pairs": [
+      {
+        "commit": "aba8043075f6df09e489379f19f99cbc377b25d4",
+        "subject": "tool: follow-up getenv fix",
+        "files": [
+          "src/tool_ipfs.c",
+          "src/tool_operate.c"
+        ],
+        "api_hits": [
+          "curl_free"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of aba8043075f6df09e489379f19f99cbc377b25d4 could be analyzed: no compile entry no compile entry no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 201.2
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Misuse",
+    "mapping": {
+      "init": [
+        "Curl_addrinfo_set_port",
+        "str2tls_max"
+      ]
+    },
+    "same_type_candidates": 1023,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 153.3
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-2",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "allocator": [
+        "Curl_uint32_tbl_resize",
+        "Curl_uint32_bset_resize",
+        "file2memory",
+        "file2memory_range",
+        "varexpand"
+      ],
+      "reallocator": [
+        "curlx_realloc",
+        "curl_dbg_realloc",
+        "Curl_nghttp2_realloc"
+      ]
+    },
+    "same_type_candidates": 177,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 150.2
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-0",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Out-of-Bound",
+    "mapping": {
+      "indexed_read": [
+        "Curl_read16_be",
+        "Curl_read16_le",
+        "Curl_read32_le"
+      ],
+      "length_of": [
+        "strlen",
+        "Curl_bufq_len",
+        "curlx_dyn_len",
+        "Curl_bufref_len",
+        "CURL_ARRAYSIZE"
+      ]
+    },
+    "same_type_candidates": 11,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 135.3
+  },
+  {
+    "bundle": "KN-Misuse-bc4bbcef-0",
+    "source": "lua",
+    "target": "curl",
+    "bug_type": "Misuse",
+    "mapping": {
+      "allocator": [
+        "ALLOC_SIZE",
+        "ALLOC_SIZE2",
+        "config_alloc",
+        "Curl_fileinfo_alloc",
+        "Curl_ftp_parselist_data_alloc",
+        "file2memory",
+        "Curl_cf_create",
+        "Curl_peer_create",
+        "curlx_CreateFile",
+        "Curl_creds_create",
+        "Curl_thrdq_create",
+        "file2memory_range",
+        "Curl_cf_tcp_create",
+        "Curl_cf_udp_create",
+        "Curl_thread_create",
+        "Curl_cf_quic_create",
+        "Curl_cf_unix_create",
+        "Curl_creader_create",
+        "Curl_cwriter_create",
+        "Curl_pollset_create",
+        "Curl_peer_uds_create",
+        "Curl_thrdpool_create",
+        "cf_ip_connect_create",
+        "create_dir_hierarchy",
+        "Curl_cf_ngtcp2_create",
+        "Curl_cf_quiche_create",
+        "Curl_ssl_scache_create",
+        "Curl_cf_h3_proxy_create",
+        "Curl_ssl_session_create",
+        "tool_create_output_file",
+        "Curl_create_sspi_identity",
+        "Curl_meta_set",
+        "Curl_conn_meta_set"
+      ],
+      "container_insert": [
+        "Curl_meta_set",
+        "Curl_conn_meta_set",
+        "Curl_schannel_set_cached_cert_store",
+        "Curl_hash_add",
+        "Curl_cf_ssl_insert_after",
+        "Curl_cf_quic_insert_after",
+        "Curl_conn_cf_insert_after",
+        "Curl_cf_setup_insert_after",
+        "Curl_cf_ngtcp2_insert_after",
+        "Curl_cf_quiche_insert_after",
+        "Curl_cf_capsule_insert_after",
+        "Curl_cf_haproxy_insert_after",
+        "Curl_cf_h1_proxy_insert_after",
+        "Curl_cf_h2_proxy_insert_after",
+        "Curl_cf_h3_proxy_insert_after",
+        "Curl_cf_ip_happy_insert_after",
+        "Curl_cf_ssl_proxy_insert_after",
+        "Curl_cf_http_proxy_insert_after",
+        "Curl_cf_socks_proxy_insert_after",
+        "Curl_cf_ngtcp2_proxy_insert_after"
+      ],
+      "lookup": [
+        "Curl_meta_get",
+        "Curl_conn_meta_get",
+        "Curl_altsvc_lookup",
+        "Curl_cipher_suite_lookup_id",
+        "Curl_schannel_get_cached_cert_store",
+        "curl_ws_meta"
+      ],
+      "init": [
+        "Curl_pp_init",
+        "sigpipe_init",
+        "Curl_MD5_init",
+        "Curl_req_init",
+        "Curl_HMAC_init",
+        "Curl_bufq_init",
+        "Curl_cond_init",
+        "Curl_hash_init",
+        "Curl_hsts_init",
+        "Curl_sasl_init",
+        "curl_easy_init",
+        "curl_mime_init",
+        "curlx_dyn_init",
+        "curlx_str_init",
+        "Curl_bufcp_init",
+        "Curl_cpool_init",
+        "Curl_llist_init",
+        "Curl_mntfy_init",
+        "Curl_mutex_init",
+        "Curl_netrc_init",
+        "curl_multi_init",
+        "curl_share_init",
+        "Curl_altsvc_init",
+        "Curl_bufref_init",
+        "Curl_cookie_init",
+        "Curl_dynhds_init",
+        "Curl_rlimit_init",
+        "Curl_wakeup_init"
+      ]
+    },
+    "same_type_candidates": 1023,
+    "api_matched_candidates": 7,
+    "pairs": [
+      {
+        "commit": "f0824d1ed73bbea0e74d9f35b8a3b7c5c04fd884",
+        "subject": "meta data handling for easy/conn fixes",
+        "files": [
+          "lib/doh.c",
+          "lib/easy.c",
+          "lib/multi_ev.c",
+          "lib/url.c"
+        ],
+        "api_hits": [
+          "Curl_conn_meta_set",
+          "Curl_meta_set"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "d3a7e571571d6d63039c5d75180f3bcfc4a632ce",
+        "subject": "lib: add \"Curl_\" prefix to two global functions",
+        "files": [
+          "lib/cf-ip-happy.c",
+          "lib/cf-setup.c",
+          "lib/ftp.c",
+          "lib/url.c"
+        ],
+        "api_hits": [
+          "Curl_cf_ip_happy_insert_after"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "0c278cd586ab648fe14c6c6389b77b7f19d9e915",
+        "subject": "tool_paramhlp: remove a malloc+free from proto2num()",
+        "files": [
+          "src/tool_paramhlp.c"
+        ],
+        "api_hits": [
+          "curlx_dyn_init"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 0c278cd586ab648fe14c6c6389b77b7f19d9e915 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "284ef8a3dcec94071753fd2e2ad99a121f0031c2",
+        "subject": "src: use curlx_dyn_ prefix, not Curl_dyn_",
+        "files": [
+          "src/tool_cfgable.c",
+          "src/tool_ssls.c",
+          "src/var.c"
+        ],
+        "api_hits": [
+          "curlx_dyn_init"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 284ef8a3dcec94071753fd2e2ad99a121f0031c2 could be analyzed: no compile entry no compile entry no compile entry no compile entry no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "83384669efe913aefea68a783d56678730f9f5ee",
+        "subject": "lib: fix thread entry point to return `DWORD` on WinCE",
+        "files": [
+          "lib/asyn-thread.c",
+          "lib/curl_threads.c"
+        ],
+        "api_hits": [
+          "Curl_thread_create"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 585.8
+  },
+  {
+    "bundle": "KN-Use-After-Free-22974326-2",
+    "source": "lua",
+    "target": "curl",
+    "bug_type": "Use-After-Free",
+    "mapping": {
+      "gc_trigger": [],
+      "ref_get": []
+    },
+    "same_type_candidates": 9,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 58.1
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "curl",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "allocated_size": [],
+      "reallocator": [
+        "curlx_realloc",
+        "curl_dbg_realloc",
+        "Curl_nghttp2_realloc"
+      ],
+      "null_on_failure": [
+        "curlx_realloc",
+        "curl_dbg_realloc",
+        "Curl_nghttp2_realloc"
+      ],
+      "initializer": [
+        "memset"
+      ]
+    },
+    "same_type_candidates": 17,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 124.9
+  },
+  {
+    "bundle": "KN-Memory-Leak-7b60ed80-1",
+    "source": "sqlite",
+    "target": "curl",
+    "bug_type": "Memory-Leak",
+    "mapping": {
+      "allocator": [
+        "config_alloc",
+        "Curl_fileinfo_alloc",
+        "Curl_ftp_parselist_data_alloc",
+        "new_getout",
+        "curlx_calloc",
+        "curlx_malloc",
+        "curlx_realloc",
+        "Curl_MD5_init",
+        "Curl_HMAC_init",
+        "Curl_hsts_init",
+        "curl_easy_init",
+        "curl_mime_init",
+        "Curl_pollset_create",
+        "ALLOC_SIZE",
+        "ALLOC_SIZE2"
+      ],
+      "duplicator": [
+        "curl_url_dup",
+        "curlx_strdup",
+        "Curl_slist_duplicate"
+      ],
+      "null_on_failure": [
+        "config_alloc",
+        "Curl_fileinfo_alloc",
+        "Curl_ftp_parselist_data_alloc",
+        "new_getout",
+        "curlx_calloc",
+        "curlx_malloc",
+        "curlx_realloc",
+        "Curl_MD5_init",
+        "Curl_HMAC_init",
+        "Curl_hsts_init",
+        "curl_easy_init",
+        "curl_mime_init",
+        "Curl_pollset_create",
+        "ALLOC_SIZE",
+        "ALLOC_SIZE2",
+        "curl_url_dup",
+        "curlx_strdup",
+        "Curl_slist_duplicate"
+      ],
+      "container_insert": [
+        "slist_wc_append",
+        "Curl_llist_append",
+        "curl_slist_append",
+        "Curl_slist_append_nodup",
+        "curl_slist_append_ccsid",
+        "Curl_conn_cf_insert_after",
+        "add2list"
+      ],
+      "deallocator": [
+        "slist_wc_free_all",
+        "curl_slist_free_all",
+        "Curl_ftp_parselist_data_free",
+        "Curl_llist_destroy",
+        "curl_free",
+        "curlx_free",
+        "config_free",
+        "Curl_ws_free",
+        "Curl_req_free",
+        "curl_dbg_free",
+        "Curl_bufq_free",
+        "Curl_conn_free",
+        "curl_mime_free",
+        "curlx_dyn_free",
+        "tool_mime_free",
+        "Curl_bufcp_free",
+        "globalconf_free",
+        "Curl_bufref_free",
+        "Curl_dynhds_free",
+        "Curl_creader_free",
+        "Curl_cwriter_free",
+        "Curl_nghttp2_free",
+        "Curl_http_req_free",
+        "Curl_http_resp_free",
+        "Curl_httpchunk_free",
+        "Curl_vquic_ctx_free",
+        "Curl_h1_req_parse_free",
+        "Curl_ssl_free_certinfo",
+        "curl_certinfo_free_all",
+        "Curl_sspi_free_identity",
+        "Curl_gtls_shared_creds_free",
+        "Curl_free_idnconverted_hostname",
+        "Curl_cf_ngtcp2_h3_stream_ctx_free",
+        "curl_easy_cleanup",
+        "curl_url_cleanup"
+      ]
+    },
+    "same_type_candidates": 104,
+    "api_matched_candidates": 13,
+    "pairs": [
+      {
+        "commit": "9820e5dface5739accda14e656d89a7f84642c61",
+        "subject": "tool_operate: fix memory-leak on failed uploads",
+        "files": [
+          "src/tool_operate.c"
+        ],
+        "api_hits": [
+          "curl_easy_cleanup",
+          "curlx_free"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 9820e5dface5739accda14e656d89a7f84642c61 could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "0dc22b690dd8dba4048d494f09a50122dd7c0dd4",
+        "subject": "ssls: fix potential memory leak on import",
+        "files": [
+          "lib/vtls/vtls_scache.c",
+          "lib/vtls/vtls_spack.c"
+        ],
+        "api_hits": [
+          "curlx_free"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "90b9f514581d671afcf66a59d4041e76f0a82cce",
+        "subject": "tool_operate: fix minor memory-leak on early error",
+        "files": [
+          "src/tool_operate.c"
+        ],
+        "api_hits": [
+          "curlx_free"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 90b9f514581d671afcf66a59d4041e76f0a82cce could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "32531f20f9f8f76e351ae317ad47b97bef82acc0",
+        "subject": "doh: fix memory-leak when doing a second DoH resolve",
+        "files": [
+          "lib/doh.c"
+        ],
+        "api_hits": [
+          "curlx_free"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "cbb5544c451f0b104a7753d90c51f1237f6a4037",
+        "subject": "digest: fix memory leak in auth_create_digest_http_message()",
+        "files": [
+          "lib/vauth/digest.c"
+        ],
+        "api_hits": [
+          "curlx_free"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 534.6
+  }
+]

@@ -1,0 +1,78 @@
+{
+  "target": "lua",
+  "commit": "0b29f408433e92953cc72b1d3e06c7ac8139e439",
+  "candidates": 845,
+  "identifiers": 7300,
+  "offered": {
+    "out_param_api": [
+      "api_check",
+      "setgcparam",
+      "api_checkpop",
+      "api_incr_top",
+      "applygcparam",
+      "luaO_codeparam",
+      "api_checknelems",
+      "luaO_applyparam",
+      "UNUSED",
+      "ci_func",
+      "lua_call",
+      "cast_func",
+      "check_exp",
+      "luaD_call",
+      "isLfunction",
+      "luaT_callTM",
+      "get_nresults",
+      "luaC_checkGC",
+      "ttisfunction",
+      "adjustresults",
+      "lua_CFunction",
+      "lua_topointer",
+      "lua_writeline",
+      "luaG_callerror",
+      "luaT_callTMres",
+      "lua_isfunction",
+      "luaL_execresult",
+      "luaL_fileresult",
+      "luaL_pushresult",
+      "lua_iscfunction",
+      "lua_pointer2str",
+      "lua_tocfunction",
+      "lua_writestring",
+      "lua_pushcfunction",
+      "luaL_pushresultsize",
+      "lua_writestringerror",
+      "luaM_newvectorchecked"
+    ]
+  },
+  "mapping": {
+    "out_param_api": [
+      "lua_tonumberx",
+      "lua_tointegerx",
+      "lua_tolstring",
+      "lua_getallocf",
+      "lua_getstack",
+      "lua_getinfo",
+      "lua_resume",
+      "luaL_tolstring",
+      "luaL_buffinitsize",
+      "luaL_prepbuffsize",
+      "luaL_addlstring",
+      "luaL_addstring",
+      "luaL_addvalue",
+      "luaL_pushresult",
+      "luaL_pushresultsize",
+      "luaL_addgsub",
+      "luaL_buffinit",
+      "luaL_prepbuffer",
+      "luaL_addchar",
+      "luaL_addsize"
+    ]
+  },
+  "dropped_not_in_target": {
+    "out_param_api": []
+  },
+  "rationale": {
+    "out_param_api": "These are Lua public API functions/macros that accept a caller-supplied pointer used as an output/write destination for a result (e.g., size/integer out-params, lua_Debug structs, or luaL_Buffer objects)."
+  },
+  "llm_seconds": 191.9
+}

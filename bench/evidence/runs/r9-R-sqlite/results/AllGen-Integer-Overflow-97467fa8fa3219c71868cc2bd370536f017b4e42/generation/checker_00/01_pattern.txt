@@ -1,0 +1,8 @@
+## Bug Pattern
+
+An untrusted size/count decoded from `parser_input` is accumulated in a fixed-width signed integer using unchecked multiplication/addition. The bounds check against the destination buffer happens only after the full accumulation, so integer overflow can wrap the count before validation. The wrapped value can then pass the bounds check and is used as the length argument to a memory-writing operation (`memset`), leading to an out-of-bounds write. The fix widens the accumulator to `sqlite3_int64` and rejects oversized counts inside the accumulation loop.
+
+Roles:
+- `parser_input`: `kvvfsDecode` — decodes the untrusted encoded byte stream.
+- `untrusted_size`: the inline run-length value computed from the decoded input digits and multiplier; it is the count later passed to `memset`.
+- `memory_write` / buffer-write sink: `memset` — its size argument receives the unchecked/overflowed count.

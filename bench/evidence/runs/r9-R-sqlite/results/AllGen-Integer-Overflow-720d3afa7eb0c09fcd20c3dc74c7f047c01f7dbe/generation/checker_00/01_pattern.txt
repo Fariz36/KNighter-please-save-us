@@ -1,0 +1,9 @@
+## Bug Pattern
+
+The element count used to size/initialize a dynamically grown cache is computed with narrow (32-bit) integer arithmetic before being multiplied by the element size and passed to a `reallocator`. That arithmetic can wrap or truncate for large length values, so the cache is allocated and initialized for fewer elements than later indexing (derived from the same length) will access, causing an out-of-bounds access. The fix widens the count computation to 64-bit.
+
+Roles:
+- `reallocator`: `sqlite3Realloc` — resizes the cache; its size argument depends on the overflow-prone count.
+- `null_on_failure`: `sqlite3Realloc` — may return NULL and is checked before use.
+- `initializer`: `memset` — clears the cache using the same under-computed count.
+- `length_of`/`allocated_size`: `sqlite3MallocSize` — returns the current allocation size used to decide whether a resize is needed.

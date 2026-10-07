@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A caller-controlled numeric limit accepted by an `untrusted_size`/configuration-setter API is stored without validating that it is nonzero. Later, that stored value is used as the denominator of a division without a zero guard. If the API accepts zero, the division executes with a zero divisor, causing undefined behavior/SIGFPE. The fix enforces the invariant both at the setter and defensively before the division.
+
+Roles:
+- `untrusted_size`: `xmlCtxtSetMaxAmplification` — accepts a caller-controlled amplification limit and stores it into the parser context.
+- `error_setter`: `xmlFatalErrMsg` — reports the resource-limit error once the guarded division check fires; not the root cause.

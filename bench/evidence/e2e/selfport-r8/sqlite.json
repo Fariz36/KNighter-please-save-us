@@ -1,0 +1,287 @@
+[
+  {
+    "bundle": "KN-Buffer-Overflow-a7200804-1",
+    "commit": "a7200804eb4aeb35229388a37ea00af27559bd25",
+    "files": [
+      "src/printf.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "src/printf.c",
+        624,
+        "unknown"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "src/printf.c",
+        624,
+        "unknown"
+      ]
+    ],
+    "mapping_original": {
+      "buffer_grow": [
+        "sqlite3StrAccumEnlargeIfNeeded"
+      ],
+      "required_capacity": [
+        "szBufNeeded"
+      ],
+      "write_pointer": [
+        "bufpt"
+      ],
+      "digit_set": [
+        "aDigits"
+      ],
+      "output_buffer": [
+        "zOut"
+      ]
+    },
+    "mapping_ported": {
+      "buffer_grow": [
+        "sqlite3StrAccumEnlargeIfNeeded"
+      ],
+      "required_capacity": [
+        "szBufNeeded"
+      ],
+      "write_pointer": [
+        "bufpt"
+      ],
+      "digit_set": [
+        "aDigits"
+      ],
+      "output_buffer": [
+        "zOut"
+      ]
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "commit": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+    "files": [
+      "src/btree.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "src/btree.c",
+        5198,
+        "accessPayload"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "src/btree.c",
+        5198,
+        "accessPayload"
+      ]
+    ],
+    "mapping_original": {
+      "payload_length": [
+        "nPayload"
+      ],
+      "local_payload_length": [
+        "nLocal"
+      ],
+      "overflow_chunk_size": [
+        "ovflSize"
+      ],
+      "overflow_page_cache": [
+        "aOverflow"
+      ],
+      "reallocator": [
+        "sqlite3Realloc"
+      ],
+      "allocated_size_query": [
+        "sqlite3MallocSize"
+      ],
+      "zero_initializer": [
+        "memset"
+      ],
+      "cache_index": [
+        "iIdx"
+      ],
+      "too_narrow_arithmetic_type": [
+        "int",
+        "u32"
+      ]
+    },
+    "mapping_ported": {
+      "payload_length": [
+        "nPayload",
+        "sqlite3BtreePayloadSize"
+      ],
+      "local_payload_length": [
+        "nLocal",
+        "sqlite3BtreePayloadFetch"
+      ],
+      "overflow_chunk_size": [
+        "ovflSize"
+      ],
+      "overflow_page_cache": [
+        "aOverflow"
+      ],
+      "reallocator": [
+        "sqlite3Realloc",
+        "sqlite3_realloc",
+        "sqlite3_realloc64",
+        "sqlite3DbRealloc",
+        "sqlite3WhereRealloc",
+        "sqlite3DbReallocOrFree"
+      ],
+      "allocated_size_query": [
+        "sqlite3MallocSize",
+        "sqlite3DbMallocSize",
+        "sqlite3_msize"
+      ],
+      "zero_initializer": [
+        "memset"
+      ],
+      "cache_index": [
+        "iIdx"
+      ],
+      "too_narrow_arithmetic_type": [
+        "int",
+        "u32"
+      ]
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Integer-Overflow-d87f8c49-0",
+    "commit": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+    "files": [
+      "src/printf.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "src/printf.c",
+        861,
+        "unknown"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "src/printf.c",
+        861,
+        "unknown"
+      ]
+    ],
+    "mapping_original": {
+      "length_of": [],
+      "character_count_bound": [
+        "precision"
+      ],
+      "iterator_advance": [
+        "SQLITE_SKIP_UTF8"
+      ],
+      "output_length": [
+        "length"
+      ],
+      "narrowing_cast": [],
+      "safe_cap": [
+        "MIN"
+      ],
+      "buffer_append": [
+        "sqlite3_str_append"
+      ]
+    },
+    "mapping_ported": {
+      "length_of": [],
+      "character_count_bound": [
+        "precision"
+      ],
+      "iterator_advance": [
+        "SQLITE_SKIP_UTF8"
+      ],
+      "output_length": [
+        "length"
+      ],
+      "narrowing_cast": [],
+      "safe_cap": [
+        "MIN"
+      ],
+      "buffer_append": [
+        "sqlite3_str_append"
+      ]
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Misuse-1bc183a9-1",
+    "commit": "1bc183a935799050919eecf4f5deffb6d98e7905",
+    "files": [
+      "src/alter.c"
+    ],
+    "reports_original": 2,
+    "locations_original": [
+      [
+        "src/alter.c",
+        2557,
+        "dropConstraintFunc"
+      ],
+      [
+        "src/alter.c",
+        2951,
+        "findConstraintFunc"
+      ]
+    ],
+    "reports_ported": 2,
+    "locations_ported": [
+      [
+        "src/alter.c",
+        2557,
+        "dropConstraintFunc"
+      ],
+      [
+        "src/alter.c",
+        2951,
+        "findConstraintFunc"
+      ]
+    ],
+    "mapping_original": {
+      "tokenizer": [
+        "getConstraintToken",
+        "sqlite3GetToken"
+      ],
+      "dequote_helper": [
+        "quotedCompare"
+      ],
+      "illegal_token_sentinel": [
+        "TK_ILLEGAL"
+      ],
+      "dequoter_with_precondition": [
+        "sqlite3Dequote"
+      ],
+      "caller_ignoring_sentinel": [
+        "findConstraintFunc",
+        "dropConstraintFunc"
+      ]
+    },
+    "mapping_ported": {
+      "tokenizer": [
+        "getConstraintToken",
+        "sqlite3GetToken"
+      ],
+      "dequote_helper": [
+        "quotedCompare"
+      ],
+      "illegal_token_sentinel": [
+        "TK_ILLEGAL"
+      ],
+      "dequoter_with_precondition": [
+        "sqlite3Dequote"
+      ],
+      "caller_ignoring_sentinel": [
+        "findConstraintFunc",
+        "dropConstraintFunc"
+      ]
+    },
+    "preserved": true
+  }
+]

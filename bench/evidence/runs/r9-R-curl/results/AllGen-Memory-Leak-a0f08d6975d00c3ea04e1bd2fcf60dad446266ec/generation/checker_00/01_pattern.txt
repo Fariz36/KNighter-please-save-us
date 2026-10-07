@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A `container_remove` operation is performed on an embedded link node **after** a `cleanup`/reset routine has already zeroed or cleared the containing object. The removal therefore operates on zeroed link fields and fails to actually detach the node, leaking the container/peer. The `container_remove` must happen before the object is cleared/zeroed.
+
+Roles:
+- `cleanup`: `cf_h2_proxy_ctx_clear` (it destroys internals and zeroes the whole context with `memset`)
+- `container_remove`: `Curl_peer_unlink`
+- `deallocator`: `curlx_free`

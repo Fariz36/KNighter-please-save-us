@@ -1,0 +1,81 @@
+{
+  "target": "curl",
+  "commit": "bb348b35e84c40c9564783d7585762b65038e8c5",
+  "candidates": 1820,
+  "identifiers": 38441,
+  "offered": {
+    "gc_trigger": [
+      "curlx_calloc",
+      "curl_dbg_calloc",
+      "CF_CTX_CALL_DATA",
+      "Curl_creds_merge",
+      "Curl_conn_is_alive",
+      "Curl_nghttp2_calloc",
+      "Curl_conn_keep_alive",
+      "Curl_cft_conn_is_alive",
+      "Curl_api_is_in_callback",
+      "Curl_cft_conn_keep_alive",
+      "Curl_cf_def_conn_is_alive",
+      "Curl_cf_def_conn_keep_alive",
+      "curl_exactly_three_arguments",
+      "Curl_api_multi_is_in_callback",
+      "Curl_cf_ngtcp2_cmn_conn_is_alive",
+      "curlcheck_resolver_start_callback"
+    ],
+    "ref_get": [
+      "Curl_schannel_get_cached_cert_store",
+      "get_args",
+      "my_get_line",
+      "curl_url_get",
+      "Curl_get_line",
+      "Curl_meta_get",
+      "Curl_async_get",
+      "Curl_get_admin",
+      "Curl_dynhds_get",
+      "Curl_get_scheme",
+      "GetSizeParameter",
+      "get_libcurl_info",
+      "Curl_addrinfo_get",
+      "Curl_dnscache_get",
+      "Curl_get_pathname",
+      "Curl_url_get_port",
+      "get_url_file_name",
+      "Curl_auth_krb5_get",
+      "Curl_auth_nego_get",
+      "Curl_auth_ntlm_get",
+      "Curl_conn_meta_get",
+      "Curl_resolv_get_ai",
+      "Curl_u8_strset_get",
+      "curl_url_get_ccsid",
+      "Curl_auth_gsasl_get",
+      "Curl_multi_get_easy",
+      "Curl_u32_ptrset_get",
+      "Curl_uint32_tbl_get",
+      "curl_multi_get_offt",
+      "Curl_conn_dns_get_ai",
+      "Curl_conn_get_origin",
+      "GetLoadedModulePaths",
+      "get_terminal_columns",
+      "Curl_conn_get_ip_info",
+      "Curl_resolv_get_https",
+      "Curl_conn_get_ssl_info",
+      "Curl_vtls_get_cert_der",
+      "curl_multi_get_handles",
+      "curlx_get_winapi_error",
+      "Curl_conn_cf_get_socket"
+    ]
+  },
+  "mapping": {
+    "gc_trigger": [],
+    "ref_get": []
+  },
+  "dropped_not_in_target": {
+    "gc_trigger": [],
+    "ref_get": []
+  },
+  "rationale": {
+    "gc_trigger": "curl uses manual memory management and has no equivalent call that may trigger an automatic emergency garbage collection.",
+    "ref_get": "curl has no garbage-collected objects or GC-root acquisition mechanism analogous to Lua stack rooting."
+  },
+  "llm_seconds": 7.2
+}

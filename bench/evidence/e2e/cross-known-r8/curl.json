@@ -1,0 +1,1088 @@
+[
+  {
+    "bundle": "KN-Double-Free-26dfab2f-1",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Double-Free",
+    "commits": [
+      {
+        "commit": "f2a1535712ff8622024d27b867480698752c254e",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "resource": [
+        "stream"
+      ],
+      "ownership_consumer_frees_on_failure": [
+        "Curl_cf_create"
+      ],
+      "deallocator": [
+        "Curl_cf_ngtcp2_h3_stream_ctx_free"
+      ],
+      "null_on_failure": [
+        "Curl_cf_create"
+      ],
+      "duplicate_cleanup": [
+        "Curl_cf_ngtcp2_h3_stream_ctx_free"
+      ],
+      "context_cleanup": []
+    },
+    "roles_mapped": 5,
+    "roles_total": 6,
+    "detected": [],
+    "perfect": [],
+    "seconds": 171.7
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Misuse",
+    "commits": [
+      {
+        "commit": "f2a1535712ff8622024d27b867480698752c254e",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "config_setter": [
+        "Curl_vsetopt"
+      ],
+      "divisor_field": [
+        "max_recv_speed",
+        "max_send_speed"
+      ]
+    },
+    "roles_mapped": 2,
+    "roles_total": 2,
+    "detected": [],
+    "perfect": [],
+    "seconds": 221.5
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "f2a1535712ff8622024d27b867480698752c254e",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "null_on_failure": [
+        "curlx_malloc",
+        "curlx_calloc",
+        "curlx_realloc",
+        "curlx_strdup",
+        "curl_easy_init",
+        "curl_mime_init",
+        "curl_url_dup",
+        "Curl_hsts_init",
+        "Curl_MD5_init",
+        "Curl_HMAC_init",
+        "Curl_fileinfo_alloc",
+        "Curl_ftp_parselist_data_alloc",
+        "config_alloc",
+        "new_getout"
+      ],
+      "length_of": [
+        "strlen",
+        "Curl_bufq_len",
+        "curlx_dyn_len",
+        "Curl_bufref_len",
+        "Curl_hash_count",
+        "Curl_llist_count",
+        "GetSizeParameter",
+        "Curl_dynhds_count",
+        "Curl_cshutdn_count",
+        "Curl_cwriter_count",
+        "Curl_bump_headersize",
+        "Curl_u8_strset_count",
+        "Curl_u32_ptrset_count",
+        "Curl_uint32_tbl_count",
+        "Curl_pgrsSetUploadSize",
+        "Curl_uint32_bset_count",
+        "Curl_uint32_tbl_resize",
+        "Curl_cshutdn_dest_count",
+        "Curl_uint32_bset_resize",
+        "Curl_pgrsSetDownloadSize",
+        "Curl_uint32_spbset_count",
+        "Curl_creader_total_length",
+        "Curl_pgrsSetUploadCounter",
+        "Curl_creader_client_length",
+        "Curl_ssl_push_certinfo_len",
+        "Curl_pgrsResetTransferSizes",
+        "Curl_creader_def_total_length",
+        "file2string",
+        "jsonWriteString",
+        "__crt0_glob_function"
+      ]
+    },
+    "roles_mapped": 2,
+    "roles_total": 2,
+    "detected": [],
+    "perfect": [],
+    "seconds": 258.6
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "f2a1535712ff8622024d27b867480698752c254e",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "nullable_inout_capacity_ptr": [
+        "capacity"
+      ],
+      "capacity_computer": [],
+      "reallocator": [
+        "curlx_realloc",
+        "curl_dbg_realloc",
+        "Curl_nghttp2_realloc",
+        "Curl_crealloc",
+        "Curl_uint32_tbl_resize",
+        "Curl_uint32_bset_resize",
+        "file2memory",
+        "file2memory_range"
+      ],
+      "deref_read": [],
+      "deref_write": [],
+      "null_guard": [],
+      "null_on_failure": []
+    },
+    "roles_mapped": 2,
+    "roles_total": 7,
+    "detected": [],
+    "perfect": [],
+    "seconds": 339.2
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-2",
+    "source": "libxml2",
+    "target": "curl",
+    "bug_type": "Out-of-Bound",
+    "commits": [
+      {
+        "commit": "f2a1535712ff8622024d27b867480698752c254e",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "lookahead": [],
+      "length_of": []
+    },
+    "roles_mapped": 0,
+    "roles_total": 2,
+    "detected": [],
+    "perfect": [],
+    "seconds": 191.6
+  },
+  {
+    "bundle": "KN-Integer-Overflow-10eb89d1-0",
+    "source": "lua",
+    "target": "curl",
+    "bug_type": "Integer-Overflow",
+    "commits": [
+      {
+        "commit": "f2a1535712ff8622024d27b867480698752c254e",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "decoder_function": [],
+      "input_byte": [],
+      "continuation_count": [
+        "count"
+      ]
+    },
+    "roles_mapped": 1,
+    "roles_total": 3,
+    "detected": [],
+    "perfect": [],
+    "seconds": 604.0
+  },
+  {
+    "bundle": "KN-Misuse-bc4bbcef-0",
+    "source": "lua",
+    "target": "curl",
+    "bug_type": "Misuse",
+    "commits": [
+      {
+        "commit": "f2a1535712ff8622024d27b867480698752c254e",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "combined_create_and_publish": [
+        "Curl_ssl_setup_x509_store",
+        "Curl_wssl_setup_x509_store",
+        "Curl_schannel_get_cached_cert_store"
+      ],
+      "object_initializer": [
+        "Curl_MD5_init",
+        "Curl_HMAC_init",
+        "Curl_ssl_init",
+        "Curl_ssh_init",
+        "Curl_hsts_init",
+        "Curl_altsvc_init",
+        "Curl_cookie_init"
+      ],
+      "persistent_registry_lookup": [
+        "Curl_meta_get",
+        "Curl_conn_meta_get",
+        "Curl_altsvc_lookup",
+        "curl_ws_meta",
+        "Curl_cipher_suite_lookup_id",
+        "Curl_schannel_get_cached_cert_store"
+      ],
+      "object_allocator": [
+        "Curl_fileinfo_alloc",
+        "Curl_ftp_parselist_data_alloc",
+        "config_alloc",
+        "ALLOC_SIZE",
+        "ALLOC_SIZE2"
+      ],
+      "registry_store": [
+        "Curl_meta_set",
+        "Curl_conn_meta_set",
+        "Curl_schannel_set_cached_cert_store",
+        "Curl_ssl_setup_x509_store",
+        "Curl_wssl_setup_x509_store"
+      ],
+      "registry_key": [
+        "Curl_ssl_peer_key_make"
+      ]
+    },
+    "roles_mapped": 6,
+    "roles_total": 6,
+    "detected": [],
+    "perfect": [],
+    "seconds": 466.2
+  },
+  {
+    "bundle": "KN-Use-After-Free-22974326-2",
+    "source": "lua",
+    "target": "curl",
+    "bug_type": "Use-After-Free",
+    "commits": [
+      {
+        "commit": "f2a1535712ff8622024d27b867480698752c254e",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "gc_managed_object": [],
+      "potential_gc_trigger": [],
+      "gc_root_anchor": [],
+      "weak_reference_container": [
+        "Curl_conn_keep_alive",
+        "Curl_conn_is_alive"
+      ],
+      "use_after_free_use": [
+        "Curl_conn_free",
+        "connclose"
+      ]
+    },
+    "roles_mapped": 2,
+    "roles_total": 5,
+    "detected": [],
+    "perfect": [],
+    "seconds": 309.9
+  },
+  {
+    "bundle": "KN-Buffer-Overflow-a7200804-1",
+    "source": "sqlite",
+    "target": "curl",
+    "bug_type": "Buffer-Overflow",
+    "commits": [
+      {
+        "commit": "f2a1535712ff8622024d27b867480698752c254e",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "buffer_grow": [],
+      "required_capacity": [
+        "len"
+      ],
+      "write_pointer": [
+        "bufp"
+      ],
+      "digit_set": [
+        "digits"
+      ],
+      "output_buffer": [
+        "buffer"
+      ]
+    },
+    "roles_mapped": 4,
+    "roles_total": 5,
+    "detected": [],
+    "perfect": [],
+    "seconds": 276.4
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "curl",
+    "bug_type": "Integer-Overflow",
+    "commits": [
+      {
+        "commit": "f2a1535712ff8622024d27b867480698752c254e",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "payload_length": [
+        "Curl_creader_total_length",
+        "Curl_creader_client_length",
+        "Curl_creader_def_total_length"
+      ],
+      "local_payload_length": [
+        "Curl_bufq_len",
+        "curlx_dyn_len",
+        "Curl_bufref_len"
+      ],
+      "overflow_chunk_size": [
+        "Curl_httpchunk_init",
+        "Curl_httpchunk_read",
+        "Curl_httpchunk_reset",
+        "Curl_httpchunk_is_done",
+        "Curl_httpchunk_add_reader"
+      ],
+      "overflow_page_cache": [
+        "Curl_dnscache_init",
+        "Curl_dnscache_add",
+        "Curl_dnscache_get",
+        "Curl_dnscache_clear",
+        "Curl_dnscache_destroy",
+        "Curl_dnscache_prune",
+        "Curl_dnscache_add_negative"
+      ],
+      "reallocator": [
+        "curlx_realloc",
+        "curl_dbg_realloc"
+      ],
+      "allocated_size_query": [],
+      "zero_initializer": [
+        "memset",
+        "curlx_memzero",
+        "curlx_strzero"
+      ],
+      "cache_index": [
+        "Curl_conn_sockindex",
+        "CONN_SOCK_IDX_VALID",
+        "Curl_cshutdn_try_once_idx"
+      ],
+      "too_narrow_arithmetic_type": [
+        "uint32_t",
+        "int"
+      ]
+    },
+    "roles_mapped": 8,
+    "roles_total": 9,
+    "detected": [],
+    "perfect": [],
+    "seconds": 331.7
+  },
+  {
+    "bundle": "KN-Integer-Overflow-d87f8c49-0",
+    "source": "sqlite",
+    "target": "curl",
+    "bug_type": "Integer-Overflow",
+    "commits": [
+      {
+        "commit": "f2a1535712ff8622024d27b867480698752c254e",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "length_of": [],
+      "character_count_bound": [
+        "precision"
+      ],
+      "iterator_advance": [],
+      "output_length": [
+        "length"
+      ],
+      "narrowing_cast": [],
+      "safe_cap": [
+        "CURLMIN"
+      ],
+      "buffer_append": [
+        "curlx_dyn_addn"
+      ]
+    },
+    "roles_mapped": 4,
+    "roles_total": 7,
+    "detected": [],
+    "perfect": [],
+    "seconds": 372.0
+  },
+  {
+    "bundle": "KN-Misuse-1bc183a9-1",
+    "source": "sqlite",
+    "target": "curl",
+    "bug_type": "Misuse",
+    "commits": [
+      {
+        "commit": "f2a1535712ff8622024d27b867480698752c254e",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+        "bug_type": "Out-of-Bound",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c53420e42742a68004854a7fa354f9500b4b1516",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "466c06cf706bd92ff77beb402934f7265183f8ff",
+        "bug_type": "Null-Pointer-Dereference",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "tokenizer": [
+        "curlx_str_word"
+      ],
+      "dequote_helper": [
+        "auth_digest_get_key_value"
+      ],
+      "illegal_token_sentinel": [
+        "CURLE_BAD_FUNCTION_ARGUMENT"
+      ],
+      "dequoter_with_precondition": [
+        "curlx_str_quotedword"
+      ],
+      "caller_ignoring_sentinel": [
+        "Curl_auth_decode_digest_http_message"
+      ]
+    },
+    "roles_mapped": 5,
+    "roles_total": 5,
+    "detected": [],
+    "perfect": [],
+    "seconds": 549.8
+  }
+]

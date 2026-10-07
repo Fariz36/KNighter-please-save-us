@@ -1,0 +1,40 @@
+{
+  "null_on_failure": [
+    "sqlite3Malloc",
+    "sqlite3MallocZero",
+    "sqlite3Realloc",
+    "sqlite3_malloc",
+    "sqlite3_malloc64",
+    "sqlite3_realloc",
+    "sqlite3_realloc64",
+    "sqlite3DbMallocRaw",
+    "sqlite3DbMallocZero",
+    "sqlite3DbMallocRawNN",
+    "sqlite3DbRealloc",
+    "sqlite3DbReallocOrFree",
+    "sqlite3DbStrDup",
+    "sqlite3DbStrNDup",
+    "sqlite3ExprAlloc",
+    "sqlite3ExprDup",
+    "sqlite3WithDup",
+    "sqlite3CteNew",
+    "sqlite3KeyInfoAlloc",
+    "sqlite3WindowAlloc",
+    "sqlite3VdbeAllocUnpackedRecord",
+    "sqlite3ParserAlloc",
+    "sqlite3MutexAlloc",
+    "sqlite3_mutex_alloc",
+    "sqlite3StackAllocRaw",
+    "sqlite3StackAllocRawNN",
+    "sqlite3_str_new",
+    "sqlite3_mprintf",
+    "sqlite3_vmprintf"
+  ],
+  "length_of": [
+    "strlen",
+    "sqlite3Utf8CharLen",
+    "sqlite3Utf16ByteLen",
+    "sqlite3_str_length",
+    "sqlite3ExprVectorSize"
+  ]
+}

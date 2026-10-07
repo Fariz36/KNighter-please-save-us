@@ -1,0 +1,68 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 14:49:54.703 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+2026-10-07 14:49:55.354 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-c36b417217cb44b0)
+2026-10-07 14:49:55.366 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 6546ffeda4f1
+2026-10-07 14:49:56.242 | INFO     | role_porting:port_roles:174 - curl: 1769 candidate API names from headers, 35014 identifiers in sources
+2026-10-07 14:49:56.307 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:50:39.552 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 43.2s
+2026-10-07 14:50:39.554 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-bc440a89-1 roles to curl: {'encoded_size_calculator': ['encoder_base64_size'], 'input_length': ['datasize'], 'max_input_size': [], 'error_sentinel': []}
+2026-10-07 14:50:39.557 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 14:50:55.815 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '6546ffeda4f1e81f68db6af721398148b5c74317', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/0af93956b3c44168f804/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 16.25, 'jobs': 32}
+2026-10-07 14:50:55.817 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 14:51:09.658 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '6546ffeda4f1e81f68db6af721398148b5c74317', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/0af93956b3c44168f804/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 13.84, 'jobs': 32}
+{"bundle": "KN-Integer-Overflow-bc440a89-1", "reports_original": 1, "reports_ported": 1, "preserved": true}
+2026-10-07 14:51:09.667 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 061136f24b52
+2026-10-07 14:51:10.680 | INFO     | role_porting:port_roles:174 - curl: 1723 candidate API names from headers, 34561 identifiers in sources
+2026-10-07 14:51:10.752 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:53:10.389 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 119.6s
+2026-10-07 14:53:10.390 | INFO     | role_porting:port_roles:226 - Ported KN-Memory-Leak-a0f08d69-0 roles to curl: {'cleanup': ['cf_h2_proxy_ctx_clear'], 'destructor': ['cf_h2_proxy_ctx_free', 'cf_haproxy_ctx_free'], 'state_reset': ['memset'], 'link_detach': ['Curl_peer_unlink'], 'link_storage': ['dest']}
+2026-10-07 14:53:10.394 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 14:53:15.093 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '061136f24b5271a8360b9c128d5a2329a253ebde', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/ae40e9cca6a3fb0b23ec/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 4.69, 'jobs': 32}
+2026-10-07 14:53:15.094 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 14:53:19.714 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '061136f24b5271a8360b9c128d5a2329a253ebde', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/ae40e9cca6a3fb0b23ec/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 4.62, 'jobs': 32}
+{"bundle": "KN-Memory-Leak-a0f08d69-0", "reports_original": 1, "reports_ported": 1, "preserved": true}
+2026-10-07 14:53:19.728 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision f042c25fb876
+2026-10-07 14:53:20.588 | INFO     | role_porting:port_roles:174 - curl: 1826 candidate API names from headers, 38198 identifiers in sources
+2026-10-07 14:53:20.656 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:54:09.085 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 48.4s
+2026-10-07 14:54:09.087 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c53420e4-0 roles to curl: {'data_provider': ['ASN1_STRING_get0_data', 'ASN1_STRING_to_UTF8'], 'length_provider': ['ASN1_STRING_length', 'ASN1_STRING_to_UTF8'], 'unbounded_string_consumer': ['strlen', 'failf', 'infof'], 'bounded_nul_scanner': ['memchr'], 'bounded_string_formatter': []}
+2026-10-07 14:54:09.089 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 14:54:12.509 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'f042c25fb876d0da5ff5f35332bcc3a8b5a7fe66', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/57dafa24b88f0f2597b8/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 3.41, 'jobs': 32}
+2026-10-07 14:54:12.510 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 14:54:16.047 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'f042c25fb876d0da5ff5f35332bcc3a8b5a7fe66', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/57dafa24b88f0f2597b8/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 3.53, 'jobs': 32}
+{"bundle": "KN-Misuse-c53420e4-0", "reports_original": 1, "reports_ported": 1, "preserved": true}
+2026-10-07 14:54:16.059 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 1750c4b27fc1
+2026-10-07 14:54:16.926 | INFO     | role_porting:port_roles:174 - curl: 1818 candidate API names from headers, 38401 identifiers in sources
+2026-10-07 14:54:16.975 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:55:03.731 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 46.8s
+2026-10-07 14:55:03.732 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-466c06cf-1 roles to curl: {'duplicator': ['curl_url_dup'], 'source_handle': ['in'], 'destination_allocator': ['curlx_calloc'], 'field_copier': ['DUP']}
+2026-10-07 14:55:03.735 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 14:55:07.701 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '1750c4b27fc1eeb370c0ff6022d1e2256fe17055', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/98f2b5c545771ef2fecd/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 14, 'seconds': 3.96, 'jobs': 32}
+2026-10-07 14:55:07.702 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 14:55:07.707 | WARNING  | backends.csa_compiledb:_run_checker_compiledb:209 - No compile entry for tests/libtest/lib1560.c
+2026-10-07 14:55:07.708 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 14:55:11.558 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '1750c4b27fc1eeb370c0ff6022d1e2256fe17055', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/98f2b5c545771ef2fecd/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 14, 'seconds': 3.85, 'jobs': 32}
+2026-10-07 14:55:11.559 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 14:55:11.571 | WARNING  | backends.csa_compiledb:_run_checker_compiledb:209 - No compile entry for tests/libtest/lib1560.c
+{"bundle": "KN-Null-Pointer-Dereference-466c06cf-1", "reports_original": 14, "reports_ported": 14, "preserved": true}
+2026-10-07 14:55:11.580 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision d87b4e460513
+2026-10-07 14:55:12.494 | INFO     | role_porting:port_roles:174 - curl: 1818 candidate API names from headers, 38362 identifiers in sources
+2026-10-07 14:55:12.524 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:58:32.936 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 200.4s
+2026-10-07 14:58:32.937 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-f2a15357-1 roles to curl: {'api_entry_point': ['curl_easy_recv', 'curl_easy_send', 'curl_ws_recv', 'curl_ws_send'], 'out_param': ['n', 'recv', 'sent'], 'out_param_writer': ['Curl_easy_recv', 'Curl_conn_recv']}
+2026-10-07 14:58:32.939 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 14:58:33.172 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'd87b4e4605132aa5f792a5955d648683277e593d', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/d6ea521459fb71966e2a/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 2, 'seconds': 0.23, 'jobs': 32}
+2026-10-07 14:58:33.172 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 14:58:33.388 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'd87b4e4605132aa5f792a5955d648683277e593d', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/d6ea521459fb71966e2a/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 2, 'seconds': 0.21, 'jobs': 32}
+{"bundle": "KN-Null-Pointer-Dereference-f2a15357-1", "reports_original": 2, "reports_ported": 2, "preserved": true}
+2026-10-07 14:58:33.398 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision b3675fe80a33
+2026-10-07 14:58:34.154 | INFO     | role_porting:port_roles:174 - curl: 1764 candidate API names from headers, 34916 identifiers in sources
+2026-10-07 14:58:34.232 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:59:16.494 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 42.3s
+2026-10-07 14:59:16.496 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-f7d4e11f-2 roles to curl: {'length_field': ['len'], 'data_pointer': ['data'], 'buffer_copy': ['memcpy'], 'error_return': ['CURLE_BAD_FUNCTION_ARGUMENT', 'CURLE_OUT_OF_MEMORY'], 'copy_flag': ['CURL_BLOB_COPY'], 'allocator': ['curlx_malloc'], 'deallocator': ['curlx_safefree'], 'validation_guard': []}
+2026-10-07 14:59:16.498 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 14:59:16.934 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'b3675fe80a3393264d58d0359b3c5ab332f3a9f9', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/5fcf622372fd8b9470ed/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 0.41, 'jobs': 32}
+2026-10-07 14:59:16.935 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 14:59:17.341 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'b3675fe80a3393264d58d0359b3c5ab332f3a9f9', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/5fcf622372fd8b9470ed/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 0.4, 'jobs': 32}
+{"bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2", "reports_original": 1, "reports_ported": 1, "preserved": true}

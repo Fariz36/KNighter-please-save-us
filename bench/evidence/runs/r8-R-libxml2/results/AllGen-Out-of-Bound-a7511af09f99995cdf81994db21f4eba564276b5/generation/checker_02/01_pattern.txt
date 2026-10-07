@@ -1,0 +1,12 @@
+## Bug Pattern
+
+A parser `lookahead` macro performs an indexed read from an `input_buffer` through a `cursor` without a `bounds_check` against the buffer length. The parser context stores the input base (`ctxt->string`) and current position (`ctxt->cur`), but originally does not store a `length_of` value, so `NXT(index)` can read `ctxt->cur[index]` past the end of the duplicated regex string and cause an out-of-bounds read. The fix adds a stored `length_of` field and guards the indexed read by checking the cursor offset against that length.
+
+Roles:
+- `allocator`: `xmlMalloc`, `xmlStrdup`
+- `input_buffer`: `ctxt->string`
+- `cursor`: `ctxt->cur`
+- `lookahead` / `unchecked_indexed_read`: `NXT(index)` -> `ctxt->cur[index]`
+- `length_of`: `ctxt->len`
+- `bounds_check`: `(size_t)(ctxt->cur + index - ctxt->string) < ctxt->len`
+- `initializer`: `xmlRegNewParserCtxt`

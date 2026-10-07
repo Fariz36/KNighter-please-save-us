@@ -1,0 +1,123 @@
+{
+  "commit_id": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/f73c92705862e39834ab/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/ftp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 3,
+        "fixed_total": 3,
+        "buggy_on_target": 3,
+        "fixed_on_target": 3,
+        "buggy_functions": [
+          "ftp_state_pasv_resp"
+        ],
+        "fixed_functions": [
+          "ftp_state_pasv_resp"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/ftp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/67ce67284258/lib/ftp.c",
+          "line": 2076,
+          "column": 48,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "Out-of-bounds read",
+          "description": "Potential out-of-bounds read: missing NUL check after delimiter",
+          "issue_hash": "1742ae6590f0341524cf33925a974bbe",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/6f1dfab6a292/fc545d63/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_67ce67284258_lib_ftp.c/report-1742ae.html",
+          "relpath": "lib/ftp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/67ce67284258/lib/ftp.c",
+          "line": 2076,
+          "column": 18,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "Out-of-bounds read",
+          "description": "Potential out-of-bounds read: missing NUL check after delimiter",
+          "issue_hash": "5202eaa25a9fcfb0a197d121e8fc59c1",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/6f1dfab6a292/fc545d63/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_67ce67284258_lib_ftp.c/report-5202ea.html",
+          "relpath": "lib/ftp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/67ce67284258/lib/ftp.c",
+          "line": 2076,
+          "column": 37,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "Out-of-bounds read",
+          "description": "Potential out-of-bounds read: missing NUL check after delimiter",
+          "issue_hash": "667c86b621a2470dc5afa5530fd09732",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/6f1dfab6a292/fc545d63/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_67ce67284258_lib_ftp.c/report-667c86.html",
+          "relpath": "lib/ftp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/ftp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/6f1dfab6a292/lib/ftp.c",
+          "line": 2076,
+          "column": 44,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "Out-of-bounds read",
+          "description": "Potential out-of-bounds read: missing NUL check after delimiter",
+          "issue_hash": "145b4cedc5457cc73d3d23f47ca4709e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/6f1dfab6a292/fc545d63/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_6f1dfab6a292_lib_ftp.c/report-145b4c.html",
+          "relpath": "lib/ftp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/6f1dfab6a292/lib/ftp.c",
+          "line": 2076,
+          "column": 25,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "Out-of-bounds read",
+          "description": "Potential out-of-bounds read: missing NUL check after delimiter",
+          "issue_hash": "33770cbb791bf2fe26f9bc3c45b3a828",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/6f1dfab6a292/fc545d63/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_6f1dfab6a292_lib_ftp.c/report-33770c.html",
+          "relpath": "lib/ftp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/6f1dfab6a292/lib/ftp.c",
+          "line": 2076,
+          "column": 55,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "Out-of-bounds read",
+          "description": "Potential out-of-bounds read: missing NUL check after delimiter",
+          "issue_hash": "785d365c2776b7262c0df27f5d23bfd1",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/6f1dfab6a292/fc545d63/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_6f1dfab6a292_lib_ftp.c/report-785d36.html",
+          "relpath": "lib/ftp.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 21.63,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 14.66,
+      "fixed": 14.49
+    },
+    "total_seconds": 50.97
+  },
+  "report_dir": "tmp/validation/6f1dfab6a292/fc545d63"
+}

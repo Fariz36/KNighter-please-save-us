@@ -1,0 +1,16 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 18:02:56.158 | WARNING  | targets.compiledb:__init__:71 - Unknown compiledb target options ignored: ['build_marker']
+2026-10-07 18:02:56.218 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (libxml2), Repository Path: /home/faris/RA-MrYudis/Knight/targets/libxml2; plugin_build=standalone; validation_scoring=strict
+libxml2: 205 mined fix candidates
+2026-10-07 18:02:57.263 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-5e05f8d9bd3a4c32)
+2026-10-07 18:02:57.279 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision c43dc98d27ac
+2026-10-07 18:02:57.932 | INFO     | role_porting:port_roles:174 - libxml2: 1692 candidate API names from headers, 22438 identifiers in sources
+2026-10-07 18:02:57.971 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 18:07:53.026 | ERROR    | model:invoke_llm:347 - Error attempt 1 [port_roles]: empty response content
+2026-10-07 18:11:56.170 | ERROR    | model:invoke_llm:347 - Error attempt 2 [port_roles]: The read operation timed out
+2026-10-07 18:14:50.790 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 170.6s
+2026-10-07 18:14:50.794 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-bc440a89-2 roles to libxml2: {'length_of': ['xmlTextWriterWriteBase64', 'xmlUTF8Strsize']}
+{"bundle": "KN-Integer-Overflow-bc440a89-2", "source": "curl", "target": "libxml2", "api_matched": 0, "pairs": []}
+2026-10-07 18:14:51.616 | INFO     | role_porting:port_roles:174 - libxml2: 1692 candidate API names from headers, 22438 identifiers in sources
+2026-10-07 18:14:51.767 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]

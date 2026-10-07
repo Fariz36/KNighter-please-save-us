@@ -1,0 +1,57 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "untrusted_input": {
+      "names": [
+        "aIn",
+        "a"
+      ],
+      "description": "pointer or array containing untrusted encoded input"
+    },
+    "length_accumulator": {
+      "names": [
+        "n"
+      ],
+      "description": "variable accumulating a decoded length from untrusted input"
+    },
+    "place_value_multiplier": {
+      "names": [
+        "mult"
+      ],
+      "description": "base multiplier used when accumulating a length"
+    },
+    "output_offset": {
+      "names": [
+        "j"
+      ],
+      "description": "current write offset into the output buffer"
+    },
+    "output_capacity": {
+      "names": [
+        "nOut"
+      ],
+      "description": "maximum size of the output buffer"
+    },
+    "buffer_writer": {
+      "names": [
+        "memset"
+      ],
+      "description": "function that writes to a buffer using a size argument"
+    },
+    "fixed_width_signed_arithmetic_type": {
+      "names": [
+        "int"
+      ],
+      "description": "fixed-width signed integer type that can overflow"
+    },
+    "widened_safe_type_in_fix": {
+      "names": [
+        "sqlite3_int64"
+      ],
+      "description": "widened integer type that avoids overflow in this context"
+    }
+  }
+}

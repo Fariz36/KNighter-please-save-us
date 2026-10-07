@@ -1,0 +1,19 @@
+{
+  "data_provider": [
+    "ASN1_STRING_get0_data",
+    "ASN1_STRING_to_UTF8"
+  ],
+  "length_provider": [
+    "ASN1_STRING_length",
+    "ASN1_STRING_to_UTF8"
+  ],
+  "unbounded_string_consumer": [
+    "strlen",
+    "failf",
+    "infof"
+  ],
+  "bounded_nul_scanner": [
+    "memchr"
+  ],
+  "bounded_string_formatter": []
+}

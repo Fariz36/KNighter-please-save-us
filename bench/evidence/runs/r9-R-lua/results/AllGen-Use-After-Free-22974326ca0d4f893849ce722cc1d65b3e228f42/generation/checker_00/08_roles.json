@@ -1,0 +1,27 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "weak_lookup": {
+      "names": [
+        "fasttm",
+        "luaT_gettmbyobj"
+      ],
+      "description": "Returns a pointer to a value that is only weakly referenced (e.g., from a weak table); the returned pointer does not keep the object alive."
+    },
+    "gc_trigger": {
+      "names": [
+        "luaH_finishset"
+      ],
+      "description": "Function call that may allocate memory and trigger a garbage collection; any weakly referenced object passed to it must be anchored beforehand."
+    },
+    "ref_get": {
+      "names": [
+        "sethvalue2s"
+      ],
+      "description": "Anchors/roots a GC object so it will not be collected; after this call the object is strongly referenced."
+    }
+  }
+}

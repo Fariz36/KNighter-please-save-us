@@ -1,0 +1,12 @@
+{
+  "commit_id": "21769e1d851de343b67c3e05d8400b4429130445",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/misc/resfmt.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/misc/resfmt.c": "no compile entry"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+## Bug Pattern
+
+An `encoded_size_calculator` performs unchecked arithmetic that expands an `input_length` into an encoded output size. Since the input length can be arbitrarily large, the multiplication/addition can overflow the signed integer type (`curl_off_t`), wrapping to a small or negative value. The resulting incorrect encoded size may then be used as an allocation or buffer bound, leading to an undersized buffer and potential out-of-bounds access.
+
+Roles:
+- `encoded_size_calculator`: `encoder_base64_size`
+- `input_length`: `part->datasize`
+- `overflow_prone_size_expression`: `4 * (1 + ((size - 1) / 3))` and the CRLF term `2 * ((size - 1) / MAX_ENCODED_LINE_LENGTH)`
+- `overflow_guard` / `max_input_size`: `BASE64_MAX_INPUT_SIZE` check (`size > BASE64_MAX_INPUT_SIZE` -> `return -1`)
+- `error_sentinel`: `-1`

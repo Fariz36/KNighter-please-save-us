@@ -1,0 +1,18 @@
+{
+  "allocator": [
+    "triggerStepAllocate"
+  ],
+  "duplicator": [
+    "sqlite3SrcListDup"
+  ],
+  "null_on_failure": [
+    "triggerStepAllocate",
+    "sqlite3SrcListDup"
+  ],
+  "container_insert": [
+    "sqlite3SrcListAppendList"
+  ],
+  "deallocator": [
+    "sqlite3SrcListDelete"
+  ]
+}

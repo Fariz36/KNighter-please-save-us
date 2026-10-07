@@ -1,0 +1,88 @@
+{
+  "target": "lua",
+  "commit": "0b29f408433e92953cc72b1d3e06c7ac8139e439",
+  "candidates": 845,
+  "identifiers": 7300,
+  "offered": {
+    "allocator": [
+      "lua_Alloc",
+      "luaL_alloc",
+      "luaD_growstack",
+      "luaH_size",
+      "isreserved",
+      "luaH_resize",
+      "luaS_resize",
+      "sizeCclosure",
+      "sizeLclosure",
+      "debug_realloc",
+      "luaM_growaux_",
+      "luaM_realloc_",
+      "luaM_freearray",
+      "luaM_growvector",
+      "luaH_resizearray",
+      "luaK_reserveregs",
+      "luaD_reallocstack",
+      "luaM_reallocvchar",
+      "luaM_saferealloc_",
+      "luaZ_resizebuffer",
+      "luaM_reallocvector",
+      "luaK_setreturns",
+      "lua_checkmemory"
+    ],
+    "reallocator": [
+      "lua_Alloc",
+      "luaL_alloc",
+      "debug_realloc",
+      "luaM_realloc_",
+      "luaH_size",
+      "isreserved",
+      "luaH_resize",
+      "luaS_resize",
+      "sizeCclosure",
+      "sizeLclosure",
+      "luaM_growaux_",
+      "luaD_growstack",
+      "luaM_growvector",
+      "luaH_resizearray",
+      "luaK_reserveregs",
+      "luaD_reallocstack",
+      "luaM_reallocvchar",
+      "luaM_saferealloc_",
+      "luaZ_resizebuffer",
+      "luaM_reallocvector",
+      "lua_topointer",
+      "luaK_setreturns",
+      "lua_checkmemory",
+      "lua_pointer2str"
+    ]
+  },
+  "mapping": {
+    "allocator": [
+      "luaD_growstack",
+      "luaH_resize",
+      "luaS_resize",
+      "luaM_growaux_",
+      "luaM_growvector",
+      "luaH_resizearray",
+      "luaD_reallocstack",
+      "luaZ_resizebuffer"
+    ],
+    "reallocator": [
+      "luaM_realloc_",
+      "luaM_saferealloc_",
+      "luaM_reallocvchar",
+      "luaM_reallocvector",
+      "luaL_alloc",
+      "debug_realloc"
+    ]
+  },
+  "dropped_not_in_target": {
+    "allocator": [],
+    "reallocator": []
+  },
+  "rationale": {
+    "allocator": "These Lua functions grow or resize memory arrays, stacks, tables, strings, or buffers, potentially dereferencing a state/capacity pointer without a NULL check.",
+    "reallocator": "These are Lua's core memory reallocation functions and wrappers that return a new pointer or NULL."
+  },
+  "llm_seconds": 161.9
+}

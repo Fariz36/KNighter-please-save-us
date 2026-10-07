@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A borrowed reference to a garbage-collected object is obtained from a weak container, then used across a call that can trigger emergency garbage collection without first anchoring/rooting the object in a strong container. The collector can free the weakly referenced object during that call, so the later access/update is a use-after-free.
+
+Concrete roles in this patch:
+
+- `ref_get`: `fasttm`, `luaT_gettmbyobj` — obtain a metamethod/reference that may live only in a weak metatable, without making it strongly reachable.
+- `cleanup`: emergency garbage collection, triggered inside `luaH_finishset`; it can reclaim the weakly referenced table while it is still being used.
+- `container_insert`: `sethvalue2s` — the fix pushes/roots the table onto the Lua stack before the GC-triggering call; the buggy code omits this anchoring.

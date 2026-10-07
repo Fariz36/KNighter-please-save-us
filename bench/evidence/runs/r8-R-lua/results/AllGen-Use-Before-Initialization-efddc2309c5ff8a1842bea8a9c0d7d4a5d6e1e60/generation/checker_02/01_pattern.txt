@@ -1,0 +1,15 @@
+## Bug Pattern
+
+A reusable state object has some mutable fields initialized only once, in a one-time initialization routine, while a per-operation reset routine resets other mutable fields and merely asserts that the remaining field is still at its initial value. If an aborting error/non-local exit occurs while that field is temporarily changed, cleanup/restoration is skipped. On the next use of the same state object, the per-operation reset does not restore the field, so the object is left inconsistent and a runtime guard may be bypassed.
+
+In this patch, `MatchState.matchdepth` is set only in `prepstate()` (one-time init), but it changes during each match (recursive depth guard). `repreparestate()` resets `level` and asserts `matchdepth == MAXCCALLS` instead of resetting `matchdepth`. After a pattern-match error, `matchdepth` can remain corrupted (e.g. `-1`), so a later use of the same `gmatch` iterator does not correctly detect stack overflow.
+
+Roles:
+- reusable_state: `MatchState`
+- one_time_initializer: `prepstate`
+- per_operation_reset: `repreparestate`
+- mutable_depth_guard: `matchdepth`
+- depth_limit: `MAXCCALLS`
+- non_local_exit_that_skips_cleanup: `luaL_error` / Lua longjmp error handling
+- reset_assertion_instead_of_reset: `lua_assert(ms->matchdepth == MAXCCALLS)`
+- reusable_iterator: result of `string.gmatch` / `gmatch`

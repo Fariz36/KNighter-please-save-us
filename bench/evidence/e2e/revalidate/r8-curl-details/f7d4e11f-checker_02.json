@@ -1,0 +1,67 @@
+{
+  "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/fa1ee0ce287bd35a6f96/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/setopt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Curl_setblobopt"
+        ],
+        "fixed_functions": [
+          "Curl_setblobopt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/b3675fe80a33/lib/setopt.c",
+          "line": 111,
+          "column": 5,
+          "function": "unknown",
+          "bug_type": "Missing NULL check on data pointer",
+          "description": "Unchecked data pointer used without NULL check",
+          "issue_hash": "b3278698fa786d9dbcc194fd9b8a8459",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f7d4e11f4b42/0e324f36/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_b3675fe80a33_lib_setopt.c/report-b32786.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/setopt.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 51.67,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 1.24,
+      "fixed": 1.16
+    },
+    "total_seconds": 54.18
+  },
+  "report_dir": "tmp/validation/f7d4e11f4b42/0e324f36"
+}

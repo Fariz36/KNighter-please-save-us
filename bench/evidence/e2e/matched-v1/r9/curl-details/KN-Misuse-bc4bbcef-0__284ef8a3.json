@@ -1,0 +1,16 @@
+{
+  "commit_id": "284ef8a3dcec94071753fd2e2ad99a121f0031c2",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "src/tool_cfgable.c": "no compile entry",
+      "src/tool_ssls.c": "no compile entry",
+      "src/var.c": "no compile entry"
+    },
+    "fixed": {
+      "src/tool_cfgable.c": "no compile entry",
+      "src/tool_ssls.c": "no compile entry",
+      "src/var.c": "no compile entry"
+    }
+  }
+}

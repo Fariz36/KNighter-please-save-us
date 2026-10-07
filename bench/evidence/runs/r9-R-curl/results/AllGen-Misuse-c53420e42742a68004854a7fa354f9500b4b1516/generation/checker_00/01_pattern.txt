@@ -1,0 +1,11 @@
+## Bug Pattern
+
+A length-delimited buffer from a certificate/ASN.1 accessor is treated as a NUL-terminated C string. The explicit length is not used to bound subsequent string operations: `strlen` (`length_of`) scans for a terminator, and `failf`/`infof` (`error_setter`, printf-like reporting) use `%s`. If the buffer has no NUL within its length, these operations read past the end. The fix instead uses the supplied length with `memchr(..., cnlen)` and `%.*s`.
+
+Roles:
+- `length_of`: `strlen`
+- `untrusted_size`: `ASN1_STRING_length`, `ASN1_STRING_to_UTF8` returned length
+- `untrusted_data_accessor`: `ASN1_STRING_get0_data`
+- `allocator`: `ASN1_STRING_to_UTF8`
+- `deallocator`: `OPENSSL_free`
+- `error_setter`: `failf`, `infof`

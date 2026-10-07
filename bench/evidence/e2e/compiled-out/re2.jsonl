@@ -1,0 +1,4 @@
+{"commit": "ca11026a", "files": {"re2/prefilter.cc": {"functions": ["Prefilter::FromRegexp"], "compiled_out": [], "preprocessed_lines": 39403}, "re2/simplify.cc": {"functions": ["Regexp::Simplify", "Regexp::SimplifyRegexp"], "compiled_out": [], "preprocessed_lines": 37146}}, "unsolvable": false}
+{"commit": "a7d27d62", "files": {"re2/prefilter.cc": {"functions": ["Prefilter::OrStrings"], "compiled_out": [], "preprocessed_lines": 39314}}, "unsolvable": false}
+{"commit": "0f15a359", "files": {"re2/bitstate.cc": {"functions": ["BitState::Push"], "compiled_out": [], "preprocessed_lines": 41478}}, "unsolvable": false}
+{"commit": "fadc3450", "files": {"re2/dfa.cc": {"functions": ["DFA::~DFA"], "compiled_out": [], "preprocessed_lines": 49922}}, "unsolvable": false}

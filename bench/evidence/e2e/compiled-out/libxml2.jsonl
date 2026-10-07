@@ -1,0 +1,7 @@
+{"commit": "ddcb79dc", "files": {"parserInternals.c": {"functions": ["xmlCtxtSetSaxHandler"], "compiled_out": [], "preprocessed_lines": 7524}, "testparser.c": {"functions": ["testSwitchDtd", "testSwitchDtdExtSubset"], "compiled_out": [], "preprocessed_lines": 7186}}, "unsolvable": false}
+{"commit": "962bd10d", "files": {"xmlmemory.c": {"functions": ["xmlGrowArray"], "compiled_out": [], "preprocessed_lines": 5416}}, "unsolvable": false}
+{"commit": "26dfab2f", "files": {"parser.c": {"functions": ["xmlIOParseDTD"], "compiled_out": [], "preprocessed_lines": 13807}}, "unsolvable": false}
+{"commit": "79c6eef0", "files": {"xmlregexp.c": {"functions": ["xmlRegNewParserCtxt"], "compiled_out": [], "preprocessed_lines": 10416}}, "unsolvable": false}
+{"commit": "6be0acd2", "files": {"tree.c": {"functions": ["xmlAddChild"], "compiled_out": [], "preprocessed_lines": 10790}}, "unsolvable": false}
+{"commit": "a7511af0", "files": {"xmlregexp.c": {"functions": ["xmlRegNewParserCtxt"], "compiled_out": [], "preprocessed_lines": 10414}}, "unsolvable": false}
+{"commit": "c8eaf223", "files": {"parser.c": {"functions": ["xmlCtxtSetMaxAmplification", "xmlParserEntityCheck"], "compiled_out": [], "preprocessed_lines": 13830}}, "unsolvable": false}

@@ -1,0 +1,59 @@
+{
+  "commit_id": "1bc183a935799050919eecf4f5deffb6d98e7905",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/d6ea521459fb71966e2a/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/alter.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ],
+        "fixed_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/alter.c": []
+    },
+    "fixed": {
+      "src/alter.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 24.61,
+      "fixed": 25.5
+    },
+    "total_seconds": 50.25
+  },
+  "report_dir": "tmp/validation/1bc183a93579/135b1c5b"
+}

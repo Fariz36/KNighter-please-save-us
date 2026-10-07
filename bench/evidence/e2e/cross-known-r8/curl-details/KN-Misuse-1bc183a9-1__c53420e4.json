@@ -1,0 +1,55 @@
+{
+  "commit_id": "c53420e42742a68004854a7fa354f9500b4b1516",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/298659bc240eb4098320/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/vtls/openssl.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "ossl_verifyhost"
+        ],
+        "fixed_functions": [
+          "ossl_verifyhost"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/vtls/openssl.c": []
+    },
+    "fixed": {
+      "lib/vtls/openssl.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 10.2,
+      "fixed": 9.28
+    },
+    "total_seconds": 19.73
+  },
+  "report_dir": "tmp/validation/c53420e42742/87050e23"
+}

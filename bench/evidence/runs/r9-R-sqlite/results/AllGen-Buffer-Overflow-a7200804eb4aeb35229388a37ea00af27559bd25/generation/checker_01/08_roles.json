@@ -1,0 +1,25 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "reallocator": {
+      "names": [
+        "sqlite3StrAccumEnlargeIfNeeded"
+      ],
+      "description": "Ensures/grows an output buffer to have at least the requested number of bytes available; the size argument is the guaranteed capacity for subsequent writes."
+    },
+    "buffer_copy": {
+      "names": [
+        "memcpy",
+        "memmove",
+        "memset",
+        "sqlite3_str_append",
+        "sqlite3_str_appendchar",
+        "sqlite3_str_appendall"
+      ],
+      "description": "Writes/copies a bounded number of bytes into a destination buffer or append-style output object; the length argument bounds the write."
+    }
+  }
+}

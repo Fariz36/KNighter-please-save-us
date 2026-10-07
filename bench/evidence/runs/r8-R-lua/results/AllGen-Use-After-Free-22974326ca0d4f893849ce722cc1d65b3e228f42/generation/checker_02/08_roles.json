@@ -1,0 +1,39 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "gc_managed_object": {
+      "names": [
+        "Table"
+      ],
+      "description": "object managed by a garbage collector; its lifetime is not tied to C scopes"
+    },
+    "potential_gc_trigger": {
+      "names": [
+        "luaH_finishset"
+      ],
+      "description": "operation that may trigger an emergency garbage collection, reclaiming unreachable objects"
+    },
+    "gc_root_anchor": {
+      "names": [
+        "sethvalue2s"
+      ],
+      "description": "operation that makes a GC-managed object visible to the collector as a root, protecting it from collection"
+    },
+    "weak_reference_container": {
+      "names": [
+        "__mode"
+      ],
+      "description": "field or container that holds weak references, not keeping objects alive"
+    },
+    "use_after_free_use": {
+      "names": [
+        "invalidateTMcache",
+        "luaC_barrierback"
+      ],
+      "description": "operation that uses a pointer to a GC-managed object after a potential collection could have freed it"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+## Bug Pattern
+
+The result of a `duplicator` call that may return NULL is consumed by a `length_of` call before the NULL check. If duplication/allocation fails, the null pointer is dereferenced.
+
+Roles in this patch:
+
+- `duplicator` / `null_on_failure`: `xmlStrdup`
+- `length_of`: `strlen`
+- `deallocator`: `xmlFree`
+
+Concretely, `xmlStrdup` can return NULL on allocation failure, but its result is passed to `strlen` before checking for NULL. The fix moves the `strlen` call after the NULL check.

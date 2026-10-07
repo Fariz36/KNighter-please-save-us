@@ -1,0 +1,11 @@
+## Bug Pattern
+
+A narrow signed integer type (`int`) is used for loop counters/accumulators (`i`, `j`) whose values can grow to the same magnitude as a wide output-size bound (`i64 nOut`). Arithmetic in the guard `assert( j+nStr-i+1<=nOut )` is therefore evaluated using the narrow type, so the left-hand side can overflow before it is compared to `nOut`. The counters must use the wide type (`i64`) so the arithmetic and the assertion have matching width.
+
+Roles:
+- `narrow_loop_counter_or_accumulator`: `i`, `j` (pre-fix `int`)
+- `wide_size_bound`: `nOut` (`i64`)
+- `narrow_size_operand`: `nStr` (`int`)
+- `aborting_assert`: `assert( j+nStr-i+1<=nOut )`, `assert( j<=nOut )`
+- `output_allocator`: `contextMalloc`
+- `output_reallocator`: `sqlite3Realloc`

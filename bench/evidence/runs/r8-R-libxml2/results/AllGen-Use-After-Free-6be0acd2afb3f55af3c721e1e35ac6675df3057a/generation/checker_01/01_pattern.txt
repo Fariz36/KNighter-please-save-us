@@ -1,0 +1,14 @@
+## Bug Pattern
+
+The bug pattern is **missing detach-before-destroy**: a `deallocator` is called on a `linked_node` that is still attached to a `container`/tree via its `parent`/`prev`/`next` links, without first calling the `unlinker`. The old tree then contains dangling pointers to freed memory, which can later cause use-after-free or double-free.
+
+Roles in this patch:
+
+- `deallocator`: `xmlFreeNode`
+- `unlinker` / `detacher`: `xmlUnlinkNodeInternal`
+- `linked_node`: `xmlNode`, using link fields such as `parent`, `children`, `last`, `prev`, `next`
+- `container`: the old parent/tree from which the node must be removed
+- `content_consumer`: `xmlTextAddContent`
+- `adder`: `xmlAddChild`
+
+The fix adds `xmlUnlinkNodeInternal(cur)` before `xmlFreeNode(cur)`, ensuring the node is no longer reachable through the old tree before it is freed.

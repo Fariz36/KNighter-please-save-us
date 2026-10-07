@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The code consumes a token returned by a `parser_input` without checking that its token type is valid, then passes the token text to a `dequoter` that assumes syntactically well-formed quoted input. Malformed/corrupt input can produce an illegal token (e.g. an unterminated quote), causing the `dequoter` to hit an `aborting_assert`. The fix validates the token type first and skips dequoting for illegal tokens.
+
+Roles:
+- `parser_input`: `getConstraintToken`, `sqlite3GetToken` — return a token length and token type from the input stream.
+- `dequoter`: `sqlite3Dequote` — removes quote delimiters in place and assumes balanced/valid quoting.
+- `aborting_assert`: `assert` — used inside `sqlite3Dequote` and can fail on malformed quoted text.

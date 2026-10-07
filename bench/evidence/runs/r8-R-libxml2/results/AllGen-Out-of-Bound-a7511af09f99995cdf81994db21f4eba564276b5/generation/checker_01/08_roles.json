@@ -1,0 +1,32 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "cursor": {
+      "names": [
+        "cur"
+      ],
+      "description": "pointer field in parser context that points into the input buffer and is advanced during parsing"
+    },
+    "length_of": {
+      "names": [
+        "len"
+      ],
+      "description": "field storing the length of the input buffer for bounds checking"
+    },
+    "input_buffer": {
+      "names": [
+        "string"
+      ],
+      "description": "NUL-terminated input string being parsed"
+    },
+    "lookahead_accessor": {
+      "names": [
+        "NXT"
+      ],
+      "description": "macro that performs an indexed lookahead read from the cursor into the input buffer"
+    }
+  }
+}

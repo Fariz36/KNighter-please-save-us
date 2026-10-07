@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A function dereferences a caller-supplied pointer parameter before checking it for NULL. Here the capacity/state pointer is read via `*capacity` before the new guard, so passing NULL causes a NULL-pointer dereference. The fix adds the NULL check before the first dereference.
+
+Roles:
+- allocator/grower: `xmlGrowArray`
+- reallocator: `xmlRealloc`

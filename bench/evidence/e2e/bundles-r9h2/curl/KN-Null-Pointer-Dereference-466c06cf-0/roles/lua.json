@@ -1,0 +1,18 @@
+{
+  "duplicator": [
+    "luaS_new",
+    "luaS_newlstr"
+  ],
+  "allocator": [
+    "luaM_malloc_",
+    "luaM_realloc_",
+    "luaM_new",
+    "luaM_newvector",
+    "luaM_newobject",
+    "luaL_alloc",
+    "luaH_new",
+    "luaS_new",
+    "luaS_newlstr",
+    "debug_realloc"
+  ]
+}

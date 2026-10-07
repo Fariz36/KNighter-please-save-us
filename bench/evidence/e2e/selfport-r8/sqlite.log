@@ -1,0 +1,44 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 14:49:54.704 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (sqlite), Repository Path: /home/faris/RA-MrYudis/Knight/targets/sqlite; plugin_build=standalone; validation_scoring=strict
+2026-10-07 14:49:55.342 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-bbfd17b46f8b4898)
+2026-10-07 14:49:55.353 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 0d979c217fd5
+2026-10-07 14:49:56.125 | INFO     | role_porting:port_roles:174 - sqlite: 2071 candidate API names from headers, 48045 identifiers in sources
+2026-10-07 14:49:56.208 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:50:52.459 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 56.3s
+2026-10-07 14:50:52.460 | INFO     | role_porting:port_roles:226 - Ported KN-Buffer-Overflow-a7200804-1 roles to sqlite: {'buffer_grow': ['sqlite3StrAccumEnlargeIfNeeded'], 'required_capacity': ['szBufNeeded'], 'write_pointer': ['bufpt'], 'digit_set': ['aDigits'], 'output_buffer': ['zOut']}
+2026-10-07 14:50:52.465 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-07 14:50:55.067 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '0d979c217fd5a3afc675eb763d468c0cf4d3fec4', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/6dde839323642fec9c86/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 2.6, 'jobs': 32}
+2026-10-07 14:50:55.068 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-07 14:50:57.759 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '0d979c217fd5a3afc675eb763d468c0cf4d3fec4', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/6dde839323642fec9c86/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 2.69, 'jobs': 32}
+{"bundle": "KN-Buffer-Overflow-a7200804-1", "reports_original": 1, "reports_ported": 1, "preserved": true}
+2026-10-07 14:50:57.772 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 4cc2dbd54dba
+2026-10-07 14:50:58.728 | INFO     | role_porting:port_roles:174 - sqlite: 2072 candidate API names from headers, 48158 identifiers in sources
+2026-10-07 14:50:58.932 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:52:23.450 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 84.5s
+2026-10-07 14:52:23.452 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-720d3afa-0 roles to sqlite: {'payload_length': ['nPayload', 'sqlite3BtreePayloadSize'], 'local_payload_length': ['nLocal', 'sqlite3BtreePayloadFetch'], 'overflow_chunk_size': ['ovflSize'], 'overflow_page_cache': ['aOverflow'], 'reallocator': ['sqlite3Realloc', 'sqlite3_realloc', 'sqlite3_realloc64', 'sqlite3DbRealloc', 'sqlite3WhereRealloc', 'sqlite3DbReallocOrFree'], 'allocated_size_query': ['sqlite3MallocSize', 'sqlite3DbMallocSize', 'sqlite3_msize'], 'zero_initializer': ['memset'], 'cache_index': ['iIdx'], 'too_narrow_arithmetic_type': ['int', 'u32']}
+2026-10-07 14:52:23.455 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-07 14:53:03.542 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '4cc2dbd54dba0271d3762ca124ab7f1edeb8d7dd', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/d77e494db6ccfb6a1054/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 40.08, 'jobs': 32}
+2026-10-07 14:53:03.542 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-07 14:53:38.827 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '4cc2dbd54dba0271d3762ca124ab7f1edeb8d7dd', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/d77e494db6ccfb6a1054/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 35.28, 'jobs': 32}
+{"bundle": "KN-Integer-Overflow-720d3afa-0", "reports_original": 1, "reports_ported": 1, "preserved": true}
+2026-10-07 14:53:38.841 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision b1541d2f1713
+2026-10-07 14:53:39.505 | INFO     | role_porting:port_roles:174 - sqlite: 2074 candidate API names from headers, 48161 identifiers in sources
+2026-10-07 14:53:39.624 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:54:22.047 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 42.4s
+2026-10-07 14:54:22.052 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-d87f8c49-0 roles to sqlite: {'length_of': [], 'character_count_bound': ['precision'], 'iterator_advance': ['SQLITE_SKIP_UTF8'], 'output_length': ['length'], 'narrowing_cast': [], 'safe_cap': ['MIN'], 'buffer_append': ['sqlite3_str_append']}
+2026-10-07 14:54:22.055 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit f4969ccaf6279f81c085
+2026-10-07 14:54:23.598 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'b1541d2f171389ade13900bed6654f6998fdde13', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/f4969ccaf6279f81c085/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 1.54, 'jobs': 32}
+2026-10-07 14:54:23.599 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit f4969ccaf6279f81c085
+2026-10-07 14:54:25.190 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'b1541d2f171389ade13900bed6654f6998fdde13', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/f4969ccaf6279f81c085/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 1.59, 'jobs': 32}
+{"bundle": "KN-Integer-Overflow-d87f8c49-0", "reports_original": 1, "reports_ported": 1, "preserved": true}
+2026-10-07 14:54:25.206 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 79837b6ee5d4
+2026-10-07 14:54:25.918 | INFO     | role_porting:port_roles:174 - sqlite: 2053 candidate API names from headers, 46245 identifiers in sources
+2026-10-07 14:54:25.991 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:55:13.359 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 47.4s
+2026-10-07 14:55:13.360 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-1bc183a9-1 roles to sqlite: {'tokenizer': ['getConstraintToken', 'sqlite3GetToken'], 'dequote_helper': ['quotedCompare'], 'illegal_token_sentinel': ['TK_ILLEGAL'], 'dequoter_with_precondition': ['sqlite3Dequote'], 'caller_ignoring_sentinel': ['findConstraintFunc', 'dropConstraintFunc']}
+2026-10-07 14:55:13.363 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 298659bc240eb4098320
+2026-10-07 14:55:24.390 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '79837b6ee5d4ecf6020758783b6fc552d02230cc', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/298659bc240eb4098320/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 2, 'seconds': 11.02, 'jobs': 32}
+2026-10-07 14:55:24.391 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 298659bc240eb4098320
+2026-10-07 14:55:35.491 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '79837b6ee5d4ecf6020758783b6fc552d02230cc', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/298659bc240eb4098320/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 2, 'seconds': 11.1, 'jobs': 32}
+{"bundle": "KN-Misuse-1bc183a9-1", "reports_original": 2, "reports_ported": 2, "preserved": true}

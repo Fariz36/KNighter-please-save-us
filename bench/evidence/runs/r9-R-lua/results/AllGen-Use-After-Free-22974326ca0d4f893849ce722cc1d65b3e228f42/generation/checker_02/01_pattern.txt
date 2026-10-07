@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A pointer to a garbage-collected object is used across a call that may trigger an emergency garbage collection, but the object is not first protected by a GC root/reference acquisition. If the object is reachable only through a weak container/metatable field, the collector can free it during the call; the stale pointer is then used, causing a use-after-free. The fix is to temporarily root the object before the GC-triggering call and unroot it afterwards.
+
+Roles:
+- `ref_get` (root/acquire keep-alive reference): `sethvalue2s` plus stack-top increment, added before `luaH_finishset`.
+- `ref_put` (release root): stack-top decrement after `luaH_finishset`.
+- `gc_trigger` (new role; no standard role covers a call that may run emergency GC): `luaH_finishset`.
+- `deallocator` (automatic collector): the emergency garbage collection that can free unrooted objects during `luaH_finishset`.

@@ -1,0 +1,35 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "luaL_newmetatable",
+        "luaL_newlibtable"
+      ],
+      "description": "creates a new object or memory region; may or may not publish it into a container"
+    },
+    "container_insert": {
+      "names": [
+        "luaL_newmetatable",
+        "lua_setfield"
+      ],
+      "description": "stores an object into a container or registry, making it visible to later lookups"
+    },
+    "lookup": {
+      "names": [
+        "luaL_newmetatable",
+        "luaL_getmetatable"
+      ],
+      "description": "checks whether a key already exists in a container or registry, usually without modifying it"
+    },
+    "init": {
+      "names": [
+        "luaL_setfuncs"
+      ],
+      "description": "initializes an object's contents and may fail or raise an error"
+    }
+  }
+}

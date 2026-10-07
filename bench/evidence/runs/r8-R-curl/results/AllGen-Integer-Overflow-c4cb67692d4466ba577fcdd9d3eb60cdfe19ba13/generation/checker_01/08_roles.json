@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "length_holder": {
+      "names": [
+        "len"
+      ],
+      "description": "variable holding a length used in a bounds check"
+    },
+    "offset_holder": {
+      "names": [
+        "off"
+      ],
+      "description": "variable holding an offset used in a bounds check"
+    },
+    "buffer_access": {
+      "names": [
+        "Curl_client_write"
+      ],
+      "description": "function/macro that accesses a buffer using a length and offset"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "duplicator": [
+    "lua_newthread"
+  ],
+  "source_handle": [
+    "L"
+  ],
+  "destination_allocator": [
+    "luaM_newobject",
+    "luaM_malloc_"
+  ],
+  "field_copier": []
+}

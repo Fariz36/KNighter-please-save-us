@@ -1,0 +1,86 @@
+{
+  "commit_id": "ddcb79dc9934fd8a26263f6368c4eb7aa43f6d49",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/ea1aceb65cf44dbfaef5/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 2,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "parserInternals.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlCtxtSetSaxHandler"
+        ],
+        "fixed_functions": [
+          "xmlCtxtSetSaxHandler"
+        ]
+      },
+      {
+        "path": "testparser.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "testSwitchDtd",
+          "testSwitchDtdExtSubset"
+        ],
+        "fixed_functions": [
+          "testSwitchDtd",
+          "testSwitchDtdExtSubset"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "parserInternals.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/c8eaf2236ff1-f6d22c8ac6c7/../../src/c8eaf2236ff1/parserInternals.c",
+          "line": 3202,
+          "column": 15,
+          "function": "xmlCtxtSetSaxHandler",
+          "bug_type": "Memory Leak",
+          "description": "Potential leak: overwriting owned pointer field with new allocation without freeing previous value",
+          "issue_hash": "b26a9a08fd042d1ddba3971cf222bc1c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ddcb79dc9934/016813a7/buggy/.._.._src_c8eaf2236ff1_parserInternals.c/report-b26a9a.html",
+          "relpath": "parserInternals.c"
+        }
+      ],
+      "testparser.c": []
+    },
+    "fixed": {
+      "parserInternals.c": [],
+      "testparser.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 12.4,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 20.23,
+      "fixed": 19.56
+    },
+    "total_seconds": 52.47
+  },
+  "report_dir": "tmp/validation/ddcb79dc9934/016813a7"
+}

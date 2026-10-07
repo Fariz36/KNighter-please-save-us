@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The size check uses narrow integer types (`unsigned short`) for the length and offset variables. When these variables are combined in an addition to calculate the total required size, the arithmetic can overflow the narrow type, making the bounds check ineffective and allowing an out-of-bounds access. The fix promotes the length and offset variables to `size_t` so the size calculation is performed in a wide enough type.
+
+Roles:
+- `length_var`: `len`
+- `offset_var`: `off`
+- `size_check`: `off + sizeof(unsigned int) + len > smbc->got`

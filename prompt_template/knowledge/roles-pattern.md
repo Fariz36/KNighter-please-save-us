@@ -1,7 +1,7 @@
 # Project Roles (mandatory)
 
 The checker will be reused on other C/C++ projects, so describe the bug pattern in terms of the
-**roles** that project-specific functions, macros, types or fields play, not their names. 
+**roles** that project-specific functions and macros play, not their names.
 
 Use roles from this standard vocabulary whenever one fits (they map well to other projects):
 `allocator`, `deallocator`, `reallocator`, `duplicator` (returns a new copy, e.g. strdup-like),
@@ -12,7 +12,12 @@ Use roles from this standard vocabulary whenever one fits (they map well to othe
 A role is an **API category that most C/C++ projects have**, not a description of this patch: name and
 describe what *any* function in that category does (e.g. "frees memory or an object; the pointer must
 not be used afterwards"), never which object, struct or call site it is in this project. Use at most 6
-roles. Only invent a new role when no category fits, and then keep it equally generic.
+roles.
+**Roles bind functions and macros only** (the calls a project makes). Never put local variables,
+parameters, struct fields, types, constants, string keys or literal values into a role: those exist
+only at this bug site and have no counterpart in another project. Recognise them structurally instead
+(e.g. "the size argument of a `buffer_copy` call", "an integer of width < 64 bits", "the value returned
+by an `allocator`"). Only invent a new role when no category fits, and then keep it equally generic.
 
 In your answer, first state the pattern with roles (e.g. "the result of an `allocator` call is
 dereferenced before a NULL check"), then list each role with the concrete names it has in this patch,

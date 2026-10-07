@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A setter/duplicator stores a new `allocator` result into an owned reference, overwriting the previously owned value without first releasing it through a `deallocator`/`cleanup`. The old allocation becomes unreachable and leaks; later cleanup frees only the newest value. The fix updates the existing owned object in place instead of allocating a replacement.
+
+Roles:
+- `allocator`: `xmlMalloc`
+- `buffer_copy`: `memcpy`
+- `cleanup`: `xmlFreeParserCtxt` (frees the parser context and its owned SAX handler)

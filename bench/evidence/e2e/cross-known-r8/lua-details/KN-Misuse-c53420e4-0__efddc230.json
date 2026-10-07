@@ -1,0 +1,147 @@
+{
+  "commit_id": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/57dafa24b88f0f2597b8/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lstrlib.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 4,
+        "fixed_total": 4,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "prepstate",
+          "reprepstate"
+        ],
+        "fixed_functions": [
+          "prepstate",
+          "reprepstate"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lstrlib.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/f1bb2773bba8/lstrlib.c",
+          "line": 1700,
+          "column": 9,
+          "function": "str_pack",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "53f1cf1de25c4000752ea44c77bfa508",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/efddc2309c5f/b29c23e8/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_f1bb2773bba8_lstrlib.c/report-53f1cf.html",
+          "relpath": "lstrlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/f1bb2773bba8/lstrlib.c",
+          "line": 1830,
+          "column": 22,
+          "function": "str_unpack",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "73b11c1f80ae2a06cc9b9538abb9c224",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/efddc2309c5f/b29c23e8/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_f1bb2773bba8_lstrlib.c/report-73b11c.html",
+          "relpath": "lstrlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/f1bb2773bba8/lstrlib.c",
+          "line": 754,
+          "column": 13,
+          "function": "nospecials",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "b5594291e1f80361b99720cf1c00f3c3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/efddc2309c5f/b29c23e8/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_f1bb2773bba8_lstrlib.c/report-b55942.html",
+          "relpath": "lstrlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/f1bb2773bba8/lstrlib.c",
+          "line": 1359,
+          "column": 13,
+          "function": "str_format",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "c1a43632c36f47d3a1f9202743c48c6e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/efddc2309c5f/b29c23e8/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_f1bb2773bba8_lstrlib.c/report-c1a436.html",
+          "relpath": "lstrlib.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lstrlib.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/efddc2309c5f/lstrlib.c",
+          "line": 1706,
+          "column": 9,
+          "function": "str_pack",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "53f1cf1de25c4000752ea44c77bfa508",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/efddc2309c5f/b29c23e8/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_efddc2309c5f_lstrlib.c/report-53f1cf.html",
+          "relpath": "lstrlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/efddc2309c5f/lstrlib.c",
+          "line": 1836,
+          "column": 22,
+          "function": "str_unpack",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "73b11c1f80ae2a06cc9b9538abb9c224",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/efddc2309c5f/b29c23e8/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_efddc2309c5f_lstrlib.c/report-73b11c.html",
+          "relpath": "lstrlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/efddc2309c5f/lstrlib.c",
+          "line": 754,
+          "column": 13,
+          "function": "nospecials",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "b5594291e1f80361b99720cf1c00f3c3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/efddc2309c5f/b29c23e8/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_efddc2309c5f_lstrlib.c/report-b55942.html",
+          "relpath": "lstrlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/efddc2309c5f/lstrlib.c",
+          "line": 1365,
+          "column": 13,
+          "function": "str_format",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "c1a43632c36f47d3a1f9202743c48c6e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/efddc2309c5f/b29c23e8/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_efddc2309c5f_lstrlib.c/report-c1a436.html",
+          "relpath": "lstrlib.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 18.32,
+      "fixed": 17.26
+    },
+    "total_seconds": 35.69
+  },
+  "report_dir": "tmp/validation/efddc2309c5f/b29c23e8"
+}

@@ -1,0 +1,73 @@
+id: KN-Integer-Overflow-d87f8c49-0
+bug_type: Integer-Overflow
+source:
+  project: sqlite
+  description: SQLite, an embedded SQL database engine written in C
+  commit: d87f8c4965497148a2cb0cc696ce557d5961cf87
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  The code computes an unbounded byte length via pointer subtraction after advancing through an input
+  string by up to `precision` logical characters, then narrows that length to a signed `int` without checking
+  whether it exceeds `INT_MAX`. For oversized strings using the `%!.*s` conversion, UTF-8 expansion can
+  make the byte length larger than `INT_MAX`; the cast truncates/wraps, producing an invalid `output_length`
+  that is later used as a copy/append length. The fix clamps the measured length to `0x7ffffff0` before
+  the cast.
+
+
+  Roles:
+
+  - `length_of`: `z - (unsigned char*)bufpt` after the `SQLITE_SKIP_UTF8` scan
+
+  - `character_count_bound`: `precision` (the `%.*s` / `%!.*s` precision)
+
+  - `iterator_advance`: `SQLITE_SKIP_UTF8`
+
+  - `output_length`: `length`
+
+  - `narrowing_cast`: `(int)` applied to the pointer difference
+
+  - `safe_cap`: `MIN(..., 0x7ffffff0)` introduced by the fix
+
+  - `buffer_append`: `sqlite3_str_append(pAccum, bufpt, length)` consuming the possibly-overflowed length'
+roles:
+  length_of:
+    names: []
+    description: pointer difference measuring the byte length after a UTF-8 character scan
+  character_count_bound:
+    names:
+    - precision
+    description: integer precision bound controlling the number of logical characters scanned
+  iterator_advance:
+    names:
+    - SQLITE_SKIP_UTF8
+    description: macro/function that advances a byte pointer past one UTF-8 character; may advance 1-4
+      bytes
+  output_length:
+    names:
+    - length
+    description: signed int variable that receives the measured byte length for later append/copy
+  narrowing_cast:
+    names: []
+    description: C integer cast that narrows the pointer difference to signed int
+  safe_cap:
+    names:
+    - MIN
+    description: macro/function that clamps a value to a safe maximum before narrowing
+  buffer_append:
+    names:
+    - sqlite3_str_append
+    description: function that appends a bounded byte buffer to an output accumulator using a signed int
+      length
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: 3c44401b20c9b0cfdf2951dd290b1bc9192d6362
+exported: 2026-10-01T20:46:41+0700

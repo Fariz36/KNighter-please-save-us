@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "kvvfsDecode"
+      ],
+      "description": "function that decodes or parses externally supplied bytes; its pointer parameters are untrusted input sources"
+    },
+    "bounded_copy": {
+      "names": [
+        "memset"
+      ],
+      "description": "function that writes a specified number of bytes into a destination buffer; the size argument must be bounded"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+## Bug Pattern
+
+The bug pattern is that a `length_holder` and an `offset_holder` used in a `bounds_check` are declared with a narrow integer type (`unsigned short`) instead of `size_t`, so the arithmetic in the `bounds_check` can overflow and the check can be bypassed, leading to an out-of-bounds `buffer_access`.
+
+Roles:
+- `length_holder`: `len` (changed from `unsigned short` to `size_t`)
+- `offset_holder`: `off` (changed from `unsigned short` to `size_t`)
+- `bounds_check`: `off + sizeof(unsigned int) + len > smbc->got`
+- `buffer_access`: `Curl_client_write` with `(char *)msg + off + sizeof(unsigned int)` and `len`

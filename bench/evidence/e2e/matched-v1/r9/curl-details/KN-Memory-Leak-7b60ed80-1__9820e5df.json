@@ -1,0 +1,12 @@
+{
+  "commit_id": "9820e5dface5739accda14e656d89a7f84642c61",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "src/tool_operate.c": "no compile entry"
+    },
+    "fixed": {
+      "src/tool_operate.c": "no compile entry"
+    }
+  }
+}

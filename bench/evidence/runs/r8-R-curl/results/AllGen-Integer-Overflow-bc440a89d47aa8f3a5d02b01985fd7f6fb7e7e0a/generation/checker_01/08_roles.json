@@ -1,0 +1,32 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "encoded_size_calculator": {
+      "names": [
+        "encoder_base64_size"
+      ],
+      "description": "function that computes an encoded output size from an input length; it must guard against signed integer overflow before doing arithmetic"
+    },
+    "input_length": {
+      "names": [
+        "datasize"
+      ],
+      "description": "field or variable holding the length of input data to be encoded, whose value may be arbitrarily large"
+    },
+    "max_input_size": {
+      "names": [
+        "BASE64_MAX_INPUT_SIZE"
+      ],
+      "description": "macro or constant defining the maximum input length that can safely participate in encoded-size arithmetic without overflow"
+    },
+    "error_sentinel": {
+      "names": [
+        "-1"
+      ],
+      "description": "sentinel return value used by a size calculator to signal an error or overflow condition"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A pointer argument is dereferenced before a NULL check while computing the input to a `size_calculator`; the computed size is then passed to a `reallocator`. In this patch, the dereference is `*capacity`, so passing a NULL pointer causes a NULL pointer dereference instead of returning a failure value.
+
+Roles:
+- `size_calculator`: `xmlGrowCapacity`
+- `reallocator`: `xmlRealloc`

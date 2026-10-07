@@ -1,0 +1,38 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "setter": {
+      "names": [
+        "xmlCtxtSetSaxHandler"
+      ],
+      "description": "function that sets a field on a context object"
+    },
+    "allocator": {
+      "names": [
+        "xmlMalloc"
+      ],
+      "description": "memory allocation function returning a pointer to newly allocated memory"
+    },
+    "owned_pointer_field": {
+      "names": [
+        "sax"
+      ],
+      "description": "struct field that owns a heap allocation and must be freed before being overwritten"
+    },
+    "deallocator": {
+      "names": [
+        "xmlFree"
+      ],
+      "description": "memory deallocation function"
+    },
+    "copier": {
+      "names": [
+        "memcpy"
+      ],
+      "description": "function that copies data into an existing allocation"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "allocator": [
+    "luaM_new",
+    "luaM_newobject",
+    "luaM_malloc_",
+    "luaM_realloc_",
+    "luaH_new",
+    "luaS_new",
+    "allocsizenode",
+    "luaL_alloc",
+    "debug_realloc"
+  ],
+  "duplicator": [],
+  "null_on_failure": [
+    "luaL_alloc",
+    "debug_realloc",
+    "lua_newstate",
+    "luaL_newstate"
+  ],
+  "container_insert": [
+    "luaH_set",
+    "luaH_setint"
+  ],
+  "deallocator": [
+    "luaM_free",
+    "luaM_free_",
+    "luaM_freemem",
+    "luaM_freearray",
+    "luaH_free",
+    "luaF_freeproto",
+    "luaE_freethread",
+    "luaZ_freebuffer",
+    "luaC_freeallobjects",
+    "lua_close",
+    "luaL_alloc"
+  ]
+}

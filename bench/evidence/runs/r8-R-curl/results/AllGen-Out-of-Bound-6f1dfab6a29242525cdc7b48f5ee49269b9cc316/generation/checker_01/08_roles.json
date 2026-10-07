@@ -1,0 +1,14 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "string_search": {
+      "names": [
+        "strchr"
+      ],
+      "description": "C string search function that returns a pointer to the first occurrence of a delimiter, or NULL if not found"
+    }
+  }
+}

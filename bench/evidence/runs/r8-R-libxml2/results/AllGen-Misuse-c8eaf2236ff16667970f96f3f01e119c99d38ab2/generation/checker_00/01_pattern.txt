@@ -1,0 +1,12 @@
+## Bug Pattern
+
+A `config_setter` stores an unchecked numeric parameter into a `divisor_field` that is later used as the denominator of a division. Because neither the setter enforces the non-zero invariant nor the `division_site` guards against a zero denominator, setting the parameter to `0` causes division by zero and a SIGFPE.
+
+### Roles
+
+- `config_setter`: `xmlCtxtSetMaxAmplification`
+- `divisor_field`: `ctxt->maxAmpl` / `maxAmpl`
+- `division_site`: `*expandedSize / ctxt->maxAmpl` in `xmlParserEntityCheck`
+- `zero_guard` (missing in buggy code, added by fix): `ctxt->maxAmpl > 0` before division, and `if (maxAmpl == 0) return;` in the setter
+
+So the specific pattern is: **a setter accepts zero for a field that downstream code assumes is a non-zero divisor, and the division site does not check the divisor before dividing.**

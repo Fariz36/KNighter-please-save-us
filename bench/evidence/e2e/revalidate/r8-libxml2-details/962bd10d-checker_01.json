@@ -1,0 +1,78 @@
+{
+  "commit_id": "962bd10d01151d29190567e2d15ccf641be55063",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/0c078da0e78f66b645b9/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlmemory.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlGrowArray"
+        ],
+        "fixed_functions": [
+          "xmlGrowArray"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlmemory.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/d28f35a26ed6-f6d22c8ac6c7/../../src/d28f35a26ed6/xmlmemory.c",
+          "line": 378,
+          "column": 15,
+          "function": "xmlGrowArray",
+          "bug_type": "Null pointer dereference",
+          "description": "in/out capacity pointer dereferenced without null check",
+          "issue_hash": "9275543a5b3a8bddc37f8b94e780b191",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/962bd10d0115/8d4a7197/buggy/.._.._src_d28f35a26ed6_xmlmemory.c/report-927554.html",
+          "relpath": "xmlmemory.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/d28f35a26ed6-f6d22c8ac6c7/../../src/d28f35a26ed6/xmlmemory.c",
+          "line": 370,
+          "column": 31,
+          "function": "xmlGrowArray",
+          "bug_type": "Null pointer dereference",
+          "description": "in/out capacity pointer dereferenced without null check",
+          "issue_hash": "b812a9f624c7ec4a87b741409ba4691c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/962bd10d0115/8d4a7197/buggy/.._.._src_d28f35a26ed6_xmlmemory.c/report-b812a9.html",
+          "relpath": "xmlmemory.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlmemory.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 10.73,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 0.1,
+      "fixed": 0.11
+    },
+    "total_seconds": 10.99
+  },
+  "report_dir": "tmp/validation/962bd10d0115/8d4a7197"
+}

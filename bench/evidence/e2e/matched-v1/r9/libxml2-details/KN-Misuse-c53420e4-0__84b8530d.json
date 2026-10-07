@@ -1,0 +1,57 @@
+{
+  "commit_id": "84b8530d852e51e7ccab1e2b4aef698f611486fb",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/64aba4da6972615f614e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlIO.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlOutputBufferGetContent",
+          "xmlOutputBufferGetSize"
+        ],
+        "fixed_functions": [
+          "xmlOutputBufferGetContent",
+          "xmlOutputBufferGetSize"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlIO.c": []
+    },
+    "fixed": {
+      "xmlIO.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 6.44,
+    "analysis_seconds": {
+      "buggy": 10.65,
+      "fixed": 12.09
+    },
+    "total_seconds": 29.37
+  },
+  "report_dir": "tmp/validation/84b8530d852e/141d6491"
+}

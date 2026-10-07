@@ -1,0 +1,12 @@
+{
+  "commit_id": "112122c2f914ead94d3ac4dab46d194695fbea24",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/qrf/qrf.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/qrf/qrf.c": "no compile entry"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "commit_id": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+  "commit_type": "Memory-Leak",
+  "total_checkers": 2,
+  "successful_checkers": 1,
+  "perfect_checkers": 1,
+  "best_tp": 1,
+  "best_tn": 1,
+  "total_time": 1200.773021,
+  "errors": [],
+  "success_rate": 0.5,
+  "timestamp": "2026-10-07T17:13:56.068710"
+}

@@ -14,8 +14,12 @@
 // instead of crashing.
 #pragma once
 
+#include "clang/AST/ASTContext.h"
 #include "clang/AST/Decl.h"
+#include "clang/AST/Expr.h"
+#include "clang/Lex/Lexer.h"
 #include "clang/StaticAnalyzer/Core/PathSensitive/CallEvent.h"
+#include "clang/StaticAnalyzer/Core/PathSensitive/ProgramState.h"
 #include "llvm/ADT/StringMap.h"
 #include "llvm/ADT/StringRef.h"
 #include "llvm/Support/JSON.h"
@@ -85,18 +89,65 @@ inline bool isRole(llvm::StringRef Role, llvm::StringRef Name) {
   return false;
 }
 
-// Whether the callee of `Call` plays `Role`.
-inline bool callIsRole(const clang::ento::CallEvent &Call, llvm::StringRef Role) {
-  if (const clang::IdentifierInfo *II = Call.getCalleeIdentifier())
-    return isRole(Role, II->getName());
-  return false;
-}
-
 // Whether the declaration (function, field, variable) plays `Role`.
 inline bool declIsRole(const clang::NamedDecl *D, llvm::StringRef Role) {
   if (!D || !D->getIdentifier())
     return false;
   return isRole(Role, D->getName());
+}
+
+// Whether a macro the code at `Loc` was written through plays `Role`.
+// The analyzer sees preprocessed code, so a call written as `curlx_free(p)`
+// reaches the checker as `free(p)`; the macro name survives only in the
+// source location's expansion chain. Macro arguments are skipped: in
+// `CHECK(foo(x))` the call `foo(x)` was written by the user, not by CHECK.
+inline bool macroIsRole(clang::SourceLocation Loc, const clang::ASTContext &Ctx,
+                        llvm::StringRef Role) {
+  const clang::SourceManager &SM = Ctx.getSourceManager();
+  for (unsigned Depth = 0; Loc.isMacroID() && Depth < 16; ++Depth) {
+    if (SM.isMacroArgExpansion(Loc)) {
+      Loc = SM.getImmediateSpellingLoc(Loc);
+      continue;
+    }
+    if (isRole(Role, clang::Lexer::getImmediateMacroName(Loc, SM, Ctx.getLangOpts())))
+      return true;
+    Loc = SM.getImmediateMacroCallerLoc(Loc);
+  }
+  return false;
+}
+
+// Whether the call plays `Role`: its callee function, the variable or field
+// holding the function pointer it calls through (libxml2's `xmlFree` is a
+// global function pointer), or a macro it was written through.
+inline bool callExprIsRole(const clang::CallExpr *CE, llvm::StringRef Role,
+                           const clang::ASTContext &Ctx) {
+  if (!CE)
+    return false;
+  if (declIsRole(CE->getDirectCallee(), Role))
+    return true;
+  if (const clang::Expr *Callee = CE->getCallee()) {
+    Callee = Callee->IgnoreParenImpCasts();
+    if (const auto *UO = llvm::dyn_cast<clang::UnaryOperator>(Callee))
+      if (UO->getOpcode() == clang::UO_Deref)
+        Callee = UO->getSubExpr()->IgnoreParenImpCasts();
+    if (const auto *DRE = llvm::dyn_cast<clang::DeclRefExpr>(Callee))
+      if (declIsRole(DRE->getDecl(), Role))
+        return true;
+    if (const auto *ME = llvm::dyn_cast<clang::MemberExpr>(Callee))
+      if (declIsRole(ME->getMemberDecl(), Role))
+        return true;
+  }
+  return macroIsRole(CE->getBeginLoc(), Ctx, Role);
+}
+
+// Whether the callee of `Call` plays `Role` (same matching as callExprIsRole).
+inline bool callIsRole(const clang::ento::CallEvent &Call, llvm::StringRef Role) {
+  if (const clang::IdentifierInfo *II = Call.getCalleeIdentifier())
+    if (isRole(Role, II->getName()))
+      return true;
+  if (const auto *CE = llvm::dyn_cast_or_null<clang::CallExpr>(Call.getOriginExpr()))
+    return callExprIsRole(CE, Role, Call.getState()->getStateManager().getContext());
+  return false;
 }
 
 } // namespace knighter

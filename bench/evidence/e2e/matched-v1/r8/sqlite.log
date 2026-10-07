@@ -1,0 +1,221 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 18:54:51.527 | WARNING  | targets.compiledb:__init__:71 - Unknown compiledb target options ignored: ['build_marker']
+2026-10-07 18:54:51.573 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (sqlite), Repository Path: /home/faris/RA-MrYudis/Knight/targets/sqlite; plugin_build=standalone; validation_scoring=strict
+sqlite: 719 mined fix candidates
+2026-10-07 18:54:52.785 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-26627c65ac5442ea)
+2026-10-07 18:54:52.806 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 1f7010d4ec42
+2026-10-07 18:54:53.717 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 18:54:53.900 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 18:57:08.305 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 134.4s
+2026-10-07 18:57:08.309 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-bc440a89-1 roles to sqlite: {'encoded_size_calculator': [], 'input_length': ['nIn', 'sqlite3_value_bytes'], 'max_input_size': ['SQLITE_MAX_LENGTH'], 'error_sentinel': []}
+2026-10-07 18:57:08.469 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 174beff6bf7daeb38757
+2026-10-07 18:57:48.070 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision ca8593ce6839 in 36.0s
+2026-10-07 18:57:51.818 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 6c218ba0ad89 in 36.0s
+2026-10-07 18:57:51.822 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/spellfix.c at ca8593ce6839
+2026-10-07 18:57:51.825 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/spellfix.c at 6c218ba0ad89
+2026-10-07 18:57:52.083 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 174beff6bf7daeb38757
+2026-10-07 18:58:44.497 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 5a9ada593f5e in 47.0s
+2026-10-07 18:58:48.783 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision ffbfc27fab6b in 46.0s
+2026-10-07 18:58:56.123 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation ffbfc27fab6b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 18:58:56.227 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for ext/misc/base64.c, including whole file (9.6KB)
+2026-10-07 18:58:56.246 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for ext/misc/base85.c, including whole file (13.1KB)
+2026-10-07 18:58:56.311 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 174beff6bf7daeb38757
+2026-10-07 18:59:40.891 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 7aa5271c7267 in 41.6s
+2026-10-07 18:59:43.203 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 9b6bc61dbd97 in 40.5s
+2026-10-07 18:59:43.207 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/base64.c at 7aa5271c7267
+2026-10-07 18:59:43.209 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/base85.c at 7aa5271c7267
+2026-10-07 18:59:58.315 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/base64.c at 9b6bc61dbd97
+2026-10-07 18:59:58.316 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/base85.c at 9b6bc61dbd97
+2026-10-07 19:00:12.107 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 9b6bc61dbd97: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:00:12.176 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 174beff6bf7daeb38757
+2026-10-07 19:00:46.949 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 2cbc485ea3c7 in 32.0s
+2026-10-07 19:00:50.100 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 2b918dbb01d4 in 31.6s
+2026-10-07 19:00:50.233 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 2b918dbb01d4: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Integer-Overflow-bc440a89-1", "source": "curl", "target": "sqlite", "api_matched": 4, "pairs": [["6c218ba0", null, null], ["ffbfc27f", 0, 0], ["9b6bc61d", 0, 0], ["2b918dbb", 0, 0]]}
+2026-10-07 19:00:51.415 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 19:00:51.649 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:04:31.480 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 219.8s
+2026-10-07 19:04:31.486 | INFO     | role_porting:port_roles:226 - Ported KN-Memory-Leak-a0f08d69-0 roles to sqlite: {'cleanup': ['sqlite3Fts5StorageReset', 'sqlite3HashClear', 'sqlite3VtabClear', 'sqlite3ErrorClear', 'sqlite3BitvecClear', 'sqlite3PcacheClear', 'sqlite3RowSetClear', 'sqlite3SchemaClear', 'sqlite3Fts3HashClear', 'sqlite3Fts5HashClear', 'sqlite3BtreeClearCache', 'sqlite3BtreeClearTable', 'sqlite3Fts5ClearLocale', 'sqlite3PagerClearCache', 'sqlite3_clear_bindings', 'sqlite3BtreeClearCursor', 'sqlite3WhereClauseClear', 'sqlite3ClearTempRegCache', 'sqlite3FkClearTriggerCache', 'sqlite3Fts5ExprClearTokens', 'sqlite3PcacheClearWritable', 'sqlite3PcacheClearSyncFlags', 'sqlite3Fts3PendingTermsClear', 'sqlite3Fts5ExprClearPoslists', 'sqlite3VdbeMemClearAndResize', 'sqlite3BtreeClearTableOfCursor', 'sqlite3VtabEponymousTableClear'], 'destructor': ['sqlite3_free', 'sqlite3DbFree', 'sqlite3DbFreeNN', 'sqlite3PageFree', 'sqlite3ValueFree', 'sqlite3_str_free', 'sqlite3ParserFree', 'sqlite3StackFree', 'sqlite3StackFreeNN', 'sqlite3_free_table', 'sqlite3_mutex_free', 'sqlite3_value_free', 'sqlite3Fts3ExprFree', 'sqlite3Fts5ExprFree', 'sqlite3Fts5HashFree', 'sqlite3BitvecDestroy', 'sqlite3Fts5BufferFree', 'sqlite3Fts5ConfigFree', 'sqlite3Stat4ProbeFree', 'sqlite3VdbeFreeCursor', 'sqlite3_free_filename', 'sqlite3_snapshot_free', 'sqlite3Fts5TermsetFree', 'sqlite3_expert_destroy', 'sqlite3rbu_destroy_vfs', 'sqlite3Fts3MIBufferFree', 'sqlite3VdbeFreeCursorNN', 'sqlite3Fts3SegReaderFree', 'sqlite3Fts5ParseNodeFree', 'sqlite3VdbeValueListFree', 'sqlite3Fts5ParsePhraseFree', 'sqlite3Fts5ParseNearsetFree', 'sqlite3WindowListDelete'], 'state_reset': ['memset', 'sqlite3Fts5StorageReset', 'sqlite3_reset', 'sqlite3VdbeReset', 'sqlite3_str_reset', 'sqlite3Fts5IndexReset', 'sqlite3ResetOneSchema', 'sqlite3VdbeSorterReset', 'sqlite3ParseObjectReset', 'sqlite3VdbeResetStepResult', 'sqlite3_reset_auto_extension', 'sqlite3_stmt_scanstatus_reset', 'sqlite3ResetAllSchemasOfConnection'], 'link_detach': ['sqlite3WindowUnlinkFromSelect', 'sqlite3Detach', 'sqlite3SubqueryDetach', 'sqlite3UnlinkAndDeleteIndex', 'sqlite3UnlinkAndDeleteTable', 'sqlite3UnlinkAndDeleteTrigger', 'sqlite3Fts5StorageReleaseDeleteRow'], 'link_storage': ['pSel', 'pNextWin']}
+2026-10-07 19:04:31.607 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 76eb243306bf1ce18c85
+2026-10-07 19:04:31.617 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 8da97114b52c
+2026-10-07 19:04:31.622 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 1af2607177ac
+2026-10-07 19:04:31.628 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/fileio.c at 8da97114b52c
+2026-10-07 19:04:31.633 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/fileio.c at 1af2607177ac
+2026-10-07 19:04:31.847 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 76eb243306bf1ce18c85
+2026-10-07 19:04:31.860 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision a863bafba7d6
+2026-10-07 19:04:31.866 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 0aa95099f500
+2026-10-07 19:04:32.333 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 0aa95099f500: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Memory-Leak-a0f08d69-0", "source": "curl", "target": "sqlite", "api_matched": 2, "pairs": [["1af26071", null, null], ["0aa95099", 0, 0]]}
+2026-10-07 19:04:33.514 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 19:04:33.707 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:07:07.335 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 153.6s
+2026-10-07 19:07:07.337 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c53420e4-0 roles to sqlite: {'data_provider': ['sqlite3_column_blob', 'sqlite3_value_blob'], 'length_provider': ['sqlite3_column_bytes', 'sqlite3_value_bytes'], 'unbounded_string_consumer': ['strlen', 'strcmp', 'strcpy', 'strcat', 'strchr', 'strstr', 'sscanf', 'printf', 'fprintf', 'sprintf', 'snprintf', 'sqlite3StrICmp', 'sqlite3_stricmp', 'sqlite3DbStrDup', 'sqlite3SetString', 'sqlite3StrIHash', 'sqlite3_str_appendf', 'sqlite3_str_vappendf', 'sqlite3VdbeLoadString', 'sqlite3TestTextToPtr', 'sqlite3_mprintf', 'sqlite3_vmprintf', 'sqlite3_snprintf', 'sqlite3_vsnprintf', 'sqlite3_log', 'sqlite3DebugPrintf', 'sqlite3Strlen30'], 'bounded_nul_scanner': ['memchr'], 'bounded_string_formatter': []}
+2026-10-07 19:07:07.650 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+2026-10-07 19:07:48.464 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision e12c6f259020 in 37.9s
+2026-10-07 19:07:51.979 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision c59cf28db7eb in 36.2s
+2026-10-07 19:07:51.983 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/closure.c at e12c6f259020
+2026-10-07 19:07:51.985 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/closure.c at c59cf28db7eb
+2026-10-07 19:07:52.148 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+2026-10-07 19:08:38.508 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 23e50585eb1a in 43.4s
+2026-10-07 19:08:43.713 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision b1bbff20a047 in 45.3s
+2026-10-07 19:08:43.717 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/wasm/api/sqlite3-wasm.c at 23e50585eb1a
+2026-10-07 19:08:43.854 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/wasm/api/sqlite3-wasm.c at b1bbff20a047
+2026-10-07 19:08:44.117 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation b1bbff20a047: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:08:44.198 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+2026-10-07 19:09:29.562 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 23d0a08176a6 in 41.7s
+2026-10-07 19:09:32.704 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 76ad3be617e8 in 41.0s
+2026-10-07 19:09:32.707 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tool/dbtotxt.c at 23d0a08176a6
+2026-10-07 19:09:32.709 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tool/dbtotxt.c at 76ad3be617e8
+2026-10-07 19:09:32.941 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+2026-10-07 19:09:32.951 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 09079ddbc921
+2026-10-07 19:09:32.956 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 8f11a71722ca
+2026-10-07 19:10:39.354 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 8f11a71722ca: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:10:39.438 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+2026-10-07 19:11:34.484 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 22f8a84fda8e in 52.2s
+2026-10-07 19:11:39.033 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 21769e1d851d in 53.5s
+2026-10-07 19:11:39.037 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/resfmt.c at 22f8a84fda8e
+2026-10-07 19:11:39.040 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/resfmt.c at 21769e1d851d
+2026-10-07 19:11:39.149 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+2026-10-07 19:11:39.160 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 23e59b34e9d6
+2026-10-07 19:11:39.165 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 6a5e74cbf04e
+2026-10-07 19:11:39.170 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/fts5/fts5_storage.c at 23e59b34e9d6
+2026-10-07 19:11:39.175 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/fts5/fts5_storage.c at 6a5e74cbf04e
+2026-10-07 19:11:39.284 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+2026-10-07 19:11:59.855 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 346f1e0ed94b in 17.6s
+2026-10-07 19:12:03.024 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 6d05f9af8145 in 17.5s
+2026-10-07 19:12:03.028 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/fts5/fts5_tcl.c at 346f1e0ed94b
+2026-10-07 19:12:03.030 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/fts5/fts5_tcl.c at 6d05f9af8145
+2026-10-07 19:12:03.174 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+2026-10-07 19:12:45.190 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 078d71402fee in 38.5s
+2026-10-07 19:12:49.692 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 2c723787f9ed in 39.5s
+2026-10-07 19:12:50.030 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 2c723787f9ed: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Misuse-c53420e4-0", "source": "curl", "target": "sqlite", "api_matched": 40, "pairs": [["c59cf28d", null, null], ["b1bbff20", 0, 0], ["76ad3be6", null, null], ["8f11a717", 0, 0], ["21769e1d", null, null], ["6a5e74cb", null, null], ["6d05f9af", null, null], ["2c723787", 0, 0]]}
+2026-10-07 19:12:51.127 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 19:12:51.300 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:15:18.095 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 146.8s
+2026-10-07 19:15:18.099 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-466c06cf-1 roles to sqlite: {'duplicator': ['sqlite3ExprDup', 'sqlite3ExprListDup', 'sqlite3IdListDup', 'sqlite3SrcListDup', 'sqlite3SelectDup', 'sqlite3WithDup', 'sqlite3WindowDup', 'sqlite3_value_dup'], 'source_handle': ['p', 'pOrig'], 'destination_allocator': ['sqlite3DbMallocRaw', 'sqlite3DbMallocZero', 'sqlite3DbMallocRawNN', 'sqlite3Malloc', 'sqlite3MallocZero', 'sqlite3_malloc', 'sqlite3_malloc64'], 'field_copier': []}
+2026-10-07 19:15:18.293 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit fccaec1fd498bccaea26
+2026-10-07 19:15:18.305 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision f2375631927a
+2026-10-07 19:15:51.477 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision ac70487e12ad in 29.8s
+2026-10-07 19:16:13.489 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation ac70487e12ad: TP=0 TN=0 (strict); strict=0/0 legacy=1/0
+2026-10-07 19:16:13.960 | WARNING  | tools:get_function_codes:611 - Tree-sitter failed for src/sqliteInt.h, but file too large (255.6KB > 100KB), skipping
+2026-10-07 19:16:14.086 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit fccaec1fd498bccaea26
+2026-10-07 19:16:56.043 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 1eca07ed7386 in 38.8s
+2026-10-07 19:16:58.246 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 9173c2f1b6ce in 37.8s
+2026-10-07 19:17:36.864 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 9173c2f1b6ce: TP=0 TN=0 (strict); strict=0/0 legacy=0/2
+2026-10-07 19:17:36.933 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit fccaec1fd498bccaea26
+2026-10-07 19:18:13.085 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 9a5801af3a41 in 33.4s
+2026-10-07 19:18:16.709 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 09c84c70ee2e in 34.0s
+2026-10-07 19:18:16.712 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/sha1.c at 9a5801af3a41
+2026-10-07 19:18:16.714 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/sha1.c at 09c84c70ee2e
+2026-10-07 19:18:16.939 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit fccaec1fd498bccaea26
+2026-10-07 19:18:58.835 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 62d17739bc27 in 38.8s
+2026-10-07 19:19:02.626 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 03aa9a7b5007 in 38.9s
+2026-10-07 19:20:19.355 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 03aa9a7b5007: TP=0 TN=0 (strict); strict=0/0 legacy=1/0
+{"bundle": "KN-Null-Pointer-Dereference-466c06cf-1", "source": "curl", "target": "sqlite", "api_matched": 8, "pairs": [["ac70487e", 0, 0], ["9173c2f1", 0, 0], ["09c84c70", null, null], ["03aa9a7b", 0, 0]]}
+2026-10-07 19:20:20.479 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 19:20:20.581 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:23:53.948 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 213.4s
+2026-10-07 19:23:53.950 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-f2a15357-1 roles to sqlite: {'api_entry_point': ['sqlite3session_changeset', 'sqlite3session_patchset', 'sqlite3changegroup_output', 'sqlite3rebaser_rebase', 'sqlite3changeset_start', 'sqlite3changeset_op', 'sqlite3changeset_new', 'sqlite3changeset_old', 'sqlite3rebaser_create'], 'out_param': ['pnChangeset', 'ppChangeset', 'pnPatchset', 'ppPatchset', 'pnData', 'ppData', 'pnOut', 'ppOut', 'pp', 'pzTab', 'pnCol', 'pOp', 'pbIndirect', 'ppValue', 'ppNew'], 'out_param_writer': ['sessionChangegroupOutput', 'sessionChangesetStart']}
+{"bundle": "KN-Null-Pointer-Dereference-f2a15357-1", "source": "curl", "target": "sqlite", "api_matched": 0, "pairs": []}
+2026-10-07 19:23:55.260 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 19:23:55.558 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:26:30.201 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 154.6s
+2026-10-07 19:26:30.203 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-f7d4e11f-2 roles to sqlite: {'length_field': ['n', 'sqlite3_value_bytes', 'sqlite3_column_bytes', 'sqlite3_blob_bytes', 'sqlite3_str_length', 'sqlite3_msize', 'sqlite3MallocSize', 'sqlite3DbMallocSize', 'sqlite3Fts5BufferSize'], 'data_pointer': ['data', 'z', 'p', 'sqlite3_value_blob', 'sqlite3_column_blob', 'sqlite3_value_pointer', 'sqlite3_bind_pointer', 'sqlite3_result_pointer', 'sqlite3VdbeMemSetPointer', 'sqlite3Fts5BufferSet', 'fts5BufferSet', 'sqlite3Fts5BufferAppendBlob', 'fts5BufferAppendBlob'], 'buffer_copy': ['memcpy', 'memmove'], 'error_return': ['SQLITE_NOMEM', 'SQLITE_MISUSE', 'SQLITE_ERROR'], 'copy_flag': ['SQLITE_TRANSIENT', 'SQLITE_STATIC'], 'allocator': ['sqlite3Malloc', 'sqlite3MallocZero', 'sqlite3DbMallocRaw', 'sqlite3DbMallocRawNN', 'sqlite3DbMallocZero', 'sqlite3_malloc', 'sqlite3_malloc64', 'sqlite3_realloc', 'sqlite3_realloc64', 'sqlite3Realloc', 'sqlite3DbRealloc', 'sqlite3DbReallocOrFree', 'sqlite3DbStrDup'], 'deallocator': ['sqlite3_free', 'sqlite3DbFree', 'sqlite3DbFreeNN', 'sqlite3PageFree', 'sqlite3ValueFree', 'sqlite3_str_free', 'sqlite3_free_table', 'sqlite3_free_filename', 'sqlite3_snapshot_free', 'sqlite3Fts5BufferFree', 'sqlite3Fts3ExprFree', 'sqlite3Fts5ExprFree', 'sqlite3Fts5HashFree', 'sqlite3Fts5ConfigFree', 'sqlite3Fts5TermsetFree', 'sqlite3Fts3MIBufferFree', 'sqlite3Fts3SegReaderFree', 'sqlite3Fts5ParseNodeFree', 'sqlite3VdbeFreeCursor', 'sqlite3VdbeValueListFree'], 'validation_guard': []}
+2026-10-07 19:26:30.322 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit fa1ee0ce287bd35a6f96
+2026-10-07 19:26:30.341 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/sha1.c at 9a5801af3a41
+2026-10-07 19:26:30.343 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/sha1.c at 09c84c70ee2e
+2026-10-07 19:26:30.471 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit fa1ee0ce287bd35a6f96
+2026-10-07 19:27:07.693 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 603233d42edf in 33.6s
+2026-10-07 19:27:11.236 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 112122c2f914 in 33.8s
+2026-10-07 19:27:11.241 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/qrf/qrf.c at 603233d42edf
+2026-10-07 19:27:11.244 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/qrf/qrf.c at 112122c2f914
+2026-10-07 19:27:11.389 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit fa1ee0ce287bd35a6f96
+2026-10-07 19:27:52.908 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 593b55cb7825 in 37.9s
+2026-10-07 19:27:56.052 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 3a697a26de4d in 37.9s
+2026-10-07 19:28:28.471 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 3a697a26de4d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:28:28.714 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit fa1ee0ce287bd35a6f96
+2026-10-07 19:29:52.023 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 03aa9a7b5007: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:29:52.276 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit fa1ee0ce287bd35a6f96
+2026-10-07 19:30:24.970 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision a8fdc0e0c09a in 29.9s
+2026-10-07 19:30:28.127 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision cf632ddb7eb7 in 30.0s
+2026-10-07 19:30:28.130 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/session/test_session.c at a8fdc0e0c09a
+2026-10-07 19:30:28.166 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/session/test_session.c at cf632ddb7eb7
+2026-10-07 19:30:28.484 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation cf632ddb7eb7: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2", "source": "curl", "target": "sqlite", "api_matched": 21, "pairs": [["09c84c70", null, null], ["112122c2", null, null], ["3a697a26", 0, 0], ["03aa9a7b", 0, 0], ["cf632ddb", 0, 0]]}
+2026-10-07 19:30:29.729 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 19:30:30.076 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:33:20.383 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 170.3s
+2026-10-07 19:33:20.387 | INFO     | role_porting:port_roles:226 - Ported KN-Double-Free-26dfab2f-1 roles to sqlite: {'resource': [], 'ownership_consumer_frees_on_failure': ['sqlite3DbReallocOrFree'], 'deallocator': ['sqlite3_free', 'sqlite3DbFree', 'sqlite3DbFreeNN', 'sqlite3ValueFree', 'sqlite3_value_free', 'sqlite3_str_free', 'sqlite3_free_table', 'sqlite3_free_filename', 'sqlite3_snapshot_free', 'sqlite3_mutex_free', 'sqlite3ParserFree', 'sqlite3OsCloseFree', 'sqlite3PageFree', 'sqlite3FreeIndex', 'sqlite3Fts5BufferFree', 'sqlite3Fts3MIBufferFree', 'sqlite3Fts5ParseNodeFree', 'sqlite3Fts5ParsePhraseFree', 'sqlite3Fts5ParseNearsetFree', 'sqlite3Fts5ExprFree', 'sqlite3Fts5HashFree', 'sqlite3Fts5ConfigFree', 'sqlite3Fts3ExprFree', 'sqlite3Fts3SegReaderFree', 'sqlite3VdbeFreeCursor', 'sqlite3VdbeFreeCursorNN', 'sqlite3VdbeMemRelease', 'sqlite3Stat4ProbeFree', 'fts5BufferFree', 'sqlite3StackFree', 'sqlite3StackFreeNN', 'sqlite3Fts5TermsetFree'], 'null_on_failure': ['sqlite3DbReallocOrFree'], 'duplicate_cleanup': ['sqlite3_free', 'sqlite3DbFree', 'sqlite3DbFreeNN', 'sqlite3ValueFree', 'sqlite3_value_free', 'sqlite3_str_free', 'sqlite3_free_table', 'sqlite3_free_filename', 'sqlite3_snapshot_free', 'sqlite3_mutex_free', 'sqlite3ParserFree', 'sqlite3OsCloseFree', 'sqlite3PageFree', 'sqlite3FreeIndex', 'sqlite3Fts5BufferFree', 'sqlite3Fts3MIBufferFree', 'sqlite3Fts5ParseNodeFree', 'sqlite3Fts5ParsePhraseFree', 'sqlite3Fts5ParseNearsetFree', 'sqlite3Fts5ExprFree', 'sqlite3Fts5HashFree', 'sqlite3Fts5ConfigFree', 'sqlite3Fts3ExprFree', 'sqlite3Fts3SegReaderFree', 'sqlite3VdbeFreeCursor', 'sqlite3VdbeFreeCursorNN', 'sqlite3VdbeMemRelease', 'sqlite3Stat4ProbeFree', 'fts5BufferFree', 'sqlite3StackFree', 'sqlite3StackFreeNN', 'sqlite3Fts5TermsetFree'], 'context_cleanup': ['sqlite3_close', 'sqlite3_close_v2']}
+2026-10-07 19:33:20.453 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 401bd5f2908f14e419f3
+2026-10-07 19:33:20.465 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision fd5e4186e106
+2026-10-07 19:33:20.468 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision b943fa12887b
+2026-10-07 19:33:20.472 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/intck/sqlite3intck.c at fd5e4186e106
+2026-10-07 19:33:20.475 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/intck/sqlite3intck.c at b943fa12887b
+{"bundle": "KN-Double-Free-26dfab2f-1", "source": "libxml2", "target": "sqlite", "api_matched": 1, "pairs": [["b943fa12", null, null]]}
+2026-10-07 19:33:21.417 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 19:33:21.505 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:37:13.953 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 232.4s
+2026-10-07 19:37:13.955 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c8eaf223-2 roles to sqlite: {'config_setter': ['sqlite3_config', 'sqlite3_db_config', 'sqlite3_vtab_config', 'sqlite3_expert_config', 'sqlite3session_config', 'sqlite3changegroup_config', 'sqlite3_recover_config', 'sqlite3session_object_config', 'sqlite3Fts5ConfigSetValue', 'sqlite3Fts5ConfigParse', 'sqlite3BtreeSetPageSize', 'sqlite3PagerSetPagesize'], 'divisor_field': ['pageSize']}
+2026-10-07 19:37:14.369 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for src/btreeInt.h, including whole file (33.2KB)
+2026-10-07 19:37:14.378 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c32866ecc68db7925c60
+2026-10-07 19:37:46.249 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 02ea41d5241e in 29.0s
+2026-10-07 19:37:49.126 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision e28c7bfec9fc in 28.9s
+2026-10-07 19:39:54.134 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation e28c7bfec9fc: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:39:54.384 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c32866ecc68db7925c60
+2026-10-07 19:40:25.959 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 053048a40fc9 in 28.7s
+2026-10-07 19:40:28.735 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 7459c016899b in 28.7s
+2026-10-07 19:41:09.819 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 7459c016899b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:41:10.113 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c32866ecc68db7925c60
+2026-10-07 19:41:46.684 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 4c1c400d6421 in 33.6s
+2026-10-07 19:41:48.624 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision f453e8d84eed in 32.1s
+2026-10-07 19:43:48.540 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation f453e8d84eed: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Misuse-c8eaf223-2", "source": "libxml2", "target": "sqlite", "api_matched": 3, "pairs": [["e28c7bfe", 0, 0], ["7459c016", 0, 0], ["f453e8d8", 0, 0]]}
+2026-10-07 19:43:49.566 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 19:43:49.639 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:47:30.329 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 220.7s
+2026-10-07 19:47:30.332 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-79c6eef0-2 roles to sqlite: {'null_on_failure': ['sqlite3Malloc', 'sqlite3MallocZero', 'sqlite3Realloc', 'sqlite3_malloc', 'sqlite3_malloc64', 'sqlite3_realloc', 'sqlite3_realloc64', 'sqlite3DbMallocRaw', 'sqlite3DbMallocZero', 'sqlite3DbMallocRawNN', 'sqlite3DbRealloc', 'sqlite3DbReallocOrFree', 'sqlite3DbStrDup', 'sqlite3DbStrNDup', 'sqlite3ExprAlloc', 'sqlite3ExprDup', 'sqlite3WithDup', 'sqlite3CteNew', 'sqlite3KeyInfoAlloc', 'sqlite3WindowAlloc', 'sqlite3VdbeAllocUnpackedRecord', 'sqlite3ParserAlloc', 'sqlite3MutexAlloc', 'sqlite3_mutex_alloc', 'sqlite3StackAllocRaw', 'sqlite3StackAllocRawNN', 'sqlite3_str_new', 'sqlite3_mprintf', 'sqlite3_vmprintf'], 'length_of': ['strlen', 'sqlite3Utf8CharLen', 'sqlite3Utf16ByteLen', 'sqlite3_str_length', 'sqlite3ExprVectorSize']}
+2026-10-07 19:47:30.478 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 73a94fb22118ff6989b8
+2026-10-07 19:47:30.495 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/qrf/qrf.c at 603233d42edf
+2026-10-07 19:47:30.497 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/qrf/qrf.c at 112122c2f914
+2026-10-07 19:47:30.567 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 73a94fb22118ff6989b8
+2026-10-07 19:48:10.731 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 07ded24fbb61 in 36.9s
+2026-10-07 19:48:15.229 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 7aad2942c232 in 36.5s
+2026-10-07 19:48:15.233 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/diskused.c at 07ded24fbb61
+2026-10-07 19:48:15.235 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/diskused.c at 7aad2942c232
+2026-10-07 19:48:15.489 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 73a94fb22118ff6989b8
+2026-10-07 19:48:15.506 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/session/test_session.c at a8fdc0e0c09a
+2026-10-07 19:48:15.600 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/session/test_session.c at cf632ddb7eb7
+2026-10-07 19:48:15.971 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation cf632ddb7eb7: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Null-Pointer-Dereference-79c6eef0-2", "source": "libxml2", "target": "sqlite", "api_matched": 3, "pairs": [["112122c2", null, null], ["7aad2942", null, null], ["cf632ddb", 0, 0]]}
+2026-10-07 19:48:17.117 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 19:48:17.333 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:53:03.168 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 285.8s
+2026-10-07 19:53:03.172 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-962bd10d-1 roles to sqlite: {'nullable_inout_capacity_ptr': ['capacity'], 'capacity_computer': ['sqlite3VdbeMemGrow', 'sqlite3Fts5BufferSize', 'fts5BufferGrow', 'sqlite3StrAccumEnlarge'], 'reallocator': ['sqlite3Realloc', 'sqlite3_realloc', 'sqlite3_realloc64', 'sqlite3DbRealloc', 'sqlite3DbReallocOrFree', 'sqlite3WhereRealloc', 'sqlite3RCStrResize'], 'deref_read': [], 'deref_write': [], 'null_guard': [], 'null_on_failure': []}
+{"bundle": "KN-Null-Pointer-Dereference-962bd10d-1", "source": "libxml2", "target": "sqlite", "api_matched": 0, "pairs": []}
+2026-10-07 19:53:04.259 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 19:53:04.328 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:54:53.933 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 109.6s
+2026-10-07 19:54:53.937 | INFO     | role_porting:port_roles:226 - Ported KN-Out-of-Bound-a7511af0-2 roles to sqlite: {'lookahead': [], 'length_of': ['nPattern']}
+2026-10-07 19:54:54.117 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 82298884b52cb4fdf2cf
+2026-10-07 19:55:29.781 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision 764881119d63 in 32.4s
+2026-10-07 19:55:33.026 | INFO     | targets.compiledb:_setup_revision:217 - [sqlite] configured revision ce512d422953 in 32.3s
+2026-10-07 19:55:33.030 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/spellfix.c at 764881119d63
+2026-10-07 19:55:33.032 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for ext/misc/spellfix.c at ce512d422953
+{"bundle": "KN-Out-of-Bound-a7511af0-2", "source": "libxml2", "target": "sqlite", "api_matched": 1, "pairs": [["ce512d42", null, null]]}
+2026-10-07 19:55:34.015 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 19:55:34.095 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:00:10.635 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 276.5s
+2026-10-07 20:00:10.641 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-10eb89d1-0 roles to sqlite: {'decoder_function': ['sqlite3Utf8Read'], 'input_byte': ['c'], 'continuation_count': ['count']}
+{"bundle": "KN-Integer-Overflow-10eb89d1-0", "source": "lua", "target": "sqlite", "api_matched": 0, "pairs": []}
+2026-10-07 20:00:11.858 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 20:00:12.091 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:04:16.624 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 244.5s
+2026-10-07 20:04:16.628 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-bc4bbcef-0 roles to sqlite: {'combined_create_and_publish': ['sqlite3StartTable', 'sqlite3VtabEponymousTableInit'], 'object_initializer': ['sqlite3AddColumn', 'sqlite3AddNotNull', 'sqlite3AddPrimaryKey', 'sqlite3AddCheckConstraint', 'sqlite3AddDefaultValue', 'sqlite3AddCollateType', 'sqlite3AddGenerated', 'sqlite3VtabCallCreate', 'sqlite3VtabCallConnect'], 'persistent_registry_lookup': ['sqlite3FindTable'], 'object_allocator': [], 'registry_store': ['sqlite3HashInsert'], 'registry_key': []}
+{"bundle": "KN-Misuse-bc4bbcef-0", "source": "lua", "target": "sqlite", "api_matched": 0, "pairs": []}
+2026-10-07 20:04:17.888 | INFO     | role_porting:port_roles:174 - sqlite: 2098 candidate API names from headers, 48606 identifiers in sources
+2026-10-07 20:04:18.083 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:05:13.786 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 55.7s
+2026-10-07 20:05:13.789 | INFO     | role_porting:port_roles:226 - Ported KN-Use-After-Free-22974326-2 roles to sqlite: {'gc_managed_object': [], 'potential_gc_trigger': [], 'gc_root_anchor': [], 'weak_reference_container': [], 'use_after_free_use': []}
+{"bundle": "KN-Use-After-Free-22974326-2", "source": "lua", "target": "sqlite", "api_matched": 0, "pairs": []}

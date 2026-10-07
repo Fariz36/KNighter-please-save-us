@@ -1088,3 +1088,379 @@ is ≤40%). **1029 reports in both, identical sets** (keyed by file, line, issue
 - `.gitignore` fixes found while staging: the upstream `result*` rule silently dropped every `results/`
   folder and `results.jsonl` in the evidence (negations added for `bench/evidence/**`), and my `e2e/`
   rule matched `bench/evidence/e2e/` (anchored to `/e2e/`).
+
+## 2026-10-01 18:00 — 3.1-A checks and the role-based run r8
+
+- **Roles mechanism E2E [M]** (`tmp/roles-e2e/watched.cpp`, hand-written role-based checker reporting every
+  call to role `watched`): built with block `{"watched": ["memcpy"]}` → `roles.json` extracted → **1 report**
+  on curl `lib/sendf.c`; the same code with an empty role list → **0 reports**. `roles.h` compiles in the
+  plugin, and the env plumbing and runtime lookup work.
+- Lint false positive fixed: words in natural-language literals ("roles E2E test") were flagged.
+  Literals containing whitespace are now skipped. Re-measured baseline [M]: previous attempt **14/22
+  (64%)**, r7 all **101/153 (66%)**, r7-B on curl+libxml2+lua+sqlite **35/46 (76%)** checkers hardcode
+  project identifiers. (Supersedes the 15:45 numbers.)
+- Launched **r8**: optimized variant + `role_based_checkers=true` on curl, libxml2, lua, sqlite (26 commits),
+  frozen snapshot, keep-awake. Compare with r7-B on the same 26 commits: perfect 17/26, hardcoding 76%.
+
+## 2026-10-01 18:20 — 3.3 bundle E2E [M]
+
+- `main.py export` on the 6 curl checkers of `e2e/refine-t0-curl` → `e2e/bundles-curl/`. The refined code
+  (`refinements/latest_refined.cpp`) is picked for the refined checker, the full commit is resolved from
+  the 8-char prefix, and `portable: false` with `hardcoded_identifiers: [Curl_peer_link, Curl_peer_unlink]`
+  (r7 checkers predate role-based generation).
+- **Standalone run** of bundle KN-Integer-Overflow-bc440a89-0 copied outside the repo, under `env -i
+  PATH=/usr/bin:/bin` with **system Python 3.14** (no venv, no KNighter): curl 8.10.0 compile DB, 169
+  files, 0 failures, 57.4 s, **1 report `lib/mime.c:523` [encoder_base64_size]**, the same report
+  KNighter's own scan found (22:47 yesterday).
+- Runner bug fixed: `--files lib/` used `endswith`, so it selected nothing, and the output dir was not created
+  (crash writing the summary). It now uses substring match, always creates the out dir, and exits with a clear
+  message on an empty selection.
+- **Rebuild kit** (`CMakeLists.txt`, `find_package(Clang)` against `KNighter/llvm/build/lib/cmake`):
+  1. The first build failed. KNighter's LLVM *declares* the `clang-cpp` target without building
+     `libclang-cpp.so`. Fix: use shared only if the imported library file exists, else the static
+     component libraries.
+  2. The second build linked (80 MB) but **crashed clang** on load. It exported every statically linked
+     Clang/LLVM symbol, which interposed on clang's own. Fix: the same version script as LLVM's in-tree
+     plugin (`global: clang_registerCheckers; clang_analyzerAPIVersionString; local: *`) + `-z nodelete`
+     + section GC.
+  3. Result: 8.8 MB `plugin.so` (same as the in-tree build), 2 exported symbols, 11 s build. Rerun over 169
+     files: **identical single report, 0 failures**.
+
+- 18:30: bundles now include `patch.md` (needed by triage on other projects). Wrote `bench/cross_project.py`
+  (3.4): per (bundle from P, target Q≠P): `port_roles` → scan Q at HEAD with `KNIGHTER_ROLES` = ported
+  file → triage up to 5 reports. Runs after r8 provides role-based perfect checkers.
+- r8 early [M]: the first 3 role-based curl checkers have **0 hardcoded identifiers before any
+  repair_roles round** (roles e.g. `cleanup`, `link_detach`, `allocator`, `length_of`, `substring_finder`).
+  a0f08d6975 (ML) perfect.
+
+## 2026-10-01 20:20 — r8 (role-based, 3.1-A) results [M]
+
+r8 = optimized variant + `role_based_checkers=true`, 26 commits (curl 8, libxml2 7, lua 4, sqlite 7), snapshot
+`213af69c343ffa57`, 17:43–19:52, 0 s suspended in all runs. (The follow-up steps were delayed by an agent
+session restart.)
+
+| | r7-B (same commits, no roles) | r8 role-based |
+|---|---|---|
+| checkers hardcoding project identifiers (`checker_lint`) | 35/46 (76%) | **0/45 (0%)** |
+| commits with a perfect checker (strict) | 17/26 | **18/26** |
+| per project curl / libxml2 / lua / sqlite | 6/8, 5/7, 4/4, 2/7 | 6/8, 5/7, 3/4, 4/7 |
+| wall (min) curl / libxml2 / lua / sqlite | 22.9 / 25.7 / 7.6 / 26.1 | 39.1 / 41.2 / 17.9 / 31.1 |
+
+- Verification that the 0% is real: all 45 compiled checkers `#include "knighter/roles.h"`, call the
+  `knighter::` role API, and carry a `KNIGHTER_ROLES` block; **204/204 roles have a project-independent
+  description**. Role names that also occur in the logic are generic identifiers (`data`, `n`, `string`,
+  `capacity`) used as ordinary variables/fields, not name comparisons.
+- **`repair_roles` never ran**: initial findings were empty for every checker, so the prompts alone achieved it.
+- Success did not drop (18 vs 17 of 26; within run-to-run variance). Wall time was higher (the role
+  guidance makes prompts longer and plans more elaborate), to be broken down per stage in the section 3
+  report.
+- 20:25: exported r8 bundles (`e2e/bundles-r8/<project>/`): curl 6, libxml2 5, lua 3, sqlite 4 = 18, **all `portable: true`**. Launched 3.4 cross-project (`bench/cross_project.py`, 4 target processes in parallel, 14 foreign bundles each = 54 pairs, triage ≤ 5 reports per pair), output `e2e/cross/`.
+- Correction: the cross-project processes started at **20:47** (first log lines), not 20:25 as written above; the 20:25 time was written before launching, and the bundle export took longer than assumed. Candidate API names from headers [M]: curl 1806, lua 689.
+
+## 2026-10-01 22:10 — 3.4 first cross-project result: ported checkers find nothing; two causes diagnosed
+
+First cross-project run (r8 bundles, 3 of 4 targets finished; lua still running) [M, `e2e/cross/*.json`]:
+- curl target 12 pairs, libxml2 13, sqlite 14 = 39 pairs. **17 got no role mapping at all** (not scanned).
+  **All 22 scanned pairs produced 0 reports.** Even basic roles were unmapped (`deallocator` → SQLite,
+  which has `sqlite3_free`/`sqlite3DbFree`).
+- Diagnosis on `KN-Double-Free-26dfab2f-1` (libxml2) → SQLite (`ports/sqlite.json`):
+  1. **Candidate extraction/ranking (3.1-B).** SQLite's public API (`sqlite3_free`, `sqlite3_malloc`) is
+     declared in `src/sqlite.h.in`, which was skipped (suffix `.in`). `sqlite3DbFree` *was* extracted and
+     ranks #1 for a generic description ("frees an object"), but the role's real description was
+     bug-specific, its words dominated the score, and the offered top 12 were `fts5BufferFree`,
+     `sqlite3ParserFree`, `S_ISDIR`, ... `sqlite3ExprListDelete`/`sqlite3SelectDelete` could not match
+     "free" at all (no synonyms).
+  2. **Roles too specific (3.1-A).** The LLM refused the mapping with the rationale "the deallocators for
+     the plausible resources (e.g. ExprList, Select) are not present". The generated roles describe the
+     bug instance (`ownership_consumer_frees_on_failure`, `gc_root_anchor`, `dequote_helper`,
+     `caller_ignoring_sentinel`), not reusable API categories, so other projects have no equivalent.
+- Fixes (commit after this entry):
+  - 3.1-B: template headers (`*.h.in`) are included. Synonym groups (free~delete~release~destroy~unref,
+    alloc~new~create~dup, len~size~count, ...). Weighted ranking: role name + source names ×3,
+    description words ×1. New test: `sqlite3_free` (from `.h.in`) and `sqlite3ExprListDelete` are the top 2
+    for a bug-specific deallocator description; `sqlite3ExprCompare` is not offered. 4/4 porting tests pass.
+  - 3.1-A: both roles prompts now give a **standard role vocabulary** (allocator, deallocator,
+    reallocator, duplicator, null_on_failure, error_setter, aborting_assert, length_of, buffer_copy,
+    bounded_copy, lock/unlock, ref_get/ref_put, init/cleanup, container_insert/remove, parser_input,
+    untrusted_size), require roles to be API categories most projects have with generic descriptions, and
+    allow at most 6 roles. **Needs a regeneration run to measure** (r8 bundles predate it).
+
+## 2026-10-01 22:45 — Cross-project v1 totals; v2 (porting fix only) launched
+
+- **v1 [M]** (all 4 targets, `e2e/cross-v1/`): 54 pairs, **87/264 roles mapped (33%)**, 21 pairs with no
+  mapping, 33 scanned, **0 reports in all scanned pairs** (so 0 triaged).
+- User decision: "both, porting first". v2 = the same r8 bundles + fixed porting (3.1-B fix only), output
+  `e2e/cross/`; afterwards regenerate with the generic-role prompts (r9) and run cross v3.
+  v1 bundle state archived in `e2e/bundles-r8-after-cross-v1/`.
+
+- 23:50: cross v2 interim: mapping improved, still 0 reports; added positive control bench/self_port.py.
+  (Full version of the line above.) Cross v2 interim [M], curl and lua targets done: mapping clearly improved
+  (e.g. libxml2 Double-Free → curl 5/6 roles vs 0/6 in v1), but **still 0 reports in every scanned pair**,
+  including near-complete mappings (curl f7d4e11f → lua 6/8). Ambiguous: either no such bugs exist at the
+  targets' HEAD, or ported checkers cannot fire. Positive control `bench/self_port.py`: port each bundle back to its
+  *own* project from scratch (LLM; `out_name <project>-selfport` keeps the original roles file) and scan the
+  patched files at the *buggy* parent with original vs ported roles. Detection is preserved when the ported
+  roles still report wherever the original did.
+
+## 2026-10-02 12:40 — State check; presentation summary written
+
+- Cross v2 was **interrupted by an agent session restart**: libxml2, curl, and lua targets finished;
+  sqlite did not (no processes running). Partial v2 [M]: 40 pairs, roles mapped 79/202 (**39%**,
+  v1: 33%), 28 scanned, **0 reports**. Self-port control and r9 not run yet.
+- Wrote `docs/PROGRESS_SUMMARY.md` for the user's presentation: goals vs status, sprint scope, problems
+  found, changes in plain words, headline evidence, section 3 status incl. the open cross-project
+  problem, findings, caveats, next steps, questions for the supervisor, and a glossary.
+
+- 12:55: wrote `docs/PROGRESS_QA.md` (question-and-answer companion to the summary, 12 topics). LLM cost
+  measured for it [M]: r7-A 407 calls, 2.72M prompt / 3.58M completion (3.09M reasoning) tokens; r7-B 388
+  calls, 2.68M / 3.74M (3.35M); r8 275 calls, 1.97M / 3.23M (2.80M). At OpenCode Go prices ≈ $2.5–5.3 per
+  run (upper bound, ignores cheaper cached input).
+
+## 2026-10-07 — Finishing section 3: self-port control, r9, cross v3
+
+- User: "please proceed on finishing section 3". Plan [I]: (1) self-port positive control on the r8 bundles
+  (`bench/self_port.py`, one process per project, output `e2e/selfport-r8/`); (2) concurrently, **r9** =
+  optimized + `role_based_checkers=true` on the same 26 commits as r8 (curl, libxml2, lua, sqlite) with the
+  generic-role vocabulary prompts (commit 3dc9c0a); r9 measures quality/roles, not speed, so CPU sharing with
+  the self-port run is acceptable; (3) export r9 bundles, cross-project v3 on all 4 targets, self-port on r9;
+  (4) `docs/RESULTS_SECTION_3.md`.
+
+- 14:42: launched self-port control v1 (r8 bundles, 4 processes) and r9.
+- **Self-port control v1 [M]** (`e2e/selfport-r8-v1/`, stopped after 8 of 18 bundles): original roles
+  report on the buggy parent in **8/8**, ported roles in **0/8**, so detection was preserved in 0/8. Porting
+  to the *same* project loses detection, so the 0-report cross-project results say nothing about other
+  projects yet. Two causes, from the per-role mapping diffs:
+  1. **Porting bug [M]:** the LLM chose the right names but validation rejected them as "not in target",
+     because the header scan never extracted them: Lua declares `LUALIB_API void (luaL_setfuncs) (...)`
+     (parenthesised name), libxml2 puts the return type on the previous line
+     (`XMLPUBFUN xmlParserInputPtr\n\t\txmlNewIOInputStream(...)`). All 6 libxml2 and 4 Lua roles were
+     lost this way.
+  2. **r8 roles are bug-site details, not APIs [M]:** many roles bind local variables (`bufpt`, `zOut`,
+     `nPayload`, `datasize`, `iIdx`, `c`, `count`), struct fields (`maxAmpl`, `dest`), types (`int`,
+     `u32`, `Table`), constants (`-1`, `BASE64_MAX_INPUT_SIZE`), string keys (`__mode`), a pattern
+     (`_UBOX*`) and a libc function (`memset`). No other project has them, and porting cannot recover
+     them; the porting LLM even put a function (`curl_mime_data`) into the variable role `input_length`.
+- Fixes [I]:
+  - Porting: two more declaration patterns (parenthesised name; name at line start with the return
+    type on the previous line). Every chosen name is validated against **all identifiers in the target's
+    C/C++ sources** (not only the header candidates), so static functions/macros are accepted when they
+    exist. Standard-library names are carried over unchanged (no LLM). The prompt allows non-listed
+    names, which are then checked. New regression test (Lua and libxml2 styles); 37/37 non-kernel tests
+    pass (upstream `test_backend` needs a kernel config, as before).
+  - Prompts (`roles-pattern.md`, `roles-checker.md`): **roles bind functions and macros only**; variables,
+    parameters, fields, types, constants, keys and literals must be recognised structurally ("size
+    argument of a `buffer_copy` call", "integer narrower than 64 bits").
+- r9 was **aborted after ~10 min** (curl only, first attempts) so it uses the new prompts; archived in
+  `bench/aborted/r9a-*`. Relaunched r9 with a fresh snapshot, and self-port control v2 (same r8 bundles,
+  fixed porting; `e2e/selfport-r8/`). The v1 port reports were copied to `e2e/selfport-r8-v1/ports/`.
+- Correction: r9 was aborted after ~7 min (14:42 → 14:49), not ~10. r9 relaunched 14:49:54, snapshot `6929653da9b3d22d`.
+
+## 2026-10-07 15:20 — Self-port control v2: porting preserves detection 18/18
+
+- **Self-port v2 [M]** (`e2e/selfport-r8/*.json`, r8 bundles, fixed porting): original roles report on the
+  buggy parent in 18/18; ported roles in **18/18 (detection preserved in all)**, with the same report
+  counts (incl. 14 = 14 and 2 = 2). The ported mapping equals the original in 11/18; in 7/18 the LLM chose
+  different/extra names and detection still held. v1 → v2 difference is the porting fix only, so the 0/8 in
+  v1 was the porting bug.
+- **Caveat [I]:** in a self-port the LLM sees the source names, which also exist in the target, so this
+  control shows the **porting machinery** (prompt, candidates, validation, roles plumbing) is sound; it
+  does **not** show that bug-specific roles (variables, fields) have counterparts in *other* projects.
+- Added `bench/cross_known.py` (3.4, known bugs): port each foreign bundle once to the target, then run
+  the **unchanged plugin** with the ported roles through normal validation on every benchmark commit of the
+  target (strict TP on commit^, TN on commit). This is a direct measure of cross-project detection of
+  real bugs, unlike HEAD scans, where "0 reports" could also mean "no such bug". Smoke test (libxml2
+  Double-Free → curl, 2 commits): runs end to end; 4/6 roles mapped, not detected.
+- Launched cross-known on the r8 bundles with fixed porting ("cross-known-r8", all 4 targets
+  sequentially, 26 known-bug commits), to separate the porting fix from the r9 prompt change.
+
+## 2026-10-07 15:45 — Finding: 4 of 43 benchmark commits are compiled out in our builds
+
+- While checking cross-known timings (curl `lib/smb.c` analyzed in 0.06 s), found that curl `c4cb6769`'s
+  patched file is entirely under `#if defined(CURL_ENABLE_SMB) && defined(USE_CURL_NTLM_CORE)`, and
+  `CURL_ENABLE_SMB` is OFF by default in curl's CMake. The file compiles to an empty TU, so the precheck
+  ("compiles and analyzes with a no-op checker") passed it, but **no checker can ever report there**.
+- New `bench/compiled_out.py` [M] (`e2e/compiled-out/*.jsonl`): runs `clang -E` with each patched file's
+  own compile command on the buggy revision and checks the strict-scoring patched function names survive
+  preprocessing. Compiled out in our configs: **curl c4cb6769** (`smb_request_state`, SMB off),
+  **libgit2 0bc19591** (`load_known_hosts`, libssh2 transport), **libgit2 ef086bc3**
+  (`verify_server_cert`, OpenSSL stream), **sqlite 97467fa8** (`kvvfsDecode`, `os_kv.c`). Cross-check: all
+  4 have TP=0 in **every** r7 attempt of both variants; no commit with a perfect checker is flagged. (The
+  first version wrongly flagged re2 `DFA::~DFA`: the regex could not match `~`; fixed.)
+- Effect on reported numbers [I]: these 4 commits are unsolvable for *both* variants, so the r7 A/B
+  comparison is unchanged in kind; the effective success rates are **26/39 (A) vs 27/39 (B)** instead of
+  /43. r8/r9 (26 commits) contain 2 of them (curl c4cb6769, sqlite 97467fa8): effective /24. This
+  repeats the libgit2 93b16df1 lesson (unanalyzable ≠ generation failure) at a subtler level: a patched
+  file can compile and still not contain the patched code. A precheck should test the functions, not
+  the file. Options: enable the features in the configs (curl `-DCURL_ENABLE_SMB=ON -DCURL_ENABLE_NTLM=ON`,
+  libgit2 with libssh2/OpenSSL, sqlite KV VFS) or drop the commits; decision deferred to the user.
+- Correction: the two headings above were timestamped wrongly (estimated, not read from the clock). Actual: self-port v2 finished ~15:03 and cross-known-r8 launched right after; the compiled-out finding was written ~15:10.
+- Correction to the correction: self-port v2 finished at **14:59** (file times: lua 14:52, sqlite 14:55, libxml2 14:58, curl 14:59); compiled_out.py curl result 15:09.
+- 15:44: cross-known-r8 targets libxml2, lua, sqlite started in parallel (`run_rest.sh`); curl continues alone. (A first attempt killed its own shell via `pgrep -f` self-match, the r6 lesson again; the sequential driver was stopped by it, the curl process survived.)
+
+- 16:20: worked example for the user of why v2 HEAD scans gave 0 reports [M]: curl checker `f7d4e11f`
+  gates its report on `containsFieldAccess(Cond, "length_field")` (a `MemberExpr` whose field decl is
+  bound to the role). In curl the role is the field `len`; ported to Lua (v2) it became
+  `luaZ_sizebuffer`, a macro `((buff)->buffsize)`. CSA analyses preprocessed code and sees the field
+  `buffsize`, never the macro name, so the gate is always false and the report is unreachable in all
+  34 Lua files. Lua *has* the equivalent field (`Mbuffer.buffsize`); the porting LLM gave the wrong
+  **kind** of name (a macro for a field role). In v2, only 3/40 pairs had every role mapped (12 none,
+  25 partial). Design note [I]: r9's function/macro-only roles avoid kind mismatches (calls map to calls), at
+  the cost of recognising fields structurally. Possible later alternative: keep field roles, record each
+  role's kind in the roles block, and have porting resolve macro wrappers to the fields they expand to.
+- 16:30: **Re-check with corrected field roles [M]** (`e2e/lua-len-recheck/`): curl `f7d4e11f` on all Lua
+  HEAD files with v2-ported roles → 0 reports; with `length_field: [buffsize, n]`,
+  `data_pointer: [buffer]` (only roles.json changed, same plugin) → **still 0**. Manual check: Lua's
+  code does not have the pattern's shape. Only 2 `if` conditions on `buffsize` (lobject.c:521, llex.c:64), neither returns
+  an error, and there is no `memcpy` from `->buffer`. The checker also requires `return <error constant>` (a `DeclRefExpr`, as with
+  curl's `CURLE_*` enum), whereas Lua reports errors via calls (`return luaL_error(...)`) or integer macros.
+  So for this pair, the 0 is plausibly genuine once the mapping is right.
+- Conceptual point raised by the user ("isn't cross-project very dependent on source and target?") [I]:
+  porting is plug-in (the plugin never changes; only the roles file does). Roles absorb **name** differences,
+  not **code-shape** differences (error constants vs error calls, field vs accessor), which are encoded
+  in the checker logic. Transfer is therefore pattern-dependent: generic API-level patterns (allocator→NULL
+  check, deallocator→use, length→copy) should transfer, while project-shaped ones (curl blob guard, Lua GC
+  barrier) should not. The research claim should be "which checker kinds transfer, measured on matched
+  same-class bugs", not "all checkers transfer". This also argues against per-target LLM rewriting of the
+  checker logic, which would re-introduce exactly the dependence and need validation per target.
+
+## 2026-10-07 16:50 — Matched-pair experiment prepared (3.4, same-class real bugs)
+
+- User question: for good research we must show "a ported checker found a vuln". Agreed [I]: neither HEAD
+  scans (no ground truth) nor cross-known (target's benchmark bugs are mostly other classes) test
+  this. Plan: matched pairs + historical replay, porting design unchanged (plug-in, roles only).
+- `bench/matched_pairs.py` [I]: ground truth = real fix commits of the target, chosen **deterministically**
+  (no LLM chooses commits): mine target history since 2019 (bug keywords in the subject, ≤ 40 changed
+  source lines, source-only, tests/fuzz/docs ignored, benchmark commits excluded), keep commits whose
+  keyword-guessed type equals the bundle's bug type **and** whose changed lines mention ≥ 1 name the
+  roles were ported to; rank by distinct names hit, then recency; validate the unchanged plugin on the
+  top 3 with strict TP/TN. The only LLM step is porting.
+- Mined pools [M] (`e2e/matched/<target>-candidates.json`): lua 96, curl 1455, libxml2 644, sqlite 2805
+  candidates. Type guesses are keyword-based and noisy (e.g. NULL-pointer via `\bNULL\b`); a pair's real
+  class is checked by reading the diff for any detection we report.
+- 16:55: exported r9 bundles for curl (5), libxml2 (4), lua (2), all portable (`e2e/bundles-r9/`). Launched matched pairs batch 1 (these 11 bundles × 4 targets, sequential targets; `e2e/matched-r9/batch1/`). r9 sqlite still running.
+
+## 2026-10-07 17:05 — Role API bug: macro wrappers and function pointers never matched a role
+
+- First matched-pair results (libxml2 Double-Free → curl, 0 API-matched candidates) led to two findings [M]:
+  1. **The porting LLM maps the bug instance, not the category**: offered `curlx_free`, `curl_free`, ... for
+     `deallocator`, it chose `Curl_cf_ngtcp2_h3_stream_ctx_free`, `Curl_vquic_ctx_free` ("the specific
+     filter contexts that Curl_cf_create consumes"). Fix [I]: `port_roles.md` now says the checker scans the
+     whole project, so roles must be mapped to their category across the project (general-purpose
+     wrappers first); macro wrappers and function-pointer variables are valid names.
+  2. **`roles.h` bug**: `callIsRole` compared only `Call.getCalleeIdentifier()`, i.e. the resolved callee of
+     the *preprocessed* code. A call through a **macro wrapper** (curl `curlx_free(p)` → `Curl_cfree`/`free`)
+     or a **function-pointer variable** (libxml2 `xmlFree`, curl `Curl_cfree`) can therefore never match.
+     Measured with the role-reporting test checker (`tmp/roles-macro/`), old header (r9 snapshot) vs new:
+     curl `lib/sendf.c` role=`curlx_free` **0 → 6**, role=`Curl_cfree` **0 → 6**; libxml2 `tree.c`
+     role=`xmlFree` **0 → 52**. (`free` alone: 0 in both, since curl's build routes `curlx_free` to
+     `Curl_cfree`.)
+     Fix [I]: new `callExprIsRole(CE, Role, Ctx)` and `macroIsRole(Loc, Ctx, Role)`; `callIsRole` now matches
+     the callee function, the variable/field holding the called function pointer (incl. `(*fp)(...)`), or any
+     macro in the call's expansion chain (macro-argument expansions skipped, so `CHECK(foo(x))` does not
+     make `foo` a `CHECK` call).
+- Consequences [I]: the header is part of the plugin hash, so every role-based checker builds a new plugin;
+  r8/r9 source-project scores were measured with the old header and must be re-validated (no LLM). The
+  header changed at 16:58:27 while matched batch 1 and cross-known-r8 were running from the live tree; both
+  were stopped at ~17:03. Cross-known-r8 partial [M]: 42/54 pairs, **0 detections** (r8 bundles, target
+  benchmark commits of mostly other bug classes; mixed headers after 16:58, so it is reported only as a
+  pre-fix control). Matched batch 1 had done 2 bundles with 0 API-matched candidates and no
+  validations; it is discarded and will be rerun after re-validation.
+- 17:10: `bench/revalidate.py` (re-validate every validated attempt with current code, no LLM). r9 lua [M]: 5/5 attempts unchanged (2 perfect before and after). Launched for r9 curl/libxml2 and r8 all 4 (`e2e/revalidate/`); r9 sqlite after r9 ends.
+- Re-validation [M]: r9 curl 13/13 attempts unchanged (5 perfect commits before/after). r9 libxml2 15/16 unchanged; **ddcb79dc checker_01 0/0 → 1/1 (now perfect)**: its roles are `allocator: xmlMalloc`, `deallocator: xmlFree` queried with `callIsRole`. Both are libxml2 function-pointer variables, so under the old header the correctly written checker was silently inert on its own project. r9 libxml2 perfect commits 4/7 → **5/7** (= r8).
+- Re-validation [M]: r8 curl 13/13 unchanged (6 perfect). r8 libxml2 15/16 unchanged; again **ddcb79dc (checker_02) 0/0 → 1/1**, r8 libxml2 5/7 → 6/7. The role API bug hid a correct checker for the same libxml2 commit in both runs.
+- Re-validation [M]: r8 lua 6/6 unchanged (3 perfect); r8 sqlite 10/10 unchanged (4 perfect). Total r8 with the fixed header: **19/26** perfect commits (was 18/26).
+
+## 2026-10-07 17:50 — r9 finished; r8 vs r9 with the fixed header; matched pairs v1 launched
+
+- r9 ended 17:46:24. Re-validation r9 sqlite [M]: 14/14 unchanged (2 perfect).
+- **r8 vs r9, same 26 commits, both re-validated with the fixed roles.h [M]** (`bench/role_stats.py`,
+  `e2e/revalidate/`):
+
+  | | r8 (free-form roles) | r9 (vocabulary, function/macro-only) |
+  |---|---|---|
+  | perfect commits | **19/26** (curl 6, libxml2 6, lua 3, sqlite 4) | **14/26** (curl 5, libxml2 5, lua 2, sqlite 2) |
+  | roles from the standard vocabulary | 21.1% | **85.2%** |
+  | role names callable (function/macro) | ≤ 84.5% (upper bound) | **100%** |
+  | roles per attempt | 4.53 | 2.96 |
+  | attempts with hardcoded identifiers | 0/45 | 0/48 |
+
+  (Effective denominators are /24: curl c4cb6769 and sqlite 97467fa8 are compiled out.) Reading [I]: the
+  generic roles cost detection on the source project in every project (−5 commits in total, one run each).
+  Generic/portable roles trade source-project detection for portability; whether they transfer better is what
+  matched pairs measure, so matched pairs run on **both** r8 and r9 bundles.
+- Re-exported bundles with the fixed header: `e2e/bundles-r9h2/` (13, all portable) and `e2e/bundles-r8h2/`
+  (18, all portable); bundles contain the new `roles.h`. Only gen-accepted (KN-*) checkers are exported, so
+  the re-validated ddcb79dc checkers (perfect only after the header fix) are not included.
+- Launched **matched pairs v1** (`e2e/matched-v1/{r9,r8}/`): 4 target processes in parallel, each runs the
+  r9 bundles and then the r8 bundles; top 3 API-matched same-type fix commits per (bundle, target).
+- 18:05: matched pairs v1 **restarted**. First attempt [M]: curl Memory-Leak → libxml2 had 54 API-matched
+  candidates, but all 3 selected commits failed setup: libxml2 revisions from before 2024-04 have no
+  `meson.build` (the config uses meson). Fixes [I]: optional `target_options.build_marker` (libxml2
+  `meson.build`, introduced 2024-04-04; sqlite `autosetup`, 2024-09-24); mining keeps only commits whose
+  parent contains it; validation skips candidates that still fail setup (recorded with the error) until 3
+  validations succeed or N+6 tries. Re-mined pools [M]: libxml2 205, sqlite 719, curl 1455, lua 96. (Again
+  `pkill -f` killed its own shell; processes were then stopped by PID via `tmp/stop_jobs.sh`.)
+- 18:20 observation [M]: after the port-prompt change, libxml2 Double-Free → curl still maps `deallocator` to filter-context frees (`Curl_vquic_ctx_free`, ...) and `parser_input`/`null_on_failure` to `Curl_cf_create`. The r9 role description itself is narrow ("frees a parser input buffer") and the pattern is project-shaped (constructor consumes its buffer and frees it on failure), so this is a faithful port of a specific pattern rather than a porting error; curl's 10 Double-Free fixes touch none of these functions (0 API-matched). The r9 vocabulary prompt fixed role *names* and *kinds* but not always the *descriptions*.
+- 18:25 sentinel bug [M]: sqlite 1af26071 changes only `ext/misc/fileio.c` (not in libsqlite3, no compile entry). Validation analyzed nothing with no errors and returned **-3 (checker plugin failure)** instead of a setup error. Fix [I]: missing compile entries are recorded as errors ("no compile entry"), so the case raises `TargetSetupError`. Running matched processes still use the old code: their -3 results with details `error: no file analyzable` and empty errors are counted as 'not analyzable' in the analysis. Gen was not affected in practice (the precheck requires compile entries).
+- 18:35: matched pairs v1 restarted again (old code still returned -3 for files without compile entries, which used up the 3 slots); aborted partial run kept in `e2e/matched-v1-aborted/`.
+
+## 2026-10-07 19:00 — First cross-project detections of real bugs (matched pairs v1, r9)
+
+- **sqlite Memory-Leak checker (r9 `KN-Memory-Leak-7b60ed80-1`) → libxml2 [M]**, roles ported by one LLM call
+  (allocator/duplicator/null_on_failure/container_insert/deallocator → 57/15/72/10/38 libxml2 names), plugin
+  unchanged. Of 3 validated same-class fixes: **c1342946 TP=1 TN=0**, **98194640 TP=1 TN=0**, ef44c240 0/0
+  (0bef1704 and 28da8549 could not be set up).
+  - c1342946 "fix memory leak in issue 1054" (xmlwriter.c, xmlTextWriterStartAttributeNS): on the buggy parent the checker
+    reports at **line 1804**, the `return -1` inside `if (p == 0)`. Its path tracks `buf` ("Assuming 'buf' is not equal to
+    NULL"), and `buf` leaks there; the fix inserts exactly `xmlFree(buf);` at that line. Manual reading confirms
+    it is the fixed bug (CWE-401).
+  - 98194640 "Fix memory leak of prefix in xmlTextWriterStartElementNS()": buggy report at **line 1055**, the
+    `return -1` in the `p->uri == 0` branch where `p->prefix` leaks; the fix adds `xmlFree(p->prefix)` there.
+  - Imprecision (why TN=0): after the fix the checker still reports at the same returns (fixed lines 1815,
+    1056/1063): it does not model a pointer stored into a field (`p->prefix = buf`) and freed through
+    it (`xmlFree(p->prefix)`). It also reports 9 other locations in xmlwriter.c on both sides (noise).
+  - Reading [I]: this is the first evidence that a checker generated from one project (SQLite) detects a
+    real, later-fixed bug in another project (libxml2) through role porting alone; the detection is exact
+    at the fix line, but the checker is imprecise (strict TN fails, noisy). This is consistent with the
+    hypothesis that generic API-level patterns (allocator → must be freed or inserted on every path) transfer.
+
+## 2026-10-07 20:15 — Matched pairs v1 complete
+
+- [M] (`bench/matched_report.py e2e/matched-v1 r9 r8`, `e2e/matched-v1/summary.txt`):
+
+  | | r9 (13 checkers × 3 targets) | r8 (18 × 3) |
+  |---|---|---|
+  | pairs with ≥ 1 API-matched same-type fix | 15/39 | 30/54 |
+  | validated fix commits (setup ok) | 27 (24 skipped) | 56 (28 skipped) |
+  | checker reports anything in the patched files | 4/27 | 2/56 |
+  | detected (strict TP > 0) | **2/27** | **0/56** |
+  | perfect | 0 | 0 |
+
+- Both detections: r9 SQLite Memory-Leak 7b60ed80 → libxml2 c1342946 and 98194640 (see 19:00). Not a clean
+  r8-vs-r9 comparison: r8 has no perfect checker for 7b60ed80. The dominant outcome is **silence**: ported
+  checkers report nothing in the patched files of 77/83 validated same-class fixes.
+- Wrote `docs/RESULTS_SECTION_3.md` (design, 3.1-A, 3.3, 3.1-B self-port, 3.4 three experiments, bugs found
+  and fixed, interpretation, limits).
+- 20:20: launched **cross v3** (`e2e/cross-v3/`): HEAD scans of every target with the foreign r9 bundles (final porting + roles.h), triage ≤ 5 reports per pair; 4 targets in parallel.
+
+## 2026-10-07 21:50 — Cross v3 (HEAD scans, r9 bundles, final porting): checkers fire; 0 confirmed new bugs
+
+- [M] curl, libxml2, lua targets finished (28 pairs; sqlite still running). Unlike v1/v2 (0 reports
+  everywhere), ported checkers now **fire**: 12/28 pairs report, 395 reports in total (sqlite Memory-Leak
+  7b60ed80: libxml2 283, curl 25, lua 16; curl f2a15357 NPD: lua 30, libxml2 10; curl c53420e4: lua 11;
+  libxml2 26dfab2f Double-Free: curl 7; ...). Roles fully mapped in most pairs (e.g. 5/5, 6/6); 3 pairs
+  still had no mapping (lua UAF 0/2 twice, libxml2 c8eaf223 → lua 0/1).
+- LLM triage (≤ 5 per pair) labelled **2 reports "Bug"**; manual review [M] found both are **false
+  positives**:
+  1. curl `lib/mime.c:1668` `Curl_mime_add_header` (libxml2 Double-Free checker): `curlx_free(s)` after
+     `Curl_slist_append_nodup` fails. curl documents and implements that the function does **not** release the
+     string on error (lib/slist.c:51–64), so the free is correct. The checker carries libxml2's
+     "consuming constructor" assumption; the ported `parser_input`/`null_on_failure` role is wrong for curl.
+  2. libxml2 `parser.c:11782` `xmlCtxtParseContentInternal` (curl Memory-Leak checker, "container_remove
+     after cleanup zeroed the object"): the 39-event path contains no cleanup call before `nodePop(ctxt)`, and
+     `nodePop` (pops the parser's node stack) was mis-mapped to `container_remove`.
+- Reading [I]: with the fixes, porting produces checkers that run and fire in other projects, but the HEAD reports
+  sampled so far contain no confirmed new bug, and the LLM triage's positive verdicts were wrong in 2/2 cases.
+  Triage cannot replace manual confirmation for cross-project reports.
+- 22:05: cross v3 sqlite done [M]: 0 Bug verdicts (reports: curl 466c06cf 17, curl f2a15357 33, libxml2 962bd10d 13). **Cross v3 totals: 39 pairs, 15 fire, 458 reports, 63 triaged, 2 'Bug' verdicts, both manually confirmed false positives → 0 confirmed new bugs.**
+- 22:15: extended `bench/export_evidence.py` to section 3 (r8/r9 runs, self-port, cross v1/v3, cross-known, matched-v1, revalidate, compiled-out, lua recheck, bundle metadata without plugin.so): 4083 files, 9.0 MB. Secret scan of the staged diff: 0 key values. Committed section 3 work locally (not pushed).

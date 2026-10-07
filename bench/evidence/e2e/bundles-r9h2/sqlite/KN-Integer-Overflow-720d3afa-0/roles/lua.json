@@ -1,0 +1,30 @@
+{
+  "allocated_size": [
+    "stacksize"
+  ],
+  "reallocator": [
+    "luaM_realloc_",
+    "luaM_saferealloc_",
+    "luaM_growaux_",
+    "luaM_reallocvector",
+    "luaM_growvector",
+    "luaM_reallocvchar",
+    "luaH_resize",
+    "luaH_resizearray",
+    "luaS_resize",
+    "luaD_reallocstack",
+    "luaD_growstack",
+    "luaZ_resizebuffer",
+    "luaK_reserveregs",
+    "luaL_prepbuffsize",
+    "luaL_buffinitsize"
+  ],
+  "null_on_failure": [
+    "lua_Alloc",
+    "luaL_alloc",
+    "debug_realloc"
+  ],
+  "initializer": [
+    "memset"
+  ]
+}

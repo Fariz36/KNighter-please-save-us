@@ -1,0 +1,14 @@
+{
+  "duplicator": [
+    "curl_url_dup"
+  ],
+  "source_handle": [
+    "in"
+  ],
+  "destination_allocator": [
+    "curlx_calloc"
+  ],
+  "field_copier": [
+    "DUP"
+  ]
+}

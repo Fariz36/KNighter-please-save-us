@@ -1,0 +1,15 @@
+{
+  "commit_id": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+  "commit_type": "Integer-Overflow",
+  "total_checkers": 3,
+  "successful_checkers": 0,
+  "perfect_checkers": 0,
+  "best_tp": 0,
+  "best_tn": 0,
+  "total_time": 1547.266704,
+  "errors": [
+    "Failed to generate compilable checker 2"
+  ],
+  "success_rate": 0.0,
+  "timestamp": "2026-10-01T18:22:37.677067"
+}

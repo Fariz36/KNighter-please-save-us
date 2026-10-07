@@ -1,0 +1,11 @@
+{
+  "cleanup": [
+    "cf_h2_proxy_ctx_clear"
+  ],
+  "container_remove": [
+    "Curl_peer_unlink"
+  ],
+  "deallocator": [
+    "curlx_free"
+  ]
+}

@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A `container_insert` path consumes/frees an input object with a `deallocator` without first removing it from its current container via `container_remove`. The deallocator does not unlink the object, so parent/sibling/list links still reference freed memory, causing dangling references and potential use-after-free. The fix adds the missing `container_remove` before the `deallocator`.
+
+Roles:
+- `container_insert`: xmlAddChild
+- `container_remove`: xmlUnlinkNodeInternal
+- `deallocator`: xmlFreeNode

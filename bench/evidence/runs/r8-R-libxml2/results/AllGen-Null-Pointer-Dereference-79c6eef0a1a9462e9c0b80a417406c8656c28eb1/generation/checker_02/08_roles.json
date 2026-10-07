@@ -1,0 +1,21 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "null_on_failure": {
+      "names": [
+        "xmlStrdup",
+        "xmlMalloc"
+      ],
+      "description": "allocation or duplication function that may return NULL on failure; its result must be NULL-checked before dereference"
+    },
+    "length_of": {
+      "names": [
+        "strlen"
+      ],
+      "description": "function that dereferences its pointer argument, e.g., computes string length"
+    }
+  }
+}

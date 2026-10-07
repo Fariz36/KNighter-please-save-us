@@ -1,0 +1,924 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-2",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "length_of": [
+        "xmlOutputBufferWriteBase64"
+      ]
+    },
+    "same_type_candidates": 6,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 248.1
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Memory-Leak",
+    "mapping": {
+      "cleanup": [
+        "xmlListClear",
+        "xmlClearParserCtxt",
+        "xmlClearNodeInfoSeq",
+        "xmlRegExecClearErrors",
+        "xmlRelaxNGValidCtxtClearErrors"
+      ],
+      "container_remove": [
+        "xmlUnlinkNode",
+        "xmlDOMWrapRemoveNode",
+        "xmlXPathNodeSetRemove",
+        "libxml_xmlNodeRemoveNsDef",
+        "xmlRemoveID",
+        "xmlRemoveRef",
+        "xmlRemoveProp",
+        "xmlCatalogRemove",
+        "xmlListRemoveAll",
+        "xmlACatalogRemove",
+        "xmlListRemoveLast",
+        "xmlHashRemoveEntry",
+        "xmlListRemoveFirst",
+        "xmlHashRemoveEntry2",
+        "xmlHashRemoveEntry3",
+        "nodePop"
+      ],
+      "deallocator": [
+        "__xmlFree",
+        "xmlBufFree",
+        "xmlBufferFree",
+        "xmlDictFree",
+        "xmlDOMWrapFreeCtxt",
+        "xmlFree",
+        "xmlFreeAutomata",
+        "xmlFreeCatalog",
+        "xmlFreeDoc",
+        "xmlFreeDocElementContent",
+        "xmlFreeDtd",
+        "xmlFreeElementContent",
+        "xmlFreeEntity",
+        "xmlFreeEnumeration",
+        "xmlFreeIDTable",
+        "xmlFreeInputStream",
+        "xmlFreeMutex",
+        "xmlFreeNode",
+        "xmlFreeNodeList",
+        "xmlFreeNs",
+        "xmlFreeNsList",
+        "xmlFreeParserCtxt",
+        "xmlFreeParserInputBuffer",
+        "xmlFreePattern",
+        "xmlFreeProp",
+        "xmlFreePropList",
+        "xmlFreeRefTable",
+        "xmlFreeRMutex",
+        "xmlFreeStreamCtxt",
+        "xmlFreeTextReader",
+        "xmlFreeTextWriter",
+        "xmlFreeURI",
+        "xmlFreeValidCtxt",
+        "xmlHashFree",
+        "htmlFreeParserCtxt",
+        "xmlListDelete",
+        "xmlMemFree",
+        "xmlModuleFree",
+        "xmlParserNsFree",
+        "xmlRegFreeRegexp",
+        "xmlRelaxNGFree",
+        "xmlRelaxNGFreeParserCtxt",
+        "xmlRelaxNGFreeValidCtxt",
+        "xmlSchemaFree",
+        "xmlSchemaFreeType",
+        "xmlSchemaFreeValidCtxt",
+        "xmlSchematronFree",
+        "xmlSchematronFreeValidCtxt",
+        "xmlXPathFreeCompExpr",
+        "xmlXPathFreeContext",
+        "xmlXPathFreeNodeSet",
+        "xmlXPathFreeNodeSetList",
+        "xmlXPathFreeObject"
+      ]
+    },
+    "same_type_candidates": 20,
+    "api_matched_candidates": 10,
+    "pairs": [
+      {
+        "commit": "28da8549a0519c11b5bb40cbb62c8f5fa67da83d",
+        "subject": "schematron: fix additional memory leaks on error paths",
+        "files": [
+          "schematron.c"
+        ],
+        "api_hits": [
+          "xmlFree",
+          "xmlXPathFreeCompExpr"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 28da8549a0519c11b5bb40cbb62c8f5fa67da83d could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "c1342946da47e14d64ea4af211a9402c937aa7f5",
+        "subject": "fix memory leak in issue 1054",
+        "files": [
+          "xmlwriter.c"
+        ],
+        "api_hits": [
+          "xmlFree"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "98194640b80a8d04b5af22b077ffd8368a9568cf",
+        "subject": "Fix memory leak of prefix in xmlTextWriterStartElementNS()",
+        "files": [
+          "xmlwriter.c"
+        ],
+        "api_hits": [
+          "xmlFree"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "8dbf298cc5ffa23c73fab979a208eada436a740d",
+        "subject": "xmllint: Fix harmless memory leaks",
+        "files": [
+          "xmllint.c"
+        ],
+        "api_hits": [
+          "xmlRelaxNGFreeParserCtxt"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 235.9
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Misuse",
+    "mapping": {
+      "length_of": [
+        "strlen",
+        "xmlStrlen"
+      ],
+      "untrusted_size": [
+        "xmlBufferLength",
+        "xmlBufUse",
+        "xmlOutputBufferGetSize",
+        "xmlNanoHTTPContentLength"
+      ],
+      "untrusted_data_accessor": [
+        "xmlBufferContent",
+        "xmlBufContent",
+        "xmlOutputBufferGetContent"
+      ],
+      "allocator": [
+        "xmlBufferCreate",
+        "xmlBufferCreateSize",
+        "xmlBufCreate",
+        "xmlAllocOutputBuffer"
+      ],
+      "deallocator": [
+        "xmlFree",
+        "xmlMemFree",
+        "xmlBufferFree",
+        "xmlBufFree",
+        "xmlOutputBufferClose"
+      ],
+      "error_setter": [
+        "xmlRaiseError",
+        "xmlVRaiseError",
+        "xmlPrintErrorMessage",
+        "xmlVPrintErrorMessage",
+        "xmlGenericErrorDefaultFunc",
+        "xmlParserValidityError",
+        "xmlGenericError"
+      ]
+    },
+    "same_type_candidates": 133,
+    "api_matched_candidates": 13,
+    "pairs": [
+      {
+        "commit": "595d7d8f6aac7f8374ad73ebe66479d1316f81a8",
+        "subject": "xpointer: Check overflow in xmlXPtrEvalXPtrPart",
+        "files": [
+          "xpointer.c"
+        ],
+        "api_hits": [
+          "xmlFree",
+          "xmlStrlen"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "84b8530d852e51e7ccab1e2b4aef698f611486fb",
+        "subject": "Fix xmlOutputBufferGetContent output when encoder is set.",
+        "files": [
+          "xmlIO.c"
+        ],
+        "api_hits": [
+          "xmlBufContent",
+          "xmlBufUse"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "b06e036416129bfafb8c288e8d9a9727e1ba50c2",
+        "subject": "xmlIO: Check for int overflow before calling writecallback",
+        "files": [
+          "xmlIO.c"
+        ],
+        "api_hits": [
+          "xmlBufUse"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 313.0
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-0",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "duplicator": [
+        "xmlCopyDoc",
+        "xmlCopyDtd",
+        "xmlCopyNode",
+        "xmlCopyNodeList",
+        "xmlCopyProp",
+        "xmlCopyPropList",
+        "xmlCopyNamespace",
+        "xmlCopyNamespaceList",
+        "xmlCopyError",
+        "xmlXPathObjectCopy",
+        "xmlListDup",
+        "xmlHashCopy",
+        "xmlStrdup",
+        "xmlMemoryStrdup",
+        "xmlDictCreateSub",
+        "xmlBufCreateMem",
+        "xmlListCopy"
+      ],
+      "allocator": [
+        "xmlMalloc",
+        "xmlMallocAtomic",
+        "xmlRealloc",
+        "xmlMemStrdup",
+        "xmlMallocLoc",
+        "xmlMallocAtomicLoc",
+        "xmlReallocLoc",
+        "xmlMemStrdupLoc",
+        "xmlNewDoc",
+        "xmlNewNode",
+        "xmlNewDocNode",
+        "xmlNewProp",
+        "xmlNewDocProp",
+        "xmlNewDtd",
+        "xmlNewNs",
+        "xmlNewPI",
+        "xmlNewText",
+        "xmlNewChild",
+        "xmlNewDocPI",
+        "xmlNewMutex",
+        "xmlListCreate",
+        "xmlHashCreate",
+        "xmlDictCreate",
+        "xmlBufCreate",
+        "xmlBufferCreate",
+        "xmlXPathNodeSetCreate",
+        "xmlAllocOutputBuffer",
+        "xmlAllocParserInputBuffer",
+        "xmlNewInputFromMemory",
+        "xmlNewInputBufferMemory",
+        "xmlCreateMemoryParserCtxt",
+        "htmlCreateMemoryParserCtxt",
+        "htmlNewDoc",
+        "xmlCreateURI",
+        "xmlCreateEnumeration",
+        "xmlCreateIntSubset",
+        "xmlCreateEntitiesTable",
+        "xmlCreateCharEncodingHandler"
+      ]
+    },
+    "same_type_candidates": 30,
+    "api_matched_candidates": 4,
+    "pairs": [
+      {
+        "commit": "6e1e22dc5f9f53fa8585b856662825d673938965",
+        "subject": "malloc-fail: Fix null-deref in xmlPatPushState",
+        "files": [
+          "pattern.c"
+        ],
+        "api_hits": [
+          "xmlMalloc",
+          "xmlRealloc"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "6afea87220588843c975928fee3bf4371631d8b5",
+        "subject": "memory: add xmlGrowArray helper for overflow-checked array reallocation",
+        "files": [
+          "xmlmemory.c"
+        ],
+        "api_hits": [
+          "xmlRealloc"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "0c56eb8215bea9e8e4aa934e45c677e6e132cf68",
+        "subject": "tree: Restore return value of xmlNodeListGetString with NULL list",
+        "files": [
+          "tree.c",
+          "valid.c",
+          "xmlreader.c"
+        ],
+        "api_hits": [
+          "xmlStrdup"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 384.3
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "out_param_api": [
+        "xmlOutputBufferWrite",
+        "xmlTextWriterWritePI",
+        "xmlTextWriterWriteDTD",
+        "xmlTextWriterWriteRaw",
+        "xmlTextWriterWriteCDATA",
+        "xmlTextWriterWriteBase64",
+        "xmlTextWriterWriteBinHex",
+        "xmlTextWriterWriteRawLen",
+        "xmlTextWriterWriteString",
+        "xmlTextWriterWriteComment",
+        "xmlTextWriterWriteElement",
+        "xmlOutputBufferWriteEscape",
+        "xmlOutputBufferWriteString",
+        "xmlTextWriterWriteFormatPI",
+        "xmlTextWriterWriteAttribute",
+        "xmlTextWriterWriteDTDEntity",
+        "xmlTextWriterWriteElementNS",
+        "xmlTextWriterWriteFormatDTD",
+        "xmlTextWriterWriteFormatRaw",
+        "xmlTextWriterWriteVFormatPI",
+        "xmlTextWriterWriteDTDAttlist",
+        "xmlTextWriterWriteDTDElement",
+        "xmlTextWriterWriteVFormatDTD",
+        "xmlTextWriterWriteVFormatRaw",
+        "xmlTextWriterWriteAttributeNS",
+        "xmlTextWriterWriteDTDNotation",
+        "xmlTextWriterWriteFormatCDATA",
+        "xmlTextWriterWriteFormatString",
+        "xmlTextWriterWriteVFormatCDATA",
+        "xmlTextWriterWriteFormatComment",
+        "xmlTextWriterWriteFormatElement",
+        "xmlTextWriterWriteVFormatString",
+        "xmlXPathSubstringBeforeFunction",
+        "xmlTextWriterWriteVFormatComment",
+        "xmlTextWriterWriteVFormatElement",
+        "xmlTextWriterWriteFormatAttribute"
+      ]
+    },
+    "same_type_candidates": 30,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 95.7
+  },
+  {
+    "bundle": "KN-Misuse-bc4bbcef-0",
+    "source": "lua",
+    "target": "libxml2",
+    "bug_type": "Misuse",
+    "mapping": {
+      "allocator": [
+        "xmlCreateEntitiesTable",
+        "xmlAllocOutputBuffer",
+        "xmlAllocParserInputBuffer",
+        "xmlCreateMemoryParserCtxt",
+        "htmlCreateMemoryParserCtxt",
+        "xmlBufCreate",
+        "xmlBufCreateMem",
+        "xmlCreateURI",
+        "xmlDictCreate",
+        "xmlHashCreate",
+        "xmlListCreate",
+        "xmlNewCharEncodingHandler",
+        "xmlDictLookup",
+        "xmlDictLookupHashed"
+      ],
+      "container_insert": [
+        "xmlListInsert",
+        "xmlListAppend",
+        "xmlHashAddEntry",
+        "xmlHashAddEntry2",
+        "xmlHashAddEntry3",
+        "xmlHashUpdateEntry",
+        "xmlHashUpdateEntry2",
+        "xmlHashUpdateEntry3",
+        "xmlDictLookup",
+        "xmlDictLookupHashed",
+        "xmlXPathRegisterFunc",
+        "xmlXPathRegisterVariable",
+        "xmlXPathRegisterNs",
+        "xmlXPathRegisterFuncLookup",
+        "xmlXPathRegisterVariableLookup",
+        "xmlRegisterCharEncodingHandler",
+        "xmlAddDocEntity",
+        "xmlAddDtdEntity",
+        "xmlAddElementDecl",
+        "xmlAddAttributeDecl",
+        "xmlAddNotationDecl",
+        "xmlAddRef"
+      ],
+      "lookup": [
+        "htmlTagLookup",
+        "xmlDictLookup",
+        "xmlHashLookup",
+        "xmlDictQLookup",
+        "xmlHashLookup2",
+        "xmlHashLookup3",
+        "xmlHashQLookup",
+        "xmlHashQLookup2",
+        "xmlHashQLookup3",
+        "htmlEntityLookup",
+        "xmlXPathNsLookup",
+        "xmlDictLookupHashed",
+        "xmlParserNsLookupSax",
+        "htmlEntityValueLookup",
+        "xmlXPathFunctionLookup",
+        "xmlXPathVariableLookup",
+        "xmlXPathFunctionLookupNS",
+        "xmlXPathVariableLookupNS",
+        "xmlLookupCharEncodingHandler",
+        "xmlTextReaderLookupNamespace"
+      ],
+      "init": [
+        "xmlInitMutex",
+        "xmlXPathInit",
+        "xmlInitMemory",
+        "xmlInitParser",
+        "xmlInitRMutex",
+        "xmlInitRandom",
+        "xmlInitGlobals",
+        "xmlInitThreads",
+        "htmlInitAutoClose",
+        "xmlInitParserCtxt",
+        "xmlInitializeDict",
+        "xmlInitIOCallbacks",
+        "xmlInitNodeInfoSeq",
+        "xmlSchemaInitTypes",
+        "xmlInitDictInternal",
+        "xmlInitXPathInternal",
+        "xmlInitializeCatalog",
+        "xmlInitMemoryInternal",
+        "xmlInitCatalogInternal",
+        "xmlInitGlobalsInternal",
+        "xmlInitRelaxNGInternal",
+        "xmlInitEncodingInternal",
+        "xmlDefaultSAXHandlerInit",
+        "htmlDefaultSAXHandlerInit",
+        "xmlInitCharEncodingHandlers",
+        "xmlInitSchemasTypesInternal",
+        "xmlSAX2InitDefaultSAXHandler"
+      ]
+    },
+    "same_type_candidates": 133,
+    "api_matched_candidates": 4,
+    "pairs": [
+      {
+        "commit": "57b92cabd2f3018212ddc1475df66e9f9cf643c3",
+        "subject": "catalog: Fix regression in xmlCatalogAdd",
+        "files": [
+          "catalog.c"
+        ],
+        "api_hits": [
+          "xmlInitParser",
+          "xmlInitializeCatalog"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "6c5b55523740103660709de3d90a4437fbd719cc",
+        "subject": "debug: Remove obsolete handling of special case",
+        "files": [
+          "debugXML.c"
+        ],
+        "api_hits": [
+          "xmlDictLookup"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "59354717329274f34ce7aac90227f554386dd7ab",
+        "subject": "parser: Fix malloc failure handling in xmlInputSetEncodingHandler",
+        "files": [
+          "parserInternals.c"
+        ],
+        "api_hits": [
+          "xmlBufCreate"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 270.6
+  },
+  {
+    "bundle": "KN-Use-After-Free-22974326-2",
+    "source": "lua",
+    "target": "libxml2",
+    "bug_type": "Use-After-Free",
+    "mapping": {
+      "gc_trigger": [],
+      "ref_get": []
+    },
+    "same_type_candidates": 3,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 63.2
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "libxml2",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "allocated_size": [
+        "xmlMemSize"
+      ],
+      "reallocator": [
+        "xmlRealloc",
+        "xmlMemRealloc",
+        "xmlReallocLoc",
+        "__xmlRealloc"
+      ],
+      "null_on_failure": [
+        "xmlRealloc",
+        "xmlMemRealloc",
+        "xmlReallocLoc",
+        "__xmlRealloc"
+      ],
+      "initializer": [
+        "memset"
+      ]
+    },
+    "same_type_candidates": 6,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 119.6
+  },
+  {
+    "bundle": "KN-Memory-Leak-7b60ed80-1",
+    "source": "sqlite",
+    "target": "libxml2",
+    "bug_type": "Memory-Leak",
+    "mapping": {
+      "allocator": [
+        "xmlAllocOutputBuffer",
+        "xmlAllocParserInputBuffer",
+        "xmlNewNs",
+        "xmlNewPI",
+        "xmlNewDoc",
+        "xmlNewDtd",
+        "htmlNewDoc",
+        "xmlNewNode",
+        "xmlNewProp",
+        "xmlNewText",
+        "xmlNewChild",
+        "xmlNewDocPI",
+        "xmlNewMutex",
+        "xmlBufCreate",
+        "xmlCreateURI",
+        "xmlMallocLoc",
+        "xmlMemMalloc",
+        "xmlNewEntity",
+        "xmlNewNsProp",
+        "xmlNewRMutex",
+        "xmlListCreate",
+        "xmlXPathNewNodeSetList",
+        "xmlBufCreateMem",
+        "xmlDictCreate",
+        "xmlHashCreate",
+        "xmlBufferCreate",
+        "xmlDictCreateSub",
+        "xmlHashCreateDict",
+        "xmlParserNsCreate",
+        "xmlCreateIntSubset",
+        "xmlBufferCreateSize",
+        "xmlCreateEnumeration",
+        "xmlBufferCreateStatic",
+        "xmlCreateIOParserCtxt",
+        "xmlXPathNodeSetCreate",
+        "xmlCreateDocParserCtxt",
+        "xmlCreateEntitiesTable",
+        "xmlCreateURLParserCtxt",
+        "xmlCreateFileParserCtxt",
+        "xmlCreatePushParserCtxt",
+        "xmlOutputBufferCreateFd",
+        "xmlOutputBufferCreateIO",
+        "htmlCreateFileParserCtxt",
+        "htmlCreatePushParserCtxt",
+        "xmlCreateEntityParserCtxt",
+        "xmlCreateMemoryParserCtxt",
+        "xmlOutputBufferCreateFile",
+        "htmlCreateMemoryParserCtxt",
+        "xmlOutputBufferCreateBuffer",
+        "xmlCreateCharEncodingHandler",
+        "xmlGetNsList",
+        "xmlMalloc",
+        "xmlRealloc",
+        "xmlMemRealloc",
+        "xmlMallocAtomicLoc",
+        "xmlReallocLoc",
+        "xmlMallocAtomic"
+      ],
+      "duplicator": [
+        "xmlCopyDoc",
+        "xmlCopyDtd",
+        "xmlCopyNode",
+        "xmlCopyProp",
+        "xmlCopyNodeList",
+        "xmlCopyPropList",
+        "xmlDocCopyNodeList",
+        "xmlCopyNamespaceList",
+        "xmlStaticCopyNodeList",
+        "xmlListDup",
+        "xmlXPathObjectCopy",
+        "xmlStrdup",
+        "xmlCharStrdup",
+        "xmlHashCopy",
+        "xmlMemoryStrdup"
+      ],
+      "null_on_failure": [
+        "xmlAllocOutputBuffer",
+        "xmlAllocParserInputBuffer",
+        "xmlNewNs",
+        "xmlNewPI",
+        "xmlNewDoc",
+        "xmlNewDtd",
+        "htmlNewDoc",
+        "xmlNewNode",
+        "xmlNewProp",
+        "xmlNewText",
+        "xmlNewChild",
+        "xmlNewDocPI",
+        "xmlNewMutex",
+        "xmlBufCreate",
+        "xmlCreateURI",
+        "xmlMallocLoc",
+        "xmlMemMalloc",
+        "xmlNewEntity",
+        "xmlNewNsProp",
+        "xmlNewRMutex",
+        "xmlListCreate",
+        "xmlXPathNewNodeSetList",
+        "xmlBufCreateMem",
+        "xmlDictCreate",
+        "xmlHashCreate",
+        "xmlBufferCreate",
+        "xmlDictCreateSub",
+        "xmlHashCreateDict",
+        "xmlParserNsCreate",
+        "xmlCreateIntSubset",
+        "xmlBufferCreateSize",
+        "xmlCreateEnumeration",
+        "xmlBufferCreateStatic",
+        "xmlCreateIOParserCtxt",
+        "xmlXPathNodeSetCreate",
+        "xmlCreateDocParserCtxt",
+        "xmlCreateEntitiesTable",
+        "xmlCreateURLParserCtxt",
+        "xmlCreateFileParserCtxt",
+        "xmlCreatePushParserCtxt",
+        "xmlOutputBufferCreateFd",
+        "xmlOutputBufferCreateIO",
+        "htmlCreateFileParserCtxt",
+        "htmlCreatePushParserCtxt",
+        "xmlCreateEntityParserCtxt",
+        "xmlCreateMemoryParserCtxt",
+        "xmlOutputBufferCreateFile",
+        "htmlCreateMemoryParserCtxt",
+        "xmlOutputBufferCreateBuffer",
+        "xmlCreateCharEncodingHandler",
+        "xmlGetNsList",
+        "xmlMalloc",
+        "xmlRealloc",
+        "xmlMemRealloc",
+        "xmlMallocAtomicLoc",
+        "xmlReallocLoc",
+        "xmlMallocAtomic",
+        "xmlCopyDoc",
+        "xmlCopyDtd",
+        "xmlCopyNode",
+        "xmlCopyProp",
+        "xmlCopyNodeList",
+        "xmlCopyPropList",
+        "xmlDocCopyNodeList",
+        "xmlCopyNamespaceList",
+        "xmlStaticCopyNodeList",
+        "xmlListDup",
+        "xmlXPathObjectCopy",
+        "xmlStrdup",
+        "xmlCharStrdup",
+        "xmlHashCopy",
+        "xmlMemoryStrdup"
+      ],
+      "container_insert": [
+        "xmlListInsert",
+        "xmlListAppend",
+        "xmlSchemaValueAppend",
+        "xmlListPushBack",
+        "xmlListPushFront",
+        "xmlAddChild",
+        "xmlAddChildList",
+        "xmlAddNextSibling",
+        "xmlAddPrevSibling",
+        "xmlAddSibling"
+      ],
+      "deallocator": [
+        "xmlFreeNsList",
+        "xmlFreeNodeList",
+        "xmlFreePropList",
+        "xmlFreePatternList",
+        "xmlXPathFreeNodeSetList",
+        "xmlListDelete",
+        "xmlXPathFreeObject",
+        "xmlFreeNs",
+        "xmlBufFree",
+        "xmlFreeDoc",
+        "xmlFreeDtd",
+        "xmlFreeURI",
+        "xmlMemFree",
+        "xmlDictFree",
+        "xmlFreeNode",
+        "xmlFreeProp",
+        "xmlHashFree",
+        "xmlFreeMutex",
+        "xmlBufferFree",
+        "xmlFreeEntity",
+        "xmlFreeRMutex",
+        "xmlModuleFree",
+        "xmlSchemaFree",
+        "xmlFreeCatalog",
+        "xmlFreeIDTable",
+        "xmlFreePattern",
+        "xmlFreeAutomata",
+        "xmlFreeRefTable",
+        "xmlParserNsFree",
+        "xmlFreeValidCtxt",
+        "xmlRegFreeRegexp",
+        "xmlFreeParserCtxt",
+        "xmlFreeStreamCtxt",
+        "xmlFreeTextReader",
+        "xmlFreeTextWriter",
+        "xmlSchemaFreeType",
+        "xmlSchematronFree",
+        "xmlFree"
+      ]
+    },
+    "same_type_candidates": 20,
+    "api_matched_candidates": 8,
+    "pairs": [
+      {
+        "commit": "c1342946da47e14d64ea4af211a9402c937aa7f5",
+        "subject": "fix memory leak in issue 1054",
+        "files": [
+          "xmlwriter.c"
+        ],
+        "api_hits": [
+          "xmlFree",
+          "xmlListPushFront"
+        ],
+        "tp": 1,
+        "tn": 0,
+        "error": null,
+        "detected": true,
+        "perfect": false
+      },
+      {
+        "commit": "0bef170486223f5da754b2104773cc332a079ada",
+        "subject": "c14n: Fix memory leak after malloc failure",
+        "files": [
+          "c14n.c"
+        ],
+        "api_hits": [
+          "xmlFree",
+          "xmlRealloc"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "f6c1-f6d22c8ac6c7\nBuild type: native build\n\n../../src/5bfaab77f6c1/meson.build:1:0: ERROR: Option \"python\" value disabled is not boolean (true or false).\n\nA full log can be found at /home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/5bfaab77f6c1-f6d22c8ac6c7/meson-logs/meson-log.txt\n",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "28da8549a0519c11b5bb40cbb62c8f5fa67da83d",
+        "subject": "schematron: fix additional memory leaks on error paths",
+        "files": [
+          "schematron.c"
+        ],
+        "api_hits": [
+          "xmlFree"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 28da8549a0519c11b5bb40cbb62c8f5fa67da83d could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "98194640b80a8d04b5af22b077ffd8368a9568cf",
+        "subject": "Fix memory leak of prefix in xmlTextWriterStartElementNS()",
+        "files": [
+          "xmlwriter.c"
+        ],
+        "api_hits": [
+          "xmlFree"
+        ],
+        "tp": 1,
+        "tn": 0,
+        "error": null,
+        "detected": true,
+        "perfect": false
+      },
+      {
+        "commit": "ef44c240f5cc5dd41c8dfa76104eed73b075924b",
+        "subject": "encoding: Fix memory leak in xmlCharEncNewCustomHandler",
+        "files": [
+          "encoding.c"
+        ],
+        "api_hits": [
+          "xmlFree"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 287.2
+  }
+]

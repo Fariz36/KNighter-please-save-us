@@ -1,0 +1,15 @@
+{
+  "nullable_inout_capacity_ptr": [
+    "capacity"
+  ],
+  "capacity_computer": [
+    "xmlGrowCapacity"
+  ],
+  "reallocator": [
+    "xmlRealloc"
+  ],
+  "deref_read": [],
+  "deref_write": [],
+  "null_guard": [],
+  "null_on_failure": []
+}

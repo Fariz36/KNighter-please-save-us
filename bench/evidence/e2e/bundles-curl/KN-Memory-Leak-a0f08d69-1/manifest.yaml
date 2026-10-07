@@ -1,0 +1,26 @@
+id: KN-Memory-Leak-a0f08d69-1
+bug_type: Memory-Leak
+source:
+  project: curl
+  description: curl, the C library (libcurl) for transferring data with URLs
+  commit: a0f08d6975d00c3ea04e1bd2fcf60dad446266ec
+checker_file: latest_refined.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: "## Bug Pattern\n\nCleanup order violation: the code zeroes out a containing struct with `memset()`\
+  \ before unlinking/releasing an embedded resource. Here, `ctx->dest` is an intrusive list node; calling\
+  \ `Curl_peer_unlink(&ctx->dest)` after `memset(ctx, 0, ...)` loses the node\u2019s list pointers, so\
+  \ the unlink becomes ineffective and the peer is leaked. The unlink must happen before the struct is\
+  \ cleared."
+roles: {}
+portable: false
+hardcoded_identifiers:
+- Curl_peer_link
+- Curl_peer_unlink
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: 65cd7774217b3b2ce0ddfefaf31c73d7dffb576b
+exported: 2026-10-01T17:43:47+0700

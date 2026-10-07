@@ -1,0 +1,20 @@
+{
+  "cleanup": [
+    "lua_closethread"
+  ],
+  "destructor": [
+    "luaE_freethread",
+    "lua_close"
+  ],
+  "state_reset": [
+    "memset",
+    "luaE_resetthread",
+    "lua_resetthread"
+  ],
+  "link_detach": [
+    "luaF_unlinkupval"
+  ],
+  "link_storage": [
+    "openupval"
+  ]
+}

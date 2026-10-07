@@ -1,0 +1,114 @@
+{
+  "commit_id": "f2a1535712ff8622024d27b867480698752c254e",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/plugin-cache/plugins/08723b139bf4e68ea662/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/easy.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 3,
+        "fixed_total": 2,
+        "buggy_on_target": 2,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "curl_easy_recv",
+          "curl_easy_send"
+        ],
+        "fixed_functions": [
+          "curl_easy_recv",
+          "curl_easy_send"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/easy.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/work/src/d87b4e460513/lib/easy.c",
+          "line": 1378,
+          "column": 8,
+          "function": "curl_easy_send",
+          "bug_type": "Output Pointer Null Check",
+          "description": "Output pointer parameter may be NULL and is dereferenced before being checked",
+          "issue_hash": "32cb4045541fe9685f84db8c9c6c6bb9",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/f2a1535712ff/eee9461b/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-curl_work_src_d87b4e460513_lib_easy.c/report-32cb40.html",
+          "relpath": "lib/easy.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/work/src/d87b4e460513/lib/easy.c",
+          "line": 1344,
+          "column": 6,
+          "function": "Curl_senddata",
+          "bug_type": "Output Pointer Null Check",
+          "description": "Output pointer parameter may be NULL and is dereferenced before being checked",
+          "issue_hash": "33a0ef4be24d188d3f6a98c780f69e26",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/f2a1535712ff/eee9461b/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-curl_work_src_d87b4e460513_lib_easy.c/report-33a0ef.html",
+          "relpath": "lib/easy.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/work/src/d87b4e460513/lib/easy.c",
+          "line": 1307,
+          "column": 14,
+          "function": "curl_easy_recv",
+          "bug_type": "Output Pointer Null Check",
+          "description": "Output pointer parameter may be NULL and is passed to an internal writer before being checked",
+          "issue_hash": "9ce2429303a43a7c5a8a847f7cf8a9e7",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/f2a1535712ff/eee9461b/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-curl_work_src_d87b4e460513_lib_easy.c/report-9ce242.html",
+          "relpath": "lib/easy.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/easy.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/work/src/f2a1535712ff/lib/easy.c",
+          "line": 1349,
+          "column": 6,
+          "function": "Curl_senddata",
+          "bug_type": "Output Pointer Null Check",
+          "description": "Output pointer parameter may be NULL and is dereferenced before being checked",
+          "issue_hash": "33a0ef4be24d188d3f6a98c780f69e26",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/f2a1535712ff/eee9461b/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-curl_work_src_f2a1535712ff_lib_easy.c/report-33a0ef.html",
+          "relpath": "lib/easy.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/work/src/f2a1535712ff/lib/easy.c",
+          "line": 1311,
+          "column": 14,
+          "function": "curl_easy_recv",
+          "bug_type": "Output Pointer Null Check",
+          "description": "Output pointer parameter may be NULL and is passed to an internal writer before being checked",
+          "issue_hash": "9ce2429303a43a7c5a8a847f7cf8a9e7",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/f2a1535712ff/eee9461b/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-curl_work_src_f2a1535712ff_lib_easy.c/report-9ce242.html",
+          "relpath": "lib/easy.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 0.22,
+      "fixed": 0.22
+    },
+    "total_seconds": 0.48
+  },
+  "report_dir": "tmp/validation/f2a1535712ff/eee9461b"
+}

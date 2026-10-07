@@ -1,0 +1,79 @@
+{
+  "commit_id": "cbb5544c451f0b104a7753d90c51f1237f6a4037",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/2ec40654c387ec060cee/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/vauth/digest.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "auth_create_digest_http_message"
+        ],
+        "fixed_functions": [
+          "auth_create_digest_http_message"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/vauth/digest.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/4a15bc13f4b3/lib/vauth/digest.c",
+          "line": 390,
+          "column": 5,
+          "function": "Curl_auth_create_digest_md5_message",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "9fe0c39015307f58fc3974a9cfdb3599",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/cbb5544c451f/da4a9984/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_4a15bc13f4b3_lib_vauth_digest.c/report-9fe0c3.html",
+          "relpath": "lib/vauth/digest.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/vauth/digest.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/cbb5544c451f/lib/vauth/digest.c",
+          "line": 390,
+          "column": 5,
+          "function": "Curl_auth_create_digest_md5_message",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "9fe0c39015307f58fc3974a9cfdb3599",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/cbb5544c451f/da4a9984/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_cbb5544c451f_lib_vauth_digest.c/report-9fe0c3.html",
+          "relpath": "lib/vauth/digest.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 59.73,
+    "analysis_seconds": {
+      "buggy": 10.81,
+      "fixed": 10.79
+    },
+    "total_seconds": 81.38
+  },
+  "report_dir": "tmp/validation/cbb5544c451f/da4a9984"
+}

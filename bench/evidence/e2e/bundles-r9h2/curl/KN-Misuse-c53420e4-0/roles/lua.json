@@ -1,0 +1,60 @@
+{
+  "length_of": [
+    "strlen"
+  ],
+  "untrusted_size": [
+    "lua_tolstring",
+    "luaL_checklstring",
+    "luaL_optlstring",
+    "luaL_tolstring",
+    "luaL_len"
+  ],
+  "untrusted_data_accessor": [
+    "lua_tolstring",
+    "luaL_checklstring",
+    "luaL_optlstring",
+    "luaL_tolstring",
+    "lua_touserdata",
+    "luaL_testudata",
+    "luaL_checkudata",
+    "getudatamem",
+    "lua_getextraspace",
+    "luaL_prepbuffsize",
+    "luaL_buffinitsize"
+  ],
+  "allocator": [
+    "lua_pushlstring",
+    "lua_pushfstring",
+    "luaO_pushfstring",
+    "lua_pushvfstring",
+    "luaO_pushvfstring",
+    "luaX_newstring",
+    "luaL_tolstring",
+    "lua_newuserdatauv",
+    "luaL_buffinitsize",
+    "luaL_prepbuffsize",
+    "luaM_malloc_",
+    "luaM_realloc_",
+    "luaM_new",
+    "luaM_newvector",
+    "luaM_newobject",
+    "luaM_growvector",
+    "luaM_reallocvector",
+    "luaL_alloc"
+  ],
+  "deallocator": [
+    "luaM_free",
+    "luaM_free_",
+    "luaM_freemem",
+    "luaM_freearray",
+    "luaH_free",
+    "luaF_freeproto",
+    "luaE_freethread",
+    "luaZ_freebuffer"
+  ],
+  "error_setter": [
+    "luaL_error",
+    "luaG_runerror",
+    "luaK_semerror"
+  ]
+}

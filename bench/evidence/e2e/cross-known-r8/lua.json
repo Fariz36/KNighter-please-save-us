@@ -1,0 +1,932 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-1",
+    "source": "curl",
+    "target": "lua",
+    "bug_type": "Integer-Overflow",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "encoded_size_calculator": [
+        "luaS_sizelngstr"
+      ],
+      "input_length": [
+        "luaL_len",
+        "lua_len"
+      ],
+      "max_input_size": [
+        "MAX_SIZE",
+        "luaM_checksize",
+        "luaM_testsize"
+      ],
+      "error_sentinel": [
+        "luaM_toobig"
+      ]
+    },
+    "roles_mapped": 4,
+    "roles_total": 4,
+    "detected": [],
+    "perfect": [],
+    "seconds": 269.8
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "lua",
+    "bug_type": "Memory-Leak",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "cleanup": [
+        "luaF_closeupval",
+        "luaF_close"
+      ],
+      "destructor": [
+        "luaE_freethread",
+        "lua_close"
+      ],
+      "state_reset": [
+        "memset",
+        "luaE_resetthread",
+        "lua_resetthread"
+      ],
+      "link_detach": [
+        "luaF_unlinkupval"
+      ],
+      "link_storage": [
+        "openupval"
+      ]
+    },
+    "roles_mapped": 5,
+    "roles_total": 5,
+    "detected": [],
+    "perfect": [],
+    "seconds": 397.2
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "lua",
+    "bug_type": "Misuse",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "data_provider": [
+        "lua_tolstring",
+        "lua_tostring",
+        "luaL_checklstring",
+        "luaL_checkstring",
+        "luaL_optlstring",
+        "luaL_optstring",
+        "luaL_tolstring",
+        "lua_touserdata",
+        "lua_newuserdata",
+        "luaL_checkudata",
+        "luaL_testudata",
+        "getudatamem",
+        "luaO_utf8esc",
+        "luaZ_buffer"
+      ],
+      "length_provider": [
+        "lua_tolstring",
+        "luaL_checklstring",
+        "luaL_optlstring",
+        "luaL_tolstring",
+        "lua_rawlen",
+        "luaL_len",
+        "lua_len",
+        "luaZ_sizebuffer",
+        "luaO_utf8esc"
+      ],
+      "unbounded_string_consumer": [
+        "strlen",
+        "lua_pushstring",
+        "luaL_addstring",
+        "luaL_dostring",
+        "luaL_loadstring",
+        "lua_pushfstring",
+        "luaO_pushfstring",
+        "lua_pushvfstring",
+        "luaO_pushvfstring",
+        "lua_writestringerror",
+        "lua_stringtonumber"
+      ],
+      "bounded_nul_scanner": [
+        "memchr"
+      ],
+      "bounded_string_formatter": []
+    },
+    "roles_mapped": 4,
+    "roles_total": 5,
+    "detected": [],
+    "perfect": [],
+    "seconds": 281.8
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-1",
+    "source": "curl",
+    "target": "lua",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "duplicator": [],
+      "source_handle": [],
+      "destination_allocator": [
+        "luaM_new",
+        "luaM_malloc_",
+        "luaM_realloc_",
+        "luaM_newobject",
+        "luaL_alloc",
+        "debug_realloc"
+      ],
+      "field_copier": [
+        "setobj"
+      ]
+    },
+    "roles_mapped": 2,
+    "roles_total": 4,
+    "detected": [],
+    "perfect": [],
+    "seconds": 321.5
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "lua",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "api_entry_point": [
+        "lua_tonumberx",
+        "lua_tointegerx",
+        "lua_tolstring",
+        "lua_getallocf",
+        "lua_getstack",
+        "lua_getinfo"
+      ],
+      "out_param": [
+        "isnum",
+        "len",
+        "ud",
+        "ar"
+      ],
+      "out_param_writer": [
+        "auxgetinfo"
+      ]
+    },
+    "roles_mapped": 3,
+    "roles_total": 3,
+    "detected": [],
+    "perfect": [],
+    "seconds": 235.5
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2",
+    "source": "curl",
+    "target": "lua",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "length_field": [
+        "luaZ_sizebuffer"
+      ],
+      "data_pointer": [
+        "data",
+        "luaZ_buffer"
+      ],
+      "buffer_copy": [
+        "memcpy"
+      ],
+      "error_return": [
+        "luaL_error",
+        "luaL_argerror",
+        "luaM_error"
+      ],
+      "copy_flag": [],
+      "allocator": [
+        "luaM_malloc_",
+        "luaM_new",
+        "luaM_realloc_"
+      ],
+      "deallocator": [
+        "luaM_free_",
+        "luaM_free"
+      ],
+      "validation_guard": [
+        "luaL_argcheck",
+        "api_check"
+      ]
+    },
+    "roles_mapped": 7,
+    "roles_total": 8,
+    "detected": [],
+    "perfect": [],
+    "seconds": 162.8
+  },
+  {
+    "bundle": "KN-Double-Free-26dfab2f-1",
+    "source": "libxml2",
+    "target": "lua",
+    "bug_type": "Double-Free",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "resource": [],
+      "ownership_consumer_frees_on_failure": [
+        "luaL_alloc"
+      ],
+      "deallocator": [
+        "luaM_free",
+        "luaM_free_",
+        "luaM_freemem",
+        "luaM_freearray"
+      ],
+      "null_on_failure": [
+        "luaL_alloc"
+      ],
+      "duplicate_cleanup": [
+        "luaM_free",
+        "luaM_free_",
+        "luaM_freemem",
+        "luaM_freearray"
+      ],
+      "context_cleanup": [
+        "lua_close",
+        "luaE_freethread"
+      ]
+    },
+    "roles_mapped": 5,
+    "roles_total": 6,
+    "detected": [],
+    "perfect": [],
+    "seconds": 411.7
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "lua",
+    "bug_type": "Misuse",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "config_setter": [
+        "lua_gc"
+      ],
+      "divisor_field": []
+    },
+    "roles_mapped": 1,
+    "roles_total": 2,
+    "detected": [],
+    "perfect": [],
+    "seconds": 133.6
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+    "source": "libxml2",
+    "target": "lua",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "null_on_failure": [
+        "luaL_alloc",
+        "debug_realloc",
+        "lua_newstate",
+        "luaL_newstate"
+      ],
+      "length_of": [
+        "strlen",
+        "tsslen",
+        "lua_len",
+        "luaL_len",
+        "sizenode",
+        "luaH_size",
+        "stacksize",
+        "luaH_resize",
+        "luaS_resize",
+        "luaL_addsize",
+        "allocsizenode",
+        "luaF_protosize",
+        "resethookcount",
+        "luaE_threadsize",
+        "luaZ_sizebuffer",
+        "luaH_resizearray",
+        "lua_gethookcount",
+        "luaK_settablesize",
+        "luaL_buffinitsize",
+        "luaL_prepbuffsize",
+        "luaZ_resizebuffer",
+        "luaL_pushresultsize",
+        "ci_func",
+        "ttisstring",
+        "isLfunction",
+        "lua_isstring",
+        "lua_tostring",
+        "pushvfstring",
+        "ttisfunction",
+        "luaL_dostring",
+        "luaO_tostring"
+      ]
+    },
+    "roles_mapped": 2,
+    "roles_total": 2,
+    "detected": [],
+    "perfect": [],
+    "seconds": 272.1
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+    "source": "libxml2",
+    "target": "lua",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "nullable_inout_capacity_ptr": [
+        "capacity",
+        "psize"
+      ],
+      "capacity_computer": [
+        "luaM_growaux_"
+      ],
+      "reallocator": [
+        "luaM_realloc_",
+        "luaM_saferealloc_"
+      ],
+      "deref_read": [],
+      "deref_write": [],
+      "null_guard": [],
+      "null_on_failure": []
+    },
+    "roles_mapped": 3,
+    "roles_total": 7,
+    "detected": [],
+    "perfect": [],
+    "seconds": 242.5
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-2",
+    "source": "libxml2",
+    "target": "lua",
+    "bug_type": "Out-of-Bound",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "lookahead": [
+        "luaX_lookahead"
+      ],
+      "length_of": [
+        "luaZ_bufflen"
+      ]
+    },
+    "roles_mapped": 2,
+    "roles_total": 2,
+    "detected": [],
+    "perfect": [],
+    "seconds": 338.6
+  },
+  {
+    "bundle": "KN-Buffer-Overflow-a7200804-1",
+    "source": "sqlite",
+    "target": "lua",
+    "bug_type": "Buffer-Overflow",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "buffer_grow": [
+        "luaL_prepbuffsize"
+      ],
+      "required_capacity": [
+        "maxitem"
+      ],
+      "write_pointer": [
+        "buff"
+      ],
+      "digit_set": [],
+      "output_buffer": [
+        "b"
+      ]
+    },
+    "roles_mapped": 4,
+    "roles_total": 5,
+    "detected": [],
+    "perfect": [],
+    "seconds": 296.6
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "lua",
+    "bug_type": "Integer-Overflow",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "payload_length": [],
+      "local_payload_length": [],
+      "overflow_chunk_size": [],
+      "overflow_page_cache": [],
+      "reallocator": [
+        "luaM_realloc_",
+        "luaM_saferealloc_",
+        "luaM_reallocvchar",
+        "luaM_reallocvector",
+        "luaM_growaux_",
+        "luaM_growvector",
+        "luaL_alloc"
+      ],
+      "allocated_size_query": [],
+      "zero_initializer": [
+        "memset"
+      ],
+      "cache_index": [],
+      "too_narrow_arithmetic_type": [
+        "int",
+        "unsigned",
+        "size_t",
+        "lu_mem",
+        "lua_Integer",
+        "lua_Unsigned"
+      ]
+    },
+    "roles_mapped": 3,
+    "roles_total": 9,
+    "detected": [],
+    "perfect": [],
+    "seconds": 189.7
+  },
+  {
+    "bundle": "KN-Integer-Overflow-d87f8c49-0",
+    "source": "sqlite",
+    "target": "lua",
+    "bug_type": "Integer-Overflow",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "length_of": [],
+      "character_count_bound": [
+        "precision"
+      ],
+      "iterator_advance": [
+        "utf8_decode"
+      ],
+      "output_length": [
+        "length"
+      ],
+      "narrowing_cast": [
+        "cast_int"
+      ],
+      "safe_cap": [],
+      "buffer_append": [
+        "luaL_addlstring"
+      ]
+    },
+    "roles_mapped": 5,
+    "roles_total": 7,
+    "detected": [],
+    "perfect": [],
+    "seconds": 228.3
+  },
+  {
+    "bundle": "KN-Misuse-1bc183a9-1",
+    "source": "sqlite",
+    "target": "lua",
+    "bug_type": "Misuse",
+    "commits": [
+      {
+        "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "bug_type": "Use-After-Free",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "bug_type": "Use-Before-Initialization",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "tokenizer": [],
+      "dequote_helper": [],
+      "illegal_token_sentinel": [],
+      "dequoter_with_precondition": [],
+      "caller_ignoring_sentinel": []
+    },
+    "roles_mapped": 0,
+    "roles_total": 5,
+    "detected": [],
+    "perfect": [],
+    "seconds": 256.0
+  }
+]

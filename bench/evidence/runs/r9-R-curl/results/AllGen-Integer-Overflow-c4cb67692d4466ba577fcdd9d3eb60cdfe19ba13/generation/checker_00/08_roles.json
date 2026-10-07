@@ -1,0 +1,33 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "Curl_read16_le"
+      ],
+      "description": "decodes untrusted input bytes into an integer length or offset value"
+    },
+    "buffer_copy": {
+      "names": [
+        "Curl_client_write"
+      ],
+      "description": "consumes a buffer pointer and a length, assuming the length is within the buffer"
+    },
+    "error_setter": {
+      "names": [
+        "failf",
+        "Curl_failf"
+      ],
+      "description": "printf-style function that records or reports an error message"
+    },
+    "length_of": {
+      "names": [
+        "sizeof"
+      ],
+      "description": "yields the byte size of a type or object, used as a constant in bounds-check arithmetic"
+    }
+  }
+}

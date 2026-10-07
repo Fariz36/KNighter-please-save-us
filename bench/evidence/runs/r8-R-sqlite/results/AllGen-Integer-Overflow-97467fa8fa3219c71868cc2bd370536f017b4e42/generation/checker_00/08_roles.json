@@ -1,0 +1,51 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "decoded_length": {
+      "names": [
+        "n"
+      ],
+      "description": "integer variable holding a decoded length/count from untrusted input"
+    },
+    "place_value_multiplier": {
+      "names": [
+        "mult"
+      ],
+      "description": "integer variable holding a place-value multiplier in base-N decoding"
+    },
+    "output_capacity": {
+      "names": [
+        "nOut"
+      ],
+      "description": "integer parameter giving the capacity of the output buffer"
+    },
+    "output_offset": {
+      "names": [
+        "j"
+      ],
+      "description": "integer variable holding the current write offset in the output buffer"
+    },
+    "narrow_integer": {
+      "names": [
+        "int"
+      ],
+      "description": "32-bit or narrower signed integer type"
+    },
+    "wide_integer": {
+      "names": [
+        "sqlite3_int64"
+      ],
+      "description": "64-bit integer type used to prevent overflow"
+    },
+    "untrusted_input": {
+      "names": [
+        "a",
+        "aIn"
+      ],
+      "description": "pointer/array parameter holding untrusted encoded input"
+    }
+  }
+}

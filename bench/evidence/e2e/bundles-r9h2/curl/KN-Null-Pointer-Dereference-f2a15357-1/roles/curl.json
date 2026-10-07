@@ -1,0 +1,6 @@
+{
+  "out_param_api": [
+    "curl_easy_send",
+    "curl_easy_recv"
+  ]
+}

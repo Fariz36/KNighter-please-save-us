@@ -1,0 +1,155 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 20:06:05.332 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (lua), Repository Path: /home/faris/RA-MrYudis/Knight/targets/lua; plugin_build=standalone; validation_scoring=strict
+2026-10-07 20:06:07.143 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-9f512f6d8d4f4db1)
+2026-10-07 20:06:07.161 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision 0b29f408433e
+2026-10-07 20:06:07.278 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 20:06:07.327 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:09:10.296 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 183.0s
+2026-10-07 20:09:10.304 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-bc440a89-2 roles to lua: {'length_of': ['sizeudata', 'sizestrshr', 'sizeCclosure', 'sizeLclosure', 'luaS_sizelngstr']}
+2026-10-07 20:09:10.309 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 432731adf76769d52b0e
+2026-10-07 20:09:49.820 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': '0b29f408433e92953cc72b1d3e06c7ac8139e439', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/432731adf76769d52b0e/plugin.so', 'files': 34, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 39.5, 'jobs': 32}
+{"bundle": "KN-Integer-Overflow-bc440a89-2", "source": "curl", "target": "lua", "status": "scanned", "reports": 0}
+2026-10-07 20:09:49.916 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 20:09:49.953 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:13:35.786 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 225.8s
+2026-10-07 20:13:35.808 | INFO     | role_porting:port_roles:226 - Ported KN-Memory-Leak-a0f08d69-0 roles to lua: {'cleanup': ['luaF_closeupval', 'luaF_close', 'lua_closethread', 'lua_close', 'luaD_closeprotected'], 'container_remove': ['luaF_unlinkupval', 'luaS_remove'], 'deallocator': ['luaM_free', 'luaM_free_', 'luaM_freemem', 'luaM_freearray', 'luaH_free', 'luaF_freeproto', 'luaE_freethread', 'luaZ_freebuffer', 'luaC_freeallobjects', 'lua_close', 'luai_userstatefree', 'luaL_alloc']}
+2026-10-07 20:13:35.825 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 7cc468466819d695e6a1
+2026-10-07 20:14:26.307 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': '0b29f408433e92953cc72b1d3e06c7ac8139e439', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/7cc468466819d695e6a1/plugin.so', 'files': 34, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 50.45, 'jobs': 32}
+{"bundle": "KN-Memory-Leak-a0f08d69-0", "source": "curl", "target": "lua", "status": "scanned", "reports": 0}
+2026-10-07 20:14:26.436 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 20:14:26.513 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:17:16.734 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 170.2s
+2026-10-07 20:17:16.747 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c53420e4-0 roles to lua: {'length_of': ['strlen'], 'untrusted_size': ['lua_tolstring', 'luaL_checklstring', 'luaL_optlstring', 'luaL_tolstring', 'luaL_len'], 'untrusted_data_accessor': ['lua_tolstring', 'luaL_checklstring', 'luaL_optlstring', 'luaL_tolstring', 'lua_touserdata', 'luaL_testudata', 'luaL_checkudata', 'getudatamem', 'lua_getextraspace', 'luaL_prepbuffsize', 'luaL_buffinitsize'], 'allocator': ['lua_pushlstring', 'lua_pushfstring', 'luaO_pushfstring', 'lua_pushvfstring', 'luaO_pushvfstring', 'luaX_newstring', 'luaL_tolstring', 'lua_newuserdatauv', 'luaL_buffinitsize', 'luaL_prepbuffsize', 'luaM_malloc_', 'luaM_realloc_', 'luaM_new', 'luaM_newvector', 'luaM_newobject', 'luaM_growvector', 'luaM_reallocvector', 'luaL_alloc'], 'deallocator': ['luaM_free', 'luaM_free_', 'luaM_freemem', 'luaM_freearray', 'luaH_free', 'luaF_freeproto', 'luaE_freethread', 'luaZ_freebuffer'], 'error_setter': ['luaL_error', 'luaG_runerror', 'luaK_semerror']}
+2026-10-07 20:17:16.752 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 64aba4da6972615f614e
+2026-10-07 20:19:40.187 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': '0b29f408433e92953cc72b1d3e06c7ac8139e439', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/64aba4da6972615f614e/plugin.so', 'files': 34, 'failed': 0, 'crashed': 0, 'reports': 11, 'seconds': 143.42, 'jobs': 32}
+2026-10-07 20:19:40.206 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:19:40.237 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:19:40.237 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:23:06.197 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 206.0s
+2026-10-07 20:23:06.199 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:23:06.201 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:23:06.201 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:23:33.760 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 27.6s
+2026-10-07 20:23:33.765 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:23:33.777 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:23:33.778 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:24:56.853 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 83.1s
+2026-10-07 20:24:56.855 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:24:56.857 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:24:56.857 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:25:48.589 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 51.7s
+2026-10-07 20:25:48.590 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:25:48.591 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:25:48.592 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:26:48.536 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 59.9s
+{"bundle": "KN-Misuse-c53420e4-0", "source": "curl", "target": "lua", "status": "scanned", "reports": 11}
+2026-10-07 20:26:48.636 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 20:26:48.660 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:29:18.540 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 149.9s
+2026-10-07 20:29:18.546 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-466c06cf-0 roles to lua: {'duplicator': ['luaS_new', 'luaS_newlstr'], 'allocator': ['luaM_malloc_', 'luaM_realloc_', 'luaM_new', 'luaM_newvector', 'luaM_newobject', 'luaL_alloc', 'luaH_new', 'luaS_new', 'luaS_newlstr', 'debug_realloc']}
+2026-10-07 20:29:18.548 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 06effd79eb538174565a
+2026-10-07 20:30:23.907 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': '0b29f408433e92953cc72b1d3e06c7ac8139e439', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/06effd79eb538174565a/plugin.so', 'files': 34, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 65.35, 'jobs': 32}
+2026-10-07 20:30:23.909 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:30:23.915 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:30:23.915 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:31:26.283 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 62.4s
+{"bundle": "KN-Null-Pointer-Dereference-466c06cf-0", "source": "curl", "target": "lua", "status": "scanned", "reports": 1}
+2026-10-07 20:31:26.376 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 20:31:26.392 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:34:38.316 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 191.9s
+2026-10-07 20:34:38.323 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-f2a15357-1 roles to lua: {'out_param_api': ['lua_tonumberx', 'lua_tointegerx', 'lua_tolstring', 'lua_getallocf', 'lua_getstack', 'lua_getinfo', 'lua_resume', 'luaL_tolstring', 'luaL_buffinitsize', 'luaL_prepbuffsize', 'luaL_addlstring', 'luaL_addstring', 'luaL_addvalue', 'luaL_pushresult', 'luaL_pushresultsize', 'luaL_addgsub', 'luaL_buffinit', 'luaL_prepbuffer', 'luaL_addchar', 'luaL_addsize']}
+2026-10-07 20:34:38.326 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 34e0db0a07ac898e67bb
+2026-10-07 20:35:09.699 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': '0b29f408433e92953cc72b1d3e06c7ac8139e439', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/34e0db0a07ac898e67bb/plugin.so', 'files': 34, 'failed': 0, 'crashed': 0, 'reports': 30, 'seconds': 31.36, 'jobs': 32}
+2026-10-07 20:35:09.707 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:35:09.712 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:35:09.712 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:36:51.921 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 102.2s
+2026-10-07 20:36:51.923 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:36:51.924 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:36:51.924 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:39:00.011 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 128.1s
+2026-10-07 20:39:00.014 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:39:00.015 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:39:00.016 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:40:15.886 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 75.9s
+2026-10-07 20:40:15.888 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:40:15.890 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:40:15.890 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:41:47.924 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 92.0s
+2026-10-07 20:41:47.926 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:41:47.927 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:41:47.927 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:42:33.965 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 46.0s
+{"bundle": "KN-Null-Pointer-Dereference-f2a15357-1", "source": "curl", "target": "lua", "status": "scanned", "reports": 30}
+2026-10-07 20:42:34.065 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 20:42:34.099 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:45:03.181 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 149.1s
+2026-10-07 20:45:03.221 | INFO     | role_porting:port_roles:226 - Ported KN-Double-Free-26dfab2f-2 roles to lua: {'parser_input': [], 'null_on_failure': [], 'deallocator': ['luaZ_freebuffer', 'luaM_free', 'luaM_free_', 'luaM_freemem', 'luaM_freearray']}
+2026-10-07 20:45:03.242 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit cb8163c3bd7c162be1e7
+2026-10-07 20:47:18.596 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': '0b29f408433e92953cc72b1d3e06c7ac8139e439', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/cb8163c3bd7c162be1e7/plugin.so', 'files': 34, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 135.24, 'jobs': 32}
+{"bundle": "KN-Double-Free-26dfab2f-2", "source": "libxml2", "target": "lua", "status": "scanned", "reports": 0}
+2026-10-07 20:47:18.730 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 20:47:18.758 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:47:29.789 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 11.0s
+2026-10-07 20:47:29.794 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c8eaf223-2 roles to lua: {'init': []}
+2026-10-07 20:47:29.903 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 20:47:29.928 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:50:11.845 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 161.9s
+2026-10-07 20:50:11.854 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-962bd10d-2 roles to lua: {'allocator': ['luaD_growstack', 'luaH_resize', 'luaS_resize', 'luaM_growaux_', 'luaM_growvector', 'luaH_resizearray', 'luaD_reallocstack', 'luaZ_resizebuffer'], 'reallocator': ['luaM_realloc_', 'luaM_saferealloc_', 'luaM_reallocvchar', 'luaM_reallocvector', 'luaL_alloc', 'debug_realloc']}
+2026-10-07 20:50:11.857 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 8c281906915350ee8b1b
+2026-10-07 20:50:42.716 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': '0b29f408433e92953cc72b1d3e06c7ac8139e439', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/8c281906915350ee8b1b/plugin.so', 'files': 34, 'failed': 0, 'crashed': 0, 'reports': 3, 'seconds': 30.85, 'jobs': 32}
+2026-10-07 20:50:42.720 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:50:42.725 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:50:42.726 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:51:35.485 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 52.8s
+2026-10-07 20:51:35.559 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:51:35.560 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:51:35.561 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:52:12.851 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 37.3s
+2026-10-07 20:52:12.853 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:52:12.854 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:52:12.855 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:52:49.961 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 37.1s
+{"bundle": "KN-Null-Pointer-Dereference-962bd10d-2", "source": "libxml2", "target": "lua", "status": "scanned", "reports": 3}
+2026-10-07 20:52:50.057 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 20:52:50.081 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:54:41.280 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 111.2s
+2026-10-07 20:54:41.299 | INFO     | role_porting:port_roles:226 - Ported KN-Out-of-Bound-a7511af0-0 roles to lua: {'indexed_read': ['zgetc'], 'length_of': ['strlen', 'luaZ_bufflen']}
+2026-10-07 20:54:41.301 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 12c04fdd13fe828b3a14
+2026-10-07 20:55:53.566 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': '0b29f408433e92953cc72b1d3e06c7ac8139e439', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/12c04fdd13fe828b3a14/plugin.so', 'files': 34, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 72.22, 'jobs': 32}
+{"bundle": "KN-Out-of-Bound-a7511af0-0", "source": "libxml2", "target": "lua", "status": "scanned", "reports": 0}
+2026-10-07 20:55:53.650 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 20:55:53.688 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 21:00:49.452 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 295.8s
+2026-10-07 21:00:49.462 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-720d3afa-0 roles to lua: {'allocated_size': ['stacksize'], 'reallocator': ['luaM_realloc_', 'luaM_saferealloc_', 'luaM_growaux_', 'luaM_reallocvector', 'luaM_growvector', 'luaM_reallocvchar', 'luaH_resize', 'luaH_resizearray', 'luaS_resize', 'luaD_reallocstack', 'luaD_growstack', 'luaZ_resizebuffer', 'luaK_reserveregs', 'luaL_prepbuffsize', 'luaL_buffinitsize'], 'null_on_failure': ['lua_Alloc', 'luaL_alloc', 'debug_realloc'], 'initializer': ['memset']}
+2026-10-07 21:00:49.473 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 89b217028d40acc7e1fe
+2026-10-07 21:01:40.224 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': '0b29f408433e92953cc72b1d3e06c7ac8139e439', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/89b217028d40acc7e1fe/plugin.so', 'files': 34, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 50.73, 'jobs': 32}
+{"bundle": "KN-Integer-Overflow-720d3afa-0", "source": "sqlite", "target": "lua", "status": "scanned", "reports": 0}
+2026-10-07 21:01:40.327 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 21:01:40.402 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 21:05:03.901 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 203.5s
+2026-10-07 21:05:03.916 | INFO     | role_porting:port_roles:226 - Ported KN-Memory-Leak-7b60ed80-1 roles to lua: {'allocator': ['luaM_new', 'luaM_newobject', 'luaM_malloc_', 'luaM_realloc_', 'luaH_new', 'luaS_new', 'allocsizenode', 'luaL_alloc', 'debug_realloc'], 'duplicator': [], 'null_on_failure': ['luaL_alloc', 'debug_realloc', 'lua_newstate', 'luaL_newstate'], 'container_insert': ['luaH_set', 'luaH_setint'], 'deallocator': ['luaM_free', 'luaM_free_', 'luaM_freemem', 'luaM_freearray', 'luaH_free', 'luaF_freeproto', 'luaE_freethread', 'luaZ_freebuffer', 'luaC_freeallobjects', 'lua_close', 'luaL_alloc']}
+2026-10-07 21:05:03.923 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 2ec40654c387ec060cee
+2026-10-07 21:05:53.202 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': '0b29f408433e92953cc72b1d3e06c7ac8139e439', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/2ec40654c387ec060cee/plugin.so', 'files': 34, 'failed': 0, 'crashed': 0, 'reports': 16, 'seconds': 49.26, 'jobs': 32}
+2026-10-07 21:05:53.207 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 21:05:53.214 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 21:05:53.214 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 21:06:57.082 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 63.9s
+2026-10-07 21:06:57.107 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 21:06:57.115 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 21:06:57.115 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 21:07:56.154 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 59.0s
+2026-10-07 21:07:56.157 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 21:07:56.160 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 21:07:56.161 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 21:08:46.396 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 50.2s
+2026-10-07 21:08:46.400 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 21:08:46.402 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 21:08:46.402 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 21:10:18.337 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 91.9s
+2026-10-07 21:10:18.339 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 21:10:18.357 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 21:10:18.358 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 21:11:09.860 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 51.5s
+{"bundle": "KN-Memory-Leak-7b60ed80-1", "source": "sqlite", "target": "lua", "status": "scanned", "reports": 16}

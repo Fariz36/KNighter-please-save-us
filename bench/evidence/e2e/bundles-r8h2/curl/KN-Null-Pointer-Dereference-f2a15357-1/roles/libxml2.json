@@ -1,0 +1,17 @@
+{
+  "api_entry_point": [
+    "xmlDocDumpMemory",
+    "xmlDocDumpFormatMemory",
+    "xmlDocDumpMemoryEnc",
+    "xmlDocDumpFormatMemoryEnc"
+  ],
+  "out_param": [
+    "mem",
+    "size",
+    "doc_txt_ptr",
+    "doc_txt_len"
+  ],
+  "out_param_writer": [
+    "xmlDocDumpFormatMemoryEnc"
+  ]
+}

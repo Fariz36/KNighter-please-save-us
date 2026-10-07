@@ -1,0 +1,13 @@
+## Bug Pattern
+
+A value derived from an untrusted input byte (`count`, the number of continuation bytes) is used as a bit-shift amount (`count * 5`) before validating that it is within the safe range for the shifted type (`l_uint32`, 32 bits). For an invalid leading byte such as `\xFF`, `count` becomes 7, so the shift amount becomes 35, which exceeds the width of a 32-bit value and causes undefined behavior. The existing check `count > 5` happens after the shift, so it is too late to prevent the overflow. The fix validates/rejects the input before the shift.
+
+Roles:
+- `input_byte`: `c` / `(unsigned char)s[0]`
+- `continuation_count`: `count`
+- `shifted_operand`: `(l_uint32)(c & 0x7F)`, stored in `res`
+- `shift_amount`: `count * 5`
+- `shift_width`: `l_uint32` (32-bit)
+- `too_late_bound_check`: `if (count > 5 || res > MAXUTF || res < limits[count])` after the shift
+- `pre_shift_guard` (fix role): `if (c >= 0xfe) return NULL;` and `lua_assert(count <= 5)`
+- `error_return`: `return NULL`

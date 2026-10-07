@@ -1,0 +1,38 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "cleanup": {
+      "names": [
+        "cf_h2_proxy_ctx_clear"
+      ],
+      "description": "function that clears/resets the state of its object; after it returns, the object's link metadata may be zeroed/cleared"
+    },
+    "destructor": {
+      "names": [
+        "cf_h2_proxy_ctx_free"
+      ],
+      "description": "function that destroys/frees an object; may call cleanup and link_detach"
+    },
+    "state_reset": {
+      "names": [
+        "memset"
+      ],
+      "description": "operation that zeroes/resets the memory of its first argument, clearing fields including link storage"
+    },
+    "link_detach": {
+      "names": [
+        "Curl_peer_unlink"
+      ],
+      "description": "operation that detaches/unlinks a link/peer entry from its container; must run before the container's link storage is cleared"
+    },
+    "link_storage": {
+      "names": [
+        "dest"
+      ],
+      "description": "field inside the container that stores the link/peer metadata used by link_detach"
+    }
+  }
+}

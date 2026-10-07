@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A public API function accepts a nullable output-pointer argument and uses it—either by writing through it directly or by forwarding it to an internal writer—before checking whether it is NULL. A caller passing NULL therefore triggers a NULL-pointer dereference instead of receiving a bad-argument error.
+
+Roles:
+- nullable output pointer: `n` in `curl_easy_send` and `curl_easy_recv`
+- internal writer: `Curl_easy_recv(...)` writes through `n`, and `curl_easy_send` performs the direct store `*n = written`
+- error return: `CURLE_BAD_FUNCTION_ARGUMENT` is returned after the added NULL guard

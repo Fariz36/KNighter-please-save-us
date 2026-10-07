@@ -1,0 +1,4 @@
+{"commit": "22974326", "files": {"lapi.c": {"functions": [], "compiled_out": [], "preprocessed_lines": 2358}, "lvm.c": {"functions": ["luaV_finishset"], "compiled_out": [], "preprocessed_lines": 3364}}, "unsolvable": false}
+{"commit": "efddc230", "files": {"lstrlib.c": {"functions": ["prepstate", "reprepstate"], "compiled_out": [], "preprocessed_lines": 2595}}, "unsolvable": false}
+{"commit": "10eb89d1", "files": {"lutf8lib.c": {"functions": ["utf8_decode"], "compiled_out": [], "preprocessed_lines": 1126}}, "unsolvable": false}
+{"commit": "bc4bbcef", "files": {"lauxlib.c": {"functions": ["newbox"], "compiled_out": [], "preprocessed_lines": 2177}}, "unsolvable": false}

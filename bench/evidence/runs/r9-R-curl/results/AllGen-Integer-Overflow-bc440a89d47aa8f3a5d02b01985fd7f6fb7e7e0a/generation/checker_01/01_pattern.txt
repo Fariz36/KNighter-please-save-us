@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The bug pattern is unchecked signed-integer arithmetic on an `untrusted_size` while computing a derived/encoded size. The size calculation multiplies and adds constants before verifying that the input size is within a range where the result remains representable. This can overflow the signed result type, producing a wrapped or negative size that is then treated as valid. The fix adds a maximum-safe-input bound check before performing the calculation.
+
+Roles:
+- `untrusted_size`: the size value consumed by `encoder_base64_size` in this patch.
+- `size_calculator`: `encoder_base64_size`, which computes an encoded output size from the input size.
+- `size_bound`: `BASE64_MAX_INPUT_SIZE`, the maximum safe input size introduced by the fix.

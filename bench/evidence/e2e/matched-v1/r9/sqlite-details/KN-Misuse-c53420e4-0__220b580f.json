@@ -1,0 +1,12 @@
+{
+  "commit_id": "220b580fc7b2df387d268ae1bcaa6e67e3516fb9",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/misc/fossildelta.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/misc/fossildelta.c": "no compile entry"
+    }
+  }
+}

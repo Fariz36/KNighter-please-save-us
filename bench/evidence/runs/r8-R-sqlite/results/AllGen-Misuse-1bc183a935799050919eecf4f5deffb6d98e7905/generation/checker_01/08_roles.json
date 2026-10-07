@@ -1,0 +1,40 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "tokenizer": {
+      "names": [
+        "getConstraintToken",
+        "sqlite3GetToken"
+      ],
+      "description": "returns a token length and writes a token type to an out-parameter; can return an illegal-token sentinel for corrupt input"
+    },
+    "dequote_helper": {
+      "names": [
+        "quotedCompare"
+      ],
+      "description": "helper that copies token text and dequotes it, assuming the token is syntactically valid"
+    },
+    "illegal_token_sentinel": {
+      "names": [
+        "TK_ILLEGAL"
+      ],
+      "description": "token type value indicating the tokenizer encountered illegal/corrupt input"
+    },
+    "dequoter_with_precondition": {
+      "names": [
+        "sqlite3Dequote"
+      ],
+      "description": "dequoter that has a precondition/assertion for valid quoted tokens"
+    },
+    "caller_ignoring_sentinel": {
+      "names": [
+        "findConstraintFunc",
+        "dropConstraintFunc"
+      ],
+      "description": "caller that ignores the tokenizer's illegal-token sentinel before invoking the dequote helper"
+    }
+  }
+}

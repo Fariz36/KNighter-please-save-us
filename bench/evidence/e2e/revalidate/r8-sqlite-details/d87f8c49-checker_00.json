@@ -1,0 +1,67 @@
+{
+  "commit_id": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/7e3967e44b9f1a7b5f3f/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/printf.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "sqlite3_str_vappendf"
+        ],
+        "fixed_functions": [
+          "sqlite3_str_vappendf"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/printf.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/b1541d2f1713/src/printf.c",
+          "line": 861,
+          "column": 13,
+          "function": "unknown",
+          "bug_type": "Unbounded byte length narrowed to int",
+          "description": "Unbounded byte length narrowed to int before append; clamp to safe maximum",
+          "issue_hash": "00b3f85c9ac059dbecff50afd8347e3a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/d87f8c496549/1a084ba0/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_b1541d2f1713_src_printf.c/report-00b3f8.html",
+          "relpath": "src/printf.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/printf.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 22.75,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 3.89,
+      "fixed": 3.86
+    },
+    "total_seconds": 30.61
+  },
+  "report_dir": "tmp/validation/d87f8c496549/1a084ba0"
+}

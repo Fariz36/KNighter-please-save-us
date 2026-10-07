@@ -1,0 +1,7 @@
+## Bug Pattern
+
+An error path applies a `deallocator` to a resource after a `null_on_failure` initializer/factory call has already taken ownership and deallocated that same resource on failure. The caller assumes the resource still belongs to it when the call returns NULL, causing a double free.
+
+Roles:
+- `null_on_failure` / ownership-taking initializer: `xmlNewIOInputStream` — may return NULL, and on failure consumes/frees the passed resource.
+- `deallocator`: `xmlFreeParserInputBuffer` — frees the resource; the caller must not call it again after the ownership-taking initializer has already failed and freed it.

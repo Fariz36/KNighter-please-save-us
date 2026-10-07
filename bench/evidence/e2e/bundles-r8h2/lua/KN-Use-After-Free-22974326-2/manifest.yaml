@@ -1,0 +1,54 @@
+id: KN-Use-After-Free-22974326-2
+bug_type: Use-After-Free
+source:
+  project: lua
+  description: Lua, a scripting language interpreter and C library written in ANSI C
+  commit: 22974326ca0d4f893849ce722cc1d65b3e228f42
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: "## Bug Pattern\n\nA GC-managed object is accessed through a C-local pointer and/or only a weak\
+  \ reference, then passed to an operation that can trigger an emergency garbage collection (`potential_gc_trigger`)\
+  \ without first being placed in a GC-visible root (`gc_root_anchor`). Because the weak reference does\
+  \ not keep the object alive and the C pointer is not scanned by the GC, the emergency collection can\
+  \ reclaim the object, after which the stale pointer is used, causing a use-after-free.\n\nRoles:\n-\
+  \ `gc_managed_object`: `Table *h` / `t` \u2014 the table being updated.\n- `weak_reference_container`:\
+  \ the weak metatable / weak `__newindex` field (`__mode='v'`), which does not keep the table alive.\n\
+  - `c_local_pointer`: `h`, `t`, `tm` \u2014 local pointers not visible to the GC as roots.\n- `potential_gc_trigger`:\
+  \ `luaH_finishset` \u2014 may allocate/rehash and trigger emergency collection.\n- `gc_root_anchor`\
+  \ / `protect_from_gc`: `sethvalue2s(L, L->top.p, h); L->top.p++;` before the call, and `L->top.p--;`\
+  \ after.\n- `use_after_free_use`: `invalidateTMcache(h)`, `luaC_barrierback(L, obj2gco(h), val)`, and\
+  \ internal uses of `h` by `luaH_finishset` after possible collection."
+roles:
+  gc_managed_object:
+    names:
+    - Table
+    description: object managed by a garbage collector; its lifetime is not tied to C scopes
+  potential_gc_trigger:
+    names:
+    - luaH_finishset
+    description: operation that may trigger an emergency garbage collection, reclaiming unreachable objects
+  gc_root_anchor:
+    names:
+    - sethvalue2s
+    description: operation that makes a GC-managed object visible to the collector as a root, protecting
+      it from collection
+  weak_reference_container:
+    names:
+    - __mode
+    description: field or container that holds weak references, not keeping objects alive
+  use_after_free_use:
+    names:
+    - invalidateTMcache
+    - luaC_barrierback
+    description: operation that uses a pointer to a GC-managed object after a potential collection could
+      have freed it
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:56+0700

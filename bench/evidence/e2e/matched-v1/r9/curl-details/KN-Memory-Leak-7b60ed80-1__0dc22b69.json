@@ -1,0 +1,72 @@
+{
+  "commit_id": "0dc22b690dd8dba4048d494f09a50122dd7c0dd4",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/2ec40654c387ec060cee/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 2,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/vtls/vtls_scache.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "cf_ssl_scache_session_ldestroy"
+        ],
+        "fixed_functions": [
+          "cf_ssl_scache_session_ldestroy"
+        ]
+      },
+      {
+        "path": "lib/vtls/vtls_spack.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Curl_ssl_session_unpack"
+        ],
+        "fixed_functions": [
+          "Curl_ssl_session_unpack"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/vtls/vtls_scache.c": [],
+      "lib/vtls/vtls_spack.c": []
+    },
+    "fixed": {
+      "lib/vtls/vtls_scache.c": [],
+      "lib/vtls/vtls_spack.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 65.99,
+    "analysis_seconds": {
+      "buggy": 12.84,
+      "fixed": 11.44
+    },
+    "total_seconds": 90.33
+  },
+  "report_dir": "tmp/validation/0dc22b690dd8/a31684ae"
+}

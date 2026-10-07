@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A `duplicator` dereferences the fields of its source object pointer through a field-copying macro before checking whether the source pointer is NULL. The destination `allocator` result is checked, but the source argument is not. Passing NULL to the `duplicator` therefore causes a NULL-pointer dereference.
+
+Roles:
+- `duplicator`: `curl_url_dup`, `DUP`
+- `allocator`: `curlx_calloc`

@@ -1,0 +1,55 @@
+{
+  "commit_id": "6be0acd2afb3f55af3c721e1e35ac6675df3057a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-libxml2/plugin-cache/plugins/00ecb128f168c5c6c59e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "tree.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlAddChild"
+        ],
+        "fixed_functions": [
+          "xmlAddChild"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "tree.c": []
+    },
+    "fixed": {
+      "tree.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 59.06,
+      "fixed": 59.59
+    },
+    "total_seconds": 118.98
+  },
+  "report_dir": "tmp/validation/6be0acd2afb3/ead14b43"
+}

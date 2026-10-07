@@ -1,0 +1,47 @@
+id: KN-Memory-Leak-a0f08d69-0
+bug_type: Memory-Leak
+source:
+  project: curl
+  description: curl, the C library (libcurl) for transferring data with URLs
+  commit: a0f08d6975d00c3ea04e1bd2fcf60dad446266ec
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A `container_remove` operation is performed on an embedded link node **after** a `cleanup`/reset routine
+  has already zeroed or cleared the containing object. The removal therefore operates on zeroed link fields
+  and fails to actually detach the node, leaking the container/peer. The `container_remove` must happen
+  before the object is cleared/zeroed.
+
+
+  Roles:
+
+  - `cleanup`: `cf_h2_proxy_ctx_clear` (it destroys internals and zeroes the whole context with `memset`)
+
+  - `container_remove`: `Curl_peer_unlink`
+
+  - `deallocator`: `curlx_free`'
+roles:
+  cleanup:
+    names:
+    - cf_h2_proxy_ctx_clear
+    description: clears/resets an object, typically zeroing or invalidating its contents
+  container_remove:
+    names:
+    - Curl_peer_unlink
+    description: unlinks/removes an embedded link node from its containing object or container
+  deallocator:
+    names:
+    - curlx_free
+    description: frees memory or an object; the pointer must not be used afterwards
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:37+0700

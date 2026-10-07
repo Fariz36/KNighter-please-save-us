@@ -1,0 +1,20 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 14:42:35.912 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (libxml2), Repository Path: /home/faris/RA-MrYudis/Knight/targets/libxml2; plugin_build=standalone; validation_scoring=strict
+2026-10-07 14:42:37.658 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-0eae32d31c014fcb)
+2026-10-07 14:42:37.702 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision c71154dad39f
+2026-10-07 14:42:37.963 | INFO     | role_porting:port_roles:140 - libxml2: 415 candidate API names from headers
+2026-10-07 14:42:38.038 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:45:29.266 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 171.2s
+2026-10-07 14:45:29.277 | INFO     | role_porting:port_roles:189 - Ported KN-Double-Free-26dfab2f-1 roles to libxml2: {'resource': [], 'ownership_consumer_frees_on_failure': [], 'deallocator': [], 'null_on_failure': [], 'duplicate_cleanup': [], 'context_cleanup': []}
+2026-10-07 14:45:29.285 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 14:46:26.411 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c71154dad39f65ead334bd9aec4092392b1c63a7', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/e97e5f883febe893cb6b/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 57.11, 'jobs': 32}
+2026-10-07 14:46:26.413 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 14:47:31.191 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c71154dad39f65ead334bd9aec4092392b1c63a7', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/e97e5f883febe893cb6b/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 64.77, 'jobs': 32}
+{"bundle": "KN-Double-Free-26dfab2f-1", "reports_original": 1, "reports_ported": 0, "preserved": false}
+2026-10-07 14:47:31.215 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision 87c77060fbd6
+2026-10-07 14:47:31.491 | INFO     | role_porting:port_roles:140 - libxml2: 418 candidate API names from headers
+2026-10-07 14:47:31.530 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:47:56.882 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 25.4s
+2026-10-07 14:47:56.884 | INFO     | role_porting:port_roles:189 - Ported KN-Misuse-c8eaf223-2 roles to libxml2: {'config_setter': [], 'divisor_field': []}
+2026-10-07 14:47:56.886 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009

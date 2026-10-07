@@ -1,0 +1,61 @@
+id: KN-Memory-Leak-a0f08d69-0
+bug_type: Memory-Leak
+source:
+  project: curl
+  description: curl, the C library (libcurl) for transferring data with URLs
+  commit: a0f08d6975d00c3ea04e1bd2fcf60dad446266ec
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  Calling a `link_detach`/`ref_put` operation **after** the containing object has been reset/zeroed, so
+  the link metadata needed by the detach has already been cleared. This makes the detach a no-op and leaves
+  the peer/list entry leaked. The correct order is `link_detach` before `state_reset`.
+
+
+  Roles:
+
+  - `cleanup`: `cf_h2_proxy_ctx_clear`
+
+  - `destructor`: `cf_h2_proxy_ctx_free`
+
+  - `state_reset`: `memset(ctx, 0, sizeof(*ctx))`
+
+  - `link_detach`: `Curl_peer_unlink`
+
+  - `link_storage`: `ctx->dest`'
+roles:
+  cleanup:
+    names:
+    - cf_h2_proxy_ctx_clear
+    description: function that clears/resets the state of its object; after it returns, the object's link
+      metadata may be zeroed/cleared
+  destructor:
+    names:
+    - cf_h2_proxy_ctx_free
+    description: function that destroys/frees an object; may call cleanup and link_detach
+  state_reset:
+    names:
+    - memset
+    description: operation that zeroes/resets the memory of its first argument, clearing fields including
+      link storage
+  link_detach:
+    names:
+    - Curl_peer_unlink
+    description: operation that detaches/unlinks a link/peer entry from its container; must run before
+      the container's link storage is cleared
+  link_storage:
+    names:
+    - dest
+    description: field inside the container that stores the link/peer metadata used by link_detach
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: 3c44401b20c9b0cfdf2951dd290b1bc9192d6362
+exported: 2026-10-01T20:42:03+0700

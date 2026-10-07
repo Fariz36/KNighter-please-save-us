@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "ownership_taking_callee": {
+      "names": [
+        "xmlNewIOInputStream"
+      ],
+      "description": "callee that takes ownership of a resource argument; if it fails, it releases the resource and returns NULL"
+    },
+    "resource_deallocator": {
+      "names": [
+        "xmlFreeParserInputBuffer"
+      ],
+      "description": "function that deallocates a resource; its first argument is the resource pointer"
+    }
+  }
+}

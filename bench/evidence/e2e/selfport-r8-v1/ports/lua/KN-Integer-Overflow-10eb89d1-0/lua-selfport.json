@@ -1,0 +1,78 @@
+{
+  "target": "lua",
+  "commit": "7c40c5edb2364745bf0add6feb02c7c90dfbae3e",
+  "candidates": 689,
+  "offered": {
+    "decoder_function": [
+      "luaK_code",
+      "assert_code",
+      "luaK_codeABC",
+      "luaK_codeABx",
+      "luaK_codeABCk",
+      "ci_func",
+      "cast_func",
+      "isLfunction",
+      "ttisfunction",
+      "lua_CFunction",
+      "lua_isfunction",
+      "lua_pushcfunction"
+    ],
+    "input_byte": [
+      "cast_byte",
+      "gettotalbytes",
+      "luaX_setinput"
+    ],
+    "continuation_count": [
+      "cast_num",
+      "sizenode",
+      "luaH_size",
+      "sizeudata",
+      "stacksize",
+      "cast_sizet",
+      "sizestrshr",
+      "luaH_resize",
+      "luaS_resize",
+      "luaL_addsize",
+      "sizeCclosure",
+      "sizeLclosure",
+      "allocsizenode",
+      "luaM_testsize",
+      "luaF_protosize",
+      "luaM_checksize",
+      "luaE_threadsize",
+      "luaS_sizelngstr",
+      "luaZ_sizebuffer",
+      "luaH_resizearray",
+      "luaK_settablesize",
+      "luaZ_resizebuffer",
+      "tonumber",
+      "cast_byte",
+      "lua_Number",
+      "tonumberns",
+      "ttisnumber",
+      "lua_tonumber",
+      "gettotalbytes",
+      "luaV_tonumber_",
+      "lua_str2number",
+      "lua_number2strx",
+      "lua_strx2number",
+      "lua_numbertointeger"
+    ]
+  },
+  "mapping": {
+    "decoder_function": [],
+    "input_byte": [],
+    "continuation_count": []
+  },
+  "dropped_not_in_target": {
+    "decoder_function": [],
+    "input_byte": [],
+    "continuation_count": []
+  },
+  "rationale": {
+    "decoder_function": "No candidate in the provided list plays the role of a UTF-8 decoder function.",
+    "input_byte": "No candidate in the provided list is a variable holding the first byte of a UTF-8 sequence.",
+    "continuation_count": "No candidate in the provided list is a variable counting the number of continuation bytes."
+  },
+  "llm_seconds": 76.1
+}

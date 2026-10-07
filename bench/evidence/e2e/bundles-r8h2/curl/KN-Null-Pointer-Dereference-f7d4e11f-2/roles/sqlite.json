@@ -1,0 +1,79 @@
+{
+  "length_field": [
+    "n",
+    "sqlite3_value_bytes",
+    "sqlite3_column_bytes",
+    "sqlite3_blob_bytes",
+    "sqlite3_str_length",
+    "sqlite3_msize",
+    "sqlite3MallocSize",
+    "sqlite3DbMallocSize",
+    "sqlite3Fts5BufferSize"
+  ],
+  "data_pointer": [
+    "data",
+    "z",
+    "p",
+    "sqlite3_value_blob",
+    "sqlite3_column_blob",
+    "sqlite3_value_pointer",
+    "sqlite3_bind_pointer",
+    "sqlite3_result_pointer",
+    "sqlite3VdbeMemSetPointer",
+    "sqlite3Fts5BufferSet",
+    "fts5BufferSet",
+    "sqlite3Fts5BufferAppendBlob",
+    "fts5BufferAppendBlob"
+  ],
+  "buffer_copy": [
+    "memcpy",
+    "memmove"
+  ],
+  "error_return": [
+    "SQLITE_NOMEM",
+    "SQLITE_MISUSE",
+    "SQLITE_ERROR"
+  ],
+  "copy_flag": [
+    "SQLITE_TRANSIENT",
+    "SQLITE_STATIC"
+  ],
+  "allocator": [
+    "sqlite3Malloc",
+    "sqlite3MallocZero",
+    "sqlite3DbMallocRaw",
+    "sqlite3DbMallocRawNN",
+    "sqlite3DbMallocZero",
+    "sqlite3_malloc",
+    "sqlite3_malloc64",
+    "sqlite3_realloc",
+    "sqlite3_realloc64",
+    "sqlite3Realloc",
+    "sqlite3DbRealloc",
+    "sqlite3DbReallocOrFree",
+    "sqlite3DbStrDup"
+  ],
+  "deallocator": [
+    "sqlite3_free",
+    "sqlite3DbFree",
+    "sqlite3DbFreeNN",
+    "sqlite3PageFree",
+    "sqlite3ValueFree",
+    "sqlite3_str_free",
+    "sqlite3_free_table",
+    "sqlite3_free_filename",
+    "sqlite3_snapshot_free",
+    "sqlite3Fts5BufferFree",
+    "sqlite3Fts3ExprFree",
+    "sqlite3Fts5ExprFree",
+    "sqlite3Fts5HashFree",
+    "sqlite3Fts5ConfigFree",
+    "sqlite3Fts5TermsetFree",
+    "sqlite3Fts3MIBufferFree",
+    "sqlite3Fts3SegReaderFree",
+    "sqlite3Fts5ParseNodeFree",
+    "sqlite3VdbeFreeCursor",
+    "sqlite3VdbeValueListFree"
+  ],
+  "validation_guard": []
+}

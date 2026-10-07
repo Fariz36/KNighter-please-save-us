@@ -1,0 +1,12 @@
+{
+  "commit_id": "1b828b87704f0bdf33565315572ffeae98ceb242",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/misc/csv.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/misc/csv.c": "no compile entry"
+    }
+  }
+}

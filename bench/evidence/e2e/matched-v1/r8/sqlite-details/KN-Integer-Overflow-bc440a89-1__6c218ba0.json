@@ -1,0 +1,12 @@
+{
+  "commit_id": "6c218ba0ad8942ae1e7f24594349860415680d95",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/misc/spellfix.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/misc/spellfix.c": "no compile entry"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+## Bug Pattern
+
+A registry entry is created and **published/inserted before it is fully initialized**. The combined lookup-and-insert API (`luaL_newmetatable`) creates the metatable and immediately stores it in the registry; a later `init`-style call (`luaL_setfuncs`) can still raise an error. If that happens, the registry keeps a partially initialized metatable. Later lookups see that the entry already exists and skip initialization, so the incomplete metatable is reused. The fix creates an unpublished table, initializes it, and only then inserts it into the registry.
+
+Roles:
+- `allocator`/creator: `luaL_newlibtable` creates the table without publishing it; in the buggy path, `luaL_newmetatable` also creates the table.
+- `init`: `luaL_setfuncs` initializes the metatable fields and may raise an error.
+- `container_insert`: `luaL_newmetatable` publishes into the registry before initialization in the buggy code; `lua_setfield` publishes only after initialization in the fixed code.
+- `lookup`: `luaL_getmetatable` checks whether the registry entry already exists.
+- `lookup`+`allocator`+`container_insert` combined: `luaL_newmetatable` performs all three and is therefore unsafe when used before a fallible `init`.

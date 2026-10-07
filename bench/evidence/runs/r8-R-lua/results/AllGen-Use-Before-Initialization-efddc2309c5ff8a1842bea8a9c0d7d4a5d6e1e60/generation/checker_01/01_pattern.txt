@@ -1,0 +1,14 @@
+## Bug Pattern
+
+A mutable per-invocation guard/counter is initialized only in the one-time state initializer, not in the per-invocation state resetter. If a match aborts through a non-local error after modifying that counter, the counter remains stale. The reusable iterator then re-enters matching without restoring the counter, so the guard no longer detects recursion/stack overflow.
+
+Roles:
+- `state_holder`: `MatchState`
+- `one_time_state_initializer`: `prepstate()`
+- `per_invocation_state_resetter`: `reprepstate()`
+- `mutable_recursion_guard_counter`: `MatchState.matchdepth`, initialized to `MAXCCALLS`
+- `nonlocal_error_raiser`: `luaL_error()` in the match routine
+- `reusable_iterator_state`: the state/closure returned by `string.gmatch`, reusing the same `MatchState` across calls
+- `guard_decrement_restore`: `ms->matchdepth--` and `ms->matchdepth++` in `match()`
+
+In the buggy code, `matchdepth` is set in `prepstate()` only once. After an error, it can be left decremented; `reprepstate()` only resets `level` and does not restore `matchdepth`, so the next match may bypass the intended recursion limit.

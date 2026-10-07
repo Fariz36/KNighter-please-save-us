@@ -1,0 +1,15 @@
+{
+  "buffer_grow": [
+    "luaL_prepbuffsize"
+  ],
+  "required_capacity": [
+    "len"
+  ],
+  "write_pointer": [
+    "buff"
+  ],
+  "digit_set": [],
+  "output_buffer": [
+    "b"
+  ]
+}

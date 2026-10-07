@@ -1,0 +1,38 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "xmlStrdup"
+      ],
+      "description": "memory allocation/duplication function that may return NULL on failure"
+    },
+    "duplicator": {
+      "names": [
+        "xmlStrdup"
+      ],
+      "description": "string duplication function that may return NULL on failure"
+    },
+    "length_of": {
+      "names": [
+        "strlen"
+      ],
+      "description": "function that computes string length and dereferences its pointer argument"
+    },
+    "deallocator": {
+      "names": [
+        "xmlFree"
+      ],
+      "description": "function that frees memory allocated by allocator/duplicator"
+    },
+    "object_field": {
+      "names": [
+        "string"
+      ],
+      "description": "struct field storing the pointer returned by allocator/duplicator"
+    }
+  }
+}

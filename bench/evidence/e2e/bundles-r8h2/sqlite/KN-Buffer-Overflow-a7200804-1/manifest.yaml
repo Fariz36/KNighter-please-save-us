@@ -1,0 +1,78 @@
+id: KN-Buffer-Overflow-a7200804-1
+bug_type: Buffer-Overflow
+source:
+  project: sqlite
+  description: SQLite, an embedded SQL database engine written in C
+  commit: a7200804eb4aeb35229388a37ea00af27559bd25
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A `required_capacity` calculation for an `output_buffer` underestimates the number of bytes that the
+  subsequent formatting/write path can emit. The calculation adds a fixed `overhead_slack` to variable-size
+  terms, but optional formatting bytes are not fully accounted for. The `buffer_grow` operation only guarantees
+  the underestimated size, and later raw stores through a `write_pointer` plus a terminator store overflow
+  the buffer.
+
+
+  Roles in this patch:
+
+
+  - `output_buffer`: `pAccum->zText`, `zOut`
+
+  - `required_capacity`: `szBufNeeded`
+
+  - `buffer_grow` / `capacity_reserver`: `sqlite3StrAccumEnlargeIfNeeded`
+
+  - `variable_size_terms`: `MAX(e2,0)`, `precision`, `width`, and the `cThousand` adjustment
+
+  - `fixed_overhead_slack`: the literal `+8` in the buggy code, changed to `+10`
+
+  - `optional_format_bytes`: `prefix`, decimal point via `flag_dp`, forced trailing zero via `flag_rtz`/`flag_altform2`,
+  and exponent suffix like `e+NNN`
+
+  - `write_pointer`: `bufpt`
+
+  - `raw_store`: `*(bufpt++) = ...`, `memcpy(...)`, `memset(...)`
+
+  - `terminator_store`: `zOut[length] = 0`
+
+  - `write_length`: `length`
+
+
+  Concretely, `%!.0e` on `-1e100` requests only 8 bytes of rendering space, but the formatter writes `-1.0e+100`
+  before the terminator. The buffer is therefore too small for the actual formatted output, causing a
+  buffer overflow.'
+roles:
+  buffer_grow:
+    names:
+    - sqlite3StrAccumEnlargeIfNeeded
+    description: Function that ensures the output buffer has at least the requested capacity.
+  required_capacity:
+    names:
+    - szBufNeeded
+    description: Variable holding the computed required capacity for an output buffer, passed to a buffer
+      grow function.
+  write_pointer:
+    names:
+    - bufpt
+    description: Pointer used to write characters into the output buffer.
+  digit_set:
+    names:
+    - aDigits
+    description: Array of digit characters used by the formatter.
+  output_buffer:
+    names:
+    - zOut
+    description: Pointer to the output buffer being written to.
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:58+0700

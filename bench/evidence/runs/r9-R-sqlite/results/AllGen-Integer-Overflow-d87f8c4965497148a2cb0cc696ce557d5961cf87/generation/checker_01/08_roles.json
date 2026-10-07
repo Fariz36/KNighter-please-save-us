@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "clamp": {
+      "names": [
+        "MIN"
+      ],
+      "description": "macro that returns the minimum of two values; used to clamp a length before narrowing"
+    },
+    "parser_input": {
+      "names": [
+        "SQLITE_SKIP_UTF8"
+      ],
+      "description": "macro that advances a pointer over one UTF-8 code point in a string"
+    }
+  }
+}

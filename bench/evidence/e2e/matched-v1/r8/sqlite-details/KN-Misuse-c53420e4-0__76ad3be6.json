@@ -1,0 +1,12 @@
+{
+  "commit_id": "76ad3be617e8abc232ce2b6dcd2f35ac4da99beb",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "tool/dbtotxt.c": "no compile entry"
+    },
+    "fixed": {
+      "tool/dbtotxt.c": "no compile entry"
+    }
+  }
+}

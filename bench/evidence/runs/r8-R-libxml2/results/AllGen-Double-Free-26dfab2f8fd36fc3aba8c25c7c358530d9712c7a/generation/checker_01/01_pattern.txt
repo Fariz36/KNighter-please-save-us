@@ -1,0 +1,11 @@
+## Bug Pattern
+
+The caller passes an owned resource to an `ownership_consumer_frees_on_failure` function, then frees that same resource again when the function reports failure via `null_on_failure`. Since the callee already releases the resource on its failure path, the caller's cleanup performs a second release, causing a double free/use-after-free. Ownership is transferred before success is established, so the caller must not free the argument after failure.
+
+Roles:
+- `resource`: `input` (`xmlParserInputBuffer *`)
+- `ownership_consumer_frees_on_failure`: `xmlNewIOInputStream(ctxt, input, ...)`
+- `null_on_failure`: `xmlNewIOInputStream` returning `NULL`
+- `deallocator`: `xmlFreeParserInputBuffer`
+- `duplicate_cleanup`: `if (pinput == NULL) { xmlFreeParserInputBuffer(input); ... }`
+- `context_cleanup`: `xmlFreeParserCtxt(ctxt)` remains valid because `ctxt` ownership stays with the caller.

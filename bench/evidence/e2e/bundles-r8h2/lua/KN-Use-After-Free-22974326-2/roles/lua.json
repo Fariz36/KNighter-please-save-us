@@ -1,0 +1,18 @@
+{
+  "gc_managed_object": [
+    "Table"
+  ],
+  "potential_gc_trigger": [
+    "luaH_finishset"
+  ],
+  "gc_root_anchor": [
+    "sethvalue2s"
+  ],
+  "weak_reference_container": [
+    "__mode"
+  ],
+  "use_after_free_use": [
+    "invalidateTMcache",
+    "luaC_barrierback"
+  ]
+}

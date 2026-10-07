@@ -1,0 +1,92 @@
+{
+  "commit_id": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/48ceadf3bc80ac325ba7/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lapi.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": []
+      },
+      {
+        "path": "lvm.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "luaV_finishset"
+        ],
+        "fixed_functions": [
+          "luaV_finishset"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lapi.c": [],
+      "lvm.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/c931d86e98da/lvm.c",
+          "line": 338,
+          "column": 9,
+          "function": "luaV_finishset",
+          "bug_type": "Weak GC Object Use Without Root Anchor",
+          "description": "Weak GC object used without a root anchor before GC-triggering call",
+          "issue_hash": "7c23281e14b9f65e1e09c54529b6e9a5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/22974326ca0d/ac54967d/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_c931d86e98da_lvm.c/report-7c2328.html",
+          "relpath": "lvm.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lapi.c": [],
+      "lvm.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/22974326ca0d/lvm.c",
+          "line": 345,
+          "column": 9,
+          "function": "luaV_finishset",
+          "bug_type": "Weak GC Object Use Without Root Anchor",
+          "description": "Weak GC object used without a root anchor before GC-triggering call",
+          "issue_hash": "7c23281e14b9f65e1e09c54529b6e9a5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/22974326ca0d/ac54967d/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_22974326ca0d_lvm.c/report-7c2328.html",
+          "relpath": "lvm.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 12.46,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 7.53,
+      "fixed": 7.42
+    },
+    "total_seconds": 27.66
+  },
+  "report_dir": "tmp/validation/22974326ca0d/ac54967d"
+}

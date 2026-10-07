@@ -1,0 +1,14 @@
+{
+  "encoded_size_calculator": [
+    "encoder_base64_size"
+  ],
+  "input_length": [
+    "datasize"
+  ],
+  "max_input_size": [
+    "BASE64_MAX_INPUT_SIZE"
+  ],
+  "error_sentinel": [
+    "-1"
+  ]
+}

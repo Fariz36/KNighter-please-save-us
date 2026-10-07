@@ -1,0 +1,51 @@
+id: KN-Misuse-c8eaf223-2
+bug_type: Misuse
+source:
+  project: libxml2
+  description: libxml2, the XML parsing and manipulation library written in C
+  commit: c8eaf2236ff16667970f96f3f01e119c99d38ab2
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A value supplied through a `config_setter` is stored directly and later used as a `divisor` in a division
+  expression. The setter does not reject zero, and the division site does not have a `zero_guard`, so
+  setting the value to zero leads to division-by-zero / SIGFPE.
+
+
+  In this patch:
+
+  - `config_setter`: `xmlCtxtSetMaxAmplification`
+
+  - `config_field` / `divisor`: `ctxt->maxAmpl`
+
+  - `division`: `*expandedSize / ctxt->maxAmpl`
+
+  - missing/added `zero_guard`: check that `maxAmpl != 0` before division and reject `maxAmpl == 0` in
+  the setter
+
+
+  The root cause is allowing a divisor-valued configuration field to become zero without enforcing a non-zero
+  invariant at either the setter or the use site.'
+roles:
+  config_setter:
+    names:
+    - xmlCtxtSetMaxAmplification
+    description: function that stores a configuration argument into a field; if the stored value is later
+      used as a divisor, the setter must reject zero
+  divisor_field:
+    names:
+    - maxAmpl
+    description: configuration field used as a divisor in arithmetic; it must be guaranteed non-zero before
+      every division
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: 3c44401b20c9b0cfdf2951dd290b1bc9192d6362
+exported: 2026-10-01T20:43:50+0700

@@ -1,0 +1,34 @@
+id: KN-Out-of-Bound-a7511af0-0
+bug_type: Out-of-Bound
+source:
+  project: libxml2
+  description: libxml2, the XML parsing and manipulation library written in C
+  commit: a7511af09f99995cdf81994db21f4eba564276b5
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: "## Bug Pattern\n\nThe bug pattern is an unchecked indexed read from a parser input buffer. An\
+  \ accessor macro dereferences `buffer[current + index]` without verifying that the resulting offset\
+  \ is within the buffer\u2019s valid length. When the parser cursor is near the end of the input, a lookahead\
+  \ index can read past the allocated string, causing an out-of-bounds read.\n\nRoles:\n- `indexed_read`:\
+  \ `NXT` (expands to `ctxt->cur[index]`)\n- `length_of`: `strlen` (used to compute `ctxt->len`, which\
+  \ the fixed macro compares against)"
+roles:
+  indexed_read:
+    names:
+    - NXT
+    description: Macro that performs an indexed read from a buffer; its expansion must verify the index
+      is within the buffer's valid length.
+  length_of:
+    names:
+    - strlen
+    description: Function that returns the length of a string, used to compute a buffer's valid length.
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:40+0700

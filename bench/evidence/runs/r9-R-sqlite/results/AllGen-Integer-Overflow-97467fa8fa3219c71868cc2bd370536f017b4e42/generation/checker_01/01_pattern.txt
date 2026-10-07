@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The bug pattern is an `untrusted_size` derived from `parser_input` being accumulated with signed arithmetic in an integer type that can overflow before it is checked against the destination capacity. Because the bound check happens only after the base-26 accumulation/multiplication, a corrupt input can wrap the computed length (or the later `j+n` comparison), bypass the check, and pass a bogus size to a memory-writing function. The fix widens the accumulator/multiplier and validates the accumulated size during parsing.
+
+Roles:
+- `parser_input`: `kvvfsDecode`’s `a` / `aIn[i]`
+- `untrusted_size`: `n` and `mult`, computed from the `a`–`z` run-length characters and used as the size for `memset`
+- `memory_writer`: `memset(&aOut[j], 0, n)`

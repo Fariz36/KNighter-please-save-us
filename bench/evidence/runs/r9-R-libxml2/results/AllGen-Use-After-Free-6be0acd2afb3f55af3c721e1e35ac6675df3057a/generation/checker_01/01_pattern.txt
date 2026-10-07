@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A `container_insert` path consumes/frees the inserted object without first calling `container_remove` on it. An object that may still be linked in its previous parent/list is passed to a `deallocator`, leaving the container with a dangling reference to freed storage. Later traversal or destruction of the container can cause use-after-free/double-free.
+
+Roles:
+- `container_insert`: `xmlAddChild`
+- `container_remove`: `xmlUnlinkNodeInternal`
+- `deallocator`: `xmlFreeNode`

@@ -1,0 +1,343 @@
+{
+  "commit_id": "a7200804eb4aeb35229388a37ea00af27559bd25",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/080d1ee0dc22134c21cb/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/printf.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 13,
+        "fixed_total": 13,
+        "buggy_on_target": 12,
+        "fixed_on_target": 12,
+        "buggy_functions": [
+          "sqlite3_str_vappendf"
+        ],
+        "fixed_functions": [
+          "sqlite3_str_vappendf"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/printf.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 654,
+          "column": 13,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "16159e421fab0326681eadd85b49e666",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-16159e.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 635,
+          "column": 22,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "5e63ce13e46e49240f7f6ce214624c7a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-5e63ce.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 723,
+          "column": 13,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "721f6fc3c01a135a96d056f898e90546",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-721f6f.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 661,
+          "column": 22,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "7fa5699b3cafa1f51f622281a28069b5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-7fa569.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 641,
+          "column": 22,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "a82847e72c04ac43b802e7d81e9ad42a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-a82847.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 650,
+          "column": 11,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "b26092c7f320e7663a5473f9ed45568f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-b26092.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 252,
+          "column": 7,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "d15f70f5a6c64b021229b4cfafe332c5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-d15f70.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 668,
+          "column": 11,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "d2b14f981702499534eeff1123faf257",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-d2b14f.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 1179,
+          "column": 5,
+          "function": "sqlite3_str_append",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "e3e1ddf624cb2f79a646a4d66b615ad0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-e3e1dd.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 732,
+          "column": 22,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "ea6c76058c739468f6a5f775733eb1c7",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-ea6c76.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 722,
+          "column": 13,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "ec75b75e0a3e46ee09ce0bc4709ec256",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-ec75b7.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 682,
+          "column": 13,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "f5f250b774ed878571cd2a529b93be2f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-f5f250.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 677,
+          "column": 13,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "f9063ca00d58e491a82607d53fc2dbe5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-f9063c.html",
+          "relpath": "src/printf.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/printf.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 654,
+          "column": 13,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "16159e421fab0326681eadd85b49e666",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-16159e.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 635,
+          "column": 22,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "5e63ce13e46e49240f7f6ce214624c7a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-5e63ce.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 723,
+          "column": 13,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "721f6fc3c01a135a96d056f898e90546",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-721f6f.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 661,
+          "column": 22,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "7fa5699b3cafa1f51f622281a28069b5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-7fa569.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 641,
+          "column": 22,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "a82847e72c04ac43b802e7d81e9ad42a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-a82847.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 650,
+          "column": 11,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "b26092c7f320e7663a5473f9ed45568f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-b26092.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 252,
+          "column": 7,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "d15f70f5a6c64b021229b4cfafe332c5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-d15f70.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 668,
+          "column": 11,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "d2b14f981702499534eeff1123faf257",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-d2b14f.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 1179,
+          "column": 5,
+          "function": "sqlite3_str_append",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "e3e1ddf624cb2f79a646a4d66b615ad0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-e3e1dd.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 732,
+          "column": 22,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "ea6c76058c739468f6a5f775733eb1c7",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-ea6c76.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 722,
+          "column": 13,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "ec75b75e0a3e46ee09ce0bc4709ec256",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-ec75b7.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 682,
+          "column": 13,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "f5f250b774ed878571cd2a529b93be2f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-f5f250.html",
+          "relpath": "src/printf.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/a7200804eb4a/src/printf.c",
+          "line": 677,
+          "column": 13,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Buffer Overflow",
+          "description": "Buffer overflow: write exceeds requested buffer capacity",
+          "issue_hash": "f9063ca00d58e491a82607d53fc2dbe5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/d5b2c9be/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_a7200804eb4a_src_printf.c/report-f9063c.html",
+          "relpath": "src/printf.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 13.24,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 5.15,
+      "fixed": 4.47
+    },
+    "total_seconds": 22.98
+  },
+  "report_dir": "tmp/validation/a7200804eb4a/d5b2c9be"
+}

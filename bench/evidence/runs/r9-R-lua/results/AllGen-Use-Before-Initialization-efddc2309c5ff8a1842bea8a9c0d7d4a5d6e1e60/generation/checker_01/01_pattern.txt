@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The `init` routine initializes a mutable state field that should instead be reset by the per-use `reinit` routine. The field is mutated during each match and is not restored when an error aborts the operation, so reusing the iterator starts from a corrupted value. The `reinit` routine only checks the invariant with an `aborting_assert`, which is compiled out in release builds and therefore cannot repair the stale state.
+
+Roles:
+- `init`: `prepstate` — initializes state shared across matches.
+- `reinit` / per-use reset: `reprepstate` — should reset mutable per-match state before every match; buggy version resets only one field and asserts the other.
+- `aborting_assert`: `lua_assert` — checks the expected value of the stale field instead of reinitializing it.

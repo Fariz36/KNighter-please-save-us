@@ -1,0 +1,10 @@
+## Bug Pattern
+
+The bug pattern is an under-sized output-buffer capacity estimate before raw, unchecked writes. A `required_capacity_estimator` computes `szBufNeeded = MAX(e2,0)+(i64)precision+(i64)width+8` and passes it to a `capacity_guard` (`sqlite3StrAccumEnlargeIfNeeded`). The formatter then writes directly into the reserved output area through `bufpt`/`zOut` (`pAccum->zText + pAccum->nChar`) and finally writes `zOut[length] = 0`. The estimate omits the two extra characters that `flag_altform2` (`!` flag) can force on `%e` conversions even when precision is 0: the decimal point and the trailing zero. Thus `%!.0e` with a three-digit exponent produces 9 output characters plus NUL, but only 8 bytes were reserved, causing the direct writes and/or terminator to overflow.
+
+Roles:
+- `required_capacity_estimator`: `szBufNeeded` computation, especially the `+8` slack
+- `capacity_guard`: `sqlite3StrAccumEnlargeIfNeeded`
+- `raw_output_writer`: `bufpt`, `zOut`, direct stores into `pAccum->zText`
+- `null_terminator_writer`: `zOut[length] = 0`
+- `flag_dependent_formatter`: `flag_altform2`, `flag_dp`, `flag_rtz` for the extra decimal point and trailing zero

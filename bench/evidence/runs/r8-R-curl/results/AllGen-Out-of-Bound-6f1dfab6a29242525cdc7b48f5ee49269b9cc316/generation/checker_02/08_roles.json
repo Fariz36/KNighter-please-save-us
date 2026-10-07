@@ -1,0 +1,14 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "delimiter_finder": {
+      "names": [
+        "strchr"
+      ],
+      "description": "function returning a pointer to the first occurrence of a delimiter character in a string, or null if not found"
+    }
+  }
+}

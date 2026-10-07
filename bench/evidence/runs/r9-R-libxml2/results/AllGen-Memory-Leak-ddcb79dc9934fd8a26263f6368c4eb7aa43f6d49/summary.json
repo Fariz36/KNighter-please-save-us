@@ -1,0 +1,15 @@
+{
+  "commit_id": "ddcb79dc9934fd8a26263f6368c4eb7aa43f6d49",
+  "commit_type": "Memory-Leak",
+  "total_checkers": 3,
+  "successful_checkers": 0,
+  "perfect_checkers": 0,
+  "best_tp": 0,
+  "best_tn": 0,
+  "total_time": 1421.084633,
+  "errors": [
+    "Failed to generate compilable checker 0"
+  ],
+  "success_rate": 0.0,
+  "timestamp": "2026-10-07T15:58:32.101234"
+}

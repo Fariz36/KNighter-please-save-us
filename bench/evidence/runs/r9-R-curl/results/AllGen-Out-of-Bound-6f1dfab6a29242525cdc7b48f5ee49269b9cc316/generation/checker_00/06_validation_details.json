@@ -1,0 +1,101 @@
+{
+  "commit_id": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/plugin-cache/plugins/8b20407c5892f55f21f8/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/ftp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 2,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "ftp_state_pasv_resp"
+        ],
+        "fixed_functions": [
+          "ftp_state_pasv_resp"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/ftp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/work/src/67ce67284258/lib/ftp.c",
+          "line": 2076,
+          "column": 37,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "One-byte out-of-bounds read",
+          "description": "Possible one-byte out-of-bounds read: delimiter byte is not checked for NUL before fixed-offset parse",
+          "issue_hash": "356bcdd64fa57849b3e0bb3a348b1997",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/6f1dfab6a292/9fac151a/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-curl_work_src_67ce67284258_lib_ftp.c/report-356bcd.html",
+          "relpath": "lib/ftp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/work/src/67ce67284258/lib/ftp.c",
+          "line": 2076,
+          "column": 18,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "One-byte out-of-bounds read",
+          "description": "Possible one-byte out-of-bounds read: delimiter byte is not checked for NUL before fixed-offset parse",
+          "issue_hash": "7db42ed113c1b71ee3b6274f95de15be",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/6f1dfab6a292/9fac151a/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-curl_work_src_67ce67284258_lib_ftp.c/report-7db42e.html",
+          "relpath": "lib/ftp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/ftp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/work/src/6f1dfab6a292/lib/ftp.c",
+          "line": 2076,
+          "column": 25,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "One-byte out-of-bounds read",
+          "description": "Possible one-byte out-of-bounds read: delimiter byte is not checked for NUL before fixed-offset parse",
+          "issue_hash": "3db3c30409863680e0c9588cf5d87ba1",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/6f1dfab6a292/9fac151a/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-curl_work_src_6f1dfab6a292_lib_ftp.c/report-3db3c3.html",
+          "relpath": "lib/ftp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-curl/work/src/6f1dfab6a292/lib/ftp.c",
+          "line": 2076,
+          "column": 44,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "One-byte out-of-bounds read",
+          "description": "Possible one-byte out-of-bounds read: delimiter byte is not checked for NUL before fixed-offset parse",
+          "issue_hash": "6d91e28b0e09b06d4a8ffb486e2eb909",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/6f1dfab6a292/9fac151a/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-curl_work_src_6f1dfab6a292_lib_ftp.c/report-6d91e2.html",
+          "relpath": "lib/ftp.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 5.07,
+      "fixed": 4.77
+    },
+    "total_seconds": 9.91
+  },
+  "report_dir": "tmp/validation/6f1dfab6a292/9fac151a"
+}

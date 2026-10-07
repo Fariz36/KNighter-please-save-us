@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A `null_on_failure` `parser_input` constructor frees its buffer argument during its own failure cleanup. The caller checks for NULL and also invokes a `deallocator` on that same buffer, causing a double free. The root cause is inconsistent ownership on failure: the callee consumes/frees the resource even when it returns NULL, but the caller treats the resource as still caller-owned.
+
+Roles:
+- `null_on_failure`: `xmlNewIOInputStream`
+- `parser_input`: `xmlNewIOInputStream`
+- `deallocator`: `xmlFreeParserInputBuffer`

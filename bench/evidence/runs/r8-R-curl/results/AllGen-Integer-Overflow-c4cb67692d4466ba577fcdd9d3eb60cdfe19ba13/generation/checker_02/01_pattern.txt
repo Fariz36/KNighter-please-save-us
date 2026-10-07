@@ -1,0 +1,12 @@
+## Bug Pattern
+
+The bug pattern is using narrow integer types for length and offset values that are then used in a bounds check. The check computes `off + sizeof(unsigned int) + len > smbc->got` to ensure the offset plus header plus payload length fits inside the received buffer. Because `len` and `off` are declared as `unsigned short`, the arithmetic can overflow/wrap or the values can be truncated, so the check may incorrectly pass. This can lead to an out-of-bounds read from `msg + off + sizeof(unsigned int)` with length `len`.
+
+Roles:
+- `length_holder`: `len` (should be `size_t`)
+- `offset_holder`: `off` (should be `size_t`)
+- `bounds_check`: `off + sizeof(unsigned int) + len > smbc->got`
+- `received_size`: `smbc->got`
+- `buffer_read`: `Curl_client_write(..., (char *)msg + off + sizeof(unsigned int), len)`
+
+The fix is to use `size_t` for the `length_holder` and `offset_holder` variables instead of `unsigned short`.

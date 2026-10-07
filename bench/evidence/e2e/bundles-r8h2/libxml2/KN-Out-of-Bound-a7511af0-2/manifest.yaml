@@ -1,0 +1,53 @@
+id: KN-Out-of-Bound-a7511af0-2
+bug_type: Out-of-Bound
+source:
+  project: libxml2
+  description: libxml2, the XML parsing and manipulation library written in C
+  commit: a7511af09f99995cdf81994db21f4eba564276b5
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A parser `lookahead` macro performs an indexed read from an `input_buffer` through a `cursor` without
+  a `bounds_check` against the buffer length. The parser context stores the input base (`ctxt->string`)
+  and current position (`ctxt->cur`), but originally does not store a `length_of` value, so `NXT(index)`
+  can read `ctxt->cur[index]` past the end of the duplicated regex string and cause an out-of-bounds read.
+  The fix adds a stored `length_of` field and guards the indexed read by checking the cursor offset against
+  that length.
+
+
+  Roles:
+
+  - `allocator`: `xmlMalloc`, `xmlStrdup`
+
+  - `input_buffer`: `ctxt->string`
+
+  - `cursor`: `ctxt->cur`
+
+  - `lookahead` / `unchecked_indexed_read`: `NXT(index)` -> `ctxt->cur[index]`
+
+  - `length_of`: `ctxt->len`
+
+  - `bounds_check`: `(size_t)(ctxt->cur + index - ctxt->string) < ctxt->len`
+
+  - `initializer`: `xmlRegNewParserCtxt`'
+roles:
+  lookahead:
+    names:
+    - NXT
+    description: macro that performs an indexed lookahead read from the parser cursor
+  length_of:
+    names:
+    - len
+    description: field storing the length of the input buffer
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:53+0700

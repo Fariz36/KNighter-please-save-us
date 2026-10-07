@@ -1,0 +1,8 @@
+## Bug Pattern
+
+An unchecked narrowing conversion of a computed byte length to a 32-bit signed integer before it is used as a `buffer_copy` length. The byte length is obtained by advancing a pointer over a variable-width encoded string while consuming a character-count precision; because one encoded character can take multiple bytes, the pointer difference can exceed the narrow integer’s range. The cast to `int` therefore overflows/truncates, and the subsequent `buffer_copy` receives an incorrect length. The fix clamps the pointer difference with `MIN(..., 0x7ffffff0)` before the cast.
+
+Roles:
+- `utf8_scanner`: `SQLITE_SKIP_UTF8` — advances a byte pointer past one encoded character, consuming up to several bytes per call.
+- `buffer_copy`: `sqlite3_str_append` — appends a buffer of the computed length to the output accumulator.
+- `clamp`: `MIN` — returns the smaller of two values; used here to cap the computed length before narrowing to `int`.

@@ -1,0 +1,63 @@
+{
+  "summary": {
+    "run": "r9-R-lua",
+    "attempts": 5,
+    "unchanged": 5,
+    "perfect_before": 2,
+    "perfect_after": 2,
+    "commits_perfect_before": 2,
+    "commits_perfect_after": 2
+  },
+  "rows": [
+    {
+      "commit": "10eb89d1",
+      "attempt": "checker_02",
+      "old_tp": 1,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 1,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "bc4bbcef",
+      "attempt": "checker_00",
+      "old_tp": 1,
+      "old_tn": 1,
+      "old_perfect": true,
+      "tp": 1,
+      "tn": 1,
+      "perfect": true
+    },
+    {
+      "commit": "22974326",
+      "attempt": "checker_00",
+      "old_tp": 0,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 0,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "22974326",
+      "attempt": "checker_01",
+      "old_tp": 0,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 0,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "22974326",
+      "attempt": "checker_02",
+      "old_tp": 1,
+      "old_tn": 1,
+      "old_perfect": true,
+      "tp": 1,
+      "tn": 1,
+      "perfect": true
+    }
+  ]
+}

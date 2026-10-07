@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "size_calculator": {
+      "names": [
+        "xmlGrowCapacity"
+      ],
+      "description": "Computes a size or capacity value from an input. Its result is often used as an allocation/reallocation size. It may dereference a pointer argument, so that argument must be NULL-checked before this call."
+    },
+    "reallocator": {
+      "names": [
+        "xmlRealloc"
+      ],
+      "description": "Reallocates memory. Takes a pointer and a size, may return NULL on failure. The size must not be computed from a NULL-dereferenced pointer."
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{"commit": "967b28f0", "files": {"src/libgit2/blame.c": {"functions": ["dup_hunk"], "compiled_out": [], "preprocessed_lines": 10168}, "tests/libgit2/blame/buffer.c": "no compile entry"}, "unsolvable": false}
+{"commit": "2fb89b6d", "files": {"src/libgit2/transports/smart_pkt.c": {"functions": ["set_data"], "compiled_out": [], "preprocessed_lines": 9209}}, "unsolvable": false}
+{"commit": "6e8227ab", "files": {"src/libgit2/pack.c": {"functions": ["pack_entry_find_offset"], "compiled_out": [], "preprocessed_lines": 9981}}, "unsolvable": false}
+{"commit": "d6486af3", "files": {"src/cli/opt_usage.c": "no compile entry", "src/libgit2/diff_driver.c": {"functions": ["git_diff_driver_load"], "compiled_out": [], "preprocessed_lines": 10299}}, "unsolvable": false}
+{"commit": "6d63f4b6", "files": {"src/libgit2/config.c": {"functions": ["git_config_parse_bool"], "compiled_out": [], "preprocessed_lines": 10717}}, "unsolvable": false}
+{"commit": "f9e05546", "files": {"src/libgit2/repository.c": {"functions": ["git_repository_set_workdir"], "compiled_out": [], "preprocessed_lines": 13324}}, "unsolvable": false}
+{"commit": "0bc19591", "files": {"src/libgit2/transports/ssh_libssh2.c": {"functions": ["load_known_hosts"], "compiled_out": ["load_known_hosts"], "preprocessed_lines": 8256}}, "unsolvable": true}
+{"commit": "c0a4ef05", "files": {"src/libgit2/repository.c": {"functions": ["git_repository_foreach_worktree"], "compiled_out": [], "preprocessed_lines": 13606}}, "unsolvable": false}
+{"commit": "36b88791", "files": {"src/libgit2/blame.c": {"functions": ["blame_internal"], "compiled_out": [], "preprocessed_lines": 10164}}, "unsolvable": false}
+{"commit": "ef086bc3", "files": {"src/libgit2/streams/openssl.c": {"functions": ["verify_server_cert"], "compiled_out": ["verify_server_cert"], "preprocessed_lines": 7611}}, "unsolvable": true}

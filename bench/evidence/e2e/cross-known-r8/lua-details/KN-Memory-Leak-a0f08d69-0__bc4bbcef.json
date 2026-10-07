@@ -1,0 +1,56 @@
+{
+  "commit_id": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/ae40e9cca6a3fb0b23ec/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lauxlib.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "newbox"
+        ],
+        "fixed_functions": [
+          "getBoxMT",
+          "newbox"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lauxlib.c": []
+    },
+    "fixed": {
+      "lauxlib.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 9.18,
+      "fixed": 9.27
+    },
+    "total_seconds": 18.56
+  },
+  "report_dir": "tmp/validation/bc4bbcef651b/4c45c96d"
+}

@@ -1,0 +1,8 @@
+{
+  "config_setter": [],
+  "divisor_field": [
+    "max_recv_speed",
+    "max_send_speed",
+    "rate"
+  ]
+}

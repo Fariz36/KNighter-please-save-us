@@ -1,0 +1,15 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "out_param_api": {
+      "names": [
+        "curl_easy_send",
+        "curl_easy_recv"
+      ],
+      "description": "public API function that accepts a caller-supplied pointer used as an output/write destination for a result; the pointer must be checked for NULL before being written through."
+    }
+  }
+}

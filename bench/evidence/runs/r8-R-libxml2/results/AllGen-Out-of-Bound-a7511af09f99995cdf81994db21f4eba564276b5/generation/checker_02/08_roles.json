@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "lookahead": {
+      "names": [
+        "NXT"
+      ],
+      "description": "macro that performs an indexed lookahead read from the parser cursor"
+    },
+    "length_of": {
+      "names": [
+        "len"
+      ],
+      "description": "field storing the length of the input buffer"
+    }
+  }
+}

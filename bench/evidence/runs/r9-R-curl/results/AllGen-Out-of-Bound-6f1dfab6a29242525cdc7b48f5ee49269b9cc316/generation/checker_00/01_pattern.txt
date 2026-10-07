@@ -1,0 +1,10 @@
+## Bug Pattern
+
+The code performs a fixed-offset parse of a NUL-terminated `parser_input` after a `strchr`-style delimiter search. It advances past the delimiter and then reads `ptr[1]`, `ptr[2]`, etc., without first checking whether the byte at the current position is the NUL terminator. If the delimiter is the last character, the pointer is on the terminator and the first `ptr[1]` access reads one byte past the valid string. The fix adds a non-zero check on the current byte (`sep &&`) before any later indexed reads.
+
+Roles:
+- `parser_input`: `curlx_dyn_ptr` (returns the received response buffer to parse)
+- `search`: `strchr` (finds the delimiter)
+- `character_classifier`: `ISDIGIT`
+- `error_setter`: `failf`
+- `numeric_parser`: `curlx_str_number`

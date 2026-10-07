@@ -1,0 +1,19 @@
+{
+  "tokenizer": [
+    "getConstraintToken",
+    "sqlite3GetToken"
+  ],
+  "dequote_helper": [
+    "quotedCompare"
+  ],
+  "illegal_token_sentinel": [
+    "TK_ILLEGAL"
+  ],
+  "dequoter_with_precondition": [
+    "sqlite3Dequote"
+  ],
+  "caller_ignoring_sentinel": [
+    "findConstraintFunc",
+    "dropConstraintFunc"
+  ]
+}

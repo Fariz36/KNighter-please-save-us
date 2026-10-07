@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "xmlGrowArray"
+      ],
+      "description": "allocates or grows memory; may return NULL"
+    },
+    "reallocator": {
+      "names": [
+        "xmlRealloc"
+      ],
+      "description": "reallocates memory; returns new pointer or NULL"
+    }
+  }
+}

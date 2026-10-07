@@ -1,0 +1,70 @@
+{
+  "commit_id": "466c06cf706bd92ff77beb402934f7265183f8ff",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/652552e49f59818ead40/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/urlapi.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "curl_url_dup"
+        ],
+        "fixed_functions": [
+          "curl_url_dup"
+        ]
+      },
+      {
+        "path": "tests/libtest/lib1560.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "test_api_errors"
+        ],
+        "fixed_functions": [
+          "test_api_errors"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/urlapi.c": []
+    },
+    "fixed": {
+      "lib/urlapi.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 2.98,
+      "fixed": 2.85
+    },
+    "total_seconds": 5.91
+  },
+  "report_dir": "tmp/validation/466c06cf706b/825279a7"
+}

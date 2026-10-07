@@ -1,0 +1,11 @@
+## Bug Pattern
+
+A GC-managed object is accessed through a C-local pointer and/or only a weak reference, then passed to an operation that can trigger an emergency garbage collection (`potential_gc_trigger`) without first being placed in a GC-visible root (`gc_root_anchor`). Because the weak reference does not keep the object alive and the C pointer is not scanned by the GC, the emergency collection can reclaim the object, after which the stale pointer is used, causing a use-after-free.
+
+Roles:
+- `gc_managed_object`: `Table *h` / `t` — the table being updated.
+- `weak_reference_container`: the weak metatable / weak `__newindex` field (`__mode='v'`), which does not keep the table alive.
+- `c_local_pointer`: `h`, `t`, `tm` — local pointers not visible to the GC as roots.
+- `potential_gc_trigger`: `luaH_finishset` — may allocate/rehash and trigger emergency collection.
+- `gc_root_anchor` / `protect_from_gc`: `sethvalue2s(L, L->top.p, h); L->top.p++;` before the call, and `L->top.p--;` after.
+- `use_after_free_use`: `invalidateTMcache(h)`, `luaC_barrierback(L, obj2gco(h), val)`, and internal uses of `h` by `luaH_finishset` after possible collection.

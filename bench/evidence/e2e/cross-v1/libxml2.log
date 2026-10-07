@@ -1,0 +1,81 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-01 20:47:03.544 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (libxml2), Repository Path: /home/faris/RA-MrYudis/Knight/targets/libxml2; plugin_build=standalone; validation_scoring=strict
+2026-10-01 20:47:04.550 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-7079f01d9d074426)
+2026-10-01 20:47:04.576 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision c43dc98d27ac
+2026-10-01 20:47:04.777 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 20:47:04.809 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 20:48:51.778 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 107.0s
+2026-10-01 20:48:51.781 | INFO     | role_porting:port_roles:145 - Ported KN-Integer-Overflow-bc440a89-1 roles to libxml2: {'encoded_size_calculator': ['xmlCharEncInput', 'xmlCharEncOutput'], 'input_length': [], 'max_input_size': [], 'error_sentinel': []}
+2026-10-01 20:48:51.783 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-01 20:52:28.879 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c43dc98d27ac315a48d93dbd399c6c22cf7125b1', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/0af93956b3c44168f804/plugin.so', 'files': 68, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 217.06, 'jobs': 32}
+{"bundle": "KN-Integer-Overflow-bc440a89-1", "source": "curl", "target": "libxml2", "status": "scanned", "reports": 0}
+2026-10-01 20:52:29.109 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 20:52:29.178 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 20:57:07.992 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 278.8s
+2026-10-01 20:57:08.028 | INFO     | role_porting:port_roles:145 - Ported KN-Memory-Leak-a0f08d69-0 roles to libxml2: {'cleanup': ['xmlRegExecClearErrors', 'xmlCleanupMutex', 'xmlCleanupRMutex'], 'destructor': ['xmlBufFree', 'xmlModuleFree', 'xmlParserNsFree', 'xmlRegFreeRegexp', 'xmlFreeTextWriter', 'xmlSchemaFreeType', 'xmlSchemaFreeWildcard', 'xmlXPathNodeSetFreeNs', 'xmlCleanupMutex', 'xmlCleanupRMutex'], 'state_reset': ['xmlXPathEmptyNodeSet', 'xmlBufBackToBuffer'], 'link_detach': ['xmlBufDetach', 'xmlBufBackToBuffer', 'xmlBufFromBuffer'], 'link_storage': []}
+2026-10-01 20:57:08.050 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-01 21:01:36.964 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c43dc98d27ac315a48d93dbd399c6c22cf7125b1', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/ae40e9cca6a3fb0b23ec/plugin.so', 'files': 68, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 268.86, 'jobs': 32}
+{"bundle": "KN-Memory-Leak-a0f08d69-0", "source": "curl", "target": "libxml2", "status": "scanned", "reports": 0}
+2026-10-01 21:01:37.509 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 21:01:37.559 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 21:04:21.370 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 163.8s
+2026-10-01 21:04:21.393 | INFO     | role_porting:port_roles:145 - Ported KN-Misuse-c53420e4-0 roles to libxml2: {'data_provider': [], 'length_provider': [], 'unbounded_string_consumer': ['xmlEscapeFormatString', 'xmlExpandEntitiesInAttValue', 'xmlTextWriterWriteFormatString', 'xmlXPathReturnString', 'xmlNewInputFromString', 'xmlNewInputBufferString', 'xmlTextWriterWriteString', 'xmlCtxtNewInputFromString'], 'bounded_nul_scanner': [], 'bounded_string_formatter': ['xmlTextWriterWriteFormatString', 'xmlTextWriterWriteVFormatString', 'xmlStrASPrintf', 'xmlStrVASPrintf']}
+2026-10-01 21:04:21.416 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-01 21:08:05.270 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c43dc98d27ac315a48d93dbd399c6c22cf7125b1', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/57dafa24b88f0f2597b8/plugin.so', 'files': 68, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 223.83, 'jobs': 32}
+{"bundle": "KN-Misuse-c53420e4-0", "source": "curl", "target": "libxml2", "status": "scanned", "reports": 0}
+2026-10-01 21:08:05.361 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 21:08:05.372 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 21:13:54.417 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 349.0s
+2026-10-01 21:13:54.434 | INFO     | role_porting:port_roles:145 - Ported KN-Null-Pointer-Dereference-466c06cf-1 roles to libxml2: {'duplicator': [], 'source_handle': [], 'destination_allocator': [], 'field_copier': []}
+2026-10-01 21:13:57.932 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 21:13:57.955 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 21:18:22.456 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 264.5s
+2026-10-01 21:18:22.460 | INFO     | role_porting:port_roles:145 - Ported KN-Null-Pointer-Dereference-f2a15357-1 roles to libxml2: {'api_entry_point': ['xmlBufEnd', 'xmlTextWriterEndPI', 'xmlTextWriterEndDTD', 'xmlTextWriterEndCDATA', 'xmlTextWriterEndComment', 'xmlTextWriterEndElement', 'xmlTextWriterEndDocument', 'xmlTextWriterEndAttribute', 'xmlTextWriterEndDTDEntity', 'xmlTextWriterEndDTDAttlist', 'xmlTextWriterEndDTDElement', 'xmlTextWriterFullEndElement'], 'out_param': ['__xmlIndentTreeOutput', '__xmlOutputBufferCreateFilenameValue', 'PyCapsule_GetPointer', 'xmlExpandEntitiesInAttValue'], 'out_param_writer': ['xmlTextWriterWriteBase64', 'xmlTextWriterWriteBinHex', 'xmlTextWriterWriteString', 'xmlTextWriterWriteComment', 'xmlTextWriterWriteElement', 'xmlTextWriterWriteAttribute', 'xmlTextWriterWriteDTDEntity', 'xmlTextWriterWriteElementNS', 'xmlTextWriterWriteDTDAttlist', 'xmlTextWriterWriteDTDElement', 'xmlTextWriterWriteAttributeNS', 'xmlTextWriterWriteFormatString', 'xmlTextWriterWriteVFormatString', 'xmlTextWriterClose', 'xmlTextWriterEndPI', 'xmlTextWriterFlush', 'xmlXPathIdFunction', 'xmlTextWriterEndDTD', 'xmlXPathNotFunction', 'xmlXPathSumFunction', 'xmlXPathLangFunction', 'xmlXPathLastFunction', 'xmlXPathTrueFunction', 'xmlTextWriterEndCDATA', 'xmlXPathCountFunction', 'xmlXPathFalseFunction', 'xmlXPathFloorFunction', 'xmlXPathRoundFunction', 'xmlXPathConcatFunction', 'xmlXPathNumberFunction', 'xmlXPathStringFunction', 'xmlTextWriterEndComment', 'xmlTextWriterEndElement', 'xmlTextWriterStartCDATA', 'xmlXPathBooleanFunction', 'xmlXPathCeilingFunction', 'xmlTextWriterEndDocument']}
+2026-10-01 21:18:22.460 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-01 21:19:47.794 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c43dc98d27ac315a48d93dbd399c6c22cf7125b1', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/d6ea521459fb71966e2a/plugin.so', 'files': 68, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 85.32, 'jobs': 32}
+{"bundle": "KN-Null-Pointer-Dereference-f2a15357-1", "source": "curl", "target": "libxml2", "status": "scanned", "reports": 0}
+2026-10-01 21:19:47.844 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 21:19:47.863 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 21:23:00.410 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 192.5s
+2026-10-01 21:23:00.412 | INFO     | role_porting:port_roles:145 - Ported KN-Null-Pointer-Dereference-f7d4e11f-2 roles to libxml2: {'length_field': ['xmlBufUse'], 'data_pointer': ['xmlBufContent'], 'buffer_copy': ['xmlBufAdd', 'xmlBufCat'], 'error_return': ['xmlRaiseMemoryError'], 'copy_flag': ['xmlBufCreateMem', 'xmlNewInputBufferMemory'], 'allocator': ['__xmlMalloc', '__xmlMallocAtomic'], 'deallocator': [], 'validation_guard': []}
+2026-10-01 21:23:00.412 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-01 21:24:19.228 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c43dc98d27ac315a48d93dbd399c6c22cf7125b1', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/5fcf622372fd8b9470ed/plugin.so', 'files': 68, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 78.81, 'jobs': 32}
+{"bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2", "source": "curl", "target": "libxml2", "status": "scanned", "reports": 0}
+2026-10-01 21:24:19.276 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 21:24:19.283 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 21:25:36.317 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 77.0s
+2026-10-01 21:25:36.318 | INFO     | role_porting:port_roles:145 - Ported KN-Integer-Overflow-10eb89d1-0 roles to libxml2: {'decoder_function': ['xmlCharEncInput', 'xmlEncInputChunk'], 'input_byte': [], 'continuation_count': []}
+2026-10-01 21:25:36.321 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c3fb1186ab482254d940
+2026-10-01 21:26:56.857 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c43dc98d27ac315a48d93dbd399c6c22cf7125b1', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/c3fb1186ab482254d940/plugin.so', 'files': 68, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 80.53, 'jobs': 32}
+{"bundle": "KN-Integer-Overflow-10eb89d1-0", "source": "lua", "target": "libxml2", "status": "scanned", "reports": 0}
+2026-10-01 21:26:56.951 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 21:26:56.966 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 21:28:28.043 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 91.1s
+2026-10-01 21:28:28.044 | INFO     | role_porting:port_roles:145 - Ported KN-Misuse-bc4bbcef-0 roles to libxml2: {'combined_create_and_publish': [], 'object_initializer': [], 'persistent_registry_lookup': [], 'object_allocator': [], 'registry_store': [], 'registry_key': []}
+2026-10-01 21:28:28.385 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 21:28:28.455 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 21:30:49.734 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 141.3s
+2026-10-01 21:30:49.736 | INFO     | role_porting:port_roles:145 - Ported KN-Use-After-Free-22974326-2 roles to libxml2: {'gc_managed_object': [], 'potential_gc_trigger': [], 'gc_root_anchor': [], 'weak_reference_container': [], 'use_after_free_use': []}
+2026-10-01 21:30:49.785 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 21:30:49.826 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 21:32:57.586 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 127.8s
+2026-10-01 21:32:57.594 | INFO     | role_porting:port_roles:145 - Ported KN-Buffer-Overflow-a7200804-1 roles to libxml2: {'buffer_grow': ['xmlBufGrow'], 'required_capacity': [], 'write_pointer': ['xmlBufEnd'], 'digit_set': [], 'output_buffer': ['xmlBufCreate', 'xmlBufCreateMem', 'xmlBufFromBuffer']}
+2026-10-01 21:32:57.597 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-01 21:34:15.295 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c43dc98d27ac315a48d93dbd399c6c22cf7125b1', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/6dde839323642fec9c86/plugin.so', 'files': 68, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 77.69, 'jobs': 32}
+{"bundle": "KN-Buffer-Overflow-a7200804-1", "source": "sqlite", "target": "libxml2", "status": "scanned", "reports": 0}
+2026-10-01 21:34:15.367 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 21:34:15.387 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 21:35:40.259 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 84.9s
+2026-10-01 21:35:40.272 | INFO     | role_porting:port_roles:145 - Ported KN-Integer-Overflow-720d3afa-0 roles to libxml2: {'payload_length': [], 'local_payload_length': [], 'overflow_chunk_size': [], 'overflow_page_cache': [], 'reallocator': [], 'allocated_size_query': [], 'zero_initializer': [], 'cache_index': [], 'too_narrow_arithmetic_type': []}
+2026-10-01 21:35:40.539 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 21:35:40.609 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 21:40:01.432 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 260.8s
+2026-10-01 21:40:01.433 | INFO     | role_porting:port_roles:145 - Ported KN-Integer-Overflow-d87f8c49-0 roles to libxml2: {'length_of': [], 'character_count_bound': [], 'iterator_advance': ['xmlCopyCharMultiByte'], 'output_length': [], 'narrowing_cast': ['XML_PTR_TO_INT'], 'safe_cap': [], 'buffer_append': []}
+2026-10-01 21:40:01.437 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit f4969ccaf6279f81c085
+2026-10-01 21:41:49.769 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c43dc98d27ac315a48d93dbd399c6c22cf7125b1', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/f4969ccaf6279f81c085/plugin.so', 'files': 68, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 108.33, 'jobs': 32}
+{"bundle": "KN-Integer-Overflow-d87f8c49-0", "source": "sqlite", "target": "libxml2", "status": "scanned", "reports": 0}
+2026-10-01 21:41:49.874 | INFO     | role_porting:port_roles:96 - libxml2: 418 candidate API names from headers
+2026-10-01 21:41:49.944 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 21:43:31.536 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 101.6s
+2026-10-01 21:43:31.568 | INFO     | role_porting:port_roles:145 - Ported KN-Misuse-1bc183a9-1 roles to libxml2: {'tokenizer': [], 'dequote_helper': [], 'illegal_token_sentinel': [], 'dequoter_with_precondition': [], 'caller_ignoring_sentinel': []}

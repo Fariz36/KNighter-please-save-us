@@ -1,0 +1,50 @@
+id: KN-Use-After-Free-22974326-2
+bug_type: Use-After-Free
+source:
+  project: lua
+  description: Lua, a scripting language interpreter and C library written in ANSI C
+  commit: 22974326ca0d4f893849ce722cc1d65b3e228f42
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A pointer to a garbage-collected object is used across a call that may trigger an emergency garbage
+  collection, but the object is not first protected by a GC root/reference acquisition. If the object
+  is reachable only through a weak container/metatable field, the collector can free it during the call;
+  the stale pointer is then used, causing a use-after-free. The fix is to temporarily root the object
+  before the GC-triggering call and unroot it afterwards.
+
+
+  Roles:
+
+  - `ref_get` (root/acquire keep-alive reference): `sethvalue2s` plus stack-top increment, added before
+  `luaH_finishset`.
+
+  - `ref_put` (release root): stack-top decrement after `luaH_finishset`.
+
+  - `gc_trigger` (new role; no standard role covers a call that may run emergency GC): `luaH_finishset`.
+
+  - `deallocator` (automatic collector): the emergency garbage collection that can free unrooted objects
+  during `luaH_finishset`.'
+roles:
+  gc_trigger:
+    names:
+    - luaH_finishset
+    description: call that may trigger an emergency garbage collection; its object argument must be kept
+      alive by a root
+  ref_get:
+    names:
+    - sethvalue2s
+    description: stores a garbage-collected object into a root location (e.g., stack) to keep it alive
+      during a GC-triggering call
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T16:54:18+0700

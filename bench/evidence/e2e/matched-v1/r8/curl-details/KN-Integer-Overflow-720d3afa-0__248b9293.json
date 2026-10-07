@@ -1,0 +1,55 @@
+{
+  "commit_id": "248b92939aa6efeff5d58e973b63b50f36337913",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/15fa3cb7c17f26f8b0e0/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/cf-socket.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "tcpkeepalive"
+        ],
+        "fixed_functions": [
+          "tcpkeepalive"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/cf-socket.c": []
+    },
+    "fixed": {
+      "lib/cf-socket.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.01,
+    "setup_seconds": 55.69,
+    "analysis_seconds": {
+      "buggy": 7.54,
+      "fixed": 7.51
+    },
+    "total_seconds": 70.84
+  },
+  "report_dir": "tmp/validation/248b92939aa6/0145f3e1"
+}

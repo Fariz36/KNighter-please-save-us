@@ -1,0 +1,63 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "input_struct": {
+      "names": [
+        "struct curl_blob"
+      ],
+      "description": "caller-supplied struct containing a buffer source and length"
+    },
+    "buffer_source": {
+      "names": [
+        "data"
+      ],
+      "description": "pointer field in the input struct that is used as a copy source or retained"
+    },
+    "length_of": {
+      "names": [
+        "len"
+      ],
+      "description": "length field companion to buffer_source"
+    },
+    "length_limit": {
+      "names": [
+        "CURL_MAX_INPUT_LENGTH"
+      ],
+      "description": "maximum allowed value for length_of"
+    },
+    "copy_flag": {
+      "names": [
+        "CURL_BLOB_COPY"
+      ],
+      "description": "flag indicating whether buffer_source should be copied"
+    },
+    "copy_operation": {
+      "names": [
+        "memcpy"
+      ],
+      "description": "function that copies from buffer_source"
+    },
+    "allocator": {
+      "names": [
+        "curlx_malloc"
+      ],
+      "description": "memory allocation function"
+    },
+    "deallocator": {
+      "names": [
+        "curlx_safefree"
+      ],
+      "description": "memory deallocation function"
+    },
+    "error_setter": {
+      "names": [
+        "CURLE_BAD_FUNCTION_ARGUMENT",
+        "CURLE_OUT_OF_MEMORY"
+      ],
+      "description": "error return codes for invalid arguments or allocation failure"
+    }
+  }
+}

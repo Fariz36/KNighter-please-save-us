@@ -1,0 +1,14 @@
+## Bug Pattern
+
+A setter overwrites an already-owned pointer field with a newly allocated copy returned by an `allocator`, without first releasing the old value with its matching `deallocator`. The old resource remains allocated but becomes unreachable, causing a memory leak.
+
+Roles:
+- setter: `xmlCtxtSetSaxHandler`
+- owned pointer / resource owner: `ctxt->sax`
+- allocator: `xmlMalloc`
+- deallocator that is missing for the old `ctxt->sax`: `xmlFree`
+- newly allocated resource: `copy`
+- copy operation: `memcpy`
+- leaking overwrite: `ctxt->sax = copy`
+
+The fix avoids the leak by updating the already-owned handler in place: `*ctxt->sax = *sax`.

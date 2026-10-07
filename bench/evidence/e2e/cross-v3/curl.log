@@ -1,0 +1,118 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 20:06:05.332 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+2026-10-07 20:06:07.143 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-716934f454ef43be)
+2026-10-07 20:06:07.161 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision bb348b35e84c
+2026-10-07 20:06:08.459 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 20:06:08.574 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:10:07.091 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 238.5s
+2026-10-07 20:10:07.099 | INFO     | role_porting:port_roles:226 - Ported KN-Double-Free-26dfab2f-2 roles to curl: {'parser_input': ['Curl_slist_append_nodup'], 'null_on_failure': ['Curl_slist_append_nodup'], 'deallocator': ['curl_free', 'curlx_free', 'curl_dbg_free']}
+2026-10-07 20:10:07.106 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit cb8163c3bd7c162be1e7
+2026-10-07 20:13:45.969 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/cb8163c3bd7c162be1e7/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 7, 'seconds': 218.85, 'jobs': 32}
+2026-10-07 20:13:46.052 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:13:46.081 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:13:46.082 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:15:50.468 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 124.4s
+2026-10-07 20:15:50.476 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:15:50.477 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:15:50.477 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:17:51.230 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 120.8s
+2026-10-07 20:17:51.295 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:17:51.321 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:17:51.322 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:19:16.598 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 85.3s
+2026-10-07 20:19:16.628 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:19:16.634 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:19:16.642 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:20:57.072 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 100.4s
+2026-10-07 20:20:57.086 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:20:57.088 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:20:57.089 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:21:21.284 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 24.2s
+{"bundle": "KN-Double-Free-26dfab2f-2", "source": "libxml2", "target": "curl", "status": "scanned", "reports": 7}
+2026-10-07 20:21:22.565 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 20:21:22.612 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:25:53.656 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 271.0s
+2026-10-07 20:25:53.661 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c8eaf223-2 roles to curl: {'init': ['curl_easy_setopt', 'curl_multi_setopt']}
+2026-10-07 20:25:53.667 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c872a13f674285de3a33
+2026-10-07 20:26:49.956 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/c872a13f674285de3a33/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 56.28, 'jobs': 32}
+{"bundle": "KN-Misuse-c8eaf223-2", "source": "libxml2", "target": "curl", "status": "scanned", "reports": 0}
+2026-10-07 20:26:50.807 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 20:26:50.860 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:29:20.817 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 150.0s
+2026-10-07 20:29:20.845 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-962bd10d-2 roles to curl: {'allocator': ['Curl_cmalloc', 'Curl_ccalloc', 'Curl_cstrdup', 'curl_dbg_malloc', 'curl_dbg_calloc', 'curl_dbg_strdup', 'Curl_nghttp2_malloc', 'Curl_nghttp2_calloc', 'config_alloc', 'Curl_fileinfo_alloc', 'Curl_ftp_parselist_data_alloc', 'Curl_uint32_tbl_resize', 'Curl_uint32_bset_resize', 'file2memory', 'file2memory_range'], 'reallocator': ['Curl_crealloc', 'curlx_realloc', 'curl_dbg_realloc', 'Curl_nghttp2_realloc']}
+2026-10-07 20:29:20.863 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 8c281906915350ee8b1b
+2026-10-07 20:30:27.902 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/8c281906915350ee8b1b/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 5, 'seconds': 67.02, 'jobs': 32}
+2026-10-07 20:30:27.915 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:30:27.921 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:30:27.921 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:33:20.766 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 172.8s
+2026-10-07 20:33:20.767 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:33:20.768 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:33:20.769 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:35:23.282 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 122.5s
+2026-10-07 20:35:23.284 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:35:23.284 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:35:23.285 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:36:47.745 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 84.5s
+2026-10-07 20:36:47.748 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:36:47.748 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:36:47.749 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:39:46.355 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 178.6s
+2026-10-07 20:39:46.357 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 20:39:46.358 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 20:39:46.359 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 20:41:43.690 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 117.3s
+{"bundle": "KN-Null-Pointer-Dereference-962bd10d-2", "source": "libxml2", "target": "curl", "status": "scanned", "reports": 5}
+2026-10-07 20:41:44.694 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 20:41:44.752 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:43:33.179 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 108.4s
+2026-10-07 20:43:33.187 | INFO     | role_porting:port_roles:226 - Ported KN-Out-of-Bound-a7511af0-0 roles to curl: {'indexed_read': ['Curl_read16_be', 'Curl_read16_le', 'Curl_read32_le'], 'length_of': ['strlen', 'Curl_bufq_len', 'curlx_dyn_len', 'Curl_bufref_len', 'Curl_creader_total_length', 'Curl_creader_client_length', 'Curl_creader_def_total_length', 'CURL_ARRAYSIZE']}
+2026-10-07 20:43:33.194 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 12c04fdd13fe828b3a14
+2026-10-07 20:47:14.389 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/12c04fdd13fe828b3a14/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 221.18, 'jobs': 32}
+{"bundle": "KN-Out-of-Bound-a7511af0-0", "source": "libxml2", "target": "curl", "status": "scanned", "reports": 0}
+2026-10-07 20:47:15.944 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 20:47:16.105 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:51:18.211 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 242.1s
+2026-10-07 20:51:18.221 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-bc4bbcef-0 roles to curl: {'allocator': ['config_alloc', 'Curl_fileinfo_alloc', 'Curl_ftp_parselist_data_alloc', 'file2memory', 'Curl_cf_create', 'Curl_peer_create', 'curlx_CreateFile', 'Curl_creds_create', 'Curl_thrdq_create', 'file2memory_range', 'Curl_cf_tcp_create', 'Curl_cf_udp_create', 'Curl_thread_create', 'Curl_cf_quic_create', 'Curl_cf_unix_create', 'Curl_creader_create', 'Curl_cwriter_create', 'Curl_pollset_create', 'Curl_peer_uds_create', 'Curl_thrdpool_create', 'Curl_cf_ngtcp2_create', 'Curl_cf_quiche_create', 'Curl_ssl_scache_create', 'Curl_cf_h3_proxy_create', 'Curl_ssl_session_create', 'Curl_create_sspi_identity'], 'container_insert': ['Curl_meta_set', 'Curl_conn_meta_set', 'Curl_conn_cf_insert_after', 'Curl_cf_ssl_insert_after', 'Curl_cf_quic_insert_after', 'Curl_cf_setup_insert_after', 'Curl_cf_ngtcp2_insert_after', 'Curl_cf_quiche_insert_after', 'Curl_cf_capsule_insert_after', 'Curl_cf_haproxy_insert_after', 'Curl_cf_h1_proxy_insert_after', 'Curl_cf_h2_proxy_insert_after', 'Curl_cf_h3_proxy_insert_after', 'Curl_cf_ip_happy_insert_after', 'Curl_cf_ssl_proxy_insert_after', 'Curl_cf_http_proxy_insert_after', 'Curl_cf_socks_proxy_insert_after', 'Curl_cf_ngtcp2_proxy_insert_after'], 'lookup': ['Curl_meta_get', 'Curl_conn_meta_get', 'Curl_altsvc_lookup', 'Curl_cipher_suite_lookup_id'], 'init': ['win32_init', 'easysrc_init', 'Curl_MD5_init', 'Curl_ssh_init', 'Curl_ssl_init', 'Curl_trc_init', 'Curl_HMAC_init', 'Curl_hsts_init', 'curl_easy_init', 'curl_mime_init', 'Curl_amiga_init', 'Curl_macos_init', 'Curl_vquic_init', 'curl_multi_init', 'curl_share_init', 'globalconf_init', 'Curl_altsvc_init', 'Curl_cookie_init', 'Curl_wakeup_init', 'curl_global_init']}
+2026-10-07 20:51:18.232 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c225e43484da7fb76c9e
+2026-10-07 20:52:34.049 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/c225e43484da7fb76c9e/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 75.81, 'jobs': 32}
+{"bundle": "KN-Misuse-bc4bbcef-0", "source": "lua", "target": "curl", "status": "scanned", "reports": 0}
+2026-10-07 20:52:34.948 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 20:52:35.012 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:52:42.170 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 7.2s
+2026-10-07 20:52:42.175 | INFO     | role_porting:port_roles:226 - Ported KN-Use-After-Free-22974326-2 roles to curl: {'gc_trigger': [], 'ref_get': []}
+2026-10-07 20:52:42.991 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 20:52:43.132 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:54:29.814 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 106.7s
+2026-10-07 20:54:29.821 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-720d3afa-0 roles to curl: {'allocated_size': [], 'reallocator': ['curlx_realloc', 'curl_dbg_realloc', 'Curl_nghttp2_realloc', 'Curl_uint32_tbl_resize', 'Curl_uint32_bset_resize'], 'null_on_failure': ['curlx_realloc', 'curl_dbg_realloc', 'Curl_nghttp2_realloc'], 'initializer': ['memset']}
+2026-10-07 20:54:29.827 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 89b217028d40acc7e1fe
+2026-10-07 20:55:56.920 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/89b217028d40acc7e1fe/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 87.07, 'jobs': 32}
+{"bundle": "KN-Integer-Overflow-720d3afa-0", "source": "sqlite", "target": "curl", "status": "scanned", "reports": 0}
+2026-10-07 20:55:57.767 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 20:55:57.950 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 20:59:15.425 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 197.5s
+2026-10-07 20:59:15.460 | INFO     | role_porting:port_roles:226 - Ported KN-Memory-Leak-7b60ed80-1 roles to curl: {'allocator': ['ALLOC_SIZE', 'ALLOC_SIZE2', 'curlx_malloc', 'curlx_calloc', 'curlx_realloc', 'curlx_strdup', 'curl_dbg_malloc', 'curl_dbg_calloc', 'curl_dbg_realloc', 'curl_dbg_strdup', 'config_alloc', 'Curl_fileinfo_alloc', 'Curl_ftp_parselist_data_alloc', 'Curl_open', 'Curl_fopen', 'new_getout', 'Curl_MD5_init', 'Curl_HMAC_init', 'Curl_cf_create', 'Curl_hsts_init', 'curl_easy_init', 'curl_mime_init', 'Curl_peer_create', 'Curl_creds_create', 'Curl_thrdq_create', 'Curl_cf_tcp_create', 'Curl_cf_udp_create', 'Curl_thread_create', 'Curl_cf_quic_create', 'Curl_cf_unix_create', 'Curl_creader_create', 'Curl_cwriter_create', 'Curl_pollset_create', 'Curl_peer_uds_create', 'Curl_thrdpool_create', 'Curl_cf_ngtcp2_create', 'Curl_cf_quiche_create', 'Curl_ssl_scache_create', 'Curl_cf_h3_proxy_create', 'Curl_ssl_session_create', 'Curl_create_sspi_identity', 'Curl_cf_ngtcp2_proxy_create', 'Curl_gtls_shared_creds_create'], 'duplicator': ['curl_url_dup', 'Curl_slist_duplicate'], 'null_on_failure': ['ALLOC_SIZE', 'ALLOC_SIZE2', 'curlx_malloc', 'curlx_calloc', 'curlx_realloc', 'curlx_strdup', 'curl_dbg_malloc', 'curl_dbg_calloc', 'curl_dbg_realloc', 'curl_dbg_strdup', 'config_alloc', 'Curl_fileinfo_alloc', 'Curl_ftp_parselist_data_alloc', 'new_getout', 'Curl_MD5_init', 'Curl_HMAC_init', 'Curl_hsts_init', 'curl_easy_init', 'curl_mime_init', 'Curl_pollset_create', 'Curl_thread_create', 'curl_url_dup', 'Curl_slist_duplicate'], 'container_insert': ['slist_wc_append', 'Curl_llist_append', 'curl_slist_append', 'Curl_slist_append_nodup', 'curl_slist_append_ccsid', 'add2list', 'Curl_cf_ssl_insert_after', 'Curl_cf_quic_insert_after', 'Curl_conn_cf_insert_after', 'Curl_cf_setup_insert_after', 'Curl_cf_ngtcp2_insert_after', 'Curl_cf_quiche_insert_after', 'Curl_cf_capsule_insert_after', 'Curl_cf_haproxy_insert_after', 'Curl_cf_h1_proxy_insert_after', 'Curl_cf_h2_proxy_insert_after', 'Curl_cf_h3_proxy_insert_after', 'Curl_cf_ip_happy_insert_after', 'Curl_cf_ssl_proxy_insert_after', 'Curl_cf_http_proxy_insert_after', 'Curl_cf_socks_proxy_insert_after', 'Curl_cf_ngtcp2_proxy_insert_after'], 'deallocator': ['slist_wc_free_all', 'curl_slist_free_all', 'Curl_ftp_parselist_data_free', 'Curl_llist_destroy', 'curl_free', 'curlx_free', 'config_free', 'Curl_freeset', 'Curl_ws_free', 'Curl_req_free', 'curl_dbg_free', 'Curl_bufq_free', 'Curl_conn_free', 'curl_mime_free', 'curlx_dyn_free', 'tool_mime_free', 'Curl_bufcp_free', 'globalconf_free', 'Curl_bufref_free', 'Curl_dynhds_free', 'Curl_creader_free', 'Curl_cwriter_free', 'Curl_nghttp2_free', 'Curl_http_req_free', 'Curl_http_resp_free', 'Curl_httpchunk_free', 'Curl_vquic_ctx_free', 'Curl_h1_req_parse_free', 'Curl_ssl_free_certinfo', 'curl_certinfo_free_all', 'Curl_sspi_free_identity', 'Curl_gtls_shared_creds_free', 'Curl_free_idnconverted_hostname', 'Curl_cf_ngtcp2_h3_stream_ctx_free']}
+2026-10-07 20:59:15.548 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 2ec40654c387ec060cee
+2026-10-07 21:01:33.993 | INFO     | backends.csa_compiledb:_run_checker_compiledb:251 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/2ec40654c387ec060cee/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 25, 'seconds': 138.29, 'jobs': 32}
+2026-10-07 21:01:34.018 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 21:01:34.024 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 21:01:34.025 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 21:06:17.565 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 283.5s
+2026-10-07 21:06:17.567 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 21:06:17.568 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 21:06:17.568 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 21:08:38.033 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 140.5s
+2026-10-07 21:08:38.036 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 21:08:38.036 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 21:08:38.037 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 21:12:00.041 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 202.0s
+2026-10-07 21:12:00.043 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 21:12:00.044 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 21:12:00.044 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 21:14:56.364 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 176.3s
+2026-10-07 21:14:56.458 | INFO     | agent:check_report:402 - start generating check_report prompts
+2026-10-07 21:14:56.461 | INFO     | agent:check_report:417 - finish check_report generation
+2026-10-07 21:14:56.499 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [check_report]
+2026-10-07 21:17:16.014 | INFO     | model:invoke_llm:332 - Finish LLM process [check_report] in 139.5s
+{"bundle": "KN-Memory-Leak-7b60ed80-1", "source": "sqlite", "target": "curl", "status": "scanned", "reports": 25}

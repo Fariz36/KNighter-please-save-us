@@ -1,0 +1,17 @@
+## Bug Pattern
+
+An untrusted input decoder computes a length/count by accumulating arithmetic results in a fixed-width integer without checking for overflow. The accumulated value is only bounds-checked after the computation loop. If the arithmetic wraps, the check can pass with a corrupted value, and that value is then used as a buffer-fill size, causing an out-of-bounds write or other memory corruption.
+
+Roles in this patch:
+- `untrusted_input`: `a`, `aIn`
+- `decoded_length_accumulator`: `n`
+- `place_value_multiplier`: `mult`
+- `fixed_width_integer_type`: `int`
+- `output_buffer`: `aOut`
+- `output_capacity`: `nOut`
+- `current_output_index`: `j`
+- `bounds_check`: `j+n>nOut`
+- `buffer_fill`: `memset(&aOut[j], 0, n)`
+- `early_bounds_check` (fix): `n>nOut` inside the accumulation loop
+
+The root cause is that `n` can overflow before the `j+n>nOut` bounds check, so the check no longer reliably prevents `memset` from receiving a huge or negative size. The fix uses a wider integer type and performs an early bounds check before the value can overflow.

@@ -1,0 +1,39 @@
+id: KN-Integer-Overflow-bc440a89-2
+bug_type: Integer-Overflow
+source:
+  project: curl
+  description: curl, the C library (libcurl) for transferring data with URLs
+  commit: bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A derived-length calculation performs unchecked signed integer arithmetic (`*`, `/`, `+`) on an `untrusted_size`
+  value before validating that the value is within the safe range for the result type. A sufficiently
+  large input overflows the calculation, producing a wrapped or negative encoded size. The fix adds a
+  maximum safe input bound derived from the type maximum (`CURL_OFF_T_MAX`) and rejects inputs above it.
+
+
+  Roles:
+
+  - `untrusted_size`: the input size value consumed by the size-calculation function (the `part->datasize`
+  field read in `encoder_base64_size`).
+
+  - `length_of`: `encoder_base64_size` (computes a derived encoded length from an input size).'
+roles:
+  length_of:
+    names:
+    - encoder_base64_size
+    description: computes a derived length from an input size; performs arithmetic on an untrusted input
+      size and must validate it against a maximum safe bound before calculating
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:36+0700

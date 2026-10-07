@@ -1,0 +1,17 @@
+{
+  "allocator": [
+    "luaL_newmetatable",
+    "luaL_newlibtable"
+  ],
+  "container_insert": [
+    "luaL_newmetatable",
+    "lua_setfield"
+  ],
+  "lookup": [
+    "luaL_newmetatable",
+    "luaL_getmetatable"
+  ],
+  "init": [
+    "luaL_setfuncs"
+  ]
+}

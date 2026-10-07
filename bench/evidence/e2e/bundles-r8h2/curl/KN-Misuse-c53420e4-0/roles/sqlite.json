@@ -1,0 +1,43 @@
+{
+  "data_provider": [
+    "sqlite3_column_blob",
+    "sqlite3_value_blob"
+  ],
+  "length_provider": [
+    "sqlite3_column_bytes",
+    "sqlite3_value_bytes"
+  ],
+  "unbounded_string_consumer": [
+    "strlen",
+    "strcmp",
+    "strcpy",
+    "strcat",
+    "strchr",
+    "strstr",
+    "sscanf",
+    "printf",
+    "fprintf",
+    "sprintf",
+    "snprintf",
+    "sqlite3StrICmp",
+    "sqlite3_stricmp",
+    "sqlite3DbStrDup",
+    "sqlite3SetString",
+    "sqlite3StrIHash",
+    "sqlite3_str_appendf",
+    "sqlite3_str_vappendf",
+    "sqlite3VdbeLoadString",
+    "sqlite3TestTextToPtr",
+    "sqlite3_mprintf",
+    "sqlite3_vmprintf",
+    "sqlite3_snprintf",
+    "sqlite3_vsnprintf",
+    "sqlite3_log",
+    "sqlite3DebugPrintf",
+    "sqlite3Strlen30"
+  ],
+  "bounded_nul_scanner": [
+    "memchr"
+  ],
+  "bounded_string_formatter": []
+}

@@ -1,0 +1,13 @@
+{
+  "length_of": [
+    "xmlBufAddLen",
+    "xmlBufferResize",
+    "xmlTextWriterWriteBase64",
+    "xmlUTF8Strsize",
+    "xmlNewTextLen",
+    "xmlNewDocTextLen",
+    "xmlNodeAddContentLen",
+    "xmlNodeSetContentLen",
+    "TIM_SORT_RESIZE"
+  ]
+}

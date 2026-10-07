@@ -1,0 +1,91 @@
+{
+  "target": "curl",
+  "commit": "bb348b35e84c40c9564783d7585762b65038e8c5",
+  "candidates": 1820,
+  "identifiers": 38441,
+  "offered": {
+    "decoder_function": [
+      "Curl_idn_decode",
+      "curlx_base64_decode",
+      "Curl_sasl_decode_mech",
+      "Curl_http_decode_status",
+      "Curl_auth_decode_spnego_message",
+      "Curl_auth_decode_ntlm_type2_message",
+      "Curl_auth_decode_digest_http_message",
+      "Curl_urldecode",
+      "CURLX_FUNCTION_CAST",
+      "__crt0_glob_function"
+    ],
+    "input_byte": [
+      "Curl_hexbyte",
+      "Curl_input_ntlm",
+      "Curl_rand_bytes",
+      "Curl_input_digest",
+      "Curl_http_input_auth",
+      "Curl_input_negotiate",
+      "setvariable",
+      "easysrc_is_first",
+      "curlx_FindFirstFile",
+      "Curl_uint32_tbl_first",
+      "Curl_uint32_bset_first",
+      "Curl_conn_get_first_peer",
+      "Curl_uint32_spbset_first",
+      "Curl_conn_get_first_socket"
+    ],
+    "continuation_count": [
+      "ALLOC_SIZE",
+      "ALLOC_SIZE2",
+      "Curl_bufq_len",
+      "curlx_dyn_len",
+      "CURL_ARRAYSIZE",
+      "Curl_bufref_len",
+      "GetSizeParameter",
+      "Curl_bump_headersize",
+      "Curl_pgrsSetUploadSize",
+      "Curl_uint32_tbl_resize",
+      "Curl_uint32_bset_resize",
+      "Curl_pgrsSetDownloadSize",
+      "Curl_creader_total_length",
+      "Curl_creader_client_length",
+      "Curl_ssl_push_certinfo_len",
+      "Curl_pgrsResetTransferSizes",
+      "Curl_creader_def_total_length",
+      "setvariable",
+      "Curl_hash_count",
+      "Curl_rand_bytes",
+      "Curl_llist_count",
+      "curlx_str_number",
+      "Curl_dynhds_count",
+      "Curl_cshutdn_count",
+      "Curl_cwriter_count",
+      "Curl_u8_strset_count",
+      "Curl_u32_ptrset_count",
+      "Curl_uint32_tbl_count",
+      "Curl_uint32_bset_count",
+      "Curl_cshutdn_dest_count",
+      "Curl_uint32_spbset_count"
+    ]
+  },
+  "mapping": {
+    "decoder_function": [],
+    "input_byte": [
+      "c"
+    ],
+    "continuation_count": [
+      "count"
+    ]
+  },
+  "dropped_not_in_target": {
+    "decoder_function": [
+      "curlx_str_utf8"
+    ],
+    "input_byte": [],
+    "continuation_count": []
+  },
+  "rationale": {
+    "decoder_function": "curl's UTF-8 decoder in lib/curlx/strparse.c.",
+    "input_byte": "Variable holding the first byte of the UTF-8 sequence.",
+    "continuation_count": "Variable counting the number of continuation bytes."
+  },
+  "llm_seconds": 171.6
+}

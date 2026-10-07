@@ -1,0 +1,14 @@
+## Bug Pattern
+
+A tokenizer/parser returns both a token length and a token-type output, but the caller ignores the token-type error sentinel before passing the token text into a helper that assumes a syntactically valid token. In this case, `getConstraintToken()`/`sqlite3GetToken()` can return `TK_ILLEGAL` for corrupt schema text, but `quotedCompare()` still copies the token and calls `sqlite3Dequote()`, which has a precondition/assertion for valid quoted tokens. The fix makes `quotedCompare()` check `TK_ILLEGAL` and skip dequoting.
+
+Roles:
+- `tokenizer`: `getConstraintToken`, `sqlite3GetToken`
+- `token_type_out_param`: `t`
+- `illegal_token_sentinel`: `TK_ILLEGAL`
+- `token_text`: `&zSql[iOff]`
+- `token_length`: `nTok`
+- `dequote_helper`: `quotedCompare`
+- `dequoter_with_precondition`: `sqlite3Dequote`
+- `caller_ignoring_sentinel`: `findConstraintFunc`, `dropConstraintFunc`
+- `missing_guard`: `t == TK_ILLEGAL` check before calling `quotedCompare()` / `sqlite3Dequote()`

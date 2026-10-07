@@ -1,0 +1,40 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "sqlite3SrcListDup",
+        "sqlite3SelectNew",
+        "sqlite3SrcListAppendFromTerm"
+      ],
+      "description": "Function that produces a new owning pointer to a resource; the returned resource must be transferred or freed."
+    },
+    "ownership_transfer": {
+      "names": [
+        "sqlite3SrcListAppendList"
+      ],
+      "description": "Function that consumes an owning pointer and attaches it to a destination, transferring ownership."
+    },
+    "deallocator": {
+      "names": [
+        "sqlite3SrcListDelete"
+      ],
+      "description": "Function that frees a resource owned by a pointer."
+    },
+    "local_owning_pointer": {
+      "names": [
+        "pFromDup"
+      ],
+      "description": "Local variable that owns a resource and is responsible for either transferring it or freeing it."
+    },
+    "destination_pointer": {
+      "names": [
+        "pSrc"
+      ],
+      "description": "Field/pointer that receives ownership of a resource when a transfer function is called."
+    }
+  }
+}

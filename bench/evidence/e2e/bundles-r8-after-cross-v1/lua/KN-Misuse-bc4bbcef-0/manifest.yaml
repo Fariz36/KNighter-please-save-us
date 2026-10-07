@@ -1,0 +1,68 @@
+id: KN-Misuse-bc4bbcef-0
+bug_type: Misuse
+source:
+  project: lua
+  description: Lua, a scripting language interpreter and C library written in ANSI C
+  commit: bc4bbcef651ba2870d6c68db16dc7d6ce6f68636
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  The bug pattern is **non-atomic publication of an object into a persistent registry**: a combined create-and-register
+  operation (`luaL_newmetatable`) stores the new metatable in the registry **before** a separate fallible
+  initializer (`luaL_setfuncs`) has completed. If that initializer raises/aborts due to a memory error,
+  the incomplete object remains registered, so later lookups can observe a partially initialized metatable.
+  The correct pattern is to separate lookup from creation, initialize the fresh object locally, and only
+  register/publish it after all fallible initialization succeeds.
+
+
+  Roles:
+
+  - `persistent_registry_lookup`: `luaL_getmetatable`
+
+  - `combined_create_and_publish`: `luaL_newmetatable`
+
+  - `object_allocator`: `luaL_newlibtable`
+
+  - `object_initializer` that can raise/abort: `luaL_setfuncs`
+
+  - `registry_store` / `publish`: `lua_setfield(L, LUA_REGISTRYINDEX, BOXMT)`
+
+  - `registry_key`: `BOXMT` (`"_UBOX*"`)'
+roles:
+  combined_create_and_publish:
+    names:
+    - luaL_newmetatable
+    description: creates a persistent object and immediately publishes it into a registry, before the
+      caller can initialize it
+  object_initializer:
+    names:
+    - luaL_setfuncs
+    description: fallible initializer for a newly created object; it may raise/abort
+  persistent_registry_lookup:
+    names:
+    - luaL_getmetatable
+    description: safe lookup of an existing object in a persistent registry
+  object_allocator:
+    names:
+    - luaL_newlibtable
+    description: allocates a new object locally without publishing it
+  registry_store:
+    names:
+    - lua_setfield
+    description: publishes an object into a registry after initialization
+  registry_key:
+    names:
+    - _UBOX*
+    description: key under which the object is stored in the registry
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: 3c44401b20c9b0cfdf2951dd290b1bc9192d6362
+exported: 2026-10-01T20:45:45+0700

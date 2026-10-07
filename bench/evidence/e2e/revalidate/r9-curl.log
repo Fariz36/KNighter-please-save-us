@@ -1,0 +1,61 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 17:05:23.741 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+2026-10-07 17:05:36.135 | INFO     | backends.plugin_builder:build:364 - Built plugin 61716cd8cc1533416dd9 (compile 8.1s, link 3.2s)
+2026-10-07 17:05:36.160 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision f1b1919bd091
+2026-10-07 17:05:36.161 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision c4cb67692d44
+2026-10-07 17:05:36.659 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"commit": "c4cb6769", "attempt": "checker_02", "old_tp": 0, "old_tn": 0, "old_perfect": false, "tp": 0, "tn": 0, "perfect": false}
+2026-10-07 17:05:36.755 | INFO     | backends.plugin_builder:build:364 - Built plugin 7cc468466819d695e6a1 (compile 8.8s, link 3.2s)
+2026-10-07 17:05:36.773 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision a0f08d6975d0
+2026-10-07 17:05:36.774 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 061136f24b52
+2026-10-07 17:05:37.037 | INFO     | backends.plugin_builder:build:364 - Built plugin 432731adf76769d52b0e (compile 9.0s, link 3.2s)
+2026-10-07 17:05:37.052 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 6546ffeda4f1
+2026-10-07 17:05:37.056 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision bc440a89d47a
+2026-10-07 17:05:37.399 | INFO     | backends.plugin_builder:build:364 - Built plugin 793cb4c9b58ae29d25f3 (compile 9.3s, link 3.2s)
+2026-10-07 17:05:37.786 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"commit": "c4cb6769", "attempt": "checker_00", "old_tp": 0, "old_tn": 0, "old_perfect": false, "tp": 0, "tn": 0, "perfect": false}
+2026-10-07 17:05:47.362 | INFO     | backends.plugin_builder:build:364 - Built plugin 64aba4da6972615f614e (compile 7.3s, link 3.4s)
+2026-10-07 17:05:47.406 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision f042c25fb876
+2026-10-07 17:05:47.407 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision c53420e42742
+2026-10-07 17:05:49.283 | INFO     | backends.plugin_builder:build:364 - Built plugin 06effd79eb538174565a (compile 8.2s, link 3.3s)
+2026-10-07 17:05:49.330 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 1750c4b27fc1
+2026-10-07 17:05:49.331 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 466c06cf706b
+2026-10-07 17:05:49.347 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 17:05:58.836 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=1 TN=1 (strict); strict=1/1 legacy=1/1
+{"commit": "a0f08d69", "attempt": "checker_00", "old_tp": 1, "old_tn": 1, "old_perfect": true, "tp": 1, "tn": 1, "perfect": true}
+2026-10-07 17:05:59.969 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 17:06:07.536 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=1 TN=1 (strict); strict=1/1 legacy=1/1
+{"commit": "c53420e4", "attempt": "checker_00", "old_tp": 1, "old_tn": 1, "old_perfect": true, "tp": 1, "tn": 1, "perfect": true}
+2026-10-07 17:06:08.941 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=1 TN=1 (strict); strict=1/1 legacy=1/1
+{"commit": "466c06cf", "attempt": "checker_00", "old_tp": 1, "old_tn": 1, "old_perfect": true, "tp": 1, "tn": 1, "perfect": true}
+2026-10-07 17:06:10.759 | INFO     | backends.plugin_builder:build:364 - Built plugin a50f7ce34769e984ef19 (compile 8.5s, link 3.4s)
+2026-10-07 17:06:10.806 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision f2a1535712ff
+2026-10-07 17:06:10.807 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision d87b4e460513
+2026-10-07 17:06:12.431 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=1 TN=0 (strict); strict=1/0 legacy=1/1
+{"commit": "f2a15357", "attempt": "checker_00", "old_tp": 1, "old_tn": 0, "old_perfect": false, "tp": 1, "tn": 0, "perfect": false}
+2026-10-07 17:06:21.535 | INFO     | backends.plugin_builder:build:364 - Built plugin c0289bc89d0f739c18bd (compile 8.8s, link 3.8s)
+2026-10-07 17:06:21.579 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision b3675fe80a33
+2026-10-07 17:06:21.582 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision f7d4e11f4b42
+2026-10-07 17:06:24.318 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"commit": "f7d4e11f", "attempt": "checker_00", "old_tp": 0, "old_tn": 0, "old_perfect": false, "tp": 0, "tn": 0, "perfect": false}
+2026-10-07 17:06:25.886 | INFO     | backends.plugin_builder:build:364 - Built plugin 6c684f447c431f9bd75d (compile 10.0s, link 3.4s)
+2026-10-07 17:06:29.078 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=1 TN=0 (strict); strict=1/0 legacy=1/0
+{"commit": "f7d4e11f", "attempt": "checker_02", "old_tp": 1, "old_tn": 0, "old_perfect": false, "tp": 1, "tn": 0, "perfect": false}
+2026-10-07 17:06:32.800 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=1 TN=1 (strict); strict=1/1 legacy=1/1
+{"commit": "bc440a89", "attempt": "checker_02", "old_tp": 1, "old_tn": 1, "old_perfect": true, "tp": 1, "tn": 1, "perfect": true}
+2026-10-07 17:06:33.449 | INFO     | backends.plugin_builder:build:364 - Built plugin 34e0db0a07ac898e67bb (compile 22.6s, link 3.2s)
+2026-10-07 17:06:34.831 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=1 TN=1 (strict); strict=1/1 legacy=1/1
+{"commit": "f2a15357", "attempt": "checker_01", "old_tp": 1, "old_tn": 1, "old_perfect": true, "tp": 1, "tn": 1, "perfect": true}
+2026-10-07 17:06:35.120 | INFO     | backends.plugin_builder:build:364 - Built plugin 4c6e2c5e32b95ad38aac (compile 7.5s, link 3.3s)
+2026-10-07 17:06:35.137 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 67ce67284258
+2026-10-07 17:06:35.139 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 6f1dfab6a292
+2026-10-07 17:06:39.313 | INFO     | backends.plugin_builder:build:364 - Built plugin 53c36502a05d75532714 (compile 6.7s, link 3.5s)
+2026-10-07 17:06:42.926 | INFO     | backends.plugin_builder:build:364 - Built plugin cc88f17448b8c561231d (compile 6.8s, link 3.3s)
+2026-10-07 17:07:02.846 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=1 TN=0 (strict); strict=1/0 legacy=1/0
+{"commit": "6f1dfab6", "attempt": "checker_00", "old_tp": 1, "old_tn": 0, "old_perfect": false, "tp": 1, "tn": 0, "perfect": false}
+2026-10-07 17:07:06.011 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"commit": "6f1dfab6", "attempt": "checker_01", "old_tp": 0, "old_tn": 0, "old_perfect": false, "tp": 0, "tn": 0, "perfect": false}
+2026-10-07 17:07:09.605 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"commit": "6f1dfab6", "attempt": "checker_02", "old_tp": 0, "old_tn": 0, "old_perfect": false, "tp": 0, "tn": 0, "perfect": false}
+{"run": "r9-R-curl", "attempts": 13, "unchanged": 13, "perfect_before": 5, "perfect_after": 5, "commits_perfect_before": 5, "commits_perfect_after": 5}

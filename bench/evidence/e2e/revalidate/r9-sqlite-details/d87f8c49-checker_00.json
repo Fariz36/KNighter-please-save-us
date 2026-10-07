@@ -1,0 +1,79 @@
+{
+  "commit_id": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/a542cd1d37659cc0199b/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/printf.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "sqlite3_str_vappendf"
+        ],
+        "fixed_functions": [
+          "sqlite3_str_vappendf"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/printf.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/b1541d2f1713/src/printf.c",
+          "line": 1134,
+          "column": 7,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Unchecked narrowing of pointer difference",
+          "description": "Unchecked narrowing of pointer difference used as buffer copy length",
+          "issue_hash": "934a56b06dfa8eee33f3978893ec16d4",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/d87f8c496549/7e90d8bf/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_b1541d2f1713_src_printf.c/report-934a56.html",
+          "relpath": "src/printf.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/printf.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/d87f8c496549/src/printf.c",
+          "line": 1134,
+          "column": 7,
+          "function": "sqlite3_str_vappendf",
+          "bug_type": "Unchecked narrowing of pointer difference",
+          "description": "Unchecked narrowing of pointer difference used as buffer copy length",
+          "issue_hash": "934a56b06dfa8eee33f3978893ec16d4",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/d87f8c496549/7e90d8bf/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_d87f8c496549_src_printf.c/report-934a56.html",
+          "relpath": "src/printf.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 13.14,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 4.19,
+      "fixed": 4.11
+    },
+    "total_seconds": 21.59
+  },
+  "report_dir": "tmp/validation/d87f8c496549/7e90d8bf"
+}

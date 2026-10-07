@@ -1,0 +1,74 @@
+{
+  "commit_id": "e492c7c524263e47844ec9354102fcf200e686a8",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/c32866ecc68db7925c60/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/transfer.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "readwrite_data"
+        ],
+        "fixed_functions": [
+          "readwrite_data"
+        ]
+      },
+      {
+        "path": "tests/http/testenv/mod_curltest/mod_curltest.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "curltest_put_handler"
+        ],
+        "fixed_functions": [
+          "curltest_put_handler"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/transfer.c": []
+    },
+    "fixed": {
+      "lib/transfer.c": []
+    }
+  },
+  "errors": {
+    "buggy": {
+      "tests/http/testenv/mod_curltest/mod_curltest.c": "no compile entry"
+    },
+    "fixed": {
+      "tests/http/testenv/mod_curltest/mod_curltest.c": "no compile entry"
+    }
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 71.88,
+    "analysis_seconds": {
+      "buggy": 8.7,
+      "fixed": 7.29
+    },
+    "total_seconds": 87.98
+  },
+  "report_dir": "tmp/validation/e492c7c52426/d18841fe"
+}

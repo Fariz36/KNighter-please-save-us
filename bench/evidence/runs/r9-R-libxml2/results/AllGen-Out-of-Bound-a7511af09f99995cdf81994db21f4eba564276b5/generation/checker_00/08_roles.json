@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "indexed_read": {
+      "names": [
+        "NXT"
+      ],
+      "description": "Macro that performs an indexed read from a buffer; its expansion must verify the index is within the buffer's valid length."
+    },
+    "length_of": {
+      "names": [
+        "strlen"
+      ],
+      "description": "Function that returns the length of a string, used to compute a buffer's valid length."
+    }
+  }
+}

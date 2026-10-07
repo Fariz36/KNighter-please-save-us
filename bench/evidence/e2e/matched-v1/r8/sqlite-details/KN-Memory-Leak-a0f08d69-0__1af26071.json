@@ -1,0 +1,12 @@
+{
+  "commit_id": "1af2607177ac5e0ef0c82d783ce7d8221632c325",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/misc/fileio.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/misc/fileio.c": "no compile entry"
+    }
+  }
+}

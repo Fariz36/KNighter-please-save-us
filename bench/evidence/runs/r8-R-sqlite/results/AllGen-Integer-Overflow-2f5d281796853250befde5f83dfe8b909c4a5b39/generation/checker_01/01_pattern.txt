@@ -1,0 +1,10 @@
+## Bug Pattern
+
+A loop counter/index variable is declared with a narrower integer type (`int`) than the wider size type (`i64`) used in the same bounds/size arithmetic inside an `aborting_assert`. The arithmetic expression is evaluated in the narrow type before being compared to the wider size value, so when the configured maximum length is large enough, the addition/subtraction can overflow the narrow type. This causes signed integer overflow and can make the debug assertion fail or invoke undefined behavior; production builds are unaffected because the assertion is compiled out. The fix is to widen the loop counters to the same type as the size expression.
+
+Roles:
+- `loop_counter`: `i`, `j` (buggy: `int`; fixed: `i64`)
+- `length_of`: `nStr`, `nPattern`, `nRep`
+- `size_limit` / `output_size`: `nOut` (`i64`), `db->aLimit[SQLITE_LIMIT_LENGTH]`, `SQLITE_MAX_LENGTH`
+- `aborting_assert`: `assert( j+nStr-i+1<=nOut )`
+- `wide_index_type`: `i64`

@@ -1,0 +1,28 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "resource_allocator": {
+      "names": [
+        "sqlite3SrcListDup",
+        "sqlite3SelectNew",
+        "sqlite3SrcListAppendFromTerm"
+      ],
+      "description": "functions that create or rebuild a resource pointer"
+    },
+    "ownership_transfer": {
+      "names": [
+        "sqlite3SrcListAppendList"
+      ],
+      "description": "function that consumes a resource into a destination owner"
+    },
+    "deallocator": {
+      "names": [
+        "sqlite3SrcListDelete"
+      ],
+      "description": "function that frees the resource"
+    }
+  }
+}

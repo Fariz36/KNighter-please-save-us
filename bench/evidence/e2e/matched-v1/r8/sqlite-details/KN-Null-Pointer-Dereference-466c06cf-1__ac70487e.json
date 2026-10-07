@@ -1,0 +1,457 @@
+{
+  "commit_id": "ac70487e12adc0633dda9ef1598a6803d819f614",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/fccaec1fd498bccaea26/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/window.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 18,
+        "fixed_total": 18,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "cume_distInvFunc",
+          "ntileInvFunc",
+          "percent_rankInvFunc"
+        ],
+        "fixed_functions": [
+          "cume_distInvFunc",
+          "ntileInvFunc",
+          "percent_rankInvFunc"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/window.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2387,
+          "column": 41,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "249865ad56420bb63f78b1f4031ca090",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-249865.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2396,
+          "column": 24,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "3728e40e18c698acb3fa77e3af80e6f3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-3728e4.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2390,
+          "column": 22,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "37d658ad267e6265291a1eb622de38fc",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-37d658.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2393,
+          "column": 24,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "3b4a62bdbd0b6f8ffe347ac87ffb831d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-3b4a62.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2389,
+          "column": 42,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "4bbb255845d53641db4cea95e494fb0a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-4bbb25.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2399,
+          "column": 23,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "50581b4adadca6a4dce73b490d73c8c5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-50581b.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2395,
+          "column": 22,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "5c7d520bf5e4ad6e8965a8191cb6dbcf",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-5c7d52.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2403,
+          "column": 39,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "69f921737c2f9efc5fbba3c0e547b638",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-69f921.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2388,
+          "column": 41,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "71d07b0f8c9a105b1d2fe33546660046",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-71d07b.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2402,
+          "column": 41,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "9ca2a4325459fa75afddd6983aad3e71",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-9ca2a4.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2400,
+          "column": 23,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "adb4fb26d2edfece45fad0696ba38e9a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-adb4fb.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2391,
+          "column": 49,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "b23546a879ec588a8f39f1ec66a170c9",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-b23546.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2392,
+          "column": 47,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "bac314dae8907bd8222174888a1d5cd6",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-bac314.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2394,
+          "column": 20,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "bfffeb9c12d0d9db0dd0ffab792ff21f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-bfffeb.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2405,
+          "column": 30,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "c48e0c1899d7f70db56cc54c9fb0cb49",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-c48e0c.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2397,
+          "column": 25,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "e19358703df90229cd300116d42fc509",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-e19358.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2398,
+          "column": 24,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "eb0b3f16fe57fa10e8afb23424f7c06f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-eb0b3f.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/f2375631927a/src/window.c",
+          "line": 2401,
+          "column": 25,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "f3eed4a23aa8738f9720314570bbe716",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_f2375631927a_src_window.c/report-f3eed4.html",
+          "relpath": "src/window.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/window.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2390,
+          "column": 41,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "249865ad56420bb63f78b1f4031ca090",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-249865.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2399,
+          "column": 24,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "3728e40e18c698acb3fa77e3af80e6f3",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-3728e4.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2393,
+          "column": 22,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "37d658ad267e6265291a1eb622de38fc",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-37d658.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2396,
+          "column": 24,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "3b4a62bdbd0b6f8ffe347ac87ffb831d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-3b4a62.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2392,
+          "column": 42,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "4bbb255845d53641db4cea95e494fb0a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-4bbb25.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2402,
+          "column": 23,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "50581b4adadca6a4dce73b490d73c8c5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-50581b.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2398,
+          "column": 22,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "5c7d520bf5e4ad6e8965a8191cb6dbcf",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-5c7d52.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2406,
+          "column": 39,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "69f921737c2f9efc5fbba3c0e547b638",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-69f921.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2391,
+          "column": 41,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "71d07b0f8c9a105b1d2fe33546660046",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-71d07b.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2405,
+          "column": 41,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "9ca2a4325459fa75afddd6983aad3e71",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-9ca2a4.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2403,
+          "column": 23,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "adb4fb26d2edfece45fad0696ba38e9a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-adb4fb.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2394,
+          "column": 49,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "b23546a879ec588a8f39f1ec66a170c9",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-b23546.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2395,
+          "column": 47,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "bac314dae8907bd8222174888a1d5cd6",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-bac314.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2397,
+          "column": 20,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "bfffeb9c12d0d9db0dd0ffab792ff21f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-bfffeb.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2408,
+          "column": 30,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "c48e0c1899d7f70db56cc54c9fb0cb49",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-c48e0c.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2400,
+          "column": 25,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "e19358703df90229cd300116d42fc509",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-e19358.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2401,
+          "column": 24,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "eb0b3f16fe57fa10e8afb23424f7c06f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-eb0b3f.html",
+          "relpath": "src/window.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/ac70487e12ad/src/window.c",
+          "line": 2404,
+          "column": 25,
+          "function": "sqlite3WindowDup",
+          "bug_type": "NULL source handle dereference",
+          "description": "Dereference of NULL source handle before validation",
+          "issue_hash": "f3eed4a23aa8738f9720314570bbe716",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/ac70487e12ad/da717e5c/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_ac70487e12ad_src_window.c/report-f3eed4.html",
+          "relpath": "src/window.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 33.18,
+    "analysis_seconds": {
+      "buggy": 10.37,
+      "fixed": 11.52
+    },
+    "total_seconds": 55.2
+  },
+  "report_dir": "tmp/validation/ac70487e12ad/da717e5c"
+}

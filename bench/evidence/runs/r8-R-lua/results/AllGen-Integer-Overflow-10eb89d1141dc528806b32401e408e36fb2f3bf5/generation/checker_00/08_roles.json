@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "decoder_function": {
+      "names": [
+        "utf8_decode"
+      ],
+      "description": "Function that decodes a UTF-8 sequence"
+    },
+    "input_byte": {
+      "names": [
+        "c"
+      ],
+      "description": "Variable holding the first byte of the UTF-8 sequence"
+    },
+    "continuation_count": {
+      "names": [
+        "count"
+      ],
+      "description": "Variable counting the number of continuation bytes"
+    }
+  }
+}

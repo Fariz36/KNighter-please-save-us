@@ -1,0 +1,8 @@
+## Bug Pattern
+
+After locating a delimiter in a NUL-terminated `parser_input` with `strchr`, the code advances the cursor and reads fixed offsets (`ptr[1]`, `ptr[2]`, `ptr[3]`) without first checking that the current byte is non-NUL, or without a remaining-length check. If the delimiter is the final character, the cursor points at the terminating NUL, so the first lookahead (`ptr[1]`) reads one byte past the string terminator. The fix guards the lookahead with a non-NUL check on the separator/current byte (`sep && ...`), preventing the out-of-bounds read.
+
+Roles:
+- `parser_input`: `curlx_dyn_ptr` (returns the NUL-terminated FTP response buffer being parsed)
+- `null_on_failure`: `strchr` (returns NULL if the delimiter is not found)
+- `error_setter`: `failf` (reports malformed EPSV/PASV responses)

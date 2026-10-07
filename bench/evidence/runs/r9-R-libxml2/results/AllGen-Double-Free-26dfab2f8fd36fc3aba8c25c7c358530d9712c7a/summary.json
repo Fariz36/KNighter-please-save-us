@@ -1,0 +1,13 @@
+{
+  "commit_id": "26dfab2f8fd36fc3aba8c25c7c358530d9712c7a",
+  "commit_type": "Double-Free",
+  "total_checkers": 3,
+  "successful_checkers": 1,
+  "perfect_checkers": 1,
+  "best_tp": 1,
+  "best_tn": 1,
+  "total_time": 1360.614246,
+  "errors": [],
+  "success_rate": 0.3333333333333333,
+  "timestamp": "2026-10-07T15:57:31.633350"
+}

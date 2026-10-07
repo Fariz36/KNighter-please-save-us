@@ -1,0 +1,78 @@
+{
+  "commit_id": "c53420e42742a68004854a7fa354f9500b4b1516",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/64aba4da6972615f614e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/vtls/openssl.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "ossl_verifyhost"
+        ],
+        "fixed_functions": [
+          "ossl_verifyhost"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/vtls/openssl.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/f042c25fb876/lib/vtls/openssl.c",
+          "line": 2187,
+          "column": 7,
+          "function": "ossl_verifyhost",
+          "bug_type": "Untrusted length-delimited buffer used as C string",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "issue_hash": "925bf932e27874996668442ccd5377cc",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/c53420e42742/243847af/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_f042c25fb876_lib_vtls_openssl.c/report-925bf9.html",
+          "relpath": "lib/vtls/openssl.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/f042c25fb876/lib/vtls/openssl.c",
+          "line": 2169,
+          "column": 34,
+          "function": "ossl_verifyhost",
+          "bug_type": "Untrusted length-delimited buffer used as C string",
+          "description": "Length-delimited buffer passed to strlen; may read past end",
+          "issue_hash": "e8d89118a57cb7a6a57645d80edf9fb9",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/c53420e42742/243847af/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_f042c25fb876_lib_vtls_openssl.c/report-e8d891.html",
+          "relpath": "lib/vtls/openssl.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/vtls/openssl.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 10.7,
+    "setup_seconds": 0.04,
+    "analysis_seconds": {
+      "buggy": 9.82,
+      "fixed": 9.99
+    },
+    "total_seconds": 30.87
+  },
+  "report_dir": "tmp/validation/c53420e42742/243847af"
+}

@@ -1,0 +1,39 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "triggerStepAllocate",
+        "sqlite3SelectNew",
+        "sqlite3SrcListAppendFromTerm",
+        "sqlite3SrcListDup"
+      ],
+      "description": "returns a newly allocated object owned by the caller; may return NULL on failure."
+    },
+    "duplicator": {
+      "names": [
+        "sqlite3SrcListDup",
+        "sqlite3ExprListDup",
+        "sqlite3ExprDup"
+      ],
+      "description": "returns a newly allocated copy owned by the caller."
+    },
+    "deallocator": {
+      "names": [
+        "sqlite3SrcListDelete",
+        "sqlite3ExprDelete",
+        "sqlite3ExprListDelete"
+      ],
+      "description": "frees an owned object; the pointer must not be used afterwards."
+    },
+    "container_insert": {
+      "names": [
+        "sqlite3SrcListAppendList"
+      ],
+      "description": "appends/transfers ownership of a source object into a destination container; if not executed, the caller must free the source."
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "length_of": [
+    "hexFunc",
+    "quoteFunc",
+    "sqlite3Fts5BufferSize",
+    "sqlite3RCStrResize",
+    "sqlite3JournalSize"
+  ]
+}

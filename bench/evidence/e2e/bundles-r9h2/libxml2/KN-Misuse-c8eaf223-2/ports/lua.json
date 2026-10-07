@@ -1,0 +1,60 @@
+{
+  "target": "lua",
+  "commit": "0b29f408433e92953cc72b1d3e06c7ac8139e439",
+  "candidates": 845,
+  "identifiers": 7300,
+  "offered": {
+    "init": [
+      "lua_call",
+      "luaD_call",
+      "luaT_callTM",
+      "luaG_callerror",
+      "luaT_callTMres",
+      "luaH_new",
+      "luaH_set",
+      "luaM_new",
+      "luaS_new",
+      "lua_copy",
+      "upisopen",
+      "CREATE_Ax",
+      "CREATE_sJ",
+      "luaS_init",
+      "luaT_init",
+      "luaX_init",
+      "luaZ_init",
+      "lua_Alloc",
+      "lua_error",
+      "CREATE_ABx",
+      "SET_OPCODE",
+      "luaL_alloc",
+      "luaL_error",
+      "luaM_error",
+      "luaopen_io",
+      "luaopen_os",
+      "CREATE_ABCk",
+      "makevariant",
+      "CREATE_vABCk",
+      "luaM_malloc_",
+      "luaopen_base",
+      "luaopen_math",
+      "luaopen_utf8",
+      "allocsizenode",
+      "debug_realloc",
+      "luaG_errormsg",
+      "luaG_forerror",
+      "luaG_runerror",
+      "luaK_semerror",
+      "luaL_argerror"
+    ]
+  },
+  "mapping": {
+    "init": []
+  },
+  "dropped_not_in_target": {
+    "init": []
+  },
+  "rationale": {
+    "init": "Lua has no equivalent general-purpose setter that stores a caller-supplied numeric configuration value into a context object for later use as a divisor."
+  },
+  "llm_seconds": 11.0
+}

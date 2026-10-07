@@ -1,0 +1,63 @@
+{
+  "commit_id": "93fd6892f85ecd8a4e82d2339016a9f71a42d0e8",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/fccaec1fd498bccaea26/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lua.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "addreturn",
+          "incomplete",
+          "loadline",
+          "multiline",
+          "pushline"
+        ],
+        "fixed_functions": [
+          "addreturn",
+          "incomplete",
+          "loadline",
+          "multiline",
+          "pushline"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lua.c": []
+    },
+    "fixed": {
+      "lua.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.01,
+    "setup_seconds": 11.09,
+    "analysis_seconds": {
+      "buggy": 5.45,
+      "fixed": 13.97
+    },
+    "total_seconds": 30.7
+  },
+  "report_dir": "tmp/validation/93fd6892f85e/02bbb2b6"
+}

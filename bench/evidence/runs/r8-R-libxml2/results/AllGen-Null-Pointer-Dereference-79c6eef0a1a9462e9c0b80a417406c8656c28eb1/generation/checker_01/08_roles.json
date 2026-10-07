@@ -1,0 +1,21 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "xmlMalloc",
+        "xmlStrdup"
+      ],
+      "description": "Memory allocation or string duplication function that returns NULL on failure."
+    },
+    "length_of": {
+      "names": [
+        "strlen"
+      ],
+      "description": "Function that computes the length of a string by dereferencing its pointer argument."
+    }
+  }
+}

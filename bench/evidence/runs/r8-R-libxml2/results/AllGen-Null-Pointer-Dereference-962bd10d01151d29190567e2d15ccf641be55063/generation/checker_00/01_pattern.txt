@@ -1,0 +1,25 @@
+## Bug Pattern
+
+A function dereferences an in/out pointer parameter before validating that the pointer is non-NULL. The `capacity` parameter is used as `*capacity` when calling the capacity-calculation helper, so if the caller passes `NULL`, the function crashes with a NULL pointer dereference. The fix inserts a `null_check` before any dereference.
+
+Roles in this patch:
+
+- `inout_capacity_pointer`: `capacity` (read via `*capacity`, later written via `*capacity = newSize`)
+- `pointer_dereference`: `*capacity`
+- `capacity_calculator`: `xmlGrowCapacity`
+- `reallocator`: `xmlRealloc`
+- `null_on_failure`: `return NULL`
+- `capacity_update`: `*capacity = newSize`
+
+Buggy missing guard:
+
+```c
+newSize = xmlGrowCapacity(*capacity, elemSize, min, max);
+```
+
+Required guard:
+
+```c
+if (capacity == NULL)
+    return NULL;
+```

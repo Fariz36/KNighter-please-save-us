@@ -1,0 +1,9 @@
+## Bug Pattern
+
+Loop-index variables are declared with a narrower signed integer type (32-bit `int`) than the length/limit values they are mixed with (64-bit `i64`). An `aborting_assert` bounds expression performs arithmetic on the narrow loop counters and narrow length before comparing against the wider limit. The arithmetic can therefore overflow in the narrow type, so the assertion tests a wrapped value instead of the intended 64-bit result. The fix promotes the loop counters to the wider type.
+
+Roles:
+- `aborting_assert`: `assert`
+- `length_of`: `sqlite3_value_bytes`
+- `allocator`: `contextMalloc`, `sqlite3Realloc`
+- `buffer_copy`: `memcpy`

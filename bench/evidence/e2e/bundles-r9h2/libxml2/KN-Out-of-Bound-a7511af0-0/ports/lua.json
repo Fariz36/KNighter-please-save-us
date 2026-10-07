@@ -1,0 +1,98 @@
+{
+  "target": "lua",
+  "commit": "0b29f408433e92953cc72b1d3e06c7ac8139e439",
+  "candidates": 845,
+  "identifiers": 7300,
+  "offered": {
+    "indexed_read": [
+      "vkisindexed",
+      "luaK_indexed",
+      "luaZ_read",
+      "mainthread",
+      "ttisthread",
+      "lua_isthread",
+      "lua_tothread",
+      "lua_newthread",
+      "lua_pushthread",
+      "luaE_freethread",
+      "luaE_threadsize",
+      "lua_closethread",
+      "lua_resetthread",
+      "luaE_resetthread",
+      "luai_userstatethread",
+      "luaZ_buffer",
+      "nodefromval",
+      "lua_absindex",
+      "luaL_loadbuffer",
+      "luaL_prepbuffer",
+      "luaZ_freebuffer",
+      "luaZ_initbuffer",
+      "luaZ_sizebuffer",
+      "luaL_loadbufferx",
+      "luaZ_resetbuffer",
+      "lua_upvalueindex",
+      "invalidateTMcache",
+      "luaZ_resizebuffer"
+    ],
+    "length_of": [
+      "luaZ_sizebuffer",
+      "luaZ_resizebuffer",
+      "lua_len",
+      "cast_num",
+      "luaL_len",
+      "sizenode",
+      "luaH_size",
+      "sizeudata",
+      "stacksize",
+      "cast_sizet",
+      "sizestrshr",
+      "luaH_resize",
+      "luaS_resize",
+      "luaL_addsize",
+      "sizeCclosure",
+      "sizeLclosure",
+      "allocsizenode",
+      "luaM_testsize",
+      "luaF_protosize",
+      "luaM_checksize",
+      "resethookcount",
+      "luaE_threadsize",
+      "luaS_sizelngstr",
+      "luaH_resizearray",
+      "lua_gethookcount",
+      "luaK_settablesize",
+      "luaL_buffinitsize",
+      "luaL_prepbuffsize",
+      "luaL_pushresultsize",
+      "UNUSED",
+      "ci_func",
+      "cast_func",
+      "ttisstring",
+      "isLfunction",
+      "luaZ_buffer",
+      "lua_isstring",
+      "lua_tostring",
+      "pushvfstring",
+      "ttisfunction",
+      "luaL_dostring"
+    ]
+  },
+  "mapping": {
+    "indexed_read": [
+      "zgetc"
+    ],
+    "length_of": [
+      "strlen",
+      "luaZ_bufflen"
+    ]
+  },
+  "dropped_not_in_target": {
+    "indexed_read": [],
+    "length_of": []
+  },
+  "rationale": {
+    "indexed_read": "zgetc is the macro that reads a character from the ZIO parser input buffer, checking the remaining length.",
+    "length_of": "luaZ_bufflen returns the number of unread bytes in the ZIO buffer, which is the valid length for reads."
+  },
+  "llm_seconds": 111.2
+}

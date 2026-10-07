@@ -1,0 +1,83 @@
+{
+  "target": "lua",
+  "commit": "0b29f408433e92953cc72b1d3e06c7ac8139e439",
+  "candidates": 845,
+  "identifiers": 7300,
+  "offered": {
+    "api_entry_point": [
+      "api_check",
+      "point2uint",
+      "api_checkpop",
+      "api_incr_top",
+      "lua_topointer",
+      "api_checknelems",
+      "lua_pointer2str",
+      "lua_getlocaledecpoint"
+    ],
+    "out_param": [
+      "setgcparam",
+      "applygcparam",
+      "luaO_codeparam",
+      "luaO_applyparam",
+      "UNUSED",
+      "lua_topointer",
+      "lua_pointer2str"
+    ],
+    "out_param_writer": [
+      "setgcparam",
+      "applygcparam",
+      "luaO_codeparam",
+      "luaO_applyparam",
+      "ci_func",
+      "cast_func",
+      "isLfunction",
+      "ttisfunction",
+      "lua_CFunction",
+      "lua_topointer",
+      "lua_isfunction",
+      "lua_iscfunction",
+      "lua_pointer2str",
+      "lua_tocfunction",
+      "lua_writestring",
+      "lua_pushcfunction",
+      "lua_writestringerror"
+    ]
+  },
+  "mapping": {
+    "api_entry_point": [
+      "lua_tonumberx",
+      "lua_tointegerx",
+      "lua_tolstring",
+      "lua_getallocf",
+      "lua_resume",
+      "lua_getstack",
+      "lua_getinfo",
+      "luaL_checklstring",
+      "luaL_optlstring",
+      "luaL_tolstring"
+    ],
+    "out_param": [
+      "isnum",
+      "len",
+      "ud",
+      "nresults",
+      "ar",
+      "l"
+    ],
+    "out_param_writer": [
+      "lua_tolstring",
+      "auxgetinfo"
+    ]
+  },
+  "dropped_not_in_target": {
+    "api_entry_point": [],
+    "out_param": [],
+    "out_param_writer": []
+  },
+  "rationale": {
+    "api_entry_point": "Public Lua API functions that accept a pointer argument for storing output.",
+    "out_param": "Parameter names used in Lua API functions as output pointers.",
+    "out_param_writer": "Downstream functions called by Lua API entry points that write through the output pointer."
+  },
+  "llm_seconds": 189.0
+}

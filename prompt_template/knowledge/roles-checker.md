@@ -1,7 +1,7 @@
 # Project Roles (mandatory)
 
-The checker must not hardcode project-specific identifiers. Project functions, macros, types and
-fields are referred to only through **roles**, so the same checker can run on another project with a
+The checker must not hardcode project-specific identifiers. Project functions and macros are
+referred to only through **roles**, so the same checker can run on another project with a
 different roles file. Standard C/C++ library names (malloc, free, memcpy, strlen, std::vector, ...)
 may still be used directly.
 
@@ -14,13 +14,21 @@ Use roles from this standard vocabulary whenever one fits (they map well to othe
 A role is an **API category that most C/C++ projects have**, not a description of this patch: name and
 describe what *any* function in that category does (e.g. "frees memory or an object; the pointer must
 not be used afterwards"), never which object, struct or call site it is in this project. Use at most 6
-roles. Only invent a new role when no category fits, and then keep it equally generic.
+roles.
+**Roles bind functions and macros only** (the calls a project makes). Never put local variables,
+parameters, struct fields, types, constants, string keys or literal values into a role: those exist
+only at this bug site and have no counterpart in another project. Recognise them structurally instead
+(e.g. "the size argument of a `buffer_copy` call", "an integer of width < 64 bits", "the value returned
+by an `allocator`"). Only invent a new role when no category fits, and then keep it equally generic.
 
 Rules:
 1. `#include "knighter/roles.h"` and query roles with:
-   - `knighter::callIsRole(Call, "allocator")`: is the callee of `Call` an allocator?
-   - `knighter::isRole("error_setter", Name)`: does this function/macro/field name play the role?
-   - `knighter::declIsRole(D, "lock_field")`: does this `NamedDecl` play the role?
+   - `knighter::callIsRole(Call, "allocator")`: is the callee of `Call` (a `CallEvent`) an allocator?
+   - `knighter::callExprIsRole(CE, "allocator", ASTCtx)`: the same for a `CallExpr` (AST checkers).
+     Both also match calls through macro wrappers (`xmlMalloc(n)` that expands to `malloc`) and
+     through function pointers (`ctx->free(p)`), so prefer them over comparing callee names yourself.
+   - `knighter::isRole("error_setter", Name)`: does this function/macro name play the role?
+   - `knighter::declIsRole(D, "deallocator")`: does this function/macro `NamedDecl` play the role?
    - `knighter::roleNames("allocator")`: all names bound to the role (`ArrayRef<std::string>`).
 2. Never write a project-specific name in a string literal or comparison in the checker logic
    (no `"git_error_set"`, no `getName() == "short_oid"`, no `startswith("Curl_")`).

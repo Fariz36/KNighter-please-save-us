@@ -1,0 +1,20 @@
+{
+  "combined_create_and_publish": [
+    "luaL_newmetatable"
+  ],
+  "object_initializer": [
+    "luaL_setfuncs"
+  ],
+  "persistent_registry_lookup": [
+    "luaL_getmetatable"
+  ],
+  "object_allocator": [
+    "luaL_newlibtable"
+  ],
+  "registry_store": [
+    "lua_setfield"
+  ],
+  "registry_key": [
+    "_UBOX*"
+  ]
+}

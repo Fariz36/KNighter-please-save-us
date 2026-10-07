@@ -1,0 +1,33 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "getConstraintToken",
+        "sqlite3GetToken"
+      ],
+      "description": "tokenizes input text, returns token length and writes token type via an out-param"
+    },
+    "buffer_copy": {
+      "names": [
+        "memcpy"
+      ],
+      "description": "copies a specified number of bytes from source to destination"
+    },
+    "allocator": {
+      "names": [
+        "sqlite3MallocZero"
+      ],
+      "description": "allocates zero-initialized memory"
+    },
+    "aborting_assert": {
+      "names": [
+        "sqlite3Dequote"
+      ],
+      "description": "dequotes a string and aborts via assert if the input is malformed"
+    }
+  }
+}

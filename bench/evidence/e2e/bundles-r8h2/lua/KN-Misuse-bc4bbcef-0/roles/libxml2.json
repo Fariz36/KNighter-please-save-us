@@ -1,0 +1,23 @@
+{
+  "combined_create_and_publish": [
+    "xmlInitializeCatalog",
+    "xmlInitCatalogInternal"
+  ],
+  "object_initializer": [
+    "xmlLoadCatalog",
+    "xmlLoadCatalogs"
+  ],
+  "persistent_registry_lookup": [
+    "xmlCatalogResolve",
+    "xmlCatalogResolveURI",
+    "xmlCatalogGetPublic",
+    "xmlCatalogGetSystem",
+    "xmlCatalogLocalResolve",
+    "xmlCatalogLocalResolveURI"
+  ],
+  "object_allocator": [
+    "xmlNewCatalog"
+  ],
+  "registry_store": [],
+  "registry_key": []
+}

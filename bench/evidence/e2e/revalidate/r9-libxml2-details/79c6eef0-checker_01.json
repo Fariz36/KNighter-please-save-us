@@ -1,0 +1,79 @@
+{
+  "commit_id": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/ebb19bc6e899bff97a88/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlregexp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "xmlRegNewParserCtxt"
+        ],
+        "fixed_functions": [
+          "xmlRegNewParserCtxt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/61e5f3ea9760-f6d22c8ac6c7/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 740,
+          "column": 13,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "Use before NULL check",
+          "description": "Result of duplicator may be NULL and is used before NULL check",
+          "issue_hash": "da2f5e1e3ac5813acf5c7ac316abdafb",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/79c6eef0a1a9/27b403d6/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-da2f5e.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/79c6eef0a1a9-f6d22c8ac6c7/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 744,
+          "column": 20,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "Use before NULL check",
+          "description": "Result of duplicator may be NULL and is used before NULL check",
+          "issue_hash": "a3a3edd8bc876bd867b769f72d171aa1",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/79c6eef0a1a9/27b403d6/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-a3a3ed.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 14.28,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 44.06,
+      "fixed": 49.93
+    },
+    "total_seconds": 108.53
+  },
+  "report_dir": "tmp/validation/79c6eef0a1a9/27b403d6"
+}

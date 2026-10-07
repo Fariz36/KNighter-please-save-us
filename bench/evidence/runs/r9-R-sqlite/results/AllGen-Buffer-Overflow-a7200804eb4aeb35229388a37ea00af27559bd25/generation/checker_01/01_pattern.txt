@@ -1,0 +1,7 @@
+## Bug Pattern
+
+The capacity requested from a `reallocator` is computed too small because it omits some bytes that later `buffer_copy`/write operations can emit. The code treats that requested size as a guarantee of sufficient space, then performs unbounded writes into the buffer. In this patch, the floating-point formatting path can emit extra fixed characters such as a sign and a forced fractional zero beyond the hard-coded slack assumed by the old size arithmetic, so the later writes overrun the allocated output buffer.
+
+Roles:
+- `reallocator`: `sqlite3StrAccumEnlargeIfNeeded` — ensures/grows the output buffer to the requested size.
+- `buffer_copy`: `memcpy`, `memmove`, `sqlite3_str_append`, `sqlite3_str_appendchar` — write/copy bytes into the output buffer; direct stores through the output pointer and `memset` writes also participate in the overflow.

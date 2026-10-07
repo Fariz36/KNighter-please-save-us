@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The code validates the length paired with a caller-supplied pointer but does not validate the pointer itself before using it as the source of a `buffer_copy` or storing it for later dereference. A nonzero length with a NULL pointer therefore passes validation and causes a NULL dereference. The fix adds the missing NULL check on that input pointer.
+
+Roles:
+- `buffer_copy`: memcpy
+- `allocator` / `null_on_failure`: curlx_malloc
+- `deallocator`: curlx_safefree

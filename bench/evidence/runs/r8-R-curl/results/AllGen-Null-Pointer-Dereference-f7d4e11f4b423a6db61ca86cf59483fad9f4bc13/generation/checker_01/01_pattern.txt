@@ -1,0 +1,23 @@
+## Bug Pattern
+
+A caller-supplied struct contains a `buffer_source` pointer plus a companion `length_of` field. The code validates the length (nonzero and within a limit) but does **not** validate that the `buffer_source` pointer is non-NULL before using it as a copy source or retaining it for later use. This allows a NULL pointer dereference either directly in `memcpy()` or later outside the function when the blob is used.
+
+Roles in this patch:
+- `input_struct`: `struct curl_blob`
+- `buffer_source` / nullable pointer: `blob->data`
+- `length_of`: `blob->len`
+- `length_limit`: `CURL_MAX_INPUT_LENGTH`
+- `copy_flag` / mode flag: `CURL_BLOB_COPY`
+- `copy_operation`: `memcpy`
+- `allocator`: `curlx_malloc`
+- `deallocator`: `curlx_safefree`
+- `error_setter` / return code: `CURLE_BAD_FUNCTION_ARGUMENT`, `CURLE_OUT_OF_MEMORY`
+
+The missing check is:
+
+```c
+if(!blob->data || !blob->len || (blob->len > CURL_MAX_INPUT_LENGTH))
+  return CURLE_BAD_FUNCTION_ARGUMENT;
+```
+
+Without the `!blob->data` check, the code can dereference `blob->data` via `memcpy()` if `CURL_BLOB_COPY` is set, or store the NULL pointer for later dereference if it is not set.

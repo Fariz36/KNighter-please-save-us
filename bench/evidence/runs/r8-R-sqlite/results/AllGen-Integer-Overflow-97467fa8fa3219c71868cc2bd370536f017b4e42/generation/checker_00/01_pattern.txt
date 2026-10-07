@@ -1,0 +1,15 @@
+## Bug Pattern
+
+A count/length value (`n`) is decoded from untrusted input using repeated multiply/add arithmetic with a place-value multiplier (`mult`) stored in a narrow signed integer (`int`). The arithmetic can overflow before the length is validated against the output capacity (`nOut`). The overflowed length is then used in a bounds check (`j+n>nOut`) and as the size argument to a buffer write (`memset(&aOut[j], 0, n)`), so the check can be bypassed and the write can exceed or incorrectly address the output buffer.
+
+Roles:
+- `untrusted_input`: `a`, `aIn`
+- `decoded_length` / `count`: `n`
+- `place_value_multiplier`: `mult`
+- `output_capacity`: `nOut`
+- `output_offset`: `j`
+- `bounds_check`: `j+n>nOut`
+- `buffer_write`: `memset(&aOut[j], 0, n)`
+- `narrow_integer`: `int`
+- `wide_integer`: `sqlite3_int64` (used in fix)
+- `overflow_guard`: `if( n>nOut ) return -1;` (added in fix)

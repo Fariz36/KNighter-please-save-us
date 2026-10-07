@@ -1,0 +1,783 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-1",
+    "source": "curl",
+    "target": "sqlite",
+    "bug_type": "Integer-Overflow",
+    "commits": [
+      {
+        "commit": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7200804eb4aeb35229388a37ea00af27559bd25",
+        "bug_type": "Buffer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "1bc183a935799050919eecf4f5deffb6d98e7905",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "97467fa8fa3219c71868cc2bd370536f017b4e42",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "2f5d281796853250befde5f83dfe8b909c4a5b39",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "encoded_size_calculator": [],
+      "input_length": [
+        "nIn"
+      ],
+      "max_input_size": [
+        "SQLITE_MAX_LENGTH"
+      ],
+      "error_sentinel": []
+    },
+    "roles_mapped": 2,
+    "roles_total": 4,
+    "detected": [],
+    "perfect": [],
+    "seconds": 395.1
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "sqlite",
+    "bug_type": "Memory-Leak",
+    "commits": [
+      {
+        "commit": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7200804eb4aeb35229388a37ea00af27559bd25",
+        "bug_type": "Buffer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "1bc183a935799050919eecf4f5deffb6d98e7905",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "97467fa8fa3219c71868cc2bd370536f017b4e42",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "2f5d281796853250befde5f83dfe8b909c4a5b39",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "cleanup": [
+        "sqlite3SchemaClear"
+      ],
+      "destructor": [
+        "sqlite3FreeIndex",
+        "sqlite3DeleteTable",
+        "sqlite3DeleteTrigger"
+      ],
+      "state_reset": [
+        "memset",
+        "sqlite3HashClear"
+      ],
+      "link_detach": [
+        "sqlite3UnlinkAndDeleteIndex",
+        "sqlite3UnlinkAndDeleteTable",
+        "sqlite3UnlinkAndDeleteTrigger"
+      ],
+      "link_storage": [
+        "idxHash",
+        "tblHash",
+        "trigHash"
+      ]
+    },
+    "roles_mapped": 5,
+    "roles_total": 5,
+    "detected": [],
+    "perfect": [],
+    "seconds": 625.0
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "sqlite",
+    "bug_type": "Misuse",
+    "commits": [
+      {
+        "commit": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7200804eb4aeb35229388a37ea00af27559bd25",
+        "bug_type": "Buffer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "1bc183a935799050919eecf4f5deffb6d98e7905",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "97467fa8fa3219c71868cc2bd370536f017b4e42",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "2f5d281796853250befde5f83dfe8b909c4a5b39",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "data_provider": [
+        "sqlite3_column_blob",
+        "sqlite3_value_blob"
+      ],
+      "length_provider": [
+        "sqlite3_column_bytes",
+        "sqlite3_value_bytes"
+      ],
+      "unbounded_string_consumer": [
+        "strlen",
+        "sqlite3StrICmp",
+        "sqlite3DbStrDup",
+        "sqlite3StrIHash",
+        "sqlite3SetString",
+        "sqlite3_bind_text",
+        "sqlite3_bind_text16",
+        "sqlite3_result_text",
+        "sqlite3_str_appendf",
+        "sqlite3_str_vappendf",
+        "sqlite3VdbeLoadString",
+        "sqlite3TestTextToPtr",
+        "sqlite3_mprintf",
+        "sqlite3_vmprintf",
+        "sqlite3_snprintf",
+        "sqlite3_vsnprintf"
+      ],
+      "bounded_nul_scanner": [
+        "memchr"
+      ],
+      "bounded_string_formatter": [
+        "sqlite3_str_appendf",
+        "sqlite3_str_vappendf",
+        "sqlite3_mprintf",
+        "sqlite3_vmprintf",
+        "sqlite3_snprintf",
+        "sqlite3_vsnprintf"
+      ]
+    },
+    "roles_mapped": 5,
+    "roles_total": 5,
+    "detected": [],
+    "perfect": [],
+    "seconds": 449.2
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-1",
+    "source": "curl",
+    "target": "sqlite",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7200804eb4aeb35229388a37ea00af27559bd25",
+        "bug_type": "Buffer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "1bc183a935799050919eecf4f5deffb6d98e7905",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "97467fa8fa3219c71868cc2bd370536f017b4e42",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "2f5d281796853250befde5f83dfe8b909c4a5b39",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "duplicator": [
+        "sqlite3ExprDup",
+        "sqlite3IdListDup",
+        "sqlite3WithDup"
+      ],
+      "source_handle": [
+        "p"
+      ],
+      "destination_allocator": [
+        "sqlite3ExprAlloc",
+        "sqlite3DbMallocRaw"
+      ],
+      "field_copier": [
+        "sqlite3ExprListDup",
+        "sqlite3DbStrDup"
+      ]
+    },
+    "roles_mapped": 4,
+    "roles_total": 4,
+    "detected": [],
+    "perfect": [],
+    "seconds": 548.9
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "sqlite",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7200804eb4aeb35229388a37ea00af27559bd25",
+        "bug_type": "Buffer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "1bc183a935799050919eecf4f5deffb6d98e7905",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "97467fa8fa3219c71868cc2bd370536f017b4e42",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "2f5d281796853250befde5f83dfe8b909c4a5b39",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "api_entry_point": [
+        "sqlite3changegroup_output",
+        "sqlite3session_changeset",
+        "sqlite3session_patchset",
+        "sqlite3_wal_checkpoint_v2",
+        "sqlite3Fts5HashScanEntry"
+      ],
+      "out_param": [
+        "pnData",
+        "ppData",
+        "pnChangeset",
+        "ppChangeset",
+        "pnPatchset",
+        "ppPatchset",
+        "pnLog",
+        "pnCkpt",
+        "pzTerm",
+        "pnTerm",
+        "ppDoclist"
+      ],
+      "out_param_writer": [
+        "sqlite3Fts5IterToken",
+        "sqlite3Fts5IterTerm"
+      ]
+    },
+    "roles_mapped": 3,
+    "roles_total": 3,
+    "detected": [],
+    "perfect": [],
+    "seconds": 521.3
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2",
+    "source": "curl",
+    "target": "sqlite",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7200804eb4aeb35229388a37ea00af27559bd25",
+        "bug_type": "Buffer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "1bc183a935799050919eecf4f5deffb6d98e7905",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "97467fa8fa3219c71868cc2bd370536f017b4e42",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "2f5d281796853250befde5f83dfe8b909c4a5b39",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "length_field": [
+        "n"
+      ],
+      "data_pointer": [
+        "data",
+        "pData"
+      ],
+      "buffer_copy": [
+        "memcpy"
+      ],
+      "error_return": [
+        "SQLITE_CORRUPT",
+        "SQLITE_NOMEM"
+      ],
+      "copy_flag": [],
+      "allocator": [
+        "sqlite3_realloc"
+      ],
+      "deallocator": [
+        "sqlite3_free",
+        "sqlite3Fts5BufferFree"
+      ],
+      "validation_guard": []
+    },
+    "roles_mapped": 6,
+    "roles_total": 8,
+    "detected": [],
+    "perfect": [],
+    "seconds": 545.0
+  },
+  {
+    "bundle": "KN-Double-Free-26dfab2f-1",
+    "source": "libxml2",
+    "target": "sqlite",
+    "bug_type": "Double-Free",
+    "commits": [
+      {
+        "commit": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7200804eb4aeb35229388a37ea00af27559bd25",
+        "bug_type": "Buffer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "1bc183a935799050919eecf4f5deffb6d98e7905",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "97467fa8fa3219c71868cc2bd370536f017b4e42",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "2f5d281796853250befde5f83dfe8b909c4a5b39",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "resource": [],
+      "ownership_consumer_frees_on_failure": [
+        "sqlite3_create_function_v2",
+        "sqlite3_create_window_function"
+      ],
+      "deallocator": [
+        "sqlite3_free"
+      ],
+      "null_on_failure": [
+        "sqlite3_create_function_v2",
+        "sqlite3_create_window_function"
+      ],
+      "duplicate_cleanup": [
+        "sqlite3_free"
+      ],
+      "context_cleanup": [
+        "sqlite3_close"
+      ]
+    },
+    "roles_mapped": 5,
+    "roles_total": 6,
+    "detected": [],
+    "perfect": [],
+    "seconds": 506.0
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "sqlite",
+    "bug_type": "Misuse",
+    "commits": [
+      {
+        "commit": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7200804eb4aeb35229388a37ea00af27559bd25",
+        "bug_type": "Buffer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "1bc183a935799050919eecf4f5deffb6d98e7905",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "97467fa8fa3219c71868cc2bd370536f017b4e42",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "2f5d281796853250befde5f83dfe8b909c4a5b39",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "config_setter": [
+        "sqlite3Fts5ConfigSetValue",
+        "sqlite3Fts5StorageConfigValue",
+        "sqlite3_config",
+        "sqlite3PagerSetPagesize",
+        "sqlite3BtreeSetPageSize"
+      ],
+      "divisor_field": [
+        "nAutomerge",
+        "nUsermerge",
+        "pgsz",
+        "mnReq",
+        "pageSize"
+      ]
+    },
+    "roles_mapped": 2,
+    "roles_total": 2,
+    "detected": [],
+    "perfect": [],
+    "seconds": 549.6
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+    "source": "libxml2",
+    "target": "sqlite",
+    "bug_type": "Null-Pointer-Dereference",
+    "commits": [
+      {
+        "commit": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+        "bug_type": "Memory-Leak",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "a7200804eb4aeb35229388a37ea00af27559bd25",
+        "bug_type": "Buffer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "1bc183a935799050919eecf4f5deffb6d98e7905",
+        "bug_type": "Misuse",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "97467fa8fa3219c71868cc2bd370536f017b4e42",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      },
+      {
+        "commit": "2f5d281796853250befde5f83dfe8b909c4a5b39",
+        "bug_type": "Integer-Overflow",
+        "tp": 0,
+        "tn": 0,
+        "perfect": false
+      }
+    ],
+    "mapping": {
+      "null_on_failure": [
+        "sqlite3ExprAlloc",
+        "sqlite3MutexAlloc",
+        "sqlite3ParserAlloc",
+        "sqlite3WindowAlloc",
+        "sqlite3KeyInfoAlloc",
+        "sqlite3_mutex_alloc",
+        "sqlite3Malloc",
+        "sqlite3Realloc",
+        "sqlite3StackAllocRaw",
+        "sqlite3StackAllocRawNN",
+        "sqlite3ExprDup",
+        "sqlite3WithDup",
+        "sqlite3CteNew",
+        "sqlite3VdbeAllocUnpackedRecord",
+        "sqlite3_fopen",
+        "sqlite3_popen"
+      ],
+      "length_of": [
+        "strlen",
+        "MergeCount",
+        "MX_CELL_SIZE",
+        "fts3HashCount",
+        "ExprIsFullSize",
+        "fts3HashKeysize",
+        "sqliteHashCount",
+        "sqlite3WalDbsize",
+        "sqlite3BitvecSize",
+        "sqlite3BtreeCount",
+        "sqlite3OsFileSize",
+        "sqlite3SectorSize",
+        "sqlite3CodeRhsOfIN",
+        "sqlite3JournalSize",
+        "sqlite3Utf8CharLen",
+        "sqlite3OsSectorSize",
+        "sqlite3Utf16ByteLen",
+        "sqlite3WalFramesize",
+        "sqlite3PagerRefcount",
+        "sqlite3BtreeSeekCount",
+        "sqlite3ExprVectorSize",
+        "sqlite3Fts5BufferSize",
+        "sqlite3KeyInfoOfIndex"
+      ]
+    },
+    "roles_mapped": 2,
+    "roles_total": 2,
+    "detected": [],
+    "perfect": [],
+    "seconds": 554.0
+  }
+]

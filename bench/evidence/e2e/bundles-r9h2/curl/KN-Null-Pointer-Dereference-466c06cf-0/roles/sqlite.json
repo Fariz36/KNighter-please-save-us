@@ -1,0 +1,40 @@
+{
+  "duplicator": [
+    "sqlite3_value_dup",
+    "sqlite3ExprDup",
+    "sqlite3ExprListDup",
+    "sqlite3SrcListDup",
+    "sqlite3IdListDup",
+    "sqlite3SelectDup",
+    "sqlite3WithDup",
+    "sqlite3WindowDup",
+    "sqlite3DbStrDup",
+    "sqlite3DbStrNDup"
+  ],
+  "allocator": [
+    "sqlite3_malloc",
+    "sqlite3_malloc64",
+    "sqlite3_realloc",
+    "sqlite3_realloc64",
+    "sqlite3Malloc",
+    "sqlite3MallocZero",
+    "sqlite3Realloc",
+    "sqlite3DbMallocRaw",
+    "sqlite3DbMallocRawNN",
+    "sqlite3DbMallocZero",
+    "sqlite3DbRealloc",
+    "sqlite3DbReallocOrFree",
+    "sqlite3StackAllocRaw",
+    "sqlite3StackAllocRawNN",
+    "sqlite3ArrayAllocate",
+    "sqlite3ParserAlloc",
+    "sqlite3KeyInfoAlloc",
+    "sqlite3WindowAlloc",
+    "sqlite3ExprAlloc",
+    "sqlite3AllocateIndexObject",
+    "sqlite3VdbeAllocUnpackedRecord",
+    "sqlite3CteNew",
+    "sqlite3MutexAlloc",
+    "sqlite3_mutex_alloc"
+  ]
+}

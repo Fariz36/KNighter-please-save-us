@@ -1,0 +1,59 @@
+{
+  "commit_id": "e28c7bfec9fcf17a4ea04d4fa3c17fba69b6dbcf",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/c32866ecc68db7925c60/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/btree.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "btreeComputeFreeSpace",
+          "checkTreePage",
+          "sqlite3BtreeIntegrityCheck"
+        ],
+        "fixed_functions": [
+          "btreeComputeFreeSpace",
+          "checkTreePage",
+          "sqlite3BtreeIntegrityCheck"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/btree.c": []
+    },
+    "fixed": {
+      "src/btree.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 34.75,
+    "analysis_seconds": {
+      "buggy": 64.12,
+      "fixed": 60.45
+    },
+    "total_seconds": 159.76
+  },
+  "report_dir": "tmp/validation/e28c7bfec9fc/09ef6748"
+}

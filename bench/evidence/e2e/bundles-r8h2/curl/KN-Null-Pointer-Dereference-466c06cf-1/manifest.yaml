@@ -1,0 +1,58 @@
+id: KN-Null-Pointer-Dereference-466c06cf-1
+bug_type: Null-Pointer-Dereference
+source:
+  project: curl
+  description: curl, the C library (libcurl) for transferring data with URLs
+  commit: 466c06cf706bd92ff77beb402934f7265183f8ff
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A duplication/clone routine accepts a nullable source object pointer, then dereferences that source
+  pointer through field-copy operations before validating it. The destination allocation result is checked,
+  but the source handle itself is not checked, so passing NULL reaches an expression like `in->scheme`
+  and causes a NULL-pointer dereference.
+
+
+  Roles:
+
+  - `duplicator`: `curl_url_dup`
+
+  - `source_handle`: parameter `in`
+
+  - `destination_allocator`: `curlx_calloc`
+
+  - `field_copier` / `source_dereferencer`: `DUP(u, in, ...)`, which dereferences `in->scheme`, `in->user`,
+  etc.
+
+  - `missing_null_guard`: no `if(!in) return NULL;` before the `DUP` calls
+
+  - `null_on_invalid_input`: the return value added by the fix, `NULL` when `in == NULL`'
+roles:
+  duplicator:
+    names:
+    - curl_url_dup
+    description: function that duplicates a source handle into a newly allocated destination
+  source_handle:
+    names:
+    - in
+    description: parameter of a duplicator that points to the source object; may be NULL
+  destination_allocator:
+    names:
+    - curlx_calloc
+    description: allocator used to allocate the destination handle in a duplicator
+  field_copier:
+    names:
+    - DUP
+    description: macro/operation that copies fields from the source handle, dereferencing the source pointer
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:49+0700

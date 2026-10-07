@@ -1,0 +1,12 @@
+{
+  "commit_id": "6a5e74cbf04e79dd7971e6dff723ef1499eddfe4",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/fts5/fts5_storage.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/fts5/fts5_storage.c": "no compile entry"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "target": "lua",
+  "commit": "0b29f408433e92953cc72b1d3e06c7ac8139e439",
+  "candidates": 845,
+  "identifiers": 7300,
+  "offered": {
+    "config_setter": [
+      "luaH_set",
+      "lua_error",
+      "SET_OPCODE",
+      "luaL_error",
+      "luaM_error",
+      "luaG_errormsg",
+      "luaG_forerror",
+      "luaG_runerror",
+      "luaK_semerror",
+      "luaL_argerror",
+      "luaL_pushfail",
+      "luaE_warnerror",
+      "luaG_callerror",
+      "luaG_typeerror",
+      "luaL_typeerror",
+      "luaG_opinterror",
+      "luaG_ordererror",
+      "luaG_tointerror",
+      "luaD_seterrorobj",
+      "luaG_concaterror",
+      "luaX_syntaxerror",
+      "lua_writestringerror",
+      "intop",
+      "UNUSED",
+      "fvalue",
+      "hvalue",
+      "ivalue",
+      "nvalue",
+      "pvalue",
+      "uvalue",
+      "ci_func",
+      "clvalue",
+      "gcvalue",
+      "thvalue",
+      "tsvalue",
+      "clCvalue",
+      "clLvalue",
+      "fltvalue",
+      "cast_func",
+      "chgivalue"
+    ],
+    "divisor_field": [
+      "lua_getfield",
+      "lua_setfield",
+      "luaL_getmetafield",
+      "UNUSED",
+      "lua_arith",
+      "luaO_arith"
+    ]
+  },
+  "mapping": {
+    "config_setter": [],
+    "divisor_field": []
+  },
+  "dropped_not_in_target": {
+    "config_setter": [],
+    "divisor_field": []
+  },
+  "rationale": {
+    "config_setter": "Lua has no configuration setter that stores a value later used as a divisor; division sites operate on operands with explicit zero checks.",
+    "divisor_field": "Lua has no configuration field used as a divisor; arithmetic divisors are function arguments/operands, not stored configuration fields."
+  },
+  "llm_seconds": 75.1
+}

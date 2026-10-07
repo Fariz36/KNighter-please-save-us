@@ -1,0 +1,17 @@
+{
+  "cleanup": [
+    "cf_h2_proxy_ctx_clear"
+  ],
+  "destructor": [
+    "cf_h2_proxy_ctx_free"
+  ],
+  "state_reset": [
+    "memset"
+  ],
+  "link_detach": [
+    "Curl_peer_unlink"
+  ],
+  "link_storage": [
+    "dest"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "buffer_grow": [],
+  "required_capacity": [],
+  "write_pointer": [],
+  "digit_set": [
+    "digits"
+  ],
+  "output_buffer": []
+}

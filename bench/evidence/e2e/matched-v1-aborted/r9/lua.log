@@ -1,0 +1,33 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 18:02:56.225 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (lua), Repository Path: /home/faris/RA-MrYudis/Knight/targets/lua; plugin_build=standalone; validation_scoring=strict
+lua: 96 mined fix candidates
+2026-10-07 18:02:57.286 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-413d25b318c346a4)
+2026-10-07 18:02:57.298 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision 0b29f408433e
+2026-10-07 18:02:57.398 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 18:02:57.410 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 18:05:00.068 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 122.7s
+2026-10-07 18:05:00.072 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-bc440a89-2 roles to lua: {'length_of': ['luaS_sizelngstr', 'sizestrshr', 'sizeudata', 'sizeCclosure', 'sizeLclosure']}
+{"bundle": "KN-Integer-Overflow-bc440a89-2", "source": "curl", "target": "lua", "api_matched": 0, "pairs": []}
+2026-10-07 18:05:00.195 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 18:05:00.233 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 18:07:40.811 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 160.6s
+2026-10-07 18:07:40.814 | INFO     | role_porting:port_roles:226 - Ported KN-Memory-Leak-a0f08d69-0 roles to lua: {'cleanup': ['luaF_closeupval', 'luaF_close'], 'container_remove': ['luaF_unlinkupval'], 'deallocator': ['luaM_free', 'luaM_free_', 'luaM_freemem', 'luaM_freearray', 'luaH_free', 'luaF_freeproto', 'luaE_freethread', 'luaZ_freebuffer', 'luaC_freeallobjects', 'lua_close']}
+{"bundle": "KN-Memory-Leak-a0f08d69-0", "source": "curl", "target": "lua", "api_matched": 0, "pairs": []}
+2026-10-07 18:07:40.919 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 18:07:41.037 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 18:11:56.086 | ERROR    | model:invoke_llm:347 - Error attempt 1 [port_roles]: The read operation timed out
+2026-10-07 18:14:51.017 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 172.9s
+2026-10-07 18:14:51.020 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c53420e4-0 roles to lua: {'length_of': ['strlen'], 'untrusted_size': ['lua_tolstring', 'luaL_checklstring', 'luaL_optlstring', 'luaL_tolstring', 'lua_rawlen', 'luaL_len', 'lua_len'], 'untrusted_data_accessor': ['lua_tolstring', 'lua_tostring', 'luaL_checklstring', 'luaL_checkstring', 'luaL_optlstring', 'luaL_optstring', 'luaL_tolstring'], 'allocator': ['lua_tolstring', 'luaL_tolstring'], 'deallocator': [], 'error_setter': ['luaL_error', 'luaG_runerror', 'luaK_semerror', 'lua_writestringerror']}
+2026-10-07 18:14:51.105 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 64aba4da6972615f614e
+2026-10-07 18:14:55.384 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for ltests.h, including whole file (3.4KB)
+2026-10-07 18:14:55.387 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 64aba4da6972615f614e
+2026-10-07 18:15:03.132 | INFO     | targets.compiledb:_setup_revision:217 - [lua] configured revision 62afbc6bfce2 in 7.6s
+2026-10-07 18:15:03.186 | INFO     | targets.compiledb:_setup_revision:217 - [lua] configured revision 04e495403ba6 in 7.6s
+2026-10-07 18:15:03.575 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 04e495403ba6: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 18:15:03.675 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for lvm.c, including whole file (57.6KB)
+2026-10-07 18:15:03.685 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 64aba4da6972615f614e
+2026-10-07 18:15:11.723 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 64aba4da6972615f614e
+{"bundle": "KN-Misuse-c53420e4-0", "source": "curl", "target": "lua", "api_matched": 4, "pairs": [["a1089b41", null, null], ["04e49540", 0, 0], ["f623b969", null, null], ["c03c527f", null, null]]}
+2026-10-07 18:15:18.058 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 18:15:18.094 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]

@@ -1,0 +1,42 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "nullable_inout_capacity_ptr": {
+      "names": [
+        "capacity"
+      ],
+      "description": "pointer parameter used as an in/out capacity slot; must be null-checked before dereference"
+    },
+    "capacity_computer": {
+      "names": [
+        "xmlGrowCapacity"
+      ],
+      "description": "function that computes a new capacity from the current capacity value"
+    },
+    "reallocator": {
+      "names": [
+        "xmlRealloc"
+      ],
+      "description": "memory reallocation function"
+    },
+    "deref_read": {
+      "names": [],
+      "description": "read through the capacity pointer, e.g., *capacity"
+    },
+    "deref_write": {
+      "names": [],
+      "description": "write through the capacity pointer, e.g., *capacity = newSize"
+    },
+    "null_guard": {
+      "names": [],
+      "description": "early-return null check, e.g., if (capacity == NULL) return NULL;"
+    },
+    "null_on_failure": {
+      "names": [],
+      "description": "condition indicating failure, e.g., realloc returning NULL or capacity computer returning negative"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "utf8_scanner": {
+      "names": [
+        "SQLITE_SKIP_UTF8"
+      ],
+      "description": "macro/function that advances a byte pointer past one encoded character, consuming up to several bytes per call"
+    },
+    "buffer_copy": {
+      "names": [
+        "sqlite3_str_append"
+      ],
+      "description": "appends a buffer of a computed length to an output accumulator"
+    },
+    "clamp": {
+      "names": [
+        "MIN"
+      ],
+      "description": "returns the smaller of two values; used to cap a computed length before narrowing to int"
+    }
+  }
+}

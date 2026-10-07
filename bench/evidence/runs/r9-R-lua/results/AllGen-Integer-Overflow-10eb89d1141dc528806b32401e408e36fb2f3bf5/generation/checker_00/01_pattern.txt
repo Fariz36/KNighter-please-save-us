@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A parser uses an untrusted size/count derived from input as a shift amount before validating that it is within the bit width of the shifted operand. In `utf8_decode`, the first byte determines the number of continuation bytes (`count`); for `0xFF`, `count` becomes 7, so `<< (count * 5)` attempts to shift a 32-bit value by 35 bits, which is undefined behavior. The existing `count > 5` check occurs after the shift, so it cannot prevent the invalid shift. The fix rejects bytes requiring more than five continuation bytes before the shift and asserts the bound.
+
+Roles:
+- `parser_input`: `utf8_decode` (consumes the untrusted UTF-8 byte string)
+- `untrusted_size`: the continuation-byte count computed from the first input byte; it controls the shift amount
+- `aborting_assert`: `lua_assert` (added by the fix to assert `count <= 5` before the shift)

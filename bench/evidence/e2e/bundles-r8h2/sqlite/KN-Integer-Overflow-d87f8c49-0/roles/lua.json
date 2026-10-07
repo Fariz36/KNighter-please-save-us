@@ -1,0 +1,19 @@
+{
+  "length_of": [],
+  "character_count_bound": [
+    "precision"
+  ],
+  "iterator_advance": [
+    "utf8_decode"
+  ],
+  "output_length": [
+    "length"
+  ],
+  "narrowing_cast": [
+    "cast_int"
+  ],
+  "safe_cap": [],
+  "buffer_append": [
+    "luaL_addlstring"
+  ]
+}

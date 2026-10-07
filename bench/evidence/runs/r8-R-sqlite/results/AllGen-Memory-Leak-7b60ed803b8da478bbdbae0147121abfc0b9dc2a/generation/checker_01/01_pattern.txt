@@ -1,0 +1,11 @@
+## Bug Pattern
+
+The bug pattern is a missing cleanup call on the non-transfer path of a conditionally transferred resource. A local owning pointer is produced by an allocation/duplication step and is only consumed by an ownership-transfer/append function when a destination pointer is non-NULL. If that condition is false—for example, because an earlier OOM left the destination pointer NULL—the local owning pointer is neither attached to its destination nor freed, causing a memory leak.
+
+Roles:
+- `allocator`/`duplicator`: `sqlite3SrcListDup`, `sqlite3SelectNew`, `sqlite3SrcListAppendFromTerm`
+- `ownership_transfer`: `sqlite3SrcListAppendList`
+- `deallocator`/`cleanup`: `sqlite3SrcListDelete`
+- `null_on_failure`: `sqlite3SrcListDup`, `sqlite3SelectNew`, `sqlite3SrcListAppendFromTerm`, `pTriggerStep->pSrc`
+- `local_owning_pointer`: `pFromDup`
+- `destination_pointer`: `pTriggerStep->pSrc`

@@ -1,0 +1,25 @@
+{
+  "resource": [],
+  "ownership_consumer_frees_on_failure": [
+    "Curl_cf_create"
+  ],
+  "deallocator": [
+    "curl_free",
+    "curlx_free",
+    "curl_dbg_free",
+    "free",
+    "curlx_safefree",
+    "Curl_cf_ngtcp2_h3_stream_ctx_free"
+  ],
+  "null_on_failure": [
+    "Curl_cf_create"
+  ],
+  "duplicate_cleanup": [
+    "free",
+    "curlx_free",
+    "curl_free",
+    "curl_dbg_free",
+    "curlx_safefree"
+  ],
+  "context_cleanup": []
+}

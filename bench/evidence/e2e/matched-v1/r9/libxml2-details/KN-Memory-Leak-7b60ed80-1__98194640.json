@@ -1,0 +1,299 @@
+{
+  "commit_id": "98194640b80a8d04b5af22b077ffd8368a9568cf",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/2ec40654c387ec060cee/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlwriter.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 11,
+        "fixed_total": 11,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "xmlTextWriterStartElementNS"
+        ],
+        "fixed_functions": [
+          "xmlTextWriterStartElementNS"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlwriter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/bcaae46a3106-f6d22c8ac6c7/../../src/bcaae46a3106/xmlwriter.c",
+          "line": 383,
+          "column": 5,
+          "function": "xmlNewTextWriterDoc",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "193f35daf9d3800761d9cfcd791c408b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/buggy/.._.._src_bcaae46a3106_xmlwriter.c/report-193f35.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/bcaae46a3106-f6d22c8ac6c7/../../src/bcaae46a3106/xmlwriter.c",
+          "line": 270,
+          "column": 9,
+          "function": "xmlNewTextWriterMemory",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "3847bba29bb6be377b6182608bac26a4",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/buggy/.._.._src_bcaae46a3106_xmlwriter.c/report-3847bb.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/bcaae46a3106-f6d22c8ac6c7/../../src/bcaae46a3106/xmlwriter.c",
+          "line": 351,
+          "column": 9,
+          "function": "xmlNewTextWriterDoc",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "3bccee747928727b8699ef9553f77c06",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/buggy/.._.._src_bcaae46a3106_xmlwriter.c/report-3bccee.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/bcaae46a3106-f6d22c8ac6c7/../../src/bcaae46a3106/xmlwriter.c",
+          "line": 313,
+          "column": 9,
+          "function": "xmlNewTextWriterPushParser",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "4ec223e9783c673f8c8f16cad9953200",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/buggy/.._.._src_bcaae46a3106_xmlwriter.c/report-4ec223.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/bcaae46a3106-f6d22c8ac6c7/../../src/bcaae46a3106/xmlwriter.c",
+          "line": 281,
+          "column": 5,
+          "function": "xmlNewTextWriterMemory",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "69db0ae4cd49f210bdb988992d729699",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/buggy/.._.._src_bcaae46a3106_xmlwriter.c/report-69db0a.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/bcaae46a3106-f6d22c8ac6c7/../../src/bcaae46a3106/xmlwriter.c",
+          "line": 438,
+          "column": 5,
+          "function": "xmlNewTextWriterTree",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "73367c82451ca8af33f134f3a5a30548",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/buggy/.._.._src_bcaae46a3106_xmlwriter.c/report-73367c.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/bcaae46a3106-f6d22c8ac6c7/../../src/bcaae46a3106/xmlwriter.c",
+          "line": 326,
+          "column": 5,
+          "function": "xmlNewTextWriterPushParser",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "8e83f1bff0723bb04115c7d178a7a1c8",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/buggy/.._.._src_bcaae46a3106_xmlwriter.c/report-8e83f1.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/bcaae46a3106-f6d22c8ac6c7/../../src/bcaae46a3106/xmlwriter.c",
+          "line": 1062,
+          "column": 5,
+          "function": "xmlTextWriterStartElementNS",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "9a6e3f3de7911bc2721e1ace51eee299",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/buggy/.._.._src_bcaae46a3106_xmlwriter.c/report-9a6e3f.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/bcaae46a3106-f6d22c8ac6c7/../../src/bcaae46a3106/xmlwriter.c",
+          "line": 416,
+          "column": 9,
+          "function": "xmlNewTextWriterTree",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "afc429a2739904bc42ccd79eadf2e5d7",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/buggy/.._.._src_bcaae46a3106_xmlwriter.c/report-afc429.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/bcaae46a3106-f6d22c8ac6c7/../../src/bcaae46a3106/xmlwriter.c",
+          "line": 1798,
+          "column": 17,
+          "function": "xmlTextWriterStartAttributeNS",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "c19c70dc2a408087380a4fe95ab9df21",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/buggy/.._.._src_bcaae46a3106_xmlwriter.c/report-c19c70.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/bcaae46a3106-f6d22c8ac6c7/../../src/bcaae46a3106/xmlwriter.c",
+          "line": 1055,
+          "column": 13,
+          "function": "xmlTextWriterStartElementNS",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "ce1c62e964303452bf8d582c59c99f21",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/buggy/.._.._src_bcaae46a3106_xmlwriter.c/report-ce1c62.html",
+          "relpath": "xmlwriter.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlwriter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/98194640b80a-f6d22c8ac6c7/../../src/98194640b80a/xmlwriter.c",
+          "line": 383,
+          "column": 5,
+          "function": "xmlNewTextWriterDoc",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "193f35daf9d3800761d9cfcd791c408b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/fixed/.._.._src_98194640b80a_xmlwriter.c/report-193f35.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/98194640b80a-f6d22c8ac6c7/../../src/98194640b80a/xmlwriter.c",
+          "line": 270,
+          "column": 9,
+          "function": "xmlNewTextWriterMemory",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "3847bba29bb6be377b6182608bac26a4",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/fixed/.._.._src_98194640b80a_xmlwriter.c/report-3847bb.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/98194640b80a-f6d22c8ac6c7/../../src/98194640b80a/xmlwriter.c",
+          "line": 351,
+          "column": 9,
+          "function": "xmlNewTextWriterDoc",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "3bccee747928727b8699ef9553f77c06",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/fixed/.._.._src_98194640b80a_xmlwriter.c/report-3bccee.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/98194640b80a-f6d22c8ac6c7/../../src/98194640b80a/xmlwriter.c",
+          "line": 313,
+          "column": 9,
+          "function": "xmlNewTextWriterPushParser",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "4ec223e9783c673f8c8f16cad9953200",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/fixed/.._.._src_98194640b80a_xmlwriter.c/report-4ec223.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/98194640b80a-f6d22c8ac6c7/../../src/98194640b80a/xmlwriter.c",
+          "line": 281,
+          "column": 5,
+          "function": "xmlNewTextWriterMemory",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "69db0ae4cd49f210bdb988992d729699",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/fixed/.._.._src_98194640b80a_xmlwriter.c/report-69db0a.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/98194640b80a-f6d22c8ac6c7/../../src/98194640b80a/xmlwriter.c",
+          "line": 438,
+          "column": 5,
+          "function": "xmlNewTextWriterTree",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "73367c82451ca8af33f134f3a5a30548",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/fixed/.._.._src_98194640b80a_xmlwriter.c/report-73367c.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/98194640b80a-f6d22c8ac6c7/../../src/98194640b80a/xmlwriter.c",
+          "line": 326,
+          "column": 5,
+          "function": "xmlNewTextWriterPushParser",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "8e83f1bff0723bb04115c7d178a7a1c8",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/fixed/.._.._src_98194640b80a_xmlwriter.c/report-8e83f1.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/98194640b80a-f6d22c8ac6c7/../../src/98194640b80a/xmlwriter.c",
+          "line": 1063,
+          "column": 5,
+          "function": "xmlTextWriterStartElementNS",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "9a6e3f3de7911bc2721e1ace51eee299",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/fixed/.._.._src_98194640b80a_xmlwriter.c/report-9a6e3f.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/98194640b80a-f6d22c8ac6c7/../../src/98194640b80a/xmlwriter.c",
+          "line": 416,
+          "column": 9,
+          "function": "xmlNewTextWriterTree",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "afc429a2739904bc42ccd79eadf2e5d7",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/fixed/.._.._src_98194640b80a_xmlwriter.c/report-afc429.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/98194640b80a-f6d22c8ac6c7/../../src/98194640b80a/xmlwriter.c",
+          "line": 1799,
+          "column": 17,
+          "function": "xmlTextWriterStartAttributeNS",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "c19c70dc2a408087380a4fe95ab9df21",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/fixed/.._.._src_98194640b80a_xmlwriter.c/report-c19c70.html",
+          "relpath": "xmlwriter.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/98194640b80a-f6d22c8ac6c7/../../src/98194640b80a/xmlwriter.c",
+          "line": 1056,
+          "column": 13,
+          "function": "xmlTextWriterStartElementNS",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "ce1c62e964303452bf8d582c59c99f21",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/98194640b80a/098964c2/fixed/.._.._src_98194640b80a_xmlwriter.c/report-ce1c62.html",
+          "relpath": "xmlwriter.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 13.2,
+      "fixed": 18.12
+    },
+    "total_seconds": 31.66
+  },
+  "report_dir": "tmp/validation/98194640b80a/098964c2"
+}

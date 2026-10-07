@@ -1,0 +1,59 @@
+id: KN-Integer-Overflow-10eb89d1-0
+bug_type: Integer-Overflow
+source:
+  project: lua
+  description: Lua, a scripting language interpreter and C library written in ANSI C
+  commit: 10eb89d1141dc528806b32401e408e36fb2f3bf5
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A value derived from an untrusted input byte (`count`, the number of continuation bytes) is used as
+  a bit-shift amount (`count * 5`) before validating that it is within the safe range for the shifted
+  type (`l_uint32`, 32 bits). For an invalid leading byte such as `\xFF`, `count` becomes 7, so the shift
+  amount becomes 35, which exceeds the width of a 32-bit value and causes undefined behavior. The existing
+  check `count > 5` happens after the shift, so it is too late to prevent the overflow. The fix validates/rejects
+  the input before the shift.
+
+
+  Roles:
+
+  - `input_byte`: `c` / `(unsigned char)s[0]`
+
+  - `continuation_count`: `count`
+
+  - `shifted_operand`: `(l_uint32)(c & 0x7F)`, stored in `res`
+
+  - `shift_amount`: `count * 5`
+
+  - `shift_width`: `l_uint32` (32-bit)
+
+  - `too_late_bound_check`: `if (count > 5 || res > MAXUTF || res < limits[count])` after the shift
+
+  - `pre_shift_guard` (fix role): `if (c >= 0xfe) return NULL;` and `lua_assert(count <= 5)`
+
+  - `error_return`: `return NULL`'
+roles:
+  decoder_function:
+    names:
+    - utf8_decode
+    description: Function that decodes a UTF-8 sequence
+  input_byte:
+    names:
+    - c
+    description: Variable holding the first byte of the UTF-8 sequence
+  continuation_count:
+    names:
+    - count
+    description: Variable counting the number of continuation bytes
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: 3c44401b20c9b0cfdf2951dd290b1bc9192d6362
+exported: 2026-10-01T20:45:36+0700

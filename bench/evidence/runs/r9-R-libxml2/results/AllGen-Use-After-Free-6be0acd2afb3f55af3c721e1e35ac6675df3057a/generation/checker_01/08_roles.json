@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "container_insert": {
+      "names": [
+        "xmlAddChild"
+      ],
+      "description": "inserts an object into a container; the inserted object may already be linked in another container, so it must be unlinked before being freed"
+    },
+    "container_remove": {
+      "names": [
+        "xmlUnlinkNodeInternal"
+      ],
+      "description": "removes or unlinks an object from its current container/list"
+    },
+    "deallocator": {
+      "names": [
+        "xmlFreeNode"
+      ],
+      "description": "frees an object; after this call the object must not remain referenced by any container"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "commit_id": "26dfab2f8fd36fc3aba8c25c7c358530d9712c7a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/401bd5f2908f14e419f3/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "parser.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlIOParseDTD"
+        ],
+        "fixed_functions": [
+          "xmlIOParseDTD"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "parser.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/c71154dad39f-f6d22c8ac6c7/../../src/c71154dad39f/parser.c",
+          "line": 11571,
+          "column": 9,
+          "function": "xmlIOParseDTD",
+          "bug_type": "Double free",
+          "description": "Double free: resource already consumed by ownership consumer",
+          "issue_hash": "cfb4fdd551824c0856d0f867b688261c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/26dfab2f8fd3/3e16819d/buggy/.._.._src_c71154dad39f_parser.c/report-cfb4fd.html",
+          "relpath": "parser.c"
+        }
+      ]
+    },
+    "fixed": {
+      "parser.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 12.36,
+    "setup_seconds": 0.05,
+    "analysis_seconds": {
+      "buggy": 68.59,
+      "fixed": 64.46
+    },
+    "total_seconds": 145.98
+  },
+  "report_dir": "tmp/validation/26dfab2f8fd3/3e16819d"
+}

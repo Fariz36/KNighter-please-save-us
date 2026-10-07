@@ -1,0 +1,675 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-1",
+    "source": "curl",
+    "target": "lua",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "encoded_size_calculator": [
+        "sizeudata",
+        "sizeCclosure",
+        "sizeLclosure",
+        "sizenode",
+        "luaS_sizelngstr",
+        "luaF_protosize",
+        "luaE_threadsize",
+        "luaH_size",
+        "luaZ_sizebuffer",
+        "stacksize",
+        "sizestrshr"
+      ],
+      "input_length": [
+        "lua_len",
+        "luaL_len"
+      ],
+      "max_input_size": [
+        "luaM_testsize",
+        "luaM_checksize",
+        "MAX_SIZET"
+      ],
+      "error_sentinel": [
+        "luaM_error",
+        "luaM_toobig"
+      ]
+    },
+    "same_type_candidates": 2,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 152.9
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "lua",
+    "bug_type": "Memory-Leak",
+    "mapping": {
+      "cleanup": [
+        "lua_closethread"
+      ],
+      "destructor": [
+        "luaE_freethread",
+        "lua_close"
+      ],
+      "state_reset": [
+        "memset",
+        "luaE_resetthread",
+        "lua_resetthread"
+      ],
+      "link_detach": [
+        "luaF_unlinkupval"
+      ],
+      "link_storage": [
+        "openupval"
+      ]
+    },
+    "same_type_candidates": 0,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 278.7
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "lua",
+    "bug_type": "Misuse",
+    "mapping": {
+      "data_provider": [
+        "lua_newuserdata",
+        "lua_newuserdatauv",
+        "lua_touserdata",
+        "luaL_checkudata",
+        "luaL_testudata",
+        "getudatamem",
+        "luaZ_buffer"
+      ],
+      "length_provider": [
+        "lua_rawlen",
+        "luaL_len",
+        "lua_len",
+        "luaZ_sizebuffer"
+      ],
+      "unbounded_string_consumer": [
+        "strlen",
+        "lua_pushstring",
+        "luaL_addstring",
+        "luaL_loadstring",
+        "luaL_dostring",
+        "lua_pushfstring",
+        "luaO_pushfstring",
+        "lua_pushvfstring",
+        "luaO_pushvfstring",
+        "pushvfstring",
+        "lua_writestringerror",
+        "lua_stringtonumber",
+        "l_sprintf"
+      ],
+      "bounded_nul_scanner": [
+        "memchr"
+      ],
+      "bounded_string_formatter": [
+        "lua_pushfstring",
+        "luaO_pushfstring",
+        "lua_pushvfstring",
+        "luaO_pushvfstring",
+        "pushvfstring",
+        "lua_writestringerror",
+        "l_sprintf"
+      ]
+    },
+    "same_type_candidates": 76,
+    "api_matched_candidates": 5,
+    "pairs": [
+      {
+        "commit": "ba9cd0d25a022cf61c0b747d8e26f9ba81201112",
+        "subject": "Change in the prefix of messages from searchers",
+        "files": [
+          "loadlib.c"
+        ],
+        "api_hits": [
+          "luaL_addstring",
+          "lua_pushfstring"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "r 1\nmake: *** Waiting for unfinished jobs....\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\nmake: Leaving directory '/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/b93f3b00bb76'\n",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "664bda02ba4bd167728a2acbe658cc4a9dd9b0b5",
+        "subject": "fixing 'lua_status' in panic.",
+        "files": [
+          "ldo.c",
+          "ltests.c"
+        ],
+        "api_hits": [
+          "lua_pushstring"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "f623b969325be736297bc1dff48e763c08778243",
+        "subject": "Bug: read overflow in 'l_strcmp'",
+        "files": [
+          "lvm.c"
+        ],
+        "api_hits": [
+          "strlen"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "oop-optimizations' [-Wunknown-warning-option]\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\nmake: Leaving directory '/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/9be74ccc214e'\n",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "cf23a93d820558acdb8b1f0db85fdb94e709fee2",
+        "subject": "Added assertions for proper use of string buffers",
+        "files": [
+          "lauxlib.c"
+        ],
+        "api_hits": [
+          "lua_touserdata"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "oop-optimizations' [-Wunknown-warning-option]\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\nmake: Leaving directory '/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/9a2de786de5d'\n",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "7f5c31cdcac5388b3c48a26112dfb6d2cadb7321",
+        "subject": "Fixed bug in 'string.format' with option '%f'",
+        "files": [
+          "lstrlib.c"
+        ],
+        "api_hits": [
+          "l_sprintf"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "an\nmake: Entering directory '/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/9e6807c3c9d5'\nrcsclean -u\nmake: rcsclean: No such file or directory\nmake: *** [makefile:110: clean] Error 127\nmake: Leaving directory '/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/9e6807c3c9d5'\n",
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 263.7
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-1",
+    "source": "curl",
+    "target": "lua",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "duplicator": [
+        "lua_newthread"
+      ],
+      "source_handle": [
+        "L"
+      ],
+      "destination_allocator": [
+        "luaM_newobject",
+        "luaM_malloc_"
+      ],
+      "field_copier": []
+    },
+    "same_type_candidates": 7,
+    "api_matched_candidates": 2,
+    "pairs": [
+      {
+        "commit": "93fd6892f85ecd8a4e82d2339016a9f71a42d0e8",
+        "subject": "Fixed bug in 'multiline'",
+        "files": [
+          "lua.c"
+        ],
+        "api_hits": [
+          "L"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "364e569945c044fd18c70ee1bc851364534aef97",
+        "subject": "Avoid calling 'fprintf' with NULL",
+        "files": [
+          "lauxlib.c",
+          "ldblib.c",
+          "ltests.c"
+        ],
+        "api_hits": [
+          "L"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "r 1\nmake: *** Waiting for unfinished jobs....\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\nmake: Leaving directory '/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/63295f1f7fa0'\n",
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 275.8
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "lua",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "api_entry_point": [
+        "lua_tonumberx",
+        "lua_tointegerx",
+        "lua_tolstring",
+        "lua_getallocf",
+        "lua_resume",
+        "lua_getstack",
+        "lua_getinfo",
+        "luaL_checklstring",
+        "luaL_optlstring",
+        "luaL_tolstring"
+      ],
+      "out_param": [
+        "isnum",
+        "len",
+        "ud",
+        "nresults",
+        "ar",
+        "l"
+      ],
+      "out_param_writer": [
+        "lua_tolstring",
+        "auxgetinfo"
+      ]
+    },
+    "same_type_candidates": 7,
+    "api_matched_candidates": 1,
+    "pairs": [
+      {
+        "commit": "364e569945c044fd18c70ee1bc851364534aef97",
+        "subject": "Avoid calling 'fprintf' with NULL",
+        "files": [
+          "lauxlib.c",
+          "ldblib.c",
+          "ltests.c"
+        ],
+        "api_hits": [
+          "luaL_tolstring"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "r 1\nmake: *** Waiting for unfinished jobs....\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\nmake: Leaving directory '/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/63295f1f7fa0'\n",
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 189.3
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2",
+    "source": "curl",
+    "target": "lua",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "length_field": [
+        "luaZ_sizebuffer",
+        "luaL_bufflen"
+      ],
+      "data_pointer": [
+        "data",
+        "luaZ_buffer",
+        "luaL_buffaddr"
+      ],
+      "buffer_copy": [
+        "memcpy"
+      ],
+      "error_return": [
+        "luaL_error",
+        "luaL_argerror",
+        "luaL_typeerror",
+        "luaM_error",
+        "luaG_runerror",
+        "lua_error"
+      ],
+      "copy_flag": [],
+      "allocator": [
+        "luaM_malloc_",
+        "luaM_realloc_",
+        "luaL_alloc",
+        "luaM_new",
+        "luaM_newvector"
+      ],
+      "deallocator": [
+        "luaM_free_",
+        "luaM_free",
+        "luaM_realloc_",
+        "luaL_alloc",
+        "luaH_free",
+        "luaF_freeproto"
+      ],
+      "validation_guard": [
+        "luaL_argcheck",
+        "luaL_checklstring",
+        "luaL_checkstring",
+        "luaL_checktype",
+        "luaL_checkany",
+        "luaL_checkudata",
+        "api_check",
+        "luaM_checksize"
+      ]
+    },
+    "same_type_candidates": 7,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 106.4
+  },
+  {
+    "bundle": "KN-Double-Free-26dfab2f-1",
+    "source": "libxml2",
+    "target": "lua",
+    "bug_type": "Double-Free",
+    "mapping": {
+      "resource": [],
+      "ownership_consumer_frees_on_failure": [
+        "luaM_realloc_",
+        "debug_realloc",
+        "luaL_alloc"
+      ],
+      "deallocator": [
+        "luaM_free",
+        "luaM_free_",
+        "luaM_freemem",
+        "luaM_freearray",
+        "luaH_free",
+        "luaF_freeproto",
+        "luaE_freethread",
+        "luaZ_freebuffer",
+        "luaC_freeallobjects",
+        "lua_close",
+        "luaL_unref",
+        "luaF_closeupval",
+        "luaS_clearcache",
+        "luaM_realloc_",
+        "debug_realloc",
+        "luaL_alloc"
+      ],
+      "null_on_failure": [
+        "luaM_realloc_",
+        "debug_realloc",
+        "luaL_alloc"
+      ],
+      "duplicate_cleanup": [
+        "luaM_free",
+        "luaM_free_",
+        "luaM_freemem",
+        "luaM_freearray",
+        "luaH_free",
+        "luaF_freeproto",
+        "luaE_freethread",
+        "luaZ_freebuffer",
+        "luaC_freeallobjects",
+        "lua_close",
+        "luaL_unref",
+        "luaF_closeupval",
+        "luaS_clearcache",
+        "luaM_realloc_",
+        "debug_realloc",
+        "luaL_alloc"
+      ],
+      "context_cleanup": [
+        "lua_close",
+        "luaE_freethread",
+        "lua_closethread"
+      ]
+    },
+    "same_type_candidates": 0,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 185.6
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "lua",
+    "bug_type": "Misuse",
+    "mapping": {
+      "config_setter": [],
+      "divisor_field": []
+    },
+    "same_type_candidates": 76,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 75.2
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+    "source": "libxml2",
+    "target": "lua",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "null_on_failure": [
+        "luaL_alloc",
+        "luaM_malloc_",
+        "luaM_realloc_",
+        "luaM_new",
+        "luaH_new",
+        "luaS_new",
+        "allocsizenode",
+        "debug_realloc"
+      ],
+      "length_of": [
+        "strlen",
+        "sizenode",
+        "luaH_size",
+        "stacksize",
+        "luaF_protosize",
+        "luaE_threadsize",
+        "luaZ_sizebuffer"
+      ]
+    },
+    "same_type_candidates": 7,
+    "api_matched_candidates": 1,
+    "pairs": [
+      {
+        "commit": "513559cc4760392b6fa33754c516683ef49dba22",
+        "subject": "Fixed bug in 'string.format(\"%p\")'",
+        "files": [
+          "lstrlib.c",
+          "ltests.c"
+        ],
+        "api_hits": [
+          "strlen"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "r 1\nmake: *** Waiting for unfinished jobs....\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\n2 warnings generated.\nmake: Leaving directory '/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/e4607523234f'\n",
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 127.2
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+    "source": "libxml2",
+    "target": "lua",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "nullable_inout_capacity_ptr": [
+        "capacity",
+        "psize"
+      ],
+      "capacity_computer": [
+        "luaM_growaux_",
+        "luaD_growstack"
+      ],
+      "reallocator": [
+        "luaM_realloc_",
+        "luaM_saferealloc_",
+        "luaL_alloc",
+        "debug_realloc",
+        "luaM_reallocvchar",
+        "luaM_reallocvector"
+      ],
+      "deref_read": [],
+      "deref_write": [],
+      "null_guard": [],
+      "null_on_failure": [
+        "luaM_saferealloc_",
+        "luaL_alloc",
+        "debug_realloc",
+        "luaD_reallocstack"
+      ]
+    },
+    "same_type_candidates": 7,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 118.0
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-2",
+    "source": "libxml2",
+    "target": "lua",
+    "bug_type": "Out-of-Bound",
+    "mapping": {
+      "lookahead": [
+        "luaX_lookahead"
+      ],
+      "length_of": [
+        "luaZ_sizebuffer"
+      ]
+    },
+    "same_type_candidates": 3,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 145.1
+  },
+  {
+    "bundle": "KN-Buffer-Overflow-a7200804-1",
+    "source": "sqlite",
+    "target": "lua",
+    "bug_type": "Buffer-Overflow",
+    "mapping": {
+      "buffer_grow": [
+        "luaL_prepbuffsize"
+      ],
+      "required_capacity": [
+        "len"
+      ],
+      "write_pointer": [
+        "buff"
+      ],
+      "digit_set": [],
+      "output_buffer": [
+        "b"
+      ]
+    },
+    "same_type_candidates": 4,
+    "api_matched_candidates": 1,
+    "pairs": [
+      {
+        "commit": "e3716ee161bb5416b5eb846eff6039d61954cfbd",
+        "subject": "Fix in string.rep",
+        "files": [
+          "lstrlib.c"
+        ],
+        "api_hits": [
+          "len"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 251.3
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "lua",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "payload_length": [],
+      "local_payload_length": [],
+      "overflow_chunk_size": [],
+      "overflow_page_cache": [],
+      "reallocator": [
+        "luaM_realloc_",
+        "luaM_saferealloc_",
+        "luaL_alloc",
+        "debug_realloc",
+        "luaM_growaux_",
+        "luaM_growvector",
+        "luaM_reallocvchar",
+        "luaM_reallocvector",
+        "luaZ_resizebuffer"
+      ],
+      "allocated_size_query": [],
+      "zero_initializer": [
+        "memset"
+      ],
+      "cache_index": [],
+      "too_narrow_arithmetic_type": [
+        "int",
+        "unsigned",
+        "l_uint32"
+      ]
+    },
+    "same_type_candidates": 2,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 154.9
+  },
+  {
+    "bundle": "KN-Integer-Overflow-d87f8c49-0",
+    "source": "sqlite",
+    "target": "lua",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "length_of": [],
+      "character_count_bound": [
+        "precision"
+      ],
+      "iterator_advance": [
+        "utf8_decode"
+      ],
+      "output_length": [
+        "length"
+      ],
+      "narrowing_cast": [
+        "cast_int"
+      ],
+      "safe_cap": [],
+      "buffer_append": [
+        "luaL_addlstring"
+      ]
+    },
+    "same_type_candidates": 2,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 164.2
+  },
+  {
+    "bundle": "KN-Misuse-1bc183a9-1",
+    "source": "sqlite",
+    "target": "lua",
+    "bug_type": "Misuse",
+    "mapping": {
+      "tokenizer": [],
+      "dequote_helper": [],
+      "illegal_token_sentinel": [],
+      "dequoter_with_precondition": [],
+      "caller_ignoring_sentinel": []
+    },
+    "same_type_candidates": 76,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 53.1
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "commit_id": "fef318553b971142aaea3fe42d927408d06472c4",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "src/tool_urlglob.c": "no compile entry"
+    },
+    "fixed": {
+      "src/tool_urlglob.c": "no compile entry"
+    }
+  }
+}

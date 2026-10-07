@@ -1,0 +1,112 @@
+{
+  "commit_id": "0c56eb8215bea9e8e4aa934e45c677e6e132cf68",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/fccaec1fd498bccaea26/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 3,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "fuzz/api.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "LLVMFuzzerTestOneInput"
+        ],
+        "fixed_functions": [
+          "LLVMFuzzerTestOneInput"
+        ]
+      },
+      {
+        "path": "tree.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlNodeListGetRawString",
+          "xmlNodeListGetString"
+        ],
+        "fixed_functions": [
+          "xmlNodeListGetRawString",
+          "xmlNodeListGetString"
+        ]
+      },
+      {
+        "path": "valid.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlValidateElement"
+        ],
+        "fixed_functions": [
+          "xmlValidateElement"
+        ]
+      },
+      {
+        "path": "xmlreader.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlTextReaderGetAttributeNo",
+          "xmlTextReaderValue"
+        ],
+        "fixed_functions": [
+          "xmlTextReaderGetAttributeNo",
+          "xmlTextReaderValue"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "tree.c": [],
+      "valid.c": [],
+      "xmlreader.c": []
+    },
+    "fixed": {
+      "tree.c": [],
+      "valid.c": [],
+      "xmlreader.c": []
+    }
+  },
+  "errors": {
+    "buggy": {
+      "fuzz/api.c": "no compile entry"
+    },
+    "fixed": {
+      "fuzz/api.c": "no compile entry"
+    }
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 83.48,
+      "fixed": 88.44
+    },
+    "total_seconds": 172.93
+  },
+  "report_dir": "tmp/validation/0c56eb8215be/ff214d84"
+}

@@ -1,0 +1,21 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "duplicator": {
+      "names": [
+        "curl_url_dup",
+        "DUP"
+      ],
+      "description": "function or macro that creates a copy of a source object; it must not dereference the source pointer before verifying it is non-null"
+    },
+    "allocator": {
+      "names": [
+        "curlx_calloc"
+      ],
+      "description": "function that allocates memory and returns a pointer or NULL on failure"
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "commit_id": "1bc183a935799050919eecf4f5deffb6d98e7905",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-sqlite/plugin-cache/plugins/55fabd586a47f6de6c5e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/alter.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ],
+        "fixed_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 2465,
+          "column": 3,
+          "function": "quotedCompare",
+          "bug_type": "Dequote Without Illegal Token Check",
+          "description": "Dequote without illegal-token check",
+          "issue_hash": "8de561766757286e9d8a659afeaf3019",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/1bc183a93579/ed997905/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-sqlite_work_src_79837b6ee5d4_src_alter.c/report-8de561.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-sqlite/work/src/1bc183a93579/src/alter.c",
+          "line": 2470,
+          "column": 3,
+          "function": "quotedCompare",
+          "bug_type": "Dequote Without Illegal Token Check",
+          "description": "Dequote without illegal-token check",
+          "issue_hash": "e11f2e4a7c7305a8985ae966a43c42ca",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/1bc183a93579/ed997905/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-sqlite_work_src_1bc183a93579_src_alter.c/report-e11f2e.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 22.02,
+      "fixed": 21.34
+    },
+    "total_seconds": 43.5
+  },
+  "report_dir": "tmp/validation/1bc183a93579/ed997905"
+}

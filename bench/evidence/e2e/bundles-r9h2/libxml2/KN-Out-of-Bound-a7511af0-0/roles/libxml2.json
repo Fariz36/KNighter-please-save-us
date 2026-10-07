@@ -1,0 +1,8 @@
+{
+  "indexed_read": [
+    "NXT"
+  ],
+  "length_of": [
+    "strlen"
+  ]
+}

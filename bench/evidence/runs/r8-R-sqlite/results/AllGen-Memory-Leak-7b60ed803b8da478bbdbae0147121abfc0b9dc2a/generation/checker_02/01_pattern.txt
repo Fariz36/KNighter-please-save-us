@@ -1,0 +1,12 @@
+## Bug Pattern
+
+The bug pattern is a missing `deallocator` call on the no-transfer path of a conditional `ownership_transfer`: an allocated/duplicated resource is intended to be transferred into a receiving container only when both the resource and the receiver are non-NULL. If the receiver is NULL (for example after an earlier OOM/allocation failure), the transfer is skipped, but the resource is neither attached nor freed, causing a memory leak.
+
+Roles in this patch:
+- allocator/duplicator: `sqlite3SrcListDup` creates `pFromDup`; `sqlite3SelectNew` / `sqlite3SrcListAppendFromTerm` may also create a replacement owned list
+- ownership_transfer: `sqlite3SrcListAppendList` transfers `pFromDup` into `pTriggerStep->pSrc`
+- receiver: `pTriggerStep->pSrc`
+- deallocator: `sqlite3SrcListDelete`
+- null_on_failure: `pTriggerStep->pSrc` can be NULL, causing the transfer to be skipped; allocation/duplication results can also be NULL on failure
+
+The fix adds the missing `sqlite3SrcListDelete(db, pFromDup)` in the `else` branch when the ownership transfer does not occur.

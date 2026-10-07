@@ -1,0 +1,38 @@
+id: KN-Double-Free-26dfab2f-2
+bug_type: Double-Free
+source:
+  project: libxml2
+  description: libxml2, the XML parsing and manipulation library written in C
+  commit: 26dfab2f8fd36fc3aba8c25c7c358530d9712c7a
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: "## Bug Pattern\n\nThe caller invokes a `deallocator` on the same resource that was passed to\
+  \ a `parser_input` constructor after that constructor returned `null_on_failure`. The constructor consumes\
+  \ the buffer and already frees it on its failure path, so the caller\u2019s additional `deallocator`\
+  \ call frees the same buffer twice.\n\nRoles:\n- `parser_input`: `xmlNewIOInputStream` \u2014 builds\
+  \ a parser input from the supplied buffer and consumes that buffer.\n- `null_on_failure`: `xmlNewIOInputStream`\
+  \ \u2014 returns NULL on failure after freeing the consumed buffer.\n- `deallocator`: `xmlFreeParserInputBuffer`\
+  \ \u2014 frees the parser input buffer."
+roles:
+  parser_input:
+    names:
+    - xmlNewIOInputStream
+    description: builds a parser input from a supplied buffer and consumes that buffer
+  null_on_failure:
+    names:
+    - xmlNewIOInputStream
+    description: may return NULL on failure after freeing the consumed buffer
+  deallocator:
+    names:
+    - xmlFreeParserInputBuffer
+    description: frees a parser input buffer
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T16:54:13+0700

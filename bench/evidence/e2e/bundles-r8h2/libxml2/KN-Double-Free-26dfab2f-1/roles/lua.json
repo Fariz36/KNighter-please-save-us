@@ -1,0 +1,54 @@
+{
+  "resource": [],
+  "ownership_consumer_frees_on_failure": [
+    "luaM_realloc_",
+    "debug_realloc",
+    "luaL_alloc"
+  ],
+  "deallocator": [
+    "luaM_free",
+    "luaM_free_",
+    "luaM_freemem",
+    "luaM_freearray",
+    "luaH_free",
+    "luaF_freeproto",
+    "luaE_freethread",
+    "luaZ_freebuffer",
+    "luaC_freeallobjects",
+    "lua_close",
+    "luaL_unref",
+    "luaF_closeupval",
+    "luaS_clearcache",
+    "luaM_realloc_",
+    "debug_realloc",
+    "luaL_alloc"
+  ],
+  "null_on_failure": [
+    "luaM_realloc_",
+    "debug_realloc",
+    "luaL_alloc"
+  ],
+  "duplicate_cleanup": [
+    "luaM_free",
+    "luaM_free_",
+    "luaM_freemem",
+    "luaM_freearray",
+    "luaH_free",
+    "luaF_freeproto",
+    "luaE_freethread",
+    "luaZ_freebuffer",
+    "luaC_freeallobjects",
+    "lua_close",
+    "luaL_unref",
+    "luaF_closeupval",
+    "luaS_clearcache",
+    "luaM_realloc_",
+    "debug_realloc",
+    "luaL_alloc"
+  ],
+  "context_cleanup": [
+    "lua_close",
+    "luaE_freethread",
+    "lua_closethread"
+  ]
+}

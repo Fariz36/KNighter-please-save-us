@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A function dereferences a caller-supplied pointer parameter used as an in/out capacity/size argument before validating that the pointer itself is non-NULL. The pointee is passed to a capacity-calculation helper, so passing NULL causes a null-pointer dereference. The later check of the `reallocator` result does not protect this earlier dereference.
+
+Roles:
+- `capacity_calculator`: `xmlGrowCapacity` (computes a new capacity/size from the current capacity value, element size, and bounds)
+- `reallocator`: `xmlRealloc` (resizes an allocation and may return NULL on failure)

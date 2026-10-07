@@ -1,0 +1,81 @@
+{
+  "commit_id": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/0ea56d631117a2932a79/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lstrlib.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "prepstate",
+          "reprepstate"
+        ],
+        "fixed_functions": [
+          "prepstate",
+          "reprepstate"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lstrlib.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/f1bb2773bba8/lstrlib.c",
+          "line": 1548,
+          "column": 18,
+          "function": "getdetails",
+          "bug_type": "Null pointer dereference",
+          "description": "in/out capacity pointer dereferenced without null check",
+          "issue_hash": "76c887e7917efeab99239e17deade88f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/efddc2309c5f/8ac870c5/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_f1bb2773bba8_lstrlib.c/report-76c887.html",
+          "relpath": "lstrlib.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lstrlib.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/efddc2309c5f/lstrlib.c",
+          "line": 1554,
+          "column": 18,
+          "function": "getdetails",
+          "bug_type": "Null pointer dereference",
+          "description": "in/out capacity pointer dereferenced without null check",
+          "issue_hash": "76c887e7917efeab99239e17deade88f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/efddc2309c5f/8ac870c5/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_efddc2309c5f_lstrlib.c/report-76c887.html",
+          "relpath": "lstrlib.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 15.9,
+      "fixed": 14.93
+    },
+    "total_seconds": 30.94
+  },
+  "report_dir": "tmp/validation/efddc2309c5f/8ac870c5"
+}

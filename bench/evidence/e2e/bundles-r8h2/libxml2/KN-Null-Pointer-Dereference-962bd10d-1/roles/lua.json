@@ -1,0 +1,27 @@
+{
+  "nullable_inout_capacity_ptr": [
+    "capacity",
+    "psize"
+  ],
+  "capacity_computer": [
+    "luaM_growaux_",
+    "luaD_growstack"
+  ],
+  "reallocator": [
+    "luaM_realloc_",
+    "luaM_saferealloc_",
+    "luaL_alloc",
+    "debug_realloc",
+    "luaM_reallocvchar",
+    "luaM_reallocvector"
+  ],
+  "deref_read": [],
+  "deref_write": [],
+  "null_guard": [],
+  "null_on_failure": [
+    "luaM_saferealloc_",
+    "luaL_alloc",
+    "debug_realloc",
+    "luaD_reallocstack"
+  ]
+}

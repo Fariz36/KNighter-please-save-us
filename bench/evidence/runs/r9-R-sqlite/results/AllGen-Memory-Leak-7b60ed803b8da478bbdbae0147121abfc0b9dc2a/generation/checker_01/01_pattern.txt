@@ -1,0 +1,10 @@
+## Bug Pattern
+
+A value produced by an `allocator`/`duplicator` (`null_on_failure`) is conditionally handed to its owner via a `container_insert` only when another pointer is non-NULL. If that guard pointer is NULL (for example after an earlier allocation failure), the value is never inserted and the path never calls the corresponding `deallocator`, so the allocation leaks.
+
+Roles:
+- `duplicator`: `sqlite3SrcListDup` (returns a new copy, may return NULL)
+- `allocator`: `triggerStepAllocate` (allocates the containing object, may fail)
+- `null_on_failure`: `sqlite3SrcListDup`, `triggerStepAllocate`
+- `container_insert`: `sqlite3SrcListAppendList` (appends/takes ownership of the duplicated list)
+- `deallocator`: `sqlite3SrcListDelete` (frees the duplicated list)

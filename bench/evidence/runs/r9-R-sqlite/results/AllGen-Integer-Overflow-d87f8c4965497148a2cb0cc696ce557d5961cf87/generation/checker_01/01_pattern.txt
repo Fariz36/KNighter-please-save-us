@@ -1,0 +1,10 @@
+## Bug Pattern
+
+An unchecked narrowing of a potentially oversized byte length to `int`. The code scans a variable-width UTF-8 string using a precision that counts characters/code points, then computes the byte length by pointer subtraction and casts it directly to a 32-bit signed `length` without clamping. Because UTF-8 characters can consume multiple bytes, the byte length can exceed `INT_MAX` even when the character precision fits in an `int`; the cast then wraps/truncates to a negative or small value. That corrupted `length` is later used as the byte count of an append/`buffer_copy` operation and in width arithmetic, leading to incorrect or unsafe memory access. The fix clamps the length before the cast.
+
+Roles:
+- `untrusted_size`: `va_arg(ap,int)`, `getIntArg(pArgList)` supplying the `*` precision
+- `length_of`: `strlen`, and the pointer-difference length calculation
+- `parser_input`: `SQLITE_SKIP_UTF8`
+- `buffer_copy`/append: `sqlite3_str_append`, `sqlite3_str_appendchar`
+- `clamp`: `MIN` (missing before the cast in the buggy code)

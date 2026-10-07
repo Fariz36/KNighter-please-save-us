@@ -1,0 +1,374 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-1",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "encoded_size_calculator": [
+        "luaM_limitN"
+      ],
+      "input_length": [],
+      "max_input_size": [],
+      "error_sentinel": []
+    },
+    "unmapped_roles": [
+      "input_length",
+      "max_input_size",
+      "error_sentinel"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 216.7
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "cleanup": [
+        "luaE_resetthread"
+      ],
+      "destructor": [
+        "luaE_freethread"
+      ],
+      "state_reset": [
+        "luaE_resetthread"
+      ],
+      "link_detach": [
+        "luaE_shrinkCI"
+      ],
+      "link_storage": []
+    },
+    "unmapped_roles": [
+      "link_storage"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 296.8
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "data_provider": [
+        "luaO_tostringbuff",
+        "luaO_utf8esc"
+      ],
+      "length_provider": [],
+      "unbounded_string_consumer": [
+        "luaE_warning",
+        "luaE_warnerror",
+        "luaO_pushfstring",
+        "luaO_pushvfstring",
+        "luaO_str2num"
+      ],
+      "bounded_nul_scanner": [],
+      "bounded_string_formatter": []
+    },
+    "unmapped_roles": [
+      "length_provider",
+      "bounded_nul_scanner",
+      "bounded_string_formatter"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 699.7
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-1",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "duplicator": [],
+      "source_handle": [],
+      "destination_allocator": [],
+      "field_copier": []
+    },
+    "unmapped_roles": [
+      "duplicator",
+      "source_handle",
+      "destination_allocator",
+      "field_copier"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "api_entry_point": [
+        "luaT_trybinTM",
+        "luaT_trybiniTM",
+        "luaT_trybinassocTM"
+      ],
+      "out_param": [],
+      "out_param_writer": [
+        "luaT_callTMres",
+        "luaT_getvararg",
+        "luaT_getvarargs",
+        "luaO_arith",
+        "luaO_chunkid",
+        "luaO_str2num",
+        "luaU_dump"
+      ]
+    },
+    "unmapped_roles": [
+      "out_param"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 240.5
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "length_field": [],
+      "data_pointer": [
+        "luaZ_buffer"
+      ],
+      "buffer_copy": [],
+      "error_return": [],
+      "copy_flag": [],
+      "allocator": [
+        "luaM_malloc_"
+      ],
+      "deallocator": [],
+      "validation_guard": []
+    },
+    "unmapped_roles": [
+      "length_field",
+      "buffer_copy",
+      "error_return",
+      "copy_flag",
+      "deallocator",
+      "validation_guard"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 229.9
+  },
+  {
+    "bundle": "KN-Double-Free-26dfab2f-1",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "resource": [],
+      "ownership_consumer_frees_on_failure": [
+        "luaS_newextlstr"
+      ],
+      "deallocator": [
+        "luaH_free",
+        "luaM_free",
+        "luaM_free_",
+        "luaE_freethread"
+      ],
+      "null_on_failure": [
+        "luaE_extendCI",
+        "luaU_undump"
+      ],
+      "duplicate_cleanup": [],
+      "context_cleanup": [
+        "luaE_freethread",
+        "luaC_freeallobjects"
+      ]
+    },
+    "unmapped_roles": [
+      "resource",
+      "duplicate_cleanup"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 668.7
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "config_setter": [],
+      "divisor_field": []
+    },
+    "unmapped_roles": [
+      "config_setter",
+      "divisor_field"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "null_on_failure": [
+        "luaT_gettm",
+        "luaT_gettmbyobj"
+      ],
+      "length_of": [
+        "luaT_callTM",
+        "luaT_callTMres"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 214.5
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "nullable_inout_capacity_ptr": [],
+      "capacity_computer": [],
+      "reallocator": [
+        "luaM_realloc_",
+        "debug_realloc"
+      ],
+      "deref_read": [],
+      "deref_write": [],
+      "null_guard": [],
+      "null_on_failure": []
+    },
+    "unmapped_roles": [
+      "nullable_inout_capacity_ptr",
+      "capacity_computer",
+      "deref_read",
+      "deref_write",
+      "null_guard",
+      "null_on_failure"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 188.9
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-2",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "lookahead": [
+        "luaX_lookahead"
+      ],
+      "length_of": []
+    },
+    "unmapped_roles": [
+      "length_of"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 110.2
+  },
+  {
+    "bundle": "KN-Buffer-Overflow-a7200804-1",
+    "source": "sqlite",
+    "target": "lua",
+    "mapping": {
+      "buffer_grow": [],
+      "required_capacity": [],
+      "write_pointer": [],
+      "digit_set": [],
+      "output_buffer": []
+    },
+    "unmapped_roles": [
+      "buffer_grow",
+      "required_capacity",
+      "write_pointer",
+      "digit_set",
+      "output_buffer"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "lua",
+    "mapping": {
+      "payload_length": [],
+      "local_payload_length": [],
+      "overflow_chunk_size": [],
+      "overflow_page_cache": [],
+      "reallocator": [
+        "luaM_realloc_"
+      ],
+      "allocated_size_query": [],
+      "zero_initializer": [],
+      "cache_index": [],
+      "too_narrow_arithmetic_type": []
+    },
+    "unmapped_roles": [
+      "payload_length",
+      "local_payload_length",
+      "overflow_chunk_size",
+      "overflow_page_cache",
+      "allocated_size_query",
+      "zero_initializer",
+      "cache_index",
+      "too_narrow_arithmetic_type"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 93.7
+  },
+  {
+    "bundle": "KN-Integer-Overflow-d87f8c49-0",
+    "source": "sqlite",
+    "target": "lua",
+    "mapping": {
+      "length_of": [],
+      "character_count_bound": [],
+      "iterator_advance": [],
+      "output_length": [],
+      "narrowing_cast": [
+        "cast_int"
+      ],
+      "safe_cap": [],
+      "buffer_append": []
+    },
+    "unmapped_roles": [
+      "length_of",
+      "character_count_bound",
+      "iterator_advance",
+      "output_length",
+      "safe_cap",
+      "buffer_append"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 165.1
+  },
+  {
+    "bundle": "KN-Misuse-1bc183a9-1",
+    "source": "sqlite",
+    "target": "lua",
+    "mapping": {
+      "tokenizer": [],
+      "dequote_helper": [],
+      "illegal_token_sentinel": [],
+      "dequoter_with_precondition": [],
+      "caller_ignoring_sentinel": []
+    },
+    "unmapped_roles": [
+      "tokenizer",
+      "dequote_helper",
+      "illegal_token_sentinel",
+      "dequoter_with_precondition",
+      "caller_ignoring_sentinel"
+    ],
+    "status": "no equivalent roles in target"
+  }
+]

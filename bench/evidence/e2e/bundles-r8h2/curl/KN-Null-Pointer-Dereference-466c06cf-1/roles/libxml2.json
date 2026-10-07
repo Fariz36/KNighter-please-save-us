@@ -1,0 +1,39 @@
+{
+  "duplicator": [
+    "xmlXPathObjectCopy",
+    "xmlBufFromBuffer",
+    "xmlCopyDoc",
+    "xmlCopyDtd",
+    "xmlCopyNode",
+    "xmlCopyProp",
+    "xmlCopyNamespace",
+    "xmlListDup",
+    "xmlHashCopy"
+  ],
+  "source_handle": [
+    "val",
+    "buffer",
+    "doc",
+    "dtd",
+    "node",
+    "cur",
+    "old",
+    "table"
+  ],
+  "destination_allocator": [
+    "xmlMalloc",
+    "xmlMallocLoc",
+    "xmlBufCreate",
+    "xmlNewDoc",
+    "xmlNewDtd",
+    "xmlNewDocNode",
+    "xmlNewNode",
+    "xmlNewProp",
+    "xmlNewNs",
+    "xmlListCreate",
+    "xmlHashCreate"
+  ],
+  "field_copier": [
+    "memcpy"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "length_of": [],
+  "character_count_bound": [
+    "precision"
+  ],
+  "iterator_advance": [
+    "SQLITE_SKIP_UTF8"
+  ],
+  "output_length": [
+    "length"
+  ],
+  "narrowing_cast": [],
+  "safe_cap": [
+    "MIN"
+  ],
+  "buffer_append": [
+    "sqlite3_str_append"
+  ]
+}

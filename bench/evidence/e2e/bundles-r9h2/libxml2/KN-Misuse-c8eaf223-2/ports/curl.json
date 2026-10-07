@@ -1,0 +1,63 @@
+{
+  "target": "curl",
+  "commit": "bb348b35e84c40c9564783d7585762b65038e8c5",
+  "candidates": 1820,
+  "identifiers": 38441,
+  "offered": {
+    "init": [
+      "Curl_addrinfo_set_port",
+      "Curl_cf_ngtcp2_h3_err_set",
+      "Curl_cf_ngtcp2_cmn_err_set",
+      "config_alloc",
+      "CF_CTX_CALL_DATA",
+      "Curl_ssl_config_init",
+      "Curl_copy_header_value",
+      "Curl_gss_init_sec_context",
+      "Curl_ssl_conn_config_clone",
+      "Curl_gss_init_sec_context_a",
+      "Curl_ssl_filter_config_tmp_init",
+      "Curl_schannel_set_cached_cert_store",
+      "error",
+      "errorf",
+      "Curl_open",
+      "GSS_ERROR",
+      "ALLOC_SIZE",
+      "Curl_failf",
+      "Curl_fopen",
+      "new_getout",
+      "win32_init",
+      "ALLOC_SIZE2",
+      "curlx_fopen",
+      "str2tls_max",
+      "Curl_pp_init",
+      "curl_url_dup",
+      "curl_url_set",
+      "curlx_calloc",
+      "curlx_fdopen",
+      "curlx_malloc",
+      "curlx_strdup",
+      "easysrc_init",
+      "inithelpscan",
+      "sigpipe_init",
+      "Curl_MD5_init",
+      "Curl_initinfo",
+      "Curl_meta_set",
+      "Curl_req_init",
+      "Curl_ssh_init",
+      "Curl_ssl_init"
+    ]
+  },
+  "mapping": {
+    "init": [
+      "curl_easy_setopt",
+      "curl_multi_setopt"
+    ]
+  },
+  "dropped_not_in_target": {
+    "init": []
+  },
+  "rationale": {
+    "init": "These are curl's general-purpose APIs for storing caller-supplied numeric configuration values into easy and multi handle context objects."
+  },
+  "llm_seconds": 271.0
+}

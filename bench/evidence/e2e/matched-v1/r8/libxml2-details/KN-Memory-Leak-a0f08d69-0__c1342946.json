@@ -1,0 +1,55 @@
+{
+  "commit_id": "c1342946da47e14d64ea4af211a9402c937aa7f5",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/76eb243306bf1ce18c85/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlwriter.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlTextWriterStartAttributeNS"
+        ],
+        "fixed_functions": [
+          "xmlTextWriterStartAttributeNS"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlwriter.c": []
+    },
+    "fixed": {
+      "xmlwriter.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.07,
+    "analysis_seconds": {
+      "buggy": 15.85,
+      "fixed": 14.03
+    },
+    "total_seconds": 30.17
+  },
+  "report_dir": "tmp/validation/c1342946da47/ac29442d"
+}

@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "utf8_decode"
+      ],
+      "description": "function that parses/decodes untrusted input data"
+    },
+    "aborting_assert": {
+      "names": [
+        "lua_assert"
+      ],
+      "description": "macro/function that aborts execution when its condition is false"
+    },
+    "null_on_failure": {
+      "names": [
+        "utf8_decode"
+      ],
+      "description": "function that may return NULL on failure"
+    }
+  }
+}

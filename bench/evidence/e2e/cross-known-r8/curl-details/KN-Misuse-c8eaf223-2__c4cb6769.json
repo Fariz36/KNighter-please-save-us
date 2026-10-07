@@ -1,0 +1,55 @@
+{
+  "commit_id": "c4cb67692d4466ba577fcdd9d3eb60cdfe19ba13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/41986670259a82a39009/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/smb.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "smb_request_state"
+        ],
+        "fixed_functions": [
+          "smb_request_state"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/smb.c": []
+    },
+    "fixed": {
+      "lib/smb.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 0.06,
+      "fixed": 0.07
+    },
+    "total_seconds": 0.16
+  },
+  "report_dir": "tmp/validation/c4cb67692d44/07f5ac23"
+}

@@ -1,0 +1,10 @@
+{
+  "length_field": ["buffsize", "n"],
+  "data_pointer": ["buffer"],
+  "buffer_copy": ["memcpy"],
+  "error_return": ["luaL_error", "luaL_argerror", "luaM_error"],
+  "copy_flag": [],
+  "allocator": ["luaM_malloc_", "luaM_new", "luaM_realloc_"],
+  "deallocator": ["luaM_free_", "luaM_free"],
+  "validation_guard": ["luaL_argcheck", "api_check"]
+}

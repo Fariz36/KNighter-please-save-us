@@ -1,0 +1,1016 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-1",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "encoded_size_calculator": [
+        "xmlEncodeSpecialChars"
+      ],
+      "input_length": [
+        "len"
+      ],
+      "max_input_size": [],
+      "error_sentinel": [
+        "NULL"
+      ]
+    },
+    "same_type_candidates": 6,
+    "api_matched_candidates": 4,
+    "pairs": [
+      {
+        "commit": "ad346c9a249c4b380bf73c460ad3e81135c5d781",
+        "subject": "tree: Fix integer overflow in xmlBuildQName",
+        "files": [
+          "tree.c"
+        ],
+        "api_hits": [
+          "NULL",
+          "len"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "538b2e38a6c6f2b662c532e9ac1520b768d2472f",
+        "subject": "uri: fix signed integer overflow in xmlBuildRelativeURISafe",
+        "files": [
+          "uri.c"
+        ],
+        "api_hits": [
+          "len"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "76a6ba4c41e5f64b5a6e89d770a6add360f72075",
+        "subject": "Add specific check to avoid signed integer overflow of buffer size.",
+        "files": [
+          "xmlwriter.c"
+        ],
+        "api_hits": [
+          "NULL"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 379.4
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Memory-Leak",
+    "mapping": {
+      "cleanup": [
+        "xmlCtxtReset",
+        "htmlCtxtReset",
+        "xmlResetError",
+        "xmlBufResetInput",
+        "xmlCtxtResetPush",
+        "xmlResetLastError",
+        "xmlCtxtResetLastError",
+        "xmlListClear",
+        "xmlClearParserCtxt",
+        "xmlClearNodeInfoSeq",
+        "xmlRegExecClearErrors",
+        "xmlRelaxNGValidCtxtClearErrors",
+        "xmlBufferEmpty"
+      ],
+      "destructor": [
+        "xmlFree",
+        "xmlMemFree",
+        "xmlXPathFreeObject",
+        "xmlFreeNs",
+        "xmlBufFree",
+        "xmlFreeDoc",
+        "xmlFreeDtd",
+        "xmlFreeURI",
+        "xmlDictFree",
+        "xmlFreeNode",
+        "xmlFreeProp",
+        "xmlHashFree",
+        "xmlFreeMutex",
+        "xmlBufferFree",
+        "xmlFreeEntity",
+        "xmlFreeNsList",
+        "xmlFreeRMutex",
+        "xmlModuleFree",
+        "xmlSchemaFree",
+        "xmlFreeCatalog",
+        "xmlFreeIDTable",
+        "xmlFreePattern",
+        "xmlFreeAutomata",
+        "xmlFreeNodeList",
+        "xmlFreePropList",
+        "xmlFreeRefTable",
+        "xmlParserNsFree",
+        "xmlFreeValidCtxt",
+        "xmlRegFreeRegexp",
+        "xmlFreeParserCtxt",
+        "xmlFreeStreamCtxt",
+        "xmlFreeTextReader",
+        "xmlFreeTextWriter",
+        "xmlSchemaFreeType",
+        "xmlSchematronFree",
+        "htmlFreeParserCtxt",
+        "xmlDOMWrapFreeCtxt",
+        "xmlFreeEnumeration",
+        "xmlFreeInputStream",
+        "xmlFreePatternList"
+      ],
+      "state_reset": [
+        "memset",
+        "xmlCtxtReset",
+        "htmlCtxtReset",
+        "xmlResetError",
+        "xmlBufResetInput",
+        "xmlCtxtResetPush",
+        "xmlResetLastError",
+        "xmlCtxtResetLastError",
+        "xmlListClear",
+        "xmlClearParserCtxt",
+        "xmlClearNodeInfoSeq",
+        "xmlRegExecClearErrors",
+        "xmlRelaxNGValidCtxtClearErrors",
+        "xmlBufferEmpty"
+      ],
+      "link_detach": [
+        "xmlUnlinkNode",
+        "xmlListRemoveFirst",
+        "xmlListRemoveLast",
+        "xmlListRemoveAll",
+        "xmlHashRemoveEntry",
+        "xmlHashRemoveEntry2",
+        "xmlHashRemoveEntry3",
+        "xmlBufDetach",
+        "xmlBufferDetach"
+      ],
+      "link_storage": [
+        "parent",
+        "next",
+        "prev",
+        "head",
+        "links",
+        "table",
+        "content"
+      ]
+    },
+    "same_type_candidates": 20,
+    "api_matched_candidates": 9,
+    "pairs": [
+      {
+        "commit": "28da8549a0519c11b5bb40cbb62c8f5fa67da83d",
+        "subject": "schematron: fix additional memory leaks on error paths",
+        "files": [
+          "schematron.c"
+        ],
+        "api_hits": [
+          "xmlFree"
+        ],
+        "tp": null,
+        "tn": null,
+        "error": "No patched file of 28da8549a0519c11b5bb40cbb62c8f5fa67da83d could be analyzed: no compile entry no compile entry",
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "c1342946da47e14d64ea4af211a9402c937aa7f5",
+        "subject": "fix memory leak in issue 1054",
+        "files": [
+          "xmlwriter.c"
+        ],
+        "api_hits": [
+          "xmlFree"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "98194640b80a8d04b5af22b077ffd8368a9568cf",
+        "subject": "Fix memory leak of prefix in xmlTextWriterStartElementNS()",
+        "files": [
+          "xmlwriter.c"
+        ],
+        "api_hits": [
+          "xmlFree"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "ef44c240f5cc5dd41c8dfa76104eed73b075924b",
+        "subject": "encoding: Fix memory leak in xmlCharEncNewCustomHandler",
+        "files": [
+          "encoding.c"
+        ],
+        "api_hits": [
+          "xmlFree"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 224.0
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Misuse",
+    "mapping": {
+      "data_provider": [
+        "xmlBufferContent",
+        "xmlBufContent",
+        "xmlOutputBufferGetContent"
+      ],
+      "length_provider": [
+        "xmlBufferLength",
+        "xmlBufUse",
+        "xmlOutputBufferGetSize"
+      ],
+      "unbounded_string_consumer": [
+        "strlen",
+        "xmlStrlen",
+        "xmlStrdup",
+        "xmlStrPrintf",
+        "xmlStrVPrintf",
+        "xmlStrASPrintf",
+        "xmlStrVASPrintf",
+        "xmlTextWriterWriteString",
+        "xmlTextWriterSetIndentString",
+        "xmlTextWriterWriteFormatString",
+        "xmlTextWriterWriteVFormatString",
+        "xmlTextWriterWriteFormatCDATA",
+        "xmlTextWriterWriteFormatPI",
+        "xmlTextWriterWriteFormatDTD",
+        "xmlTextWriterWriteFormatRaw",
+        "xmlTextWriterWriteFormatComment",
+        "xmlTextWriterWriteFormatElement",
+        "xmlTextWriterWriteFormatAttribute",
+        "xmlTextWriterWriteFormatElementNS",
+        "xmlTextWriterWriteFormatDTDAttlist",
+        "xmlTextWriterWriteFormatDTDElement",
+        "xmlTextWriterWriteFormatAttributeNS",
+        "xmlTextWriterWriteFormatDTDInternalEntity",
+        "xmlStrEqual",
+        "xmlStrQEqual",
+        "xmlNewText",
+        "xmlNewDocText",
+        "xmlTextMerge",
+        "xmlEscapeText",
+        "xmlEscapeFormatString",
+        "xmlBufferCat",
+        "xmlBufferCCat",
+        "xmlBufferWriteChar",
+        "xmlBufferWriteCHAR",
+        "xmlBufferWriteQuotedString",
+        "xmlOutputBufferWriteString",
+        "xmlOutputBufferWriteQuotedString",
+        "xmlTextWriterWriteCDATA",
+        "xmlTextWriterWritePI",
+        "xmlTextWriterWriteDTD",
+        "xmlTextWriterWriteRaw"
+      ],
+      "bounded_nul_scanner": [
+        "memchr"
+      ],
+      "bounded_string_formatter": [
+        "xmlStrPrintf",
+        "xmlStrVPrintf",
+        "xmlStrASPrintf",
+        "xmlStrVASPrintf",
+        "xmlTextWriterWriteFormatString",
+        "xmlTextWriterWriteVFormatString",
+        "xmlTextWriterWriteFormatCDATA",
+        "xmlTextWriterWriteFormatPI",
+        "xmlTextWriterWriteFormatDTD",
+        "xmlTextWriterWriteFormatRaw",
+        "xmlTextWriterWriteFormatComment",
+        "xmlTextWriterWriteFormatElement",
+        "xmlTextWriterWriteFormatAttribute",
+        "xmlTextWriterWriteFormatElementNS",
+        "xmlTextWriterWriteFormatDTDAttlist",
+        "xmlTextWriterWriteFormatDTDElement",
+        "xmlTextWriterWriteFormatAttributeNS",
+        "xmlTextWriterWriteFormatDTDInternalEntity"
+      ]
+    },
+    "same_type_candidates": 133,
+    "api_matched_candidates": 6,
+    "pairs": [
+      {
+        "commit": "84b8530d852e51e7ccab1e2b4aef698f611486fb",
+        "subject": "Fix xmlOutputBufferGetContent output when encoder is set.",
+        "files": [
+          "xmlIO.c"
+        ],
+        "api_hits": [
+          "xmlBufContent",
+          "xmlBufUse"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "b06e036416129bfafb8c288e8d9a9727e1ba50c2",
+        "subject": "xmlIO: Check for int overflow before calling writecallback",
+        "files": [
+          "xmlIO.c"
+        ],
+        "api_hits": [
+          "xmlBufUse"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "595d7d8f6aac7f8374ad73ebe66479d1316f81a8",
+        "subject": "xpointer: Check overflow in xmlXPtrEvalXPtrPart",
+        "files": [
+          "xpointer.c"
+        ],
+        "api_hits": [
+          "xmlStrlen"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 226.1
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-1",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "duplicator": [
+        "xmlXPathObjectCopy",
+        "xmlBufFromBuffer",
+        "xmlCopyDoc",
+        "xmlCopyDtd",
+        "xmlCopyNode",
+        "xmlCopyProp",
+        "xmlCopyNamespace",
+        "xmlListDup",
+        "xmlHashCopy"
+      ],
+      "source_handle": [
+        "val",
+        "buffer",
+        "doc",
+        "dtd",
+        "node",
+        "cur",
+        "old",
+        "table"
+      ],
+      "destination_allocator": [
+        "xmlMalloc",
+        "xmlMallocLoc",
+        "xmlBufCreate",
+        "xmlNewDoc",
+        "xmlNewDtd",
+        "xmlNewDocNode",
+        "xmlNewNode",
+        "xmlNewProp",
+        "xmlNewNs",
+        "xmlListCreate",
+        "xmlHashCreate"
+      ],
+      "field_copier": [
+        "memcpy"
+      ]
+    },
+    "same_type_candidates": 30,
+    "api_matched_candidates": 10,
+    "pairs": [
+      {
+        "commit": "0c56eb8215bea9e8e4aa934e45c677e6e132cf68",
+        "subject": "tree: Restore return value of xmlNodeListGetString with NULL list",
+        "files": [
+          "tree.c",
+          "valid.c",
+          "xmlreader.c"
+        ],
+        "api_hits": [
+          "cur",
+          "doc",
+          "node"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "8f5f02ba295a20dfc5ddd8de03894918c5870ec8",
+        "subject": "xmlstring: Free cur on every error for xmlStrncat",
+        "files": [
+          "xmlstring.c"
+        ],
+        "api_hits": [
+          "cur"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "dd4c0f62fa1fd9650aae6b718dd9964a4ffa69b9",
+        "subject": "tree: Fix xmlTextMerge with NULL args",
+        "files": [
+          "tree.c"
+        ],
+        "api_hits": [
+          "node"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 554.7
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "api_entry_point": [
+        "xmlDocDumpMemory",
+        "xmlDocDumpFormatMemory",
+        "xmlDocDumpMemoryEnc",
+        "xmlDocDumpFormatMemoryEnc"
+      ],
+      "out_param": [
+        "mem",
+        "size",
+        "doc_txt_ptr",
+        "doc_txt_len"
+      ],
+      "out_param_writer": [
+        "xmlDocDumpFormatMemoryEnc"
+      ]
+    },
+    "same_type_candidates": 30,
+    "api_matched_candidates": 2,
+    "pairs": [
+      {
+        "commit": "6afea87220588843c975928fee3bf4371631d8b5",
+        "subject": "memory: add xmlGrowArray helper for overflow-checked array reallocation",
+        "files": [
+          "xmlmemory.c"
+        ],
+        "api_hits": [
+          "size"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "8f5f02ba295a20dfc5ddd8de03894918c5870ec8",
+        "subject": "xmlstring: Free cur on every error for xmlStrncat",
+        "files": [
+          "xmlstring.c"
+        ],
+        "api_hits": [
+          "size"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 265.8
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2",
+    "source": "curl",
+    "target": "libxml2",
+    "bug_type": "Null-Pointer-Dereference",
+    "mapping": {
+      "length_field": [
+        "use",
+        "size",
+        "xmlBufferLength",
+        "xmlBufUse",
+        "xmlOutputBufferGetSize"
+      ],
+      "data_pointer": [
+        "data",
+        "content",
+        "mem",
+        "xmlBufferContent",
+        "xmlBufContent"
+      ],
+      "buffer_copy": [
+        "memcpy",
+        "xmlBufAdd",
+        "xmlBufCat",
+        "xmlBufferAdd",
+        "xmlBufferCat",
+        "xmlBufferCCat",
+        "xmlBufferWriteCHAR",
+        "xmlBufferWriteChar"
+      ],
+      "error_return": [
+        "NULL"
+      ],
+      "copy_flag": [
+        "isStatic"
+      ],
+      "allocator": [
+        "xmlMalloc",
+        "xmlMallocAtomic",
+        "xmlRealloc",
+        "xmlMemMalloc",
+        "xmlMemStrdup",
+        "xmlStrdup",
+        "xmlStrndup",
+        "__xmlMalloc",
+        "xmlAllocOutputBuffer",
+        "xmlAllocParserInputBuffer",
+        "xmlBufferCreate",
+        "xmlBufCreate",
+        "xmlBufferCreateSize"
+      ],
+      "deallocator": [
+        "xmlFree",
+        "xmlMemFree",
+        "__xmlFree",
+        "xmlBufFree",
+        "xmlBufferFree",
+        "xmlFreeParserInputBuffer",
+        "xmlFreeDoc",
+        "xmlFreeNode",
+        "xmlFreeProp",
+        "xmlFreeNs",
+        "xmlFreeDtd",
+        "xmlFreeParserCtxt",
+        "xmlFreeTextReader",
+        "xmlFreeTextWriter",
+        "xmlSchemaFree",
+        "xmlSchematronFree",
+        "xmlHashFree",
+        "xmlDictFree"
+      ],
+      "validation_guard": []
+    },
+    "same_type_candidates": 30,
+    "api_matched_candidates": 30,
+    "pairs": [
+      {
+        "commit": "6afea87220588843c975928fee3bf4371631d8b5",
+        "subject": "memory: add xmlGrowArray helper for overflow-checked array reallocation",
+        "files": [
+          "xmlmemory.c"
+        ],
+        "api_hits": [
+          "NULL",
+          "size",
+          "xmlRealloc"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "8f5f02ba295a20dfc5ddd8de03894918c5870ec8",
+        "subject": "xmlstring: Free cur on every error for xmlStrncat",
+        "files": [
+          "xmlstring.c"
+        ],
+        "api_hits": [
+          "NULL",
+          "size",
+          "xmlFree"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "6e1e22dc5f9f53fa8585b856662825d673938965",
+        "subject": "malloc-fail: Fix null-deref in xmlPatPushState",
+        "files": [
+          "pattern.c"
+        ],
+        "api_hits": [
+          "NULL",
+          "xmlMalloc",
+          "xmlRealloc"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 179.5
+  },
+  {
+    "bundle": "KN-Integer-Overflow-10eb89d1-0",
+    "source": "lua",
+    "target": "libxml2",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "decoder_function": [
+        "xmlGetUTF8Char",
+        "xmlStringCurrentChar",
+        "xmlCurrentChar"
+      ],
+      "input_byte": [
+        "c"
+      ],
+      "continuation_count": [
+        "count",
+        "l",
+        "len",
+        "xmlUTF8Size",
+        "xmlUTF8Strsize"
+      ]
+    },
+    "same_type_candidates": 6,
+    "api_matched_candidates": 3,
+    "pairs": [
+      {
+        "commit": "538b2e38a6c6f2b662c532e9ac1520b768d2472f",
+        "subject": "uri: fix signed integer overflow in xmlBuildRelativeURISafe",
+        "files": [
+          "uri.c"
+        ],
+        "api_hits": [
+          "len"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "76a6ba4c41e5f64b5a6e89d770a6add360f72075",
+        "subject": "Add specific check to avoid signed integer overflow of buffer size.",
+        "files": [
+          "xmlwriter.c"
+        ],
+        "api_hits": [
+          "count"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "ad346c9a249c4b380bf73c460ad3e81135c5d781",
+        "subject": "tree: Fix integer overflow in xmlBuildQName",
+        "files": [
+          "tree.c"
+        ],
+        "api_hits": [
+          "len"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 329.9
+  },
+  {
+    "bundle": "KN-Misuse-bc4bbcef-0",
+    "source": "lua",
+    "target": "libxml2",
+    "bug_type": "Misuse",
+    "mapping": {
+      "combined_create_and_publish": [
+        "xmlInitializeCatalog",
+        "xmlInitCatalogInternal"
+      ],
+      "object_initializer": [
+        "xmlLoadCatalog",
+        "xmlLoadCatalogs"
+      ],
+      "persistent_registry_lookup": [
+        "xmlCatalogResolve",
+        "xmlCatalogResolveURI",
+        "xmlCatalogGetPublic",
+        "xmlCatalogGetSystem",
+        "xmlCatalogLocalResolve",
+        "xmlCatalogLocalResolveURI"
+      ],
+      "object_allocator": [
+        "xmlNewCatalog"
+      ],
+      "registry_store": [],
+      "registry_key": []
+    },
+    "same_type_candidates": 133,
+    "api_matched_candidates": 1,
+    "pairs": [
+      {
+        "commit": "57b92cabd2f3018212ddc1475df66e9f9cf643c3",
+        "subject": "catalog: Fix regression in xmlCatalogAdd",
+        "files": [
+          "catalog.c"
+        ],
+        "api_hits": [
+          "xmlInitializeCatalog"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 338.3
+  },
+  {
+    "bundle": "KN-Use-After-Free-22974326-2",
+    "source": "lua",
+    "target": "libxml2",
+    "bug_type": "Use-After-Free",
+    "mapping": {
+      "gc_managed_object": [],
+      "potential_gc_trigger": [],
+      "gc_root_anchor": [],
+      "weak_reference_container": [],
+      "use_after_free_use": []
+    },
+    "same_type_candidates": 3,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 65.3
+  },
+  {
+    "bundle": "KN-Buffer-Overflow-a7200804-1",
+    "source": "sqlite",
+    "target": "libxml2",
+    "bug_type": "Buffer-Overflow",
+    "mapping": {
+      "buffer_grow": [
+        "xmlBufGrow",
+        "xmlBufferGrow",
+        "xmlBufferResize"
+      ],
+      "required_capacity": [
+        "xmlOutputBufferGetSize",
+        "xmlBufAvail",
+        "xmlBufUse",
+        "xmlBufAddLen"
+      ],
+      "write_pointer": [
+        "xmlTextWriterWritePI",
+        "xmlTextWriterWriteDTD",
+        "xmlTextWriterWriteRaw",
+        "xmlTextWriterWriteCDATA",
+        "xmlTextWriterWriteBase64",
+        "xmlTextWriterWriteBinHex",
+        "xmlTextWriterWriteRawLen",
+        "xmlTextWriterWriteString",
+        "xmlTextWriterWriteComment",
+        "xmlTextWriterWriteElement",
+        "xmlTextWriterWriteFormatPI",
+        "xmlTextWriterWriteAttribute",
+        "xmlTextWriterWriteDTDEntity",
+        "xmlTextWriterWriteElementNS",
+        "xmlTextWriterWriteFormatDTD",
+        "xmlTextWriterWriteFormatRaw",
+        "xmlTextWriterWriteVFormatPI",
+        "xmlTextWriterWriteDTDAttlist",
+        "xmlTextWriterWriteDTDElement",
+        "xmlTextWriterWriteVFormatDTD",
+        "xmlTextWriterWriteVFormatRaw",
+        "xmlTextWriterWriteAttributeNS",
+        "xmlTextWriterWriteDTDNotation",
+        "xmlTextWriterWriteFormatCDATA",
+        "xmlTextWriterWriteFormatString",
+        "xmlTextWriterWriteVFormatCDATA",
+        "xmlTextWriterWriteFormatComment",
+        "xmlTextWriterWriteFormatElement",
+        "xmlTextWriterWriteVFormatString",
+        "xmlTextWriterWriteVFormatComment",
+        "xmlTextWriterWriteVFormatElement",
+        "xmlTextWriterWriteFormatAttribute",
+        "xmlTextWriterWriteFormatElementNS",
+        "xmlTextWriterWriteFormatDTDAttlist",
+        "xmlTextWriterWriteFormatDTDElement",
+        "xmlTextWriterWriteVFormatAttribute",
+        "xmlTextWriterWriteVFormatElementNS",
+        "xmlTextWriterWriteDTDExternalEntity",
+        "xmlTextWriterWriteDTDInternalEntity",
+        "xmlTextWriterWriteFormatAttributeNS"
+      ],
+      "digit_set": [
+        "IS_DIGIT",
+        "IS_DIGIT_CH",
+        "xmlIsDigit",
+        "xmlIsDigitQ"
+      ],
+      "output_buffer": [
+        "xmlAllocOutputBuffer",
+        "xmlOutputBufferCreateBuffer",
+        "xmlOutputBufferCreateFd",
+        "xmlOutputBufferCreateIO",
+        "xmlOutputBufferCreateFile",
+        "xmlOutputBufferCreateFilename",
+        "xmlBufferCreateSize",
+        "xmlBufCreate",
+        "xmlBufFromBuffer",
+        "xmlBufBackToBuffer",
+        "PyoutputBuffer_Get"
+      ]
+    },
+    "same_type_candidates": 6,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 187.3
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "libxml2",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "payload_length": [],
+      "local_payload_length": [],
+      "overflow_chunk_size": [],
+      "overflow_page_cache": [],
+      "reallocator": [
+        "xmlRealloc",
+        "xmlMemRealloc",
+        "xmlReallocLoc",
+        "__xmlRealloc"
+      ],
+      "allocated_size_query": [
+        "xmlMemSize"
+      ],
+      "zero_initializer": [
+        "memset"
+      ],
+      "cache_index": [],
+      "too_narrow_arithmetic_type": [
+        "int"
+      ]
+    },
+    "same_type_candidates": 6,
+    "api_matched_candidates": 4,
+    "pairs": [
+      {
+        "commit": "538b2e38a6c6f2b662c532e9ac1520b768d2472f",
+        "subject": "uri: fix signed integer overflow in xmlBuildRelativeURISafe",
+        "files": [
+          "uri.c"
+        ],
+        "api_hits": [
+          "int"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "8baa5de182503cee649268a3394931b031656b8d",
+        "subject": "parser: Avoid integer overflow in xmlParseCharDataInternal",
+        "files": [
+          "parser.c"
+        ],
+        "api_hits": [
+          "int"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      },
+      {
+        "commit": "ad346c9a249c4b380bf73c460ad3e81135c5d781",
+        "subject": "tree: Fix integer overflow in xmlBuildQName",
+        "files": [
+          "tree.c"
+        ],
+        "api_hits": [
+          "int"
+        ],
+        "tp": 0,
+        "tn": 0,
+        "error": null,
+        "detected": false,
+        "perfect": false
+      }
+    ],
+    "seconds": 324.0
+  },
+  {
+    "bundle": "KN-Integer-Overflow-d87f8c49-0",
+    "source": "sqlite",
+    "target": "libxml2",
+    "bug_type": "Integer-Overflow",
+    "mapping": {
+      "length_of": [
+        "xmlUTF8Strsize"
+      ],
+      "character_count_bound": [
+        "precision",
+        "xmlUTF8Strsize",
+        "xmlUTF8Strndup",
+        "xmlUTF8Strsub"
+      ],
+      "iterator_advance": [
+        "xmlUTF8Size",
+        "xmlGetUTF8Char"
+      ],
+      "output_length": [
+        "length",
+        "xmlUTF8Strsize"
+      ],
+      "narrowing_cast": [],
+      "safe_cap": [
+        "MIN"
+      ],
+      "buffer_append": [
+        "xmlStrndup",
+        "xmlBufferAdd",
+        "xmlBufAdd",
+        "xmlOutputBufferWrite"
+      ]
+    },
+    "same_type_candidates": 6,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 170.9
+  },
+  {
+    "bundle": "KN-Misuse-1bc183a9-1",
+    "source": "sqlite",
+    "target": "libxml2",
+    "bug_type": "Misuse",
+    "mapping": {
+      "tokenizer": [],
+      "dequote_helper": [],
+      "illegal_token_sentinel": [],
+      "dequoter_with_precondition": [],
+      "caller_ignoring_sentinel": []
+    },
+    "same_type_candidates": 133,
+    "api_matched_candidates": 0,
+    "pairs": [],
+    "seconds": 269.1
+  }
+]

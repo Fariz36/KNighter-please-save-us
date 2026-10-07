@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A public API function accepts a caller-supplied pointer used as an out-parameter/write destination for a result. It writes through that pointer directly, or forwards it to an internal routine that writes through it, without first checking that the pointer is non-NULL. Passing NULL for that argument therefore leads to a NULL-pointer dereference. The fix adds a NULL guard before the write and returns the API’s bad-argument error.
+
+Roles:
+- out-parameter / write destination: `n` in `curl_easy_send` and `curl_easy_recv`; direct write `*n = written`; callee `Curl_easy_recv` which writes through `n`.
+- error_setter: `CURLE_BAD_FUNCTION_ARGUMENT` assigned to `result` in the fix.

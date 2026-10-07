@@ -1,0 +1,44 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "resource": {
+      "names": [
+        "input"
+      ],
+      "description": "an owned resource pointer that may be consumed by a function"
+    },
+    "ownership_consumer_frees_on_failure": {
+      "names": [
+        "xmlNewIOInputStream"
+      ],
+      "description": "function that takes ownership of a resource and releases it on failure"
+    },
+    "deallocator": {
+      "names": [
+        "xmlFreeParserInputBuffer"
+      ],
+      "description": "function that releases/frees a resource"
+    },
+    "null_on_failure": {
+      "names": [
+        "xmlNewIOInputStream"
+      ],
+      "description": "function that returns NULL on failure"
+    },
+    "duplicate_cleanup": {
+      "names": [
+        "xmlFreeParserInputBuffer"
+      ],
+      "description": "cleanup action that duplicates a release already performed by the callee"
+    },
+    "context_cleanup": {
+      "names": [
+        "xmlFreeParserCtxt"
+      ],
+      "description": "cleanup action that releases a context whose ownership remains with the caller"
+    }
+  }
+}

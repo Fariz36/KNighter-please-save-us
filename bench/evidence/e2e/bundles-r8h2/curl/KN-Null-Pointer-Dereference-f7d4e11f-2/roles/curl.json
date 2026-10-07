@@ -1,0 +1,25 @@
+{
+  "length_field": [
+    "len"
+  ],
+  "data_pointer": [
+    "data"
+  ],
+  "buffer_copy": [
+    "memcpy"
+  ],
+  "error_return": [
+    "CURLE_BAD_FUNCTION_ARGUMENT",
+    "CURLE_OUT_OF_MEMORY"
+  ],
+  "copy_flag": [
+    "CURL_BLOB_COPY"
+  ],
+  "allocator": [
+    "curlx_malloc"
+  ],
+  "deallocator": [
+    "curlx_safefree"
+  ],
+  "validation_guard": []
+}

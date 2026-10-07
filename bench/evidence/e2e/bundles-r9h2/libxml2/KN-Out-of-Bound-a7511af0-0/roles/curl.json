@@ -1,0 +1,17 @@
+{
+  "indexed_read": [
+    "Curl_read16_be",
+    "Curl_read16_le",
+    "Curl_read32_le"
+  ],
+  "length_of": [
+    "strlen",
+    "Curl_bufq_len",
+    "curlx_dyn_len",
+    "Curl_bufref_len",
+    "Curl_creader_total_length",
+    "Curl_creader_client_length",
+    "Curl_creader_def_total_length",
+    "CURL_ARRAYSIZE"
+  ]
+}

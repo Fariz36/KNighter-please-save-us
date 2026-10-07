@@ -1,0 +1,44 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "deallocator": {
+      "names": [
+        "xmlFreeNode"
+      ],
+      "description": "function that frees a linked node object"
+    },
+    "unlinker": {
+      "names": [
+        "xmlUnlinkNodeInternal"
+      ],
+      "description": "function that detaches a linked node from its container/tree by updating parent/prev/next links"
+    },
+    "linked_node": {
+      "names": [
+        "xmlNode"
+      ],
+      "description": "struct type representing a node in a linked tree or container"
+    },
+    "content_consumer": {
+      "names": [
+        "xmlTextAddContent"
+      ],
+      "description": "function that consumes or copies content from a linked node"
+    },
+    "adder": {
+      "names": [
+        "xmlAddChild"
+      ],
+      "description": "function that adds a node to a container/tree, possibly freeing the node after consuming its content"
+    },
+    "content_field": {
+      "names": [
+        "content"
+      ],
+      "description": "field of a linked node whose content is consumed"
+    }
+  }
+}

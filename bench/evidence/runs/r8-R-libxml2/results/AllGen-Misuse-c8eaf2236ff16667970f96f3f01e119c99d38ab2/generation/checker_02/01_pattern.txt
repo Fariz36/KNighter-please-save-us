@@ -1,0 +1,11 @@
+## Bug Pattern
+
+A value supplied through a `config_setter` is stored directly and later used as a `divisor` in a division expression. The setter does not reject zero, and the division site does not have a `zero_guard`, so setting the value to zero leads to division-by-zero / SIGFPE.
+
+In this patch:
+- `config_setter`: `xmlCtxtSetMaxAmplification`
+- `config_field` / `divisor`: `ctxt->maxAmpl`
+- `division`: `*expandedSize / ctxt->maxAmpl`
+- missing/added `zero_guard`: check that `maxAmpl != 0` before division and reject `maxAmpl == 0` in the setter
+
+The root cause is allowing a divisor-valued configuration field to become zero without enforcing a non-zero invariant at either the setter or the use site.

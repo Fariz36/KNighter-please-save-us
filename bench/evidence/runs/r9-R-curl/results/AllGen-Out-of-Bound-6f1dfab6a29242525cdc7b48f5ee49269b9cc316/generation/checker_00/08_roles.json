@@ -1,0 +1,38 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "curlx_dyn_ptr"
+      ],
+      "description": "returns the received response buffer to parse"
+    },
+    "search": {
+      "names": [
+        "strchr"
+      ],
+      "description": "finds the first occurrence of a character in a NUL-terminated string"
+    },
+    "character_classifier": {
+      "names": [
+        "ISDIGIT"
+      ],
+      "description": "tests whether a character is a decimal digit"
+    },
+    "error_setter": {
+      "names": [
+        "failf"
+      ],
+      "description": "records/reports an error message"
+    },
+    "numeric_parser": {
+      "names": [
+        "curlx_str_number"
+      ],
+      "description": "parses a number from a string"
+    }
+  }
+}

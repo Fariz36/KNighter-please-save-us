@@ -1,0 +1,46 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "length_of": {
+      "names": [
+        "strlen"
+      ],
+      "description": "function that computes the length of a NUL-terminated C string by scanning for a terminator"
+    },
+    "untrusted_size": {
+      "names": [
+        "ASN1_STRING_length",
+        "ASN1_STRING_to_UTF8"
+      ],
+      "description": "function or return value that provides a length for a length-delimited buffer"
+    },
+    "untrusted_data_accessor": {
+      "names": [
+        "ASN1_STRING_get0_data"
+      ],
+      "description": "function that returns a pointer to raw, length-delimited data that may not be NUL-terminated"
+    },
+    "allocator": {
+      "names": [
+        "ASN1_STRING_to_UTF8"
+      ],
+      "description": "function that allocates memory and writes the pointer through an output parameter or returns it"
+    },
+    "deallocator": {
+      "names": [
+        "OPENSSL_free"
+      ],
+      "description": "function that frees memory or an object; pointer must not be used afterwards"
+    },
+    "error_setter": {
+      "names": [
+        "failf",
+        "infof"
+      ],
+      "description": "printf-style function that records or reports an error/info message; format arguments must be valid C strings unless length-bounded"
+    }
+  }
+}

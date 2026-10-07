@@ -1,0 +1,30 @@
+{
+  "payload_length": [
+    "nPayload"
+  ],
+  "local_payload_length": [
+    "nLocal"
+  ],
+  "overflow_chunk_size": [
+    "ovflSize"
+  ],
+  "overflow_page_cache": [
+    "aOverflow"
+  ],
+  "reallocator": [
+    "sqlite3Realloc"
+  ],
+  "allocated_size_query": [
+    "sqlite3MallocSize"
+  ],
+  "zero_initializer": [
+    "memset"
+  ],
+  "cache_index": [
+    "iIdx"
+  ],
+  "too_narrow_arithmetic_type": [
+    "int",
+    "u32"
+  ]
+}

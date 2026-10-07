@@ -1,0 +1,11 @@
+## Bug Pattern
+
+A garbage-collected object is used across a call that can trigger an emergency garbage collection, but the object is not rooted/anchored before that call. In `luaV_finishset`, when the assignment follows an `__newindex` table obtained from a weak metatable, `h` can be reachable only through a weak reference. The call `luaH_finishset(L, h, ...)` may allocate and run an emergency GC, which can collect `h` while it is still being updated, leading to a use-after-free. The fix anchors `h` on the Lua stack before the GC-triggering call and releases it afterward.
+
+Roles:
+- `weakly_referenced_object`: `Table *h` / `t` — the table being assigned/updated, which may come from a weak `__newindex` field.
+- `weak_reference_lookup`: `fasttm(L, h->metatable, TM_NEWINDEX)` / `luaT_gettmbyobj(..., TM_NEWINDEX)` — retrieves the metamethod value from a possibly weak metatable.
+- `gc_triggering_call`: `luaH_finishset` — can allocate and invoke an emergency garbage collection.
+- `gc_anchor`: `sethvalue2s(L, L->top.p, h); L->top.p++;` — roots the object before the GC-triggering call.
+- `gc_unanchor`: `L->top.p--;` — removes the temporary root.
+- `use_after_free_site`: `invalidateTMcache(h)`, `luaC_barrierback(L, obj2gco(h), val)`, and accesses inside `luaH_finishset` after a possible collection.

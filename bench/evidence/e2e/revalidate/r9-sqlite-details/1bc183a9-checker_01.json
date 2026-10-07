@@ -1,0 +1,83 @@
+{
+  "commit_id": "1bc183a935799050919eecf4f5deffb6d98e7905",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/f2ebdea52261b53bf264/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/alter.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ],
+        "fixed_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/79837b6ee5d4/src/alter.c",
+          "line": 2464,
+          "column": 3,
+          "function": "quotedCompare",
+          "bug_type": "Unchecked token type",
+          "description": "Token length used without checking token type; malformed input may reach dequoter",
+          "issue_hash": "c1649b4d845d6c418cab1f74832410c4",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/1bc183a93579/1295a9ba/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_79837b6ee5d4_src_alter.c/report-c1649b.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/1bc183a93579/src/alter.c",
+          "line": 2469,
+          "column": 3,
+          "function": "quotedCompare",
+          "bug_type": "Unchecked token type",
+          "description": "Token length used without checking token type; malformed input may reach dequoter",
+          "issue_hash": "38bd0422a9bff796a72598d571f9ca28",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/1bc183a93579/1295a9ba/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_1bc183a93579_src_alter.c/report-38bd04.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 13.15,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 30.97,
+      "fixed": 30.17
+    },
+    "total_seconds": 74.43
+  },
+  "report_dir": "tmp/validation/1bc183a93579/1295a9ba"
+}

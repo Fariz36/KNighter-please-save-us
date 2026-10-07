@@ -1,0 +1,74 @@
+{
+  "commit_id": "ddcb79dc9934fd8a26263f6368c4eb7aa43f6d49",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-libxml2/plugin-cache/plugins/95c8a4525a1473f07c1b/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 2,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "parserInternals.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlCtxtSetSaxHandler"
+        ],
+        "fixed_functions": [
+          "xmlCtxtSetSaxHandler"
+        ]
+      },
+      {
+        "path": "testparser.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "testSwitchDtd",
+          "testSwitchDtdExtSubset"
+        ],
+        "fixed_functions": [
+          "testSwitchDtd",
+          "testSwitchDtdExtSubset"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "parserInternals.c": [],
+      "testparser.c": []
+    },
+    "fixed": {
+      "parserInternals.c": [],
+      "testparser.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 18.49,
+      "fixed": 17.58
+    },
+    "total_seconds": 36.36
+  },
+  "report_dir": "tmp/validation/ddcb79dc9934/17c66e19"
+}

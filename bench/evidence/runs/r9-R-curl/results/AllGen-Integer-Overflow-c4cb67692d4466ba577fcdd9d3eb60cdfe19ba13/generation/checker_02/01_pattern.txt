@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A bounds check for a `buffer_copy` uses values obtained from an `untrusted_size` reader that are stored in narrow integer types. The arithmetic in the check can overflow, so the check may incorrectly pass and the subsequent `buffer_copy` can use an out-of-bounds offset and length.
+
+Roles:
+- `untrusted_size`: `Curl_read16_le`
+- `buffer_copy`: `Curl_client_write`
+- `error_setter`: `failf`

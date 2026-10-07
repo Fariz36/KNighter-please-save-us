@@ -1,0 +1,404 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-1",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "encoded_size_calculator": [
+        "luaS_sizelngstr",
+        "sizestrshr"
+      ],
+      "input_length": [],
+      "max_input_size": [
+        "luaM_testsize",
+        "luaM_checksize"
+      ],
+      "error_sentinel": [
+        "luaM_error"
+      ]
+    },
+    "unmapped_roles": [
+      "input_length"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 387.3
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "cleanup": [
+        "luaF_closeupval"
+      ],
+      "destructor": [
+        "luaE_freethread"
+      ],
+      "state_reset": [],
+      "link_detach": [
+        "luaF_unlinkupval"
+      ],
+      "link_storage": []
+    },
+    "unmapped_roles": [
+      "state_reset",
+      "link_storage"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 315.8
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "data_provider": [
+        "luaO_tostringbuff",
+        "luaO_utf8esc",
+        "luaZ_buffer"
+      ],
+      "length_provider": [
+        "luaO_tostringbuff",
+        "luaO_utf8esc",
+        "luaZ_sizebuffer"
+      ],
+      "unbounded_string_consumer": [
+        "luaL_dostring",
+        "luaO_pushfstring",
+        "luaO_pushvfstring",
+        "pushvfstring",
+        "lua_writestringerror",
+        "l_sprintf"
+      ],
+      "bounded_nul_scanner": [],
+      "bounded_string_formatter": []
+    },
+    "unmapped_roles": [
+      "bounded_nul_scanner",
+      "bounded_string_formatter"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 202.6
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-1",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "duplicator": [
+        "luaS_new"
+      ],
+      "source_handle": [],
+      "destination_allocator": [
+        "luaM_malloc_"
+      ],
+      "field_copier": []
+    },
+    "unmapped_roles": [
+      "source_handle",
+      "field_copier"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 221.4
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "api_entry_point": [],
+      "out_param": [
+        "lua_pointer2str"
+      ],
+      "out_param_writer": [
+        "lua_pointer2str"
+      ]
+    },
+    "unmapped_roles": [
+      "api_entry_point"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 201.7
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2",
+    "source": "curl",
+    "target": "lua",
+    "mapping": {
+      "length_field": [
+        "luaZ_sizebuffer"
+      ],
+      "data_pointer": [
+        "luaZ_buffer"
+      ],
+      "buffer_copy": [],
+      "error_return": [
+        "luaM_error",
+        "luaG_runerror",
+        "luaL_pushfail"
+      ],
+      "copy_flag": [],
+      "allocator": [
+        "luaM_malloc_",
+        "luaM_new",
+        "luaM_realloc_",
+        "luaM_saferealloc_",
+        "luaM_reallocvchar",
+        "luaM_reallocvector"
+      ],
+      "deallocator": [
+        "luaM_free",
+        "luaM_free_"
+      ],
+      "validation_guard": [
+        "api_check",
+        "check_exp",
+        "luaL_argcheck"
+      ]
+    },
+    "unmapped_roles": [
+      "buffer_copy",
+      "copy_flag"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 181.0
+  },
+  {
+    "bundle": "KN-Double-Free-26dfab2f-1",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "resource": [],
+      "ownership_consumer_frees_on_failure": [],
+      "deallocator": [],
+      "null_on_failure": [],
+      "duplicate_cleanup": [],
+      "context_cleanup": []
+    },
+    "unmapped_roles": [
+      "resource",
+      "ownership_consumer_frees_on_failure",
+      "deallocator",
+      "null_on_failure",
+      "duplicate_cleanup",
+      "context_cleanup"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "config_setter": [],
+      "divisor_field": []
+    },
+    "unmapped_roles": [
+      "config_setter",
+      "divisor_field"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "null_on_failure": [
+        "debug_realloc"
+      ],
+      "length_of": [
+        "sizenode",
+        "luaH_size",
+        "stacksize",
+        "luaF_protosize",
+        "luaE_threadsize",
+        "luaZ_sizebuffer",
+        "allocsizenode"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 246.8
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "nullable_inout_capacity_ptr": [],
+      "capacity_computer": [
+        "luaM_growaux_"
+      ],
+      "reallocator": [
+        "luaM_realloc_",
+        "luaM_saferealloc_",
+        "luaM_reallocvchar",
+        "luaM_reallocvector"
+      ],
+      "deref_read": [],
+      "deref_write": [],
+      "null_guard": [],
+      "null_on_failure": []
+    },
+    "unmapped_roles": [
+      "nullable_inout_capacity_ptr",
+      "deref_read",
+      "deref_write",
+      "null_guard",
+      "null_on_failure"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 171.8
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-2",
+    "source": "libxml2",
+    "target": "lua",
+    "mapping": {
+      "lookahead": [],
+      "length_of": []
+    },
+    "unmapped_roles": [
+      "lookahead",
+      "length_of"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Buffer-Overflow-a7200804-1",
+    "source": "sqlite",
+    "target": "lua",
+    "mapping": {
+      "buffer_grow": [
+        "luaZ_resizebuffer",
+        "luaL_prepbuffer"
+      ],
+      "required_capacity": [
+        "luaZ_sizebuffer"
+      ],
+      "write_pointer": [
+        "luaL_prepbuffer"
+      ],
+      "digit_set": [],
+      "output_buffer": [
+        "luaZ_buffer"
+      ]
+    },
+    "unmapped_roles": [
+      "digit_set"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 326.3
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "lua",
+    "mapping": {
+      "payload_length": [],
+      "local_payload_length": [],
+      "overflow_chunk_size": [],
+      "overflow_page_cache": [],
+      "reallocator": [
+        "debug_realloc",
+        "luaM_realloc_",
+        "luaM_growaux_",
+        "luaD_growstack",
+        "luaM_growvector",
+        "luaD_reallocstack",
+        "luaM_reallocvchar",
+        "luaM_saferealloc_",
+        "luaZ_resizebuffer",
+        "luaM_reallocvector"
+      ],
+      "allocated_size_query": [
+        "luaH_size",
+        "luaF_protosize"
+      ],
+      "zero_initializer": [],
+      "cache_index": [],
+      "too_narrow_arithmetic_type": [
+        "lua_Integer"
+      ]
+    },
+    "unmapped_roles": [
+      "payload_length",
+      "local_payload_length",
+      "overflow_chunk_size",
+      "overflow_page_cache",
+      "zero_initializer",
+      "cache_index"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 183.9
+  },
+  {
+    "bundle": "KN-Integer-Overflow-d87f8c49-0",
+    "source": "sqlite",
+    "target": "lua",
+    "mapping": {
+      "length_of": [],
+      "character_count_bound": [],
+      "iterator_advance": [],
+      "output_length": [],
+      "narrowing_cast": [
+        "cast_int"
+      ],
+      "safe_cap": [],
+      "buffer_append": []
+    },
+    "unmapped_roles": [
+      "length_of",
+      "character_count_bound",
+      "iterator_advance",
+      "output_length",
+      "safe_cap",
+      "buffer_append"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 221.0
+  },
+  {
+    "bundle": "KN-Misuse-1bc183a9-1",
+    "source": "sqlite",
+    "target": "lua",
+    "mapping": {
+      "tokenizer": [],
+      "dequote_helper": [],
+      "illegal_token_sentinel": [],
+      "dequoter_with_precondition": [],
+      "caller_ignoring_sentinel": []
+    },
+    "unmapped_roles": [
+      "tokenizer",
+      "dequote_helper",
+      "illegal_token_sentinel",
+      "dequoter_with_precondition",
+      "caller_ignoring_sentinel"
+    ],
+    "status": "no equivalent roles in target"
+  }
+]

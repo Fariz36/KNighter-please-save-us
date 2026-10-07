@@ -1,0 +1,12 @@
+{
+  "commit_id": "b943fa12887b5565b21be3f0bbae052d71fa9933",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/intck/sqlite3intck.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/intck/sqlite3intck.c": "no compile entry"
+    }
+  }
+}

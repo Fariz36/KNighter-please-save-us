@@ -1,0 +1,74 @@
+{
+  "commit_id": "dd4c0f62fa1fd9650aae6b718dd9964a4ffa69b9",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/fccaec1fd498bccaea26/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "fuzz/api.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "LLVMFuzzerTestOneInput"
+        ],
+        "fixed_functions": [
+          "LLVMFuzzerTestOneInput"
+        ]
+      },
+      {
+        "path": "tree.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlTextMerge"
+        ],
+        "fixed_functions": [
+          "xmlTextMerge"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "tree.c": []
+    },
+    "fixed": {
+      "tree.c": []
+    }
+  },
+  "errors": {
+    "buggy": {
+      "fuzz/api.c": "no compile entry"
+    },
+    "fixed": {
+      "fuzz/api.c": "no compile entry"
+    }
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 6.49,
+    "analysis_seconds": {
+      "buggy": 93.18,
+      "fixed": 71.87
+    },
+    "total_seconds": 172.01
+  },
+  "report_dir": "tmp/validation/dd4c0f62fa1f/8f26c417"
+}

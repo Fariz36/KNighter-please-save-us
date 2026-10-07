@@ -1,0 +1,316 @@
+{
+  "commit_id": "014be82a66f62972a68c4c9ae5300edc84e9b0df",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/73a94fb22118ff6989b8/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 8,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/easy.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "dupeasy_meta_freeentry"
+        ],
+        "fixed_functions": [
+          "dupeasy_meta_freeentry"
+        ]
+      },
+      {
+        "path": "lib/ftplistparser.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Curl_wildcard_dtor"
+        ],
+        "fixed_functions": [
+          "Curl_wildcard_dtor"
+        ]
+      },
+      {
+        "path": "lib/multi.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "ph_freeentry"
+        ],
+        "fixed_functions": [
+          "ph_freeentry"
+        ]
+      },
+      {
+        "path": "lib/pingpong.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Curl_pp_vsendf"
+        ],
+        "fixed_functions": [
+          "Curl_pp_vsendf"
+        ]
+      },
+      {
+        "path": "lib/url.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "conn_meta_freeentry",
+          "easy_meta_freeentry"
+        ],
+        "fixed_functions": [
+          "conn_meta_freeentry",
+          "easy_meta_freeentry"
+        ]
+      },
+      {
+        "path": "lib/vssh/libssh.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "sshc_cleanup"
+        ],
+        "fixed_functions": [
+          "sshc_cleanup"
+        ]
+      },
+      {
+        "path": "lib/vssh/libssh2.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "kbd_callback",
+          "sshc_cleanup"
+        ],
+        "fixed_functions": [
+          "kbd_callback",
+          "sshc_cleanup"
+        ]
+      },
+      {
+        "path": "lib/vtls/rustls.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "cr_init_backend"
+        ],
+        "fixed_functions": [
+          "cr_init_backend"
+        ]
+      },
+      {
+        "path": "src/tool_doswin.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "win32_stdin_read_thread"
+        ],
+        "fixed_functions": [
+          "win32_stdin_read_thread"
+        ]
+      },
+      {
+        "path": "tests/libtest/lib1536.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "test_lib1536"
+        ],
+        "fixed_functions": [
+          "test_lib1536"
+        ]
+      },
+      {
+        "path": "tests/unit/unit1300.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "test_unit1300"
+        ],
+        "fixed_functions": [
+          "test_unit1300"
+        ]
+      },
+      {
+        "path": "tests/unit/unit1304.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "test_unit1304"
+        ],
+        "fixed_functions": [
+          "test_unit1304"
+        ]
+      },
+      {
+        "path": "tests/unit/unit1309.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "test_unit1309"
+        ],
+        "fixed_functions": [
+          "test_unit1309"
+        ]
+      },
+      {
+        "path": "tests/unit/unit1605.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "test_unit1605"
+        ],
+        "fixed_functions": [
+          "test_unit1605"
+        ]
+      },
+      {
+        "path": "tests/unit/unit1620.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "test_unit1620"
+        ],
+        "fixed_functions": [
+          "test_unit1620"
+        ]
+      },
+      {
+        "path": "tests/unit/unit2601.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "check_bufq"
+        ],
+        "fixed_functions": [
+          "check_bufq"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/easy.c": [],
+      "lib/ftplistparser.c": [],
+      "lib/multi.c": [],
+      "lib/pingpong.c": [],
+      "lib/url.c": [],
+      "lib/vssh/libssh.c": [],
+      "lib/vssh/libssh2.c": [],
+      "lib/vtls/rustls.c": []
+    },
+    "fixed": {
+      "lib/easy.c": [],
+      "lib/ftplistparser.c": [],
+      "lib/multi.c": [],
+      "lib/pingpong.c": [],
+      "lib/url.c": [],
+      "lib/vssh/libssh.c": [],
+      "lib/vssh/libssh2.c": [],
+      "lib/vtls/rustls.c": []
+    }
+  },
+  "errors": {
+    "buggy": {
+      "src/tool_doswin.c": "no compile entry",
+      "tests/libtest/lib1536.c": "no compile entry",
+      "tests/unit/unit1300.c": "no compile entry",
+      "tests/unit/unit1304.c": "no compile entry",
+      "tests/unit/unit1309.c": "no compile entry",
+      "tests/unit/unit1605.c": "no compile entry",
+      "tests/unit/unit1620.c": "no compile entry",
+      "tests/unit/unit2601.c": "no compile entry"
+    },
+    "fixed": {
+      "src/tool_doswin.c": "no compile entry",
+      "tests/libtest/lib1536.c": "no compile entry",
+      "tests/unit/unit1300.c": "no compile entry",
+      "tests/unit/unit1304.c": "no compile entry",
+      "tests/unit/unit1309.c": "no compile entry",
+      "tests/unit/unit1605.c": "no compile entry",
+      "tests/unit/unit1620.c": "no compile entry",
+      "tests/unit/unit2601.c": "no compile entry"
+    }
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 65.63,
+    "analysis_seconds": {
+      "buggy": 39.25,
+      "fixed": 31.88
+    },
+    "total_seconds": 138.89
+  },
+  "report_dir": "tmp/validation/014be82a66f6/542eadf0"
+}

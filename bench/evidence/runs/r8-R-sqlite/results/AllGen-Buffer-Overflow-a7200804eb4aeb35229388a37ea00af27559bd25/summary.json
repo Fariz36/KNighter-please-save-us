@@ -1,0 +1,15 @@
+{
+  "commit_id": "a7200804eb4aeb35229388a37ea00af27559bd25",
+  "commit_type": "Buffer-Overflow",
+  "total_checkers": 2,
+  "successful_checkers": 1,
+  "perfect_checkers": 1,
+  "best_tp": 1,
+  "best_tn": 1,
+  "total_time": 708.657417,
+  "errors": [
+    "Failed to generate compilable checker 0"
+  ],
+  "success_rate": 0.5,
+  "timestamp": "2026-10-01T19:33:37.320770"
+}

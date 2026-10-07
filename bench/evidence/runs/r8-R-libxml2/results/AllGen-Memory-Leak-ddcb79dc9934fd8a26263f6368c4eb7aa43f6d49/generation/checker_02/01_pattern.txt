@@ -1,0 +1,12 @@
+## Bug Pattern
+
+The bug pattern is **replacing an owned pointer field with a new `allocator` result without first releasing the field’s previous value**. Here, `xmlCtxtSetSaxHandler` allocates a new `xmlSAXHandler` with `xmlMalloc`, copies the supplied handler into it, and then overwrites `ctxt->sax`. If `ctxt->sax` already owns an allocation, that old allocation is leaked. The fix avoids the leak by copying into the existing handler object (`*ctxt->sax = *sax`) instead of replacing the pointer.
+
+Role names in this patch:
+
+- `setter`: `xmlCtxtSetSaxHandler`
+- `allocator`: `xmlMalloc`
+- `owned_pointer_field`: `ctxt->sax`
+- `deallocator` (missing before overwrite): `xmlFree`
+- `copier`: `memcpy` in the buggy code; `*ctxt->sax = *sax` in the fixed code
+- `null_on_failure`: `xmlMalloc` returns NULL, which is checked

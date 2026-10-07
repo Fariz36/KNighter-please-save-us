@@ -1,0 +1,190 @@
+{
+  "commit_id": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/57dafa24b88f0f2597b8/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lauxlib.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 6,
+        "fixed_total": 6,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "newbox"
+        ],
+        "fixed_functions": [
+          "getBoxMT",
+          "newbox"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lauxlib.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/40b76de2d77e/lauxlib.c",
+          "line": 375,
+          "column": 24,
+          "function": "luaL_checkoption",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "2a2cfc603e5221c083d2a694d50b693b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/60ec477e/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_40b76de2d77e_lauxlib.c/report-2a2cfc.html",
+          "relpath": "lauxlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/40b76de2d77e/lauxlib.c",
+          "line": 765,
+          "column": 5,
+          "function": "errfile",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "8259e1f44ed2900c5d6f91b8d3fe7eaf",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/60ec477e/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_40b76de2d77e_lauxlib.c/report-8259e1.html",
+          "relpath": "lauxlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/40b76de2d77e/lauxlib.c",
+          "line": 102,
+          "column": 5,
+          "function": "pushfuncname",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "a0c12ab84ffbe3d681e137bd10eb605c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/60ec477e/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_40b76de2d77e_lauxlib.c/report-a0c12a.html",
+          "relpath": "lauxlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/40b76de2d77e/lauxlib.c",
+          "line": 949,
+          "column": 9,
+          "function": "luaL_tolstring",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "af88c73f4ec0eff69937f22c5539e47c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/60ec477e/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_40b76de2d77e_lauxlib.c/report-af88c7.html",
+          "relpath": "lauxlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/40b76de2d77e/lauxlib.c",
+          "line": 206,
+          "column": 9,
+          "function": "luaL_typeerror",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "b35875a500f3f733156b6cdde7609701",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/60ec477e/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_40b76de2d77e_lauxlib.c/report-b35875.html",
+          "relpath": "lauxlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/40b76de2d77e/lauxlib.c",
+          "line": 767,
+          "column": 5,
+          "function": "errfile",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "f18f4a2b147128fbad7e9f9a4542b491",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/60ec477e/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_40b76de2d77e_lauxlib.c/report-f18f4a.html",
+          "relpath": "lauxlib.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lauxlib.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/bc4bbcef651b/lauxlib.c",
+          "line": 375,
+          "column": 24,
+          "function": "luaL_checkoption",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "2a2cfc603e5221c083d2a694d50b693b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/60ec477e/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_bc4bbcef651b_lauxlib.c/report-2a2cfc.html",
+          "relpath": "lauxlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/bc4bbcef651b/lauxlib.c",
+          "line": 778,
+          "column": 5,
+          "function": "errfile",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "8259e1f44ed2900c5d6f91b8d3fe7eaf",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/60ec477e/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_bc4bbcef651b_lauxlib.c/report-8259e1.html",
+          "relpath": "lauxlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/bc4bbcef651b/lauxlib.c",
+          "line": 102,
+          "column": 5,
+          "function": "pushfuncname",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "a0c12ab84ffbe3d681e137bd10eb605c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/60ec477e/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_bc4bbcef651b_lauxlib.c/report-a0c12a.html",
+          "relpath": "lauxlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/bc4bbcef651b/lauxlib.c",
+          "line": 962,
+          "column": 9,
+          "function": "luaL_tolstring",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "af88c73f4ec0eff69937f22c5539e47c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/60ec477e/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_bc4bbcef651b_lauxlib.c/report-af88c7.html",
+          "relpath": "lauxlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/bc4bbcef651b/lauxlib.c",
+          "line": 206,
+          "column": 9,
+          "function": "luaL_typeerror",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "b35875a500f3f733156b6cdde7609701",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/60ec477e/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_bc4bbcef651b_lauxlib.c/report-b35875.html",
+          "relpath": "lauxlib.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/bc4bbcef651b/lauxlib.c",
+          "line": 780,
+          "column": 5,
+          "function": "errfile",
+          "bug_type": "Length-delimited buffer used as C string",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "issue_hash": "f18f4a2b147128fbad7e9f9a4542b491",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/60ec477e/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_bc4bbcef651b_lauxlib.c/report-f18f4a.html",
+          "relpath": "lauxlib.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 9.37,
+      "fixed": 9.45
+    },
+    "total_seconds": 18.95
+  },
+  "report_dir": "tmp/validation/bc4bbcef651b/60ec477e"
+}

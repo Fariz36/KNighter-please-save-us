@@ -1,0 +1,21 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "reallocator": {
+      "names": [
+        "sqlite3StrAccumEnlargeIfNeeded"
+      ],
+      "description": "Ensures a buffer has at least the requested number of bytes available; returns nonzero on failure."
+    },
+    "buffer_copy": {
+      "names": [
+        "memcpy",
+        "memmove"
+      ],
+      "description": "Copies a specified number of bytes from a source to a destination buffer."
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "resource": [
+    "input"
+  ],
+  "ownership_consumer_frees_on_failure": [
+    "xmlNewIOInputStream"
+  ],
+  "deallocator": [
+    "xmlFreeParserInputBuffer"
+  ],
+  "null_on_failure": [
+    "xmlNewIOInputStream"
+  ],
+  "duplicate_cleanup": [
+    "xmlFreeParserInputBuffer"
+  ],
+  "context_cleanup": [
+    "xmlFreeParserCtxt"
+  ]
+}

@@ -1,0 +1,61 @@
+id: KN-Integer-Overflow-bc440a89-1
+bug_type: Integer-Overflow
+source:
+  project: curl
+  description: curl, the C library (libcurl) for transferring data with URLs
+  commit: bc440a89d47aa8f3a5d02b01985fd7f6fb7e7e0a
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  An `encoded_size_calculator` performs unchecked arithmetic that expands an `input_length` into an encoded
+  output size. Since the input length can be arbitrarily large, the multiplication/addition can overflow
+  the signed integer type (`curl_off_t`), wrapping to a small or negative value. The resulting incorrect
+  encoded size may then be used as an allocation or buffer bound, leading to an undersized buffer and
+  potential out-of-bounds access.
+
+
+  Roles:
+
+  - `encoded_size_calculator`: `encoder_base64_size`
+
+  - `input_length`: `part->datasize`
+
+  - `overflow_prone_size_expression`: `4 * (1 + ((size - 1) / 3))` and the CRLF term `2 * ((size - 1)
+  / MAX_ENCODED_LINE_LENGTH)`
+
+  - `overflow_guard` / `max_input_size`: `BASE64_MAX_INPUT_SIZE` check (`size > BASE64_MAX_INPUT_SIZE`
+  -> `return -1`)
+
+  - `error_sentinel`: `-1`'
+roles:
+  encoded_size_calculator:
+    names:
+    - encoder_base64_size
+    description: function that computes an encoded output size from an input length; it must guard against
+      signed integer overflow before doing arithmetic
+  input_length:
+    names:
+    - datasize
+    description: field or variable holding the length of input data to be encoded, whose value may be
+      arbitrarily large
+  max_input_size:
+    names:
+    - BASE64_MAX_INPUT_SIZE
+    description: macro or constant defining the maximum input length that can safely participate in encoded-size
+      arithmetic without overflow
+  error_sentinel:
+    names:
+    - '-1'
+    description: sentinel return value used by a size calculator to signal an error or overflow condition
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: 3c44401b20c9b0cfdf2951dd290b1bc9192d6362
+exported: 2026-10-01T20:41:52+0700

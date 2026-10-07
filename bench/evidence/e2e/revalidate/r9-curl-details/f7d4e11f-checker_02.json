@@ -1,0 +1,79 @@
+{
+  "commit_id": "f7d4e11f4b423a6db61ca86cf59483fad9f4bc13",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/6c684f447c431f9bd75d/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/setopt.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "Curl_setblobopt"
+        ],
+        "fixed_functions": [
+          "Curl_setblobopt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/b3675fe80a33/lib/setopt.c",
+          "line": 122,
+          "column": 7,
+          "function": "Curl_setblobopt",
+          "bug_type": "Unchecked NULL Buffer Copy",
+          "description": "Unchecked NULL pointer from input struct used as buffer_copy source",
+          "issue_hash": "fe430641fc19eaf398191b9936ddf477",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f7d4e11f4b42/205b5d09/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_b3675fe80a33_lib_setopt.c/report-fe4306.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/setopt.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/f7d4e11f4b42/lib/setopt.c",
+          "line": 122,
+          "column": 7,
+          "function": "Curl_setblobopt",
+          "bug_type": "Unchecked NULL Buffer Copy",
+          "description": "Unchecked NULL pointer from input struct used as buffer_copy source",
+          "issue_hash": "fe430641fc19eaf398191b9936ddf477",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/f7d4e11f4b42/205b5d09/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_f7d4e11f4b42_lib_setopt.c/report-fe4306.html",
+          "relpath": "lib/setopt.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 13.42,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 1.22,
+      "fixed": 1.82
+    },
+    "total_seconds": 16.61
+  },
+  "report_dir": "tmp/validation/f7d4e11f4b42/205b5d09"
+}

@@ -1,0 +1,68 @@
+{
+  "commit_id": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/c225e43484da7fb76c9e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lauxlib.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "newbox"
+        ],
+        "fixed_functions": [
+          "getBoxMT",
+          "newbox"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lauxlib.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/lua/src/40b76de2d77e/lauxlib.c",
+          "line": 520,
+          "column": 7,
+          "function": "newbox",
+          "bug_type": "Registry Entry Published Before Initialization",
+          "description": "Registry entry published before initialization",
+          "issue_hash": "c107df51dad1f4062f052251a9274b41",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/bc4bbcef651b/c91f3068/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_lua_src_40b76de2d77e_lauxlib.c/report-c107df.html",
+          "relpath": "lauxlib.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lauxlib.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 14.21,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 8.65,
+      "fixed": 9.1
+    },
+    "total_seconds": 32.06
+  },
+  "report_dir": "tmp/validation/bc4bbcef651b/c91f3068"
+}

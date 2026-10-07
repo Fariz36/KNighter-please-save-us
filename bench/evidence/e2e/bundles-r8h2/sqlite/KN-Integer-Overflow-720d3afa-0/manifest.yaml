@@ -1,0 +1,93 @@
+id: KN-Integer-Overflow-720d3afa-0
+bug_type: Integer-Overflow
+source:
+  project: sqlite
+  description: SQLite, an embedded SQL database engine written in C
+  commit: 720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  The bug pattern is an **integer overflow in a cache-size/count computation**: the number of overflow
+  pages is computed with 32-bit unsigned arithmetic using the expression `(payload_length - local_payload_length
+  + overflow_chunk_size - 1) / overflow_chunk_size`. Because the addition of `overflow_chunk_size - 1`
+  is performed in 32-bit unsigned arithmetic, it can wrap around before the division. The resulting too-small
+  count is then used as an allocation/reallocation size and as a bound for indexing the overflow-page
+  cache, leading to under-allocation and out-of-bounds access.
+
+
+  Roles in this patch:
+
+
+  - `payload_length`: `pCur->info.nPayload` (`u32`)
+
+  - `local_payload_length`: `pCur->info.nLocal` (`u16`)
+
+  - `overflow_chunk_size`: `ovflSize` (`u32`)
+
+  - `count_computation`: `(pCur->info.nPayload - pCur->info.nLocal + ovflSize - 1) / ovflSize`
+
+  - `overflow_page_cache`: `pCur->aOverflow`
+
+  - `reallocator`: `sqlite3Realloc`
+
+  - `allocated_size_query`: `sqlite3MallocSize`
+
+  - `zero_initializer`: `memset`
+
+  - `cache_index`: `iIdx`, `offset / ovflSize`
+
+  - `too_narrow_arithmetic_type`: `int` / `u32` in the original expression
+
+
+  The fix promotes the computation to `i64` before the subtraction/addition/division, preventing the 32-bit
+  wraparound.'
+roles:
+  payload_length:
+    names:
+    - nPayload
+    description: length of the payload being read/written in a btree cell
+  local_payload_length:
+    names:
+    - nLocal
+    description: amount of payload stored locally on the current btree page
+  overflow_chunk_size:
+    names:
+    - ovflSize
+    description: number of usable bytes per overflow page
+  overflow_page_cache:
+    names:
+    - aOverflow
+    description: cache of overflow page numbers
+  reallocator:
+    names:
+    - sqlite3Realloc
+    description: memory reallocation function
+  allocated_size_query:
+    names:
+    - sqlite3MallocSize
+    description: function returning the allocated size of a memory block
+  zero_initializer:
+    names:
+    - memset
+    description: memory zeroing function
+  cache_index:
+    names:
+    - iIdx
+    description: index into the overflow page cache
+  too_narrow_arithmetic_type:
+    names:
+    - int
+    - u32
+    description: integer type narrower than 64 bits that can overflow in size computations
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:59+0700

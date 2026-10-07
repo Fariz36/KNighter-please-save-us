@@ -1,0 +1,32 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "api_entry": {
+      "names": [
+        "xmlAddChild"
+      ],
+      "description": "entry API function that adds or links a node into a tree/list and may free a merged node"
+    },
+    "content_merger": {
+      "names": [
+        "xmlTextAddContent"
+      ],
+      "description": "function that merges content from one object into another, after which the source object may still be linked"
+    },
+    "deallocator": {
+      "names": [
+        "xmlFreeNode"
+      ],
+      "description": "function that frees a node object"
+    },
+    "unlinker": {
+      "names": [
+        "xmlUnlinkNodeInternal"
+      ],
+      "description": "function that removes a node from its parent/sibling/child links before freeing"
+    }
+  }
+}

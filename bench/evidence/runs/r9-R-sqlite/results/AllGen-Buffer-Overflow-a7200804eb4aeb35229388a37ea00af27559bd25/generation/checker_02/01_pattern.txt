@@ -1,0 +1,7 @@
+## Bug Pattern
+
+The required output-buffer size passed to a capacity-reserving `reallocator` is computed from variable field lengths plus a fixed overhead, but that fixed overhead is too small for all literal characters that the subsequent formatting code can write (sign, decimal point, exponent marker/sign/digits, and terminator). The `reallocator` therefore reserves too little space, and later `buffer_copy`/store operations write past the reserved destination.
+
+Roles:
+- `reallocator`: `sqlite3StrAccumEnlargeIfNeeded`
+- `buffer_copy`: `memcpy`, `memset` (and the direct stores into the accumulator buffer after the reservation)

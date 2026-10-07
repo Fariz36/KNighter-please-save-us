@@ -1,0 +1,62 @@
+{
+  "target": "sqlite",
+  "commit": "1f7010d4ec424169c68b4299dc0c43ef3d11ea93",
+  "candidates": 2098,
+  "identifiers": 48606,
+  "offered": {
+    "init": [
+      "sqlite3VtabCallCreate",
+      "sqlite3MallocInit",
+      "sqlite3RowSetInit",
+      "sqlite3ReportError",
+      "sqlite3OsOpenMalloc",
+      "sqlite3CantopenError",
+      "sqlite3SetMakeRecordP5",
+      "sqlite3StrAccumSetError",
+      "sqlite3VdbeMemSetRowSet",
+      "sqlite3ExprSetErrorOffset",
+      "sqlite3Fts5ConfigSetValue",
+      "sqlite3ValueNew",
+      "sqlite3_value_dup",
+      "sqlite3ValueSetStr",
+      "sqlite3ValueSetNull",
+      "sqlite3VdbeMemSetText",
+      "sqlite3ParseObjectInit",
+      "sqlite3SetTextEncoding",
+      "sqlite3VtabCallConnect",
+      "sqlite3VtabCallDestroy",
+      "sqlite3IsNumericAffinity",
+      "sqlite3Stat4ProbeSetValue",
+      "sqlite3ValueApplyAffinity",
+      "sqlite3AllocateIndexObject",
+      "sqlite3VdbeAddFunctionCall",
+      "MAX",
+      "isOpen",
+      "DbMaskSet",
+      "isMalloced",
+      "OpenCounter",
+      "sqlite3Init",
+      "SET_FULLSYNC",
+      "sqlite3Error",
+      "sqlite3_open",
+      "DbSetProperty",
+      "fts5BufferSet",
+      "sqlite3CteNew",
+      "sqlite3ErrStr",
+      "sqlite3Malloc",
+      "sqlite3OsInit"
+    ]
+  },
+  "mapping": {
+    "init": [
+      "sqlite3Fts5ConfigSetValue"
+    ]
+  },
+  "dropped_not_in_target": {
+    "init": []
+  },
+  "rationale": {
+    "init": "It is the FTS5 configuration setter that stores caller-supplied numeric values (e.g., pgsz) into the Fts5Config context, which can later be used as a divisor."
+  },
+  "llm_seconds": 187.3
+}

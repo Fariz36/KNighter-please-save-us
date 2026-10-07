@@ -1,0 +1,12 @@
+## Bug Pattern
+
+The caller deallocates a resource on an error path after passing that resource to a callee that already takes ownership and frees it when it fails. This creates a double free: the same resource is released once by the `ownership_taking_callee` on failure and again by the caller’s error cleanup.
+
+Roles:
+- `ownership_taking_callee` / `null_on_failure`: `xmlNewIOInputStream` — takes ownership of `input`; if it fails, it frees `input` and returns `NULL`.
+- `transferred_resource`: `input` (`xmlParserInputBufferPtr`) — owned by the caller before the call, then consumed by `xmlNewIOInputStream`.
+- `resource_deallocator`: `xmlFreeParserInputBuffer` — frees an `xmlParserInputBuffer`.
+- `failure_guard`: `if (pinput == NULL)` — detects failure of `xmlNewIOInputStream`.
+- `double_release_site`: `xmlFreeParserInputBuffer(input)` inside the failure guard — incorrectly frees `input` again after the callee already freed it.
+- `caller`: `xmlIOParseDTD`.
+- `context_deallocator`: `xmlFreeParserCtxt` — frees the parser context; not the resource involved in the double free.

@@ -1,0 +1,298 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 14:59:47.262 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+2026-10-07 14:59:47.666 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-b634c40d735a41f1)
+2026-10-07 14:59:47.990 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision bb348b35e84c
+2026-10-07 14:59:48.405 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 14:59:48.496 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:01:45.592 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 117.1s
+2026-10-07 15:01:45.593 | INFO     | role_porting:port_roles:226 - Ported KN-Double-Free-26dfab2f-1 roles to curl: {'resource': ['stream'], 'ownership_consumer_frees_on_failure': ['Curl_cf_create'], 'deallocator': ['Curl_cf_ngtcp2_h3_stream_ctx_free'], 'null_on_failure': ['Curl_cf_create'], 'duplicate_cleanup': ['Curl_cf_ngtcp2_h3_stream_ctx_free'], 'context_cleanup': []}
+2026-10-07 15:01:45.596 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 15:01:45.601 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision d87b4e460513
+2026-10-07 15:01:45.603 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision f2a1535712ff
+2026-10-07 15:01:46.054 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:01:46.056 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 15:01:46.061 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision b3675fe80a33
+2026-10-07 15:01:46.063 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision f7d4e11f4b42
+2026-10-07 15:01:46.988 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:01:46.989 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 15:01:46.993 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 061136f24b52
+2026-10-07 15:01:46.996 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision a0f08d6975d0
+2026-10-07 15:01:54.654 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:01:54.655 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 15:01:54.659 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 67ce67284258
+2026-10-07 15:01:54.672 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 6f1dfab6a292
+2026-10-07 15:02:04.582 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:02:04.583 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 15:02:04.588 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 6546ffeda4f1
+2026-10-07 15:02:04.591 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision bc440a89d47a
+2026-10-07 15:02:25.208 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:02:25.209 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 15:02:25.215 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision f042c25fb876
+2026-10-07 15:02:25.217 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision c53420e42742
+2026-10-07 15:02:32.626 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:02:32.626 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 15:02:32.631 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 1750c4b27fc1
+2026-10-07 15:02:32.634 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 466c06cf706b
+2026-10-07 15:02:32.636 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 15:02:36.048 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 15:02:39.436 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:02:39.437 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-07 15:02:39.441 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision f1b1919bd091
+2026-10-07 15:02:39.444 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision c4cb67692d44
+2026-10-07 15:02:39.647 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Double-Free-26dfab2f-1", "source": "libxml2", "target": "curl", "roles_mapped": 5, "roles_total": 6, "detected": [], "perfect": []}
+2026-10-07 15:02:40.126 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 15:02:40.157 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:05:20.105 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 159.9s
+2026-10-07 15:05:20.121 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c8eaf223-2 roles to curl: {'config_setter': ['Curl_vsetopt'], 'divisor_field': ['max_recv_speed', 'max_send_speed']}
+2026-10-07 15:05:20.124 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 15:05:20.597 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:05:20.598 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 15:05:21.460 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:05:21.461 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 15:05:29.383 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:05:29.384 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 15:05:40.663 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:05:40.664 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 15:06:03.851 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:06:03.853 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 15:06:12.808 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:06:12.809 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 15:06:12.820 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 15:06:16.899 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 15:06:21.010 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:06:21.011 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 41986670259a82a39009
+2026-10-07 15:06:21.172 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Misuse-c8eaf223-2", "source": "libxml2", "target": "curl", "roles_mapped": 2, "roles_total": 2, "detected": [], "perfect": []}
+2026-10-07 15:06:21.661 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 15:06:21.696 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:09:38.345 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 196.6s
+2026-10-07 15:09:38.349 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-79c6eef0-2 roles to curl: {'null_on_failure': ['curlx_malloc', 'curlx_calloc', 'curlx_realloc', 'curlx_strdup', 'curl_easy_init', 'curl_mime_init', 'curl_url_dup', 'Curl_hsts_init', 'Curl_MD5_init', 'Curl_HMAC_init', 'Curl_fileinfo_alloc', 'Curl_ftp_parselist_data_alloc', 'config_alloc', 'new_getout'], 'length_of': ['strlen', 'Curl_bufq_len', 'curlx_dyn_len', 'Curl_bufref_len', 'Curl_hash_count', 'Curl_llist_count', 'GetSizeParameter', 'Curl_dynhds_count', 'Curl_cshutdn_count', 'Curl_cwriter_count', 'Curl_bump_headersize', 'Curl_u8_strset_count', 'Curl_u32_ptrset_count', 'Curl_uint32_tbl_count', 'Curl_pgrsSetUploadSize', 'Curl_uint32_bset_count', 'Curl_uint32_tbl_resize', 'Curl_cshutdn_dest_count', 'Curl_uint32_bset_resize', 'Curl_pgrsSetDownloadSize', 'Curl_uint32_spbset_count', 'Curl_creader_total_length', 'Curl_pgrsSetUploadCounter', 'Curl_creader_client_length', 'Curl_ssl_push_certinfo_len', 'Curl_pgrsResetTransferSizes', 'Curl_creader_def_total_length', 'file2string', 'jsonWriteString', '__crt0_glob_function']}
+2026-10-07 15:09:38.353 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 15:09:38.830 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:09:38.831 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 15:09:39.726 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:09:39.727 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 15:09:48.100 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:09:48.101 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 15:09:59.282 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:09:59.283 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 15:10:25.689 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:10:25.690 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 15:10:33.045 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:10:33.045 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 15:10:33.054 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 15:10:36.323 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 15:10:39.632 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:10:39.634 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-07 15:10:39.789 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Null-Pointer-Dereference-79c6eef0-2", "source": "libxml2", "target": "curl", "roles_mapped": 2, "roles_total": 2, "detected": [], "perfect": []}
+2026-10-07 15:10:40.203 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 15:10:40.275 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:15:28.534 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 288.3s
+2026-10-07 15:15:28.536 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-962bd10d-1 roles to curl: {'nullable_inout_capacity_ptr': ['capacity'], 'capacity_computer': [], 'reallocator': ['curlx_realloc', 'curl_dbg_realloc', 'Curl_nghttp2_realloc', 'Curl_crealloc', 'Curl_uint32_tbl_resize', 'Curl_uint32_bset_resize', 'file2memory', 'file2memory_range'], 'deref_read': [], 'deref_write': [], 'null_guard': [], 'null_on_failure': []}
+2026-10-07 15:15:28.540 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0ea56d631117a2932a79
+2026-10-07 15:15:29.005 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:15:29.006 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0ea56d631117a2932a79
+2026-10-07 15:15:29.867 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:15:29.868 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0ea56d631117a2932a79
+2026-10-07 15:15:37.303 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:15:37.304 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0ea56d631117a2932a79
+2026-10-07 15:15:47.242 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:15:47.243 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0ea56d631117a2932a79
+2026-10-07 15:16:06.036 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:16:06.037 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0ea56d631117a2932a79
+2026-10-07 15:16:12.616 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:16:12.617 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0ea56d631117a2932a79
+2026-10-07 15:16:12.625 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 15:16:15.695 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 15:16:18.886 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:16:18.887 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0ea56d631117a2932a79
+2026-10-07 15:16:19.021 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Null-Pointer-Dereference-962bd10d-1", "source": "libxml2", "target": "curl", "roles_mapped": 2, "roles_total": 7, "detected": [], "perfect": []}
+2026-10-07 15:16:19.424 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 15:16:19.445 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:18:35.516 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 136.1s
+2026-10-07 15:18:35.518 | INFO     | role_porting:port_roles:226 - Ported KN-Out-of-Bound-a7511af0-2 roles to curl: {'lookahead': [], 'length_of': []}
+2026-10-07 15:18:35.520 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 652552e49f59818ead40
+2026-10-07 15:18:35.998 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:18:36.000 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 652552e49f59818ead40
+2026-10-07 15:18:36.824 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:18:36.825 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 652552e49f59818ead40
+2026-10-07 15:18:43.607 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:18:43.608 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 652552e49f59818ead40
+2026-10-07 15:18:56.139 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:18:56.140 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 652552e49f59818ead40
+2026-10-07 15:19:13.762 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:19:13.763 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 652552e49f59818ead40
+2026-10-07 15:19:24.522 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:19:24.523 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 652552e49f59818ead40
+2026-10-07 15:19:24.532 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 15:19:27.509 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 15:19:30.436 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:19:30.437 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 652552e49f59818ead40
+2026-10-07 15:19:30.598 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Out-of-Bound-a7511af0-2", "source": "libxml2", "target": "curl", "roles_mapped": 0, "roles_total": 2, "detected": [], "perfect": []}
+2026-10-07 15:19:31.007 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 15:19:31.034 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:26:02.142 | ERROR    | model:invoke_llm:347 - Error attempt 1 [port_roles]: empty response content
+2026-10-07 15:27:55.269 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 111.1s
+2026-10-07 15:27:55.275 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-10eb89d1-0 roles to curl: {'decoder_function': [], 'input_byte': [], 'continuation_count': ['count']}
+2026-10-07 15:27:55.286 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c3fb1186ab482254d940
+2026-10-07 15:27:56.602 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:27:56.604 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c3fb1186ab482254d940
+2026-10-07 15:27:58.726 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:27:58.728 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c3fb1186ab482254d940
+2026-10-07 15:28:13.807 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:28:13.809 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c3fb1186ab482254d940
+2026-10-07 15:28:33.165 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:28:33.167 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c3fb1186ab482254d940
+2026-10-07 15:29:08.823 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:29:08.824 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c3fb1186ab482254d940
+2026-10-07 15:29:22.382 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:29:22.385 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c3fb1186ab482254d940
+2026-10-07 15:29:22.405 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 15:29:28.251 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 15:29:34.240 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:29:34.242 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c3fb1186ab482254d940
+2026-10-07 15:29:34.574 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Integer-Overflow-10eb89d1-0", "source": "lua", "target": "curl", "roles_mapped": 1, "roles_total": 3, "detected": [], "perfect": []}
+2026-10-07 15:29:35.505 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 15:29:35.656 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:35:42.277 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 366.6s
+2026-10-07 15:35:42.282 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-bc4bbcef-0 roles to curl: {'combined_create_and_publish': ['Curl_ssl_setup_x509_store', 'Curl_wssl_setup_x509_store', 'Curl_schannel_get_cached_cert_store'], 'object_initializer': ['Curl_MD5_init', 'Curl_HMAC_init', 'Curl_ssl_init', 'Curl_ssh_init', 'Curl_hsts_init', 'Curl_altsvc_init', 'Curl_cookie_init'], 'persistent_registry_lookup': ['Curl_meta_get', 'Curl_conn_meta_get', 'Curl_altsvc_lookup', 'curl_ws_meta', 'Curl_cipher_suite_lookup_id', 'Curl_schannel_get_cached_cert_store'], 'object_allocator': ['Curl_fileinfo_alloc', 'Curl_ftp_parselist_data_alloc', 'config_alloc', 'ALLOC_SIZE', 'ALLOC_SIZE2'], 'registry_store': ['Curl_meta_set', 'Curl_conn_meta_set', 'Curl_schannel_set_cached_cert_store', 'Curl_ssl_setup_x509_store', 'Curl_wssl_setup_x509_store'], 'registry_key': ['Curl_ssl_peer_key_make']}
+2026-10-07 15:35:42.291 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dfd89b32eea9382685cf
+2026-10-07 15:35:43.264 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:35:43.266 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dfd89b32eea9382685cf
+2026-10-07 15:35:45.149 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:35:45.150 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dfd89b32eea9382685cf
+2026-10-07 15:35:59.156 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:35:59.157 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dfd89b32eea9382685cf
+2026-10-07 15:36:17.985 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:36:17.987 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dfd89b32eea9382685cf
+2026-10-07 15:36:54.848 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:36:54.850 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dfd89b32eea9382685cf
+2026-10-07 15:37:08.534 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:37:08.540 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dfd89b32eea9382685cf
+2026-10-07 15:37:08.558 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 15:37:14.300 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 15:37:20.450 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:37:20.452 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dfd89b32eea9382685cf
+2026-10-07 15:37:20.740 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Misuse-bc4bbcef-0", "source": "lua", "target": "curl", "roles_mapped": 6, "roles_total": 6, "detected": [], "perfect": []}
+2026-10-07 15:37:21.593 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 15:37:21.743 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:40:42.085 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 200.3s
+2026-10-07 15:40:42.088 | INFO     | role_porting:port_roles:226 - Ported KN-Use-After-Free-22974326-2 roles to curl: {'gc_managed_object': [], 'potential_gc_trigger': [], 'gc_root_anchor': [], 'weak_reference_container': ['Curl_conn_keep_alive', 'Curl_conn_is_alive'], 'use_after_free_use': ['Curl_conn_free', 'connclose']}
+2026-10-07 15:40:42.093 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dd8eb6cb2e4f2061a2ae
+2026-10-07 15:40:43.295 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:40:43.297 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dd8eb6cb2e4f2061a2ae
+2026-10-07 15:40:45.640 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:40:45.642 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dd8eb6cb2e4f2061a2ae
+2026-10-07 15:41:02.258 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:41:02.260 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dd8eb6cb2e4f2061a2ae
+2026-10-07 15:41:23.017 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:41:23.018 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dd8eb6cb2e4f2061a2ae
+2026-10-07 15:42:02.204 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:42:02.206 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dd8eb6cb2e4f2061a2ae
+2026-10-07 15:42:17.084 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:42:17.085 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dd8eb6cb2e4f2061a2ae
+2026-10-07 15:42:17.104 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 15:42:23.690 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 15:42:30.332 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:42:30.334 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dd8eb6cb2e4f2061a2ae
+2026-10-07 15:42:30.633 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Use-After-Free-22974326-2", "source": "lua", "target": "curl", "roles_mapped": 2, "roles_total": 5, "detected": [], "perfect": []}
+2026-10-07 15:42:31.493 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 15:42:31.620 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:45:12.862 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 161.2s
+2026-10-07 15:45:12.866 | INFO     | role_porting:port_roles:226 - Ported KN-Buffer-Overflow-a7200804-1 roles to curl: {'buffer_grow': [], 'required_capacity': ['len'], 'write_pointer': ['bufp'], 'digit_set': ['digits'], 'output_buffer': ['buffer']}
+2026-10-07 15:45:12.873 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-07 15:45:14.040 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:45:14.042 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-07 15:45:16.059 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:45:16.061 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-07 15:45:32.963 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:45:32.966 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-07 15:45:53.182 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:45:53.185 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-07 15:46:37.302 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:46:37.304 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-07 15:46:53.006 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:46:53.008 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-07 15:46:53.028 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 15:46:59.704 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 15:47:06.725 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:47:06.727 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-07 15:47:07.042 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Buffer-Overflow-a7200804-1", "source": "sqlite", "target": "curl", "roles_mapped": 4, "roles_total": 5, "detected": [], "perfect": []}
+2026-10-07 15:47:08.011 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 15:47:08.252 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:50:06.734 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 178.5s
+2026-10-07 15:50:06.741 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-720d3afa-0 roles to curl: {'payload_length': ['Curl_creader_total_length', 'Curl_creader_client_length', 'Curl_creader_def_total_length'], 'local_payload_length': ['Curl_bufq_len', 'curlx_dyn_len', 'Curl_bufref_len'], 'overflow_chunk_size': ['Curl_httpchunk_init', 'Curl_httpchunk_read', 'Curl_httpchunk_reset', 'Curl_httpchunk_is_done', 'Curl_httpchunk_add_reader'], 'overflow_page_cache': ['Curl_dnscache_init', 'Curl_dnscache_add', 'Curl_dnscache_get', 'Curl_dnscache_clear', 'Curl_dnscache_destroy', 'Curl_dnscache_prune', 'Curl_dnscache_add_negative'], 'reallocator': ['curlx_realloc', 'curl_dbg_realloc'], 'allocated_size_query': [], 'zero_initializer': ['memset', 'curlx_memzero', 'curlx_strzero'], 'cache_index': ['Curl_conn_sockindex', 'CONN_SOCK_IDX_VALID', 'Curl_cshutdn_try_once_idx'], 'too_narrow_arithmetic_type': ['uint32_t', 'int']}
+2026-10-07 15:50:06.747 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-07 15:50:08.361 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:50:08.363 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-07 15:50:11.165 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:50:11.167 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-07 15:50:34.301 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:50:34.304 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-07 15:51:03.397 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:51:03.399 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-07 15:51:59.183 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:51:59.196 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-07 15:52:19.752 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:52:19.755 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-07 15:52:19.779 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 15:52:28.702 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 15:52:38.347 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:52:38.353 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-07 15:52:38.760 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Integer-Overflow-720d3afa-0", "source": "sqlite", "target": "curl", "roles_mapped": 8, "roles_total": 9, "detected": [], "perfect": []}
+2026-10-07 15:52:40.103 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 15:52:40.375 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:56:20.607 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 220.2s
+2026-10-07 15:56:20.610 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-d87f8c49-0 roles to curl: {'length_of': [], 'character_count_bound': ['precision'], 'iterator_advance': [], 'output_length': ['length'], 'narrowing_cast': [], 'safe_cap': ['CURLMIN'], 'buffer_append': ['curlx_dyn_addn']}
+2026-10-07 15:56:20.616 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit f4969ccaf6279f81c085
+2026-10-07 15:56:22.152 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:56:22.154 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit f4969ccaf6279f81c085
+2026-10-07 15:56:24.905 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:56:24.907 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit f4969ccaf6279f81c085
+2026-10-07 15:56:47.383 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:56:47.385 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit f4969ccaf6279f81c085
+2026-10-07 15:57:16.192 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:57:16.196 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit f4969ccaf6279f81c085
+2026-10-07 15:58:12.676 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:58:12.678 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit f4969ccaf6279f81c085
+2026-10-07 15:58:32.428 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:58:32.430 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit f4969ccaf6279f81c085
+2026-10-07 15:58:32.448 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 15:58:41.266 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 15:58:50.347 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:58:50.349 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit f4969ccaf6279f81c085
+2026-10-07 15:58:50.769 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Integer-Overflow-d87f8c49-0", "source": "sqlite", "target": "curl", "roles_mapped": 4, "roles_total": 7, "detected": [], "perfect": []}
+2026-10-07 15:58:51.962 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 15:58:52.158 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 16:05:39.730 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 407.6s
+2026-10-07 16:05:39.734 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-1bc183a9-1 roles to curl: {'tokenizer': ['curlx_str_word'], 'dequote_helper': ['auth_digest_get_key_value'], 'illegal_token_sentinel': ['CURLE_BAD_FUNCTION_ARGUMENT'], 'dequoter_with_precondition': ['curlx_str_quotedword'], 'caller_ignoring_sentinel': ['Curl_auth_decode_digest_http_message']}
+2026-10-07 16:05:39.741 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 298659bc240eb4098320
+2026-10-07 16:05:41.268 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f2a1535712ff: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:05:41.272 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 298659bc240eb4098320
+2026-10-07 16:05:43.891 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation f7d4e11f4b42: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:05:43.894 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 298659bc240eb4098320
+2026-10-07 16:06:05.729 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a0f08d6975d0: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:06:05.732 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 298659bc240eb4098320
+2026-10-07 16:06:32.504 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6f1dfab6a292: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:06:32.506 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 298659bc240eb4098320
+2026-10-07 16:07:24.043 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation bc440a89d47a: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:07:24.046 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 298659bc240eb4098320
+2026-10-07 16:07:43.774 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c53420e42742: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:07:43.776 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 298659bc240eb4098320
+2026-10-07 16:07:43.797 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 1750c4b27fc1
+2026-10-07 16:07:52.076 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1560.c at 466c06cf706b
+2026-10-07 16:08:00.281 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 466c06cf706b: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:08:00.283 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 298659bc240eb4098320
+2026-10-07 16:08:00.583 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c4cb67692d44: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Misuse-1bc183a9-1", "source": "sqlite", "target": "curl", "roles_mapped": 5, "roles_total": 5, "detected": [], "perfect": []}

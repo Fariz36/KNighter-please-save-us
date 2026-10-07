@@ -1,0 +1,225 @@
+{
+  "commit_id": "466c06cf706bd92ff77beb402934f7265183f8ff",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/06effd79eb538174565a/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/urlapi.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 14,
+        "fixed_total": 0,
+        "buggy_on_target": 14,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "curl_url_dup"
+        ],
+        "fixed_functions": [
+          "curl_url_dup"
+        ]
+      },
+      {
+        "path": "tests/libtest/lib1560.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "test_api_errors"
+        ],
+        "fixed_functions": [
+          "test_api_errors"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/urlapi.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1442,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "195a3c1bc6d36661bc8d8689e6ce9072",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-195a3c.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1451,
+          "column": 25,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "361673259b4f9ec85e2654f7efa57953",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-361673.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1438,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "3e3b7e60f7313c1c022a0768a8e6d80c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-3e3b7e.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1447,
+          "column": 18,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "41b700a13797e1a6d9ba2638f876301a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-41b700.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1450,
+          "column": 24,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "5187bf863cea59bc921598117dc88977",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-5187bf.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1441,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "74cdaa677d28a7223030513c7eb08adc",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-74cdaa.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1439,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "78d081a365e017ded1055d957c232112",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-78d081.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1444,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "8111267eeca95d12ad5a553a01bf5247",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-811126.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1449,
+          "column": 27,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "827b762bad31cc341cbd8d341929fe88",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-827b76.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1440,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "a9cae390329b52263cce14eac5bc2448",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-a9cae3.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1446,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "b77539d4fd7032de3f6ce900a5bb80dd",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-b77539.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1445,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "b7d98575d2eb03922b222a463e8eb0a1",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-b7d985.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1448,
+          "column": 23,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "d07999912581094f32faa12213e528df",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-d07999.html",
+          "relpath": "lib/urlapi.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/1750c4b27fc1/lib/urlapi.c",
+          "line": 1443,
+          "column": 5,
+          "function": "curl_url_dup",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "e7aff2f65c603f43cca00932565a741e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/466c06cf706b/44d76d9b/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_1750c4b27fc1_lib_urlapi.c/report-e7aff2.html",
+          "relpath": "lib/urlapi.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/urlapi.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 11.48,
+    "setup_seconds": 0.05,
+    "analysis_seconds": {
+      "buggy": 10.58,
+      "fixed": 8.71
+    },
+    "total_seconds": 31.13
+  },
+  "report_dir": "tmp/validation/466c06cf706b/44d76d9b"
+}

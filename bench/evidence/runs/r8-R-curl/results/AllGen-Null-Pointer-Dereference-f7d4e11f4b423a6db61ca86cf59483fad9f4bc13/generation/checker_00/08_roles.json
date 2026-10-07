@@ -1,0 +1,57 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "data_pointer": {
+      "names": [
+        "data"
+      ],
+      "description": "pointer field holding the data buffer of a descriptor"
+    },
+    "length_of": {
+      "names": [
+        "len"
+      ],
+      "description": "length field paired with data_pointer"
+    },
+    "allocator": {
+      "names": [
+        "curlx_malloc"
+      ],
+      "description": "memory allocation function"
+    },
+    "deallocator": {
+      "names": [
+        "curlx_safefree"
+      ],
+      "description": "memory deallocation function"
+    },
+    "buffer_copy": {
+      "names": [
+        "memcpy"
+      ],
+      "description": "function that copies between buffers"
+    },
+    "copy_flag": {
+      "names": [
+        "CURL_BLOB_COPY"
+      ],
+      "description": "flag indicating the data should be copied rather than referenced"
+    },
+    "error_setter": {
+      "names": [
+        "CURLE_BAD_FUNCTION_ARGUMENT",
+        "CURLE_OUT_OF_MEMORY"
+      ],
+      "description": "return value/macro used to signal an argument error or out-of-memory"
+    },
+    "retained_pointer": {
+      "names": [
+        "blobp"
+      ],
+      "description": "output parameter through which the descriptor is retained/returned"
+    }
+  }
+}

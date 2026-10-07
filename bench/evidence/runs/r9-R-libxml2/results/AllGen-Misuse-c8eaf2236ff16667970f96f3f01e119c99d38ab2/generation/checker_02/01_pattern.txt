@@ -1,0 +1,6 @@
+## Bug Pattern
+
+The bug pattern is using a value supplied through an `init`/setter API as the divisor in a division without validating that it is nonzero. The setter stores the caller-provided value into a context object, and a later calculation divides by that stored value. If the setter is called with zero, the division triggers SIGFPE. The fix rejects zero in the setter and adds a defensive nonzero guard at the division site.
+
+Roles:
+- `init`: `xmlCtxtSetMaxAmplification` — stores/initializes a caller-supplied numeric configuration value in the parser context.

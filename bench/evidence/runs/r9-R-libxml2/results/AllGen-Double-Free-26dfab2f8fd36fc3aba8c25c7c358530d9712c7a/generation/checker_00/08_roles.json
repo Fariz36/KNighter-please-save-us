@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "xmlNewIOInputStream"
+      ],
+      "description": "constructs a parser input from a buffer; may return NULL on failure"
+    },
+    "null_on_failure": {
+      "names": [
+        "xmlNewIOInputStream"
+      ],
+      "description": "function that may return NULL on failure"
+    },
+    "deallocator": {
+      "names": [
+        "xmlFreeParserInputBuffer"
+      ],
+      "description": "frees a parser input buffer; the buffer must not be used afterwards"
+    }
+  }
+}

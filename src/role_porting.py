@@ -48,6 +48,13 @@ _FUNC_DECL = re.compile(
     r"^[ \t]*(?:[A-Za-z_][\w \t\*&:<>,]*?[\s\*&])([A-Za-z_]\w*)[ \t]*\(([^;{]*?)\)[ \t]*(?:;|$)",
     re.MULTILINE,
 )
+# Lua style: LUA_API int (lua_gettop) (lua_State *L);
+_PAREN_DECL = re.compile(
+    r"^[ \t]*(?:[A-Za-z_][\w \t\*&:<>,]*?[\s\*&])\(([A-Za-z_]\w*)\)[ \t]*\(([^;{]*?)\)[ \t]*;",
+    re.MULTILINE,
+)
+# Return type on the previous line (libxml2: XMLPUBFUN xmlParserInputPtr\n\t\txmlNewIOInputStream(...);).
+_BARE_DECL = re.compile(r"^[ \t]*([A-Za-z_]\w*)[ \t]*\(([^;{]*?)\)[ \t]*;", re.MULTILINE)
 _MACRO = re.compile(r"^[ \t]*#[ \t]*define[ \t]+([A-Za-z_]\w*)\(([^)]*)\)", re.MULTILINE)
 _KEYWORDS = {"if", "for", "while", "switch", "return", "sizeof", "defined", "else", "do"}
 
@@ -74,7 +81,8 @@ def extract_candidates(root: Path) -> Dict[str, str]:
             text = header.read_text(errors="replace")
         except OSError:
             continue
-        for regex, kind in ((_FUNC_DECL, "function"), (_MACRO, "macro")):
+        for regex, kind in ((_FUNC_DECL, "function"), (_PAREN_DECL, "function"),
+                            (_BARE_DECL, "function"), (_MACRO, "macro")):
             for match in regex.finditer(text):
                 name = match.group(1)
                 if name in _KEYWORDS or name in stdlib or name in candidates:
@@ -82,6 +90,30 @@ def extract_candidates(root: Path) -> Dict[str, str]:
                 signature = " ".join(match.group(0).split())[:160]
                 candidates[name] = f"{kind} in {rel}: {signature}"
     return candidates
+
+
+SOURCE_EXTENSIONS = (".c", ".cc", ".cpp", ".cxx", ".h", ".hh", ".hpp", ".hxx", ".in", ".inc", ".def")
+_TOKEN = re.compile(r"[A-Za-z_]\w*")
+
+
+def identifier_index(root: Path) -> set:
+    """Every identifier spelled anywhere in the target's C/C++ sources.
+
+    Used to validate names the LLM proposes outside the ranked list (static
+    functions, names the header scan cannot parse): a name is accepted only if
+    the target really contains it.
+    """
+    index = set()
+    for path in root.rglob("*"):
+        rel = path.relative_to(root)
+        if (not path.is_file() or path.suffix not in SOURCE_EXTENSIONS
+                or rel.parts[0].startswith(".")):
+            continue
+        try:
+            index.update(_TOKEN.findall(path.read_text(errors="replace")))
+        except OSError:
+            continue
+    return index
 
 
 def _expand(words):
@@ -137,7 +169,9 @@ def port_roles(bundle_dir, commit=None, top_k: int = 40, out_name=None):
 
     checkout = global_config.target.prepare(commit or global_config.scan_commit)
     candidates = extract_candidates(checkout.src)
-    logger.info(f"{target}: {len(candidates)} candidate API names from headers")
+    known = identifier_index(checkout.src)
+    stdlib = standard_names()
+    logger.info(f"{target}: {len(candidates)} candidate API names from headers, {len(known)} identifiers in sources")
 
     sections, offered = [], {}
     for role, value in roles.items():
@@ -169,8 +203,10 @@ def port_roles(bundle_dir, commit=None, top_k: int = 40, out_name=None):
     for role in roles:
         entry = answer.get(role) or {}
         names = entry.get("names", []) if isinstance(entry, dict) else entry
-        valid = [n for n in names if n in offered[role] or n in candidates]
-        mapping[role] = valid
+        valid = [n for n in names if isinstance(n, str) and (n in candidates or n in known)]
+        # Standard C/C++ names (memset, free, ...) mean the same everywhere: carried over as is.
+        carried = [n for n in roles[role].get("names", []) if n in stdlib and n not in valid]
+        mapping[role] = carried + valid
         dropped[role] = [n for n in names if n not in valid]
         rationale[role] = entry.get("rationale", "") if isinstance(entry, dict) else ""
 
@@ -179,6 +215,7 @@ def port_roles(bundle_dir, commit=None, top_k: int = 40, out_name=None):
         "target": target,
         "commit": checkout.revision,
         "candidates": len(candidates),
+        "identifiers": len(known),
         "offered": offered,
         "mapping": mapping,
         "dropped_not_in_target": dropped,

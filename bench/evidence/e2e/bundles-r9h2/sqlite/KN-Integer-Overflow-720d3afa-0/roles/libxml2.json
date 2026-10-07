@@ -1,0 +1,26 @@
+{
+  "allocated_size": [
+    "xmlMemSize"
+  ],
+  "reallocator": [
+    "xmlRealloc",
+    "xmlMemRealloc",
+    "xmlReallocLoc",
+    "xmlGrowArray",
+    "xmlBufGrow",
+    "xmlBufferResize",
+    "xmlBufferGrow",
+    "xmlParserInputGrow",
+    "xmlParserInputBufferGrow",
+    "TIM_SORT_RESIZE"
+  ],
+  "null_on_failure": [
+    "xmlRealloc",
+    "xmlMemRealloc",
+    "xmlReallocLoc",
+    "xmlGrowArray"
+  ],
+  "initializer": [
+    "memset"
+  ]
+}

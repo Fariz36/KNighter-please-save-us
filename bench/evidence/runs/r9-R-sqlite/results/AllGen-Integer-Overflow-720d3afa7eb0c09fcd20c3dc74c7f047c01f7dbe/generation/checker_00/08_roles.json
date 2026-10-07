@@ -1,0 +1,32 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocated_size": {
+      "names": [
+        "sqlite3MallocSize"
+      ],
+      "description": "returns the current allocated size of a memory region; used to decide whether a resize is needed"
+    },
+    "reallocator": {
+      "names": [
+        "sqlite3Realloc"
+      ],
+      "description": "resizes a memory region; its size argument must be large enough for the element count"
+    },
+    "null_on_failure": {
+      "names": [
+        "sqlite3Realloc"
+      ],
+      "description": "may return NULL on failure; its result is checked before use"
+    },
+    "initializer": {
+      "names": [
+        "memset"
+      ],
+      "description": "initializes a memory region to zero; the size must match the allocated size"
+    }
+  }
+}

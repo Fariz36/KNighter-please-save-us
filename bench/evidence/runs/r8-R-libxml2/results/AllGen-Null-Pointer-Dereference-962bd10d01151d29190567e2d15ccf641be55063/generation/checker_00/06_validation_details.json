@@ -1,0 +1,79 @@
+{
+  "commit_id": "962bd10d01151d29190567e2d15ccf641be55063",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/plugin-cache/plugins/8cc42e00edb22b32c621/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlmemory.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "xmlGrowArray"
+        ],
+        "fixed_functions": [
+          "xmlGrowArray"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlmemory.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/d28f35a26ed6-f6d22c8ac6c7/../../src/d28f35a26ed6/xmlmemory.c",
+          "line": 378,
+          "column": 15,
+          "function": "xmlGrowArray",
+          "bug_type": "Dereference of NULL pointer parameter before null check",
+          "description": "Dereference of NULL pointer parameter before null check",
+          "issue_hash": "a4d6a672ec8d28c3263b9276a2a1890c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/962bd10d0115/4054689a/buggy/.._.._src_d28f35a26ed6_xmlmemory.c/report-a4d6a6.html",
+          "relpath": "xmlmemory.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlmemory.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/962bd10d0115-f6d22c8ac6c7/../../src/962bd10d0115/xmlmemory.c",
+          "line": 381,
+          "column": 15,
+          "function": "xmlGrowArray",
+          "bug_type": "Dereference of NULL pointer parameter before null check",
+          "description": "Dereference of NULL pointer parameter before null check",
+          "issue_hash": "a4d6a672ec8d28c3263b9276a2a1890c",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/962bd10d0115/4054689a/fixed/.._.._src_962bd10d0115_xmlmemory.c/report-a4d6a6.html",
+          "relpath": "xmlmemory.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 0.12,
+      "fixed": 0.11
+    },
+    "total_seconds": 0.28
+  },
+  "report_dir": "tmp/validation/962bd10d0115/4054689a"
+}

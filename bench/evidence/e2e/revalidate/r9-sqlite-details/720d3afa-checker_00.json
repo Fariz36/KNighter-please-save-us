@@ -1,0 +1,67 @@
+{
+  "commit_id": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/89b217028d40acc7e1fe/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/btree.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "accessPayload"
+        ],
+        "fixed_functions": [
+          "accessPayload"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/btree.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/4cc2dbd54dba/src/btree.c",
+          "line": 5200,
+          "column": 35,
+          "function": "accessPayload",
+          "bug_type": "Integer Overflow in Cache Size Computation",
+          "description": "Potential integer overflow in cache element count; widen count to 64-bit before multiplying by element size",
+          "issue_hash": "30ee1a778e3e7c330a978066ca8ee776",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/720d3afa7eb0/252a00c5/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_4cc2dbd54dba_src_btree.c/report-30ee1a.html",
+          "relpath": "src/btree.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/btree.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 11.2,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 90.08,
+      "fixed": 87.48
+    },
+    "total_seconds": 189.35
+  },
+  "report_dir": "tmp/validation/720d3afa7eb0/252a00c5"
+}

@@ -1,0 +1,13 @@
+## Bug Pattern
+
+A derived encoded size is calculated from an `input_length` using signed arithmetic (multiplication, division, addition) without first checking that the input is within the range where the result type cannot overflow. For a sufficiently large input, the calculation overflows the signed size type, producing an incorrect, negative, or wrapped size value instead of a valid encoded length. The fix introduces an `overflow_guard` based on the maximum signed value and rejects inputs larger than the safe range before performing the arithmetic.
+
+Roles in this patch:
+
+- `input_length`: `part->datasize`
+- `encoded_size_calculator`: `encoder_base64_size`
+- `signed_size_type`: `curl_off_t`
+- `max_signed_value`: `CURL_OFF_T_MAX`
+- `line_length_constant`: `MAX_ENCODED_LINE_LENGTH`
+- `overflow_guard`: missing check, added as `BASE64_MAX_INPUT_SIZE` and `if(size > BASE64_MAX_INPUT_SIZE) return -1;`
+- `error_return`: `-1`

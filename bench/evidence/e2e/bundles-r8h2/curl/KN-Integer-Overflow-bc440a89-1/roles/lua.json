@@ -1,0 +1,28 @@
+{
+  "encoded_size_calculator": [
+    "sizeudata",
+    "sizeCclosure",
+    "sizeLclosure",
+    "sizenode",
+    "luaS_sizelngstr",
+    "luaF_protosize",
+    "luaE_threadsize",
+    "luaH_size",
+    "luaZ_sizebuffer",
+    "stacksize",
+    "sizestrshr"
+  ],
+  "input_length": [
+    "lua_len",
+    "luaL_len"
+  ],
+  "max_input_size": [
+    "luaM_testsize",
+    "luaM_checksize",
+    "MAX_SIZET"
+  ],
+  "error_sentinel": [
+    "luaM_error",
+    "luaM_toobig"
+  ]
+}

@@ -1,0 +1,29 @@
+id: KN-Misuse-c8eaf223-2
+bug_type: Misuse
+source:
+  project: libxml2
+  description: libxml2, the XML parsing and manipulation library written in C
+  commit: c8eaf2236ff16667970f96f3f01e119c99d38ab2
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: "## Bug Pattern\n\nThe bug pattern is using a value supplied through an `init`/setter API as\
+  \ the divisor in a division without validating that it is nonzero. The setter stores the caller-provided\
+  \ value into a context object, and a later calculation divides by that stored value. If the setter is\
+  \ called with zero, the division triggers SIGFPE. The fix rejects zero in the setter and adds a defensive\
+  \ nonzero guard at the division site.\n\nRoles:\n- `init`: `xmlCtxtSetMaxAmplification` \u2014 stores/initializes\
+  \ a caller-supplied numeric configuration value in the parser context."
+roles:
+  init:
+    names:
+    - xmlCtxtSetMaxAmplification
+    description: setter that stores a caller-supplied numeric configuration value into a context object
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:40+0700

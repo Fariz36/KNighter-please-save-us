@@ -1,0 +1,8 @@
+{
+  "config_setter": [
+    "xmlCtxtSetMaxAmplification"
+  ],
+  "divisor_field": [
+    "maxAmpl"
+  ]
+}

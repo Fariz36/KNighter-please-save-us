@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "capacity_calculator": {
+      "names": [
+        "xmlGrowCapacity"
+      ],
+      "description": "computes a new capacity/size from a current capacity value, element size, and bounds"
+    },
+    "reallocator": {
+      "names": [
+        "xmlRealloc"
+      ],
+      "description": "resizes an allocation and may return NULL on failure"
+    }
+  }
+}

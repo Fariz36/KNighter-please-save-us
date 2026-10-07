@@ -1,0 +1,36 @@
+result_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-sqlite/results
+LLVM_dir: /home/faris/RA-MrYudis/Knight/KNighter/llvm
+key_file: llm_keys.yaml
+model: opencode-go:deepseek-v4.1-flash
+checker_nums: 3
+max_tokens: 65536
+llm_timeout: 600
+project:
+  description: SQLite, an embedded SQL database engine written in C
+target_type: compiledb
+target_options:
+  name: sqlite
+  repo_dir: /home/faris/RA-MrYudis/Knight/targets/sqlite
+  work_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-sqlite/work
+  setup:
+  - '{src}/configure --disable-tcl CC={clang}'
+  - intercept-build --cdb {build}/compile_commands.json make USE_AMALGAMATION=0 -j{jobs}
+    libsqlite3.a
+  source_extensions:
+  - .c
+  scan_include:
+  - src/
+  - ext/
+  reuse_revisions: true
+plugin_build: standalone
+validation_scoring: strict
+analysis_jobs: 8
+analysis_timeout: 600
+max_parallel_plugin_builds: 4
+scan_commit: HEAD
+min_reports_for_triage: 1
+perfect_report_threshold: 3
+jobs: 8
+gen_workers: 4
+role_based_checkers: true
+plugin_cache_dir: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-sqlite/plugin-cache

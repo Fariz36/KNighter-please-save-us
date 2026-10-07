@@ -1,0 +1,55 @@
+{
+  "commit_id": "32531f20f9f8f76e351ae317ad47b97bef82acc0",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/2ec40654c387ec060cee/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/doh.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "Curl_doh"
+        ],
+        "fixed_functions": [
+          "Curl_doh"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/doh.c": []
+    },
+    "fixed": {
+      "lib/doh.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 58.59,
+    "analysis_seconds": {
+      "buggy": 5.54,
+      "fixed": 5.35
+    },
+    "total_seconds": 69.55
+  },
+  "report_dir": "tmp/validation/32531f20f9f8/56522c8e"
+}

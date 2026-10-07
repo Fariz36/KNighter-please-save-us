@@ -1,0 +1,13 @@
+## Bug Pattern
+
+The result of a `null_on_failure` allocator/duplicator is dereferenced by a length-computing function before its `null_check` is performed. In this patch, `xmlStrdup` may return `NULL`, but its result is passed to `strlen` before `ret->string == NULL` is checked.
+
+Roles:
+- `allocator` / `duplicator`: `xmlStrdup`
+- `null_on_failure`: return value of `xmlStrdup`, stored in `ret->string`
+- `length_of`: `strlen`
+- `null_check`: `if (ret->string == NULL)`
+- `deallocator`: `xmlFree`
+- `object_field`: `ret->string`
+
+The bug is that `strlen((const char *) ret->string)` is executed before checking whether `ret->string` is `NULL`. If `xmlStrdup` fails, this causes a NULL pointer dereference. The fix reorders the null check before calling `strlen`.

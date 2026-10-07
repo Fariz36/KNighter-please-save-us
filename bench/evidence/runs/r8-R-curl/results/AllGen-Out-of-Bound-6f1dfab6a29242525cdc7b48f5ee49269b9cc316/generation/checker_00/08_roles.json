@@ -1,0 +1,14 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "substring_finder": {
+      "names": [
+        "strchr"
+      ],
+      "description": "function that searches a string for a delimiter and returns a pointer to it or NULL"
+    }
+  }
+}

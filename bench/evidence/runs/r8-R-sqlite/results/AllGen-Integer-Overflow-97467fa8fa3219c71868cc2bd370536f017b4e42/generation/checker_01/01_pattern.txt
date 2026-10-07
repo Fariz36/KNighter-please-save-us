@@ -1,0 +1,14 @@
+## Bug Pattern
+
+A `length_accumulator` is decoded from an untrusted input using fixed-width signed arithmetic, and its multiplication/addition operations (`place_value_multiplier`, `length_accumulator`) can overflow before the value is validated against `output_capacity`. Because the `bounds_check` is performed only after the overflowing arithmetic, a negative or wrapped count can pass the check and then be used as the size argument to a `buffer_writer`, leading to an out-of-bounds write.
+
+Roles:
+- untrusted_input: `aIn` / `a`
+- length_accumulator: `n`
+- place_value_multiplier: `mult`
+- output_offset: `j`
+- output_capacity: `nOut`
+- bounds_check: `if( j+n>nOut )`
+- buffer_writer: `memset(&aOut[j], 0, n)`
+- fixed_width_signed_arithmetic_type: `int`
+- widened_safe_type_in_fix: `sqlite3_int64`

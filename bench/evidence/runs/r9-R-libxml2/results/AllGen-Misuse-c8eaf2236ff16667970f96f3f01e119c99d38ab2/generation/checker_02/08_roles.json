@@ -1,0 +1,14 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "init": {
+      "names": [
+        "xmlCtxtSetMaxAmplification"
+      ],
+      "description": "setter that stores a caller-supplied numeric configuration value into a context object"
+    }
+  }
+}

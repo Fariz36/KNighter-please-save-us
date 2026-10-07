@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A `length_of` computation takes an `untrusted_size` and performs unchecked multiplications/additions to derive an encoded length. If the input is too large, the arithmetic overflows the signed integer type before the length is returned, producing a wrapped, possibly negative or too-small value. This bogus length can then be treated as a valid size by callers. The fix pre-checks the input against a maximum derived from the integer maximum and the line-length constant before doing the arithmetic.
+
+Roles:
+- `untrusted_size`: the input size value consumed by `encoder_base64_size` (`part->datasize`)
+- `length_of`: `encoder_base64_size`, which computes the encoded output length

@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The code derives a continuation-byte count from an untrusted lead byte, then uses that count as a bit-shift amount (`count * 5`) before validating that the count is within the allowed maximum. A lead byte such as `0xFF` can produce `count == 7`, making the shift amount `35`, which exceeds the 32-bit width of the result type and causes shift overflow / undefined behavior. The fix enforces the bound before the shift by rejecting lead bytes that imply six or more continuation bytes and by asserting the count invariant.
+
+Roles:
+- `parser_input`: `utf8_decode` consumes/decodes the input byte sequence, and `iscont` validates continuation bytes from that input.
+- `aborting_assert`: `lua_assert` is used in the fixed code to assert `count <= 5` before the shift.
+- `null_on_failure`: `utf8_decode` returns `NULL` on invalid input.

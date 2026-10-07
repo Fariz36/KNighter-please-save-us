@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A `divisor` value accepted by a `divisor_setter` is used in a division without a `nonzero_guard`. Here, `xmlCtxtSetMaxAmplification` stores `maxAmpl` into `ctxt->maxAmpl`, including `0`; later `xmlParserEntityCheck` uses `ctxt->maxAmpl` as the divisor in `*expandedSize / ctxt->maxAmpl` without checking it is non-zero. This permits integer division by zero / SIGFPE. The fix adds the missing non-zero guard both at the setter and before the division.
+
+Roles:
+- `divisor_setter`: `xmlCtxtSetMaxAmplification`
+- `divisor`: `ctxt->maxAmpl`
+- `division_use`: `*expandedSize / ctxt->maxAmpl`
+- `missing_nonzero_guard`: absent `maxAmpl == 0` check in setter and absent `ctxt->maxAmpl > 0` check at division site.

@@ -1,0 +1,421 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-1",
+    "source": "curl",
+    "target": "libxml2",
+    "mapping": {
+      "encoded_size_calculator": [
+        "xmlTextWriterWriteBase64"
+      ],
+      "input_length": [],
+      "max_input_size": [],
+      "error_sentinel": []
+    },
+    "unmapped_roles": [
+      "input_length",
+      "max_input_size",
+      "error_sentinel"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 440.9
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "libxml2",
+    "mapping": {
+      "cleanup": [
+        "xmlRegExecClearErrors",
+        "xmlModuleClose",
+        "xmlTextWriterClose"
+      ],
+      "destructor": [
+        "__xmlFree",
+        "xmlBufFree",
+        "xmlModuleFree",
+        "xmlParserNsFree",
+        "xmlRegFreeRegexp",
+        "xmlFreeTextWriter",
+        "xmlSchemaFreeType",
+        "xmlSchemaFreeWildcard",
+        "xmlXPathNodeSetFreeNs",
+        "PyFile_Release",
+        "libxml_PyFileRelease"
+      ],
+      "state_reset": [
+        "xmlBufResetInput",
+        "xmlRegExecClearErrors"
+      ],
+      "link_detach": [
+        "xmlBufDetach",
+        "xmlBufFromBuffer"
+      ],
+      "link_storage": []
+    },
+    "unmapped_roles": [
+      "link_storage"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 504.9
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "libxml2",
+    "mapping": {
+      "data_provider": [],
+      "length_provider": [],
+      "unbounded_string_consumer": [
+        "xmlTextWriterWriteString",
+        "xmlTextWriterWriteFormatString",
+        "xmlTextWriterWriteVFormatString",
+        "xmlStrASPrintf",
+        "xmlStrVASPrintf",
+        "xmlEscapeFormatString",
+        "xmlXPathStringFunction",
+        "xmlXPathSubstringFunction",
+        "xmlXPathStringLengthFunction",
+        "xmlXPathSubstringAfterFunction",
+        "xmlXPathSubstringBeforeFunction",
+        "xmlEscapeText",
+        "xmlNewInputFromString",
+        "xmlNewInputBufferString",
+        "xmlCtxtNewInputFromString",
+        "xmlTextWriterWriteComment",
+        "xmlTextWriterWriteElement"
+      ],
+      "bounded_nul_scanner": [],
+      "bounded_string_formatter": [
+        "xmlStrASPrintf",
+        "xmlStrVASPrintf",
+        "xmlTextWriterWriteFormatString",
+        "xmlTextWriterWriteVFormatString"
+      ]
+    },
+    "unmapped_roles": [
+      "data_provider",
+      "length_provider",
+      "bounded_nul_scanner"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 418.1
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-1",
+    "source": "curl",
+    "target": "libxml2",
+    "mapping": {
+      "duplicator": [
+        "xmlStaticCopyNode",
+        "xmlStaticCopyNodeList"
+      ],
+      "source_handle": [],
+      "destination_allocator": [
+        "__xmlMalloc"
+      ],
+      "field_copier": []
+    },
+    "unmapped_roles": [
+      "source_handle",
+      "field_copier"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 381.9
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "libxml2",
+    "mapping": {
+      "api_entry_point": [
+        "PyCapsule_GetPointer"
+      ],
+      "out_param": [
+        "xmlCharEncOutput",
+        "xmlNsListDumpOutput",
+        "xmlOutputBufferWriteQuotedString"
+      ],
+      "out_param_writer": [
+        "xmlTextWriterWriteBase64",
+        "xmlTextWriterWriteBinHex",
+        "xmlTextWriterWriteString",
+        "xmlTextWriterWriteComment",
+        "xmlTextWriterWriteElement",
+        "xmlTextWriterWriteAttribute",
+        "xmlTextWriterWriteDTDEntity",
+        "xmlTextWriterWriteElementNS",
+        "xmlTextWriterWriteDTDAttlist",
+        "xmlTextWriterWriteDTDElement",
+        "xmlTextWriterWriteAttributeNS",
+        "xmlTextWriterWriteFormatString",
+        "xmlTextWriterWriteVFormatString",
+        "xmlOutputBufferWriteQuotedString",
+        "xmlTextWriterClose",
+        "xmlTextWriterEndPI",
+        "xmlTextWriterFlush",
+        "xmlTextWriterEndDTD",
+        "xmlTextWriterEndCDATA",
+        "xmlTextWriterEndComment",
+        "xmlTextWriterEndElement",
+        "xmlTextWriterStartCDATA",
+        "xmlTextWriterEndDocument",
+        "xmlTextWriterEndAttribute",
+        "xmlTextWriterEndDTDEntity",
+        "xmlTextWriterStartComment",
+        "xmlTextWriterEndDTDAttlist",
+        "xmlTextWriterEndDTDElement",
+        "xmlTextWriterFullEndElement",
+        "xmlTextWriterStartElementNS",
+        "xmlTextWriterStartAttributeNS"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 374.9
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2",
+    "source": "curl",
+    "target": "libxml2",
+    "mapping": {
+      "length_field": [
+        "xmlNewInputBufferMemory"
+      ],
+      "data_pointer": [
+        "xmlNewInputBufferMemory",
+        "xmlNewInputBufferString"
+      ],
+      "buffer_copy": [
+        "xmlBufCreateMem",
+        "xmlNewInputBufferMemory"
+      ],
+      "error_return": [],
+      "copy_flag": [
+        "xmlNewInputBufferMemory",
+        "xmlNewInputBufferString"
+      ],
+      "allocator": [
+        "__xmlMalloc",
+        "__xmlMallocAtomic",
+        "__xmlRealloc",
+        "__xmlMemStrdup",
+        "xmlBufCreate",
+        "xmlBufCreateMem"
+      ],
+      "deallocator": [
+        "__xmlFree",
+        "xmlBufFree"
+      ],
+      "validation_guard": []
+    },
+    "unmapped_roles": [
+      "error_return",
+      "validation_guard"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 409.9
+  },
+  {
+    "bundle": "KN-Integer-Overflow-10eb89d1-0",
+    "source": "lua",
+    "target": "libxml2",
+    "mapping": {
+      "decoder_function": [],
+      "input_byte": [],
+      "continuation_count": []
+    },
+    "unmapped_roles": [
+      "decoder_function",
+      "input_byte",
+      "continuation_count"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Misuse-bc4bbcef-0",
+    "source": "lua",
+    "target": "libxml2",
+    "mapping": {
+      "combined_create_and_publish": [
+        "xmlInitGlobalsInternal"
+      ],
+      "object_initializer": [
+        "xmlInitRandom",
+        "xmlInitDictInternal",
+        "xmlInitMemoryInternal",
+        "xmlInitCatalogInternal",
+        "xmlInitXPathInternal",
+        "xmlInitRelaxNGInternal",
+        "xmlInitEncodingInternal",
+        "xmlInitSchemasTypesInternal"
+      ],
+      "persistent_registry_lookup": [],
+      "object_allocator": [],
+      "registry_store": [],
+      "registry_key": []
+    },
+    "unmapped_roles": [
+      "persistent_registry_lookup",
+      "object_allocator",
+      "registry_store",
+      "registry_key"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 459.5
+  },
+  {
+    "bundle": "KN-Use-After-Free-22974326-2",
+    "source": "lua",
+    "target": "libxml2",
+    "mapping": {
+      "gc_managed_object": [],
+      "potential_gc_trigger": [],
+      "gc_root_anchor": [],
+      "weak_reference_container": [],
+      "use_after_free_use": []
+    },
+    "unmapped_roles": [
+      "gc_managed_object",
+      "potential_gc_trigger",
+      "gc_root_anchor",
+      "weak_reference_container",
+      "use_after_free_use"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Buffer-Overflow-a7200804-1",
+    "source": "sqlite",
+    "target": "libxml2",
+    "mapping": {
+      "buffer_grow": [
+        "xmlBufGrow"
+      ],
+      "required_capacity": [],
+      "write_pointer": [
+        "xmlTextWriterWriteString",
+        "xmlTextWriterWriteFormatString",
+        "xmlTextWriterWriteVFormatString",
+        "xmlOutputBufferWriteQuotedString"
+      ],
+      "digit_set": [
+        "IS_DIGIT",
+        "IS_DIGIT_CH",
+        "xmlIsDigitQ",
+        "xmlIsDigit_ch",
+        "IS_ASCII_DIGIT"
+      ],
+      "output_buffer": [
+        "xmlBufCreate",
+        "xmlBufCreateMem",
+        "xmlBufFromBuffer",
+        "PyoutputBuffer_Get"
+      ]
+    },
+    "unmapped_roles": [
+      "required_capacity"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 247.7
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "libxml2",
+    "mapping": {
+      "payload_length": [
+        "xmlXPathStringLengthFunction"
+      ],
+      "local_payload_length": [
+        "xmlCurrentChar",
+        "xmlStringCurrentChar"
+      ],
+      "overflow_chunk_size": [],
+      "overflow_page_cache": [],
+      "reallocator": [
+        "__xmlRealloc"
+      ],
+      "allocated_size_query": [],
+      "zero_initializer": [],
+      "cache_index": [],
+      "too_narrow_arithmetic_type": []
+    },
+    "unmapped_roles": [
+      "overflow_chunk_size",
+      "overflow_page_cache",
+      "allocated_size_query",
+      "zero_initializer",
+      "cache_index",
+      "too_narrow_arithmetic_type"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 292.8
+  },
+  {
+    "bundle": "KN-Integer-Overflow-d87f8c49-0",
+    "source": "sqlite",
+    "target": "libxml2",
+    "mapping": {
+      "length_of": [],
+      "character_count_bound": [],
+      "iterator_advance": [
+        "xmlNextChar"
+      ],
+      "output_length": [],
+      "narrowing_cast": [],
+      "safe_cap": [],
+      "buffer_append": [
+        "xmlBufAdd"
+      ]
+    },
+    "unmapped_roles": [
+      "length_of",
+      "character_count_bound",
+      "output_length",
+      "narrowing_cast",
+      "safe_cap"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 327.1
+  },
+  {
+    "bundle": "KN-Misuse-1bc183a9-1",
+    "source": "sqlite",
+    "target": "libxml2",
+    "mapping": {
+      "tokenizer": [],
+      "dequote_helper": [],
+      "illegal_token_sentinel": [],
+      "dequoter_with_precondition": [],
+      "caller_ignoring_sentinel": []
+    },
+    "unmapped_roles": [
+      "tokenizer",
+      "dequote_helper",
+      "illegal_token_sentinel",
+      "dequoter_with_precondition",
+      "caller_ignoring_sentinel"
+    ],
+    "status": "no equivalent roles in target"
+  }
+]

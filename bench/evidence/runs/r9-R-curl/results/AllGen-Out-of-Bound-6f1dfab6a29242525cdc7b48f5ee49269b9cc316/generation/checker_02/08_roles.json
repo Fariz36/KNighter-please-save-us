@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "null_on_failure": {
+      "names": [
+        "strchr"
+      ],
+      "description": "returns NULL if the search fails; the returned pointer is valid only when non-NULL and points into the searched buffer"
+    },
+    "parser_input": {
+      "names": [
+        "curlx_dyn_ptr"
+      ],
+      "description": "returns a NUL-terminated pointer to a buffer being parsed"
+    },
+    "error_setter": {
+      "names": [
+        "failf"
+      ],
+      "description": "printf-style function that records an error message"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "allocated_size": [
+    "sqlite3MallocSize"
+  ],
+  "reallocator": [
+    "sqlite3Realloc"
+  ],
+  "null_on_failure": [
+    "sqlite3Realloc"
+  ],
+  "initializer": [
+    "memset"
+  ]
+}

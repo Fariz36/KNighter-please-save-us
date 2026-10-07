@@ -1,0 +1,75 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-01 22:45:21.548 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+2026-10-01 22:45:23.084 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-f530231401df4358)
+2026-10-01 22:45:23.152 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision bb348b35e84c
+2026-10-01 22:45:23.868 | INFO     | role_porting:port_roles:134 - curl: 1806 candidate API names from headers
+2026-10-01 22:45:24.073 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 22:49:50.084 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 266.0s
+2026-10-01 22:49:50.151 | INFO     | role_porting:port_roles:183 - Ported KN-Double-Free-26dfab2f-1 roles to curl: {'resource': [], 'ownership_consumer_frees_on_failure': ['Curl_cf_create'], 'deallocator': ['curlx_free', 'curl_dbg_free'], 'null_on_failure': ['Curl_cf_create'], 'duplicate_cleanup': ['curlx_safefree', 'curlx_free', 'curl_dbg_free'], 'context_cleanup': ['Curl_close']}
+2026-10-01 22:49:50.159 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit e97e5f883febe893cb6b
+2026-10-01 22:52:04.775 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/e97e5f883febe893cb6b/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 134.53, 'jobs': 32}
+{"bundle": "KN-Double-Free-26dfab2f-1", "source": "libxml2", "target": "curl", "status": "scanned", "reports": 0}
+2026-10-01 22:52:05.105 | INFO     | role_porting:port_roles:134 - curl: 1806 candidate API names from headers
+2026-10-01 22:52:05.177 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 22:54:07.741 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 122.6s
+2026-10-01 22:54:07.744 | INFO     | role_porting:port_roles:183 - Ported KN-Misuse-c8eaf223-2 roles to curl: {'config_setter': [], 'divisor_field': []}
+2026-10-01 22:54:07.942 | INFO     | role_porting:port_roles:134 - curl: 1806 candidate API names from headers
+2026-10-01 22:54:08.013 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 22:56:41.831 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 153.8s
+2026-10-01 22:56:41.834 | INFO     | role_porting:port_roles:183 - Ported KN-Null-Pointer-Dereference-79c6eef0-2 roles to curl: {'null_on_failure': ['config_alloc', 'Curl_fileinfo_alloc', 'Curl_ftp_parselist_data_alloc', 'new_getout', 'curl_url_dup', 'curlx_calloc', 'curlx_malloc', 'curlx_strdup', 'Curl_MD5_init', 'curlx_realloc', 'Curl_HMAC_init', 'Curl_hsts_init', 'curl_easy_init', 'curl_mime_init'], 'length_of': ['Curl_bufq_len', 'curlx_dyn_len', 'Curl_bufref_len', 'Curl_hash_count', 'Curl_llist_count', 'GetSizeParameter', 'Curl_dynhds_count', 'Curl_cshutdn_count', 'Curl_cwriter_count', 'Curl_bump_headersize', 'Curl_u8_strset_count', 'Curl_u32_ptrset_count', 'Curl_uint32_tbl_count', 'Curl_pgrsSetUploadSize', 'Curl_uint32_bset_count', 'Curl_uint32_tbl_resize', 'Curl_pgrsSetDownloadSize', 'Curl_cshutdn_dest_count', 'Curl_uint32_spbset_count', 'Curl_creader_total_length', 'Curl_pgrsSetUploadCounter', 'Curl_creader_client_length', 'Curl_ssl_push_certinfo_len', 'Curl_pgrsResetTransferSizes', 'Curl_creader_def_total_length', 'file2string', 'jsonWriteString', '__crt0_glob_function']}
+2026-10-01 22:56:41.836 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 575e06e9a0d6ee31add3
+2026-10-01 22:59:50.224 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/575e06e9a0d6ee31add3/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 188.38, 'jobs': 32}
+{"bundle": "KN-Null-Pointer-Dereference-79c6eef0-2", "source": "libxml2", "target": "curl", "status": "scanned", "reports": 0}
+2026-10-01 22:59:51.017 | INFO     | role_porting:port_roles:134 - curl: 1806 candidate API names from headers
+2026-10-01 22:59:51.629 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 23:02:40.641 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 169.0s
+2026-10-01 23:02:40.644 | INFO     | role_porting:port_roles:183 - Ported KN-Null-Pointer-Dereference-962bd10d-1 roles to curl: {'nullable_inout_capacity_ptr': [], 'capacity_computer': ['Curl_uint32_tbl_resize', 'Curl_uint32_bset_resize'], 'reallocator': ['curlx_realloc', 'curl_dbg_realloc', 'Curl_nghttp2_realloc'], 'deref_read': [], 'deref_write': [], 'null_guard': [], 'null_on_failure': []}
+2026-10-01 23:02:40.646 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0ea56d631117a2932a79
+2026-10-01 23:04:05.381 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/0ea56d631117a2932a79/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 84.72, 'jobs': 32}
+{"bundle": "KN-Null-Pointer-Dereference-962bd10d-1", "source": "libxml2", "target": "curl", "status": "scanned", "reports": 0}
+2026-10-01 23:04:05.613 | INFO     | role_porting:port_roles:134 - curl: 1806 candidate API names from headers
+2026-10-01 23:04:05.694 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 23:05:21.695 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 76.0s
+2026-10-01 23:05:21.714 | INFO     | role_porting:port_roles:183 - Ported KN-Out-of-Bound-a7511af0-2 roles to curl: {'lookahead': [], 'length_of': []}
+2026-10-01 23:05:23.702 | INFO     | role_porting:port_roles:134 - curl: 1806 candidate API names from headers
+2026-10-01 23:05:24.605 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 23:07:53.085 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 148.5s
+2026-10-01 23:07:53.097 | INFO     | role_porting:port_roles:183 - Ported KN-Integer-Overflow-10eb89d1-0 roles to curl: {'decoder_function': [], 'input_byte': [], 'continuation_count': []}
+2026-10-01 23:07:53.284 | INFO     | role_porting:port_roles:134 - curl: 1806 candidate API names from headers
+2026-10-01 23:07:53.429 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 23:13:41.578 | ERROR    | model:invoke_llm:347 - Error attempt 1 [port_roles]: empty response content
+2026-10-01 23:18:16.617 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 273.0s
+2026-10-01 23:18:16.660 | INFO     | role_porting:port_roles:183 - Ported KN-Misuse-bc4bbcef-0 roles to curl: {'combined_create_and_publish': [], 'object_initializer': ['Curl_ssl_init', 'Curl_ssh_init', 'Curl_trc_init', 'Curl_amiga_init', 'Curl_macos_init', 'Curl_vquic_init', 'curl_global_init', 'globalconf_init'], 'persistent_registry_lookup': ['Curl_meta_get', 'Curl_conn_meta_get', 'Curl_altsvc_lookup'], 'object_allocator': ['config_alloc', 'Curl_fileinfo_alloc', 'Curl_ftp_parselist_data_alloc'], 'registry_store': ['Curl_schannel_set_cached_cert_store', 'Curl_ssl_setup_x509_store', 'Curl_wssl_setup_x509_store'], 'registry_key': ['Curl_ssl_peer_key_make']}
+2026-10-01 23:18:16.662 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dfd89b32eea9382685cf
+2026-10-01 23:19:52.688 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/dfd89b32eea9382685cf/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 96.0, 'jobs': 32}
+{"bundle": "KN-Misuse-bc4bbcef-0", "source": "lua", "target": "curl", "status": "scanned", "reports": 0}
+2026-10-01 23:19:52.960 | INFO     | role_porting:port_roles:134 - curl: 1806 candidate API names from headers
+2026-10-01 23:19:53.113 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 23:20:57.426 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 64.3s
+2026-10-01 23:20:57.429 | INFO     | role_porting:port_roles:183 - Ported KN-Use-After-Free-22974326-2 roles to curl: {'gc_managed_object': [], 'potential_gc_trigger': [], 'gc_root_anchor': [], 'weak_reference_container': [], 'use_after_free_use': []}
+2026-10-01 23:20:57.611 | INFO     | role_porting:port_roles:134 - curl: 1806 candidate API names from headers
+2026-10-01 23:20:57.761 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 23:23:23.894 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 146.1s
+2026-10-01 23:23:23.920 | INFO     | role_porting:port_roles:183 - Ported KN-Buffer-Overflow-a7200804-1 roles to curl: {'buffer_grow': ['curlx_realloc', 'curl_dbg_realloc'], 'required_capacity': [], 'write_pointer': [], 'digit_set': [], 'output_buffer': []}
+2026-10-01 23:23:23.923 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 6dde839323642fec9c86
+2026-10-01 23:26:25.964 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/6dde839323642fec9c86/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 182.03, 'jobs': 32}
+{"bundle": "KN-Buffer-Overflow-a7200804-1", "source": "sqlite", "target": "curl", "status": "scanned", "reports": 0}
+2026-10-01 23:26:26.273 | INFO     | role_porting:port_roles:134 - curl: 1806 candidate API names from headers
+2026-10-01 23:26:26.604 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 23:28:01.788 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 95.2s
+2026-10-01 23:28:01.825 | INFO     | role_porting:port_roles:183 - Ported KN-Integer-Overflow-720d3afa-0 roles to curl: {'payload_length': ['Curl_creader_total_length', 'Curl_creader_client_length', 'Curl_creader_def_total_length'], 'local_payload_length': [], 'overflow_chunk_size': [], 'overflow_page_cache': [], 'reallocator': ['curlx_realloc', 'curl_dbg_realloc', 'Curl_nghttp2_realloc'], 'allocated_size_query': [], 'zero_initializer': ['curlx_memzero'], 'cache_index': [], 'too_narrow_arithmetic_type': []}
+2026-10-01 23:28:01.829 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d77e494db6ccfb6a1054
+2026-10-01 23:29:16.821 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/d77e494db6ccfb6a1054/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 74.97, 'jobs': 32}
+{"bundle": "KN-Integer-Overflow-720d3afa-0", "source": "sqlite", "target": "curl", "status": "scanned", "reports": 0}
+2026-10-01 23:29:17.024 | INFO     | role_porting:port_roles:134 - curl: 1806 candidate API names from headers
+2026-10-01 23:29:17.214 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 23:30:25.189 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 68.0s
+2026-10-01 23:30:25.218 | INFO     | role_porting:port_roles:183 - Ported KN-Integer-Overflow-d87f8c49-0 roles to curl: {'length_of': [], 'character_count_bound': [], 'iterator_advance': [], 'output_length': [], 'narrowing_cast': [], 'safe_cap': [], 'buffer_append': []}
+2026-10-01 23:30:25.398 | INFO     | role_porting:port_roles:134 - curl: 1806 candidate API names from headers
+2026-10-01 23:30:25.542 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-01 23:33:23.291 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 177.7s
+2026-10-01 23:33:23.466 | INFO     | role_porting:port_roles:183 - Ported KN-Misuse-1bc183a9-1 roles to curl: {'tokenizer': [], 'dequote_helper': [], 'illegal_token_sentinel': [], 'dequoter_with_precondition': ['curlx_str_quotedword'], 'caller_ignoring_sentinel': []}
+2026-10-01 23:33:23.522 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 298659bc240eb4098320
+2026-10-01 23:35:36.949 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'bb348b35e84c40c9564783d7585762b65038e8c5', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/298659bc240eb4098320/plugin.so', 'files': 194, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 133.4, 'jobs': 32}
+{"bundle": "KN-Misuse-1bc183a9-1", "source": "sqlite", "target": "curl", "status": "scanned", "reports": 0}

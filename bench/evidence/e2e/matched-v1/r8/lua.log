@@ -1,0 +1,106 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 18:55:25.438 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (lua), Repository Path: /home/faris/RA-MrYudis/Knight/targets/lua; plugin_build=standalone; validation_scoring=strict
+lua: 96 mined fix candidates
+2026-10-07 18:55:26.516 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-dbca1b5e57544e2e)
+2026-10-07 18:55:26.534 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision 0b29f408433e
+2026-10-07 18:55:26.612 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 18:55:26.651 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 18:57:59.433 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 152.8s
+2026-10-07 18:57:59.437 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-bc440a89-1 roles to lua: {'encoded_size_calculator': ['sizeudata', 'sizeCclosure', 'sizeLclosure', 'sizenode', 'luaS_sizelngstr', 'luaF_protosize', 'luaE_threadsize', 'luaH_size', 'luaZ_sizebuffer', 'stacksize', 'sizestrshr'], 'input_length': ['lua_len', 'luaL_len'], 'max_input_size': ['luaM_testsize', 'luaM_checksize', 'MAX_SIZET'], 'error_sentinel': ['luaM_error', 'luaM_toobig']}
+{"bundle": "KN-Integer-Overflow-bc440a89-1", "source": "curl", "target": "lua", "api_matched": 0, "pairs": []}
+2026-10-07 18:57:59.558 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 18:57:59.637 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:02:38.135 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 278.5s
+2026-10-07 19:02:38.138 | INFO     | role_porting:port_roles:226 - Ported KN-Memory-Leak-a0f08d69-0 roles to lua: {'cleanup': ['lua_closethread'], 'destructor': ['luaE_freethread', 'lua_close'], 'state_reset': ['memset', 'luaE_resetthread', 'lua_resetthread'], 'link_detach': ['luaF_unlinkupval'], 'link_storage': ['openupval']}
+{"bundle": "KN-Memory-Leak-a0f08d69-0", "source": "curl", "target": "lua", "api_matched": 0, "pairs": []}
+2026-10-07 19:02:38.254 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:02:38.307 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:06:18.170 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 219.9s
+2026-10-07 19:06:18.179 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c53420e4-0 roles to lua: {'data_provider': ['lua_newuserdata', 'lua_newuserdatauv', 'lua_touserdata', 'luaL_checkudata', 'luaL_testudata', 'getudatamem', 'luaZ_buffer'], 'length_provider': ['lua_rawlen', 'luaL_len', 'lua_len', 'luaZ_sizebuffer'], 'unbounded_string_consumer': ['strlen', 'lua_pushstring', 'luaL_addstring', 'luaL_loadstring', 'luaL_dostring', 'lua_pushfstring', 'luaO_pushfstring', 'lua_pushvfstring', 'luaO_pushvfstring', 'pushvfstring', 'lua_writestringerror', 'lua_stringtonumber', 'l_sprintf'], 'bounded_nul_scanner': ['memchr'], 'bounded_string_formatter': ['lua_pushfstring', 'luaO_pushfstring', 'lua_pushvfstring', 'luaO_pushvfstring', 'pushvfstring', 'lua_writestringerror', 'l_sprintf']}
+2026-10-07 19:06:18.294 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+2026-10-07 19:06:22.678 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+2026-10-07 19:06:31.259 | INFO     | targets.compiledb:_setup_revision:217 - [lua] configured revision 2d8d5c74b5ef in 8.4s
+2026-10-07 19:06:31.315 | INFO     | targets.compiledb:_setup_revision:217 - [lua] configured revision 664bda02ba4b in 8.3s
+2026-10-07 19:06:53.245 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 664bda02ba4b: TP=0 TN=0 (strict); strict=0/0 legacy=0/2
+2026-10-07 19:06:53.339 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for lvm.c, including whole file (57.6KB)
+2026-10-07 19:06:53.342 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+2026-10-07 19:06:57.537 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+2026-10-07 19:07:01.466 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d46a1e4e7184e9f31800
+{"bundle": "KN-Misuse-c53420e4-0", "source": "curl", "target": "lua", "api_matched": 5, "pairs": [["ba9cd0d2", null, null], ["664bda02", 0, 0], ["f623b969", null, null], ["cf23a93d", null, null], ["7f5c31cd", null, null]]}
+2026-10-07 19:07:01.919 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:07:01.959 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:10:57.093 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 235.1s
+2026-10-07 19:10:57.096 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-466c06cf-1 roles to lua: {'duplicator': ['lua_newthread'], 'source_handle': ['L'], 'destination_allocator': ['luaM_newobject', 'luaM_malloc_'], 'field_copier': []}
+2026-10-07 19:10:57.181 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit fccaec1fd498bccaea26
+2026-10-07 19:11:08.219 | INFO     | targets.compiledb:_setup_revision:217 - [lua] configured revision 193bf7919ea9 in 10.8s
+2026-10-07 19:11:08.269 | INFO     | targets.compiledb:_setup_revision:217 - [lua] configured revision 93fd6892f85e in 10.6s
+2026-10-07 19:11:27.860 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 93fd6892f85e: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:11:28.190 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for lauxlib.c, including whole file (30.1KB)
+2026-10-07 19:11:28.569 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for ltests.c, including whole file (47.9KB)
+2026-10-07 19:11:28.578 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit fccaec1fd498bccaea26
+{"bundle": "KN-Null-Pointer-Dereference-466c06cf-1", "source": "curl", "target": "lua", "api_matched": 2, "pairs": [["93fd6892", 0, 0], ["364e5699", null, null]]}
+2026-10-07 19:11:37.761 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:11:37.792 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:14:46.756 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 189.0s
+2026-10-07 19:14:46.762 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-f2a15357-1 roles to lua: {'api_entry_point': ['lua_tonumberx', 'lua_tointegerx', 'lua_tolstring', 'lua_getallocf', 'lua_resume', 'lua_getstack', 'lua_getinfo', 'luaL_checklstring', 'luaL_optlstring', 'luaL_tolstring'], 'out_param': ['isnum', 'len', 'ud', 'nresults', 'ar', 'l'], 'out_param_writer': ['lua_tolstring', 'auxgetinfo']}
+2026-10-07 19:14:46.829 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for lauxlib.c, including whole file (30.1KB)
+2026-10-07 19:14:46.910 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for ltests.c, including whole file (47.9KB)
+2026-10-07 19:14:46.918 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 8d23648640252e7df01f
+{"bundle": "KN-Null-Pointer-Dereference-f2a15357-1", "source": "curl", "target": "lua", "api_matched": 1, "pairs": [["364e5699", null, null]]}
+2026-10-07 19:14:47.057 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:14:47.149 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:16:33.345 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 106.2s
+2026-10-07 19:16:33.350 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-f7d4e11f-2 roles to lua: {'length_field': ['luaZ_sizebuffer', 'luaL_bufflen'], 'data_pointer': ['data', 'luaZ_buffer', 'luaL_buffaddr'], 'buffer_copy': ['memcpy'], 'error_return': ['luaL_error', 'luaL_argerror', 'luaL_typeerror', 'luaM_error', 'luaG_runerror', 'lua_error'], 'copy_flag': [], 'allocator': ['luaM_malloc_', 'luaM_realloc_', 'luaL_alloc', 'luaM_new', 'luaM_newvector'], 'deallocator': ['luaM_free_', 'luaM_free', 'luaM_realloc_', 'luaL_alloc', 'luaH_free', 'luaF_freeproto'], 'validation_guard': ['luaL_argcheck', 'luaL_checklstring', 'luaL_checkstring', 'luaL_checktype', 'luaL_checkany', 'luaL_checkudata', 'api_check', 'luaM_checksize']}
+{"bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2", "source": "curl", "target": "lua", "api_matched": 0, "pairs": []}
+2026-10-07 19:16:33.469 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:16:33.550 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:19:38.954 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 185.4s
+2026-10-07 19:19:38.957 | INFO     | role_porting:port_roles:226 - Ported KN-Double-Free-26dfab2f-1 roles to lua: {'resource': [], 'ownership_consumer_frees_on_failure': ['luaM_realloc_', 'debug_realloc', 'luaL_alloc'], 'deallocator': ['luaM_free', 'luaM_free_', 'luaM_freemem', 'luaM_freearray', 'luaH_free', 'luaF_freeproto', 'luaE_freethread', 'luaZ_freebuffer', 'luaC_freeallobjects', 'lua_close', 'luaL_unref', 'luaF_closeupval', 'luaS_clearcache', 'luaM_realloc_', 'debug_realloc', 'luaL_alloc'], 'null_on_failure': ['luaM_realloc_', 'debug_realloc', 'luaL_alloc'], 'duplicate_cleanup': ['luaM_free', 'luaM_free_', 'luaM_freemem', 'luaM_freearray', 'luaH_free', 'luaF_freeproto', 'luaE_freethread', 'luaZ_freebuffer', 'luaC_freeallobjects', 'lua_close', 'luaL_unref', 'luaF_closeupval', 'luaS_clearcache', 'luaM_realloc_', 'debug_realloc', 'luaL_alloc'], 'context_cleanup': ['lua_close', 'luaE_freethread', 'lua_closethread']}
+{"bundle": "KN-Double-Free-26dfab2f-1", "source": "libxml2", "target": "lua", "api_matched": 0, "pairs": []}
+2026-10-07 19:19:39.054 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:19:39.083 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:20:54.142 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 75.1s
+2026-10-07 19:20:54.144 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c8eaf223-2 roles to lua: {'config_setter': [], 'divisor_field': []}
+{"bundle": "KN-Misuse-c8eaf223-2", "source": "libxml2", "target": "lua", "api_matched": 0, "pairs": []}
+2026-10-07 19:20:54.257 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:20:54.280 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:22:57.467 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 123.2s
+2026-10-07 19:22:57.471 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-79c6eef0-2 roles to lua: {'null_on_failure': ['luaL_alloc', 'luaM_malloc_', 'luaM_realloc_', 'luaM_new', 'luaH_new', 'luaS_new', 'allocsizenode', 'debug_realloc'], 'length_of': ['strlen', 'sizenode', 'luaH_size', 'stacksize', 'luaF_protosize', 'luaE_threadsize', 'luaZ_sizebuffer']}
+2026-10-07 19:22:57.640 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 73a94fb22118ff6989b8
+{"bundle": "KN-Null-Pointer-Dereference-79c6eef0-2", "source": "libxml2", "target": "lua", "api_matched": 1, "pairs": [["513559cc", null, null]]}
+2026-10-07 19:23:01.425 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:23:01.481 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:24:59.307 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 117.8s
+2026-10-07 19:24:59.310 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-962bd10d-1 roles to lua: {'nullable_inout_capacity_ptr': ['capacity', 'psize'], 'capacity_computer': ['luaM_growaux_', 'luaD_growstack'], 'reallocator': ['luaM_realloc_', 'luaM_saferealloc_', 'luaL_alloc', 'debug_realloc', 'luaM_reallocvchar', 'luaM_reallocvector'], 'deref_read': [], 'deref_write': [], 'null_guard': [], 'null_on_failure': ['luaM_saferealloc_', 'luaL_alloc', 'debug_realloc', 'luaD_reallocstack']}
+{"bundle": "KN-Null-Pointer-Dereference-962bd10d-1", "source": "libxml2", "target": "lua", "api_matched": 0, "pairs": []}
+2026-10-07 19:24:59.408 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:24:59.425 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:27:24.410 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 145.0s
+2026-10-07 19:27:24.418 | INFO     | role_porting:port_roles:226 - Ported KN-Out-of-Bound-a7511af0-2 roles to lua: {'lookahead': ['luaX_lookahead'], 'length_of': ['luaZ_sizebuffer']}
+{"bundle": "KN-Out-of-Bound-a7511af0-2", "source": "libxml2", "target": "lua", "api_matched": 0, "pairs": []}
+2026-10-07 19:27:24.527 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:27:24.579 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:31:08.548 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 224.0s
+2026-10-07 19:31:08.551 | INFO     | role_porting:port_roles:226 - Ported KN-Buffer-Overflow-a7200804-1 roles to lua: {'buffer_grow': ['luaL_prepbuffsize'], 'required_capacity': ['len'], 'write_pointer': ['buff'], 'digit_set': [], 'output_buffer': ['b']}
+2026-10-07 19:31:08.635 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for lstrlib.c, including whole file (56.3KB)
+2026-10-07 19:31:08.641 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d3e3b9db86eb8962792c
+2026-10-07 19:31:14.255 | INFO     | targets.compiledb:_setup_revision:217 - [lua] configured revision 303f41555937 in 5.5s
+2026-10-07 19:31:14.302 | INFO     | targets.compiledb:_setup_revision:217 - [lua] configured revision e3716ee161bb in 5.4s
+2026-10-07 19:31:35.776 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation e3716ee161bb: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Buffer-Overflow-a7200804-1", "source": "sqlite", "target": "lua", "api_matched": 1, "pairs": [["e3716ee1", 0, 0]]}
+2026-10-07 19:31:35.862 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:31:35.937 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:34:10.702 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 154.8s
+2026-10-07 19:34:10.704 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-720d3afa-0 roles to lua: {'payload_length': [], 'local_payload_length': [], 'overflow_chunk_size': [], 'overflow_page_cache': [], 'reallocator': ['luaM_realloc_', 'luaM_saferealloc_', 'luaL_alloc', 'debug_realloc', 'luaM_growaux_', 'luaM_growvector', 'luaM_reallocvchar', 'luaM_reallocvector', 'luaZ_resizebuffer'], 'allocated_size_query': [], 'zero_initializer': ['memset'], 'cache_index': [], 'too_narrow_arithmetic_type': ['int', 'unsigned', 'l_uint32']}
+{"bundle": "KN-Integer-Overflow-720d3afa-0", "source": "sqlite", "target": "lua", "api_matched": 0, "pairs": []}
+2026-10-07 19:34:10.821 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:34:10.883 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:36:54.859 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 164.0s
+2026-10-07 19:36:54.861 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-d87f8c49-0 roles to lua: {'length_of': [], 'character_count_bound': ['precision'], 'iterator_advance': ['utf8_decode'], 'output_length': ['length'], 'narrowing_cast': ['cast_int'], 'safe_cap': [], 'buffer_append': ['luaL_addlstring']}
+{"bundle": "KN-Integer-Overflow-d87f8c49-0", "source": "sqlite", "target": "lua", "api_matched": 0, "pairs": []}
+2026-10-07 19:36:54.971 | INFO     | role_porting:port_roles:174 - lua: 845 candidate API names from headers, 7300 identifiers in sources
+2026-10-07 19:36:55.025 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:37:47.954 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 52.9s
+2026-10-07 19:37:47.956 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-1bc183a9-1 roles to lua: {'tokenizer': [], 'dequote_helper': [], 'illegal_token_sentinel': [], 'dequoter_with_precondition': [], 'caller_ignoring_sentinel': []}
+{"bundle": "KN-Misuse-1bc183a9-1", "source": "sqlite", "target": "lua", "api_matched": 0, "pairs": []}

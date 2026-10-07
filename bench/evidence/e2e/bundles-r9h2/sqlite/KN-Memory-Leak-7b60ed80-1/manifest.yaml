@@ -1,0 +1,60 @@
+id: KN-Memory-Leak-7b60ed80-1
+bug_type: Memory-Leak
+source:
+  project: sqlite
+  description: SQLite, an embedded SQL database engine written in C
+  commit: 7b60ed803b8da478bbdbae0147121abfc0b9dc2a
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A value produced by an `allocator`/`duplicator` (`null_on_failure`) is conditionally handed to its owner
+  via a `container_insert` only when another pointer is non-NULL. If that guard pointer is NULL (for example
+  after an earlier allocation failure), the value is never inserted and the path never calls the corresponding
+  `deallocator`, so the allocation leaks.
+
+
+  Roles:
+
+  - `duplicator`: `sqlite3SrcListDup` (returns a new copy, may return NULL)
+
+  - `allocator`: `triggerStepAllocate` (allocates the containing object, may fail)
+
+  - `null_on_failure`: `sqlite3SrcListDup`, `triggerStepAllocate`
+
+  - `container_insert`: `sqlite3SrcListAppendList` (appends/takes ownership of the duplicated list)
+
+  - `deallocator`: `sqlite3SrcListDelete` (frees the duplicated list)'
+roles:
+  allocator:
+    names:
+    - triggerStepAllocate
+    description: allocates and returns a new object; may return NULL on failure
+  duplicator:
+    names:
+    - sqlite3SrcListDup
+    description: creates and returns a new copy of an object; may return NULL on failure
+  null_on_failure:
+    names:
+    - triggerStepAllocate
+    - sqlite3SrcListDup
+    description: function that may return NULL on failure
+  container_insert:
+    names:
+    - sqlite3SrcListAppendList
+    description: inserts/takes ownership of a value into a container
+  deallocator:
+    names:
+    - sqlite3SrcListDelete
+    description: frees memory or an object; the pointer must not be used afterwards
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:46+0700

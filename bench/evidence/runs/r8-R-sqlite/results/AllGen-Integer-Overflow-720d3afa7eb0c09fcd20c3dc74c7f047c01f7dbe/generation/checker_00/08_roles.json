@@ -1,0 +1,63 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "payload_length": {
+      "names": [
+        "nPayload"
+      ],
+      "description": "length of the payload being read/written in a btree cell"
+    },
+    "local_payload_length": {
+      "names": [
+        "nLocal"
+      ],
+      "description": "amount of payload stored locally on the current btree page"
+    },
+    "overflow_chunk_size": {
+      "names": [
+        "ovflSize"
+      ],
+      "description": "number of usable bytes per overflow page"
+    },
+    "overflow_page_cache": {
+      "names": [
+        "aOverflow"
+      ],
+      "description": "cache of overflow page numbers"
+    },
+    "reallocator": {
+      "names": [
+        "sqlite3Realloc"
+      ],
+      "description": "memory reallocation function"
+    },
+    "allocated_size_query": {
+      "names": [
+        "sqlite3MallocSize"
+      ],
+      "description": "function returning the allocated size of a memory block"
+    },
+    "zero_initializer": {
+      "names": [
+        "memset"
+      ],
+      "description": "memory zeroing function"
+    },
+    "cache_index": {
+      "names": [
+        "iIdx"
+      ],
+      "description": "index into the overflow page cache"
+    },
+    "too_narrow_arithmetic_type": {
+      "names": [
+        "int",
+        "u32"
+      ],
+      "description": "integer type narrower than 64 bits that can overflow in size computations"
+    }
+  }
+}

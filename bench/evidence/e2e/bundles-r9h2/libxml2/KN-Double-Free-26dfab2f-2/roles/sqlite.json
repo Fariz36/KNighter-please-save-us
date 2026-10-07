@@ -1,0 +1,11 @@
+{
+  "parser_input": [
+    "sqlite3_str_finish"
+  ],
+  "null_on_failure": [
+    "sqlite3_str_finish"
+  ],
+  "deallocator": [
+    "sqlite3_str_free"
+  ]
+}

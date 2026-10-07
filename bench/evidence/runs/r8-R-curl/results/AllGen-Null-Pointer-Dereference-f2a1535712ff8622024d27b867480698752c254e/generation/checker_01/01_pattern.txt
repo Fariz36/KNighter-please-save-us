@@ -1,0 +1,11 @@
+## Bug Pattern
+
+An API entry point accepts a pointer argument that serves as an `out_param` (here, the location to store bytes sent/received), then either forwards that pointer to a downstream writer or writes through it directly, without first performing a `null_check`. If the caller passes `NULL`, the downstream writer or direct store dereferences it, causing a NULL pointer dereference. The fix adds a `null_check` for the `out_param` before use and returns an `argument_error_code`.
+
+Roles in this patch:
+- `api_entry_point`: `curl_easy_recv`, `curl_easy_send`
+- `out_param`: `n`
+- `out_param_writer`: `Curl_easy_recv` (via forwarded `n`), and `*n = written` in `curl_easy_send`
+- `null_check`: `if(!n) { ... }`
+- `argument_error_code` / `error_setter`: `CURLE_BAD_FUNCTION_ARGUMENT`
+- `cleanup_label`: `out` (used to still run `CURL_EAPI_LEAVE`)

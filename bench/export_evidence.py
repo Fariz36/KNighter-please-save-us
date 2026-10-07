@@ -12,6 +12,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "bench" / "evidence"
 
+SECTION3_DIRS = {"selfport-r8", "selfport-r8-v1", "cross", "cross-v1", "cross-v3", "cross-known-r8",
+                 "matched-v1", "revalidate", "compiled-out", "lua-len-recheck"}
 RUN_FILES = ["summary.json", "time.txt", "config.yaml", "commits.txt", "code_root.txt",
              "results/llm_calls.jsonl", "results/generation_results_*.txt",
              "results/generation_summary_*.json"]
@@ -43,7 +45,7 @@ def main():
     if OUT.exists():
         shutil.rmtree(OUT)
     runs = sorted(p for p in (ROOT / "bench" / "runs").iterdir()
-                  if p.is_dir() and (p / "summary.json").exists() and p.name.startswith(("r5-", "r7-", "smoke-02")))
+                  if p.is_dir() and (p / "summary.json").exists() and p.name.startswith(("r5-", "r7-", "r8-", "r9-", "smoke-02")))
     for run in runs:
         export_run(run, OUT / "runs" / run.name)
     for replay in sorted((ROOT / "bench" / "replay").glob("*")):
@@ -60,9 +62,15 @@ def main():
             if not f.is_file():
                 continue
             rel = f.relative_to(e2e)
+            # Section 3 experiments keep their result JSON (small; HTML reports and worktrees are not kept).
+            section3 = rel.parts[0] in SECTION3_DIRS and f.suffix in (".json", ".jsonl") \
+                and not f.name.endswith("-candidates.json")
+            # Exported bundles: manifest, roles/ports JSON and checker source, not plugin.so.
+            section3 = section3 or (rel.parts[0] in ("bundles-r8h2", "bundles-r9h2")
+                                    and (f.suffix == ".json" or f.name in ("checker.cpp", "patch.md")))
             keep = (f.suffix in (".log", ".yaml", ".csv", ".txt", ".patch")
                     or f.name in ("parity.json", "scan_summary.json", "summary.json", "ranking.txt")
-                    or f.name.endswith(("-summary.json", "_metadata.yaml")))
+                    or f.name.endswith(("-summary.json", "_metadata.yaml")) or section3)
             if keep and "prompt_history" not in rel.parts and f.stat().st_size < 2_000_000:
                 copy(f, OUT / "e2e" / rel)
     size = sum(f.stat().st_size for f in OUT.rglob("*") if f.is_file())

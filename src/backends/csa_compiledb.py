@@ -91,7 +91,10 @@ class CompileDBMixin:
             )
             analysis_seconds[side] = round(time.time() - t0, 2)
             by_source = {entry["file"]: path for path, entry in entries.items()}
-            reports, analyzed, errors = {}, set(), {}
+            # A patched file outside the build (e.g. an extension not compiled into the
+            # library) is a setup problem, not a checker failure.
+            reports, analyzed = {}, set()
+            errors = {path: "no compile entry" for path in files if path not in entries}
             for result in results:
                 path = by_source[result.source]
                 if result.crashed:

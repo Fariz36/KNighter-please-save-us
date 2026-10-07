@@ -1,0 +1,44 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "combined_create_and_publish": {
+      "names": [
+        "luaL_newmetatable"
+      ],
+      "description": "creates a persistent object and immediately publishes it into a registry, before the caller can initialize it"
+    },
+    "object_initializer": {
+      "names": [
+        "luaL_setfuncs"
+      ],
+      "description": "fallible initializer for a newly created object; it may raise/abort"
+    },
+    "persistent_registry_lookup": {
+      "names": [
+        "luaL_getmetatable"
+      ],
+      "description": "safe lookup of an existing object in a persistent registry"
+    },
+    "object_allocator": {
+      "names": [
+        "luaL_newlibtable"
+      ],
+      "description": "allocates a new object locally without publishing it"
+    },
+    "registry_store": {
+      "names": [
+        "lua_setfield"
+      ],
+      "description": "publishes an object into a registry after initialization"
+    },
+    "registry_key": {
+      "names": [
+        "_UBOX*"
+      ],
+      "description": "key under which the object is stored in the registry"
+    }
+  }
+}

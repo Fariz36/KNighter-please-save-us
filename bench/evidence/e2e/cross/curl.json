@@ -1,0 +1,343 @@
+[
+  {
+    "bundle": "KN-Double-Free-26dfab2f-1",
+    "source": "libxml2",
+    "target": "curl",
+    "mapping": {
+      "resource": [],
+      "ownership_consumer_frees_on_failure": [
+        "Curl_cf_create"
+      ],
+      "deallocator": [
+        "curlx_free",
+        "curl_dbg_free"
+      ],
+      "null_on_failure": [
+        "Curl_cf_create"
+      ],
+      "duplicate_cleanup": [
+        "curlx_safefree",
+        "curlx_free",
+        "curl_dbg_free"
+      ],
+      "context_cleanup": [
+        "Curl_close"
+      ]
+    },
+    "unmapped_roles": [
+      "resource"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 401.7
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "curl",
+    "mapping": {
+      "config_setter": [],
+      "divisor_field": []
+    },
+    "unmapped_roles": [
+      "config_setter",
+      "divisor_field"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+    "source": "libxml2",
+    "target": "curl",
+    "mapping": {
+      "null_on_failure": [
+        "config_alloc",
+        "Curl_fileinfo_alloc",
+        "Curl_ftp_parselist_data_alloc",
+        "new_getout",
+        "curl_url_dup",
+        "curlx_calloc",
+        "curlx_malloc",
+        "curlx_strdup",
+        "Curl_MD5_init",
+        "curlx_realloc",
+        "Curl_HMAC_init",
+        "Curl_hsts_init",
+        "curl_easy_init",
+        "curl_mime_init"
+      ],
+      "length_of": [
+        "Curl_bufq_len",
+        "curlx_dyn_len",
+        "Curl_bufref_len",
+        "Curl_hash_count",
+        "Curl_llist_count",
+        "GetSizeParameter",
+        "Curl_dynhds_count",
+        "Curl_cshutdn_count",
+        "Curl_cwriter_count",
+        "Curl_bump_headersize",
+        "Curl_u8_strset_count",
+        "Curl_u32_ptrset_count",
+        "Curl_uint32_tbl_count",
+        "Curl_pgrsSetUploadSize",
+        "Curl_uint32_bset_count",
+        "Curl_uint32_tbl_resize",
+        "Curl_pgrsSetDownloadSize",
+        "Curl_cshutdn_dest_count",
+        "Curl_uint32_spbset_count",
+        "Curl_creader_total_length",
+        "Curl_pgrsSetUploadCounter",
+        "Curl_creader_client_length",
+        "Curl_ssl_push_certinfo_len",
+        "Curl_pgrsResetTransferSizes",
+        "Curl_creader_def_total_length",
+        "file2string",
+        "jsonWriteString",
+        "__crt0_glob_function"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 342.5
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+    "source": "libxml2",
+    "target": "curl",
+    "mapping": {
+      "nullable_inout_capacity_ptr": [],
+      "capacity_computer": [
+        "Curl_uint32_tbl_resize",
+        "Curl_uint32_bset_resize"
+      ],
+      "reallocator": [
+        "curlx_realloc",
+        "curl_dbg_realloc",
+        "Curl_nghttp2_realloc"
+      ],
+      "deref_read": [],
+      "deref_write": [],
+      "null_guard": [],
+      "null_on_failure": []
+    },
+    "unmapped_roles": [
+      "nullable_inout_capacity_ptr",
+      "deref_read",
+      "deref_write",
+      "null_guard",
+      "null_on_failure"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 255.1
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-2",
+    "source": "libxml2",
+    "target": "curl",
+    "mapping": {
+      "lookahead": [],
+      "length_of": []
+    },
+    "unmapped_roles": [
+      "lookahead",
+      "length_of"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Integer-Overflow-10eb89d1-0",
+    "source": "lua",
+    "target": "curl",
+    "mapping": {
+      "decoder_function": [],
+      "input_byte": [],
+      "continuation_count": []
+    },
+    "unmapped_roles": [
+      "decoder_function",
+      "input_byte",
+      "continuation_count"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Misuse-bc4bbcef-0",
+    "source": "lua",
+    "target": "curl",
+    "mapping": {
+      "combined_create_and_publish": [],
+      "object_initializer": [
+        "Curl_ssl_init",
+        "Curl_ssh_init",
+        "Curl_trc_init",
+        "Curl_amiga_init",
+        "Curl_macos_init",
+        "Curl_vquic_init",
+        "curl_global_init",
+        "globalconf_init"
+      ],
+      "persistent_registry_lookup": [
+        "Curl_meta_get",
+        "Curl_conn_meta_get",
+        "Curl_altsvc_lookup"
+      ],
+      "object_allocator": [
+        "config_alloc",
+        "Curl_fileinfo_alloc",
+        "Curl_ftp_parselist_data_alloc"
+      ],
+      "registry_store": [
+        "Curl_schannel_set_cached_cert_store",
+        "Curl_ssl_setup_x509_store",
+        "Curl_wssl_setup_x509_store"
+      ],
+      "registry_key": [
+        "Curl_ssl_peer_key_make"
+      ]
+    },
+    "unmapped_roles": [
+      "combined_create_and_publish"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 719.6
+  },
+  {
+    "bundle": "KN-Use-After-Free-22974326-2",
+    "source": "lua",
+    "target": "curl",
+    "mapping": {
+      "gc_managed_object": [],
+      "potential_gc_trigger": [],
+      "gc_root_anchor": [],
+      "weak_reference_container": [],
+      "use_after_free_use": []
+    },
+    "unmapped_roles": [
+      "gc_managed_object",
+      "potential_gc_trigger",
+      "gc_root_anchor",
+      "weak_reference_container",
+      "use_after_free_use"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Buffer-Overflow-a7200804-1",
+    "source": "sqlite",
+    "target": "curl",
+    "mapping": {
+      "buffer_grow": [
+        "curlx_realloc",
+        "curl_dbg_realloc"
+      ],
+      "required_capacity": [],
+      "write_pointer": [],
+      "digit_set": [],
+      "output_buffer": []
+    },
+    "unmapped_roles": [
+      "required_capacity",
+      "write_pointer",
+      "digit_set",
+      "output_buffer"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 328.5
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "curl",
+    "mapping": {
+      "payload_length": [
+        "Curl_creader_total_length",
+        "Curl_creader_client_length",
+        "Curl_creader_def_total_length"
+      ],
+      "local_payload_length": [],
+      "overflow_chunk_size": [],
+      "overflow_page_cache": [],
+      "reallocator": [
+        "curlx_realloc",
+        "curl_dbg_realloc",
+        "Curl_nghttp2_realloc"
+      ],
+      "allocated_size_query": [],
+      "zero_initializer": [
+        "curlx_memzero"
+      ],
+      "cache_index": [],
+      "too_narrow_arithmetic_type": []
+    },
+    "unmapped_roles": [
+      "local_payload_length",
+      "overflow_chunk_size",
+      "overflow_page_cache",
+      "allocated_size_query",
+      "cache_index",
+      "too_narrow_arithmetic_type"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 170.8
+  },
+  {
+    "bundle": "KN-Integer-Overflow-d87f8c49-0",
+    "source": "sqlite",
+    "target": "curl",
+    "mapping": {
+      "length_of": [],
+      "character_count_bound": [],
+      "iterator_advance": [],
+      "output_length": [],
+      "narrowing_cast": [],
+      "safe_cap": [],
+      "buffer_append": []
+    },
+    "unmapped_roles": [
+      "length_of",
+      "character_count_bound",
+      "iterator_advance",
+      "output_length",
+      "narrowing_cast",
+      "safe_cap",
+      "buffer_append"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Misuse-1bc183a9-1",
+    "source": "sqlite",
+    "target": "curl",
+    "mapping": {
+      "tokenizer": [],
+      "dequote_helper": [],
+      "illegal_token_sentinel": [],
+      "dequoter_with_precondition": [
+        "curlx_str_quotedword"
+      ],
+      "caller_ignoring_sentinel": []
+    },
+    "unmapped_roles": [
+      "tokenizer",
+      "dequote_helper",
+      "illegal_token_sentinel",
+      "caller_ignoring_sentinel"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 311.7
+  }
+]

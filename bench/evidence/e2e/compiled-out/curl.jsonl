@@ -1,0 +1,8 @@
+{"commit": "f2a15357", "files": {"lib/easy.c": {"functions": ["curl_easy_recv", "curl_easy_send"], "compiled_out": [], "preprocessed_lines": 10053}}, "unsolvable": false}
+{"commit": "f7d4e11f", "files": {"lib/setopt.c": {"functions": ["Curl_setblobopt"], "compiled_out": [], "preprocessed_lines": 10400}}, "unsolvable": false}
+{"commit": "a0f08d69", "files": {"lib/cf-h2-proxy.c": {"functions": ["cf_h2_proxy_ctx_clear", "cf_h2_proxy_ctx_free"], "compiled_out": [], "preprocessed_lines": 9603}}, "unsolvable": false}
+{"commit": "6f1dfab6", "files": {"lib/ftp.c": {"functions": ["ftp_state_pasv_resp"], "compiled_out": [], "preprocessed_lines": 11802}}, "unsolvable": false}
+{"commit": "bc440a89", "files": {"lib/mime.c": {"functions": ["encoder_base64_size"], "compiled_out": [], "preprocessed_lines": 9674}}, "unsolvable": false}
+{"commit": "c53420e4", "files": {"lib/vtls/openssl.c": {"functions": ["ossl_verifyhost"], "compiled_out": [], "preprocessed_lines": 20991}}, "unsolvable": false}
+{"commit": "466c06cf", "files": {"lib/urlapi.c": {"functions": ["curl_url_dup"], "compiled_out": [], "preprocessed_lines": 9752}, "tests/libtest/lib1560.c": "no compile entry"}, "unsolvable": false}
+{"commit": "c4cb6769", "files": {"lib/smb.c": {"functions": ["smb_request_state"], "compiled_out": ["smb_request_state"], "preprocessed_lines": 7832}}, "unsolvable": true}

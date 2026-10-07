@@ -1,0 +1,306 @@
+[
+  {
+    "bundle": "KN-Double-Free-26dfab2f-1",
+    "source": "libxml2",
+    "target": "curl",
+    "mapping": {
+      "resource": [],
+      "ownership_consumer_frees_on_failure": [],
+      "deallocator": [],
+      "null_on_failure": [],
+      "duplicate_cleanup": [],
+      "context_cleanup": []
+    },
+    "unmapped_roles": [
+      "resource",
+      "ownership_consumer_frees_on_failure",
+      "deallocator",
+      "null_on_failure",
+      "duplicate_cleanup",
+      "context_cleanup"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "curl",
+    "mapping": {
+      "config_setter": [],
+      "divisor_field": []
+    },
+    "unmapped_roles": [
+      "config_setter",
+      "divisor_field"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+    "source": "libxml2",
+    "target": "curl",
+    "mapping": {
+      "null_on_failure": [
+        "curlx_malloc",
+        "curlx_strdup",
+        "curl_dbg_malloc",
+        "curl_dbg_strdup",
+        "Curl_nghttp2_malloc"
+      ],
+      "length_of": [
+        "getpass_r",
+        "getpwuid_r",
+        "r_getaddrinfo",
+        "r_freeaddrinfo",
+        "Curl_ipv4_resolve_r",
+        "jsonWriteString",
+        "__crt0_glob_function",
+        "Curl_creader_total_length",
+        "Curl_creader_client_length",
+        "Curl_creader_def_total_length",
+        "Curl_getaddrinfo_a",
+        "Curl_getnameinfo_a",
+        "Curl_pollset_add_in",
+        "Curl_gss_import_name_a",
+        "Curl_pollset_remove_in",
+        "Curl_api_is_in_callback",
+        "Curl_pollset_set_in_only",
+        "Curl_gss_display_status_a",
+        "Curl_ntlm_core_mk_nt_hash",
+        "Curl_gss_init_sec_context_a",
+        "Curl_api_multi_is_in_callback",
+        "Curl_gss_delete_sec_context_a",
+        "curlx_str",
+        "file2string",
+        "CURL_EASY_STR",
+        "Curl_bufq_len",
+        "MY_SETOPT_STR"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 244.2
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+    "source": "libxml2",
+    "target": "curl",
+    "mapping": {
+      "nullable_inout_capacity_ptr": [],
+      "capacity_computer": [],
+      "reallocator": [
+        "curlx_realloc",
+        "curl_dbg_realloc",
+        "Curl_nghttp2_realloc"
+      ],
+      "deref_read": [],
+      "deref_write": [],
+      "null_guard": [],
+      "null_on_failure": []
+    },
+    "unmapped_roles": [
+      "nullable_inout_capacity_ptr",
+      "capacity_computer",
+      "deref_read",
+      "deref_write",
+      "null_guard",
+      "null_on_failure"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 291.2
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-2",
+    "source": "libxml2",
+    "target": "curl",
+    "mapping": {
+      "lookahead": [],
+      "length_of": []
+    },
+    "unmapped_roles": [
+      "lookahead",
+      "length_of"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Integer-Overflow-10eb89d1-0",
+    "source": "lua",
+    "target": "curl",
+    "mapping": {
+      "decoder_function": [],
+      "input_byte": [],
+      "continuation_count": []
+    },
+    "unmapped_roles": [
+      "decoder_function",
+      "input_byte",
+      "continuation_count"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Misuse-bc4bbcef-0",
+    "source": "lua",
+    "target": "curl",
+    "mapping": {
+      "combined_create_and_publish": [],
+      "object_initializer": [
+        "Curl_meta_set",
+        "Curl_cf_create"
+      ],
+      "persistent_registry_lookup": [
+        "Curl_altsvc_lookup",
+        "Curl_schannel_get_cached_cert_store"
+      ],
+      "object_allocator": [
+        "config_alloc",
+        "Curl_fileinfo_alloc",
+        "Curl_ftp_parselist_data_alloc",
+        "new_getout"
+      ],
+      "registry_store": [
+        "Curl_conn_cf_insert_after",
+        "Curl_schannel_set_cached_cert_store"
+      ],
+      "registry_key": [
+        "Curl_ssl_peer_key_make"
+      ]
+    },
+    "unmapped_roles": [
+      "combined_create_and_publish"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 470.3
+  },
+  {
+    "bundle": "KN-Use-After-Free-22974326-2",
+    "source": "lua",
+    "target": "curl",
+    "mapping": {
+      "gc_managed_object": [],
+      "potential_gc_trigger": [],
+      "gc_root_anchor": [],
+      "weak_reference_container": [],
+      "use_after_free_use": []
+    },
+    "unmapped_roles": [
+      "gc_managed_object",
+      "potential_gc_trigger",
+      "gc_root_anchor",
+      "weak_reference_container",
+      "use_after_free_use"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Buffer-Overflow-a7200804-1",
+    "source": "sqlite",
+    "target": "curl",
+    "mapping": {
+      "buffer_grow": [],
+      "required_capacity": [],
+      "write_pointer": [],
+      "digit_set": [],
+      "output_buffer": []
+    },
+    "unmapped_roles": [
+      "buffer_grow",
+      "required_capacity",
+      "write_pointer",
+      "digit_set",
+      "output_buffer"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Integer-Overflow-720d3afa-0",
+    "source": "sqlite",
+    "target": "curl",
+    "mapping": {
+      "payload_length": [
+        "Curl_creader_total_length",
+        "Curl_creader_client_length",
+        "Curl_creader_def_total_length"
+      ],
+      "local_payload_length": [
+        "Curl_bufq_len",
+        "curlx_dyn_len",
+        "Curl_bufref_len"
+      ],
+      "overflow_chunk_size": [],
+      "overflow_page_cache": [],
+      "reallocator": [
+        "curlx_realloc",
+        "curl_dbg_realloc"
+      ],
+      "allocated_size_query": [],
+      "zero_initializer": [
+        "curlx_memzero"
+      ],
+      "cache_index": [],
+      "too_narrow_arithmetic_type": []
+    },
+    "unmapped_roles": [
+      "overflow_chunk_size",
+      "overflow_page_cache",
+      "allocated_size_query",
+      "cache_index",
+      "too_narrow_arithmetic_type"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 208.7
+  },
+  {
+    "bundle": "KN-Integer-Overflow-d87f8c49-0",
+    "source": "sqlite",
+    "target": "curl",
+    "mapping": {
+      "length_of": [],
+      "character_count_bound": [],
+      "iterator_advance": [],
+      "output_length": [],
+      "narrowing_cast": [],
+      "safe_cap": [],
+      "buffer_append": []
+    },
+    "unmapped_roles": [
+      "length_of",
+      "character_count_bound",
+      "iterator_advance",
+      "output_length",
+      "narrowing_cast",
+      "safe_cap",
+      "buffer_append"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Misuse-1bc183a9-1",
+    "source": "sqlite",
+    "target": "curl",
+    "mapping": {
+      "tokenizer": [],
+      "dequote_helper": [],
+      "illegal_token_sentinel": [],
+      "dequoter_with_precondition": [],
+      "caller_ignoring_sentinel": []
+    },
+    "unmapped_roles": [
+      "tokenizer",
+      "dequote_helper",
+      "illegal_token_sentinel",
+      "dequoter_with_precondition",
+      "caller_ignoring_sentinel"
+    ],
+    "status": "no equivalent roles in target"
+  }
+]

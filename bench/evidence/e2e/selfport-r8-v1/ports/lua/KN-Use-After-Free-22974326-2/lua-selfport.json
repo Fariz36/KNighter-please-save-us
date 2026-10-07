@@ -1,0 +1,129 @@
+{
+  "target": "lua",
+  "commit": "c931d86e98da320c71da70c16d44aa28e9755520",
+  "candidates": 679,
+  "offered": {
+    "gc_managed_object": [
+      "luaC_condGC",
+      "luaC_checkGC",
+      "luaM_newobject",
+      "luaC_freeallobjects"
+    ],
+    "potential_gc_trigger": [
+      "luaH_finishset",
+      "luaH_get",
+      "luaH_new",
+      "luaH_set",
+      "luaH_free",
+      "luaH_getn",
+      "luaH_next",
+      "luaH_pset",
+      "luaH_size",
+      "luaC_condGC",
+      "luaH_getint",
+      "luaH_getstr",
+      "luaH_resize",
+      "luaH_setint",
+      "luaK_finish",
+      "luaC_checkGC",
+      "luaH_psetint",
+      "luaH_psetstr",
+      "luaH_fastgeti",
+      "luaH_fastseti",
+      "luaV_finishOp",
+      "luaV_finishset",
+      "luaH_getshortstr",
+      "luaH_resizearray",
+      "luaH_Hgetshortstr",
+      "luaH_mainposition",
+      "luaH_psetshortstr",
+      "luaC_freeallobjects"
+    ],
+    "gc_root_anchor": [
+      "luaC_condGC",
+      "luaC_checkGC",
+      "nodefromval",
+      "luaL_makeseed",
+      "luaM_newobject",
+      "luaC_freeallobjects"
+    ],
+    "weak_reference_container": [
+      "luaC_freeallobjects"
+    ],
+    "use_after_free_use": [
+      "luaC_freeallobjects",
+      "luaC_barrier",
+      "luaC_barrier_",
+      "luaC_barrierback",
+      "luaC_barrierback_",
+      "luaC_checkfinalizer",
+      "luaC_objbarrierback",
+      "luaH_free",
+      "luaM_free",
+      "luaM_free_",
+      "C",
+      "int2sC",
+      "GETARG_C",
+      "SETARG_C",
+      "luaC_fix",
+      "GETARG_sC",
+      "GETARG_vC",
+      "SETARG_vC",
+      "luaC_step",
+      "lua_Alloc",
+      "luaC_white",
+      "luaF_close",
+      "tofinalize",
+      "luaC_condGC",
+      "luaC_fullgc",
+      "luaC_newobj",
+      "luaC_checkGC",
+      "luaM_freemem",
+      "luaC_newobjdt",
+      "luaF_freeproto",
+      "luaM_freearray",
+      "luaC_changemode",
+      "luaC_objbarrier",
+      "luaE_freethread",
+      "luaF_closeupval",
+      "luaS_clearcache",
+      "luaZ_freebuffer",
+      "luaC_runtilstate",
+      "invalidateTMcache",
+      "luai_userstatefree"
+    ]
+  },
+  "mapping": {
+    "gc_managed_object": [],
+    "potential_gc_trigger": [
+      "luaH_finishset"
+    ],
+    "gc_root_anchor": [
+      "sethvalue2s"
+    ],
+    "weak_reference_container": [],
+    "use_after_free_use": [
+      "invalidateTMcache",
+      "luaC_barrierback"
+    ]
+  },
+  "dropped_not_in_target": {
+    "gc_managed_object": [
+      "Table"
+    ],
+    "potential_gc_trigger": [],
+    "gc_root_anchor": [],
+    "weak_reference_container": [
+      "__mode"
+    ],
+    "use_after_free_use": []
+  },
+  "rationale": {
+    "gc_managed_object": "Table is the Lua type whose instances are garbage-collected and can be accessed via C pointers.",
+    "potential_gc_trigger": "luaH_finishset can allocate or rehash and thus trigger an emergency garbage collection.",
+    "gc_root_anchor": "sethvalue2s places a table value on the Lua stack, making it visible to the GC as a root.",
+    "weak_reference_container": "__mode is the metatable field that marks tables as weak, so they do not keep referenced objects alive.",
+    "use_after_free_use": "invalidateTMcache and luaC_barrierback operate on the table pointer after a potential collection, risking use-after-free."
+  },
+  "llm_seconds": 74.4
+}

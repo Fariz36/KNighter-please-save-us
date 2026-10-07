@@ -1,0 +1,9 @@
+{
+  "duplicator": [
+    "curl_url_dup",
+    "DUP"
+  ],
+  "allocator": [
+    "curlx_calloc"
+  ]
+}

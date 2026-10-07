@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The caller invokes a `deallocator` on the same resource that was passed to a `parser_input` constructor after that constructor returned `null_on_failure`. The constructor consumes the buffer and already frees it on its failure path, so the caller’s additional `deallocator` call frees the same buffer twice.
+
+Roles:
+- `parser_input`: `xmlNewIOInputStream` — builds a parser input from the supplied buffer and consumes that buffer.
+- `null_on_failure`: `xmlNewIOInputStream` — returns NULL on failure after freeing the consumed buffer.
+- `deallocator`: `xmlFreeParserInputBuffer` — frees the parser input buffer.

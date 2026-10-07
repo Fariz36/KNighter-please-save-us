@@ -1,0 +1,11 @@
+{
+  "decoder_function": [
+    "utf8_decode"
+  ],
+  "input_byte": [
+    "c"
+  ],
+  "continuation_count": [
+    "count"
+  ]
+}

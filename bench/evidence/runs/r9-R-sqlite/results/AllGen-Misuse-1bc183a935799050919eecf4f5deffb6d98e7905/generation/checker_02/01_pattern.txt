@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A token-processing helper is given the text/length of a tokenizer result but not the token type, so it cannot reject an illegal/error token before using the token. The unchecked token is copied and passed to a dequoting routine whose assertion/precondition requires a valid quoted token, causing an assertion failure on corrupt input.
+
+Roles:
+- `parser_input`: `getConstraintToken`, `sqlite3GetToken` — return a token type plus a length; the illegal/error indication is in the token type, not in the length.
+- `buffer_copy`: `memcpy` — copies the token bytes using the length returned by `parser_input`.
+- `dequoter` (new role): `sqlite3Dequote` — removes quoting/escaping and requires a valid quoted token.
+- `aborting_assert`: the assertion reached inside `sqlite3Dequote` — fails when the dequoter’s precondition is violated.

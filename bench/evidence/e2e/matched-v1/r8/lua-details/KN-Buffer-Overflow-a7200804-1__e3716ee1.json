@@ -1,0 +1,55 @@
+{
+  "commit_id": "e3716ee161bb5416b5eb846eff6039d61954cfbd",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/d3e3b9db86eb8962792c/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lstrlib.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "str_rep"
+        ],
+        "fixed_functions": [
+          "str_rep"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lstrlib.c": []
+    },
+    "fixed": {
+      "lstrlib.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.01,
+    "setup_seconds": 5.66,
+    "analysis_seconds": {
+      "buggy": 10.9,
+      "fixed": 10.5
+    },
+    "total_seconds": 27.14
+  },
+  "report_dir": "tmp/validation/e3716ee161bb/56fe9299"
+}

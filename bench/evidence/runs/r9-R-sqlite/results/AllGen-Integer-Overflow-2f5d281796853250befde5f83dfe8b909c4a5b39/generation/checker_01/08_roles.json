@@ -1,0 +1,44 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "aborting_assert": {
+      "names": [
+        "assert"
+      ],
+      "description": "macro that aborts when its condition is false; the condition expression is evaluated for its truth value"
+    },
+    "length_of": {
+      "names": [
+        "sqlite3_value_bytes"
+      ],
+      "description": "function that returns the length of a value"
+    },
+    "allocator": {
+      "names": [
+        "contextMalloc"
+      ],
+      "description": "allocates memory"
+    },
+    "reallocator": {
+      "names": [
+        "sqlite3Realloc"
+      ],
+      "description": "reallocates memory"
+    },
+    "deallocator": {
+      "names": [
+        "sqlite3_free"
+      ],
+      "description": "frees memory"
+    },
+    "buffer_copy": {
+      "names": [
+        "memcpy"
+      ],
+      "description": "copies bytes from one buffer to another"
+    }
+  }
+}

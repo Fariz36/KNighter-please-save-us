@@ -1,0 +1,40 @@
+id: KN-Null-Pointer-Dereference-962bd10d-2
+bug_type: Null-Pointer-Dereference
+source:
+  project: libxml2
+  description: libxml2, the XML parsing and manipulation library written in C
+  commit: 962bd10d01151d29190567e2d15ccf641be55063
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A function dereferences a caller-supplied pointer parameter before checking it for NULL. Here the capacity/state
+  pointer is read via `*capacity` before the new guard, so passing NULL causes a NULL-pointer dereference.
+  The fix adds the NULL check before the first dereference.
+
+
+  Roles:
+
+  - allocator/grower: `xmlGrowArray`
+
+  - reallocator: `xmlRealloc`'
+roles:
+  allocator:
+    names:
+    - xmlGrowArray
+    description: allocates or grows memory; may return NULL
+  reallocator:
+    names:
+    - xmlRealloc
+    description: reallocates memory; returns new pointer or NULL
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:40+0700

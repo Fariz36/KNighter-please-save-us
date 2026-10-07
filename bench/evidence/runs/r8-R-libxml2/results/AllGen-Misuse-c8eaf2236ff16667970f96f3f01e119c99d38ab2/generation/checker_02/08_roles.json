@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "config_setter": {
+      "names": [
+        "xmlCtxtSetMaxAmplification"
+      ],
+      "description": "function that stores a configuration argument into a field; if the stored value is later used as a divisor, the setter must reject zero"
+    },
+    "divisor_field": {
+      "names": [
+        "maxAmpl"
+      ],
+      "description": "configuration field used as a divisor in arithmetic; it must be guaranteed non-zero before every division"
+    }
+  }
+}

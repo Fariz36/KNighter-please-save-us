@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "gc_trigger": {
+      "names": [
+        "luaH_finishset"
+      ],
+      "description": "call that may trigger an emergency garbage collection; its object argument must be kept alive by a root"
+    },
+    "ref_get": {
+      "names": [
+        "sethvalue2s"
+      ],
+      "description": "stores a garbage-collected object into a root location (e.g., stack) to keep it alive during a GC-triggering call"
+    }
+  }
+}

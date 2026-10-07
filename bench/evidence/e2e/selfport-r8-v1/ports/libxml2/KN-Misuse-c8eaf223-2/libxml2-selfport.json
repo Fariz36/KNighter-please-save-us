@@ -1,0 +1,65 @@
+{
+  "target": "libxml2",
+  "commit": "87c77060fbd6168b7f338e0f3aed58f12e92ee72",
+  "candidates": 418,
+  "offered": {
+    "config_setter": [
+      "xmlCtxtErr",
+      "xmlCtxtErrIO",
+      "xmlRaiseError",
+      "xmlVRaiseError",
+      "xmlXPathSetError",
+      "xmlRaiseMemoryError",
+      "xmlXPathSetTypeError",
+      "xmlXPathSetArityError",
+      "xmlCtxtIsCatastrophicError",
+      "libxml_xmlSchemaSetValidErrors",
+      "xmlGenericErrorDefaultFunc",
+      "initGenericErrorDefaultFunc",
+      "MAX",
+      "XP_ERROR",
+      "XP_ERROR0",
+      "PyError_Get",
+      "xmlCtxtVErr",
+      "xmlFatalErr",
+      "xmlErrString",
+      "__xmlLastError",
+      "xmlFormatError",
+      "PyValidCtxt_Get",
+      "PyparserCtxt_Get",
+      "xmlXPathGetError",
+      "__xmlGenericError",
+      "xmlXPathErrMemory",
+      "xmlXPathCheckError",
+      "xmlAutomataSetFlags",
+      "xmlXPathNodeSetItem",
+      "__xmlStructuredError",
+      "xmlPrintErrorMessage",
+      "xmlXPathEmptyNodeSet",
+      "PySchemaValidCtxt_Get",
+      "xmlCtxtNewInputFromFd",
+      "xmlCtxtNewInputFromIO",
+      "xmlRegExecClearErrors",
+      "xmlVPrintErrorMessage",
+      "xmlXPathNodeSetFreeNs",
+      "xmlXPathReturnNodeSet",
+      "PySchemaParserCtxt_Get"
+    ],
+    "divisor_field": [
+      "xmlXPathSubstringBeforeFunction"
+    ]
+  },
+  "mapping": {
+    "config_setter": [],
+    "divisor_field": []
+  },
+  "dropped_not_in_target": {
+    "config_setter": [],
+    "divisor_field": []
+  },
+  "rationale": {
+    "config_setter": "None of the listed candidates is a configuration setter that stores a divisor-valued field like xmlCtxtSetMaxAmplification.",
+    "divisor_field": "The only candidate is an XPath function, not a divisor configuration field like maxAmpl."
+  },
+  "llm_seconds": 25.4
+}

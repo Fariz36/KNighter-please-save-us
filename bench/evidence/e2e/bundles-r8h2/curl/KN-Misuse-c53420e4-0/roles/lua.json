@@ -1,0 +1,44 @@
+{
+  "data_provider": [
+    "lua_newuserdata",
+    "lua_newuserdatauv",
+    "lua_touserdata",
+    "luaL_checkudata",
+    "luaL_testudata",
+    "getudatamem",
+    "luaZ_buffer"
+  ],
+  "length_provider": [
+    "lua_rawlen",
+    "luaL_len",
+    "lua_len",
+    "luaZ_sizebuffer"
+  ],
+  "unbounded_string_consumer": [
+    "strlen",
+    "lua_pushstring",
+    "luaL_addstring",
+    "luaL_loadstring",
+    "luaL_dostring",
+    "lua_pushfstring",
+    "luaO_pushfstring",
+    "lua_pushvfstring",
+    "luaO_pushvfstring",
+    "pushvfstring",
+    "lua_writestringerror",
+    "lua_stringtonumber",
+    "l_sprintf"
+  ],
+  "bounded_nul_scanner": [
+    "memchr"
+  ],
+  "bounded_string_formatter": [
+    "lua_pushfstring",
+    "luaO_pushfstring",
+    "lua_pushvfstring",
+    "luaO_pushvfstring",
+    "pushvfstring",
+    "lua_writestringerror",
+    "l_sprintf"
+  ]
+}

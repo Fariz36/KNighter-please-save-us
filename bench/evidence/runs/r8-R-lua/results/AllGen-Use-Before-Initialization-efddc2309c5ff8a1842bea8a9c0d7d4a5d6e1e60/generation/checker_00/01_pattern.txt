@@ -1,0 +1,13 @@
+## Bug Pattern
+
+A reusable state object has a transient recursion/stack-depth guard counter. That counter is initialized only in the one-time state initializer, not in the per-match reset routine. If a match aborts through a non-local error (`luaL_error`), cleanup that would restore the counter is skipped. The same state object survives inside the `gmatch` iterator closure and is reused later; since the per-match reset does not reinitialize the guard counter, it starts from an exhausted/negative value and fails to detect the next recursion/stack overflow.
+
+Roles:
+- `state_object`: `MatchState`, `GMatchState` (`gm->ms`)
+- `state_initializer`: `prepstate`
+- `per_match_state_resetter`: `reprepstate`
+- `transient_guard_counter`: `MatchState.matchdepth`
+- `guard_check`: `if (l_unlikely(ms->matchdepth-- == 0))`
+- `guard_restore`: `ms->matchdepth++` on normal exit
+- `non_local_error_abort`: `luaL_error` / `lua_error`
+- `reusing_iterator`: `gmatch_aux` / `string.gmatch` closure

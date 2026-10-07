@@ -1,0 +1,22 @@
+{
+  "payload_length": [],
+  "local_payload_length": [],
+  "overflow_chunk_size": [],
+  "overflow_page_cache": [],
+  "reallocator": [
+    "xmlRealloc",
+    "xmlMemRealloc",
+    "xmlReallocLoc",
+    "__xmlRealloc"
+  ],
+  "allocated_size_query": [
+    "xmlMemSize"
+  ],
+  "zero_initializer": [
+    "memset"
+  ],
+  "cache_index": [],
+  "too_narrow_arithmetic_type": [
+    "int"
+  ]
+}

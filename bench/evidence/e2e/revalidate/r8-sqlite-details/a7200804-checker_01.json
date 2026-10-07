@@ -1,0 +1,67 @@
+{
+  "commit_id": "a7200804eb4aeb35229388a37ea00af27559bd25",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/d3e3b9db86eb8962792c/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/printf.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "sqlite3_str_vappendf"
+        ],
+        "fixed_functions": [
+          "sqlite3_str_vappendf"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/printf.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/0d979c217fd5/src/printf.c",
+          "line": 624,
+          "column": 9,
+          "function": "unknown",
+          "bug_type": "Buffer capacity underestimation",
+          "description": "Buffer capacity calculation underestimates optional formatting bytes; possible buffer overflow",
+          "issue_hash": "4e5a869d735ec666ee40bf9d159b0892",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/a7200804eb4a/600b3bea/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_0d979c217fd5_src_printf.c/report-4e5a86.html",
+          "relpath": "src/printf.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/printf.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 22.42,
+    "setup_seconds": 0.03,
+    "analysis_seconds": {
+      "buggy": 4.07,
+      "fixed": 3.99
+    },
+    "total_seconds": 30.6
+  },
+  "report_dir": "tmp/validation/a7200804eb4a/600b3bea"
+}

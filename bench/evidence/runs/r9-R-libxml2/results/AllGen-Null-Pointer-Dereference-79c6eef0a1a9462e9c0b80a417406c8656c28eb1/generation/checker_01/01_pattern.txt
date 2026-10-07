@@ -1,0 +1,11 @@
+## Bug Pattern
+
+The result of a `duplicator` call, which is also a `null_on_failure` API, is passed to a `length_of` operation before the NULL check on that result. If duplication fails and returns NULL, `length_of` dereferences the NULL pointer. The check must happen before any use of the duplicated value.
+
+Roles:
+- `duplicator` / `null_on_failure`: `xmlStrdup`
+- `length_of`: `strlen`
+- `allocator`: `xmlMalloc`
+- `deallocator`: `xmlFree`
+
+In this patch, `xmlStrdup(string)` is called, then `strlen((const char *) ret->string)` is evaluated before the `ret->string == NULL` check. The fix moves the `strlen` call after the NULL check.

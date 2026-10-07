@@ -1,0 +1,7 @@
+{"commit": "7b60ed80", "files": {"src/trigger.c": {"functions": ["sqlite3TriggerUpdateStep"], "compiled_out": [], "preprocessed_lines": 5381}}, "unsolvable": false}
+{"commit": "a7200804", "files": {"src/printf.c": {"functions": ["sqlite3_str_vappendf"], "compiled_out": [], "preprocessed_lines": 5448}}, "unsolvable": false}
+{"commit": "d87f8c49", "files": {"src/printf.c": {"functions": ["sqlite3_str_vappendf"], "compiled_out": [], "preprocessed_lines": 5544}}, "unsolvable": false}
+{"commit": "1bc183a9", "files": {"src/alter.c": {"functions": ["dropConstraintFunc", "findConstraintFunc", "quotedCompare"], "compiled_out": [], "preprocessed_lines": 6337}}, "unsolvable": false}
+{"commit": "97467fa8", "files": {"src/os_kv.c": {"functions": ["kvvfsDecode"], "compiled_out": ["kvvfsDecode"], "preprocessed_lines": 4353}}, "unsolvable": true}
+{"commit": "720d3afa", "files": {"src/btree.c": {"functions": ["accessPayload"], "compiled_out": [], "preprocessed_lines": 11126}}, "unsolvable": false}
+{"commit": "2f5d2817", "files": {"src/func.c": {"functions": ["replaceFunc"], "compiled_out": [], "preprocessed_lines": 7888}}, "unsolvable": false}

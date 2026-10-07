@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "curlx_dyn_ptr"
+      ],
+      "description": "returns a pointer to the input buffer being parsed"
+    },
+    "null_on_failure": {
+      "names": [
+        "strchr"
+      ],
+      "description": "returns NULL if the searched character is not found"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "payload_length": [
+    "Curl_creader_total_length",
+    "Curl_creader_client_length",
+    "Curl_creader_def_total_length"
+  ],
+  "local_payload_length": [
+    "Curl_bufq_len",
+    "curlx_dyn_len",
+    "Curl_bufref_len"
+  ],
+  "overflow_chunk_size": [],
+  "overflow_page_cache": [
+    "Curl_dnscache_add",
+    "Curl_dnscache_get",
+    "Curl_dnscache_init",
+    "Curl_dnscache_clear",
+    "Curl_dnscache_prune",
+    "Curl_dnscache_destroy",
+    "Curl_dnscache_add_negative",
+    "Curl_ssl_scache_put",
+    "Curl_ssl_scache_use",
+    "Curl_ssl_scache_lock",
+    "Curl_ssl_scache_take",
+    "Curl_ssl_scache_create",
+    "Curl_ssl_scache_return",
+    "Curl_ssl_scache_unlock",
+    "Curl_ssl_scache_add_obj",
+    "Curl_ssl_scache_destroy",
+    "Curl_ssl_scache_get_obj",
+    "Curl_ssl_scache_remove_all",
+    "Curl_ssl_scache_is_locked_by_current_thread",
+    "Curl_gtls_cache_session",
+    "Curl_wssl_cache_session",
+    "Curl_schannel_get_cached_cert_store",
+    "Curl_schannel_set_cached_cert_store",
+    "CURL_SHARE_ssl_scache"
+  ],
+  "reallocator": [
+    "curlx_realloc",
+    "curl_dbg_realloc",
+    "Curl_nghttp2_realloc",
+    "Curl_uint32_tbl_resize",
+    "Curl_uint32_bset_resize"
+  ],
+  "allocated_size_query": [],
+  "zero_initializer": [
+    "memset",
+    "curlx_memzero",
+    "curlx_strzero"
+  ],
+  "cache_index": [],
+  "too_narrow_arithmetic_type": [
+    "size_t",
+    "uint32_t",
+    "int"
+  ]
+}

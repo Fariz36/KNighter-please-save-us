@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A persistent state object has a mutable field (a recursion-depth counter) that is initialized only by the one-time `init` used when the object is created, but not by the per-operation `init` that runs before each match. An `error_setter` can perform a non-local exit before the field’s normal restoration (increment) executes, leaving the field corrupted. Because the per-operation `init` does not reset that field, subsequent operations on the same state object use the stale, corrupted value.
+
+Roles:
+- `init`: `prepstate` (one-time initialization), `reprepstate` (per-match reinitialization)
+- `error_setter`: `luaL_error`

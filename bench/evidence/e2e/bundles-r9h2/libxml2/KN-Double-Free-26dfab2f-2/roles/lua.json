@@ -1,0 +1,11 @@
+{
+  "parser_input": [],
+  "null_on_failure": [],
+  "deallocator": [
+    "luaZ_freebuffer",
+    "luaM_free",
+    "luaM_free_",
+    "luaM_freemem",
+    "luaM_freearray"
+  ]
+}

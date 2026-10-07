@@ -1,0 +1,12 @@
+{
+  "commit_id": "1cd9eb3811e48f7e01474608500b789e5b8bf6bc",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/misc/zipfile.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/misc/zipfile.c": "no compile entry"
+    }
+  }
+}

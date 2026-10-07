@@ -1,0 +1,68 @@
+{
+  "commit_id": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-lua/plugin-cache/plugins/dfd89b32eea9382685cf/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lauxlib.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "newbox"
+        ],
+        "fixed_functions": [
+          "getBoxMT",
+          "newbox"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lauxlib.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-lua/work/src/40b76de2d77e/lauxlib.c",
+          "line": 520,
+          "column": 7,
+          "function": "newbox",
+          "bug_type": "Non-atomic registry publication",
+          "description": "Non-atomic registry publication: initialize before publishing",
+          "issue_hash": "8158ac4661179c444c560f8a4474fdd5",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/bc4bbcef651b/3c74c453/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-lua_work_src_40b76de2d77e_lauxlib.c/report-8158ac.html",
+          "relpath": "lauxlib.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lauxlib.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 6.47,
+      "fixed": 6.45
+    },
+    "total_seconds": 13.01
+  },
+  "report_dir": "tmp/validation/bc4bbcef651b/3c74c453"
+}

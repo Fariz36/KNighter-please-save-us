@@ -1,0 +1,25 @@
+{
+  "set": "r9",
+  "bundle_target_pairs": 39,
+  "with_candidates": 15,
+  "validated": 27,
+  "setup_skipped": 24,
+  "fires": 4,
+  "detected": 2,
+  "perfect": 0,
+  "detections": [
+    "sqlite->libxml2 KN-Memory-Leak-7b60ed80-1 c1342946 tp=1 tn=0 | fix memory leak in issue 1054",
+    "sqlite->libxml2 KN-Memory-Leak-7b60ed80-1 98194640 tp=1 tn=0 | Fix memory leak of prefix in xmlTextWriterStartElementNS()"
+  ]
+}
+{
+  "set": "r8",
+  "bundle_target_pairs": 54,
+  "with_candidates": 30,
+  "validated": 56,
+  "setup_skipped": 28,
+  "fires": 2,
+  "detected": 0,
+  "perfect": 0,
+  "detections": []
+}

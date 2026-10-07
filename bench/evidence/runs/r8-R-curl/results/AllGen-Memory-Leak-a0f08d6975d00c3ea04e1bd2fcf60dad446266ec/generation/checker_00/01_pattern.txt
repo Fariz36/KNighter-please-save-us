@@ -1,0 +1,10 @@
+## Bug Pattern
+
+Calling a `link_detach`/`ref_put` operation **after** the containing object has been reset/zeroed, so the link metadata needed by the detach has already been cleared. This makes the detach a no-op and leaves the peer/list entry leaked. The correct order is `link_detach` before `state_reset`.
+
+Roles:
+- `cleanup`: `cf_h2_proxy_ctx_clear`
+- `destructor`: `cf_h2_proxy_ctx_free`
+- `state_reset`: `memset(ctx, 0, sizeof(*ctx))`
+- `link_detach`: `Curl_peer_unlink`
+- `link_storage`: `ctx->dest`

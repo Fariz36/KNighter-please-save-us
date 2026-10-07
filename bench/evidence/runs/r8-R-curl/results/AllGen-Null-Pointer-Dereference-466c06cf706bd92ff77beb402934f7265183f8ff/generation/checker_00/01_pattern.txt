@@ -1,0 +1,12 @@
+## Bug Pattern
+
+A `duplicator` function dereferences its `source_handle` argument before verifying that the argument is non-NULL. Specifically, `curl_url_dup()` passes `in` to the `field_copy` macro `DUP()` and also directly reads fields such as `in->portnum`, `in->port_present`, etc. When `in` is NULL, this causes a NULL pointer dereference. The fix adds a `null_guard` at function entry.
+
+Roles:
+- `duplicator`: `curl_url_dup`
+- `source_handle`: `in`
+- `field_copy` / `source_dereference`: `DUP`, `in->portnum`, `in->port_present`, `in->fragment_present`, `in->query_present`, `in->guessed_scheme`
+- `allocator`: `curlx_calloc`
+- `deallocator`: `curl_url_cleanup`
+- `null_guard`: `if(!in) return NULL;`
+- `null_on_failure`: `return NULL`

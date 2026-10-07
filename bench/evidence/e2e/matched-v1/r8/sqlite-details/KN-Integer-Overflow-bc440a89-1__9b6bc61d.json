@@ -1,0 +1,91 @@
+{
+  "commit_id": "9b6bc61dbd9744ca01e1d25e31745858dbf4feb7",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/174beff6bf7daeb38757/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "ext/misc/base64.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "base64"
+        ],
+        "fixed_functions": [
+          "base64"
+        ]
+      },
+      {
+        "path": "ext/misc/base85.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "base85"
+        ],
+        "fixed_functions": [
+          "base85"
+        ]
+      },
+      {
+        "path": "src/func.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "isNHex"
+        ],
+        "fixed_functions": [
+          "isNHex"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/func.c": []
+    },
+    "fixed": {
+      "src/func.c": []
+    }
+  },
+  "errors": {
+    "buggy": {
+      "ext/misc/base64.c": "no compile entry",
+      "ext/misc/base85.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/misc/base64.c": "no compile entry",
+      "ext/misc/base85.c": "no compile entry"
+    }
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 46.89,
+    "analysis_seconds": {
+      "buggy": 15.1,
+      "fixed": 13.64
+    },
+    "total_seconds": 75.8
+  },
+  "report_dir": "tmp/validation/9b6bc61dbd97/a0ff4358"
+}

@@ -1,0 +1,300 @@
+[
+  {
+    "bundle": "KN-Double-Free-26dfab2f-1",
+    "commit": "26dfab2f8fd36fc3aba8c25c7c358530d9712c7a",
+    "files": [
+      "parser.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "parser.c",
+        11571,
+        "xmlIOParseDTD"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "parser.c",
+        11571,
+        "xmlIOParseDTD"
+      ]
+    ],
+    "mapping_original": {
+      "resource": [
+        "input"
+      ],
+      "ownership_consumer_frees_on_failure": [
+        "xmlNewIOInputStream"
+      ],
+      "deallocator": [
+        "xmlFreeParserInputBuffer"
+      ],
+      "null_on_failure": [
+        "xmlNewIOInputStream"
+      ],
+      "duplicate_cleanup": [
+        "xmlFreeParserInputBuffer"
+      ],
+      "context_cleanup": [
+        "xmlFreeParserCtxt"
+      ]
+    },
+    "mapping_ported": {
+      "resource": [
+        "input"
+      ],
+      "ownership_consumer_frees_on_failure": [
+        "xmlNewIOInputStream"
+      ],
+      "deallocator": [
+        "xmlFreeParserInputBuffer"
+      ],
+      "null_on_failure": [
+        "xmlNewIOInputStream"
+      ],
+      "duplicate_cleanup": [
+        "xmlFreeParserInputBuffer"
+      ],
+      "context_cleanup": [
+        "xmlFreeParserCtxt"
+      ]
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "commit": "c8eaf2236ff16667970f96f3f01e119c99d38ab2",
+    "files": [
+      "parser.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "parser.c",
+        470,
+        "unknown"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "parser.c",
+        470,
+        "unknown"
+      ]
+    ],
+    "mapping_original": {
+      "config_setter": [
+        "xmlCtxtSetMaxAmplification"
+      ],
+      "divisor_field": [
+        "maxAmpl"
+      ]
+    },
+    "mapping_ported": {
+      "config_setter": [
+        "xmlCtxtSetMaxAmplification"
+      ],
+      "divisor_field": [
+        "maxAmpl"
+      ]
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+    "commit": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1",
+    "files": [
+      "xmlregexp.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "xmlregexp.c",
+        740,
+        "xmlRegNewParserCtxt"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "xmlregexp.c",
+        740,
+        "xmlRegNewParserCtxt"
+      ]
+    ],
+    "mapping_original": {
+      "null_on_failure": [
+        "xmlStrdup",
+        "xmlMalloc"
+      ],
+      "length_of": [
+        "strlen"
+      ]
+    },
+    "mapping_ported": {
+      "null_on_failure": [
+        "xmlStrdup",
+        "xmlMalloc",
+        "xmlRealloc",
+        "xmlMemRealloc",
+        "xmlReallocLoc",
+        "xmlMallocLoc",
+        "xmlMemMalloc",
+        "xmlStrndup",
+        "xmlCharStrdup",
+        "xmlCharStrndup",
+        "xmlMemStrdup",
+        "xmlNewReference",
+        "xmlAllocOutputBuffer",
+        "xmlAllocParserInputBuffer",
+        "xmlNewNs",
+        "xmlNewPI",
+        "xmlNewDoc",
+        "xmlNewDtd",
+        "htmlNewDoc",
+        "xmlCopyDoc",
+        "xmlCopyDtd",
+        "xmlListDup",
+        "xmlNewNode",
+        "xmlNewProp",
+        "xmlNewText",
+        "xmlCopyNode",
+        "xmlCopyProp",
+        "xmlHashCopy",
+        "xmlNewChild",
+        "xmlNewDocPI",
+        "xmlNewMutex",
+        "xmlBufCreate",
+        "xmlCreateURI",
+        "xmlNewEntity",
+        "xmlNewNsProp"
+      ],
+      "length_of": [
+        "strlen",
+        "xmlStrlen",
+        "xmlMemSize",
+        "xmlDictSize",
+        "xmlHashSize",
+        "xmlListSize",
+        "xmlUTF8Size",
+        "xmlUTF8Strsize",
+        "xmlBufferLength",
+        "xmlChildElementCount",
+        "xmlOutputBufferGetSize",
+        "xmlNanoHTTPContentLength",
+        "xmlXPathNodeSetGetLength",
+        "xmlTextReaderAttributeCount"
+      ]
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+    "commit": "962bd10d01151d29190567e2d15ccf641be55063",
+    "files": [
+      "xmlmemory.c"
+    ],
+    "reports_original": 2,
+    "locations_original": [
+      [
+        "xmlmemory.c",
+        378,
+        "xmlGrowArray"
+      ],
+      [
+        "xmlmemory.c",
+        370,
+        "xmlGrowArray"
+      ]
+    ],
+    "reports_ported": 2,
+    "locations_ported": [
+      [
+        "xmlmemory.c",
+        378,
+        "xmlGrowArray"
+      ],
+      [
+        "xmlmemory.c",
+        370,
+        "xmlGrowArray"
+      ]
+    ],
+    "mapping_original": {
+      "nullable_inout_capacity_ptr": [
+        "capacity"
+      ],
+      "capacity_computer": [
+        "xmlGrowCapacity"
+      ],
+      "reallocator": [
+        "xmlRealloc"
+      ],
+      "deref_read": [],
+      "deref_write": [],
+      "null_guard": [],
+      "null_on_failure": []
+    },
+    "mapping_ported": {
+      "nullable_inout_capacity_ptr": [
+        "capacity"
+      ],
+      "capacity_computer": [
+        "xmlGrowCapacity"
+      ],
+      "reallocator": [
+        "xmlRealloc",
+        "xmlMemRealloc",
+        "xmlReallocLoc"
+      ],
+      "deref_read": [],
+      "deref_write": [],
+      "null_guard": [],
+      "null_on_failure": []
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-2",
+    "commit": "a7511af09f99995cdf81994db21f4eba564276b5",
+    "files": [
+      "xmlregexp.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "xmlregexp.c",
+        51,
+        "unknown"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "xmlregexp.c",
+        51,
+        "unknown"
+      ]
+    ],
+    "mapping_original": {
+      "lookahead": [
+        "NXT"
+      ],
+      "length_of": [
+        "len"
+      ]
+    },
+    "mapping_ported": {
+      "lookahead": [
+        "NXT"
+      ],
+      "length_of": [
+        "len"
+      ]
+    },
+    "preserved": true
+  }
+]

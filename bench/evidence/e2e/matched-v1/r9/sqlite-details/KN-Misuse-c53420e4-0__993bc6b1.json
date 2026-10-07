@@ -1,0 +1,12 @@
+{
+  "commit_id": "993bc6b171706b93fd787145c8c5e266a276f396",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/misc/regexp.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/misc/regexp.c": "no compile entry"
+    }
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "target": "lua",
+  "commit": "0b29f408433e92953cc72b1d3e06c7ac8139e439",
+  "candidates": 845,
+  "identifiers": 7300,
+  "offered": {
+    "duplicator": [
+      "lua_Alloc",
+      "luaL_alloc",
+      "luaH_new",
+      "luaM_new",
+      "luaS_new",
+      "lua_call",
+      "lua_copy",
+      "upisopen",
+      "CREATE_Ax",
+      "CREATE_sJ",
+      "luaD_call",
+      "luaS_init",
+      "luaT_init",
+      "luaX_init",
+      "luaZ_init",
+      "CREATE_ABx",
+      "luaopen_io",
+      "luaopen_os",
+      "CREATE_ABCk",
+      "luaT_callTM",
+      "makevariant",
+      "CREATE_vABCk",
+      "luaM_malloc_",
+      "luaopen_base",
+      "luaopen_math",
+      "luaopen_utf8",
+      "allocsizenode",
+      "debug_realloc",
+      "luaL_buffinit",
+      "luaL_makeseed",
+      "luaL_openlibs",
+      "luaM_realloc_",
+      "lua_getallocf",
+      "lua_setallocf",
+      "luai_openlibs",
+      "luaopen_debug",
+      "luaopen_table",
+      "luaB_opentests",
+      "luaT_callTMres",
+      "luaopen_string"
+    ],
+    "source_handle": [
+      "luaM_newobject",
+      "luaC_freeallobjects"
+    ],
+    "destination_allocator": [
+      "luaH_new",
+      "luaM_new",
+      "luaS_new",
+      "lua_call",
+      "lua_copy",
+      "upisopen",
+      "CREATE_Ax",
+      "CREATE_sJ",
+      "luaD_call",
+      "luaS_init",
+      "luaT_init",
+      "luaX_init",
+      "luaZ_init",
+      "lua_Alloc",
+      "CREATE_ABx",
+      "luaL_alloc",
+      "luaopen_io",
+      "luaopen_os",
+      "CREATE_ABCk",
+      "luaT_callTM",
+      "makevariant",
+      "CREATE_vABCk",
+      "luaM_malloc_",
+      "luaopen_base",
+      "luaopen_math",
+      "luaopen_utf8",
+      "allocsizenode",
+      "debug_realloc",
+      "luaL_buffinit",
+      "luaL_makeseed",
+      "luaL_openlibs",
+      "luaM_realloc_",
+      "lua_getallocf",
+      "lua_setallocf",
+      "luai_openlibs",
+      "luaopen_debug",
+      "luaopen_table",
+      "luaB_opentests",
+      "luaT_callTMres",
+      "luaopen_string"
+    ],
+    "field_copier": [
+      "lua_getfield",
+      "lua_setfield",
+      "luaL_getmetafield",
+      "nodefromval",
+      "lua_topointer",
+      "lua_pointer2str"
+    ]
+  },
+  "mapping": {
+    "duplicator": [
+      "lua_newthread"
+    ],
+    "source_handle": [
+      "L"
+    ],
+    "destination_allocator": [
+      "luaM_newobject",
+      "luaM_malloc_"
+    ],
+    "field_copier": []
+  },
+  "dropped_not_in_target": {
+    "duplicator": [
+      "luaE_newthread"
+    ],
+    "source_handle": [],
+    "destination_allocator": [],
+    "field_copier": []
+  },
+  "rationale": {
+    "duplicator": "Both create a new lua_State (destination) from a source lua_State L, copying fields and allocating the new state.",
+    "source_handle": "The source lua_State parameter in lua_newthread and luaE_newthread.",
+    "destination_allocator": "luaE_newthread allocates the new thread with luaM_newobject, which expands to luaM_malloc_.",
+    "field_copier": "Lua copies the state fields via direct assignment rather than a dedicated field-copy macro."
+  },
+  "llm_seconds": 235.1
+}

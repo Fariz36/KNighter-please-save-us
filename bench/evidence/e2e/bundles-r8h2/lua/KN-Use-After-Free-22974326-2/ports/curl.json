@@ -1,0 +1,108 @@
+{
+  "target": "curl",
+  "commit": "bb348b35e84c40c9564783d7585762b65038e8c5",
+  "candidates": 1820,
+  "identifiers": 38441,
+  "offered": {
+    "gc_managed_object": [
+      "Curl_pgrsTime",
+      "Curl_ipv6_scope",
+      "Curl_pgrsTimeWas",
+      "Curl_vquic_ctx_set_time",
+      "Curl_vquic_ctx_update_time",
+      "Curl_cf_ngtcp2_io_ctx_update_time"
+    ],
+    "potential_gc_trigger": [
+      "Curl_creds_merge"
+    ],
+    "gc_root_anchor": [
+      "curl_from_ccsid",
+      "Curl_http_req_make",
+      "Curl_peer_from_url",
+      "Curl_http_resp_make",
+      "Curl_os400_recvfrom",
+      "Curl_httpsrr_from_ares",
+      "Curl_ssl_peer_key_make",
+      "Curl_peer_from_proxy_url",
+      "Curl_socket_addr_from_ai",
+      "Curl_peer_from_connect_to",
+      "Curl_creader_def_resume_from"
+    ],
+    "weak_reference_container": [
+      "Curl_conn_keep_alive",
+      "Curl_cft_conn_keep_alive",
+      "Curl_cf_def_conn_keep_alive",
+      "Curl_conn_is_alive",
+      "curlcheck_postfields",
+      "Curl_cft_conn_is_alive",
+      "CURL_SHARE_KEEP_CONNECT",
+      "Curl_cf_def_conn_is_alive",
+      "curlcheck_postfields_option",
+      "Curl_cf_ngtcp2_cmn_conn_is_alive"
+    ],
+    "use_after_free_use": [
+      "curl_free",
+      "curlx_free",
+      "config_free",
+      "Curl_ws_free",
+      "Curl_req_free",
+      "curl_dbg_free",
+      "Curl_bufq_free",
+      "Curl_conn_free",
+      "curl_mime_free",
+      "curlx_dyn_free",
+      "tool_mime_free",
+      "Curl_bufcp_free",
+      "globalconf_free",
+      "Curl_bufref_free",
+      "Curl_dynhds_free",
+      "Curl_creader_free",
+      "Curl_cwriter_free",
+      "Curl_nghttp2_free",
+      "slist_wc_free_all",
+      "Curl_http_req_free",
+      "Curl_http_resp_free",
+      "Curl_httpchunk_free",
+      "Curl_vquic_ctx_free",
+      "curl_slist_free_all",
+      "Curl_h1_req_parse_free",
+      "Curl_ssl_free_certinfo",
+      "curl_certinfo_free_all",
+      "Curl_sspi_free_identity",
+      "Curl_thrdq_item_free_cb",
+      "Curl_gtls_shared_creds_free",
+      "Curl_ftp_parselist_data_free",
+      "Curl_free_idnconverted_hostname",
+      "Curl_cf_ngtcp2_h3_stream_ctx_free",
+      "sclose",
+      "connclose",
+      "ALLOC_SIZE",
+      "Curl_close",
+      "varcleanup",
+      "ALLOC_SIZE2",
+      "CURL_SCLOSE"
+    ]
+  },
+  "mapping": {
+    "gc_managed_object": [],
+    "potential_gc_trigger": [],
+    "gc_root_anchor": [],
+    "weak_reference_container": [],
+    "use_after_free_use": []
+  },
+  "dropped_not_in_target": {
+    "gc_managed_object": [],
+    "potential_gc_trigger": [],
+    "gc_root_anchor": [],
+    "weak_reference_container": [],
+    "use_after_free_use": []
+  },
+  "rationale": {
+    "gc_managed_object": "curl has no garbage-collected objects; all memory is manually managed.",
+    "potential_gc_trigger": "curl has no garbage collector, so there is no emergency GC operation.",
+    "gc_root_anchor": "curl has no GC roots or collector write barriers for anchoring objects.",
+    "weak_reference_container": "curl has no weak references managed by a garbage collector.",
+    "use_after_free_use": "curl has no GC-managed objects whose collection could cause this use-after-free pattern."
+  },
+  "llm_seconds": 37.5
+}

@@ -1,0 +1,8 @@
+## Bug Pattern
+
+An `allocator` creates a replacement object, and the resulting pointer is stored into an owned pointer field that may already reference a live allocation. The previous value is not passed to a `deallocator` before the overwrite, so the old allocation becomes unreachable and leaks.
+
+Roles in this patch:
+- `allocator`: `xmlMalloc` — allocates the replacement object.
+- `buffer_copy`: `memcpy` — fills the replacement object from the supplied template.
+- `deallocator`: `xmlFree` — must release the old owned pointer before replacing it; this release is missing in the buggy path.

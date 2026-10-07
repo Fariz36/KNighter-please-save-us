@@ -1,0 +1,39 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "triggerStepAllocate"
+      ],
+      "description": "allocates and returns a new object; may return NULL on failure"
+    },
+    "duplicator": {
+      "names": [
+        "sqlite3SrcListDup"
+      ],
+      "description": "creates and returns a new copy of an object; may return NULL on failure"
+    },
+    "null_on_failure": {
+      "names": [
+        "triggerStepAllocate",
+        "sqlite3SrcListDup"
+      ],
+      "description": "function that may return NULL on failure"
+    },
+    "container_insert": {
+      "names": [
+        "sqlite3SrcListAppendList"
+      ],
+      "description": "inserts/takes ownership of a value into a container"
+    },
+    "deallocator": {
+      "names": [
+        "sqlite3SrcListDelete"
+      ],
+      "description": "frees memory or an object; the pointer must not be used afterwards"
+    }
+  }
+}

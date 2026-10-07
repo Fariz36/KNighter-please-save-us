@@ -1,0 +1,34 @@
+{
+  "api_entry_point": [
+    "sqlite3session_changeset",
+    "sqlite3session_patchset",
+    "sqlite3changegroup_output",
+    "sqlite3rebaser_rebase",
+    "sqlite3changeset_start",
+    "sqlite3changeset_op",
+    "sqlite3changeset_new",
+    "sqlite3changeset_old",
+    "sqlite3rebaser_create"
+  ],
+  "out_param": [
+    "pnChangeset",
+    "ppChangeset",
+    "pnPatchset",
+    "ppPatchset",
+    "pnData",
+    "ppData",
+    "pnOut",
+    "ppOut",
+    "pp",
+    "pzTab",
+    "pnCol",
+    "pOp",
+    "pbIndirect",
+    "ppValue",
+    "ppNew"
+  ],
+  "out_param_writer": [
+    "sessionChangegroupOutput",
+    "sessionChangesetStart"
+  ]
+}

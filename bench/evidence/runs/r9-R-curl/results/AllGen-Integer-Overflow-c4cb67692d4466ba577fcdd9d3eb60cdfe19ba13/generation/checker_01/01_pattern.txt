@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The bug pattern is an integer-overflow/truncation flaw in a bounds check: a length or offset value obtained from an untrusted input parser is stored in an integer type narrower than the type used for the surrounding size arithmetic. When the offset and length are summed for validation against the received-message size, the narrow type can overflow/wrap, so the check may pass even though the computed offset+length exceeds the buffer. The subsequent buffer copy using that offset/length can then access out of bounds. The fix widens the length/offset variables to `size_t`.
+
+Roles:
+- `parser_input`: `Curl_read16_le` (reads 16-bit length/offset from the untrusted SMB response)
+- `buffer_copy`: `Curl_client_write` (writes the body data to the client using the unchecked offset/length)
+- `error_setter`: `failf` (reports the invalid packet when the bounds check fails)

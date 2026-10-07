@@ -1,0 +1,96 @@
+{
+  "target": "curl",
+  "commit": "bb348b35e84c40c9564783d7585762b65038e8c5",
+  "candidates": 1820,
+  "identifiers": 38441,
+  "offered": {
+    "config_setter": [
+      "Curl_addrinfo_set_port",
+      "Curl_cf_ngtcp2_h3_err_set",
+      "Curl_cf_ngtcp2_cmn_err_set",
+      "config_free",
+      "config_alloc",
+      "Curl_ssl_config_init",
+      "Curl_ssl_config_cleanup",
+      "Curl_ssl_conn_config_clone",
+      "Curl_ssl_conn_config_match",
+      "Curl_ssl_cf_get_easy_config",
+      "Curl_ssl_conn_config_update",
+      "Curl_ssl_conn_config_cleanup",
+      "Curl_ssl_cf_get_filter_config",
+      "Curl_ssl_filter_config_tmp_init",
+      "Curl_schannel_set_cached_cert_store",
+      "error",
+      "errorf",
+      "GSS_ERROR",
+      "Curl_failf",
+      "parseconfig",
+      "str2tls_max",
+      "curl_url_set",
+      "Curl_meta_set",
+      "SET_SOCKERRNO",
+      "SetHTTPrequest",
+      "config2setopts",
+      "curlx_strerror",
+      "Curl_bufref_set",
+      "Curl_expire_set",
+      "Curl_reset_fail",
+      "glob_show_error",
+      "Curl_creader_set",
+      "Curl_httpsrr_set",
+      "CURL_EASY_STR_SET",
+      "CURL_REQ_SET_RECV",
+      "CURL_REQ_SET_SEND",
+      "Curl_async_failed",
+      "Curl_url_get_port",
+      "curl_url_strerror",
+      "Curl_conn_meta_set"
+    ],
+    "divisor_field": [
+      "curlcheck_postfields",
+      "curlcheck_postfields_option",
+      "config_free",
+      "config_alloc",
+      "curlx_memzero",
+      "curlx_strzero",
+      "curlx_memzero_low",
+      "Curl_ssl_config_init",
+      "Curl_creader_is_paused",
+      "Curl_cwriter_is_paused",
+      "Curl_ssl_config_cleanup",
+      "Curl_cpool_conn_was_used",
+      "Curl_xfer_recv_is_paused",
+      "Curl_xfer_send_is_paused",
+      "Curl_xfer_write_is_paused",
+      "Curl_creader_def_is_paused",
+      "Curl_ssl_conn_config_clone",
+      "Curl_ssl_conn_config_match",
+      "Curl_vquic_tls_before_recv",
+      "Curl_ssl_cf_get_easy_config",
+      "Curl_ssl_conn_config_update",
+      "Curl_ssl_conn_config_cleanup",
+      "Curl_ssl_cf_get_filter_config",
+      "Curl_ssl_filter_config_tmp_init"
+    ]
+  },
+  "mapping": {
+    "config_setter": [],
+    "divisor_field": [
+      "max_recv_speed",
+      "max_send_speed",
+      "rate"
+    ]
+  },
+  "dropped_not_in_target": {
+    "config_setter": [
+      "Curl_setopt",
+      "get_param"
+    ],
+    "divisor_field": []
+  },
+  "rationale": {
+    "config_setter": "Curl_setopt and get_param are the general configuration setters in libcurl and the curl tool that store numeric options into divisor-valued fields such as max_recv_speed, max_send_speed, and rate.",
+    "divisor_field": "These configuration fields are used as divisors in rate-limiting arithmetic and must be checked for zero before division."
+  },
+  "llm_seconds": 253.5
+}

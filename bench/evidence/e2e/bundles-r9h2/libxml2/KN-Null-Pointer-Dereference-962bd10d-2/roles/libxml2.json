@@ -1,0 +1,8 @@
+{
+  "allocator": [
+    "xmlGrowArray"
+  ],
+  "reallocator": [
+    "xmlRealloc"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "commit_id": "6f1dfab6a29242525cdc7b48f5ee49269b9cc316",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/4c6e2c5e32b95ad38aac/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/ftp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 2,
+        "buggy_on_target": 2,
+        "fixed_on_target": 2,
+        "buggy_functions": [
+          "ftp_state_pasv_resp"
+        ],
+        "fixed_functions": [
+          "ftp_state_pasv_resp"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/ftp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/67ce67284258/lib/ftp.c",
+          "line": 2076,
+          "column": 37,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "One-byte out-of-bounds read",
+          "description": "Possible one-byte out-of-bounds read: delimiter byte is not checked for NUL before fixed-offset parse",
+          "issue_hash": "356bcdd64fa57849b3e0bb3a348b1997",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/6f1dfab6a292/5c0c978a/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_67ce67284258_lib_ftp.c/report-356bcd.html",
+          "relpath": "lib/ftp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/67ce67284258/lib/ftp.c",
+          "line": 2076,
+          "column": 18,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "One-byte out-of-bounds read",
+          "description": "Possible one-byte out-of-bounds read: delimiter byte is not checked for NUL before fixed-offset parse",
+          "issue_hash": "7db42ed113c1b71ee3b6274f95de15be",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/6f1dfab6a292/5c0c978a/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_67ce67284258_lib_ftp.c/report-7db42e.html",
+          "relpath": "lib/ftp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/ftp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/6f1dfab6a292/lib/ftp.c",
+          "line": 2076,
+          "column": 25,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "One-byte out-of-bounds read",
+          "description": "Possible one-byte out-of-bounds read: delimiter byte is not checked for NUL before fixed-offset parse",
+          "issue_hash": "3db3c30409863680e0c9588cf5d87ba1",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/6f1dfab6a292/5c0c978a/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_6f1dfab6a292_lib_ftp.c/report-3db3c3.html",
+          "relpath": "lib/ftp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/curl/src/6f1dfab6a292/lib/ftp.c",
+          "line": 2076,
+          "column": 44,
+          "function": "ftp_state_pasv_resp",
+          "bug_type": "One-byte out-of-bounds read",
+          "description": "Possible one-byte out-of-bounds read: delimiter byte is not checked for NUL before fixed-offset parse",
+          "issue_hash": "6d91e28b0e09b06d4a8ffb486e2eb909",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/6f1dfab6a292/5c0c978a/fixed/home_faris_RA-MrYudis_Knight_targets_.knighter-work_curl_src_6f1dfab6a292_lib_ftp.c/report-6d91e2.html",
+          "relpath": "lib/ftp.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 10.78,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 13.83,
+      "fixed": 13.7
+    },
+    "total_seconds": 38.51
+  },
+  "report_dir": "tmp/validation/6f1dfab6a292/5c0c978a"
+}

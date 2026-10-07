@@ -1,0 +1,17 @@
+{
+  "buffer_grow": [
+    "sqlite3StrAccumEnlargeIfNeeded"
+  ],
+  "required_capacity": [
+    "szBufNeeded"
+  ],
+  "write_pointer": [
+    "bufpt"
+  ],
+  "digit_set": [
+    "aDigits"
+  ],
+  "output_buffer": [
+    "zOut"
+  ]
+}

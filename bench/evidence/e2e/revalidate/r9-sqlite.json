@@ -1,0 +1,153 @@
+{
+  "summary": {
+    "run": "r9-R-sqlite",
+    "attempts": 14,
+    "unchanged": 14,
+    "perfect_before": 2,
+    "perfect_after": 2,
+    "commits_perfect_before": 2,
+    "commits_perfect_after": 2
+  },
+  "rows": [
+    {
+      "commit": "a7200804",
+      "attempt": "checker_00",
+      "old_tp": 0,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 0,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "a7200804",
+      "attempt": "checker_01",
+      "old_tp": 1,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 1,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "2f5d2817",
+      "attempt": "checker_01",
+      "old_tp": 0,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 0,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "720d3afa",
+      "attempt": "checker_00",
+      "old_tp": 1,
+      "old_tn": 1,
+      "old_perfect": true,
+      "tp": 1,
+      "tn": 1,
+      "perfect": true
+    },
+    {
+      "commit": "97467fa8",
+      "attempt": "checker_00",
+      "old_tp": 0,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 0,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "97467fa8",
+      "attempt": "checker_01",
+      "old_tp": 0,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 0,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "97467fa8",
+      "attempt": "checker_02",
+      "old_tp": 0,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 0,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "d87f8c49",
+      "attempt": "checker_00",
+      "old_tp": 1,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 1,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "d87f8c49",
+      "attempt": "checker_01",
+      "old_tp": 0,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 0,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "7b60ed80",
+      "attempt": "checker_00",
+      "old_tp": 0,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 0,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "7b60ed80",
+      "attempt": "checker_01",
+      "old_tp": 1,
+      "old_tn": 1,
+      "old_perfect": true,
+      "tp": 1,
+      "tn": 1,
+      "perfect": true
+    },
+    {
+      "commit": "1bc183a9",
+      "attempt": "checker_00",
+      "old_tp": 1,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 1,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "1bc183a9",
+      "attempt": "checker_01",
+      "old_tp": 1,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 1,
+      "tn": 0,
+      "perfect": false
+    },
+    {
+      "commit": "1bc183a9",
+      "attempt": "checker_02",
+      "old_tp": 1,
+      "old_tn": 0,
+      "old_perfect": false,
+      "tp": 1,
+      "tn": 0,
+      "perfect": false
+    }
+  ]
+}

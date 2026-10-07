@@ -1,0 +1,12 @@
+## Bug Pattern
+
+The code computes an unbounded byte length via pointer subtraction after advancing through an input string by up to `precision` logical characters, then narrows that length to a signed `int` without checking whether it exceeds `INT_MAX`. For oversized strings using the `%!.*s` conversion, UTF-8 expansion can make the byte length larger than `INT_MAX`; the cast truncates/wraps, producing an invalid `output_length` that is later used as a copy/append length. The fix clamps the measured length to `0x7ffffff0` before the cast.
+
+Roles:
+- `length_of`: `z - (unsigned char*)bufpt` after the `SQLITE_SKIP_UTF8` scan
+- `character_count_bound`: `precision` (the `%.*s` / `%!.*s` precision)
+- `iterator_advance`: `SQLITE_SKIP_UTF8`
+- `output_length`: `length`
+- `narrowing_cast`: `(int)` applied to the pointer difference
+- `safe_cap`: `MIN(..., 0x7ffffff0)` introduced by the fix
+- `buffer_append`: `sqlite3_str_append(pAccum, bufpt, length)` consuming the possibly-overflowed length

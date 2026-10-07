@@ -1,0 +1,158 @@
+{
+  "commit_id": "0c56eb8215bea9e8e4aa934e45c677e6e132cf68",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/06effd79eb538174565a/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 2,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "fuzz/api.c",
+        "analyzed_buggy": false,
+        "analyzed_fixed": false,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "LLVMFuzzerTestOneInput"
+        ],
+        "fixed_functions": [
+          "LLVMFuzzerTestOneInput"
+        ]
+      },
+      {
+        "path": "tree.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 2,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlNodeListGetRawString",
+          "xmlNodeListGetString"
+        ],
+        "fixed_functions": [
+          "xmlNodeListGetRawString",
+          "xmlNodeListGetString"
+        ]
+      },
+      {
+        "path": "valid.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlValidateElement"
+        ],
+        "fixed_functions": [
+          "xmlValidateElement"
+        ]
+      },
+      {
+        "path": "xmlreader.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlTextReaderGetAttributeNo",
+          "xmlTextReaderValue"
+        ],
+        "fixed_functions": [
+          "xmlTextReaderGetAttributeNo",
+          "xmlTextReaderValue"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "tree.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/b45a0f0eca7d-f6d22c8ac6c7/../../src/b45a0f0eca7d/tree.c",
+          "line": 4557,
+          "column": 8,
+          "function": "xmlCopyDtd",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "8a451c88c677b18777868b0e5db8bc18",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/0c56eb8215be/1df567ff/buggy/.._.._src_b45a0f0eca7d_tree.c/report-8a451c.html",
+          "relpath": "tree.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/b45a0f0eca7d-f6d22c8ac6c7/../../src/b45a0f0eca7d/tree.c",
+          "line": 4084,
+          "column": 8,
+          "function": "xmlCopyPropList",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "a0dad8ff238461057c92414c193312ea",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/0c56eb8215be/1df567ff/buggy/.._.._src_b45a0f0eca7d_tree.c/report-a0dad8.html",
+          "relpath": "tree.c"
+        }
+      ],
+      "valid.c": [],
+      "xmlreader.c": []
+    },
+    "fixed": {
+      "tree.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/0c56eb8215be-f6d22c8ac6c7/../../src/0c56eb8215be/tree.c",
+          "line": 4565,
+          "column": 8,
+          "function": "xmlCopyDtd",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "8a451c88c677b18777868b0e5db8bc18",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/0c56eb8215be/1df567ff/fixed/.._.._src_0c56eb8215be_tree.c/report-8a451c.html",
+          "relpath": "tree.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/libxml2/build/0c56eb8215be-f6d22c8ac6c7/../../src/0c56eb8215be/tree.c",
+          "line": 4092,
+          "column": 8,
+          "function": "xmlCopyPropList",
+          "bug_type": "Null Pointer Dereference",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "issue_hash": "a0dad8ff238461057c92414c193312ea",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/0c56eb8215be/1df567ff/fixed/.._.._src_0c56eb8215be_tree.c/report-a0dad8.html",
+          "relpath": "tree.c"
+        }
+      ],
+      "valid.c": [],
+      "xmlreader.c": []
+    }
+  },
+  "errors": {
+    "buggy": {
+      "fuzz/api.c": "no compile entry"
+    },
+    "fixed": {
+      "fuzz/api.c": "no compile entry"
+    }
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 5.31,
+    "analysis_seconds": {
+      "buggy": 66.92,
+      "fixed": 66.11
+    },
+    "total_seconds": 139.19
+  },
+  "report_dir": "tmp/validation/0c56eb8215be/1df567ff"
+}

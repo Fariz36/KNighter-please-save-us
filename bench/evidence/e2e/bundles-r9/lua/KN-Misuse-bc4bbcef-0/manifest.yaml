@@ -1,0 +1,64 @@
+id: KN-Misuse-bc4bbcef-0
+bug_type: Misuse
+source:
+  project: lua
+  description: Lua, a scripting language interpreter and C library written in ANSI C
+  commit: bc4bbcef651ba2870d6c68db16dc7d6ce6f68636
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A registry entry is created and **published/inserted before it is fully initialized**. The combined
+  lookup-and-insert API (`luaL_newmetatable`) creates the metatable and immediately stores it in the registry;
+  a later `init`-style call (`luaL_setfuncs`) can still raise an error. If that happens, the registry
+  keeps a partially initialized metatable. Later lookups see that the entry already exists and skip initialization,
+  so the incomplete metatable is reused. The fix creates an unpublished table, initializes it, and only
+  then inserts it into the registry.
+
+
+  Roles:
+
+  - `allocator`/creator: `luaL_newlibtable` creates the table without publishing it; in the buggy path,
+  `luaL_newmetatable` also creates the table.
+
+  - `init`: `luaL_setfuncs` initializes the metatable fields and may raise an error.
+
+  - `container_insert`: `luaL_newmetatable` publishes into the registry before initialization in the buggy
+  code; `lua_setfield` publishes only after initialization in the fixed code.
+
+  - `lookup`: `luaL_getmetatable` checks whether the registry entry already exists.
+
+  - `lookup`+`allocator`+`container_insert` combined: `luaL_newmetatable` performs all three and is therefore
+  unsafe when used before a fallible `init`.'
+roles:
+  allocator:
+    names:
+    - luaL_newmetatable
+    - luaL_newlibtable
+    description: creates a new object or memory region; may or may not publish it into a container
+  container_insert:
+    names:
+    - luaL_newmetatable
+    - lua_setfield
+    description: stores an object into a container or registry, making it visible to later lookups
+  lookup:
+    names:
+    - luaL_newmetatable
+    - luaL_getmetatable
+    description: checks whether a key already exists in a container or registry, usually without modifying
+      it
+  init:
+    names:
+    - luaL_setfuncs
+    description: initializes an object's contents and may fail or raise an error
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T16:54:17+0700

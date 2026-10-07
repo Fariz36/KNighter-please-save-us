@@ -1,0 +1,67 @@
+{
+  "commit_id": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-sqlite/plugin-cache/plugins/0ecd0762497b732dedbf/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/btree.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "accessPayload"
+        ],
+        "fixed_functions": [
+          "accessPayload"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/btree.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-sqlite/work/src/4cc2dbd54dba/src/btree.c",
+          "line": 5200,
+          "column": 35,
+          "function": "accessPayload",
+          "bug_type": "Integer Overflow in Cache Size Computation",
+          "description": "Potential integer overflow in cache element count; widen count to 64-bit before multiplying by element size",
+          "issue_hash": "30ee1a778e3e7c330a978066ca8ee776",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/720d3afa7eb0/c903a761/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-sqlite_work_src_4cc2dbd54dba_src_btree.c/report-30ee1a.html",
+          "relpath": "src/btree.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/btree.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.01,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 83.45,
+      "fixed": 84.87
+    },
+    "total_seconds": 168.85
+  },
+  "report_dir": "tmp/validation/720d3afa7eb0/c903a761"
+}

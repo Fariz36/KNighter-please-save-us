@@ -1,0 +1,24 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "length_var": {
+      "names": [
+        "len"
+      ],
+      "description": "variable holding a length value used in a size check"
+    },
+    "offset_var": {
+      "names": [
+        "off"
+      ],
+      "description": "variable holding an offset value used in a size check"
+    },
+    "size_check": {
+      "names": [],
+      "description": "integer addition used as a bounds check where overflow can bypass the check"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 17:26:18.188 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (sqlite), Repository Path: /home/faris/RA-MrYudis/Knight/targets/sqlite; plugin_build=standalone; validation_scoring=strict
+2026-10-07 17:26:31.350 | INFO     | backends.plugin_builder:build:364 - Built plugin 870b5d0b25c0da66324a (compile 7.1s, link 5.1s)
+2026-10-07 17:26:31.367 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision fb41f57de460
+2026-10-07 17:26:31.377 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 97467fa8fa32
+2026-10-07 17:26:31.767 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 97467fa8fa32: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"commit": "97467fa8", "attempt": "checker_00", "old_tp": 0, "old_tn": 0, "old_perfect": false, "tp": 0, "tn": 0, "perfect": false}
+2026-10-07 17:26:41.459 | INFO     | backends.plugin_builder:build:364 - Built plugin 15fa3cb7c17f26f8b0e0 (compile 18.9s, link 3.4s)
+2026-10-07 17:26:41.480 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 4cc2dbd54dba
+2026-10-07 17:26:41.486 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 720d3afa7eb0
+2026-10-07 17:26:41.597 | INFO     | backends.plugin_builder:build:364 - Built plugin d3e3b9db86eb8962792c (compile 19.1s, link 3.3s)
+2026-10-07 17:26:41.613 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 0d979c217fd5
+2026-10-07 17:26:41.625 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision a7200804eb4a
+2026-10-07 17:26:49.781 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7200804eb4a: TP=1 TN=1 (strict); strict=1/1 legacy=1/1
+{"commit": "a7200804", "attempt": "checker_01", "old_tp": 1, "old_tn": 1, "old_perfect": true, "tp": 1, "tn": 1, "perfect": true}
+2026-10-07 17:26:54.519 | INFO     | backends.plugin_builder:build:364 - Built plugin 7e3967e44b9f1a7b5f3f (compile 19.4s, link 3.3s)
+2026-10-07 17:26:54.530 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision b1541d2f1713
+2026-10-07 17:26:54.537 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision d87f8c496549
+2026-10-07 17:26:59.134 | INFO     | backends.plugin_builder:build:364 - Built plugin 3097bd91c9ce43de209a (compile 6.1s, link 3.2s)
+2026-10-07 17:26:59.153 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 73937f0ca880
+2026-10-07 17:26:59.153 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 7b60ed803b8d
+2026-10-07 17:27:02.380 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation d87f8c496549: TP=1 TN=1 (strict); strict=1/1 legacy=1/1
+{"commit": "d87f8c49", "attempt": "checker_00", "old_tp": 1, "old_tn": 1, "old_perfect": true, "tp": 1, "tn": 1, "perfect": true}
+2026-10-07 17:27:14.805 | INFO     | backends.plugin_builder:build:364 - Built plugin 695841ac9a8145992e63 (compile 52.3s, link 3.3s)
+2026-10-07 17:27:15.084 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 97467fa8fa32: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"commit": "97467fa8", "attempt": "checker_01", "old_tp": 0, "old_tn": 0, "old_perfect": false, "tp": 0, "tn": 0, "perfect": false}
+2026-10-07 17:27:23.448 | INFO     | backends.plugin_builder:build:364 - Built plugin 6b2da86096826e72cfb8 (compile 17.8s, link 3.3s)
+2026-10-07 17:27:24.941 | INFO     | backends.plugin_builder:build:364 - Built plugin 72e403174411cb48724d (compile 6.5s, link 3.3s)
+2026-10-07 17:27:26.678 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 7b60ed803b8d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"commit": "7b60ed80", "attempt": "checker_00", "old_tp": 0, "old_tn": 0, "old_perfect": false, "tp": 0, "tn": 0, "perfect": false}
+2026-10-07 17:27:37.399 | INFO     | backends.plugin_builder:build:364 - Built plugin 7c2e1c99015a81e814d4 (compile 7.5s, link 3.2s)
+2026-10-07 17:27:37.443 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 1bc183a93579
+2026-10-07 17:27:37.443 | INFO     | targets.compiledb:_setup_revision:180 - [sqlite] reuse configured revision 79837b6ee5d4
+2026-10-07 17:27:50.099 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 7b60ed803b8d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"commit": "7b60ed80", "attempt": "checker_01", "old_tp": 0, "old_tn": 0, "old_perfect": false, "tp": 0, "tn": 0, "perfect": false}
+2026-10-07 17:27:51.389 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 7b60ed803b8d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"commit": "7b60ed80", "attempt": "checker_02", "old_tp": 0, "old_tn": 0, "old_perfect": false, "tp": 0, "tn": 0, "perfect": false}
+2026-10-07 17:28:01.639 | INFO     | backends.plugin_builder:build:364 - Built plugin 6f919fcce9d67c98e5ac (compile 8.3s, link 3.2s)
+2026-10-07 17:28:30.663 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 1bc183a93579: TP=1 TN=0 (strict); strict=1/0 legacy=1/0
+{"commit": "1bc183a9", "attempt": "checker_00", "old_tp": 1, "old_tn": 0, "old_perfect": false, "tp": 1, "tn": 0, "perfect": false}
+2026-10-07 17:28:57.371 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 1bc183a93579: TP=1 TN=1 (strict); strict=1/1 legacy=1/1
+{"commit": "1bc183a9", "attempt": "checker_01", "old_tp": 1, "old_tn": 1, "old_perfect": true, "tp": 1, "tn": 1, "perfect": true}
+2026-10-07 17:29:20.774 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 720d3afa7eb0: TP=1 TN=1 (strict); strict=1/1 legacy=1/1
+{"commit": "720d3afa", "attempt": "checker_00", "old_tp": 1, "old_tn": 1, "old_perfect": true, "tp": 1, "tn": 1, "perfect": true}
+{"run": "r8-R-sqlite", "attempts": 10, "unchanged": 10, "perfect_before": 4, "perfect_after": 4, "commits_perfect_before": 4, "commits_perfect_after": 4}

@@ -1,0 +1,154 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 18:48:49.041 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+curl: 1455 mined fix candidates
+2026-10-07 18:48:50.479 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-e5a9d26f3db04d68)
+2026-10-07 18:48:50.507 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision bb348b35e84c
+2026-10-07 18:48:51.423 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 18:48:51.648 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 18:52:39.877 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 228.2s
+2026-10-07 18:52:39.893 | INFO     | role_porting:port_roles:226 - Ported KN-Double-Free-26dfab2f-1 roles to curl: {'resource': [], 'ownership_consumer_frees_on_failure': ['Curl_cf_create'], 'deallocator': ['curl_free', 'curlx_free', 'curl_dbg_free', 'free', 'curlx_safefree', 'Curl_cf_ngtcp2_h3_stream_ctx_free'], 'null_on_failure': ['Curl_cf_create'], 'duplicate_cleanup': ['free', 'curlx_free', 'curl_free', 'curl_dbg_free', 'curlx_safefree'], 'context_cleanup': []}
+2026-10-07 18:52:39.971 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 401bd5f2908f14e419f3
+2026-10-07 18:53:40.365 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision f13f320dee7e in 58.3s
+2026-10-07 18:53:41.920 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 74f750597483 in 57.7s
+2026-10-07 18:53:42.205 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 74f750597483: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 18:53:42.304 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 401bd5f2908f14e419f3
+2026-10-07 18:53:42.313 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision 6a43d0d74211
+2026-10-07 18:53:42.318 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision aba8043075f6
+2026-10-07 18:53:42.323 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for src/tool_ipfs.c at 6a43d0d74211
+2026-10-07 18:53:42.325 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for src/tool_operate.c at 6a43d0d74211
+2026-10-07 18:53:42.330 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for src/tool_ipfs.c at aba8043075f6
+2026-10-07 18:53:42.332 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for src/tool_operate.c at aba8043075f6
+2026-10-07 18:53:42.371 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 401bd5f2908f14e419f3
+2026-10-07 18:53:46.023 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for lib/http.h, including whole file (10.4KB)
+2026-10-07 18:53:46.082 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 401bd5f2908f14e419f3
+{"bundle": "KN-Double-Free-26dfab2f-1", "source": "libxml2", "target": "curl", "api_matched": 4, "pairs": [["74f75059", 0, 0], ["aba80430", null, null], ["68ffe6c1", null, null], ["c4c9e070", null, null]]}
+2026-10-07 18:53:50.601 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 18:53:50.674 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 18:58:04.184 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 253.5s
+2026-10-07 18:58:04.187 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c8eaf223-2 roles to curl: {'config_setter': [], 'divisor_field': ['max_recv_speed', 'max_send_speed', 'rate']}
+2026-10-07 18:58:04.366 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c32866ecc68db7925c60
+2026-10-07 18:59:49.767 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 11e248b782d9 in 103.7s
+2026-10-07 18:59:52.345 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision fc273027f16d in 104.4s
+2026-10-07 19:00:03.979 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation fc273027f16d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:00:04.078 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c32866ecc68db7925c60
+2026-10-07 19:01:14.467 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 8b1d2298358e in 68.9s
+2026-10-07 19:01:15.962 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision e492c7c52426 in 69.0s
+2026-10-07 19:01:15.967 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/http/testenv/mod_curltest/mod_curltest.c at 8b1d2298358e
+2026-10-07 19:01:24.672 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/http/testenv/mod_curltest/mod_curltest.c at e492c7c52426
+2026-10-07 19:01:32.054 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation e492c7c52426: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:01:32.136 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c32866ecc68db7925c60
+2026-10-07 19:02:44.568 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision bc1e405edea6 in 70.8s
+2026-10-07 19:02:46.195 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 0e4c1434ae3d in 70.7s
+2026-10-07 19:02:46.518 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 0e4c1434ae3d: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Misuse-c8eaf223-2", "source": "libxml2", "target": "curl", "api_matched": 3, "pairs": [["fc273027", 0, 0], ["e492c7c5", 0, 0], ["0e4c1434", 0, 0]]}
+2026-10-07 19:02:47.810 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 19:02:47.910 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:05:02.125 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 134.2s
+2026-10-07 19:05:02.131 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-79c6eef0-2 roles to curl: {'null_on_failure': ['curlx_malloc', 'curlx_calloc', 'curlx_realloc', 'curlx_strdup', 'curl_easy_init', 'curl_mime_init', 'curl_url_dup', 'Curl_fileinfo_alloc', 'Curl_ftp_parselist_data_alloc', 'Curl_MD5_init', 'Curl_HMAC_init', 'Curl_hsts_init', 'config_alloc', 'new_getout', 'curlx_fopen', 'curlx_fdopen', 'curlx_freopen', 'curl_dbg_fopen'], 'length_of': ['strlen', 'Curl_bufq_len', 'curlx_dyn_len', 'Curl_bufref_len', 'Curl_hash_count', 'Curl_llist_count', 'GetSizeParameter', 'Curl_dynhds_count', 'Curl_cshutdn_count', 'Curl_cwriter_count', 'Curl_bump_headersize', 'Curl_u8_strset_count', 'Curl_u32_ptrset_count', 'Curl_uint32_tbl_count', 'Curl_pgrsSetUploadSize', 'Curl_uint32_bset_count', 'Curl_uint32_tbl_resize', 'Curl_cshutdn_dest_count', 'Curl_uint32_bset_resize', 'Curl_pgrsSetDownloadSize', 'Curl_uint32_spbset_count', 'Curl_creader_total_length', 'Curl_pgrsSetUploadCounter', 'Curl_creader_client_length', 'Curl_ssl_push_certinfo_len', 'Curl_pgrsResetTransferSizes', 'Curl_creader_def_total_length', 'file2string', 'jsonWriteString', '__crt0_glob_function']}
+2026-10-07 19:05:02.266 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 73a94fb22118ff6989b8
+2026-10-07 19:06:01.468 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 50bd20abb215 in 56.9s
+2026-10-07 19:06:03.307 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision c2676bf9e639 in 56.6s
+2026-10-07 19:06:03.658 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation c2676bf9e639: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:06:03.802 | WARNING  | tools:get_function_codes:597 - Tree-sitter failed to find functions for lib/cfilters.h, including whole file (27.9KB)
+2026-10-07 19:06:04.288 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 73a94fb22118ff6989b8
+2026-10-07 19:07:08.134 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 59213abfb2fd in 62.0s
+2026-10-07 19:07:09.914 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 014be82a66f6 in 61.9s
+2026-10-07 19:07:09.931 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for src/tool_doswin.c at 59213abfb2fd
+2026-10-07 19:07:09.934 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1536.c at 59213abfb2fd
+2026-10-07 19:07:09.937 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/unit/unit1300.c at 59213abfb2fd
+2026-10-07 19:07:09.940 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/unit/unit1304.c at 59213abfb2fd
+2026-10-07 19:07:09.943 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/unit/unit1309.c at 59213abfb2fd
+2026-10-07 19:07:09.947 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/unit/unit1605.c at 59213abfb2fd
+2026-10-07 19:07:09.951 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/unit/unit1620.c at 59213abfb2fd
+2026-10-07 19:07:09.956 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/unit/unit2601.c at 59213abfb2fd
+2026-10-07 19:07:49.230 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for src/tool_doswin.c at 014be82a66f6
+2026-10-07 19:07:49.234 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/libtest/lib1536.c at 014be82a66f6
+2026-10-07 19:07:49.237 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/unit/unit1300.c at 014be82a66f6
+2026-10-07 19:07:49.242 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/unit/unit1304.c at 014be82a66f6
+2026-10-07 19:07:49.246 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/unit/unit1309.c at 014be82a66f6
+2026-10-07 19:07:49.249 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/unit/unit1605.c at 014be82a66f6
+2026-10-07 19:07:49.253 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/unit/unit1620.c at 014be82a66f6
+2026-10-07 19:07:49.257 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for tests/unit/unit2601.c at 014be82a66f6
+2026-10-07 19:08:23.164 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 014be82a66f6: TP=0 TN=0 (strict); strict=0/0 legacy=0/8
+2026-10-07 19:08:23.396 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 73a94fb22118ff6989b8
+2026-10-07 19:09:47.574 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 7d2382ebfacc in 79.5s
+2026-10-07 19:09:49.855 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision b825417043fa in 74.4s
+2026-10-07 19:09:49.861 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for src/tool_operhlp.c at 7d2382ebfacc
+2026-10-07 19:09:49.868 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for src/tool_operhlp.c at b825417043fa
+2026-10-07 19:09:49.942 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 73a94fb22118ff6989b8
+2026-10-07 19:10:59.998 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 0d560d00faaa in 67.8s
+2026-10-07 19:11:05.408 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 69efbcaa03b9 in 71.1s
+2026-10-07 19:11:06.275 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 69efbcaa03b9: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Null-Pointer-Dereference-79c6eef0-2", "source": "libxml2", "target": "curl", "api_matched": 15, "pairs": [["c2676bf9", 0, 0], ["014be82a", 0, 0], ["b8254170", null, null], ["69efbcaa", 0, 0]]}
+2026-10-07 19:11:08.405 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 19:11:08.660 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:15:01.093 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 232.4s
+2026-10-07 19:15:01.097 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-962bd10d-1 roles to curl: {'nullable_inout_capacity_ptr': ['capacity'], 'capacity_computer': ['Curl_uint32_tbl_resize', 'Curl_uint32_bset_resize'], 'reallocator': ['curlx_realloc', 'curl_dbg_realloc', 'Curl_nghttp2_realloc'], 'deref_read': [], 'deref_write': [], 'null_guard': [], 'null_on_failure': ['curlx_realloc', 'curl_dbg_realloc', 'Curl_nghttp2_realloc', 'Curl_uint32_tbl_resize', 'Curl_uint32_bset_resize']}
+{"bundle": "KN-Null-Pointer-Dereference-962bd10d-1", "source": "libxml2", "target": "curl", "api_matched": 0, "pairs": []}
+2026-10-07 19:15:01.947 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 19:15:02.005 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:17:37.503 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 155.5s
+2026-10-07 19:17:37.509 | INFO     | role_porting:port_roles:226 - Ported KN-Out-of-Bound-a7511af0-2 roles to curl: {'lookahead': [], 'length_of': ['buflen']}
+{"bundle": "KN-Out-of-Bound-a7511af0-2", "source": "libxml2", "target": "curl", "api_matched": 0, "pairs": []}
+2026-10-07 19:17:38.417 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 19:17:38.489 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:20:30.107 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 171.6s
+2026-10-07 19:20:30.121 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-10eb89d1-0 roles to curl: {'decoder_function': [], 'input_byte': ['c'], 'continuation_count': ['count']}
+2026-10-07 19:20:30.173 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit caf9a2fcb9236df2beab
+2026-10-07 19:21:27.694 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 57d349fe0eee in 55.7s
+2026-10-07 19:21:29.179 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision fef318553b97 in 55.3s
+2026-10-07 19:21:29.185 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for src/tool_urlglob.c at 57d349fe0eee
+2026-10-07 19:21:29.188 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for src/tool_urlglob.c at fef318553b97
+{"bundle": "KN-Integer-Overflow-10eb89d1-0", "source": "lua", "target": "curl", "api_matched": 1, "pairs": [["fef31855", null, null]]}
+2026-10-07 19:21:30.074 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 19:21:30.240 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:25:17.833 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 227.6s
+2026-10-07 19:25:17.839 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-bc4bbcef-0 roles to curl: {'combined_create_and_publish': ['Curl_peer_create'], 'object_initializer': ['Curl_MD5_init', 'Curl_HMAC_init', 'Curl_hsts_init', 'curl_easy_init', 'curl_mime_init', 'Curl_altsvc_init', 'Curl_cookie_init', 'Curl_cf_create', 'Curl_peer_create'], 'persistent_registry_lookup': ['Curl_meta_get', 'Curl_conn_meta_get', 'Curl_altsvc_lookup'], 'object_allocator': ['ALLOC_SIZE', 'ALLOC_SIZE2', 'config_alloc', 'Curl_fileinfo_alloc', 'Curl_ftp_parselist_data_alloc'], 'registry_store': ['Curl_ssl_setup_x509_store', 'Curl_wssl_setup_x509_store', 'Curl_schannel_set_cached_cert_store'], 'registry_key': ['Curl_ssl_peer_key_make']}
+2026-10-07 19:25:18.159 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 3afa90f2d2f566039a37
+2026-10-07 19:26:32.185 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 2f3e57b5dd53 in 72.1s
+2026-10-07 19:26:34.010 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 0f2876b2c33f in 72.2s
+2026-10-07 19:26:34.289 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 0f2876b2c33f: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Misuse-bc4bbcef-0", "source": "lua", "target": "curl", "api_matched": 1, "pairs": [["0f2876b2", 0, 0]]}
+2026-10-07 19:26:35.318 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 19:26:35.474 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:27:12.962 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 37.5s
+2026-10-07 19:27:12.966 | INFO     | role_porting:port_roles:226 - Ported KN-Use-After-Free-22974326-2 roles to curl: {'gc_managed_object': [], 'potential_gc_trigger': [], 'gc_root_anchor': [], 'weak_reference_container': [], 'use_after_free_use': []}
+{"bundle": "KN-Use-After-Free-22974326-2", "source": "lua", "target": "curl", "api_matched": 0, "pairs": []}
+2026-10-07 19:27:14.056 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 19:27:14.216 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:30:57.550 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 223.3s
+2026-10-07 19:30:57.552 | INFO     | role_porting:port_roles:226 - Ported KN-Buffer-Overflow-a7200804-1 roles to curl: {'buffer_grow': [], 'required_capacity': [], 'write_pointer': [], 'digit_set': ['digits'], 'output_buffer': []}
+{"bundle": "KN-Buffer-Overflow-a7200804-1", "source": "sqlite", "target": "curl", "api_matched": 0, "pairs": []}
+2026-10-07 19:30:58.402 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 19:30:58.644 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:33:49.407 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 170.8s
+2026-10-07 19:33:49.422 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-720d3afa-0 roles to curl: {'payload_length': ['Curl_creader_total_length', 'Curl_creader_client_length', 'Curl_creader_def_total_length'], 'local_payload_length': ['Curl_bufq_len', 'curlx_dyn_len', 'Curl_bufref_len'], 'overflow_chunk_size': [], 'overflow_page_cache': ['Curl_dnscache_add', 'Curl_dnscache_get', 'Curl_dnscache_init', 'Curl_dnscache_clear', 'Curl_dnscache_prune', 'Curl_dnscache_destroy', 'Curl_dnscache_add_negative', 'Curl_ssl_scache_put', 'Curl_ssl_scache_use', 'Curl_ssl_scache_lock', 'Curl_ssl_scache_take', 'Curl_ssl_scache_create', 'Curl_ssl_scache_return', 'Curl_ssl_scache_unlock', 'Curl_ssl_scache_add_obj', 'Curl_ssl_scache_destroy', 'Curl_ssl_scache_get_obj', 'Curl_ssl_scache_remove_all', 'Curl_ssl_scache_is_locked_by_current_thread', 'Curl_gtls_cache_session', 'Curl_wssl_cache_session', 'Curl_schannel_get_cached_cert_store', 'Curl_schannel_set_cached_cert_store', 'CURL_SHARE_ssl_scache'], 'reallocator': ['curlx_realloc', 'curl_dbg_realloc', 'Curl_nghttp2_realloc', 'Curl_uint32_tbl_resize', 'Curl_uint32_bset_resize'], 'allocated_size_query': [], 'zero_initializer': ['memset', 'curlx_memzero', 'curlx_strzero'], 'cache_index': [], 'too_narrow_arithmetic_type': ['size_t', 'uint32_t', 'int']}
+2026-10-07 19:33:49.523 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 15fa3cb7c17f26f8b0e0
+2026-10-07 19:34:43.536 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 860c57dffdc8 in 52.1s
+2026-10-07 19:34:45.214 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 248b92939aa6 in 52.1s
+2026-10-07 19:35:00.359 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 248b92939aa6: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:35:00.404 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 15fa3cb7c17f26f8b0e0
+2026-10-07 19:35:54.480 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision c1f1b66d78f2 in 52.3s
+2026-10-07 19:35:56.067 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision fbc4d59151dc in 52.0s
+2026-10-07 19:36:19.519 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation fbc4d59151dc: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 19:36:19.562 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 15fa3cb7c17f26f8b0e0
+2026-10-07 19:36:19.577 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for src/tool_urlglob.c at 57d349fe0eee
+2026-10-07 19:36:19.579 | WARNING  | backends.csa_compiledb:_validate_checker_compiledb:79 - No compile entry for src/tool_urlglob.c at fef318553b97
+2026-10-07 19:36:19.626 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 15fa3cb7c17f26f8b0e0
+2026-10-07 19:37:13.064 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision ec14be6a4db9 in 51.7s
+2026-10-07 19:37:14.298 | INFO     | targets.compiledb:_setup_revision:217 - [curl] configured revision 59fec5ac43ad in 51.3s
+2026-10-07 19:37:24.695 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 59fec5ac43ad: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Integer-Overflow-720d3afa-0", "source": "sqlite", "target": "curl", "api_matched": 4, "pairs": [["248b9293", 0, 0], ["fbc4d591", 0, 0], ["fef31855", null, null], ["59fec5ac", 0, 0]]}
+2026-10-07 19:37:25.573 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 19:37:25.765 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:39:24.352 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 118.6s
+2026-10-07 19:39:24.355 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-d87f8c49-0 roles to curl: {'length_of': [], 'character_count_bound': ['precision'], 'iterator_advance': [], 'output_length': ['length'], 'narrowing_cast': [], 'safe_cap': ['CURLMIN'], 'buffer_append': ['curlx_dyn_addn']}
+2026-10-07 19:39:24.414 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 7e3967e44b9f1a7b5f3f
+2026-10-07 19:39:33.943 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:151 - Validation 59fec5ac43ad: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Integer-Overflow-d87f8c49-0", "source": "sqlite", "target": "curl", "api_matched": 1, "pairs": [["59fec5ac", 0, 0]]}
+2026-10-07 19:39:34.895 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 19:39:35.038 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 19:44:22.052 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 287.0s
+2026-10-07 19:44:22.056 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-1bc183a9-1 roles to curl: {'tokenizer': ['curlx_str_quotedword'], 'dequote_helper': ['parse_cert_parameter'], 'illegal_token_sentinel': [], 'dequoter_with_precondition': ['curlx_str_quotedword'], 'caller_ignoring_sentinel': ['parse_cert_parameter']}
+{"bundle": "KN-Misuse-1bc183a9-1", "source": "sqlite", "target": "curl", "api_matched": 0, "pairs": []}

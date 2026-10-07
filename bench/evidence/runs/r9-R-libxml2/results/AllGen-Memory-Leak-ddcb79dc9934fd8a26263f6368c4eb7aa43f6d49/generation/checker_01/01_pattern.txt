@@ -1,0 +1,11 @@
+## Bug Pattern
+
+The pattern is an ownership leak: the result of an `allocator` is stored by overwriting an already-owned pointer, but the previous value is not released with a `deallocator`/`ref_put` first. The old allocation becomes unreachable. The fix avoids the extra allocation by updating the existing object in place.
+
+Roles in this patch:
+- `allocator`: `xmlMalloc`
+- `null_on_failure`: `xmlMalloc`
+- `buffer_copy`: `memcpy`
+- `deallocator` (missing for the overwritten value): `xmlFree` / parser-context cleanup
+
+In the buggy `xmlCtxtSetSaxHandler`, `xmlMalloc` creates a copy and `ctxt->sax` is overwritten without freeing the previous handler, causing a memory leak.

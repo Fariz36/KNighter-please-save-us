@@ -1,0 +1,10 @@
+## Bug Pattern
+
+The bug pattern is that a `duplicator`/setter accepts a caller-supplied descriptor containing a data pointer and a length, validates the length but does not check that the data pointer is non-NULL before using it as the source of a `buffer_copy` or before storing it in the newly allocated duplicate. With a non-zero length and a NULL data pointer, this causes a NULL dereference in the copy path, or later when the stored pointer is used.
+
+Roles:
+- `duplicator`: `Curl_setblobopt`
+- `allocator`: `curlx_malloc`
+- `deallocator`: `curlx_safefree`
+- `buffer_copy`: `memcpy`
+- `untrusted_size`: the caller-provided length used as the `buffer_copy` size and allocation size

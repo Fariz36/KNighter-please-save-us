@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A reusable state object has a field that is mutated during an operation and must start from a known initial value for every operation. That field is initialized only by the one-time `init` routine, not by the per-operation `init`/reset routine. If an operation aborts through an `error_setter` (longjmp/exception) before restoring the field, the next invocation reuses the stale value. The `aborting_assert` only checks the invariant in debug builds, so production code is left with the inconsistent state. The per-operation initializer must reset every field that can change during an operation.
+
+Roles:
+- `init`: `prepstate` (one-time state initialization), `reprepstate` (per-operation state reset)
+- `error_setter`: `luaL_error`
+- `aborting_assert`: `lua_assert`

@@ -1,0 +1,6 @@
+{
+  "init": [
+    "curl_easy_setopt",
+    "curl_multi_setopt"
+  ]
+}

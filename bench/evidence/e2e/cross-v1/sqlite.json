@@ -1,0 +1,433 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-bc440a89-1",
+    "source": "curl",
+    "target": "sqlite",
+    "mapping": {
+      "encoded_size_calculator": [],
+      "input_length": [],
+      "max_input_size": [],
+      "error_sentinel": []
+    },
+    "unmapped_roles": [
+      "encoded_size_calculator",
+      "input_length",
+      "max_input_size",
+      "error_sentinel"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Memory-Leak-a0f08d69-0",
+    "source": "curl",
+    "target": "sqlite",
+    "mapping": {
+      "cleanup": [
+        "sqlite3SchemaClear"
+      ],
+      "destructor": [
+        "sqlite3FreeIndex"
+      ],
+      "state_reset": [
+        "sqlite3ResetOneSchema"
+      ],
+      "link_detach": [
+        "sqlite3UnlinkAndDeleteIndex"
+      ],
+      "link_storage": []
+    },
+    "unmapped_roles": [
+      "link_storage"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 296.6
+  },
+  {
+    "bundle": "KN-Misuse-c53420e4-0",
+    "source": "curl",
+    "target": "sqlite",
+    "mapping": {
+      "data_provider": [
+        "sqlite3PagerGetData",
+        "fts5BufferSet"
+      ],
+      "length_provider": [
+        "sqlite3Utf16ByteLen",
+        "sqlite3Utf8ReadLimited"
+      ],
+      "unbounded_string_consumer": [
+        "sqlite3DebugPrintf",
+        "sqlite3Fts5BufferAppendPrintf",
+        "sqlite3Fts5BufferAppendString",
+        "sqlite3SetString",
+        "sqlite3VdbeLoadString",
+        "sqlite3AtoF",
+        "sqlite3ExprAddCollateString",
+        "sqlite3VdbeUsesDoubleQuotedString",
+        "sqlite3FindFunction",
+        "sqlite3FunctionSearch"
+      ],
+      "bounded_nul_scanner": [
+        "sqlite3Utf16ByteLen"
+      ],
+      "bounded_string_formatter": [
+        "sqlite3DebugPrintf",
+        "sqlite3Fts5BufferAppendPrintf"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 443.1
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-466c06cf-1",
+    "source": "curl",
+    "target": "sqlite",
+    "mapping": {
+      "duplicator": [
+        "sqlite3ExprDup",
+        "sqlite3WithDup",
+        "sqlite3IdListDup",
+        "sqlite3SelectDup",
+        "sqlite3UpsertDup",
+        "sqlite3WindowDup",
+        "sqlite3SrcListDup",
+        "sqlite3ExprListDup",
+        "sqlite3WindowListDup"
+      ],
+      "source_handle": [],
+      "destination_allocator": [],
+      "field_copier": []
+    },
+    "unmapped_roles": [
+      "source_handle",
+      "destination_allocator",
+      "field_copier"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 326.9
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+    "source": "curl",
+    "target": "sqlite",
+    "mapping": {
+      "api_entry_point": [
+        "sqlite3Fts5HashScanEntry",
+        "sqlite3Checkpoint",
+        "sqlite3FindInIndex",
+        "sqlite3Fts3ReadInt",
+        "sqlite3WalSavepoint"
+      ],
+      "out_param": [
+        "sqlite3changegroup_output",
+        "sqlite3changegroup_output_strm",
+        "sqlite3Fts3GetVarintU",
+        "sqlite3LookasideUsed",
+        "sqlite3VdbeMemSetPointer"
+      ],
+      "out_param_writer": [
+        "sqlite3Fts3GetVarintU",
+        "sqlite3VdbeMemSetPointer"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 343.4
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2",
+    "source": "curl",
+    "target": "sqlite",
+    "mapping": {
+      "length_field": [
+        "sqlite3Fts5BufferSet",
+        "sqlite3Fts5BufferAppendBlob",
+        "sqlite3Fts5BufferSize",
+        "fts5BufferSet",
+        "fts5BufferAppendBlob",
+        "fts5BufferGrow"
+      ],
+      "data_pointer": [
+        "sqlite3Fts5BufferSet",
+        "sqlite3Fts5BufferAppendBlob",
+        "fts5BufferSet",
+        "fts5BufferAppendBlob"
+      ],
+      "buffer_copy": [
+        "sqlite3Fts5BufferSet",
+        "sqlite3Fts5BufferAppendBlob",
+        "fts5BufferSet",
+        "fts5BufferAppendBlob"
+      ],
+      "error_return": [
+        "sqlite3NomemError",
+        "sqlite3MisuseError"
+      ],
+      "copy_flag": [],
+      "allocator": [
+        "sqlite3Malloc",
+        "sqlite3MallocZero",
+        "sqlite3DbMallocRaw",
+        "sqlite3DbMallocZero",
+        "sqlite3PageMalloc"
+      ],
+      "deallocator": [],
+      "validation_guard": []
+    },
+    "unmapped_roles": [
+      "copy_flag",
+      "deallocator",
+      "validation_guard"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 278.7
+  },
+  {
+    "bundle": "KN-Double-Free-26dfab2f-1",
+    "source": "libxml2",
+    "target": "sqlite",
+    "mapping": {
+      "resource": [],
+      "ownership_consumer_frees_on_failure": [],
+      "deallocator": [],
+      "null_on_failure": [],
+      "duplicate_cleanup": [],
+      "context_cleanup": []
+    },
+    "unmapped_roles": [
+      "resource",
+      "ownership_consumer_frees_on_failure",
+      "deallocator",
+      "null_on_failure",
+      "duplicate_cleanup",
+      "context_cleanup"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Misuse-c8eaf223-2",
+    "source": "libxml2",
+    "target": "sqlite",
+    "mapping": {
+      "config_setter": [
+        "sqlite3Fts5ConfigSetValue",
+        "sqlite3Fts5StorageConfigValue",
+        "sqlite3_expert_config",
+        "sqlite3session_config",
+        "sqlite3_recover_config",
+        "sqlite3changegroup_config",
+        "sqlite3session_object_config"
+      ],
+      "divisor_field": []
+    },
+    "unmapped_roles": [
+      "divisor_field"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 172.6
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+    "source": "libxml2",
+    "target": "sqlite",
+    "mapping": {
+      "null_on_failure": [
+        "sqlite3Malloc",
+        "sqlite3MallocZero",
+        "sqlite3PageMalloc",
+        "sqlite3DbMallocRaw",
+        "sqlite3WhereMalloc",
+        "sqlite3DbMallocZero",
+        "sqlite3ExprFunction",
+        "sqlite3DbMallocRawNN",
+        "sqlite3Fts3MallocZero",
+        "sqlite3Fts5MallocZero"
+      ],
+      "length_of": [
+        "sqlite3CodeRhsOfIN",
+        "sqlite3ExprFunction",
+        "sqlite3FindFunction",
+        "sqlite3Fts3GetVarintU",
+        "sqlite3FunctionSearch",
+        "sqlite3IsLikeFunction",
+        "sqlite3VdbeLoadString",
+        "sqlite3ExprFunctionUsable",
+        "sqlite3ExprListCheckLength",
+        "sqlite3VdbeAddFunctionCall",
+        "sqlite3ExprAddCollateString",
+        "sqlite3VtabOverloadFunction",
+        "sqlite3ExprAddFunctionOrderBy",
+        "sqlite3Fts5BufferAppendString",
+        "sqlite3ExprIsConstantOrFunction",
+        "sqlite3VdbeUsesDoubleQuotedString",
+        "sqlite3AtoF",
+        "sqlite3VtabInSync",
+        "sqlite3ExprCheckIN",
+        "sqlite3FindInIndex",
+        "sqlite3TempInMemory",
+        "sqlite3UpsertOfIndex",
+        "sqlite3KeyInfoOfIndex",
+        "sqlite3NoTempsInRange",
+        "sqlite3ValueIsOfClass",
+        "sqlite3BtreeIsInBackup"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 212.5
+  },
+  {
+    "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+    "source": "libxml2",
+    "target": "sqlite",
+    "mapping": {
+      "nullable_inout_capacity_ptr": [],
+      "capacity_computer": [
+        "fts5BufferGrow",
+        "sqlite3VdbeMemGrow"
+      ],
+      "reallocator": [
+        "sqlite3DbReallocOrFree",
+        "sqlite3Realloc",
+        "sqlite3DbRealloc",
+        "sqlite3WhereRealloc"
+      ],
+      "deref_read": [],
+      "deref_write": [],
+      "null_guard": [],
+      "null_on_failure": []
+    },
+    "unmapped_roles": [
+      "nullable_inout_capacity_ptr",
+      "deref_read",
+      "deref_write",
+      "null_guard",
+      "null_on_failure"
+    ],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 205.3
+  },
+  {
+    "bundle": "KN-Out-of-Bound-a7511af0-2",
+    "source": "libxml2",
+    "target": "sqlite",
+    "mapping": {
+      "lookahead": [],
+      "length_of": []
+    },
+    "unmapped_roles": [
+      "lookahead",
+      "length_of"
+    ],
+    "status": "no equivalent roles in target"
+  },
+  {
+    "bundle": "KN-Integer-Overflow-10eb89d1-0",
+    "source": "lua",
+    "target": "sqlite",
+    "mapping": {
+      "decoder_function": [
+        "sqlite3Fts5DecodeLocaleValue"
+      ],
+      "input_byte": [
+        "ONE_BYTE_INT",
+        "TWO_BYTE_INT",
+        "THREE_BYTE_INT",
+        "FOUR_BYTE_INT",
+        "FOUR_BYTE_U64",
+        "FOUR_BYTE_UINT",
+        "SIX_BYTE_INT"
+      ],
+      "continuation_count": [
+        "sqlite3ValueBytes",
+        "sqlite3Utf16ByteLen",
+        "sqlite3Fts3GetVarintU"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 334.1
+  },
+  {
+    "bundle": "KN-Misuse-bc4bbcef-0",
+    "source": "lua",
+    "target": "sqlite",
+    "mapping": {
+      "combined_create_and_publish": [
+        "sqlite3VtabCallCreate",
+        "sqlite3Fts5CreateTable",
+        "sqlite3BtreeCreateTable",
+        "sqlite3Fts3CreateStatTable",
+        "sqlite3CreateFunc"
+      ],
+      "object_initializer": [
+        "sqlite3RowSetInit",
+        "sqlite3ParseObjectInit"
+      ],
+      "persistent_registry_lookup": [
+        "sqlite3PagerLookup"
+      ],
+      "object_allocator": [
+        "sqlite3ExprAlloc",
+        "sqlite3MutexAlloc",
+        "sqlite3ParserAlloc",
+        "sqlite3WindowAlloc",
+        "sqlite3KeyInfoAlloc",
+        "sqlite3AllocateIndexObject",
+        "sqlite3_mutex_alloc",
+        "sqlite3StackAllocRaw",
+        "sqlite3StackAllocRawNN"
+      ],
+      "registry_store": [
+        "AtomicStore"
+      ],
+      "registry_key": [
+        "fts3HashKey"
+      ]
+    },
+    "unmapped_roles": [],
+    "reports": 0,
+    "triage": [],
+    "status": "scanned",
+    "seconds": 289.4
+  },
+  {
+    "bundle": "KN-Use-After-Free-22974326-2",
+    "source": "lua",
+    "target": "sqlite",
+    "mapping": {
+      "gc_managed_object": [],
+      "potential_gc_trigger": [],
+      "gc_root_anchor": [],
+      "weak_reference_container": [],
+      "use_after_free_use": []
+    },
+    "unmapped_roles": [
+      "gc_managed_object",
+      "potential_gc_trigger",
+      "gc_root_anchor",
+      "weak_reference_container",
+      "use_after_free_use"
+    ],
+    "status": "no equivalent roles in target"
+  }
+]

@@ -1,0 +1,68 @@
+id: KN-Null-Pointer-Dereference-962bd10d-1
+bug_type: Null-Pointer-Dereference
+source:
+  project: libxml2
+  description: libxml2, the XML parsing and manipulation library written in C
+  commit: 962bd10d01151d29190567e2d15ccf641be55063
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A pointer parameter that acts as an in/out capacity slot is dereferenced without a preceding `null_guard`.
+  In `xmlGrowArray`, `capacity` is read through `*capacity` when calling `xmlGrowCapacity` and later written
+  through `*capacity = newSize`; if the caller passes `NULL`, this causes a NULL-pointer dereference.
+  The fix adds a `null_guard` at function entry before any dereference.
+
+
+  Roles:
+
+  - `nullable_inout_capacity_ptr`: `capacity`
+
+  - `capacity_computer`: `xmlGrowCapacity`
+
+  - `deref_read`: `*capacity` passed to `xmlGrowCapacity`
+
+  - `deref_write`: `*capacity = newSize`
+
+  - `null_guard`: `if (capacity == NULL) return(NULL);` added by the patch
+
+  - `reallocator`: `xmlRealloc`
+
+  - `null_on_failure`: `xmlRealloc` returning `NULL`; `xmlGrowCapacity` returning a negative value'
+roles:
+  nullable_inout_capacity_ptr:
+    names:
+    - capacity
+    description: pointer parameter used as an in/out capacity slot; must be null-checked before dereference
+  capacity_computer:
+    names:
+    - xmlGrowCapacity
+    description: function that computes a new capacity from the current capacity value
+  reallocator:
+    names:
+    - xmlRealloc
+    description: memory reallocation function
+  deref_read:
+    names: []
+    description: read through the capacity pointer, e.g., *capacity
+  deref_write:
+    names: []
+    description: write through the capacity pointer, e.g., *capacity = newSize
+  null_guard:
+    names: []
+    description: early-return null check, e.g., if (capacity == NULL) return NULL;
+  null_on_failure:
+    names: []
+    description: condition indicating failure, e.g., realloc returning NULL or capacity computer returning
+      negative
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: 3c44401b20c9b0cfdf2951dd290b1bc9192d6362
+exported: 2026-10-01T20:44:10+0700

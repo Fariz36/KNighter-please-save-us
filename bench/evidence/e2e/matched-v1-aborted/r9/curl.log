@@ -1,0 +1,17 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 18:02:56.236 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (curl), Repository Path: /home/faris/RA-MrYudis/Knight/targets/curl; plugin_build=standalone; validation_scoring=strict
+curl: 1455 mined fix candidates
+2026-10-07 18:02:57.321 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-9d8dc18a931b4fb0)
+2026-10-07 18:02:57.338 | INFO     | targets.compiledb:_setup_revision:180 - [curl] reuse configured revision bb348b35e84c
+2026-10-07 18:02:58.304 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 18:02:58.411 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 18:06:21.788 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 203.4s
+2026-10-07 18:06:21.792 | INFO     | role_porting:port_roles:226 - Ported KN-Double-Free-26dfab2f-2 roles to curl: {'parser_input': ['Curl_cf_create'], 'null_on_failure': ['Curl_cf_create'], 'deallocator': ['Curl_vquic_ctx_free', 'Curl_cf_ngtcp2_h3_stream_ctx_free', 'Curl_bufq_free', 'Curl_ws_free']}
+{"bundle": "KN-Double-Free-26dfab2f-2", "source": "libxml2", "target": "curl", "api_matched": 0, "pairs": []}
+2026-10-07 18:06:22.816 | INFO     | role_porting:port_roles:174 - curl: 1820 candidate API names from headers, 38441 identifiers in sources
+2026-10-07 18:06:22.869 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 18:11:56.087 | ERROR    | model:invoke_llm:347 - Error attempt 1 [port_roles]: The read operation timed out
+2026-10-07 18:15:29.861 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 211.8s
+2026-10-07 18:15:29.863 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c8eaf223-2 roles to curl: {'init': ['Curl_vsetopt', 'curl_easy_setopt']}
+2026-10-07 18:15:29.962 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c872a13f674285de3a33

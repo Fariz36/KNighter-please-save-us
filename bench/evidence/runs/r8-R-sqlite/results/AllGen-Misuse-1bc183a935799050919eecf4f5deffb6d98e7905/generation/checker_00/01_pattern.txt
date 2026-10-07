@@ -1,0 +1,11 @@
+## Bug Pattern
+
+A tokenizer/classifier returns both a token length and a token type, but one possible type is an invalid/illegal sentinel. The code forwards the token text to a dequote/normalizer routine without first checking that token type. The dequote routine assumes the token is a syntactically valid quoted token; an illegal token such as an unterminated quote can therefore trigger an assertion inside the dequote routine. The fix is to propagate the token type into the comparison helper and reject `TK_ILLEGAL` before dequoting.
+
+Roles in this patch:
+- tokenizer/classifier: `getConstraintToken` (returns token length and sets `t`)
+- invalid-token sentinel: `TK_ILLEGAL`
+- dequote/normalizer: `sqlite3Dequote`
+- dequote-and-compare wrapper: `quotedCompare`
+- callers that must check the token type before dequoting: `findConstraintFunc`, `dropConstraintFunc`
+- comparison result setter: `*pRes` (set to nonzero when the token is illegal)

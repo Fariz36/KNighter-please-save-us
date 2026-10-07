@@ -1,0 +1,4 @@
+curl 66057
+libxml2 66058
+lua 66059
+sqlite 66060

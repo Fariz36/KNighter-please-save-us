@@ -1,0 +1,17 @@
+{
+  "length_of": [],
+  "character_count_bound": [
+    "precision"
+  ],
+  "iterator_advance": [],
+  "output_length": [
+    "length"
+  ],
+  "narrowing_cast": [],
+  "safe_cap": [
+    "CURLMIN"
+  ],
+  "buffer_append": [
+    "curlx_dyn_addn"
+  ]
+}

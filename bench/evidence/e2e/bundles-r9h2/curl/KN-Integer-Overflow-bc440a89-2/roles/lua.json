@@ -1,0 +1,9 @@
+{
+  "length_of": [
+    "sizeudata",
+    "sizestrshr",
+    "sizeCclosure",
+    "sizeLclosure",
+    "luaS_sizelngstr"
+  ]
+}

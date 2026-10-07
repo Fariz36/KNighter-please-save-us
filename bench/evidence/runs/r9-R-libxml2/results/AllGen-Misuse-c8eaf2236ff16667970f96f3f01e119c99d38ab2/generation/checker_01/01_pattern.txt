@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A caller-configurable numeric limit is stored in a parser context by a configuration setter and later used as the divisor of a division in a parser check. The setter accepts a zero value and the division site does not guard against zero, so setting the limit to zero causes division by zero/SIGFPE. The invariant that a divisor must be non-zero is neither enforced at the setter nor checked before the division.
+
+Roles:
+- configuration_setter: `xmlCtxtSetMaxAmplification` — accepts and stores the caller-supplied limit; must reject zero if the value is later used as a divisor
+- parser_check: `xmlParserEntityCheck` — performs the division; must guard against a zero divisor
+- error_setter: `xmlFatalErrMsg` — reports the resource-limit error once the check is valid

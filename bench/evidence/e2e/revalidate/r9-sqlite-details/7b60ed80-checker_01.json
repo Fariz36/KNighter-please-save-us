@@ -1,0 +1,67 @@
+{
+  "commit_id": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/2ec40654c387ec060cee/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/trigger.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "sqlite3TriggerUpdateStep"
+        ],
+        "fixed_functions": [
+          "sqlite3TriggerUpdateStep"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/trigger.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/targets/.knighter-work/sqlite/src/73937f0ca880/src/trigger.c",
+          "line": 597,
+          "column": 3,
+          "function": "sqlite3TriggerUpdateStep",
+          "bug_type": "Memory Leak",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "issue_hash": "354d0750e07c4e47956cd5a3899dce71",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/validation/7b60ed803b8d/2a6e3f2f/buggy/home_faris_RA-MrYudis_Knight_targets_.knighter-work_sqlite_src_73937f0ca880_src_trigger.c/report-354d07.html",
+          "relpath": "src/trigger.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/trigger.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 13.16,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 14.66,
+      "fixed": 14.8
+    },
+    "total_seconds": 42.71
+  },
+  "report_dir": "tmp/validation/7b60ed803b8d/2a6e3f2f"
+}

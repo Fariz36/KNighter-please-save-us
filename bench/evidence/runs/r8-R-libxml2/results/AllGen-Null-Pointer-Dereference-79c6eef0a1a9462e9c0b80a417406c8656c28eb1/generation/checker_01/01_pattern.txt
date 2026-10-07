@@ -1,0 +1,10 @@
+## Bug Pattern
+
+The result of a `null_on_failure` allocation/duplication call is used by a `length_of` operation before it is checked for NULL. In this patch, `xmlStrdup()` can return NULL, but `strlen()` is called on that result before the NULL check, causing a NULL pointer dereference if allocation fails.
+
+Roles:
+- `allocator` / `string_duplicator`: `xmlStrdup` (and `xmlMalloc` for the context)
+- `null_on_failure`: the value assigned to `ret->string` by `xmlStrdup`
+- `length_of`: `strlen`
+- `null_check`: `if (ret->string == NULL)`
+- `deallocator` / `cleanup`: `xmlFree`

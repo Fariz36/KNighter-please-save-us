@@ -1,0 +1,70 @@
+id: KN-Misuse-c53420e4-0
+bug_type: Misuse
+source:
+  project: curl
+  description: curl, the C library (libcurl) for transferring data with URLs
+  commit: c53420e42742a68004854a7fa354f9500b4b1516
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A length-delimited buffer from a certificate/ASN.1 accessor is treated as a NUL-terminated C string.
+  The explicit length is not used to bound subsequent string operations: `strlen` (`length_of`) scans
+  for a terminator, and `failf`/`infof` (`error_setter`, printf-like reporting) use `%s`. If the buffer
+  has no NUL within its length, these operations read past the end. The fix instead uses the supplied
+  length with `memchr(..., cnlen)` and `%.*s`.
+
+
+  Roles:
+
+  - `length_of`: `strlen`
+
+  - `untrusted_size`: `ASN1_STRING_length`, `ASN1_STRING_to_UTF8` returned length
+
+  - `untrusted_data_accessor`: `ASN1_STRING_get0_data`
+
+  - `allocator`: `ASN1_STRING_to_UTF8`
+
+  - `deallocator`: `OPENSSL_free`
+
+  - `error_setter`: `failf`, `infof`'
+roles:
+  length_of:
+    names:
+    - strlen
+    description: function that computes the length of a NUL-terminated C string by scanning for a terminator
+  untrusted_size:
+    names:
+    - ASN1_STRING_length
+    - ASN1_STRING_to_UTF8
+    description: function or return value that provides a length for a length-delimited buffer
+  untrusted_data_accessor:
+    names:
+    - ASN1_STRING_get0_data
+    description: function that returns a pointer to raw, length-delimited data that may not be NUL-terminated
+  allocator:
+    names:
+    - ASN1_STRING_to_UTF8
+    description: function that allocates memory and writes the pointer through an output parameter or
+      returns it
+  deallocator:
+    names:
+    - OPENSSL_free
+    description: function that frees memory or an object; pointer must not be used afterwards
+  error_setter:
+    names:
+    - failf
+    - infof
+    description: printf-style function that records or reports an error/info message; format arguments
+      must be valid C strings unless length-bounded
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T16:54:10+0700

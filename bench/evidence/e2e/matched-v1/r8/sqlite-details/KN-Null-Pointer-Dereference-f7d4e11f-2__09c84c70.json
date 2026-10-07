@@ -1,0 +1,12 @@
+{
+  "commit_id": "09c84c70ee2e5355b6bca3085b7a6c616909b197",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/misc/sha1.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/misc/sha1.c": "no compile entry"
+    }
+  }
+}

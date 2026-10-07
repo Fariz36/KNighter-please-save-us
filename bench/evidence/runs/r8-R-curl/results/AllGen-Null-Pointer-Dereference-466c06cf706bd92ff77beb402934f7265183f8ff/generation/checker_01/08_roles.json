@@ -1,0 +1,32 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "duplicator": {
+      "names": [
+        "curl_url_dup"
+      ],
+      "description": "function that duplicates a source handle into a newly allocated destination"
+    },
+    "source_handle": {
+      "names": [
+        "in"
+      ],
+      "description": "parameter of a duplicator that points to the source object; may be NULL"
+    },
+    "destination_allocator": {
+      "names": [
+        "curlx_calloc"
+      ],
+      "description": "allocator used to allocate the destination handle in a duplicator"
+    },
+    "field_copier": {
+      "names": [
+        "DUP"
+      ],
+      "description": "macro/operation that copies fields from the source handle, dereferencing the source pointer"
+    }
+  }
+}

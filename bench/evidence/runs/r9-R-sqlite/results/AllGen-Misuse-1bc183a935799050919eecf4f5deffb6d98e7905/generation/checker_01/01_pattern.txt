@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A tokenizer (`parser_input`) returns both a token type and a token length. The code ignores the token type and uses only the length: it copies that many bytes of untrusted SQL into an allocated zero-terminated buffer with `buffer_copy`, then passes it to a dequoter (`sqlite3Dequote`) that assumes syntactically valid quoted input. When the tokenizer marks the token as illegal/malformed, the invalid bytes still reach the dequoter and trip its internal `aborting_assert`.
+
+Roles:
+- `parser_input`: `getConstraintToken`, `sqlite3GetToken` — tokenize SQL text and emit token type + token length.
+- `allocator`: `sqlite3MallocZero` — allocates the zero-terminated copy.
+- `buffer_copy`: `memcpy` — copies the length-delimited token bytes.
+- `aborting_assert`: the `assert` inside `sqlite3Dequote` — fires when the dequoter receives malformed/unclosed quoting.

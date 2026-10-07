@@ -1,0 +1,11 @@
+## Bug Pattern
+
+The pattern is a missing cleanup on a conditional ownership transfer: an owned object obtained from a `duplicator` (or by moving ownership into a local pointer) is only consumed by a `container_insert` when the destination container pointer is non-NULL. If the destination is NULL—for example because an earlier `null_on_failure` allocation returned NULL—the `container_insert` is skipped and the owned object is never released by a `deallocator`, causing a memory leak.
+
+The fix adds the missing `deallocator` call in the `else` branch of the condition that guards the `container_insert`.
+
+Roles:
+- `allocator` / `null_on_failure`: `triggerStepAllocate`, `sqlite3SelectNew`, `sqlite3SrcListAppendFromTerm`, `sqlite3SrcListDup` — can return NULL on allocation failure.
+- `duplicator`: `sqlite3SrcListDup`, `sqlite3ExprListDup`, `sqlite3ExprDup` — return a newly allocated copy owned by the caller.
+- `deallocator`: `sqlite3SrcListDelete`, `sqlite3ExprDelete`, `sqlite3ExprListDelete` — free owned objects.
+- `container_insert`: `sqlite3SrcListAppendList` — appends/transfers ownership of a source list into a destination list; if not executed, the source must be freed by the caller.

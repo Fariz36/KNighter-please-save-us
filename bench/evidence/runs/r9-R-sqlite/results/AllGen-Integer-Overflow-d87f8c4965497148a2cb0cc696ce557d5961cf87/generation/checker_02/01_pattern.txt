@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A length computed by a `length_of` operation over untrusted input is narrowed from a wide pointer-difference/size type to `int` without an upper-bound check. The scan is limited by a character count, but each iteration may advance multiple bytes (UTF-8), so the byte length can exceed `INT_MAX`. The narrowing cast then wraps/truncates to a negative or unexpected value, which is later used in width arithmetic and as the count argument of a `buffer_copy`/append routine, causing integer overflow and possible out-of-bounds access. The fix bounds the wide length before the cast.
+
+Roles:
+- `length_of`: `SQLITE_SKIP_UTF8` (UTF-8 character-advancing macro used in the precision-limited scan that produces the pointer-difference length)
+- `untrusted_size`: `va_arg`, `getTextArg`, `getIntArg` (caller-supplied string, width, and precision values)
+- `buffer_copy`: `sqlite3_str_append`

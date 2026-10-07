@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "untrusted_size": {
+      "names": [
+        "Curl_read16_le"
+      ],
+      "description": "reads a size or length value from untrusted input"
+    },
+    "buffer_copy": {
+      "names": [
+        "Curl_client_write"
+      ],
+      "description": "copies data from a buffer to an output sink; its pointer and length arguments must be within bounds"
+    },
+    "error_setter": {
+      "names": [
+        "failf"
+      ],
+      "description": "records or reports an error; called when a check fails"
+    }
+  }
+}

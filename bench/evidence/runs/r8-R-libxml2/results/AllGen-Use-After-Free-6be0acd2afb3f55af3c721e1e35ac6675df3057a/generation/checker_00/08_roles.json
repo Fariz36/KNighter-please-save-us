@@ -1,0 +1,32 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "deallocator": {
+      "names": [
+        "xmlFreeNode"
+      ],
+      "description": "Function that frees a node; if the node is still linked into a tree/list, it must be unlinked first."
+    },
+    "unlinker": {
+      "names": [
+        "xmlUnlinkNodeInternal"
+      ],
+      "description": "Function that unlinks a node from its parent/children/prev/next links."
+    },
+    "content_merger": {
+      "names": [
+        "xmlTextAddContent"
+      ],
+      "description": "Function that consumes/merges the content of a node before the node is freed."
+    },
+    "wrapper": {
+      "names": [
+        "xmlAddChild"
+      ],
+      "description": "Wrapper function that merges content and frees a node; used to scope the pattern."
+    }
+  }
+}

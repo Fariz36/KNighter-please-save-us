@@ -1,0 +1,171 @@
+[
+  {
+    "bundle": "KN-Integer-Overflow-10eb89d1-0",
+    "commit": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+    "files": [
+      "lutf8lib.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "lutf8lib.c",
+        67,
+        "unknown"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "lutf8lib.c",
+        67,
+        "unknown"
+      ]
+    ],
+    "mapping_original": {
+      "decoder_function": [
+        "utf8_decode"
+      ],
+      "input_byte": [
+        "c"
+      ],
+      "continuation_count": [
+        "count"
+      ]
+    },
+    "mapping_ported": {
+      "decoder_function": [
+        "utf8_decode"
+      ],
+      "input_byte": [
+        "c"
+      ],
+      "continuation_count": [
+        "count"
+      ]
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Misuse-bc4bbcef-0",
+    "commit": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+    "files": [
+      "lauxlib.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "lauxlib.c",
+        520,
+        "newbox"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "lauxlib.c",
+        520,
+        "newbox"
+      ]
+    ],
+    "mapping_original": {
+      "combined_create_and_publish": [
+        "luaL_newmetatable"
+      ],
+      "object_initializer": [
+        "luaL_setfuncs"
+      ],
+      "persistent_registry_lookup": [
+        "luaL_getmetatable"
+      ],
+      "object_allocator": [
+        "luaL_newlibtable"
+      ],
+      "registry_store": [
+        "lua_setfield"
+      ],
+      "registry_key": [
+        "_UBOX*"
+      ]
+    },
+    "mapping_ported": {
+      "combined_create_and_publish": [
+        "luaL_newmetatable"
+      ],
+      "object_initializer": [
+        "luaL_setfuncs"
+      ],
+      "persistent_registry_lookup": [
+        "luaL_getmetatable"
+      ],
+      "object_allocator": [
+        "luaL_newlibtable"
+      ],
+      "registry_store": [
+        "lua_setfield"
+      ],
+      "registry_key": []
+    },
+    "preserved": true
+  },
+  {
+    "bundle": "KN-Use-After-Free-22974326-2",
+    "commit": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+    "files": [
+      "lapi.c",
+      "lvm.c"
+    ],
+    "reports_original": 1,
+    "locations_original": [
+      [
+        "lvm.c",
+        338,
+        "luaV_finishset"
+      ]
+    ],
+    "reports_ported": 1,
+    "locations_ported": [
+      [
+        "lvm.c",
+        338,
+        "luaV_finishset"
+      ]
+    ],
+    "mapping_original": {
+      "gc_managed_object": [
+        "Table"
+      ],
+      "potential_gc_trigger": [
+        "luaH_finishset"
+      ],
+      "gc_root_anchor": [
+        "sethvalue2s"
+      ],
+      "weak_reference_container": [
+        "__mode"
+      ],
+      "use_after_free_use": [
+        "invalidateTMcache",
+        "luaC_barrierback"
+      ]
+    },
+    "mapping_ported": {
+      "gc_managed_object": [
+        "Table"
+      ],
+      "potential_gc_trigger": [
+        "luaH_finishset"
+      ],
+      "gc_root_anchor": [
+        "sethvalue2s"
+      ],
+      "weak_reference_container": [
+        "__mode"
+      ],
+      "use_after_free_use": [
+        "invalidateTMcache",
+        "luaC_barrierback"
+      ]
+    },
+    "preserved": true
+  }
+]

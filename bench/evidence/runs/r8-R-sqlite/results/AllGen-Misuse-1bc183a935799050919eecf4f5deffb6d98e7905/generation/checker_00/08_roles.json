@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "illegal_token_sentinel": {
+      "names": [
+        "TK_ILLEGAL"
+      ],
+      "description": "token type value indicating an invalid or illegal token; must be rejected before dequoting"
+    },
+    "dequote": {
+      "names": [
+        "sqlite3Dequote"
+      ],
+      "description": "dequote/normalizer routine that assumes its input is a syntactically valid quoted token"
+    },
+    "dequote_compare": {
+      "names": [
+        "quotedCompare"
+      ],
+      "description": "wrapper that dequotes a token and compares it; must check the token type against the illegal sentinel before dequoting"
+    }
+  }
+}

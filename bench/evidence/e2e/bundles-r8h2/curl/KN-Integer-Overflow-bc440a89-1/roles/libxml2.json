@@ -1,0 +1,12 @@
+{
+  "encoded_size_calculator": [
+    "xmlEncodeSpecialChars"
+  ],
+  "input_length": [
+    "len"
+  ],
+  "max_input_size": [],
+  "error_sentinel": [
+    "NULL"
+  ]
+}

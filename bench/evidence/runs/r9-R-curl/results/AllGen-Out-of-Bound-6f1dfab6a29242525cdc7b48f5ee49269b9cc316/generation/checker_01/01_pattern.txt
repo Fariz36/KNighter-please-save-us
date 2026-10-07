@@ -1,0 +1,7 @@
+## Bug Pattern
+
+The code searches a `parser_input` for a delimiter, advances past it, and then performs fixed-offset lookahead reads (`[1]`, `[2]`, `[3]`) without first checking that the byte at offset `[0]` is not the NUL terminator. If the delimiter is the final byte, offset `[0]` is the terminator and the next read goes one byte past the NUL. The fix adds a non-NUL guard on offset `[0]` before the chained lookahead so the later indexed reads short-circuit.
+
+Roles:
+- `parser_input`: `curlx_dyn_ptr(&pp->recvbuf)` (the received FTP response buffer being parsed)
+- `null_on_failure`: `strchr` (may return NULL when the delimiter is not found; the non-NULL result is advanced)

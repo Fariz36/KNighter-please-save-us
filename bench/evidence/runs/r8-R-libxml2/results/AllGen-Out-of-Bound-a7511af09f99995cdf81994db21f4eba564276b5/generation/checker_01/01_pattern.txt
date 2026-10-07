@@ -1,0 +1,13 @@
+## Bug Pattern
+
+The bug pattern is an unchecked indexed lookahead read: a `lookahead_accessor` (`NXT(index)`) dereferences `cursor[index]` from a NUL-terminated `input_buffer`, but the parser context does not store or check a `length_of` the buffer. When the cursor is near the end of the input, an out-of-range `index` reads past the allocated string. The fix adds a `length_of` field and a `bounds_check` inside the accessor, returning a safe sentinel for out-of-range indices.
+
+Roles:
+- `input_buffer`: `ctxt->string`
+- `cursor`: `ctxt->cur`
+- `lookahead_accessor`: `NXT(index)` → `ctxt->cur[index]`
+- `length_of`: `strlen(...)` stored in `ctxt->len`
+- `bounds_check`: `(size_t)(ctxt->cur + index - ctxt->string) < ctxt->len`
+- `allocator`: `xmlMalloc`, `xmlStrdup`
+- `deallocator`: `xmlFree`
+- `out_of_range_value`: `0`

@@ -1,0 +1,42 @@
+id: KN-Null-Pointer-Dereference-466c06cf-0
+bug_type: Null-Pointer-Dereference
+source:
+  project: curl
+  description: curl, the C library (libcurl) for transferring data with URLs
+  commit: 466c06cf706bd92ff77beb402934f7265183f8ff
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  A `duplicator` dereferences the fields of its source object pointer through a field-copying macro before
+  checking whether the source pointer is NULL. The destination `allocator` result is checked, but the
+  source argument is not. Passing NULL to the `duplicator` therefore causes a NULL-pointer dereference.
+
+
+  Roles:
+
+  - `duplicator`: `curl_url_dup`, `DUP`
+
+  - `allocator`: `curlx_calloc`'
+roles:
+  duplicator:
+    names:
+    - curl_url_dup
+    - DUP
+    description: function or macro that creates a copy of a source object; it must not dereference the
+      source pointer before verifying it is non-null
+  allocator:
+    names:
+    - curlx_calloc
+    description: function that allocates memory and returns a pointer or NULL on failure
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: cdac1c3efca4f1961996e3d50388c26d7ea6be34
+exported: 2026-10-07T17:52:37+0700

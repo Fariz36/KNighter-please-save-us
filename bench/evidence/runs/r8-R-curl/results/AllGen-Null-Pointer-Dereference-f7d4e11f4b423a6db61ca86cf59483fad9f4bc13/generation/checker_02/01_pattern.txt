@@ -1,0 +1,14 @@
+## Bug Pattern
+
+The function validates the **length field** of an input buffer but fails to validate the associated **data pointer** before using it. Specifically, when a **copy flag** is set, the unchecked data pointer is passed as the source to a **buffer copy** operation (`memcpy`); when the flag is unset, the unchecked NULL pointer is stored in the output structure for later dereference. The root cause is a missing NULL check on a required buffer pointer before copying/storing it.
+
+## Roles
+
+- `data_pointer`: `blob->data`
+- `length_field`: `blob->len`
+- `copy_flag`: `CURL_BLOB_COPY`
+- `buffer_copy`: `memcpy`
+- `allocator`: `curlx_malloc`
+- `deallocator`: `curlx_safefree`
+- `error_return`: `CURLE_BAD_FUNCTION_ARGUMENT`, `CURLE_OUT_OF_MEMORY`
+- `validation_guard`: missing check `!blob->data` before using `blob->data`

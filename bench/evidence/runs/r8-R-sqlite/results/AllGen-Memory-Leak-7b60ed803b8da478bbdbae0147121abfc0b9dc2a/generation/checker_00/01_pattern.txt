@@ -1,0 +1,13 @@
+## Bug Pattern
+
+The bug pattern is a missing deallocation on a skipped ownership-transfer path. A local resource is created or duplicated, then conditionally transferred into its destination owner; if the destination/owner pointer is NULL, the transfer is skipped but the resource is neither attached nor freed, causing a memory leak on an error/OOM recovery path.
+
+Roles in this patch:
+
+- resource_allocator/duplicator: `sqlite3SrcListDup`, `sqlite3SelectNew`, `sqlite3SrcListAppendFromTerm` — produce/rebuild `pFromDup`
+- ownership_transfer/aggregator: `sqlite3SrcListAppendList` — consumes `pFromDup` into `pTriggerStep->pSrc`
+- destination/owner: `pTriggerStep->pSrc`
+- deallocator: `sqlite3SrcListDelete`
+- guard/condition: `pFromDup && pTriggerStep->pSrc`
+
+The fix adds the missing `else` path that calls the deallocator when the ownership transfer does not happen.

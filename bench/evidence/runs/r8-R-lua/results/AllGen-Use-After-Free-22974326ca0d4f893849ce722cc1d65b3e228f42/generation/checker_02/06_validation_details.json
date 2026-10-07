@@ -1,0 +1,80 @@
+{
+  "commit_id": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-lua/plugin-cache/plugins/dd8eb6cb2e4f2061a2ae/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 2,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lapi.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [],
+        "fixed_functions": []
+      },
+      {
+        "path": "lvm.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "luaV_finishset"
+        ],
+        "fixed_functions": [
+          "luaV_finishset"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lapi.c": [],
+      "lvm.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-lua/work/src/c931d86e98da/lvm.c",
+          "line": 338,
+          "column": 9,
+          "function": "luaV_finishset",
+          "bug_type": "Missing GC root anchor",
+          "description": "GC-managed object passed to potential GC trigger without GC root anchor; possible use-after-free",
+          "issue_hash": "e08d43766032541527b6e2e81ddccf33",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/22974326ca0d/63c0385d/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r8-R-lua_work_src_c931d86e98da_lvm.c/report-e08d43.html",
+          "relpath": "lvm.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lapi.c": [],
+      "lvm.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 6.0,
+      "fixed": 6.02
+    },
+    "total_seconds": 12.23
+  },
+  "report_dir": "tmp/validation/22974326ca0d/63c0385d"
+}

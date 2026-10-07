@@ -1,0 +1,5 @@
+{
+  "init": [
+    "sqlite3Fts5ConfigSetValue"
+  ]
+}

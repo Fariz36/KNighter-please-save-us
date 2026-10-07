@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A count derived from parsing untrusted input is used as a bit-shift amount before it is range-checked. The continuation-byte loop can produce a count larger than the supported width; for a leading byte such as `0xFF`, the count reaches 7, so `... << (count * 5)` shifts a 32-bit value by 35 bits. The later `count > 5` check occurs after the undefined shift. The fix must reject such leading bytes before the loop or assert the count bound before shifting.
+
+Roles:
+- `parser_input`: `utf8_decode` (reads the untrusted byte sequence)
+- `aborting_assert`: `lua_assert` (asserts the `count <= 5` bound before the shift in the fixed version)

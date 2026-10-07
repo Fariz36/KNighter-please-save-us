@@ -1,0 +1,134 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 15:42:43.529 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (libxml2), Repository Path: /home/faris/RA-MrYudis/Knight/targets/libxml2; plugin_build=standalone; validation_scoring=strict
+2026-10-07 15:42:44.439 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-875b8b5f32f14c69)
+2026-10-07 15:42:45.596 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision c43dc98d27ac
+2026-10-07 15:42:46.387 | INFO     | role_porting:port_roles:174 - libxml2: 1692 candidate API names from headers, 22438 identifiers in sources
+2026-10-07 15:42:46.528 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:45:57.230 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 190.7s
+2026-10-07 15:45:57.239 | INFO     | role_porting:port_roles:226 - Ported KN-Integer-Overflow-bc440a89-1 roles to libxml2: {'encoded_size_calculator': [], 'input_length': ['len'], 'max_input_size': [], 'error_sentinel': ['NULL']}
+2026-10-07 15:45:57.245 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:45:57.256 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision c8eaf2236ff1
+2026-10-07 15:45:57.262 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision ddcb79dc9934
+2026-10-07 15:46:25.558 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation ddcb79dc9934: TP=0 TN=0 (strict); strict=0/0 legacy=0/2
+2026-10-07 15:46:25.560 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:46:25.571 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision d28f35a26ed6
+2026-10-07 15:46:25.612 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision 962bd10d0115
+2026-10-07 15:46:25.904 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 962bd10d0115: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:46:25.906 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:46:25.915 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision c71154dad39f
+2026-10-07 15:46:25.922 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision 26dfab2f8fd3
+2026-10-07 15:48:04.531 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 26dfab2f8fd3: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:48:04.533 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:48:04.543 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision 61e5f3ea9760
+2026-10-07 15:48:04.550 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision 79c6eef0a1a9
+2026-10-07 15:49:15.188 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 79c6eef0a1a9: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:49:15.190 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:49:15.206 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision c2e233fc1b34
+2026-10-07 15:49:15.225 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision 6be0acd2afb3
+2026-10-07 15:51:14.896 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6be0acd2afb3: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:51:14.899 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:51:14.907 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision 7cea3fd15574
+2026-10-07 15:51:14.915 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision a7511af09f99
+2026-10-07 15:52:51.811 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7511af09f99: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 15:52:51.814 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 0af93956b3c44168f804
+2026-10-07 15:52:51.825 | INFO     | targets.compiledb:_setup_revision:180 - [libxml2] reuse configured revision 87c77060fbd6
+2026-10-07 15:55:09.105 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c8eaf2236ff1: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Integer-Overflow-bc440a89-1", "source": "curl", "target": "libxml2", "roles_mapped": 2, "roles_total": 4, "detected": [], "perfect": []}
+2026-10-07 15:55:09.968 | INFO     | role_porting:port_roles:174 - libxml2: 1692 candidate API names from headers, 22438 identifiers in sources
+2026-10-07 15:55:10.221 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 15:59:41.082 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 270.9s
+2026-10-07 15:59:41.090 | INFO     | role_porting:port_roles:226 - Ported KN-Memory-Leak-a0f08d69-0 roles to libxml2: {'cleanup': ['xmlListClear', 'xmlClearParserCtxt', 'xmlClearNodeInfoSeq', 'xmlCtxtReset', 'htmlCtxtReset', 'xmlResetError', 'xmlRegExecClearErrors', 'xmlRelaxNGValidCtxtClearErrors', 'xmlBufferEmpty', 'xmlDictCleanup', 'xmlCleanupMemory', 'xmlCleanupMutex'], 'destructor': ['xmlListDelete', 'xmlFreeParserCtxt', 'htmlFreeParserCtxt', 'xmlFreeDoc', 'xmlFreeNode', 'xmlFreeNodeList', 'xmlFreeProp', 'xmlFreePropList', 'xmlFreeNs', 'xmlFreeNsList', 'xmlFreeDtd', 'xmlFreeEntity', 'xmlFreeURI', 'xmlFreeInputStream', 'xmlBufferFree', 'xmlBufFree', 'xmlHashFree', 'xmlDictFree', 'xmlSchemaFree', 'xmlRelaxNGFree', 'xmlSchematronFree', 'xmlFreeTextReader', 'xmlFreeTextWriter', 'xmlFreePattern', 'xmlFreePatternList', 'xmlFreeStreamCtxt', 'xmlFreeAutomata', 'xmlFreeValidCtxt', 'xmlFreeCatalog', 'xmlFreeIDTable', 'xmlFreeRefTable', 'xmlRegFreeRegexp', 'xmlFreeEnumeration', 'xmlDOMWrapFreeCtxt', 'xmlSchemaFreeType', 'xmlModuleFree', 'xmlFreeMutex', 'xmlFreeRMutex', 'xmlParserNsFree'], 'state_reset': ['memset', 'xmlCtxtReset', 'htmlCtxtReset', 'xmlResetError', 'xmlClearParserCtxt', 'xmlClearNodeInfoSeq', 'xmlListClear', 'xmlBufferEmpty', 'xmlResetLastError', 'xmlCtxtResetLastError', 'xmlRegExecClearErrors', 'xmlRelaxNGValidCtxtClearErrors'], 'link_detach': ['xmlUnlinkNode', 'xmlListRemoveFirst', 'xmlBufferDetach', 'xmlBufDetach', 'xmlHashRemoveEntry', 'xmlHashRemoveEntry2', 'xmlHashRemoveEntry3', 'xmlPopInput', 'xmlFreeInputStream'], 'link_storage': ['parent', 'next', 'prev', 'children', 'last', 'content', 'link', 'input', 'inputTab', 'inputNr', 'table']}
+2026-10-07 15:59:41.096 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 16:00:17.448 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation ddcb79dc9934: TP=0 TN=0 (strict); strict=0/0 legacy=0/2
+2026-10-07 16:00:17.450 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 16:00:17.755 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 962bd10d0115: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:00:17.757 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 16:02:32.769 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 26dfab2f8fd3: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:02:32.771 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 16:04:07.545 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 79c6eef0a1a9: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:04:07.549 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 16:06:04.911 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6be0acd2afb3: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:06:04.914 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 16:07:33.176 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7511af09f99: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:07:33.180 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit ae40e9cca6a3fb0b23ec
+2026-10-07 16:09:29.871 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c8eaf2236ff1: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Memory-Leak-a0f08d69-0", "source": "curl", "target": "libxml2", "roles_mapped": 5, "roles_total": 5, "detected": [], "perfect": []}
+2026-10-07 16:09:30.453 | INFO     | role_porting:port_roles:174 - libxml2: 1692 candidate API names from headers, 22438 identifiers in sources
+2026-10-07 16:09:30.646 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 16:11:56.210 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 145.6s
+2026-10-07 16:11:56.214 | INFO     | role_porting:port_roles:226 - Ported KN-Misuse-c53420e4-0 roles to libxml2: {'data_provider': ['xmlBufferContent', 'xmlOutputBufferGetContent', 'htmlUTF8ToHtml', 'xmlIsolat1ToUTF8', 'xmlUTF8ToIsolat1'], 'length_provider': ['xmlBufferLength', 'xmlOutputBufferGetSize', 'htmlUTF8ToHtml', 'xmlIsolat1ToUTF8', 'xmlUTF8ToIsolat1'], 'unbounded_string_consumer': ['strlen', 'xmlStrlen', 'xmlStrPrintf', 'xmlStrVPrintf', 'xmlStrASPrintf', 'xmlStrVASPrintf', 'xmlTextWriterWriteFormatString', 'xmlTextWriterWriteVFormatString', 'xmlTextWriterWriteFormatPI', 'xmlTextWriterWriteFormatDTD', 'xmlTextWriterWriteFormatRaw', 'xmlTextWriterWriteFormatCDATA', 'xmlTextWriterWriteFormatComment', 'xmlTextWriterWriteFormatElement', 'xmlTextWriterWriteFormatAttribute', 'xmlTextWriterWriteFormatElementNS', 'xmlTextWriterWriteFormatDTDAttlist', 'xmlTextWriterWriteFormatDTDElement', 'xmlTextWriterWriteFormatAttributeNS', 'xmlTextWriterWriteFormatDTDInternalEntity', 'xmlTextWriterWriteString', 'xmlTextWriterSetIndentString', 'xmlTextReaderConstString', 'xmlNewText', 'xmlNewDocText', 'xmlStrEqual', 'xmlStrQEqual', 'xmlEscapeText', 'xmlEscapeFormatString'], 'bounded_nul_scanner': ['memchr'], 'bounded_string_formatter': []}
+2026-10-07 16:11:56.220 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:12:27.970 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation ddcb79dc9934: TP=0 TN=0 (strict); strict=0/0 legacy=1/1
+2026-10-07 16:12:27.972 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:12:28.264 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 962bd10d0115: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:12:28.266 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:14:24.104 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 26dfab2f8fd3: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:14:24.108 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:15:41.182 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 79c6eef0a1a9: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:15:41.184 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:17:19.067 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6be0acd2afb3: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:17:19.069 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:18:36.818 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7511af09f99: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:18:36.821 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 57dafa24b88f0f2597b8
+2026-10-07 16:20:34.089 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c8eaf2236ff1: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Misuse-c53420e4-0", "source": "curl", "target": "libxml2", "roles_mapped": 4, "roles_total": 5, "detected": [], "perfect": []}
+2026-10-07 16:20:34.691 | INFO     | role_porting:port_roles:174 - libxml2: 1692 candidate API names from headers, 22438 identifiers in sources
+2026-10-07 16:20:34.809 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 16:23:40.064 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 185.3s
+2026-10-07 16:23:40.066 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-466c06cf-1 roles to libxml2: {'duplicator': ['xmlXPathObjectCopy'], 'source_handle': ['val'], 'destination_allocator': ['xmlMalloc'], 'field_copier': ['memcpy']}
+2026-10-07 16:23:40.071 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:24:14.278 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation ddcb79dc9934: TP=0 TN=0 (strict); strict=0/0 legacy=0/2
+2026-10-07 16:24:14.281 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:24:14.541 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 962bd10d0115: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:24:14.543 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:26:07.997 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 26dfab2f8fd3: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:26:08.000 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:27:26.808 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 79c6eef0a1a9: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:27:26.812 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:29:32.122 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6be0acd2afb3: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:29:32.126 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:31:03.748 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7511af09f99: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:31:03.751 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 98f2b5c545771ef2fecd
+2026-10-07 16:33:03.476 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c8eaf2236ff1: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Null-Pointer-Dereference-466c06cf-1", "source": "curl", "target": "libxml2", "roles_mapped": 4, "roles_total": 4, "detected": [], "perfect": []}
+2026-10-07 16:33:04.160 | INFO     | role_porting:port_roles:174 - libxml2: 1692 candidate API names from headers, 22438 identifiers in sources
+2026-10-07 16:33:04.249 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 16:37:37.200 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 273.0s
+2026-10-07 16:37:37.211 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-f2a15357-1 roles to libxml2: {'api_entry_point': ['xmlHashAddEntry', 'xmlHashAddEntry2', 'xmlHashAddEntry3', 'xmlHashRemoveEntry', 'xmlHashUpdateEntry', 'xmlHashRemoveEntry2', 'xmlHashRemoveEntry3', 'xmlHashUpdateEntry2', 'xmlHashUpdateEntry3', 'xmlSAX2GetPublicId', 'xmlCatalogGetPublic', 'xmlGetParameterEntity', 'xmlCatalogResolvePublic', 'xmlACatalogResolvePublic', 'xmlSAX2GetParameterEntity'], 'out_param': ['out', 'n'], 'out_param_writer': ['xmlTextWriterWritePI', 'xmlTextWriterWriteDTD', 'xmlTextWriterWriteRaw', 'xmlTextWriterWriteCDATA', 'xmlTextWriterWriteBase64', 'xmlTextWriterWriteBinHex', 'xmlTextWriterWriteRawLen', 'xmlTextWriterWriteString', 'xmlTextWriterWriteComment', 'xmlTextWriterWriteElement', 'xmlTextWriterWriteFormatPI', 'xmlTextWriterWriteAttribute', 'xmlTextWriterWriteDTDEntity', 'xmlTextWriterWriteElementNS', 'xmlTextWriterWriteFormatDTD', 'xmlTextWriterWriteFormatRaw', 'xmlTextWriterWriteVFormatPI', 'xmlTextWriterWriteDTDAttlist', 'xmlTextWriterWriteDTDElement', 'xmlTextWriterWriteVFormatDTD', 'xmlTextWriterWriteVFormatRaw', 'xmlTextWriterWriteAttributeNS', 'xmlTextWriterWriteDTDNotation', 'xmlTextWriterWriteFormatCDATA', 'xmlTextWriterWriteFormatString', 'xmlTextWriterWriteVFormatCDATA', 'xmlTextWriterWriteFormatComment', 'xmlTextWriterWriteFormatElement', 'xmlTextWriterWriteVFormatString', 'xmlTextWriterWriteVFormatComment', 'xmlTextWriterWriteVFormatElement', 'xmlTextWriterWriteFormatAttribute', 'xmlTextWriterWriteFormatElementNS', 'xmlTextWriterWriteFormatDTDAttlist', 'xmlTextWriterWriteFormatDTDElement', 'xmlTextWriterWriteVFormatAttribute', 'xmlTextWriterWriteVFormatElementNS', 'xmlTextWriterWriteDTDExternalEntity', 'xmlTextWriterWriteDTDInternalEntity', 'xmlTextWriterWriteFormatAttributeNS']}
+2026-10-07 16:37:37.216 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:38:09.916 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation ddcb79dc9934: TP=0 TN=0 (strict); strict=0/0 legacy=0/2
+2026-10-07 16:38:09.919 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:38:10.176 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 962bd10d0115: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:38:10.178 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:40:11.551 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 26dfab2f8fd3: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:40:11.554 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:41:41.184 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 79c6eef0a1a9: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:41:41.186 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:43:35.770 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6be0acd2afb3: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:43:35.772 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:45:15.386 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7511af09f99: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:45:15.388 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit d6ea521459fb71966e2a
+2026-10-07 16:47:33.733 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c8eaf2236ff1: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Null-Pointer-Dereference-f2a15357-1", "source": "curl", "target": "libxml2", "roles_mapped": 3, "roles_total": 3, "detected": [], "perfect": []}
+2026-10-07 16:47:34.406 | INFO     | role_porting:port_roles:174 - libxml2: 1692 candidate API names from headers, 22438 identifiers in sources
+2026-10-07 16:47:34.716 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 16:49:51.571 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 136.9s
+2026-10-07 16:49:51.576 | INFO     | role_porting:port_roles:226 - Ported KN-Null-Pointer-Dereference-f7d4e11f-2 roles to libxml2: {'length_field': ['xmlBufferLength', 'xmlBufUse', 'xmlOutputBufferGetSize'], 'data_pointer': ['data', 'xmlBufferContent', 'xmlBufContent'], 'buffer_copy': ['memcpy', 'xmlBufferAdd', 'xmlBufAdd', 'xmlBufferCat', 'xmlBufCat'], 'error_return': ['XML_ERR_NO_MEMORY'], 'copy_flag': [], 'allocator': ['xmlMalloc', 'xmlMallocAtomic', 'xmlMemMalloc'], 'deallocator': ['xmlFree', 'xmlMemFree'], 'validation_guard': []}
+2026-10-07 16:49:51.581 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:50:22.783 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation ddcb79dc9934: TP=0 TN=0 (strict); strict=0/0 legacy=0/2
+2026-10-07 16:50:22.785 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:50:23.060 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 962bd10d0115: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:50:23.062 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:52:30.157 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 26dfab2f8fd3: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:52:30.160 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:53:44.516 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 79c6eef0a1a9: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:53:44.519 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:56:20.255 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation 6be0acd2afb3: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:56:20.381 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 16:57:49.755 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation a7511af09f99: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+2026-10-07 16:57:49.758 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit 5fcf622372fd8b9470ed
+2026-10-07 17:00:07.131 | INFO     | backends.csa_compiledb:_validate_checker_compiledb:148 - Validation c8eaf2236ff1: TP=0 TN=0 (strict); strict=0/0 legacy=0/1
+{"bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2", "source": "curl", "target": "libxml2", "roles_mapped": 6, "roles_total": 8, "detected": [], "perfect": []}
+2026-10-07 17:00:07.873 | INFO     | role_porting:port_roles:174 - libxml2: 1692 candidate API names from headers, 22438 identifiers in sources
+2026-10-07 17:00:08.003 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]

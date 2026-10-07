@@ -1,0 +1,12 @@
+{
+  "commit_id": "c59cf28db7eb7da5cce0933d77f339d8726a386f",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "ext/misc/closure.c": "no compile entry"
+    },
+    "fixed": {
+      "ext/misc/closure.c": "no compile entry"
+    }
+  }
+}

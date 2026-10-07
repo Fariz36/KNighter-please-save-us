@@ -1,0 +1,12 @@
+{
+  "commit_id": "28da8549a0519c11b5bb40cbb62c8f5fa67da83d",
+  "error": "no file analyzable",
+  "errors": {
+    "buggy": {
+      "schematron.c": "no compile entry"
+    },
+    "fixed": {
+      "schematron.c": "no compile entry"
+    }
+  }
+}

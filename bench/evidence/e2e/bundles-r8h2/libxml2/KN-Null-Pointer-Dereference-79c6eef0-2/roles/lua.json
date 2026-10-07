@@ -1,0 +1,21 @@
+{
+  "null_on_failure": [
+    "luaL_alloc",
+    "luaM_malloc_",
+    "luaM_realloc_",
+    "luaM_new",
+    "luaH_new",
+    "luaS_new",
+    "allocsizenode",
+    "debug_realloc"
+  ],
+  "length_of": [
+    "strlen",
+    "sizenode",
+    "luaH_size",
+    "stacksize",
+    "luaF_protosize",
+    "luaE_threadsize",
+    "luaZ_sizebuffer"
+  ]
+}

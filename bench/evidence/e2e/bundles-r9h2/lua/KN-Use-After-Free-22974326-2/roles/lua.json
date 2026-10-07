@@ -1,0 +1,8 @@
+{
+  "gc_trigger": [
+    "luaH_finishset"
+  ],
+  "ref_get": [
+    "sethvalue2s"
+  ]
+}

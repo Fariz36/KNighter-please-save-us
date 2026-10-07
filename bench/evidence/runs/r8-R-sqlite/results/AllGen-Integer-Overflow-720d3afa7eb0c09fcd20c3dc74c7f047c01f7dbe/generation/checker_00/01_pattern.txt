@@ -1,0 +1,18 @@
+## Bug Pattern
+
+The bug pattern is an **integer overflow in a cache-size/count computation**: the number of overflow pages is computed with 32-bit unsigned arithmetic using the expression `(payload_length - local_payload_length + overflow_chunk_size - 1) / overflow_chunk_size`. Because the addition of `overflow_chunk_size - 1` is performed in 32-bit unsigned arithmetic, it can wrap around before the division. The resulting too-small count is then used as an allocation/reallocation size and as a bound for indexing the overflow-page cache, leading to under-allocation and out-of-bounds access.
+
+Roles in this patch:
+
+- `payload_length`: `pCur->info.nPayload` (`u32`)
+- `local_payload_length`: `pCur->info.nLocal` (`u16`)
+- `overflow_chunk_size`: `ovflSize` (`u32`)
+- `count_computation`: `(pCur->info.nPayload - pCur->info.nLocal + ovflSize - 1) / ovflSize`
+- `overflow_page_cache`: `pCur->aOverflow`
+- `reallocator`: `sqlite3Realloc`
+- `allocated_size_query`: `sqlite3MallocSize`
+- `zero_initializer`: `memset`
+- `cache_index`: `iIdx`, `offset / ovflSize`
+- `too_narrow_arithmetic_type`: `int` / `u32` in the original expression
+
+The fix promotes the computation to `i64` before the subtraction/addition/division, preventing the 32-bit wraparound.

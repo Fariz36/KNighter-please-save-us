@@ -1,0 +1,12 @@
+## Bug Pattern
+
+A pointer parameter that acts as an in/out capacity slot is dereferenced without a preceding `null_guard`. In `xmlGrowArray`, `capacity` is read through `*capacity` when calling `xmlGrowCapacity` and later written through `*capacity = newSize`; if the caller passes `NULL`, this causes a NULL-pointer dereference. The fix adds a `null_guard` at function entry before any dereference.
+
+Roles:
+- `nullable_inout_capacity_ptr`: `capacity`
+- `capacity_computer`: `xmlGrowCapacity`
+- `deref_read`: `*capacity` passed to `xmlGrowCapacity`
+- `deref_write`: `*capacity = newSize`
+- `null_guard`: `if (capacity == NULL) return(NULL);` added by the patch
+- `reallocator`: `xmlRealloc`
+- `null_on_failure`: `xmlRealloc` returning `NULL`; `xmlGrowCapacity` returning a negative value

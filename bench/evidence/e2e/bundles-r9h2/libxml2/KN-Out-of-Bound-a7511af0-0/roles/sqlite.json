@@ -1,0 +1,9 @@
+{
+  "indexed_read": [
+    "CC"
+  ],
+  "length_of": [
+    "sqlite3Strlen30",
+    "strlen"
+  ]
+}

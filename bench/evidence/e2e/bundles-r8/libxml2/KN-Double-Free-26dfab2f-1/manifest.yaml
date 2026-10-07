@@ -1,0 +1,67 @@
+id: KN-Double-Free-26dfab2f-1
+bug_type: Double-Free
+source:
+  project: libxml2
+  description: libxml2, the XML parsing and manipulation library written in C
+  commit: 26dfab2f8fd36fc3aba8c25c7c358530d9712c7a
+checker_file: checker-repaired.cpp
+scores:
+  tp: 1
+  tn: 1
+  scoring: strict
+pattern: '## Bug Pattern
+
+
+  The caller passes an owned resource to an `ownership_consumer_frees_on_failure` function, then frees
+  that same resource again when the function reports failure via `null_on_failure`. Since the callee already
+  releases the resource on its failure path, the caller''s cleanup performs a second release, causing
+  a double free/use-after-free. Ownership is transferred before success is established, so the caller
+  must not free the argument after failure.
+
+
+  Roles:
+
+  - `resource`: `input` (`xmlParserInputBuffer *`)
+
+  - `ownership_consumer_frees_on_failure`: `xmlNewIOInputStream(ctxt, input, ...)`
+
+  - `null_on_failure`: `xmlNewIOInputStream` returning `NULL`
+
+  - `deallocator`: `xmlFreeParserInputBuffer`
+
+  - `duplicate_cleanup`: `if (pinput == NULL) { xmlFreeParserInputBuffer(input); ... }`
+
+  - `context_cleanup`: `xmlFreeParserCtxt(ctxt)` remains valid because `ctxt` ownership stays with the
+  caller.'
+roles:
+  resource:
+    names:
+    - input
+    description: an owned resource pointer that may be consumed by a function
+  ownership_consumer_frees_on_failure:
+    names:
+    - xmlNewIOInputStream
+    description: function that takes ownership of a resource and releases it on failure
+  deallocator:
+    names:
+    - xmlFreeParserInputBuffer
+    description: function that releases/frees a resource
+  null_on_failure:
+    names:
+    - xmlNewIOInputStream
+    description: function that returns NULL on failure
+  duplicate_cleanup:
+    names:
+    - xmlFreeParserInputBuffer
+    description: cleanup action that duplicates a release already performed by the callee
+  context_cleanup:
+    names:
+    - xmlFreeParserCtxt
+    description: cleanup action that releases a context whose ownership remains with the caller
+portable: true
+hardcoded_identifiers: []
+plugin:
+  clang_version: clang version 18.1.8 (git@github.com:ise-uiuc/KNighter.git f4e834b3074104001c31c5c262ab11e28d1a8e38)
+  checker_name: custom.SAGenTestChecker
+knighter_revision: 3c44401b20c9b0cfdf2951dd290b1bc9192d6362
+exported: 2026-10-01T20:43:24+0700

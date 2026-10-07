@@ -1,0 +1,57 @@
+{
+  "commit_id": "a0f08d6975d00c3ea04e1bd2fcf60dad446266ec",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/d77e494db6ccfb6a1054/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/cf-h2-proxy.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "cf_h2_proxy_ctx_clear",
+          "cf_h2_proxy_ctx_free"
+        ],
+        "fixed_functions": [
+          "cf_h2_proxy_ctx_clear",
+          "cf_h2_proxy_ctx_free"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/cf-h2-proxy.c": []
+    },
+    "fixed": {
+      "lib/cf-h2-proxy.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 11.68,
+      "fixed": 11.37
+    },
+    "total_seconds": 23.14
+  },
+  "report_dir": "tmp/validation/a0f08d6975d0/029c78ab"
+}

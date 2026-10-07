@@ -1,0 +1,9 @@
+{
+  "null_on_failure": [
+    "xmlStrdup",
+    "xmlMalloc"
+  ],
+  "length_of": [
+    "strlen"
+  ]
+}

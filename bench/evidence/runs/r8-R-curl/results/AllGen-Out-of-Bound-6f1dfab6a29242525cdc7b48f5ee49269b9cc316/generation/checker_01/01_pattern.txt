@@ -1,0 +1,11 @@
+## Bug Pattern
+
+The code performs fixed-offset reads from a pointer obtained by a `string_search` call after advancing past the matched delimiter, but does not first verify that the character immediately after the delimiter is not the `nul_terminator`. If the delimiter is the last character before the NUL terminator, reads such as `ptr[1]`, `ptr[2]`, or `ptr[3]` go past the end of the string, causing an out-of-bounds read. The fix adds a `bounds_guard`: check that `sep` (the character right after the delimiter) is non-NUL before evaluating later indexed reads, relying on short-circuit evaluation.
+
+Roles:
+- `string_search`: `strchr`
+- `pointer_advance`: `ptr++`
+- `first_char_after_delim`: `sep = ptr[0]`
+- `fixed_offset_read`: `ptr[1]`, `ptr[2]`, `ptr[3]`
+- `nul_terminator`: `'\0'`
+- `bounds_guard`: `sep &&` (the fix)

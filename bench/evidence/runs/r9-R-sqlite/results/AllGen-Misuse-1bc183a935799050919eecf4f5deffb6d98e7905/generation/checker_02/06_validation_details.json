@@ -1,0 +1,83 @@
+{
+  "commit_id": "1bc183a935799050919eecf4f5deffb6d98e7905",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-sqlite/plugin-cache/plugins/46745685a562ca416273/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/alter.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ],
+        "fixed_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 2465,
+          "column": 3,
+          "function": "quotedCompare",
+          "bug_type": "Dequote of unchecked token",
+          "description": "Dequote of unchecked token may assert on illegal token",
+          "issue_hash": "de7d79018407c4aa8e6e02fc9774245b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/1bc183a93579/b32155fd/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-sqlite_work_src_79837b6ee5d4_src_alter.c/report-de7d79.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9-R-sqlite/work/src/1bc183a93579/src/alter.c",
+          "line": 2470,
+          "column": 3,
+          "function": "quotedCompare",
+          "bug_type": "Dequote of unchecked token",
+          "description": "Dequote of unchecked token may assert on illegal token",
+          "issue_hash": "13b3069b456cb12e610fda993796b42b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9/tmp/validation/1bc183a93579/b32155fd/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9-R-sqlite_work_src_1bc183a93579_src_alter.c/report-13b306.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 2.67,
+    "analysis_seconds": {
+      "buggy": 32.22,
+      "fixed": 30.47
+    },
+    "total_seconds": 65.53
+  },
+  "report_dir": "tmp/validation/1bc183a93579/b32155fd"
+}

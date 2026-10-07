@@ -1,0 +1,70 @@
+{
+  "target": "libxml2",
+  "commit": "c43dc98d27ac315a48d93dbd399c6c22cf7125b1",
+  "candidates": 1692,
+  "identifiers": 22438,
+  "offered": {
+    "length_of": [
+      "xmlNodeGetBaseSafe",
+      "xmlSchemaValidateLengthFacet",
+      "xmlSchemaValidateLengthFacetWhtsp",
+      "xmlMemSize",
+      "xmlDictSize",
+      "xmlHashSize",
+      "xmlListSize",
+      "xmlUTF8Size",
+      "xmlBufAddLen",
+      "xmlNewTextLen",
+      "xmlIsBaseCharQ",
+      "xmlNodeGetBase",
+      "xmlNodeSetBase",
+      "xmlUTF8Strsize",
+      "TIM_SORT_RESIZE",
+      "xmlBufferLength",
+      "xmlBufferResize",
+      "xmlIsBaseChar_ch",
+      "xmlNewDocTextLen",
+      "xmlParseVersionNum",
+      "xmlBufferCreateSize",
+      "ATTRIBUTE_COUNTED_BY",
+      "xmlChildElementCount",
+      "xmlNodeAddContentLen",
+      "xmlNodeSetContentLen",
+      "xmlTextReaderBaseUri",
+      "xmlAutomataNewCounter",
+      "xmlXPathCountFunction",
+      "LIBXML_ATTR_ALLOC_SIZE",
+      "xmlOutputBufferGetSize",
+      "xmlStringLenGetNodeList",
+      "xmlAutomataNewCountTrans",
+      "xmlNanoHTTPContentLength",
+      "xmlTextWriterWriteBase64",
+      "xmlTextWriterWriteRawLen",
+      "xmlXPathNodeSetGetLength",
+      "xmlAutomataNewCountTrans2",
+      "xmlTextReaderConstBaseUri",
+      "xmlAutomataNewCountedTrans",
+      "xmlAutomataNewCounterTrans"
+    ]
+  },
+  "mapping": {
+    "length_of": [
+      "xmlBufAddLen",
+      "xmlBufferResize",
+      "xmlTextWriterWriteBase64",
+      "xmlUTF8Strsize",
+      "xmlNewTextLen",
+      "xmlNewDocTextLen",
+      "xmlNodeAddContentLen",
+      "xmlNodeSetContentLen",
+      "TIM_SORT_RESIZE"
+    ]
+  },
+  "dropped_not_in_target": {
+    "length_of": []
+  },
+  "rationale": {
+    "length_of": "These libxml2 functions compute a derived length (allocation size, buffer size, or encoded size) from an input size and perform unchecked arithmetic on that size before validating it against the type maximum."
+  },
+  "llm_seconds": 261.4
+}

@@ -1,0 +1,13 @@
+## Bug Pattern
+
+A debug-only invariant (`aborting_assert`) evaluates an arithmetic expression using loop-counter/index variables that are narrower than the bound/length variable they are compared against. Because the expression is computed in the narrow signed type before comparison with the wider `i64` bound, it can overflow even when the final index fits. In this patch, `i` and `j` are `int`, while `nOut` is `i64`; an expression such as `j+nStr-i+1` can overflow in `int` when `nStr+1` reaches `INT_MAX` under an extra-large `SQLITE_MAX_LENGTH`. The fix widens `i` and `j` to `i64` so the whole expression is evaluated in 64-bit arithmetic.
+
+Roles:
+- `loop_counter` / `buffer_index`: `i`, `j` (buggy: `int`; fixed: `i64`)
+- `wide_bound` / `output_length`: `nOut` (`i64`)
+- `narrow_length`: `nStr`, `nPattern`, `nRep` (`int`)
+- `debug_only_invariant` / `aborting_assert`: `assert( j+nStr-i+1<=nOut )`, `assert( j<=nOut )`
+- `length_limit`: `db->aLimit[SQLITE_LIMIT_LENGTH]`, `SQLITE_MAX_LENGTH`
+- `allocator`: `contextMalloc`, `sqlite3Realloc`
+- `deallocator`: `sqlite3_free`
+- `output_buffer`: `zOut`

@@ -1,0 +1,178 @@
+{
+  "commit_id": "a7511af09f99995cdf81994db21f4eba564276b5",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/plugin-cache/plugins/51bca6f7e51b5d399f5e/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlregexp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 9,
+        "fixed_total": 2,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlRegNewParserCtxt"
+        ],
+        "fixed_functions": [
+          "xmlRegNewParserCtxt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5139,
+          "column": 23,
+          "function": "xmlFAParseCharGroup",
+          "bug_type": "Unchecked indexed lookahead read",
+          "description": "Unchecked indexed lookahead read: cursor access lacks bounds check against length",
+          "issue_hash": "1d6ad0504bf1daa44f28707f71aaa5e0",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/a7511af09f99/c64dd21e/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-1d6ad0.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5028,
+          "column": 45,
+          "function": "xmlFAParseCharRange",
+          "bug_type": "Unchecked indexed lookahead read",
+          "description": "Unchecked indexed lookahead read: cursor access lacks bounds check against length",
+          "issue_hash": "2f8d6a9bc23023482b28726ae2cfd86b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/a7511af09f99/c64dd21e/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-2f8d6a.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5097,
+          "column": 11,
+          "function": "xmlFAParsePosCharGroup",
+          "bug_type": "Unchecked indexed lookahead read",
+          "description": "Unchecked indexed lookahead read: cursor access lacks bounds check against length",
+          "issue_hash": "545ddb04e32272e618ec799b44c7eb7a",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/a7511af09f99/c64dd21e/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-545ddb.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5022,
+          "column": 47,
+          "function": "xmlFAParseCharRange",
+          "bug_type": "Unchecked indexed lookahead read",
+          "description": "Unchecked indexed lookahead read: cursor access lacks bounds check against length",
+          "issue_hash": "594a3ad7401d808427ab6f49b54a9c59",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/a7511af09f99/c64dd21e/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-594a3a.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5022,
+          "column": 28,
+          "function": "xmlFAParseCharRange",
+          "bug_type": "Unchecked indexed lookahead read",
+          "description": "Unchecked indexed lookahead read: cursor access lacks bounds check against length",
+          "issue_hash": "6d9ca92c3152d4e3466112bb3dea4cb6",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/a7511af09f99/c64dd21e/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-6d9ca9.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5104,
+          "column": 11,
+          "function": "xmlFAParsePosCharGroup",
+          "bug_type": "Unchecked indexed lookahead read",
+          "description": "Unchecked indexed lookahead read: cursor access lacks bounds check against length",
+          "issue_hash": "ac0b0f14ce3dd041d9b8f3d812cd9345",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/a7511af09f99/c64dd21e/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-ac0b0f.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5028,
+          "column": 26,
+          "function": "xmlFAParseCharRange",
+          "bug_type": "Unchecked indexed lookahead read",
+          "description": "Unchecked indexed lookahead read: cursor access lacks bounds check against length",
+          "issue_hash": "ad4262938e619c110aff37eb9570486f",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/a7511af09f99/c64dd21e/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-ad4262.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5022,
+          "column": 64,
+          "function": "xmlFAParseCharRange",
+          "bug_type": "Unchecked indexed lookahead read",
+          "description": "Unchecked indexed lookahead read: cursor access lacks bounds check against length",
+          "issue_hash": "ed2a18acad37f45d8fdd006c5741551d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/a7511af09f99/c64dd21e/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-ed2a18.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5090,
+          "column": 14,
+          "function": "xmlFAParsePosCharGroup",
+          "bug_type": "Unchecked indexed lookahead read",
+          "description": "Unchecked indexed lookahead read: cursor access lacks bounds check against length",
+          "issue_hash": "fe071cbaea8272e929737f24ae117384",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/a7511af09f99/c64dd21e/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-fe071c.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/a7511af09f99-f6d22c8ac6c7/../../src/a7511af09f99/xmlregexp.c",
+          "line": 5026,
+          "column": 47,
+          "function": "xmlFAParseCharRange",
+          "bug_type": "Unchecked indexed lookahead read",
+          "description": "Unchecked indexed lookahead read: cursor access lacks bounds check against length",
+          "issue_hash": "594a3ad7401d808427ab6f49b54a9c59",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/a7511af09f99/c64dd21e/fixed/.._.._src_a7511af09f99_xmlregexp.c/report-594a3a.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r8-R-libxml2/work/build/a7511af09f99-f6d22c8ac6c7/../../src/a7511af09f99/xmlregexp.c",
+          "line": 5026,
+          "column": 64,
+          "function": "xmlFAParseCharRange",
+          "bug_type": "Unchecked indexed lookahead read",
+          "description": "Unchecked indexed lookahead read: cursor access lacks bounds check against length",
+          "issue_hash": "ed2a18acad37f45d8fdd006c5741551d",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r8/tmp/validation/a7511af09f99/c64dd21e/fixed/.._.._src_a7511af09f99_xmlregexp.c/report-ed2a18.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 34.07,
+      "fixed": 33.74
+    },
+    "total_seconds": 68.06
+  },
+  "report_dir": "tmp/validation/a7511af09f99/c64dd21e"
+}

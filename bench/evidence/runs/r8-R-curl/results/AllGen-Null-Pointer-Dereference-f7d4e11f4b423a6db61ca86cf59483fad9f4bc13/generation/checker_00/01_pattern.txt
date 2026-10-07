@@ -1,0 +1,15 @@
+## Bug Pattern
+
+A function validates the `length_of` field of an incoming descriptor but does not validate the paired `data_pointer` field. When `length_of` is nonzero but `data_pointer` is NULL, the code either passes the NULL pointer to a `buffer_copy`, causing a NULL dereference, or stores/returns the descriptor with a NULL data pointer that is later dereferenced outside the function.
+
+Roles:
+- `data_pointer`: `blob->data`
+- `length_of`: `blob->len`
+- `allocator`: `curlx_malloc`
+- `deallocator`: `curlx_safefree`
+- `buffer_copy`: `memcpy`
+- `copy_flag`: `blob->flags & CURL_BLOB_COPY`
+- `error_setter`: `return CURLE_BAD_FUNCTION_ARGUMENT`, `return CURLE_OUT_OF_MEMORY`
+- `retained_pointer`: `*blobp`, `nblob->data`
+
+The fix adds a NULL check for `blob->data` before accepting the blob, preventing both in-function and later out-of-function NULL dereferences.

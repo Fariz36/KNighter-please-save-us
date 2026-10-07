@@ -1,0 +1,32 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "xmlMalloc"
+      ],
+      "description": "allocates memory; the returned pointer is owned by the caller"
+    },
+    "buffer_copy": {
+      "names": [
+        "memcpy"
+      ],
+      "description": "copies bytes from a source into a destination buffer"
+    },
+    "deallocator": {
+      "names": [
+        "xmlFree"
+      ],
+      "description": "frees a previously allocated memory object; the pointer must not be used afterwards"
+    },
+    "cleanup": {
+      "names": [
+        "xmlFreeParserCtxt"
+      ],
+      "description": "frees an object and the resources owned by it; used to discover owned fields"
+    }
+  }
+}

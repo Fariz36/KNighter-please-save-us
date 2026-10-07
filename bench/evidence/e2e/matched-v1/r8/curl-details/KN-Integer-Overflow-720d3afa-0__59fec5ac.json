@@ -1,0 +1,55 @@
+{
+  "commit_id": "59fec5ac43ade98b31093e707b5ac2aba305bd2a",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/15fa3cb7c17f26f8b0e0/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/mprintf.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "parsefmt"
+        ],
+        "fixed_functions": [
+          "parsefmt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/mprintf.c": []
+    },
+    "fixed": {
+      "lib/mprintf.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 54.67,
+    "analysis_seconds": {
+      "buggy": 5.49,
+      "fixed": 4.86
+    },
+    "total_seconds": 65.07
+  },
+  "report_dir": "tmp/validation/59fec5ac43ad/72e68efa"
+}

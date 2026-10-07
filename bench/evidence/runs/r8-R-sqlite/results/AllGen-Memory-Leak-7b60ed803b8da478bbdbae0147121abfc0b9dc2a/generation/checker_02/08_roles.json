@@ -1,0 +1,40 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "sqlite3SrcListDup",
+        "sqlite3SrcListAppendFromTerm",
+        "sqlite3SelectNew"
+      ],
+      "description": "function that allocates or duplicates a resource and returns ownership to the caller"
+    },
+    "ownership_transfer": {
+      "names": [
+        "sqlite3SrcListAppendList"
+      ],
+      "description": "function that transfers ownership of a resource into a receiver container"
+    },
+    "receiver": {
+      "names": [
+        "pSrc"
+      ],
+      "description": "field or variable that receives ownership of the transferred resource"
+    },
+    "deallocator": {
+      "names": [
+        "sqlite3SrcListDelete"
+      ],
+      "description": "function that frees a resource"
+    },
+    "null_on_failure": {
+      "names": [
+        "pSrc"
+      ],
+      "description": "field or variable that may be NULL on allocation failure and cause the transfer to be skipped"
+    }
+  }
+}

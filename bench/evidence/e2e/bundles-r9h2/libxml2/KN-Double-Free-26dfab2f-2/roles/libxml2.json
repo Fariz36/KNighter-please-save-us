@@ -1,0 +1,11 @@
+{
+  "parser_input": [
+    "xmlNewIOInputStream"
+  ],
+  "null_on_failure": [
+    "xmlNewIOInputStream"
+  ],
+  "deallocator": [
+    "xmlFreeParserInputBuffer"
+  ]
+}

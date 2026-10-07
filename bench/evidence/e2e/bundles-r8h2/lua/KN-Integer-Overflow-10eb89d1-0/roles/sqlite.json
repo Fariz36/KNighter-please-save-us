@@ -1,0 +1,11 @@
+{
+  "decoder_function": [
+    "sqlite3Utf8Read"
+  ],
+  "input_byte": [
+    "c"
+  ],
+  "continuation_count": [
+    "count"
+  ]
+}

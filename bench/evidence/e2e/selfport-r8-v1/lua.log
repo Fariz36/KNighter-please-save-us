@@ -1,0 +1,38 @@
+/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/.venv/lib/python3.14/site-packages/tree_sitter/__init__.py:36: FutureWarning: Language.build_library is deprecated. Use the new bindings instead.
+  warn("{} is deprecated. Use {} instead.".format(old, new), FutureWarning)
+2026-10-07 14:42:35.912 | INFO     | global_config:setup:94 - Target: Target Type: compiledb (lua), Repository Path: /home/faris/RA-MrYudis/Knight/targets/lua; plugin_build=standalone; validation_scoring=strict
+2026-10-07 14:42:37.660 | INFO     | model:init_llm:111 - Init LLM with model: opencode-go:deepseek-v4.1-flash (session knighter-d628186486884306)
+2026-10-07 14:42:37.685 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision 7c40c5edb236
+2026-10-07 14:42:37.732 | INFO     | role_porting:port_roles:140 - lua: 689 candidate API names from headers
+2026-10-07 14:42:37.752 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:43:53.882 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 76.1s
+2026-10-07 14:43:53.886 | INFO     | role_porting:port_roles:189 - Ported KN-Integer-Overflow-10eb89d1-0 roles to lua: {'decoder_function': [], 'input_byte': [], 'continuation_count': []}
+2026-10-07 14:43:53.889 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c3fb1186ab482254d940
+2026-10-07 14:43:54.384 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '7c40c5edb2364745bf0add6feb02c7c90dfbae3e', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/c3fb1186ab482254d940/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 0.49, 'jobs': 32}
+2026-10-07 14:43:54.388 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit c3fb1186ab482254d940
+2026-10-07 14:43:54.940 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '7c40c5edb2364745bf0add6feb02c7c90dfbae3e', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/c3fb1186ab482254d940/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 0.54, 'jobs': 32}
+{"bundle": "KN-Integer-Overflow-10eb89d1-0", "reports_original": 1, "reports_ported": 0, "preserved": false}
+2026-10-07 14:43:54.962 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision 40b76de2d77e
+2026-10-07 14:43:55.002 | INFO     | role_porting:port_roles:140 - lua: 688 candidate API names from headers
+2026-10-07 14:43:55.051 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:44:28.424 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 33.4s
+2026-10-07 14:44:28.427 | INFO     | role_porting:port_roles:189 - Ported KN-Misuse-bc4bbcef-0 roles to lua: {'combined_create_and_publish': [], 'object_initializer': [], 'persistent_registry_lookup': ['luaL_getmetatable'], 'object_allocator': ['luaL_newlibtable'], 'registry_store': [], 'registry_key': []}
+2026-10-07 14:44:28.428 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dfd89b32eea9382685cf
+2026-10-07 14:44:35.209 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '40b76de2d77e66b70a9d4bf989c3f5340919973f', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/dfd89b32eea9382685cf/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 6.77, 'jobs': 32}
+2026-10-07 14:44:35.211 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dfd89b32eea9382685cf
+2026-10-07 14:44:41.536 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': '40b76de2d77e66b70a9d4bf989c3f5340919973f', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/dfd89b32eea9382685cf/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 6.32, 'jobs': 32}
+{"bundle": "KN-Misuse-bc4bbcef-0", "reports_original": 1, "reports_ported": 0, "preserved": false}
+2026-10-07 14:44:41.555 | INFO     | targets.compiledb:_setup_revision:180 - [lua] reuse configured revision c931d86e98da
+2026-10-07 14:44:41.590 | INFO     | role_porting:port_roles:140 - lua: 679 candidate API names from headers
+2026-10-07 14:44:41.636 | INFO     | model:invoke_llm:264 - Start LLM process: opencode-go:deepseek-v4.1-flash [port_roles]
+2026-10-07 14:45:55.984 | INFO     | model:invoke_llm:332 - Finish LLM process [port_roles] in 74.3s
+2026-10-07 14:45:55.988 | INFO     | role_porting:port_roles:189 - Ported KN-Use-After-Free-22974326-2 roles to lua: {'gc_managed_object': [], 'potential_gc_trigger': ['luaH_finishset'], 'gc_root_anchor': ['sethvalue2s'], 'weak_reference_container': [], 'use_after_free_use': ['invalidateTMcache', 'luaC_barrierback']}
+2026-10-07 14:45:55.991 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dd8eb6cb2e4f2061a2ae
+2026-10-07 14:45:56.731 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c931d86e98da320c71da70c16d44aa28e9755520', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/dd8eb6cb2e4f2061a2ae/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 0.71, 'jobs': 32}
+2026-10-07 14:45:56.733 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dd8eb6cb2e4f2061a2ae
+2026-10-07 14:46:03.999 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c931d86e98da320c71da70c16d44aa28e9755520', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/dd8eb6cb2e4f2061a2ae/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 1, 'seconds': 7.26, 'jobs': 32}
+2026-10-07 14:46:04.000 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dd8eb6cb2e4f2061a2ae
+2026-10-07 14:46:04.411 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c931d86e98da320c71da70c16d44aa28e9755520', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/dd8eb6cb2e4f2061a2ae/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 0.4, 'jobs': 32}
+2026-10-07 14:46:04.412 | DEBUG    | backends.plugin_builder:build:302 - Plugin cache hit dd8eb6cb2e4f2061a2ae
+2026-10-07 14:46:08.940 | INFO     | backends.csa_compiledb:_run_checker_compiledb:248 - Scan {'commit': 'c931d86e98da320c71da70c16d44aa28e9755520', 'plugin': '/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/tmp/plugin-cache/plugins/dd8eb6cb2e4f2061a2ae/plugin.so', 'files': 1, 'failed': 0, 'crashed': 0, 'reports': 0, 'seconds': 4.52, 'jobs': 32}
+{"bundle": "KN-Use-After-Free-22974326-2", "reports_original": 1, "reports_ported": 0, "preserved": false}
