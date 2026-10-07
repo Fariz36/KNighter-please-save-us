@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A pointer to an object that is only weakly reachable is passed to a `container_insert`-type operation that may allocate and trigger an emergency garbage collection. Because no strong root/`ref_get` protects the object across that call, the collector can free it during the call; the code then continues to use the stale pointer, causing a use-after-free. The fix is to acquire a strong root for the object before the potentially collecting call and release it afterward.
+
+Roles:
+- `container_insert` (may allocate/rehash and trigger GC): `luaH_finishset`
+- `ref_get` / strong-root acquisition: `sethvalue2s` (with stack-top adjustment to expose the root)

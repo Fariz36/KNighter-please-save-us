@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A NUL-terminated input string is scanned by a delimiter-search operation. The code then advances past the delimiter and reads fixed neighboring offsets without first checking that the byte at the first offset is not the string terminator. When the input ends immediately after the delimiter, that first byte is `'\0'`, and the next offset read goes one byte past the NUL terminator, causing an out-of-bounds read. The fix adds a non-zero check on the first byte before later offsets are read.
+
+Roles:
+- `parser_input`: `curlx_dyn_ptr` (returns the NUL-terminated protocol response buffer)
+- `delimiter_search`: `strchr` (locates the delimiter and returns a pointer into the input)
+- `char_classifier`: `ISDIGIT` (tests a character, potentially one read out of bounds)

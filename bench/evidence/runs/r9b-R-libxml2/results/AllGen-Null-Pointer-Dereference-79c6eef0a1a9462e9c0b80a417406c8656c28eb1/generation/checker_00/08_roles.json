@@ -1,0 +1,38 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "null_on_failure": {
+      "names": [
+        "xmlStrdup"
+      ],
+      "description": "function that may return NULL on failure; its result must be checked before dereference"
+    },
+    "length_of": {
+      "names": [
+        "strlen"
+      ],
+      "description": "function that computes the length of a C string, dereferencing its pointer argument"
+    },
+    "duplicator": {
+      "names": [
+        "xmlStrdup"
+      ],
+      "description": "function that returns a newly allocated copy of its input"
+    },
+    "allocator": {
+      "names": [
+        "xmlMalloc"
+      ],
+      "description": "function that allocates memory"
+    },
+    "deallocator": {
+      "names": [
+        "xmlFree"
+      ],
+      "description": "function that frees memory"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "resource": [],
+  "ownership_consumer_frees_on_failure": [],
+  "deallocator": [
+    "luaH_free",
+    "luaM_free",
+    "luaM_free_",
+    "luaM_freearray",
+    "luaM_freemem",
+    "luaF_freeproto",
+    "luaE_freethread",
+    "luaC_freeallobjects",
+    "lua_close",
+    "luaZ_freebuffer",
+    "luai_userstatefree",
+    "luai_userstateclose"
+  ],
+  "null_on_failure": [],
+  "duplicate_cleanup": [
+    "luaH_free",
+    "luaM_free",
+    "luaM_free_",
+    "luaM_freearray",
+    "luaM_freemem",
+    "luaF_freeproto",
+    "luaE_freethread",
+    "luaC_freeallobjects",
+    "lua_close",
+    "luaZ_freebuffer",
+    "luai_userstatefree",
+    "luai_userstateclose"
+  ],
+  "context_cleanup": [
+    "lua_close",
+    "luaE_freethread"
+  ]
+}

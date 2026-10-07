@@ -1,0 +1,49 @@
+{
+  "duplicator": [
+    "xmlCopyDoc",
+    "xmlCopyDtd",
+    "xmlCopyNode",
+    "xmlCopyProp",
+    "xmlListDup",
+    "xmlHashCopy",
+    "xmlStrdup",
+    "xmlXPathObjectCopy",
+    "xmlBufFromBuffer"
+  ],
+  "source_handle": [
+    "doc",
+    "dtd",
+    "node",
+    "cur",
+    "old",
+    "hash",
+    "val",
+    "buffer"
+  ],
+  "destination_allocator": [
+    "xmlMalloc",
+    "xmlMallocLoc",
+    "xmlMemMalloc",
+    "xmlRealloc",
+    "xmlReallocLoc",
+    "xmlMemRealloc",
+    "__xmlMalloc",
+    "__xmlRealloc",
+    "xmlNewDoc",
+    "xmlNewDtd",
+    "xmlNewNode",
+    "xmlNewProp",
+    "xmlNewText",
+    "xmlNewPI",
+    "xmlNewComment",
+    "xmlNewCDataBlock",
+    "xmlNewReference",
+    "xmlNewEntity",
+    "xmlNewDocProp",
+    "xmlListCreate",
+    "xmlHashCreate",
+    "xmlBufCreate",
+    "xmlStrndup"
+  ],
+  "field_copier": []
+}

@@ -1,0 +1,9 @@
+{
+  "tokenizer": [],
+  "dequote_helper": [],
+  "illegal_token_sentinel": [],
+  "dequoter_with_precondition": [
+    "curlx_str_quotedword"
+  ],
+  "caller_ignoring_sentinel": []
+}

@@ -1,0 +1,26 @@
+{
+  "config_setter": [
+    "sqlite3_config",
+    "sqlite3_db_config",
+    "sqlite3_vtab_config",
+    "sqlite3session_config",
+    "sqlite3session_object_config",
+    "sqlite3_expert_config",
+    "sqlite3_recover_config",
+    "lsm_config",
+    "lsm_config_log",
+    "lsm_config_work_hook",
+    "lsmConfigMmap",
+    "sqlite3Fts5ConfigSetValue",
+    "sqlite3Fts5StorageConfigValue",
+    "sqlite3Fts5ConfigParse",
+    "sqlite3Fts5ConfigLoad",
+    "sqlite3Fts5IndexLoadConfig",
+    "tdb_lsm_config_str",
+    "tdb_lsm_config_work_hook"
+  ],
+  "divisor_field": [
+    "szPma",
+    "nMerge"
+  ]
+}

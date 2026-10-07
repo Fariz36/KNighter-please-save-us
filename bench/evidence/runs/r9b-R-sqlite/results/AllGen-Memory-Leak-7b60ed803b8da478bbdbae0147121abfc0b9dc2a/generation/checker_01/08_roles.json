@@ -1,0 +1,36 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "duplicator": {
+      "names": [
+        "sqlite3SrcListDup"
+      ],
+      "description": "creates a new copy of an object; returns a pointer that must be freed by the caller"
+    },
+    "deallocator": {
+      "names": [
+        "sqlite3SrcListDelete"
+      ],
+      "description": "frees an object; the pointer must not be used afterwards"
+    },
+    "container_insert": {
+      "names": [
+        "sqlite3SrcListAppendList"
+      ],
+      "description": "appends an element to a container and takes ownership of the element"
+    },
+    "null_on_failure": {
+      "names": [
+        "triggerStepAllocate",
+        "sqlite3SrcListDup",
+        "sqlite3SelectNew",
+        "sqlite3SrcListAppendFromTerm",
+        "sqlite3SrcListAppendList"
+      ],
+      "description": "may return NULL on allocation failure"
+    }
+  }
+}

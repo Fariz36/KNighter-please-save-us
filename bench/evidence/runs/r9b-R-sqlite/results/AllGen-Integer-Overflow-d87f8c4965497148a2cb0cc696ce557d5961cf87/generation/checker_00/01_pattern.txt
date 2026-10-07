@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A length computed from input-dependent traversal (a `parser_input` operation bounded by an `untrusted_size` value) is narrowed to a 32-bit signed `int` without an upper-bound check. When the input is oversized, the true byte length exceeds the range of `int`; the narrowing cast overflows/truncates to a negative or incorrect length. That value is then used as a byte count by a `buffer_copy`/append operation, enabling further integer overflow or memory-safety problems. The fix clamps the wide length to a safe maximum before the cast.
+
+Roles:
+- `parser_input`: `SQLITE_SKIP_UTF8` (walks UTF-8 input while the byte length is computed)
+- `untrusted_size`: `va_arg`, `getIntArg` (caller-supplied precision controlling traversal)
+- `buffer_copy`: `sqlite3_str_append` (consumes the resulting length as a byte count)

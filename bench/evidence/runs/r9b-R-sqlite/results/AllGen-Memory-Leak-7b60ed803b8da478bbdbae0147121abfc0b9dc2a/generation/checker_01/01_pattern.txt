@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A resource produced by a `duplicator` (or otherwise owned by a local pointer) is conditionally transferred into a destination via a `container_insert`, guarded by both the source and destination being non-NULL. If the destination is NULL—often after an earlier `null_on_failure` allocation failure—the transfer is skipped, but the source is not passed to a `deallocator`, causing a memory leak. The fix adds the missing `deallocator` call on the skipped branch.
+
+Roles:
+- `duplicator`: `sqlite3SrcListDup`
+- `deallocator`: `sqlite3SrcListDelete`
+- `container_insert`: `sqlite3SrcListAppendList`
+- `null_on_failure`: `triggerStepAllocate`, `sqlite3SrcListDup`, `sqlite3SelectNew`, `sqlite3SrcListAppendFromTerm`, `sqlite3SrcListAppendList`

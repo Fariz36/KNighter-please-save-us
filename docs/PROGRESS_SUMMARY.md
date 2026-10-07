@@ -1,11 +1,12 @@
 # KNighter fork: progress summary
 
-*Status as of 2 Oct 2026. Branch `general-c-speed` on `Fariz36/KNighter-please-save-us`.*
+*Status as of 8 Oct 2026. Branch `general-c-speed` on `Fariz36/KNighter-please-save-us`.*
 
 > **In one sentence:** KNighter now runs on any C/C++ project from a config file, generates and
 > validates checkers **3.3× faster with the same success rate**, and judges checkers by whether they
-> hit the actual bug. Checkers can now be exported as standalone, project-independent bundles, but
-> using them **on other projects does not find anything yet**; that is the current open problem.
+> hit the actual bug. Checkers can be exported as standalone bundles and ported to other projects by
+> renaming roles only; a checker generated from a SQLite fix found **2 real memory leaks in libxml2**
+> that libxml2 fixed months later, but such transfer is rare and noisy.
 
 ---
 
@@ -15,7 +16,7 @@
 |---|---|---|---|
 | 1 | Make it faster | ✅ **Done** | 3.3× faster end to end (441 → 135 min on 43 commits), same quality |
 | 2 | Target general C (not just Linux kernel) | ✅ **Done** | 7 real projects, 4 build systems, C and C++, config only |
-| 3 | Checkers usable across projects | 🟡 **In progress** | Checkers are now portable and standalone, but they don't find bugs in other projects yet |
+| 3 | Checkers usable across projects | ✅ **Done (with caveats)** | Portable, standalone, ported by role renaming; 2 real cross-project bugs found; transfer is rare and pattern-dependent |
 | 4 | Accept a CVE as input | ⬜ **Not started** | Planned after goal 3 |
 
 Plan sections: **0** = correctness fixes (needed so the numbers mean something), **1** = speed,
@@ -26,8 +27,8 @@ Plan sections: **0** = correctness fixes (needed so the numbers mean something),
 ## 2. This sprint's scope
 
 - **Done and pushed:** sections 0, 1, 2 (every acceptance criterion checked, evidence committed).
-- **Built, tested, not pushed:** section 3 (portable checkers, role-based generation, role porting).
-- **In progress:** section 3.4, making ported checkers actually find bugs in other projects.
+- **Done and pushed:** section 3 (portable checkers, role-based generation, role porting, cross-project
+  evaluation). Details: `docs/RESULTS_SECTION_3.md`.
 - **Out of scope for now:** section 4 (CVE input), Linux-kernel/V8 regression testing (no kernel or V8
   source on this machine).
 
@@ -73,14 +74,16 @@ Plan sections: **0** = correctness fixes (needed so the numbers mean something),
   generic C reasoning instead of driver/kernel reasoning.
 - **Refinement and whole-project scanning now work** on these projects (they were kernel-only or broken).
 
-### Cross-project (section 3, not pushed yet)
+### Cross-project (section 3)
 - **Role-based checkers.** Instead of hardcoding names like `git_error_set` or `xmlMalloc`, checkers ask
   "is this call an *allocator*?". The real names live in a small roles file that can be swapped per
   project.
 - **Portable bundles.** Each checker can be exported as a folder (plugin, source, roles, manifest, run
   script) that runs on any project with plain Python and clang, and can be rebuilt for another clang.
-- **Role porting.** One LLM step proposes the target project's names for each role, choosing only from
-  names that really exist in the target's headers.
+- **Role porting.** One LLM step proposes the target project's names for each role; every name is checked
+  against the target's source. The checker plugin itself never changes.
+- **Role matching fixed for real C code:** calls through macro wrappers (`curlx_free`) and function
+  pointers (`xmlFree`) now match their role (before, they silently never did).
 
 ---
 
@@ -95,7 +98,8 @@ Plan sections: **0** = correctness fixes (needed so the numbers mean something),
 | Validations using the correct plugin | not guaranteed | **152/152** | Byte-identical source check |
 | Refinement repairs that validate | 0% (12/12 failed) | **100% (4/4)** | Root cause: wrapped file paths |
 | Checkers hardcoding project names | 64–76% | **0% (0/45)** | Role-based generation |
-| Commits solved with role-based checkers | 17/26 | **18/26** | Same 26 commits |
+| Commits solved with role-based checkers | 17/26 | **19/26** (free-form roles) / 14 and 12/26 (generic roles) | Same 26 commits |
+| Real bugs found in another project by a ported checker | – | **2** (libxml2 2.15.0, fixed 3 and 5 months later) | Blind scan of an old release + manual review |
 
 **Per project** (baseline → optimized wall time, perfect checkers):
 
@@ -124,31 +128,27 @@ failures and corrections).
 
 ---
 
-## 6. Section 3: what works and what doesn't yet
+## 6. Section 3: results
 
 **Works**
-- 45/45 role-based checkers use roles correctly, with 204 role descriptions; 0 hardcoded project names.
-- Success rate didn't drop because of roles (18/26 vs 17/26).
-- Bundles export, run standalone, and rebuild from source.
+- 0 hardcoded project names in role-based checkers; bundles run standalone and rebuild from source.
+- Porting a checker back to its own project from scratch keeps detection in **18/18** cases.
+- **Real cross-project detection:** a checker generated from a SQLite memory-leak fix, ported to libxml2 by
+  renaming roles, found 2 real leaks in libxml2 2.15.0 (`xmlwriter.c:1055` and `:1798`) at the exact lines
+  libxml2 fixed 3 and 5 months later, both in a blind whole-project scan and on the fix commits.
 
-**Doesn't work yet: checkers find nothing in *other* projects**
+**Limits (honest version)**
 
-| Cross-project run | Pairs (checker × other project) | Roles mapped | Reports found |
-|---|---|---|---|
-| v1 (first try) | 54 | 33% | **0** |
-| v2 (fixed porting; 3 of 4 targets, interrupted) | 40 | 39% | **0** |
+| Test | Result |
+|---|---|
+| Same-type real fixes in other projects (r9) | 2/27 detected; most ported checkers stay silent |
+| Old-release scan (historical replay, r9) | 13 later-fixed functions hit vs 5.6 by chance; 2 confirmed bugs; 12/13 hits from one checker |
+| Whole-project scan at HEAD (r9) | 458 reports; the LLM triage's 2 "bugs" were both false positives |
 
-**Why (diagnosed):**
-1. **Roles are too specific.** Generated roles describe the bug itself (e.g. "consumer frees on
-   failure", "GC root anchor") instead of reusable API categories ("deallocator"), so other projects have
-   no equivalent. *Fix written (standard role vocabulary in the prompts), needs a regeneration run.*
-2. **Porting missed real APIs.** SQLite's public API lives in a `.h.in` file that was skipped, and
-   "free" did not match "delete"/"destroy". *Fixed (v2): mapping went 33% → 39%.*
-3. **Open question:** with zero reports we can't yet tell "no such bug exists there" from "ported
-   checkers can't fire". A **positive control** is ready: port a checker back to its *own* project
-   from scratch and check it still catches its original bug.
-
----
+**Why transfer is rare:** roles fix *naming* differences between projects, but not differences in *how the
+code is written* (e.g. curl returns error constants, Lua calls `luaL_error`). Generic patterns (memory must be
+freed on every path) transfer; project-specific ones don't. Generic roles also cost detection on the source
+project (19 → 14 and 12/26).
 
 ## 7. Interesting findings (useful for the paper)
 
@@ -177,18 +177,18 @@ failures and corrections).
 
 ## 9. Next steps
 
-1. **Positive control** (self-port): does porting preserve detection? (~30 min)
-2. **Regenerate with generic roles** (r9, ~2 h), then **cross-project v3**, to see if checkers find
-   anything in other projects.
-3. Write `docs/RESULTS_SECTION_3.md`; push section 3 after review.
-4. **Section 4: CVE as input** (CVE ID → fix commit(s) → existing pipeline; libxml2 is a good test bed).
+1. Decide with the supervisor how to frame section 3 (see questions below).
+2. **Section 4: CVE as input** (CVE ID → fix commit(s) → existing pipeline; libxml2 is a good test bed).
+3. Optional section 3 follow-ups: a larger matched-pair set, a manually reviewed sample of HEAD-scan reports,
+   and making checkers model "pointer stored in a struct field and freed through it" (the main false-positive
+   source).
 
 ## 10. Questions for the supervisor
 
 1. Is "3.3× faster at equal success" (plus the 5.4× deterministic replay) the right speed claim?
 2. Is function-level strict scoring acceptable as the main metric, with the old metric alongside?
-3. For cross-project: is "the checker runs on another project and its reports are triaged" enough, or
-   do we need confirmed new bugs?
+3. For cross-project: is "2 real bugs found in another project's old release (already fixed upstream)" plus
+   the measured trade-off enough, or do we need a confirmed *new* (unfixed) bug?
 4. Should section 4 (CVE input) start before cross-project detection is solved?
 
 ---

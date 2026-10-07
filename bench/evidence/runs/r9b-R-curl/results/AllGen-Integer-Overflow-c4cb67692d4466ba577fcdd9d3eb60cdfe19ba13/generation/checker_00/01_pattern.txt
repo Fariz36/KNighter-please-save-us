@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The size check combines untrusted 16-bit size/offset values with a constant and compares the result against the received buffer length, but the variables holding those values are declared as `unsigned short`. This makes the arithmetic vulnerable to overflow/truncation: the sum can wrap around or be computed in a too-narrow type, causing the bounds check to pass even when the requested data extends beyond the received buffer. The subsequent copy then reads out of bounds. The fix is to declare these size variables as `size_t` so the arithmetic is performed in a sufficiently wide unsigned type.
+
+Roles:
+- `untrusted_size`: `Curl_read16_le` (reads the `len` and `off` values from the network message)
+- `buffer_copy`: `Curl_client_write` (copies data using the unchecked `len`)
+- `length_of`: the inline check `off + sizeof(unsigned int) + len > smbc->got` (compares the untrusted sizes against the received buffer length)

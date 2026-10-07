@@ -1,0 +1,71 @@
+{
+  "commit_id": "1bc183a935799050919eecf4f5deffb6d98e7905",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-sqlite/plugin-cache/plugins/da63d364714b0f832733/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/alter.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ],
+        "fixed_functions": [
+          "dropConstraintFunc",
+          "findConstraintFunc",
+          "quotedCompare"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/alter.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-sqlite/work/src/79837b6ee5d4/src/alter.c",
+          "line": 2465,
+          "column": 3,
+          "function": "quotedCompare",
+          "bug_type": "Dequoting Unchecked Parser Token",
+          "description": "Dequoting unchecked parser token",
+          "issue_hash": "0e70565887e189492d1f4b1f0f12b69e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/1bc183a93579/4744cfab/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9b-R-sqlite_work_src_79837b6ee5d4_src_alter.c/report-0e7056.html",
+          "relpath": "src/alter.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/alter.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 17.95,
+      "fixed": 20.04
+    },
+    "total_seconds": 38.15
+  },
+  "report_dir": "tmp/validation/1bc183a93579/4744cfab"
+}

@@ -1,0 +1,32 @@
+{
+  "combined_create_and_publish": [],
+  "object_initializer": [
+    "Curl_init_do",
+    "vquic_ctx_init",
+    "Curl_MD5_init",
+    "Curl_HMAC_init",
+    "Curl_cf_create"
+  ],
+  "persistent_registry_lookup": [
+    "Curl_meta_get",
+    "Curl_conn_meta_get",
+    "Curl_altsvc_lookup"
+  ],
+  "object_allocator": [
+    "ALLOC_SIZE",
+    "ALLOC_SIZE2",
+    "config_alloc",
+    "Curl_fileinfo_alloc",
+    "Curl_ftp_parselist_data_alloc"
+  ],
+  "registry_store": [
+    "Curl_meta_set",
+    "Curl_conn_meta_set",
+    "Curl_schannel_set_cached_cert_store",
+    "Curl_ssl_setup_x509_store",
+    "Curl_wssl_setup_x509_store"
+  ],
+  "registry_key": [
+    "Curl_ssl_peer_key_make"
+  ]
+}

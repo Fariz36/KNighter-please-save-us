@@ -1,0 +1,9 @@
+## Bug Pattern
+
+The code validates the length field of a caller-supplied input descriptor but does not validate the corresponding data pointer before using it as the source of a `buffer_copy`, or before storing it for later dereference. If the length is nonzero and the data pointer is NULL, a copy path dereferences NULL via `memcpy`; if no copy is requested, the NULL pointer is stored and may be dereferenced later by consumers. The fix adds an explicit NULL check on that input data pointer before allocation/copy.
+
+Roles:
+- `buffer_copy`: `memcpy`
+- `allocator`: `curlx_malloc`
+- `deallocator`: `curlx_safefree`
+- `null_on_failure`: `curlx_malloc` (return value is checked)

@@ -1,0 +1,15 @@
+{
+  "parser_input": [
+    "sqlite3Fts5ParseNode",
+    "sqlite3Fts5ParseNearset"
+  ],
+  "null_on_failure": [
+    "sqlite3Fts5ParseNode",
+    "sqlite3Fts5ParseNearset"
+  ],
+  "deallocator": [
+    "sqlite3Fts5ParseNodeFree",
+    "sqlite3Fts5ParseNearsetFree",
+    "sqlite3Fts5ParsePhraseFree"
+  ]
+}

@@ -1,0 +1,7 @@
+## Bug Pattern
+
+The code computes a count while parsing untrusted input via a `parser_input`, then uses that count as a shift amount before validating it against the bit width of the shifted type. The existing bounds check (`count > 5`) occurs after the shift, so a crafted input can make the shift amount exceed the type width and cause undefined behavior (shift overflow).
+
+Roles:
+- `parser_input`: `utf8_decode` (parses the untrusted byte sequence from `s`)
+- `aborting_assert`: `lua_assert` (documents the required `count <= 5` bound at the shift site)

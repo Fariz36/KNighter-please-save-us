@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A length value derived from an untrusted/oversized input is narrowed to `int` without first clamping it to the `int` range. The resulting truncation/overflow produces a bogus byte count that is later used as a `buffer_copy` length and in signed width arithmetic, leading to integer overflow or out-of-bounds memory access.
+
+Roles:
+- `length_of`: `strlen`; the pointer-difference `(z - (unsigned char*)bufpt)` computed after `SQLITE_SKIP_UTF8` in the `%!.*s` path.
+- `buffer_copy`: `sqlite3_str_append` (consumes the computed `length`), plus `memcpy`/`memmove`/`memset` consumers of the same `length`/`width` values.
+- `untrusted_size`: the `.*` precision fetched via `va_arg`/`getIntArg`, which bounds the UTF-8 character scan.

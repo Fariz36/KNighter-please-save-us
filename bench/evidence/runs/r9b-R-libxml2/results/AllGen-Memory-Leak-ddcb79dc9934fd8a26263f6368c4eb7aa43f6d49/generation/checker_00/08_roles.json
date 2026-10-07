@@ -1,0 +1,38 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "xmlMalloc"
+      ],
+      "description": "allocates a new dynamically-sized memory block and returns a pointer to it, or NULL on failure"
+    },
+    "deallocator": {
+      "names": [
+        "xmlFreeParserCtxt"
+      ],
+      "description": "releases an object and the resources owned by it; the pointer must not be used afterwards"
+    },
+    "buffer_copy": {
+      "names": [
+        "memcpy"
+      ],
+      "description": "copies bytes from a source buffer into a destination buffer"
+    },
+    "init": {
+      "names": [
+        "xmlSAXVersion"
+      ],
+      "description": "initializes an object or handler structure to a default state"
+    },
+    "parser_input": {
+      "names": [
+        "xmlCtxtReadMemory"
+      ],
+      "description": "parses an in-memory document, typically taking a parser context and a character buffer"
+    }
+  }
+}

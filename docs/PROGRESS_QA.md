@@ -322,7 +322,7 @@ didn't need to change.
 
 **Q: Did role-based generation work?**
 Yes for the code: **0/45** generated checkers hardcode project names (before: 76% on the same commits),
-all 204 roles have a description, and success did not drop (**18/26** vs 17/26). The LLM did it right
+all 204 roles have a description, and success did not drop (**19/26** vs 17/26, after the `roles.h` fix below). The LLM did it right
 the first time; the automatic "move names into roles" repair was never needed.
 
 **Q: What is a bundle?**
@@ -333,25 +333,44 @@ report as KNighter; rebuilt from source it gives the same report too.
 
 **Q: What is porting?**
 Mapping a checker's roles to another project's names. KNighter collects function names from the target
-project's headers, ranks the likely ones per role, and asks the LLM to pick, **only among names that
-exist**. Invented names are rejected.
+project's headers, ranks the likely ones per role, and asks the LLM to pick. Every name is checked against
+all identifiers in the target's source; invented names are rejected. **The compiled checker never changes;
+only its roles file does.**
 
 **Q: So do checkers work on other projects?**
-**Not yet.** Two attempts on 54 checker × project pairs: roles mapped 33% → 39% after a fix, but
-**0 reports in every scanned pair**.
+**Sometimes, for generic patterns.** A checker generated from a SQLite memory-leak fix, ported to libxml2
+by renaming roles, found **2 real memory leaks in libxml2 2.15.0** (`xmlwriter.c:1055`, `:1798`) at the exact
+lines libxml2 fixed 3 and 5 months later. It found them in a blind scan of the whole old release and also on
+the fix commits. But most ported checkers stay silent in other projects, and those that fire are noisy.
 
-**Q: Why?**
-Diagnosed causes:
-1. **Roles are too specific.** They describe the bug ("consumer frees on failure", "GC root anchor"),
-   not reusable categories ("deallocator"), so other projects have no equivalent. A prompt fix (a
-   standard role vocabulary, at most 6 generic roles) is written but needs a regeneration run.
-2. **Porting missed real APIs** (SQLite's public API is in a `.h.in` file; "free" didn't match
-   "delete"). Fixed.
+**Q: Why did the first attempts find nothing (0 reports everywhere)?**
+Three bugs, all fixed and measured:
+1. **Porting rejected correct names.** Lua and libxml2 declare functions in styles the header scanner
+   missed. Porting a checker back to its own project kept detection in 0/8 cases before the fix, 18/18 after.
+2. **Roles never matched calls through macros or function pointers** (curl `curlx_free`, libxml2
+   `xmlFree`). In libxml2's `tree.c`, `xmlFree` went from 0 to 52 matched calls; one correct libxml2 checker was
+   wrongly scored as a failure because of it.
+3. **Roles described bug-site details** (a struct field `len`, a local `bufpt`) that other projects
+   don't have. New prompts restrict roles to standard API categories (allocator, deallocator, …), functions
+   and macros only.
 
-**Q: Could "0 reports" simply mean those bugs don't exist in the other projects?**
-Possibly; these are mature projects. That's why the next step is a **positive control**: port each
-checker back to its *own* project from scratch and check it still catches its original bug. If it does,
-porting works and "0" means "no such bug". If not, porting is the problem.
+**Q: Could "0 reports" mean the bugs just aren't there?**
+For a single pair, yes: e.g. a curl checker on Lua finds nothing even with hand-corrected roles, because Lua
+has no code of that shape. That's why transfer is **pattern-dependent**: roles fix *naming* differences, not
+differences in *how the code is written*.
+
+**Q: How was "found a real bug" measured?**
+Two ways with ground truth:
+- **Matched pairs:** run the ported checker on real same-type fix commits of the other project, with the
+  same strict TP/TN rule. r9: 2/27 detected; r8: 0/56.
+- **Historical replay:** scan an old release (≥ 12 months old) and check whether reports land in functions
+  the project fixed later, against a random-chance base rate. r9: 13 hits vs 5.6 expected, 2 confirmed bugs;
+  r8: 0 hits. Every claimed bug was checked by hand: the LLM's verdicts on cross-project reports were often
+  wrong.
+
+**Q: Is there a trade-off?**
+Yes. Generic roles make checkers fire on other projects (252 vs 17 reported functions) but find fewer bugs on
+their own project (14 and 12/26 in two runs vs 19/26 with free-form roles).
 
 ---
 
@@ -359,7 +378,8 @@ porting works and "0" means "no such bug". If not, porting is the problem.
 
 **Q: What hasn't been tested?**
 - The Linux kernel and V8 paths (no source trees on this machine), including item 1.3 (faster kernel checkout).
-- Cross-project detection (section 3.4) has no positive result yet.
+- Cross-project detection works only rarely (2 confirmed bugs, both from one checker), and no *new* (unfixed)
+  bug has been confirmed.
 
 **Q: How reliable are the success numbers?**
 One run per variant. Differences of 1–2 commits (e.g. 26 vs 27) are within run-to-run randomness. The
@@ -379,14 +399,13 @@ pasted in chat, so **rotating it is still recommended**.
 ## L. Practical: where things are
 
 **Q: What is pushed and what isn't?**
-- **Pushed** (branch `general-c-speed`): everything for sections 0–2 plus the evidence.
-- **Local commits, not pushed:** section 3 code (off by default).
-- **Not committed:** `docs/PROGRESS_SUMMARY.md`, this file, the latest log entries.
+- **Pushed** (branch `general-c-speed`): sections 0–3, the evidence, and these documents.
+- Section 3 (role-based generation) is **off by default** (`role_based_checkers: true` enables it).
 
 **Q: Which documents should I read?**
 - `PROGRESS_SUMMARY.md` for the overview;
 - this file for understanding;
-- `RESULTS_SECTIONS_0_2.md` for criterion-by-criterion evidence;
+- `RESULTS_SECTIONS_0_2.md` and `RESULTS_SECTION_3.md` for the evidence;
 - `RESEARCH_LOG.md` for the full history;
 - `REVIEW_CHECKLIST.md` for the decisions you approved.
 
@@ -401,7 +420,6 @@ validation with its reports. `bench/aggregate.py r7` regenerates the main table.
 ```
 
 **Q: What are the next steps?**
-1. Positive control (self-port), ~30 min.
-2. Regenerate with generic roles + cross-project v3, ~3 h.
-3. Write the section 3 results and push.
-4. Section 4: CVE as input.
+1. Agree with the supervisor on how to frame section 3.
+2. Section 4: CVE as input.
+3. Optional: larger cross-project sets, and checkers that model "stored in a field, freed through it".

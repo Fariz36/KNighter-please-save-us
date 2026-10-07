@@ -1,0 +1,7 @@
+{
+  "indexed_read": [],
+  "length_of": [
+    "strlen",
+    "sqlite3Strlen30"
+  ]
+}

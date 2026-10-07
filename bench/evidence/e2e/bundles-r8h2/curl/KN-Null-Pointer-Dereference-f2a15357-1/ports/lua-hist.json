@@ -1,0 +1,84 @@
+{
+  "target": "lua",
+  "commit": "cfce6f4b20afe85ede2182b3df3ab2bfcdb0e692",
+  "candidates": 841,
+  "identifiers": 7223,
+  "offered": {
+    "api_entry_point": [
+      "api_check",
+      "point2uint",
+      "api_checkpop",
+      "api_incr_top",
+      "lua_topointer",
+      "api_checknelems",
+      "lua_pointer2str",
+      "lua_getlocaledecpoint"
+    ],
+    "out_param": [
+      "setgcparam",
+      "applygcparam",
+      "luaO_codeparam",
+      "luaO_applyparam",
+      "UNUSED",
+      "lua_topointer",
+      "lua_pointer2str"
+    ],
+    "out_param_writer": [
+      "setgcparam",
+      "applygcparam",
+      "luaO_codeparam",
+      "luaO_applyparam",
+      "ci_func",
+      "cast_func",
+      "isLfunction",
+      "ttisfunction",
+      "lua_CFunction",
+      "lua_topointer",
+      "lua_isfunction",
+      "lua_iscfunction",
+      "lua_pointer2str",
+      "lua_tocfunction",
+      "lua_writestring",
+      "lua_pushcfunction",
+      "lua_writestringerror"
+    ]
+  },
+  "mapping": {
+    "api_entry_point": [
+      "lua_tonumberx",
+      "lua_tointegerx",
+      "lua_tolstring",
+      "lua_resume"
+    ],
+    "out_param": [
+      "isnum",
+      "pisnum",
+      "len",
+      "nres",
+      "nresults"
+    ],
+    "out_param_writer": [
+      "luaV_tonumber_",
+      "luaV_flttointeger",
+      "auxgetinfo",
+      "luaO_chunkid",
+      "luaO_utf8esc",
+      "lua_pointer2str",
+      "setgcparam",
+      "lua_pushcfunction"
+    ]
+  },
+  "dropped_not_in_target": {
+    "api_entry_point": [],
+    "out_param": [],
+    "out_param_writer": [
+      "luaV_tointeger_"
+    ]
+  },
+  "rationale": {
+    "api_entry_point": "Public Lua API functions that accept an optional out parameter.",
+    "out_param": "Parameter names used as optional output pointers in those API functions.",
+    "out_param_writer": "Functions/macros that write through a pointer argument without checking for NULL."
+  },
+  "llm_seconds": 214.4
+}

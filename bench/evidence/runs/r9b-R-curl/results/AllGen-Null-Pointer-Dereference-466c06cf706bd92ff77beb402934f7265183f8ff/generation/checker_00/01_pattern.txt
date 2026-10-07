@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A `duplicator` dereferences its source input pointer before checking whether that source is NULL. Callers may pass a NULL handle, such as an uninitialized handle or a handle from a failed allocation, so the duplication/copying logic performs a NULL pointer dereference instead of returning NULL/error. The fix is an early NULL guard on the source argument before any allocation or field copying.
+
+Roles:
+- `duplicator`: `curl_url_dup`, `DUP`
+- `allocator`: `curlx_calloc`
+- `cleanup`: `curl_url_cleanup`

@@ -1,0 +1,20 @@
+{
+  "allocator": [
+    "config_alloc",
+    "Curl_fileinfo_alloc",
+    "Curl_ftp_parselist_data_alloc",
+    "Curl_saferealloc",
+    "Curl_uint_tbl_resize",
+    "Curl_uint_bset_resize",
+    "file2memory",
+    "file2memory_range",
+    "varexpand"
+  ],
+  "reallocator": [
+    "curl_dbg_realloc",
+    "Curl_saferealloc",
+    "Curl_nghttp2_realloc",
+    "Curl_crealloc",
+    "realloc"
+  ]
+}

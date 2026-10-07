@@ -1,0 +1,9 @@
+## Bug Pattern
+
+The bug pattern is an unchecked narrowing of a potentially large length: a `length_of`/pointer-difference value is cast to a 32-bit signed `int` without first bounding it. The length comes from a `parser_input` scan over an untrusted string; because one scan step can consume multiple bytes, the resulting byte length can exceed `INT_MAX`. The cast then wraps/truncates to a negative or otherwise inconsistent value. That corrupted length is subsequently used in signed width arithmetic and as a byte count for `buffer_copy`-style output, causing integer overflow and incorrect/unsafe output sizing. The fix clamps the length to a safe maximum before the narrowing cast.
+
+Roles:
+- `length_of`: the pointer-difference measurement after the UTF-8 scan (`strlen` is the analogous length function in the alternate branch).
+- `parser_input`: `SQLITE_SKIP_UTF8`, which advances over UTF-8 input and can consume multiple bytes per call.
+- `untrusted_size`: the precision-size argument retrieved by `va_arg(ap,int)` for the `%!.*s` conversion.
+- `buffer_copy`: `sqlite3_str_append` and `sqlite3_str_appendchar`, which consume the resulting length during output/padding.

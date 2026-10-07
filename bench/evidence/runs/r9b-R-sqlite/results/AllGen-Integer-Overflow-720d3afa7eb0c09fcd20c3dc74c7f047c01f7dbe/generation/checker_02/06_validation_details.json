@@ -1,0 +1,67 @@
+{
+  "commit_id": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-sqlite/plugin-cache/plugins/62e032148597249ac7ae/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "src/btree.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 0,
+        "buggy_on_target": 1,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "accessPayload"
+        ],
+        "fixed_functions": [
+          "accessPayload"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "src/btree.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-sqlite/work/src/4cc2dbd54dba/src/btree.c",
+          "line": 5198,
+          "column": 11,
+          "function": "unknown",
+          "bug_type": "Integer Overflow",
+          "description": "32-bit size computation may overflow before allocation",
+          "issue_hash": "0e6c7efa7a43f26bd1bc4d1fa7f1a862",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/720d3afa7eb0/f5b05bc1/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9b-R-sqlite_work_src_4cc2dbd54dba_src_btree.c/report-0e6c7e.html",
+          "relpath": "src/btree.c"
+        }
+      ]
+    },
+    "fixed": {
+      "src/btree.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 54.41,
+      "fixed": 83.21
+    },
+    "total_seconds": 138.07
+  },
+  "report_dir": "tmp/validation/720d3afa7eb0/f5b05bc1"
+}

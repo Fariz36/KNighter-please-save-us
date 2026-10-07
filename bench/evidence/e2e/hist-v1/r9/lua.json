@@ -1,0 +1,1067 @@
+{
+  "tag": "v5.5-beta",
+  "base_rate": {
+    "functions": 1273,
+    "later_fixed": 14,
+    "rate": 0.011
+  },
+  "results": [
+    {
+      "bundle": "KN-Integer-Overflow-bc440a89-2",
+      "source": "curl",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Integer-Overflow",
+      "mapping": {
+        "length_of": [
+          "sizeudata",
+          "sizestrshr",
+          "luaH_resize",
+          "luaS_resize",
+          "sizeCclosure",
+          "sizeLclosure",
+          "luaS_sizelngstr",
+          "luaH_resizearray",
+          "luaL_prepbuffsize"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 229.7
+    },
+    {
+      "bundle": "KN-Memory-Leak-a0f08d69-0",
+      "source": "curl",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Memory-Leak",
+      "mapping": {
+        "cleanup": [
+          "luaF_closeupval",
+          "luaF_close",
+          "lua_closethread",
+          "lua_closeslot",
+          "luaD_closeprotected"
+        ],
+        "container_remove": [
+          "luaF_unlinkupval",
+          "luaS_remove"
+        ],
+        "deallocator": [
+          "luaM_free",
+          "luaM_free_",
+          "luaM_freemem",
+          "luaM_freearray",
+          "luaZ_freebuffer",
+          "luaH_free",
+          "luaF_freeproto",
+          "luaE_freethread",
+          "luaC_freeallobjects",
+          "lua_close"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 268.8
+    },
+    {
+      "bundle": "KN-Misuse-c53420e4-0",
+      "source": "curl",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Misuse",
+      "mapping": {
+        "length_of": [
+          "strlen"
+        ],
+        "untrusted_size": [
+          "lua_tolstring",
+          "luaL_checklstring",
+          "luaL_optlstring",
+          "luaL_tolstring",
+          "lua_rawlen",
+          "luaL_len",
+          "lua_len"
+        ],
+        "untrusted_data_accessor": [
+          "lua_tolstring",
+          "lua_tostring",
+          "luaL_checklstring",
+          "luaL_optlstring",
+          "luaL_checkstring",
+          "luaL_optstring",
+          "luaL_tolstring",
+          "lua_touserdata",
+          "luaL_testudata",
+          "luaL_checkudata",
+          "getudatamem"
+        ],
+        "allocator": [
+          "luaM_malloc_",
+          "luaM_new",
+          "luaM_newvector",
+          "luaM_newobject",
+          "luaM_realloc_",
+          "lua_newuserdatauv",
+          "lua_newuserdata",
+          "luaS_newudata",
+          "luaL_buffinitsize",
+          "luaL_prepbuffsize",
+          "lua_pushlstring",
+          "lua_pushstring",
+          "lua_pushfstring",
+          "lua_pushvfstring",
+          "luaO_pushfstring",
+          "luaO_pushvfstring",
+          "luaS_newlstr",
+          "luaX_newstring",
+          "lua_pushexternalstring"
+        ],
+        "deallocator": [
+          "luaM_free",
+          "luaM_free_",
+          "luaM_freemem",
+          "luaM_freearray",
+          "luaH_free",
+          "luaF_freeproto",
+          "luaE_freethread",
+          "luaZ_freebuffer",
+          "luaC_freeallobjects",
+          "lua_close",
+          "lua_closethread",
+          "luai_userstatefree",
+          "luai_userstateclose"
+        ],
+        "error_setter": [
+          "luaL_error",
+          "luaG_runerror",
+          "luaK_semerror",
+          "luaL_argerror",
+          "luaL_typeerror",
+          "luaG_typeerror",
+          "luaG_forerror",
+          "luaG_opinterror",
+          "luaX_syntaxerror",
+          "luaE_warnerror",
+          "luaG_addinfo",
+          "lua_writestringerror",
+          "lua_pushfstring",
+          "luaO_pushfstring",
+          "lua_pushvfstring",
+          "luaO_pushvfstring"
+        ]
+      },
+      "status": "scanned",
+      "reports": 28,
+      "functions_reported": 26,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "lauxlib.c",
+          "line": 206,
+          "function": "luaL_typeerror",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lauxlib.c",
+          "line": 1068,
+          "function": "panic",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lauxlib.c",
+          "line": 375,
+          "function": "luaL_checkoption",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lauxlib.c",
+          "line": 102,
+          "function": "pushfuncname",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lauxlib.c",
+          "line": 949,
+          "function": "luaL_tolstring",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lauxlib.c",
+          "line": 765,
+          "function": "errfile",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lauxlib.c",
+          "line": 192,
+          "function": "luaL_argerror",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "ldblib.c",
+          "line": 432,
+          "function": "db_debug",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "ldblib.c",
+          "line": 158,
+          "function": "db_getinfo",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "liolib.c",
+          "line": 42,
+          "function": "l_checkmode",
+          "description": "Length-delimited buffer passed to strlen; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "liolib.c",
+          "line": 264,
+          "function": "opencheck",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "liolib.c",
+          "line": 649,
+          "function": "io_readline",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "loadlib.c",
+          "line": 578,
+          "function": "searcher_Croot",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "loadlib.c",
+          "line": 591,
+          "function": "searcher_preload",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "loadlib.c",
+          "line": 616,
+          "function": "findloader",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "loadlib.c",
+          "line": 517,
+          "function": "checkload",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "loslib.c",
+          "line": 289,
+          "function": "checkoption",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lstrlib.c",
+          "line": 1819,
+          "function": "str_unpack",
+          "description": "Length-delimited buffer passed to strlen; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lstrlib.c",
+          "line": 743,
+          "function": "nospecials",
+          "description": "Length-delimited buffer passed to strlen; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lstrlib.c",
+          "line": 1689,
+          "function": "str_pack",
+          "description": "Length-delimited buffer passed to strlen; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lstrlib.c",
+          "line": 1348,
+          "function": "str_format",
+          "description": "Length-delimited buffer passed to strlen; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lua.c",
+          "line": 585,
+          "function": "addreturn",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lua.c",
+          "line": 113,
+          "function": "l_message",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lua.c",
+          "line": 662,
+          "function": "l_print",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lua.c",
+          "line": 209,
+          "function": "dostring",
+          "description": "Length-delimited buffer passed to strlen; may read past end",
+          "later_fixes": []
+        },
+        {
+          "file": "lua.c",
+          "line": 87,
+          "function": "print_usage",
+          "description": "Length-delimited buffer passed to %s; may read past end",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 382.9
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-466c06cf-0",
+      "source": "curl",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "duplicator": [
+          "luaS_new",
+          "luaS_newlstr",
+          "lua_pushlstring",
+          "lua_pushstring",
+          "lua_pushvfstring",
+          "lua_pushfstring",
+          "luaL_addlstring",
+          "luaL_addstring",
+          "luaX_newstring",
+          "luaO_pushvfstring",
+          "luaO_pushfstring",
+          "lua_copy",
+          "setobj",
+          "setobj2s",
+          "setobj2t",
+          "setobj2n"
+        ],
+        "allocator": [
+          "luaM_malloc_",
+          "luaM_realloc_",
+          "luaM_new",
+          "luaM_newobject",
+          "luaM_newvector",
+          "luaM_newblock",
+          "luaM_growaux_",
+          "luaM_shrinkvector_",
+          "luaC_newobj",
+          "debug_realloc"
+        ]
+      },
+      "status": "scanned",
+      "reports": 12,
+      "functions_reported": 7,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "lapi.c",
+          "line": 567,
+          "function": "lua_pushstring",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "later_fixes": []
+        },
+        {
+          "file": "lapi.c",
+          "line": 261,
+          "function": "lua_copy",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "later_fixes": []
+        },
+        {
+          "file": "lapi.c",
+          "line": 597,
+          "function": "lua_pushfstring",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "later_fixes": []
+        },
+        {
+          "file": "lapi.c",
+          "line": 543,
+          "function": "lua_pushlstring",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "later_fixes": []
+        },
+        {
+          "file": "lapi.c",
+          "line": 586,
+          "function": "lua_pushvfstring",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "later_fixes": []
+        },
+        {
+          "file": "llex.c",
+          "line": 157,
+          "function": "luaX_newstring",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "later_fixes": []
+        },
+        {
+          "file": "lstring.c",
+          "line": 272,
+          "function": "luaS_new",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 372.9
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+      "source": "curl",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "out_param_api": [
+          "lua_getstack",
+          "lua_getinfo",
+          "luaL_buffinit",
+          "luaL_prepbuffsize",
+          "luaL_prepbuffer",
+          "luaL_addlstring",
+          "luaL_addstring",
+          "luaL_addvalue",
+          "luaL_pushresult",
+          "luaL_pushresultsize",
+          "luaL_addchar"
+        ]
+      },
+      "status": "scanned",
+      "reports": 13,
+      "functions_reported": 8,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "lauxlib.c",
+          "line": 664,
+          "function": "luaL_buffinit",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "lauxlib.c",
+          "line": 656,
+          "function": "luaL_addvalue",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "lauxlib.c",
+          "line": 636,
+          "function": "luaL_pushresultsize",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "lauxlib.c",
+          "line": 607,
+          "function": "luaL_addstring",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "lauxlib.c",
+          "line": 593,
+          "function": "luaL_prepbuffsize",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "lauxlib.c",
+          "line": 599,
+          "function": "luaL_addlstring",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "ldebug.c",
+          "line": 414,
+          "function": "lua_getinfo",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "ldebug.c",
+          "line": 171,
+          "function": "lua_getstack",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 203.7
+    },
+    {
+      "bundle": "KN-Double-Free-26dfab2f-2",
+      "source": "libxml2",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Double-Free",
+      "mapping": {
+        "parser_input": [],
+        "null_on_failure": [],
+        "deallocator": [
+          "luaZ_freebuffer"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 254.0
+    },
+    {
+      "bundle": "KN-Misuse-c8eaf223-2",
+      "source": "libxml2",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Misuse",
+      "mapping": {
+        "init": [
+          "lua_gc"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 147.8
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-962bd10d-2",
+      "source": "libxml2",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "allocator": [
+          "luaM_growaux_",
+          "luaM_growvector"
+        ],
+        "reallocator": [
+          "luaM_realloc_",
+          "luaM_saferealloc_",
+          "lua_Alloc",
+          "debug_realloc",
+          "luaM_reallocvector",
+          "luaM_reallocvchar"
+        ]
+      },
+      "status": "scanned",
+      "reports": 1,
+      "functions_reported": 1,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "lmem.c",
+          "line": 117,
+          "function": "luaM_growaux_",
+          "description": "Pointer parameter dereferenced before NULL check",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 208.1
+    },
+    {
+      "bundle": "KN-Out-of-Bound-a7511af0-0",
+      "source": "libxml2",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Out-of-Bound",
+      "mapping": {
+        "indexed_read": [],
+        "length_of": [
+          "strlen"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 136.5
+    },
+    {
+      "bundle": "KN-Integer-Overflow-720d3afa-0",
+      "source": "sqlite",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Integer-Overflow",
+      "mapping": {
+        "allocated_size": [
+          "sizenode",
+          "stacksize",
+          "luaZ_sizebuffer"
+        ],
+        "reallocator": [
+          "luaM_realloc_",
+          "luaM_saferealloc_",
+          "luaM_reallocvchar",
+          "luaM_reallocvector",
+          "luaM_growaux_",
+          "luaM_growvector",
+          "luaH_resize",
+          "luaH_resizearray",
+          "luaS_resize",
+          "luaD_reallocstack",
+          "luaD_growstack",
+          "luaZ_resizebuffer",
+          "luaL_prepbuffsize",
+          "luaL_buffinitsize",
+          "debug_realloc"
+        ],
+        "null_on_failure": [
+          "lua_Alloc",
+          "frealloc",
+          "debug_realloc"
+        ],
+        "initializer": [
+          "memset"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 360.3
+    },
+    {
+      "bundle": "KN-Memory-Leak-7b60ed80-1",
+      "source": "sqlite",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Memory-Leak",
+      "mapping": {
+        "allocator": [
+          "luaM_malloc_",
+          "luaM_realloc_",
+          "luaM_new",
+          "luaM_newvector",
+          "luaM_newobject",
+          "luaM_growaux_",
+          "luaH_new",
+          "luaS_new",
+          "luaS_newlstr",
+          "luaS_createlngstrobj",
+          "luaF_newproto",
+          "luaF_newLclosure",
+          "luaF_newCclosure",
+          "luaC_newobj",
+          "luaX_newstring",
+          "lua_newstate",
+          "luaL_newstate",
+          "debug_realloc"
+        ],
+        "duplicator": [
+          "luaS_new",
+          "luaS_newlstr",
+          "luaS_createlngstrobj",
+          "luaX_newstring",
+          "luaO_pushvfstring",
+          "luaO_pushfstring"
+        ],
+        "null_on_failure": [
+          "luaM_malloc_",
+          "luaM_realloc_",
+          "luaM_new",
+          "luaM_newvector",
+          "luaM_newobject",
+          "luaM_growaux_",
+          "luaH_new",
+          "luaS_new",
+          "luaS_newlstr",
+          "luaS_createlngstrobj",
+          "luaF_newproto",
+          "luaF_newLclosure",
+          "luaF_newCclosure",
+          "luaC_newobj",
+          "luaX_newstring",
+          "lua_newstate",
+          "luaL_newstate",
+          "luaO_pushvfstring",
+          "luaO_pushfstring",
+          "debug_realloc"
+        ],
+        "container_insert": [
+          "setobj",
+          "setobj2s",
+          "setobj2t",
+          "sethvalue",
+          "sethvalue2s",
+          "setsvalue",
+          "setuvalue",
+          "setclLvalue",
+          "setclCvalue",
+          "setthvalue",
+          "setfvalue",
+          "setpvalue",
+          "setivalue",
+          "setfltvalue",
+          "setbfvalue",
+          "setbtvalue",
+          "setgcovalue",
+          "luaK_setlist"
+        ],
+        "deallocator": [
+          "luaM_free_",
+          "luaM_free",
+          "luaM_freemem",
+          "luaM_freearray",
+          "luaH_free",
+          "luaF_freeproto",
+          "luaE_freethread",
+          "luaZ_freebuffer",
+          "luaC_freeallobjects",
+          "lua_close"
+        ]
+      },
+      "status": "scanned",
+      "reports": 43,
+      "functions_reported": 38,
+      "hits": 1,
+      "hit_rate": 0.0263,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "lapi.c",
+          "line": 1300,
+          "function": "lua_concat",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lapi.c",
+          "line": 796,
+          "function": "lua_createtable",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lapi.c",
+          "line": 600,
+          "function": "lua_pushfstring",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lapi.c",
+          "line": 627,
+          "function": "lua_pushcclosure",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lapi.c",
+          "line": 676,
+          "function": "auxgetstr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lapi.c",
+          "line": 577,
+          "function": "lua_pushstring",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lapi.c",
+          "line": 868,
+          "function": "auxsetstr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lcode.c",
+          "line": 49,
+          "function": "luaK_semerror",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "ldebug.c",
+          "line": 862,
+          "function": "luaG_runerror",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "ldebug.c",
+          "line": 303,
+          "function": "collectvalidlines",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "ldebug.c",
+          "line": 845,
+          "function": "luaG_errormsg",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "ldo.c",
+          "line": 197,
+          "function": "luaD_errerr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "ldo.c",
+          "line": 872,
+          "function": "resume_error",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "ldump.c",
+          "line": 301,
+          "function": "luaU_dump",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lfunc.c",
+          "line": 58,
+          "function": "luaF_initupvals",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lfunc.c",
+          "line": 41,
+          "function": "luaF_newLclosure",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lfunc.c",
+          "line": 267,
+          "function": "luaF_newproto",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lfunc.c",
+          "line": 79,
+          "function": "newupval",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lfunc.c",
+          "line": 31,
+          "function": "luaF_newCclosure",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "llex.c",
+          "line": 574,
+          "function": "llex",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "llex.c",
+          "line": 308,
+          "function": "read_long_string",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lmem.c",
+          "line": 196,
+          "function": "luaM_saferealloc_",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lobject.c",
+          "line": 532,
+          "function": "pushbuff",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lobject.c",
+          "line": 670,
+          "function": "luaO_pushfstring",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lobject.c",
+          "line": 467,
+          "function": "luaO_tostring",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lparser.c",
+          "line": 2089,
+          "function": "luaY_parser",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lparser.c",
+          "line": 83,
+          "function": "errorlimit",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lstate.c",
+          "line": 200,
+          "function": "init_registry",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lstring.c",
+          "line": 299,
+          "function": "luaS_newudata",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lstring.c",
+          "line": 175,
+          "function": "createstrobj",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "ltable.c",
+          "line": 797,
+          "function": "luaH_new",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lua.c",
+          "line": 749,
+          "function": "main",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lundump.c",
+          "line": 354,
+          "function": "numerror",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lundump.c",
+          "line": 421,
+          "function": "luaU_undump",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lundump.c",
+          "line": 152,
+          "function": "loadString",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": [
+            {
+              "commit": "7a92f3f99a26d9e51be40b744ed4fab0b50ecaa5",
+              "subject": "Change in dumping of NULL strings",
+              "type": "Null-Pointer-Dereference"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "7a92f3f99a26d9e51be40b744ed4fab0b50ecaa5",
+              "fixes": false,
+              "reason": "The commit only changes the binary chunk encoding for NULL/shared strings and does not add any deallocation or ownership transfer to fix the reported memory leak in loadString."
+            }
+          ]
+        },
+        {
+          "file": "lvm.c",
+          "line": 689,
+          "function": "luaV_concat",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lvm.c",
+          "line": 1792,
+          "function": "luaV_execute",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lvm.c",
+          "line": 807,
+          "function": "pushclosure",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 249.9
+    }
+  ]
+}

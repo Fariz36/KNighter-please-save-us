@@ -1,0 +1,13 @@
+{
+  "encoded_size_calculator": [
+    "luaL_prepbuffsize"
+  ],
+  "input_length": [
+    "luaL_len",
+    "luaL_addsize"
+  ],
+  "max_input_size": [],
+  "error_sentinel": [
+    "luaL_error"
+  ]
+}

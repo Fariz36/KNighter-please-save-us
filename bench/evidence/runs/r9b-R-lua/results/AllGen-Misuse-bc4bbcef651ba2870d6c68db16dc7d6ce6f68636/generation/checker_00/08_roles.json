@@ -1,0 +1,21 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "container_insert": {
+      "names": [
+        "luaL_newmetatable",
+        "lua_setfield"
+      ],
+      "description": "inserts or publishes an object into a persistent registry/container so later lookups can observe it; it must happen after the object is fully initialized"
+    },
+    "init": {
+      "names": [
+        "luaL_setfuncs"
+      ],
+      "description": "populates or initializes an already created object and may raise a non-local error, so it must complete before publication"
+    }
+  }
+}

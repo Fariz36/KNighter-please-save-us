@@ -1,0 +1,150 @@
+keep-awake helper pid 409384
+code snapshot: /home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b (5c4396cf8c6526de)
+=== 2026-10-07T22:43:08+07:00 start r9b-R-curl
+{
+  "run": "r9b-R-curl",
+  "variant": "optimized",
+  "exit_code": 0,
+  "wall_seconds": 3155.2,
+  "suspended_seconds": -0.0,
+  "commits": 8,
+  "commits_with_perfect_checker": 5,
+  "llm_calls_total": 70,
+  "llm_seconds_sum": 8318.3,
+  "step_seconds_sum": {
+    "\ud83e\udde9 Pattern Extraction": 2117.6,
+    "\ud83d\udccb Plan Generation": 1858.3,
+    "\ud83d\udcbb Code Generation": 2247.9,
+    "\ud83d\udd27 Syntax Repair": 2154.4,
+    "\u2705 Validation": 157.8
+  },
+  "validation_seconds": {
+    "plugin_seconds": {
+      "n": 16,
+      "sum": 0.0,
+      "mean": 0.0
+    },
+    "setup_seconds": {
+      "n": 16,
+      "sum": 0.7,
+      "mean": 0.05
+    },
+    "total_seconds": {
+      "n": 16,
+      "sum": 156.7,
+      "mean": 9.8
+    }
+  }
+}
+=== 2026-10-07T23:35:43+07:00 end r9b-R-curl
+=== 2026-10-07T23:35:43+07:00 start r9b-R-libxml2
+{
+  "run": "r9b-R-libxml2",
+  "variant": "optimized",
+  "exit_code": 0,
+  "wall_seconds": 1829.8,
+  "suspended_seconds": -0.0,
+  "commits": 7,
+  "commits_with_perfect_checker": 4,
+  "llm_calls_total": 48,
+  "llm_seconds_sum": 3477.4,
+  "step_seconds_sum": {
+    "\ud83e\udde9 Pattern Extraction": 460.2,
+    "\ud83d\udccb Plan Generation": 1206.2,
+    "\ud83d\udcbb Code Generation": 1072.2,
+    "\ud83d\udd27 Syntax Repair": 1710.7,
+    "\u2705 Validation": 1697.2
+  },
+  "validation_seconds": {
+    "plugin_seconds": {
+      "n": 12,
+      "sum": 0.0,
+      "mean": 0.0
+    },
+    "setup_seconds": {
+      "n": 12,
+      "sum": 0.7,
+      "mean": 0.06
+    },
+    "total_seconds": {
+      "n": 12,
+      "sum": 1697.1,
+      "mean": 141.43
+    }
+  }
+}
+=== 2026-10-08T00:06:14+07:00 end r9b-R-libxml2
+=== 2026-10-08T00:06:14+07:00 start r9b-R-lua
+{
+  "run": "r9b-R-lua",
+  "variant": "optimized",
+  "exit_code": 0,
+  "wall_seconds": 1474.6,
+  "suspended_seconds": -0.0,
+  "commits": 4,
+  "commits_with_perfect_checker": 1,
+  "llm_calls_total": 48,
+  "llm_seconds_sum": 3421.9,
+  "step_seconds_sum": {
+    "\ud83e\udde9 Pattern Extraction": 514.2,
+    "\ud83d\udccb Plan Generation": 993.9,
+    "\ud83d\udcbb Code Generation": 1034.7,
+    "\ud83d\udd27 Syntax Repair": 1306.0,
+    "\u2705 Validation": 175.8
+  },
+  "validation_seconds": {
+    "plugin_seconds": {
+      "n": 7,
+      "sum": 0.0,
+      "mean": 0.0
+    },
+    "setup_seconds": {
+      "n": 7,
+      "sum": 0.2,
+      "mean": 0.03
+    },
+    "total_seconds": {
+      "n": 7,
+      "sum": 175.8,
+      "mean": 25.11
+    }
+  }
+}
+=== 2026-10-08T00:30:48+07:00 end r9b-R-lua
+=== 2026-10-08T00:30:48+07:00 start r9b-R-sqlite
+{
+  "run": "r9b-R-sqlite",
+  "variant": "optimized",
+  "exit_code": 0,
+  "wall_seconds": 3356.7,
+  "suspended_seconds": -0.3,
+  "commits": 7,
+  "commits_with_perfect_checker": 2,
+  "llm_calls_total": 110,
+  "llm_seconds_sum": 9255.5,
+  "step_seconds_sum": {
+    "\ud83e\udde9 Pattern Extraction": 1212.8,
+    "\ud83d\udccb Plan Generation": 1849.5,
+    "\ud83d\udcbb Code Generation": 2919.8,
+    "\ud83d\udd27 Syntax Repair": 4199.7,
+    "\u2705 Validation": 286.3
+  },
+  "validation_seconds": {
+    "plugin_seconds": {
+      "n": 11,
+      "sum": 0.0,
+      "mean": 0.0
+    },
+    "setup_seconds": {
+      "n": 11,
+      "sum": 0.2,
+      "mean": 0.02
+    },
+    "total_seconds": {
+      "n": 11,
+      "sum": 286.3,
+      "mean": 26.02
+    }
+  }
+}
+=== 2026-10-08T01:26:45+07:00 end r9b-R-sqlite

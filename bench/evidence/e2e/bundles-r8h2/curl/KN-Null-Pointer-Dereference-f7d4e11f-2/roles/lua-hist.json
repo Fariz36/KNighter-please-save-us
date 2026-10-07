@@ -1,0 +1,83 @@
+{
+  "length_field": [
+    "luaZ_sizebuffer"
+  ],
+  "data_pointer": [
+    "data",
+    "luaZ_buffer",
+    "luaL_prepbuffer"
+  ],
+  "buffer_copy": [
+    "memcpy"
+  ],
+  "error_return": [
+    "lua_error",
+    "luaL_error",
+    "luaM_error",
+    "luaM_toobig",
+    "luaG_errormsg",
+    "luaG_runerror",
+    "luaL_argerror",
+    "luaL_typeerror",
+    "luaX_syntaxerror",
+    "luaK_semerror",
+    "luaG_typeerror",
+    "luaG_callerror",
+    "luaG_concaterror",
+    "luaG_opinterror",
+    "luaG_ordererror",
+    "luaG_tointerror",
+    "luaG_forerror"
+  ],
+  "copy_flag": [],
+  "allocator": [
+    "luaM_malloc_",
+    "luaM_realloc_",
+    "luaM_new",
+    "luaM_newvector",
+    "luaM_newobject",
+    "luaM_newblock",
+    "luaM_reallocvchar",
+    "frealloc",
+    "luaH_new",
+    "luaS_new",
+    "debug_realloc"
+  ],
+  "deallocator": [
+    "luaM_free_",
+    "luaM_free",
+    "luaM_freemem",
+    "luaM_freearray",
+    "frealloc",
+    "luaH_free",
+    "luaF_freeproto",
+    "lua_close"
+  ],
+  "validation_guard": [
+    "luaL_argcheck",
+    "luaL_checkany",
+    "luaL_checkint",
+    "luaL_checklong",
+    "luaL_checktype",
+    "luaL_checknumber",
+    "luaL_checkoption",
+    "luaL_checkstring",
+    "luaL_checkstack",
+    "luaL_checkudata",
+    "luaL_testudata",
+    "api_check",
+    "api_checknelems",
+    "api_checkpop",
+    "check_exp",
+    "checktype",
+    "checktag",
+    "lua_checkstack",
+    "luaD_checkstack",
+    "luaK_checkstack",
+    "luaY_checklimit",
+    "luaM_checksize",
+    "luaE_checkcstack",
+    "lua_checkmemory",
+    "lua_assert"
+  ]
+}

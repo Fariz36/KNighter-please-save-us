@@ -1,0 +1,102 @@
+{
+  "target": "curl",
+  "commit": "11b991232fbcaa88e2b1faecac224416b0001e35",
+  "candidates": 1595,
+  "identifiers": 34096,
+  "offered": {
+    "gc_managed_object": [
+      "Curl_pgrsTime",
+      "Curl_ipv6_scope",
+      "Curl_pgrsTimeWas",
+      "vquic_ctx_update_time",
+      "Curl_pgrsLimitWaitTime"
+    ],
+    "potential_gc_trigger": [],
+    "gc_root_anchor": [
+      "curl_from_ccsid",
+      "Curl_http_req_make",
+      "Curl_http_resp_make",
+      "Curl_os400_recvfrom",
+      "Curl_sec_request_prot",
+      "Curl_httpsrr_from_ares",
+      "Curl_ssl_peer_key_make",
+      "Curl_creader_resume_from",
+      "Curl_creader_def_resume_from"
+    ],
+    "weak_reference_container": [
+      "Curl_conn_keep_alive",
+      "Curl_cft_conn_keep_alive",
+      "Curl_cf_def_conn_keep_alive",
+      "Curl_conn_is_alive",
+      "curlcheck_postfields",
+      "Curl_cft_conn_is_alive",
+      "CURL_SHARE_KEEP_CONNECT",
+      "Curl_cf_def_conn_is_alive",
+      "curlcheck_postfields_option"
+    ],
+    "use_after_free_use": [
+      "curl_free",
+      "config_free",
+      "Curl_ws_free",
+      "Curl_req_free",
+      "curl_dbg_free",
+      "Curl_bufq_free",
+      "Curl_conn_free",
+      "curl_mime_free",
+      "curlx_dyn_free",
+      "tool_mime_free",
+      "vquic_ctx_free",
+      "Curl_bufcp_free",
+      "globalconf_free",
+      "Curl_bufref_free",
+      "Curl_dynhds_free",
+      "Curl_creader_free",
+      "Curl_cwriter_free",
+      "Curl_nghttp2_free",
+      "slist_wc_free_all",
+      "Curl_http_req_free",
+      "Curl_http_resp_free",
+      "Curl_httpchunk_free",
+      "curl_slist_free_all",
+      "Curl_h1_req_parse_free",
+      "Curl_ssl_free_certinfo",
+      "curl_certinfo_free_all",
+      "Curl_sspi_free_identity",
+      "Curl_gtls_shared_creds_free",
+      "Curl_ftp_parselist_data_free",
+      "Curl_free_idnconverted_hostname",
+      "sclose",
+      "connclose",
+      "ALLOC_SIZE",
+      "Curl_close",
+      "de_cleanup",
+      "varcleanup",
+      "ALLOC_SIZE2",
+      "CURL_SCLOSE",
+      "fake_sclose",
+      "streamclose"
+    ]
+  },
+  "mapping": {
+    "gc_managed_object": [],
+    "potential_gc_trigger": [],
+    "gc_root_anchor": [],
+    "weak_reference_container": [],
+    "use_after_free_use": []
+  },
+  "dropped_not_in_target": {
+    "gc_managed_object": [],
+    "potential_gc_trigger": [],
+    "gc_root_anchor": [],
+    "weak_reference_container": [],
+    "use_after_free_use": []
+  },
+  "rationale": {
+    "gc_managed_object": "curl uses manual memory management and has no garbage-collected objects whose lifetime is independent of C scopes.",
+    "potential_gc_trigger": "curl has no emergency garbage collection mechanism that could reclaim unreachable objects during an operation.",
+    "gc_root_anchor": "curl has no GC roots or root-anchoring operations because it does not employ garbage collection.",
+    "weak_reference_container": "curl does not have weak references or GC-managed containers that hold objects without keeping them alive.",
+    "use_after_free_use": "curl lacks the GC-triggered collection step, so there is no equivalent for using a pointer after a potential garbage collection."
+  },
+  "llm_seconds": 52.3
+}

@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "xmlNewIOInputStream"
+      ],
+      "description": "constructor that takes ownership of a resource argument; on failure it frees/consumes that argument and returns NULL, so the caller must not deallocate it afterwards."
+    },
+    "deallocator": {
+      "names": [
+        "xmlFreeParserInputBuffer"
+      ],
+      "description": "frees the resource passed to a parser_input constructor; must not be called after ownership transfer."
+    },
+    "null_on_failure": {
+      "names": [
+        "xmlNewIOInputStream"
+      ],
+      "description": "function that may return NULL on failure."
+    }
+  }
+}

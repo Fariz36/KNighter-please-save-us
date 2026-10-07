@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The size argument of a memory-write primitive is computed from a `parser_input` byte stream by unchecked arithmetic in a signed integer narrower than the eventual size type. The computed value is used first in a capacity check and then as the length argument of a bounded write (`memset`). If corrupt input makes the arithmetic overflow, the wrapped value can pass the signed capacity check but be converted to a huge unsigned length, causing an out-of-bounds write. The fix widens the accumulator to a 64-bit type and rejects any intermediate value larger than the output capacity before continuing.
+
+Roles:
+- `parser_input`: `kvvfsDecode` (decodes the untrusted/corrupt block)
+- `bounded_copy`/`buffer_write`: `memset`
+- `error_setter`: `return -1` malformed-input exits

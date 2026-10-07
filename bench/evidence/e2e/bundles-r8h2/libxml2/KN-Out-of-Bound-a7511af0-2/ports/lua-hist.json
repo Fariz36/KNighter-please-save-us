@@ -1,0 +1,87 @@
+{
+  "target": "lua",
+  "commit": "cfce6f4b20afe85ede2182b3df3ab2bfcdb0e692",
+  "candidates": 841,
+  "identifiers": 7223,
+  "offered": {
+    "lookahead": [
+      "luaX_lookahead",
+      "luaZ_read",
+      "mainthread",
+      "ttisthread",
+      "luaY_parser",
+      "nodefromval",
+      "vkisindexed",
+      "luaK_indexed",
+      "lua_isthread",
+      "lua_tothread",
+      "lua_newthread",
+      "lua_pushthread",
+      "luaE_freethread",
+      "luaE_threadsize",
+      "lua_closethread",
+      "lua_resetthread",
+      "luaE_resetthread",
+      "luaD_protectedparser",
+      "luai_userstatethread"
+    ],
+    "length_of": [
+      "luaZ_sizebuffer",
+      "luaZ_resizebuffer",
+      "cast_num",
+      "sizenode",
+      "luaH_size",
+      "sizeudata",
+      "stacksize",
+      "cast_sizet",
+      "sizestrshr",
+      "luaH_resize",
+      "luaS_resize",
+      "luaL_addsize",
+      "sizeCclosure",
+      "sizeLclosure",
+      "allocsizenode",
+      "luaM_testsize",
+      "luaF_protosize",
+      "luaM_checksize",
+      "resethookcount",
+      "luaE_threadsize",
+      "luaS_sizelngstr",
+      "luaH_resizearray",
+      "lua_gethookcount",
+      "luaK_settablesize",
+      "luaL_buffinitsize",
+      "luaL_prepbuffsize",
+      "luaL_pushresultsize",
+      "luaZ_buffer",
+      "lua_getfield",
+      "lua_setfield",
+      "luaX_setinput",
+      "luaL_loadbuffer",
+      "luaL_prepbuffer",
+      "luaZ_freebuffer",
+      "luaZ_initbuffer",
+      "luaL_loadbufferx",
+      "luaZ_resetbuffer",
+      "luaL_getmetafield"
+    ]
+  },
+  "mapping": {
+    "lookahead": [
+      "luaX_lookahead"
+    ],
+    "length_of": [
+      "luaZ_sizebuffer",
+      "luaZ_bufflen"
+    ]
+  },
+  "dropped_not_in_target": {
+    "lookahead": [],
+    "length_of": []
+  },
+  "rationale": {
+    "lookahead": "luaX_lookahead is the lexer's lookahead function.",
+    "length_of": "These macros return the allocated size or current length of an Mbuffer, used for buffer length checks."
+  },
+  "llm_seconds": 184.1
+}

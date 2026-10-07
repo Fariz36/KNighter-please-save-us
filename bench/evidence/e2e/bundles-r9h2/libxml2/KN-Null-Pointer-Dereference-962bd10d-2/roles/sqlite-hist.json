@@ -1,0 +1,38 @@
+{
+  "allocator": [
+    "fts5BufferGrow",
+    "sqlite3ArrayAllocate",
+    "sqlite3VdbeMemGrow",
+    "sqlite3ExprAlloc",
+    "sqlite3MutexAlloc",
+    "sqlite3ParserAlloc",
+    "sqlite3WindowAlloc",
+    "sqlite3KeyInfoAlloc",
+    "sqlite3_mutex_alloc",
+    "sqlite3StackAllocRaw",
+    "sqlite3StackAllocRawNN",
+    "sqlite3VdbeAllocUnpackedRecord",
+    "sqlite3Malloc",
+    "sqlite3MallocZero",
+    "sqlite3DbMallocRaw",
+    "sqlite3DbMallocZero",
+    "sqlite3DbMallocRawNN",
+    "sqlite3_malloc",
+    "sqlite3_malloc64",
+    "lsmMalloc",
+    "lsm_malloc"
+  ],
+  "reallocator": [
+    "lsmRealloc",
+    "lsm_realloc",
+    "testRealloc",
+    "sqlite3Realloc",
+    "sqlite3_realloc",
+    "lsmReallocOrFree",
+    "sqlite3DbRealloc",
+    "lsmReallocOrFreeRc",
+    "sqlite3WhereRealloc",
+    "sqlite3DbReallocOrFree",
+    "sqlite3_realloc64"
+  ]
+}

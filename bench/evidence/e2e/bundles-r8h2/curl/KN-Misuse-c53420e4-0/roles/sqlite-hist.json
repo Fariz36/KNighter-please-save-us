@@ -1,0 +1,48 @@
+{
+  "data_provider": [
+    "sqlite3_column_blob",
+    "sqlite3_value_blob",
+    "lsmFsPageData",
+    "sqlite3VdbeMemFromBtree"
+  ],
+  "length_provider": [
+    "sqlite3_column_bytes",
+    "sqlite3_value_bytes",
+    "sqlite3_blob_bytes",
+    "sqlite3_str_length",
+    "lsmFsPageData"
+  ],
+  "unbounded_string_consumer": [
+    "strlen",
+    "strcmp",
+    "strcpy",
+    "strcat",
+    "strchr",
+    "strstr",
+    "strdup",
+    "sqlite3StrICmp",
+    "sqlite3StrIHash",
+    "sqlite3DbStrDup",
+    "sqlite3SetString",
+    "sqlite3_str_appendf",
+    "sqlite3_str_vappendf",
+    "sqlite3ErrorWithMsg",
+    "sqlite3VdbeError",
+    "lsmStringAppendf",
+    "lsmStringVAppendf",
+    "testCompareStr",
+    "testFetchStr",
+    "testWriteStr",
+    "tdb_lsm_config_str",
+    "sqlite3Fts5BufferAppendString",
+    "sqlite3Fts5BufferAppendPrintf",
+    "sqlite3_mprintf",
+    "sqlite3_vmprintf",
+    "sqlite3_snprintf",
+    "sqlite3_vsnprintf"
+  ],
+  "bounded_nul_scanner": [
+    "memchr"
+  ],
+  "bounded_string_formatter": []
+}

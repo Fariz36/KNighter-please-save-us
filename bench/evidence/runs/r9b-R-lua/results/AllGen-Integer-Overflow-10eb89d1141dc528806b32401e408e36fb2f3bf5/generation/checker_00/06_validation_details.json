@@ -1,0 +1,79 @@
+{
+  "commit_id": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-lua/plugin-cache/plugins/dd8ca4eaa58e46b2f4c0/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lutf8lib.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "utf8_decode"
+        ],
+        "fixed_functions": [
+          "utf8_decode"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lutf8lib.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-lua/work/src/7c40c5edb236/lutf8lib.c",
+          "line": 67,
+          "column": 34,
+          "function": "utf8_decode",
+          "bug_type": "Shift overflow",
+          "description": "Shift amount may exceed bit width before validation",
+          "issue_hash": "a38d766b776b20fcb32110e3f67d7884",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/10eb89d1141d/bf1e9b4b/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9b-R-lua_work_src_7c40c5edb236_lutf8lib.c/report-a38d76.html",
+          "relpath": "lutf8lib.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lutf8lib.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-lua/work/src/10eb89d1141d/lutf8lib.c",
+          "line": 70,
+          "column": 34,
+          "function": "utf8_decode",
+          "bug_type": "Shift overflow",
+          "description": "Shift amount may exceed bit width before validation",
+          "issue_hash": "a38d766b776b20fcb32110e3f67d7884",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/10eb89d1141d/bf1e9b4b/fixed/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9b-R-lua_work_src_10eb89d1141d_lutf8lib.c/report-a38d76.html",
+          "relpath": "lutf8lib.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 0.37,
+      "fixed": 0.34
+    },
+    "total_seconds": 0.75
+  },
+  "report_dir": "tmp/validation/10eb89d1141d/bf1e9b4b"
+}

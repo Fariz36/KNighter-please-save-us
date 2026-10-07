@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A reusable state object has a mutable field that changes during an operation and must be restored before every reuse. The one-time initialization routine sets that field, while the per-call reset routine only checks it with an `aborting_assert` instead of resetting it. If the operation aborts via an `error_setter`, the field is left stale/inconsistent; reusing the object skips the one-time initialization, so later calls start from corrupted state. The fix is to reinitialize all per-call mutable state in the per-call reset routine.
+
+Roles:
+- `init`: `prepstate`, `reprepstate`
+- `error_setter`: `luaL_error`
+- `aborting_assert`: `lua_assert`

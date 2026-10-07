@@ -1,0 +1,12 @@
+{
+  "length_of": [
+    "sqlite3VarintLen",
+    "sqlite3Utf8CharLen",
+    "sqlite3Utf16ByteLen",
+    "sqlite3JournalSize",
+    "MX_CELL_SIZE",
+    "sqlite3WalFramesize",
+    "lsmTreeSize",
+    "lsmCheckpointSize"
+  ]
+}

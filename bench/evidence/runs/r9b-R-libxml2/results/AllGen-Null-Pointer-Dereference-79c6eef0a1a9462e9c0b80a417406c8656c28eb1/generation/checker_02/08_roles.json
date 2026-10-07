@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "duplicator": {
+      "names": [
+        "xmlStrdup"
+      ],
+      "description": "returns a newly allocated copy of its input string, or NULL on failure"
+    },
+    "length_of": {
+      "names": [
+        "strlen"
+      ],
+      "description": "computes the length of a C string, dereferencing its pointer argument"
+    }
+  }
+}

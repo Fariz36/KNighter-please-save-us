@@ -1,0 +1,79 @@
+{
+  "commit_id": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/plugin-cache/plugins/618d049697576c59faec/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlregexp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "xmlRegNewParserCtxt"
+        ],
+        "fixed_functions": [
+          "xmlRegNewParserCtxt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 740,
+          "column": 13,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "Length of Unchecked Nullable Result",
+          "description": "length_of called on unchecked nullable result",
+          "issue_hash": "7843235981254f21cc2486636f18e344",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/79c6eef0a1a9/8f61192e/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-784323.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 744,
+          "column": 20,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "Length of Unchecked Nullable Result",
+          "description": "length_of called on unchecked nullable result",
+          "issue_hash": "68364981a9f711928b5c058376940e90",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/79c6eef0a1a9/8f61192e/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-683649.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 197.63,
+      "fixed": 84.47
+    },
+    "total_seconds": 282.35
+  },
+  "report_dir": "tmp/validation/79c6eef0a1a9/8f61192e"
+}

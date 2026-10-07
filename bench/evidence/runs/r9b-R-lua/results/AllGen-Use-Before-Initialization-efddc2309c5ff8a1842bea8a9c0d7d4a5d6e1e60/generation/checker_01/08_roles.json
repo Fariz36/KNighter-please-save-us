@@ -1,0 +1,27 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "init": {
+      "names": [
+        "prepstate",
+        "reprepstate"
+      ],
+      "description": "function that initializes or reinitializes a persistent state object used by later operations"
+    },
+    "aborting_assert": {
+      "names": [
+        "lua_assert"
+      ],
+      "description": "macro/function that aborts when its condition is false; its condition should be an invariant before the operation"
+    },
+    "error_setter": {
+      "names": [
+        "luaL_error"
+      ],
+      "description": "printf-like function that reports a runtime error and aborts the current operation"
+    }
+  }
+}

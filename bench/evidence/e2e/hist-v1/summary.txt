@@ -1,0 +1,87 @@
+{
+  "set": "r9",
+  "pairs": 39,
+  "scanned": 37,
+  "firing": 14,
+  "functions_reported": 252,
+  "hits": 13,
+  "expected_hits": 5.6,
+  "judged_positive": 4,
+  "per_target": {
+    "curl": {
+      "tag": "curl-8_16_0",
+      "base_rate": 0.0975,
+      "functions": 9,
+      "hits": 2,
+      "expected": 0.9
+    },
+    "libxml2": {
+      "tag": "v2.15.0",
+      "base_rate": 0.0146,
+      "functions": 137,
+      "hits": 10,
+      "expected": 2.0
+    },
+    "lua": {
+      "tag": "v5.5-beta",
+      "base_rate": 0.011,
+      "functions": 80,
+      "hits": 1,
+      "expected": 0.9
+    },
+    "sqlite": {
+      "tag": "version-3.50.0",
+      "base_rate": 0.0697,
+      "functions": 26,
+      "hits": 0,
+      "expected": 1.8
+    }
+  },
+  "positives": [
+    "sqlite->libxml2 KN-Memory-Leak-7b60ed80-1 xmlwriter.c:1062 xmlTextWriterStartElementNS fixed by cee7107a",
+    "sqlite->libxml2 KN-Memory-Leak-7b60ed80-1 xmlwriter.c:1062 xmlTextWriterStartElementNS fixed by 98194640",
+    "sqlite->libxml2 KN-Memory-Leak-7b60ed80-1 xmlwriter.c:1798 xmlTextWriterStartAttributeNS fixed by c1342946",
+    "sqlite->libxml2 KN-Memory-Leak-7b60ed80-1 xmlwriter.c:1798 xmlTextWriterStartAttributeNS fixed by cee7107a"
+  ]
+}
+{
+  "set": "r8",
+  "pairs": 54,
+  "scanned": 50,
+  "firing": 6,
+  "functions_reported": 17,
+  "hits": 0,
+  "expected_hits": 0.5,
+  "judged_positive": 0,
+  "per_target": {
+    "curl": {
+      "tag": "curl-8_16_0",
+      "base_rate": 0.0975,
+      "functions": 0,
+      "hits": 0,
+      "expected": 0.0
+    },
+    "libxml2": {
+      "tag": "v2.15.0",
+      "base_rate": 0.0146,
+      "functions": 3,
+      "hits": 0,
+      "expected": 0.0
+    },
+    "lua": {
+      "tag": "v5.5-beta",
+      "base_rate": 0.011,
+      "functions": 9,
+      "hits": 0,
+      "expected": 0.1
+    },
+    "sqlite": {
+      "tag": "version-3.50.0",
+      "base_rate": 0.0697,
+      "functions": 5,
+      "hits": 0,
+      "expected": 0.3
+    }
+  },
+  "positives": []
+}

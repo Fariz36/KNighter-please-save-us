@@ -1,0 +1,28 @@
+{
+  "tokenizer": [
+    "xmlParseNmtoken",
+    "xmlParseCharRef",
+    "xmlParseEntityRef",
+    "htmlParseEntityRef"
+  ],
+  "dequote_helper": [
+    "xmlXPathCompareValues",
+    "xmlSchemaCompareValues"
+  ],
+  "illegal_token_sentinel": [
+    "NULL"
+  ],
+  "dequoter_with_precondition": [
+    "xmlValidateNmtokenValue",
+    "xmlValidateNmtokensValue",
+    "xmlValidateName",
+    "xmlValidateQName",
+    "xmlValidateNCName"
+  ],
+  "caller_ignoring_sentinel": [
+    "xmlXPathStringFunction",
+    "xmlXPathConcatFunction",
+    "xmlXPathSubstringFunction",
+    "xmlXPathTranslateFunction"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "data_provider": [
+    "htmlUTF8ToHtml",
+    "xmlIsolat1ToUTF8",
+    "xmlUTF8ToIsolat1",
+    "xmlBufferContent",
+    "xmlOutputBufferGetContent"
+  ],
+  "length_provider": [
+    "htmlUTF8ToHtml",
+    "xmlIsolat1ToUTF8",
+    "xmlUTF8ToIsolat1",
+    "xmlBufferLength",
+    "xmlOutputBufferGetSize"
+  ],
+  "unbounded_string_consumer": [
+    "strlen",
+    "xmlStrlen",
+    "xmlGenericError",
+    "xmlStrPrintf",
+    "xmlStrVPrintf",
+    "xmlStrASPrintf",
+    "xmlStrVASPrintf",
+    "xmlEscapeFormatString",
+    "xmlTextWriterWriteString",
+    "xmlTextWriterWriteFormatString",
+    "xmlTextWriterWriteVFormatString",
+    "xmlTextWriterSetIndentString",
+    "xmlTextWriterWriteFormatPI",
+    "xmlTextWriterWriteFormatDTD",
+    "xmlTextWriterWriteFormatRaw",
+    "xmlTextWriterWriteFormatCDATA",
+    "xmlTextWriterWriteFormatComment",
+    "xmlTextWriterWriteFormatElement",
+    "xmlTextWriterWriteFormatAttribute",
+    "xmlTextWriterWriteFormatElementNS",
+    "xmlTextWriterWriteFormatDTDAttlist",
+    "xmlTextWriterWriteFormatDTDElement",
+    "xmlTextWriterWriteFormatAttributeNS",
+    "xmlTextWriterWriteFormatDTDInternalEntity",
+    "xmlNewText",
+    "xmlNewDocText",
+    "xmlStrEqual",
+    "xmlStrQEqual",
+    "xmlEscapeText",
+    "xmlTextReaderConstString",
+    "xmlOutputBufferWriteString",
+    "xmlBufferCat",
+    "xmlBufferCCat",
+    "xmlBufferWriteChar",
+    "xmlBufferWriteCHAR",
+    "xmlStrdup",
+    "xmlCharStrdup",
+    "xmlStrcat"
+  ],
+  "bounded_nul_scanner": [
+    "memchr"
+  ],
+  "bounded_string_formatter": []
+}

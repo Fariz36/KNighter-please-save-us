@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The decoder computes an untrusted length using repeated multiply-add arithmetic in a fixed-width signed integer, with no overflow check during accumulation. A corrupt input can overflow the accumulator or multiplier, causing the later capacity check to be bypassed. The wrapped or negative length is then passed as the size argument to a memory-write/initialization routine, leading to an out-of-bounds write. The fix widens the length arithmetic and checks the accumulated value against the output bound while it is still being accumulated.
+
+Roles:
+- `parser_input`: `kvvfsDecode` — decodes the untrusted encoded byte stream.
+- `untrusted_size`: the run-length value computed from the input and passed as the size argument to `memset`.
+- `init`: `memset` — writes/initializes memory using that decoded size.

@@ -1,0 +1,35 @@
+{
+  "data_provider": [
+    "luaZ_buffer",
+    "luaL_prepbuffer",
+    "luaL_prepbuffsize",
+    "luaO_tostringbuff",
+    "luaO_utf8esc",
+    "lua_numbertocstring"
+  ],
+  "length_provider": [
+    "luaZ_sizebuffer",
+    "luaO_tostringbuff",
+    "luaO_utf8esc",
+    "lua_numbertocstring"
+  ],
+  "unbounded_string_consumer": [
+    "strlen",
+    "lua_pushstring",
+    "luaL_addstring",
+    "luaL_loadstring",
+    "luaL_dostring",
+    "lua_pushfstring",
+    "lua_pushvfstring",
+    "luaO_pushfstring",
+    "luaO_pushvfstring",
+    "lua_writestringerror",
+    "lua_stringtonumber",
+    "l_sprintf",
+    "luaL_error"
+  ],
+  "bounded_nul_scanner": [
+    "memchr"
+  ],
+  "bounded_string_formatter": []
+}

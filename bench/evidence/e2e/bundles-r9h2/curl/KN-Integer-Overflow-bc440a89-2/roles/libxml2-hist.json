@@ -1,0 +1,14 @@
+{
+  "length_of": [
+    "xmlNewTextLen",
+    "xmlNewDocTextLen",
+    "xmlNodeAddContentLen",
+    "xmlNodeSetContentLen",
+    "xmlStringLenGetNodeList",
+    "xmlStrndup",
+    "xmlStrncat",
+    "xmlStrncatNew",
+    "xmlBufferAdd",
+    "xmlBufferAddHead"
+  ]
+}

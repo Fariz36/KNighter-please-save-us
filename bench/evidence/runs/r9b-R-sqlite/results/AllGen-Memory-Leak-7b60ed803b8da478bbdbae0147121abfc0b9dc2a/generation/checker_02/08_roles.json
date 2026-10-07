@@ -1,0 +1,34 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "duplicator": {
+      "names": [
+        "sqlite3SrcListDup"
+      ],
+      "description": "returns a newly allocated copy of an object; caller owns the copy and must free it"
+    },
+    "container_insert": {
+      "names": [
+        "sqlite3SrcListAppendList",
+        "sqlite3SrcListAppendFromTerm"
+      ],
+      "description": "attaches or appends an owned resource to a container; the passed resource is consumed, and any returned container is owned by the caller"
+    },
+    "deallocator": {
+      "names": [
+        "sqlite3SrcListDelete"
+      ],
+      "description": "frees an object or container; safe to call with NULL"
+    },
+    "null_on_failure": {
+      "names": [
+        "sqlite3SrcListDup",
+        "sqlite3SrcListAppendList"
+      ],
+      "description": "may return NULL on allocation failure"
+    }
+  }
+}

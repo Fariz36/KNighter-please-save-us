@@ -1,0 +1,32 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "string_search": {
+      "names": [
+        "strchr"
+      ],
+      "description": "searches for the first occurrence of a character in a NUL-terminated string and returns a pointer to it, or NULL if not found"
+    },
+    "parser_input": {
+      "names": [
+        "curlx_dyn_ptr"
+      ],
+      "description": "returns a pointer to the start of an untrusted NUL-terminated input buffer"
+    },
+    "error_setter": {
+      "names": [
+        "failf"
+      ],
+      "description": "reports an error message with printf-style formatting"
+    },
+    "predicate": {
+      "names": [
+        "ISDIGIT"
+      ],
+      "description": "character classification macro that tests whether a character is a decimal digit"
+    }
+  }
+}

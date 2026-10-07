@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A resource is passed to a `parser_input` constructor that may return NULL. On its failure path, the constructor already frees/consumes that passed resource. The caller treats the NULL result as “construction failed, resource still owned by caller” and calls a `deallocator` on the same resource, causing a double free.
+
+Roles:
+- `parser_input`: `xmlNewIOInputStream`
+- `null_on_failure`: `xmlNewIOInputStream`
+- `deallocator`: `xmlFreeParserInputBuffer`

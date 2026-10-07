@@ -1,0 +1,8 @@
+## Bug Pattern
+
+In a `container_insert` operation, a special path consumes/merges an input object and then calls a `deallocator` on it without first calling `container_remove`. The object may still be linked in its previous container, leaving dangling parent/sibling pointers that can cause use-after-free or double-free. The fix is to call `container_remove` before `deallocator`.
+
+Roles:
+- `container_insert`: xmlAddChild
+- `container_remove`: xmlUnlinkNodeInternal
+- `deallocator`: xmlFreeNode

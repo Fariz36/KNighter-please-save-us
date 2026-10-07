@@ -1,0 +1,25 @@
+{
+  "cleanup": [
+    "luaF_closeupval",
+    "luaF_close",
+    "lua_closethread",
+    "lua_closeslot",
+    "luaD_closeprotected"
+  ],
+  "container_remove": [
+    "luaF_unlinkupval",
+    "luaS_remove"
+  ],
+  "deallocator": [
+    "luaM_free",
+    "luaM_free_",
+    "luaM_freemem",
+    "luaM_freearray",
+    "luaZ_freebuffer",
+    "luaH_free",
+    "luaF_freeproto",
+    "luaE_freethread",
+    "luaC_freeallobjects",
+    "lua_close"
+  ]
+}

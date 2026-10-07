@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A configuration setter (`init`-like role) accepts a caller-supplied value and stores it without validating that it is nonzero. A later checker routine uses that stored value as the divisor of a division, but only guards the numerator/limit condition. A zero divisor can therefore reach the `/` operation and cause division-by-zero / SIGFPE.
+
+Roles:
+- `init` / configuration setter: `xmlCtxtSetMaxAmplification` — stores the caller-provided amplification limit; should reject zero.
+- `checker` / division consumer: `xmlParserEntityCheck` — uses the stored value as a divisor without a zero guard.
+- `error_setter`: `xmlFatalErrMsg` — reports the amplification-limit error.

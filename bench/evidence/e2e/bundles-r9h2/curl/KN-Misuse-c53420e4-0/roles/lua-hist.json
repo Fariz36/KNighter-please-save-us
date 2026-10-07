@@ -1,0 +1,81 @@
+{
+  "length_of": [
+    "strlen"
+  ],
+  "untrusted_size": [
+    "lua_tolstring",
+    "luaL_checklstring",
+    "luaL_optlstring",
+    "luaL_tolstring",
+    "lua_rawlen",
+    "luaL_len",
+    "lua_len"
+  ],
+  "untrusted_data_accessor": [
+    "lua_tolstring",
+    "lua_tostring",
+    "luaL_checklstring",
+    "luaL_optlstring",
+    "luaL_checkstring",
+    "luaL_optstring",
+    "luaL_tolstring",
+    "lua_touserdata",
+    "luaL_testudata",
+    "luaL_checkudata",
+    "getudatamem"
+  ],
+  "allocator": [
+    "luaM_malloc_",
+    "luaM_new",
+    "luaM_newvector",
+    "luaM_newobject",
+    "luaM_realloc_",
+    "lua_newuserdatauv",
+    "lua_newuserdata",
+    "luaS_newudata",
+    "luaL_buffinitsize",
+    "luaL_prepbuffsize",
+    "lua_pushlstring",
+    "lua_pushstring",
+    "lua_pushfstring",
+    "lua_pushvfstring",
+    "luaO_pushfstring",
+    "luaO_pushvfstring",
+    "luaS_newlstr",
+    "luaX_newstring",
+    "lua_pushexternalstring"
+  ],
+  "deallocator": [
+    "luaM_free",
+    "luaM_free_",
+    "luaM_freemem",
+    "luaM_freearray",
+    "luaH_free",
+    "luaF_freeproto",
+    "luaE_freethread",
+    "luaZ_freebuffer",
+    "luaC_freeallobjects",
+    "lua_close",
+    "lua_closethread",
+    "luai_userstatefree",
+    "luai_userstateclose"
+  ],
+  "error_setter": [
+    "luaL_error",
+    "luaG_runerror",
+    "luaK_semerror",
+    "luaL_argerror",
+    "luaL_typeerror",
+    "luaG_typeerror",
+    "luaG_forerror",
+    "luaG_opinterror",
+    "luaX_syntaxerror",
+    "luaE_warnerror",
+    "luaG_addinfo",
+    "lua_writestringerror",
+    "lua_pushfstring",
+    "luaO_pushfstring",
+    "lua_pushvfstring",
+    "luaO_pushvfstring"
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "target": "lua",
+  "commit": "cfce6f4b20afe85ede2182b3df3ab2bfcdb0e692",
+  "candidates": 841,
+  "identifiers": 7223,
+  "offered": {
+    "indexed_read": [
+      "vkisindexed",
+      "luaK_indexed",
+      "luaZ_read",
+      "mainthread",
+      "ttisthread",
+      "lua_isthread",
+      "lua_tothread",
+      "lua_newthread",
+      "lua_pushthread",
+      "luaE_freethread",
+      "luaE_threadsize",
+      "lua_closethread",
+      "lua_resetthread",
+      "luaE_resetthread",
+      "luai_userstatethread",
+      "luaZ_buffer",
+      "nodefromval",
+      "lua_absindex",
+      "luaL_loadbuffer",
+      "luaL_prepbuffer",
+      "luaZ_freebuffer",
+      "luaZ_initbuffer",
+      "luaZ_sizebuffer",
+      "luaL_loadbufferx",
+      "luaZ_resetbuffer",
+      "lua_upvalueindex",
+      "invalidateTMcache",
+      "luaZ_resizebuffer"
+    ],
+    "length_of": [
+      "luaZ_sizebuffer",
+      "luaZ_resizebuffer",
+      "lua_len",
+      "cast_num",
+      "luaL_len",
+      "sizenode",
+      "luaH_size",
+      "sizeudata",
+      "stacksize",
+      "cast_sizet",
+      "sizestrshr",
+      "luaH_resize",
+      "luaS_resize",
+      "luaL_addsize",
+      "sizeCclosure",
+      "sizeLclosure",
+      "allocsizenode",
+      "luaM_testsize",
+      "luaF_protosize",
+      "luaM_checksize",
+      "resethookcount",
+      "luaE_threadsize",
+      "luaS_sizelngstr",
+      "luaH_resizearray",
+      "lua_gethookcount",
+      "luaK_settablesize",
+      "luaL_buffinitsize",
+      "luaL_prepbuffsize",
+      "luaL_pushresultsize",
+      "UNUSED",
+      "ci_func",
+      "cast_func",
+      "ttisstring",
+      "isLfunction",
+      "luaZ_buffer",
+      "lua_isstring",
+      "lua_tostring",
+      "pushvfstring",
+      "ttisfunction",
+      "luaL_dostring"
+    ]
+  },
+  "mapping": {
+    "indexed_read": [],
+    "length_of": [
+      "strlen"
+    ]
+  },
+  "dropped_not_in_target": {
+    "indexed_read": [
+      "luaZ_getc"
+    ],
+    "length_of": []
+  },
+  "rationale": {
+    "indexed_read": "luaZ_getc is the macro that reads the next character from the parser input buffer (ZIO), analogous to NXT in libxml2.",
+    "length_of": "strlen is used to compute the length of the input string passed to luaL_loadstring, analogous to how strlen computes ctxt->len in libxml2."
+  },
+  "llm_seconds": 112.4
+}

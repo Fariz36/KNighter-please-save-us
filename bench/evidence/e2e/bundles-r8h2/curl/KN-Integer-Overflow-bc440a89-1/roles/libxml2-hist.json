@@ -1,0 +1,15 @@
+{
+  "encoded_size_calculator": [
+    "xmlEncodeSpecialChars",
+    "xmlURIEscapeStr"
+  ],
+  "input_length": [
+    "xmlStrlen"
+  ],
+  "max_input_size": [
+    "XML_MAX_TEXT_LENGTH"
+  ],
+  "error_sentinel": [
+    "NULL"
+  ]
+}

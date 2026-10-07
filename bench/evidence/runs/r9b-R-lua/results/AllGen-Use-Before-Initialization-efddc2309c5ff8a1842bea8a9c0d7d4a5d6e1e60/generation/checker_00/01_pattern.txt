@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A reusable state object has a mutable counter/limit that is initialized only once by a one-time `init`, while the per-use `init` resets other fields and assumes that counter is still at its initial value. The counter is temporarily changed during an operation and restored only on normal completion. If an `error_setter` aborts the operation, the restore is skipped, leaving the object with stale state. The next use relies on the per-use `init` to repair it, but that reset is missing, so subsequent operations see a corrupted counter (e.g. negative), bypassing the intended limit and leading to inconsistent behavior or stack overflow. The fix moves reinitialization of that counter into the per-use `init`.
+
+Roles:
+- `init`: `prepstate`, `reprepstate`
+- `error_setter`: `luaL_error`
+- `aborting_assert`: `lua_assert`

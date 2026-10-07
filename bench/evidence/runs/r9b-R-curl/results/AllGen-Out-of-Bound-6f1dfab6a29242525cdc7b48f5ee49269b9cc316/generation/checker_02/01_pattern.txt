@@ -1,0 +1,7 @@
+## Bug Pattern
+
+The code uses a `string_search` API to find a delimiter in a NUL-terminated input, advances the returned pointer past that delimiter, and then reads `ptr[1]` before verifying that `ptr[0]` is not the string terminator. If the delimiter is the last character, `ptr[0]` is `'\0'` and `ptr[1]` is read one byte past the end of the buffer. The fix adds a non-NUL check on the first character at the new position (`sep && ...`) so later indexing and the `character_classifier` check only occur when at least one character follows the delimiter.
+
+Roles:
+- `string_search`: `strchr` (returns a pointer to the first occurrence or NULL)
+- `character_classifier`: `ISDIGIT` (tests whether a character is a digit)

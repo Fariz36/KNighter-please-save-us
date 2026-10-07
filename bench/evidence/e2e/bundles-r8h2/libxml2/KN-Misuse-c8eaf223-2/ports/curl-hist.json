@@ -1,0 +1,93 @@
+{
+  "target": "curl",
+  "commit": "11b991232fbcaa88e2b1faecac224416b0001e35",
+  "candidates": 1595,
+  "identifiers": 34096,
+  "offered": {
+    "config_setter": [
+      "Curl_addrinfo_set_port",
+      "config_free",
+      "config_alloc",
+      "Curl_ssl_cf_get_config",
+      "Curl_ssl_conn_config_init",
+      "Curl_ssl_easy_config_init",
+      "Curl_ssl_conn_config_match",
+      "Curl_ssl_conn_config_update",
+      "Curl_ssl_conn_config_cleanup",
+      "Curl_ssl_easy_config_complete",
+      "Curl_ssl_cf_get_primary_config",
+      "Curl_schannel_set_cached_cert_store",
+      "error",
+      "errorf",
+      "GSS_ERROR",
+      "Curl_failf",
+      "parseconfig",
+      "str2tls_max",
+      "Curl_1st_err",
+      "curl_url_set",
+      "Curl_meta_set",
+      "Curl_strerror",
+      "SET_SOCKERRNO",
+      "SetHTTPrequest",
+      "config2setopts",
+      "Curl_bufref_set",
+      "Curl_dynhds_set",
+      "Curl_parse_port",
+      "Curl_creader_set",
+      "Curl_httpsrr_set",
+      "Curl_pollset_set",
+      "CURLX_SET_BINMODE",
+      "curl_url_strerror",
+      "Curl_conn_meta_set",
+      "Curl_gss_log_error",
+      "Curl_sspi_strerror",
+      "Curl_uint_hash_set",
+      "curl_easy_strerror",
+      "curl_url_set_ccsid",
+      "Curl_netrc_strerror"
+    ],
+    "divisor_field": [
+      "curlcheck_postfields",
+      "curlcheck_postfields_option",
+      "config_free",
+      "config_alloc",
+      "Curl_cw_out_is_paused",
+      "Curl_creader_is_paused",
+      "Curl_cwriter_is_paused",
+      "Curl_ssl_cf_get_config",
+      "Curl_xfer_recv_is_paused",
+      "Curl_xfer_send_is_paused",
+      "Curl_ssl_conn_config_init",
+      "Curl_ssl_easy_config_init",
+      "Curl_xfer_write_is_paused",
+      "Curl_creader_def_is_paused",
+      "Curl_ssl_conn_config_match",
+      "Curl_vquic_tls_before_recv",
+      "Curl_ssl_conn_config_update",
+      "Curl_ssl_conn_config_cleanup",
+      "Curl_ssl_easy_config_complete",
+      "Curl_ssl_cf_get_primary_config"
+    ]
+  },
+  "mapping": {
+    "config_setter": [
+      "Curl_vsetopt",
+      "curl_easy_setopt"
+    ],
+    "divisor_field": [
+      "max_recv_speed",
+      "max_send_speed"
+    ]
+  },
+  "dropped_not_in_target": {
+    "config_setter": [
+      "Curl_setopt"
+    ],
+    "divisor_field": []
+  },
+  "rationale": {
+    "config_setter": "These functions store CURLOPT_* configuration values into the UserDefined fields, including the rate-limit speed fields.",
+    "divisor_field": "These UserDefined fields are used as the divisor in Curl_pgrsLimitWaitTime to compute rate-limiting delays."
+  },
+  "llm_seconds": 180.1
+}

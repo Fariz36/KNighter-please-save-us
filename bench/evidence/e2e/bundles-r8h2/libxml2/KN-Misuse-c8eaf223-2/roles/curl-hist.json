@@ -1,0 +1,10 @@
+{
+  "config_setter": [
+    "Curl_vsetopt",
+    "curl_easy_setopt"
+  ],
+  "divisor_field": [
+    "max_recv_speed",
+    "max_send_speed"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "target": "lua",
+  "commit": "cfce6f4b20afe85ede2182b3df3ab2bfcdb0e692",
+  "candidates": 841,
+  "identifiers": 7223,
+  "offered": {
+    "length_of": [
+      "lua_len",
+      "cast_num",
+      "luaL_len",
+      "sizenode",
+      "luaH_size",
+      "sizeudata",
+      "stacksize",
+      "cast_sizet",
+      "sizestrshr",
+      "luaH_resize",
+      "luaS_resize",
+      "luaL_addsize",
+      "luaopen_base",
+      "sizeCclosure",
+      "sizeLclosure",
+      "allocsizenode",
+      "luaM_testsize",
+      "luaF_protosize",
+      "luaM_checksize",
+      "resethookcount",
+      "luaE_threadsize",
+      "luaS_sizelngstr",
+      "luaZ_sizebuffer",
+      "luaH_resizearray",
+      "lua_gethookcount",
+      "luaK_settablesize",
+      "luaL_buffinitsize",
+      "luaL_prepbuffsize",
+      "luaZ_resizebuffer",
+      "luaL_pushresultsize",
+      "cast_Inst",
+      "lua_arith",
+      "luaO_arith",
+      "nodefromval",
+      "luaX_setinput",
+      "invalidateTMcache",
+      "luaM_saferealloc_"
+    ]
+  },
+  "mapping": {
+    "length_of": [
+      "sizeudata",
+      "sizestrshr",
+      "luaH_resize",
+      "luaS_resize",
+      "sizeCclosure",
+      "sizeLclosure",
+      "luaS_sizelngstr",
+      "luaH_resizearray",
+      "luaL_prepbuffsize"
+    ]
+  },
+  "dropped_not_in_target": {
+    "length_of": []
+  },
+  "rationale": {
+    "length_of": "These functions and macros compute a derived size from an input count or length using unchecked arithmetic that can overflow, matching the role of encoder_base64_size."
+  },
+  "llm_seconds": 181.6
+}

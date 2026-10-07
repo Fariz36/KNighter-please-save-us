@@ -1,0 +1,15 @@
+{
+  "out_param_api": [
+    "lua_getstack",
+    "lua_getinfo",
+    "luaL_buffinit",
+    "luaL_prepbuffsize",
+    "luaL_prepbuffer",
+    "luaL_addlstring",
+    "luaL_addstring",
+    "luaL_addvalue",
+    "luaL_pushresult",
+    "luaL_pushresultsize",
+    "luaL_addchar"
+  ]
+}

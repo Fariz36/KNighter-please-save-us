@@ -1,0 +1,75 @@
+{
+  "target": "lua",
+  "commit": "cfce6f4b20afe85ede2182b3df3ab2bfcdb0e692",
+  "candidates": 841,
+  "identifiers": 7223,
+  "offered": {
+    "config_setter": [
+      "luaH_set",
+      "lua_error",
+      "SET_OPCODE",
+      "luaL_error",
+      "luaM_error",
+      "luaG_errormsg",
+      "luaG_forerror",
+      "luaG_runerror",
+      "luaK_semerror",
+      "luaL_argerror",
+      "luaL_pushfail",
+      "luaE_warnerror",
+      "luaG_callerror",
+      "luaG_typeerror",
+      "luaL_typeerror",
+      "luaG_opinterror",
+      "luaG_ordererror",
+      "luaG_tointerror",
+      "luaD_seterrorobj",
+      "luaG_concaterror",
+      "luaX_syntaxerror",
+      "lua_writestringerror",
+      "intop",
+      "UNUSED",
+      "fvalue",
+      "hvalue",
+      "ivalue",
+      "nvalue",
+      "pvalue",
+      "uvalue",
+      "ci_func",
+      "clvalue",
+      "gcvalue",
+      "thvalue",
+      "tsvalue",
+      "clCvalue",
+      "clLvalue",
+      "fltvalue",
+      "cast_func",
+      "chgivalue"
+    ],
+    "divisor_field": [
+      "lua_getfield",
+      "lua_setfield",
+      "luaL_getmetafield",
+      "UNUSED",
+      "lua_arith",
+      "luaO_arith"
+    ]
+  },
+  "mapping": {
+    "config_setter": [
+      "lua_gc"
+    ],
+    "divisor_field": []
+  },
+  "dropped_not_in_target": {
+    "config_setter": [],
+    "divisor_field": [
+      "gcstepmul"
+    ]
+  },
+  "rationale": {
+    "config_setter": "lua_gc stores GC configuration values, including gcstepmul via LUA_GCSETSTEPMUL, without rejecting zero.",
+    "divisor_field": "gcstepmul is a global_State field used as a divisor in incstep during incremental GC steps."
+  },
+  "llm_seconds": 71.8
+}

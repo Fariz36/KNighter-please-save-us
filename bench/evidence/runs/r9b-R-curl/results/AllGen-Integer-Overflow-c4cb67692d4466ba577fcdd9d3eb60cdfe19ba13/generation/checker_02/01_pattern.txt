@@ -1,0 +1,9 @@
+## Bug Pattern
+
+An untrusted length/offset value produced by a `parser_input` is stored in an integer type narrower than the type used by the subsequent size check and pointer arithmetic. The narrow value can overflow/truncate, so the bounds check may not actually guarantee that the later `buffer_copy` stays within the received packet. The fix widens the holding variables to `size_t`.
+
+Roles:
+- `parser_input`: `Curl_read16_le` (extracts 16-bit little-endian length/offset from the SMB message)
+- `length_of`: `sizeof` (header size added to the offset/length in the check)
+- `buffer_copy`: `Curl_client_write` (copies `len` bytes from the computed offset)
+- `error_setter`: `failf` (reports the invalid packet)

@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A `parser_input` routine derives a continuation-byte count from untrusted input and uses that count as an arithmetic shift amount before validating it against the width of the shifted integer. A crafted lead byte can make the loop count exceed the maximum allowed, producing a shift count greater than or equal to the bit width of the result type; the later range check occurs too late to prevent the out-of-range shift, which is undefined behavior. The fix rejects such lead bytes before entering the count/shift loop and adds an `aborting_assert` for the count invariant.
+
+Roles:
+- `parser_input`: `utf8_decode`
+- `aborting_assert`: `lua_assert`

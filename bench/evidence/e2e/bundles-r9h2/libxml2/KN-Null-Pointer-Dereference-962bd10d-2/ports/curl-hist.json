@@ -1,0 +1,83 @@
+{
+  "target": "curl",
+  "commit": "11b991232fbcaa88e2b1faecac224416b0001e35",
+  "candidates": 1595,
+  "identifiers": 34096,
+  "offered": {
+    "allocator": [
+      "ALLOC_SIZE",
+      "ALLOC_SIZE2",
+      "config_alloc",
+      "Curl_fileinfo_alloc",
+      "Curl_ftp_parselist_data_alloc",
+      "varexpand",
+      "ISUNRESERVED",
+      "CURL_ARRAYSIZE",
+      "Curl_saferealloc",
+      "curl_dbg_realloc",
+      "Curl_nghttp2_realloc",
+      "Curl_uint_tbl_resize",
+      "Curl_uint_bset_resize",
+      "Curl_pgrsSetUploadSize",
+      "Curl_pgrsSetDownloadSize",
+      "file2memory",
+      "curlcheck_NULL",
+      "file2memory_range",
+      "Curl_creader_set_null",
+      "Curl_ssl_scache_return"
+    ],
+    "reallocator": [
+      "ALLOC_SIZE",
+      "ALLOC_SIZE2",
+      "config_alloc",
+      "curl_dbg_realloc",
+      "Curl_fileinfo_alloc",
+      "Curl_nghttp2_realloc",
+      "Curl_ftp_parselist_data_alloc",
+      "varexpand",
+      "ISUNRESERVED",
+      "Curl_saferealloc",
+      "Curl_uint_tbl_resize",
+      "Curl_uint_bset_resize",
+      "Curl_pgrsSetUploadSize",
+      "Curl_pgrsSetDownloadSize",
+      "file2memory",
+      "curlcheck_NULL",
+      "file2memory_range",
+      "Curl_creader_set_null",
+      "Curl_ssl_scache_return"
+    ]
+  },
+  "mapping": {
+    "allocator": [
+      "config_alloc",
+      "Curl_fileinfo_alloc",
+      "Curl_ftp_parselist_data_alloc",
+      "Curl_saferealloc",
+      "Curl_uint_tbl_resize",
+      "Curl_uint_bset_resize",
+      "file2memory",
+      "file2memory_range",
+      "varexpand"
+    ],
+    "reallocator": [
+      "curl_dbg_realloc",
+      "Curl_saferealloc",
+      "Curl_nghttp2_realloc",
+      "Curl_crealloc",
+      "realloc"
+    ]
+  },
+  "dropped_not_in_target": {
+    "allocator": [
+      "Curl_dyn_addn",
+      "Curl_dyn_add"
+    ],
+    "reallocator": []
+  },
+  "rationale": {
+    "allocator": "These functions allocate or grow memory in libcurl and may dereference caller-supplied state or capacity pointers before checking them for NULL.",
+    "reallocator": "These are libcurl's realloc wrappers and the standard realloc used to resize memory, returning a new pointer or NULL."
+  },
+  "llm_seconds": 124.8
+}

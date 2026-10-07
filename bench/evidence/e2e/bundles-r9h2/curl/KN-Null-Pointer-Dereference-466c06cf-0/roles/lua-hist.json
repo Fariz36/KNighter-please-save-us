@@ -1,0 +1,32 @@
+{
+  "duplicator": [
+    "luaS_new",
+    "luaS_newlstr",
+    "lua_pushlstring",
+    "lua_pushstring",
+    "lua_pushvfstring",
+    "lua_pushfstring",
+    "luaL_addlstring",
+    "luaL_addstring",
+    "luaX_newstring",
+    "luaO_pushvfstring",
+    "luaO_pushfstring",
+    "lua_copy",
+    "setobj",
+    "setobj2s",
+    "setobj2t",
+    "setobj2n"
+  ],
+  "allocator": [
+    "luaM_malloc_",
+    "luaM_realloc_",
+    "luaM_new",
+    "luaM_newobject",
+    "luaM_newvector",
+    "luaM_newblock",
+    "luaM_growaux_",
+    "luaM_shrinkvector_",
+    "luaC_newobj",
+    "debug_realloc"
+  ]
+}

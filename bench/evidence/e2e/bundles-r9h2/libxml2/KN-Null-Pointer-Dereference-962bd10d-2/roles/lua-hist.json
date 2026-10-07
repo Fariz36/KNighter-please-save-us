@@ -1,0 +1,14 @@
+{
+  "allocator": [
+    "luaM_growaux_",
+    "luaM_growvector"
+  ],
+  "reallocator": [
+    "luaM_realloc_",
+    "luaM_saferealloc_",
+    "lua_Alloc",
+    "debug_realloc",
+    "luaM_reallocvector",
+    "luaM_reallocvchar"
+  ]
+}

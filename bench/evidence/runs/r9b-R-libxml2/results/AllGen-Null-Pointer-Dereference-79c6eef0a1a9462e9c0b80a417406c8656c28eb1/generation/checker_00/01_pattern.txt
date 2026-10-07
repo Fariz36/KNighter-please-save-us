@@ -1,0 +1,9 @@
+## Bug Pattern
+
+The result of a `duplicator` / `null_on_failure` call is passed to a `length_of` operation before being checked for NULL. If the duplication/allocation fails and returns NULL, the `length_of` call dereferences NULL. The NULL check and cleanup happen too late.
+
+Roles:
+- `duplicator` / `null_on_failure`: `xmlStrdup`
+- `length_of`: `strlen`
+- `allocator`: `xmlMalloc`
+- `deallocator`: `xmlFree`

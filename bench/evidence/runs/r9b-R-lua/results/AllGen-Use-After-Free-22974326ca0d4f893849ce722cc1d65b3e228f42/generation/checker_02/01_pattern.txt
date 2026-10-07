@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A pointer to a garbage-collectable object is obtained through a weak reference and then used across an allocation/collection point without first acquiring a strong/rooting reference. The allocation can trigger an emergency garbage collection that frees the weakly reachable object, leaving the code with a dangling pointer and causing a use-after-free when it continues to update the object or run barriers/cache invalidation on it.
+
+Roles:
+- weak_ref_get: `fasttm`, `luaT_gettmbyobj` — retrieve a value that may be collected because it is only weakly referenced.
+- container_insert / allocation-triggering operation: `luaH_finishset` — mutates a table and may allocate, which can trigger emergency GC.
+- ref_get / root: `sethvalue2s` — stores the object on the Lua stack to keep it reachable; the buggy path omits this before `luaH_finishset`.
+- deallocator: the emergency GC invoked by the allocation path — frees unreachable/weakly referenced objects.

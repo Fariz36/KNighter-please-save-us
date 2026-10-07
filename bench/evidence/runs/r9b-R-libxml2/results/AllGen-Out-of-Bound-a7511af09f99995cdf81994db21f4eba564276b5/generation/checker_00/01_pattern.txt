@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A parser-input lookahead accessor indexes the parser input buffer at `cursor + offset` without checking that the resulting position is still within the known input length. This allows an out-of-bounds read when the parser looks past the end of the input.
+
+Roles:
+- `parser_input`: `NXT` (reads a character from the parser input buffer at a computed offset)
+- `length_of`: `strlen` (computes the input length that should bound the lookahead)
+- `duplicator` / `null_on_failure`: `xmlStrdup` (creates the duplicated parser input buffer)

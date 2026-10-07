@@ -1,0 +1,67 @@
+{
+  "commit_id": "a7511af09f99995cdf81994db21f4eba564276b5",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/plugin-cache/plugins/e33429ecaf79fb796389/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 0,
+    "legacy_tn": -1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlregexp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 0,
+        "fixed_total": 1,
+        "buggy_on_target": 0,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "xmlRegNewParserCtxt"
+        ],
+        "fixed_functions": [
+          "xmlRegNewParserCtxt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlregexp.c": []
+    },
+    "fixed": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/work/build/a7511af09f99-f6d22c8ac6c7/../../src/a7511af09f99/xmlregexp.c",
+          "line": 740,
+          "column": 13,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "NULL pointer dereference",
+          "description": "NULL pointer dereference: unchecked result of duplicator passed to length_of",
+          "issue_hash": "6e17a35c7edc6049ceb807c174f15432",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/a7511af09f99/393ed7c4/fixed/.._.._src_a7511af09f99_xmlregexp.c/report-6e17a3.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 34.01,
+      "fixed": 31.91
+    },
+    "total_seconds": 66.13
+  },
+  "report_dir": "tmp/validation/a7511af09f99/393ed7c4"
+}

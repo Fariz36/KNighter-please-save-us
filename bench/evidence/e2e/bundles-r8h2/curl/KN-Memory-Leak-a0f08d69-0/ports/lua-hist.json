@@ -1,0 +1,160 @@
+{
+  "target": "lua",
+  "commit": "cfce6f4b20afe85ede2182b3df3ab2bfcdb0e692",
+  "candidates": 841,
+  "identifiers": 7223,
+  "offered": {
+    "cleanup": [
+      "luai_userstatefree",
+      "luaC_freeallobjects",
+      "luai_userstateclose",
+      "luaH_free",
+      "luaM_free",
+      "lua_Alloc",
+      "lua_close",
+      "luaF_close",
+      "luaL_unref",
+      "luaM_free_",
+      "tofinalize",
+      "lua_toclose",
+      "luaM_freemem",
+      "lua_closeslot",
+      "luaF_freeproto",
+      "luaM_freearray",
+      "luaE_freethread",
+      "luaF_closeupval",
+      "luaS_clearcache",
+      "luaZ_freebuffer",
+      "lua_closethread",
+      "luaC_checkfinalizer",
+      "luaD_closeprotected",
+      "ci_func",
+      "cast_func",
+      "isLfunction",
+      "lua_newstate",
+      "ttisfunction",
+      "completestate",
+      "luaL_newstate",
+      "lua_CFunction",
+      "luaM_newobject",
+      "lua_isfunction",
+      "luaK_setreturns",
+      "lua_iscfunction",
+      "lua_tocfunction",
+      "luaC_runtilstate",
+      "luaF_unlinkupval",
+      "lua_pushcfunction",
+      "luai_userstateopen"
+    ],
+    "destructor": [
+      "luaH_free",
+      "luaM_free",
+      "luaM_free_",
+      "luaC_freeallobjects",
+      "lua_Alloc",
+      "lua_close",
+      "luaF_close",
+      "luaL_unref",
+      "tofinalize",
+      "lua_toclose",
+      "luaM_freemem",
+      "lua_closeslot",
+      "luaF_freeproto",
+      "luaM_freearray",
+      "luaE_freethread",
+      "luaF_closeupval",
+      "luaS_clearcache",
+      "luaZ_freebuffer",
+      "lua_closethread",
+      "luai_userstatefree",
+      "luaC_checkfinalizer",
+      "luaD_closeprotected",
+      "luai_userstateclose",
+      "ci_func",
+      "lua_call",
+      "cast_func",
+      "getCcalls",
+      "luaD_call",
+      "lua_callk",
+      "lua_pcall",
+      "luaD_pcall",
+      "lua_pcallk",
+      "isLfunction",
+      "luaT_callTM",
+      "luaD_poscall",
+      "luaD_precall",
+      "ttisfunction",
+      "luaD_hookcall",
+      "luaL_callmeta",
+      "lua_CFunction"
+    ],
+    "state_reset": [
+      "resetbit",
+      "resetbits",
+      "lua_newstate",
+      "completestate",
+      "luaL_newstate",
+      "resethookcount",
+      "lua_resetthread",
+      "luaC_runtilstate",
+      "luaE_resetthread",
+      "luaZ_resetbuffer",
+      "luai_userstatefree",
+      "luai_userstateopen",
+      "luai_userstateclose",
+      "luai_userstatethread",
+      "lua_checkmemory",
+      "luaF_unlinkupval"
+    ],
+    "link_detach": [
+      "luaG_typeerror",
+      "luaL_typeerror",
+      "luaF_unlinkupval",
+      "nodefromval"
+    ],
+    "link_storage": [
+      "luaF_unlinkupval",
+      "UNUSED",
+      "lua_getfield",
+      "lua_setfield",
+      "restorestack",
+      "luaG_typeerror",
+      "luaL_typeerror",
+      "luaL_getmetafield"
+    ]
+  },
+  "mapping": {
+    "cleanup": [
+      "luaF_closeupval"
+    ],
+    "destructor": [],
+    "state_reset": [
+      "memset",
+      "luaF_closeupval"
+    ],
+    "link_detach": [
+      "luaF_unlinkupval"
+    ],
+    "link_storage": []
+  },
+  "dropped_not_in_target": {
+    "cleanup": [],
+    "destructor": [
+      "luaF_freeupval"
+    ],
+    "state_reset": [],
+    "link_detach": [],
+    "link_storage": [
+      "u.open.next",
+      "u.open.previous"
+    ]
+  },
+  "rationale": {
+    "cleanup": "luaF_closeupval closes open upvalues, clearing the open-union link metadata used by luaF_unlinkupval.",
+    "destructor": "luaF_freeupval destroys an UpVal and may call luaF_unlinkupval when the upvalue is still open.",
+    "state_reset": "Closing an upvalue overwrites the union with the closed value, effectively zeroing the link storage used by the detach operation.",
+    "link_detach": "luaF_unlinkupval detaches an open upvalue from the thread's open-upvalue list.",
+    "link_storage": "The open upvalue list links are stored in the UpVal's u.open.next and u.open.previous fields."
+  },
+  "llm_seconds": 367.3
+}

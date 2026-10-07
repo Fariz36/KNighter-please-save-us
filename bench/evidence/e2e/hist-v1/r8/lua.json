@@ -1,0 +1,653 @@
+{
+  "tag": "v5.5-beta",
+  "base_rate": {
+    "functions": 1273,
+    "later_fixed": 14,
+    "rate": 0.011
+  },
+  "results": [
+    {
+      "bundle": "KN-Integer-Overflow-bc440a89-1",
+      "source": "curl",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Integer-Overflow",
+      "mapping": {
+        "encoded_size_calculator": [
+          "luaL_prepbuffsize"
+        ],
+        "input_length": [
+          "luaL_len",
+          "luaL_addsize"
+        ],
+        "max_input_size": [],
+        "error_sentinel": [
+          "luaL_error"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 383.8
+    },
+    {
+      "bundle": "KN-Memory-Leak-a0f08d69-0",
+      "source": "curl",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Memory-Leak",
+      "mapping": {
+        "cleanup": [
+          "luaF_closeupval"
+        ],
+        "destructor": [],
+        "state_reset": [
+          "memset",
+          "luaF_closeupval"
+        ],
+        "link_detach": [
+          "luaF_unlinkupval"
+        ],
+        "link_storage": []
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 396.3
+    },
+    {
+      "bundle": "KN-Misuse-c53420e4-0",
+      "source": "curl",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Misuse",
+      "mapping": {
+        "data_provider": [
+          "luaZ_buffer",
+          "luaL_prepbuffer",
+          "luaL_prepbuffsize",
+          "luaO_tostringbuff",
+          "luaO_utf8esc",
+          "lua_numbertocstring"
+        ],
+        "length_provider": [
+          "luaZ_sizebuffer",
+          "luaO_tostringbuff",
+          "luaO_utf8esc",
+          "lua_numbertocstring"
+        ],
+        "unbounded_string_consumer": [
+          "strlen",
+          "lua_pushstring",
+          "luaL_addstring",
+          "luaL_loadstring",
+          "luaL_dostring",
+          "lua_pushfstring",
+          "lua_pushvfstring",
+          "luaO_pushfstring",
+          "luaO_pushvfstring",
+          "lua_writestringerror",
+          "lua_stringtonumber",
+          "l_sprintf",
+          "luaL_error"
+        ],
+        "bounded_nul_scanner": [
+          "memchr"
+        ],
+        "bounded_string_formatter": []
+      },
+      "status": "scanned",
+      "reports": 8,
+      "functions_reported": 3,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "loadlib.c",
+          "line": 294,
+          "function": "setpath",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "later_fixes": []
+        },
+        {
+          "file": "lstrlib.c",
+          "line": 1291,
+          "function": "str_format",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "later_fixes": []
+        },
+        {
+          "file": "lstrlib.c",
+          "line": 1186,
+          "function": "addliteral",
+          "description": "Length-delimited buffer used as NUL-terminated string",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 210.0
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-466c06cf-1",
+      "source": "curl",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "duplicator": [
+          "luaS_new",
+          "luaS_newlstr"
+        ],
+        "source_handle": [
+          "str"
+        ],
+        "destination_allocator": [
+          "createstrobj",
+          "luaC_newobj",
+          "luaM_newobject",
+          "luaM_malloc_",
+          "luaM_new",
+          "luaM_realloc_"
+        ],
+        "field_copier": [
+          "strlen",
+          "memcpy"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 570.9
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+      "source": "curl",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "api_entry_point": [
+          "lua_tonumberx",
+          "lua_tointegerx",
+          "lua_tolstring",
+          "lua_resume"
+        ],
+        "out_param": [
+          "isnum",
+          "pisnum",
+          "len",
+          "nres",
+          "nresults"
+        ],
+        "out_param_writer": [
+          "luaV_tonumber_",
+          "luaV_flttointeger",
+          "auxgetinfo",
+          "luaO_chunkid",
+          "luaO_utf8esc",
+          "lua_pointer2str",
+          "setgcparam",
+          "lua_pushcfunction"
+        ]
+      },
+      "status": "scanned",
+      "reports": 1,
+      "functions_reported": 1,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "ldo.c",
+          "line": 961,
+          "function": "lua_resume",
+          "description": "Missing null check for out parameter before use",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 326.2
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-f7d4e11f-2",
+      "source": "curl",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "length_field": [
+          "luaZ_sizebuffer"
+        ],
+        "data_pointer": [
+          "data",
+          "luaZ_buffer",
+          "luaL_prepbuffer"
+        ],
+        "buffer_copy": [
+          "memcpy"
+        ],
+        "error_return": [
+          "lua_error",
+          "luaL_error",
+          "luaM_error",
+          "luaM_toobig",
+          "luaG_errormsg",
+          "luaG_runerror",
+          "luaL_argerror",
+          "luaL_typeerror",
+          "luaX_syntaxerror",
+          "luaK_semerror",
+          "luaG_typeerror",
+          "luaG_callerror",
+          "luaG_concaterror",
+          "luaG_opinterror",
+          "luaG_ordererror",
+          "luaG_tointerror",
+          "luaG_forerror"
+        ],
+        "copy_flag": [],
+        "allocator": [
+          "luaM_malloc_",
+          "luaM_realloc_",
+          "luaM_new",
+          "luaM_newvector",
+          "luaM_newobject",
+          "luaM_newblock",
+          "luaM_reallocvchar",
+          "frealloc",
+          "luaH_new",
+          "luaS_new",
+          "debug_realloc"
+        ],
+        "deallocator": [
+          "luaM_free_",
+          "luaM_free",
+          "luaM_freemem",
+          "luaM_freearray",
+          "frealloc",
+          "luaH_free",
+          "luaF_freeproto",
+          "lua_close"
+        ],
+        "validation_guard": [
+          "luaL_argcheck",
+          "luaL_checkany",
+          "luaL_checkint",
+          "luaL_checklong",
+          "luaL_checktype",
+          "luaL_checknumber",
+          "luaL_checkoption",
+          "luaL_checkstring",
+          "luaL_checkstack",
+          "luaL_checkudata",
+          "luaL_testudata",
+          "api_check",
+          "api_checknelems",
+          "api_checkpop",
+          "check_exp",
+          "checktype",
+          "checktag",
+          "lua_checkstack",
+          "luaD_checkstack",
+          "luaK_checkstack",
+          "luaY_checklimit",
+          "luaM_checksize",
+          "luaE_checkcstack",
+          "lua_checkmemory",
+          "lua_assert"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 209.4
+    },
+    {
+      "bundle": "KN-Double-Free-26dfab2f-1",
+      "source": "libxml2",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Double-Free",
+      "mapping": {
+        "resource": [],
+        "ownership_consumer_frees_on_failure": [],
+        "deallocator": [
+          "luaH_free",
+          "luaM_free",
+          "luaM_free_",
+          "luaM_freearray",
+          "luaM_freemem",
+          "luaF_freeproto",
+          "luaE_freethread",
+          "luaC_freeallobjects",
+          "lua_close",
+          "luaZ_freebuffer",
+          "luai_userstatefree",
+          "luai_userstateclose"
+        ],
+        "null_on_failure": [],
+        "duplicate_cleanup": [
+          "luaH_free",
+          "luaM_free",
+          "luaM_free_",
+          "luaM_freearray",
+          "luaM_freemem",
+          "luaF_freeproto",
+          "luaE_freethread",
+          "luaC_freeallobjects",
+          "lua_close",
+          "luaZ_freebuffer",
+          "luai_userstatefree",
+          "luai_userstateclose"
+        ],
+        "context_cleanup": [
+          "lua_close",
+          "luaE_freethread"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 524.9
+    },
+    {
+      "bundle": "KN-Misuse-c8eaf223-2",
+      "source": "libxml2",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Misuse",
+      "mapping": {
+        "config_setter": [
+          "lua_gc"
+        ],
+        "divisor_field": []
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 99.4
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+      "source": "libxml2",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "null_on_failure": [
+          "luaM_malloc_",
+          "luaM_realloc_",
+          "luaM_new",
+          "luaH_new",
+          "luaS_new",
+          "debug_realloc",
+          "frealloc"
+        ],
+        "length_of": [
+          "strlen",
+          "luaH_size",
+          "luaF_protosize",
+          "luaE_threadsize",
+          "luaZ_sizebuffer",
+          "sizenode",
+          "allocsizenode",
+          "stacksize"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 161.0
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+      "source": "libxml2",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "nullable_inout_capacity_ptr": [
+          "capacity",
+          "size"
+        ],
+        "capacity_computer": [],
+        "reallocator": [
+          "luaM_realloc_",
+          "luaM_saferealloc_",
+          "luaM_reallocvchar",
+          "luaM_reallocvector",
+          "luaZ_resizebuffer",
+          "frealloc",
+          "debug_realloc"
+        ],
+        "deref_read": [],
+        "deref_write": [],
+        "null_guard": [],
+        "null_on_failure": []
+      },
+      "status": "scanned",
+      "reports": 25,
+      "functions_reported": 5,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "lauxlib.c",
+          "line": 861,
+          "function": "getS",
+          "description": "in/out capacity pointer dereferenced without null check",
+          "later_fixes": []
+        },
+        {
+          "file": "lauxlib.c",
+          "line": 747,
+          "function": "getF",
+          "description": "in/out capacity pointer dereferenced without null check",
+          "later_fixes": []
+        },
+        {
+          "file": "lbaselib.c",
+          "line": 386,
+          "function": "generic_reader",
+          "description": "in/out capacity pointer dereferenced without null check",
+          "later_fixes": []
+        },
+        {
+          "file": "lmem.c",
+          "line": 131,
+          "function": "luaM_shrinkvector_",
+          "description": "in/out capacity pointer dereferenced without null check",
+          "later_fixes": []
+        },
+        {
+          "file": "lstrlib.c",
+          "line": 1508,
+          "function": "getoption",
+          "description": "in/out capacity pointer dereferenced without null check",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 233.5
+    },
+    {
+      "bundle": "KN-Out-of-Bound-a7511af0-2",
+      "source": "libxml2",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Out-of-Bound",
+      "mapping": {
+        "lookahead": [
+          "luaX_lookahead"
+        ],
+        "length_of": [
+          "luaZ_sizebuffer",
+          "luaZ_bufflen"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 207.2
+    },
+    {
+      "bundle": "KN-Buffer-Overflow-a7200804-1",
+      "source": "sqlite",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Buffer-Overflow",
+      "mapping": {
+        "buffer_grow": [
+          "luaL_prepbuffsize",
+          "luaL_prepbuffer",
+          "luaL_buffinitsize"
+        ],
+        "required_capacity": [
+          "sz",
+          "l"
+        ],
+        "write_pointer": [
+          "b"
+        ],
+        "digit_set": [],
+        "output_buffer": []
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 231.6
+    },
+    {
+      "bundle": "KN-Integer-Overflow-720d3afa-0",
+      "source": "sqlite",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Integer-Overflow",
+      "mapping": {
+        "payload_length": [],
+        "local_payload_length": [],
+        "overflow_chunk_size": [],
+        "overflow_page_cache": [],
+        "reallocator": [
+          "luaM_realloc_",
+          "luaM_saferealloc_",
+          "luaM_reallocvchar",
+          "luaM_reallocvector",
+          "luaM_growaux_",
+          "luaM_growvector",
+          "luaZ_resizebuffer",
+          "luaD_reallocstack",
+          "luaD_growstack",
+          "luaH_resize",
+          "luaS_resize",
+          "luaH_resizearray",
+          "debug_realloc",
+          "frealloc"
+        ],
+        "allocated_size_query": [],
+        "zero_initializer": [
+          "memset"
+        ],
+        "cache_index": [],
+        "too_narrow_arithmetic_type": [
+          "int",
+          "unsigned"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 222.0
+    },
+    {
+      "bundle": "KN-Integer-Overflow-d87f8c49-0",
+      "source": "sqlite",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Integer-Overflow",
+      "mapping": {
+        "length_of": [],
+        "character_count_bound": [
+          "precision"
+        ],
+        "iterator_advance": [
+          "utf8_decode"
+        ],
+        "output_length": [
+          "length"
+        ],
+        "narrowing_cast": [
+          "cast_int"
+        ],
+        "safe_cap": [],
+        "buffer_append": [
+          "luaL_addlstring",
+          "luaL_addsize",
+          "lua_pushlstring"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 188.2
+    },
+    {
+      "bundle": "KN-Misuse-1bc183a9-1",
+      "source": "sqlite",
+      "target": "lua",
+      "tag": "v5.5-beta",
+      "bug_type": "Misuse",
+      "mapping": {
+        "tokenizer": [],
+        "dequote_helper": [],
+        "illegal_token_sentinel": [],
+        "dequoter_with_precondition": [],
+        "caller_ignoring_sentinel": []
+      },
+      "status": "no equivalent roles"
+    }
+  ]
+}

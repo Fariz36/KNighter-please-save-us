@@ -1,0 +1,34 @@
+{
+  "role_based": true,
+  "initial_findings": [
+    "aborting_assert"
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "result": "compiled",
+      "remaining": []
+    }
+  ],
+  "final_findings": [],
+  "roles": {
+    "init": {
+      "names": [
+        "xmlCtxtSetMaxAmplification"
+      ],
+      "description": "configuration setter that stores a caller-supplied value into an object field"
+    },
+    "error_setter": {
+      "names": [
+        "xmlFatalErrMsg"
+      ],
+      "description": "printf-style function that records or reports an error condition"
+    },
+    "aborting_assert": {
+      "names": [
+        "aborting_assert"
+      ],
+      "description": "macro or function that aborts execution (or returns) when its condition is false, so the guarded value is considered validated"
+    }
+  }
+}

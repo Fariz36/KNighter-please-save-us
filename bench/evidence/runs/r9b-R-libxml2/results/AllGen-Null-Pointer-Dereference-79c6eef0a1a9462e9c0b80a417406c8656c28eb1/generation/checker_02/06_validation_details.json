@@ -1,0 +1,79 @@
+{
+  "commit_id": "79c6eef0a1a9462e9c0b80a417406c8656c28eb1",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/plugin-cache/plugins/95187bfca97d2b423d0a/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    0
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 0,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlregexp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 1,
+        "fixed_total": 1,
+        "buggy_on_target": 1,
+        "fixed_on_target": 1,
+        "buggy_functions": [
+          "xmlRegNewParserCtxt"
+        ],
+        "fixed_functions": [
+          "xmlRegNewParserCtxt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/work/build/61e5f3ea9760-f6d22c8ac6c7/../../src/61e5f3ea9760/xmlregexp.c",
+          "line": 740,
+          "column": 13,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "Unchecked NULL from duplicator",
+          "description": "Length calculated on unchecked duplicator result",
+          "issue_hash": "9005caba7eb16cb61649186283263d0e",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/79c6eef0a1a9/83343472/buggy/.._.._src_61e5f3ea9760_xmlregexp.c/report-9005ca.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/work/build/79c6eef0a1a9-f6d22c8ac6c7/../../src/79c6eef0a1a9/xmlregexp.c",
+          "line": 744,
+          "column": 20,
+          "function": "xmlRegNewParserCtxt",
+          "bug_type": "Unchecked NULL from duplicator",
+          "description": "Length calculated on unchecked duplicator result",
+          "issue_hash": "12db1c785a625a727847c1f0a65d6442",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/79c6eef0a1a9/83343472/fixed/.._.._src_79c6eef0a1a9_xmlregexp.c/report-12db1c.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.11,
+    "analysis_seconds": {
+      "buggy": 125.76,
+      "fixed": 33.69
+    },
+    "total_seconds": 159.65
+  },
+  "report_dir": "tmp/validation/79c6eef0a1a9/83343472"
+}

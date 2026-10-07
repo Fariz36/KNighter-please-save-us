@@ -1,0 +1,1766 @@
+{
+  "tag": "v2.15.0",
+  "base_rate": {
+    "functions": 3080,
+    "later_fixed": 45,
+    "rate": 0.0146
+  },
+  "results": [
+    {
+      "bundle": "KN-Integer-Overflow-bc440a89-2",
+      "source": "curl",
+      "target": "libxml2",
+      "tag": "v2.15.0",
+      "bug_type": "Integer-Overflow",
+      "mapping": {
+        "length_of": [
+          "xmlNewTextLen",
+          "xmlNewDocTextLen",
+          "xmlNodeAddContentLen",
+          "xmlNodeSetContentLen",
+          "xmlStringLenGetNodeList",
+          "xmlStrndup",
+          "xmlStrncat",
+          "xmlStrncatNew",
+          "xmlBufferAdd",
+          "xmlBufferAddHead"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 562.7
+    },
+    {
+      "bundle": "KN-Memory-Leak-a0f08d69-0",
+      "source": "curl",
+      "target": "libxml2",
+      "tag": "v2.15.0",
+      "bug_type": "Memory-Leak",
+      "mapping": {
+        "cleanup": [
+          "xmlListClear",
+          "xmlClearParserCtxt",
+          "xmlClearNodeInfoSeq"
+        ],
+        "container_remove": [
+          "xmlUnlinkNode",
+          "xmlDOMWrapRemoveNode",
+          "xmlXPathNodeSetRemove",
+          "libxml_xmlNodeRemoveNsDef",
+          "xmlRemoveID",
+          "xmlRemoveRef",
+          "xmlRemoveProp",
+          "xmlCatalogRemove",
+          "xmlListRemoveAll",
+          "xmlACatalogRemove",
+          "xmlListRemoveLast",
+          "xmlHashRemoveEntry",
+          "xmlListRemoveFirst",
+          "xmlHashRemoveEntry2",
+          "xmlHashRemoveEntry3",
+          "nodePop"
+        ],
+        "deallocator": [
+          "xmlXPathFreeObject",
+          "__xmlFree",
+          "xmlFreeNs",
+          "xmlBufFree",
+          "xmlFreeDoc",
+          "xmlFreeDtd",
+          "xmlFreeURI",
+          "xmlMemFree",
+          "xmlDictFree",
+          "xmlFreeNode",
+          "xmlFreeProp",
+          "xmlHashFree",
+          "xmlFreeMutex",
+          "xmlBufferFree",
+          "xmlFreeEntity",
+          "xmlFreeNsList",
+          "xmlFreeRMutex",
+          "xmlModuleFree",
+          "xmlSchemaFree",
+          "xmlFreeCatalog",
+          "xmlFreeIDTable",
+          "xmlFreePattern",
+          "xmlFreeAutomata",
+          "xmlFreeNodeList",
+          "xmlFreePropList",
+          "xmlFreeRefTable",
+          "xmlParserNsFree",
+          "xmlFreeValidCtxt",
+          "xmlRegFreeRegexp",
+          "xmlFreeParserCtxt",
+          "xmlFreeStreamCtxt",
+          "xmlFreeTextReader",
+          "xmlFreeTextWriter",
+          "xmlSchemaFreeType",
+          "xmlSchematronFree",
+          "htmlFreeParserCtxt",
+          "xmlDOMWrapFreeCtxt",
+          "xmlFreeEnumeration",
+          "xmlFreeInputStream",
+          "xmlFree"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 434.6
+    },
+    {
+      "bundle": "KN-Misuse-c53420e4-0",
+      "source": "curl",
+      "target": "libxml2",
+      "tag": "v2.15.0",
+      "bug_type": "Misuse",
+      "mapping": {
+        "length_of": [
+          "strlen",
+          "xmlStrlen",
+          "xmlUTF8Size",
+          "xmlUTF8Strlen"
+        ],
+        "untrusted_size": [
+          "xmlBufferLength",
+          "xmlOutputBufferGetSize",
+          "htmlUTF8ToHtml",
+          "xmlIsolat1ToUTF8",
+          "xmlUTF8ToIsolat1"
+        ],
+        "untrusted_data_accessor": [
+          "xmlBufferContent"
+        ],
+        "allocator": [
+          "xmlStrndup",
+          "xmlCharStrndup",
+          "xmlStringLenDecodeEntities",
+          "xmlNewTextLen",
+          "xmlNewCDataBlock",
+          "xmlNewDocTextLen",
+          "xmlBufferCreate",
+          "xmlBufferCreateSize"
+        ],
+        "deallocator": [
+          "xmlFree",
+          "xmlMemFree",
+          "__xmlFree",
+          "xmlBufferFree",
+          "xmlFreeNode",
+          "xmlFreeDoc",
+          "xmlFreeTextReader",
+          "xmlFreeTextWriter"
+        ],
+        "error_setter": [
+          "xmlRaiseError",
+          "xmlVRaiseError",
+          "xmlPrintErrorMessage",
+          "xmlVPrintErrorMessage",
+          "xmlParserValidityError",
+          "xmlGenericErrorDefaultFunc"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 402.5
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-466c06cf-0",
+      "source": "curl",
+      "target": "libxml2",
+      "tag": "v2.15.0",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "duplicator": [
+          "xmlCopyDoc",
+          "xmlCopyDtd",
+          "xmlCopyNode",
+          "xmlDocCopyNode",
+          "xmlCopyNodeList",
+          "xmlDocCopyNodeList",
+          "xmlCopyProp",
+          "xmlCopyPropList",
+          "xmlCopyNamespace",
+          "xmlCopyNamespaceList",
+          "xmlXPathObjectCopy",
+          "xmlListDup",
+          "xmlHashCopy",
+          "xmlStrdup",
+          "xmlMemStrdup",
+          "xmlMemoryStrdup"
+        ],
+        "allocator": [
+          "xmlMalloc",
+          "xmlMallocAtomic",
+          "xmlRealloc",
+          "xmlMemStrdup",
+          "xmlMallocLoc",
+          "xmlMallocAtomicLoc",
+          "xmlReallocLoc",
+          "xmlMemStrdupLoc",
+          "__xmlMalloc",
+          "__xmlRealloc",
+          "xmlMemMalloc",
+          "xmlMemRealloc",
+          "xmlMemoryStrdup",
+          "xmlNewDoc",
+          "xmlNewDtd",
+          "xmlNewNode",
+          "xmlNewDocNode",
+          "xmlNewProp",
+          "xmlNewDocProp",
+          "xmlNewNs",
+          "xmlNewPI",
+          "xmlNewText",
+          "xmlNewComment",
+          "xmlNewCDataBlock",
+          "xmlNewCharRef",
+          "xmlNewReference",
+          "xmlNewChild",
+          "xmlNewDocPI",
+          "xmlNewMutex",
+          "xmlListCreate",
+          "xmlHashCreate",
+          "xmlDictCreate",
+          "xmlBufCreate",
+          "xmlBufferCreate"
+        ]
+      },
+      "status": "scanned",
+      "reports": 2,
+      "functions_reported": 2,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "tree.c",
+          "line": 3825,
+          "function": "xmlCopyPropList",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 4296,
+          "function": "xmlCopyDtd",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 405.8
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+      "source": "curl",
+      "target": "libxml2",
+      "tag": "v2.15.0",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "out_param_api": [
+          "xmlCharEncOutFunc",
+          "xmlOutputBufferWrite",
+          "xmlTextWriterWritePI",
+          "xmlTextWriterWriteDTD",
+          "xmlTextWriterWriteRaw",
+          "xmlTextWriterWriteCDATA",
+          "xmlTextWriterWriteBase64",
+          "xmlTextWriterWriteBinHex",
+          "xmlTextWriterWriteRawLen",
+          "xmlTextWriterWriteString",
+          "xmlTextWriterWriteComment",
+          "xmlTextWriterWriteElement",
+          "xmlOutputBufferWriteEscape",
+          "xmlOutputBufferWriteString",
+          "xmlTextWriterWriteFormatPI",
+          "xmlTextWriterWriteAttribute",
+          "xmlTextWriterWriteDTDEntity",
+          "xmlTextWriterWriteElementNS",
+          "xmlTextWriterWriteFormatDTD",
+          "xmlTextWriterWriteFormatRaw",
+          "xmlTextWriterWriteVFormatPI",
+          "xmlTextWriterWriteDTDAttlist",
+          "xmlTextWriterWriteDTDElement",
+          "xmlTextWriterWriteVFormatDTD",
+          "xmlTextWriterWriteVFormatRaw",
+          "xmlTextWriterWriteAttributeNS",
+          "xmlTextWriterWriteDTDNotation",
+          "xmlTextWriterWriteFormatCDATA",
+          "xmlTextWriterWriteFormatString",
+          "xmlTextWriterWriteVFormatCDATA",
+          "xmlTextWriterWriteFormatComment",
+          "xmlTextWriterWriteFormatElement",
+          "xmlTextWriterWriteVFormatString",
+          "xmlXPathSubstringBeforeFunction",
+          "xmlOutputBufferWriteQuotedString",
+          "xmlTextWriterWriteVFormatComment",
+          "xmlTextWriterWriteVFormatElement",
+          "xmlTextWriterWriteFormatAttribute"
+        ]
+      },
+      "status": "scanned",
+      "reports": 11,
+      "functions_reported": 8,
+      "hits": 1,
+      "hit_rate": 0.125,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "encoding.c",
+          "line": 2125,
+          "function": "xmlCharEncOutFunc",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlIO.c",
+          "line": 2569,
+          "function": "xmlOutputBufferWriteString",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlIO.c",
+          "line": 2414,
+          "function": "xmlOutputBufferWrite",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": [
+            {
+              "commit": "b06e036416129bfafb8c288e8d9a9727e1ba50c2",
+              "subject": "xmlIO: Check for int overflow before calling writecallback",
+              "type": "Misuse"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "b06e036416129bfafb8c288e8d9a9727e1ba50c2",
+              "fixes": false,
+              "reason": "The commit only adds integer-overflow checks before write callbacks and does not add any NULL guard for the out-parameter/write destination described in the report."
+            }
+          ]
+        },
+        {
+          "file": "xmlIO.c",
+          "line": 2536,
+          "function": "xmlOutputBufferWriteEscape",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlwriter.c",
+          "line": 1453,
+          "function": "xmlTextWriterWriteString",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlwriter.c",
+          "line": 2254,
+          "function": "xmlTextWriterWriteElementNS",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlwriter.c",
+          "line": 2149,
+          "function": "xmlTextWriterWriteElement",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlwriter.c",
+          "line": 1351,
+          "function": "xmlTextWriterWriteRaw",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 334.4
+    },
+    {
+      "bundle": "KN-Misuse-bc4bbcef-0",
+      "source": "lua",
+      "target": "libxml2",
+      "tag": "v2.15.0",
+      "bug_type": "Misuse",
+      "mapping": {
+        "allocator": [
+          "xmlHashCreate",
+          "xmlDictCreate",
+          "xmlListCreate",
+          "xmlCreateEntitiesTable",
+          "xmlCopyElementTable",
+          "xmlCopyEntitiesTable",
+          "xmlCopyNotationTable",
+          "xmlCopyAttributeTable",
+          "xmlAllocOutputBuffer",
+          "xmlAllocParserInputBuffer",
+          "xmlCreateMemoryParserCtxt",
+          "htmlCreateMemoryParserCtxt",
+          "xmlBufCreate",
+          "xmlCreateURI",
+          "xmlBufCreateMem",
+          "xmlReadMemory",
+          "htmlReadMemory",
+          "xmlParseMemory",
+          "xmlDictLookup",
+          "xmlDictQLookup",
+          "xmlDictLookupHashed",
+          "xmlNewElementContent",
+          "xmlNewDocElementContent"
+        ],
+        "container_insert": [
+          "xmlHashAddEntry",
+          "xmlHashAddEntry2",
+          "xmlHashAddEntry3",
+          "xmlHashUpdateEntry",
+          "xmlHashUpdateEntry2",
+          "xmlHashUpdateEntry3",
+          "xmlListInsert",
+          "xmlListAppend",
+          "xmlDictLookup",
+          "xmlDictQLookup",
+          "xmlDictLookupHashed",
+          "xmlXPathRegisterFuncLookup",
+          "xmlXPathRegisterVariableLookup"
+        ],
+        "lookup": [
+          "xmlHashLookup",
+          "xmlHashLookup2",
+          "xmlHashLookup3",
+          "xmlHashQLookup",
+          "xmlHashQLookup2",
+          "xmlHashQLookup3",
+          "xmlDictLookup",
+          "xmlDictQLookup",
+          "xmlDictLookupHashed",
+          "xmlDictExists",
+          "htmlTagLookup",
+          "htmlEntityLookup",
+          "htmlEntityValueLookup",
+          "xmlXPathNsLookup",
+          "xmlXPathFunctionLookup",
+          "xmlXPathVariableLookup",
+          "xmlXPathFunctionLookupNS",
+          "xmlXPathVariableLookupNS",
+          "xmlLookupCharEncodingHandler",
+          "xmlTextReaderLookupNamespace",
+          "xmlParserNsLookupSax"
+        ],
+        "init": [
+          "xmlHashAddEntry",
+          "xmlHashAddEntry2",
+          "xmlHashAddEntry3",
+          "xmlHashUpdateEntry",
+          "xmlHashUpdateEntry2",
+          "xmlHashUpdateEntry3",
+          "xmlListInsert",
+          "xmlListAppend",
+          "xmlInitParserCtxt",
+          "xmlInitNodeInfoSeq",
+          "xmlSAX2InitDefaultSAXHandler",
+          "xmlInitCharEncodingHandlers",
+          "xmlInitParser",
+          "xmlInitGlobals",
+          "xmlInitThreads",
+          "xmlInitializeDict",
+          "xmlInitMemory",
+          "xmlInitIOCallbacks",
+          "xmlInitRandom",
+          "xmlInitMutex",
+          "xmlInitRMutex",
+          "xmlDefaultSAXHandlerInit",
+          "htmlDefaultSAXHandlerInit",
+          "xmlSchemaInitTypes",
+          "xmlInitializeCatalog",
+          "xmlXPathInit",
+          "htmlInitAutoClose",
+          "xmlInitDictInternal",
+          "xmlInitXPathInternal",
+          "xmlInitMemoryInternal",
+          "xmlInitCatalogInternal",
+          "xmlInitGlobalsInternal",
+          "xmlInitRelaxNGInternal",
+          "xmlInitEncodingInternal",
+          "xmlInitSchemasTypesInternal",
+          "HASH_INIT"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 420.0
+    },
+    {
+      "bundle": "KN-Use-After-Free-22974326-2",
+      "source": "lua",
+      "target": "libxml2",
+      "tag": "v2.15.0",
+      "bug_type": "Use-After-Free",
+      "mapping": {
+        "gc_trigger": [],
+        "ref_get": []
+      },
+      "status": "no equivalent roles"
+    },
+    {
+      "bundle": "KN-Integer-Overflow-720d3afa-0",
+      "source": "sqlite",
+      "target": "libxml2",
+      "tag": "v2.15.0",
+      "bug_type": "Integer-Overflow",
+      "mapping": {
+        "allocated_size": [
+          "xmlMemSize"
+        ],
+        "reallocator": [
+          "xmlRealloc",
+          "xmlMemRealloc",
+          "xmlReallocLoc",
+          "xmlBufferResize",
+          "xmlBufferGrow",
+          "xmlBufGrow",
+          "xmlParserInputGrow",
+          "xmlParserInputBufferGrow"
+        ],
+        "null_on_failure": [
+          "xmlRealloc",
+          "xmlMemRealloc",
+          "xmlReallocLoc"
+        ],
+        "initializer": [
+          "memset"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 236.5
+    },
+    {
+      "bundle": "KN-Memory-Leak-7b60ed80-1",
+      "source": "sqlite",
+      "target": "libxml2",
+      "tag": "v2.15.0",
+      "bug_type": "Memory-Leak",
+      "mapping": {
+        "allocator": [
+          "xmlNewNode",
+          "xmlNewDoc",
+          "xmlNewProp",
+          "xmlNewNs",
+          "xmlNewText",
+          "xmlNewPI",
+          "xmlNewDtd",
+          "xmlNewEntity",
+          "xmlNewChild",
+          "xmlNewDocPI",
+          "xmlNewNsProp",
+          "htmlNewDoc",
+          "xmlAllocOutputBuffer",
+          "xmlAllocParserInputBuffer",
+          "xmlBufCreate",
+          "xmlBufferCreate",
+          "xmlCreateURI",
+          "xmlListCreate",
+          "xmlDictCreate",
+          "xmlHashCreate",
+          "xmlMallocLoc",
+          "xmlMemMalloc",
+          "__xmlMalloc",
+          "__xmlRealloc",
+          "xmlMalloc",
+          "xmlRealloc",
+          "xmlMemRealloc"
+        ],
+        "duplicator": [
+          "xmlCopyNode",
+          "xmlCopyNodeList",
+          "xmlCopyProp",
+          "xmlCopyPropList",
+          "xmlCopyDoc",
+          "xmlCopyDtd",
+          "xmlCopyNamespace",
+          "xmlCopyNamespaceList",
+          "xmlDocCopyNode",
+          "xmlDocCopyNodeList",
+          "xmlStaticCopyNodeList",
+          "xmlListDup",
+          "xmlXPathObjectCopy",
+          "xmlXPathNewNodeSetList",
+          "xmlHashCopy",
+          "xmlStrdup",
+          "xmlCharStrdup"
+        ],
+        "null_on_failure": [
+          "xmlNewNode",
+          "xmlNewDoc",
+          "xmlNewProp",
+          "xmlNewNs",
+          "xmlNewText",
+          "xmlNewPI",
+          "xmlNewDtd",
+          "xmlNewEntity",
+          "xmlNewChild",
+          "xmlNewDocPI",
+          "xmlNewNsProp",
+          "htmlNewDoc",
+          "xmlAllocOutputBuffer",
+          "xmlAllocParserInputBuffer",
+          "xmlBufCreate",
+          "xmlBufferCreate",
+          "xmlCreateURI",
+          "xmlListCreate",
+          "xmlDictCreate",
+          "xmlHashCreate",
+          "xmlMallocLoc",
+          "xmlMemMalloc",
+          "__xmlMalloc",
+          "__xmlRealloc",
+          "xmlMalloc",
+          "xmlRealloc",
+          "xmlMemRealloc",
+          "xmlCopyNode",
+          "xmlCopyNodeList",
+          "xmlCopyProp",
+          "xmlCopyPropList",
+          "xmlCopyDoc",
+          "xmlCopyDtd",
+          "xmlCopyNamespace",
+          "xmlCopyNamespaceList",
+          "xmlDocCopyNode",
+          "xmlDocCopyNodeList",
+          "xmlStaticCopyNodeList",
+          "xmlListDup",
+          "xmlXPathObjectCopy",
+          "xmlXPathNewNodeSetList",
+          "xmlHashCopy",
+          "xmlStrdup",
+          "xmlCharStrdup"
+        ],
+        "container_insert": [
+          "xmlAddChild",
+          "xmlAddChildList",
+          "xmlAddNextSibling",
+          "xmlAddPrevSibling",
+          "xmlAddSibling",
+          "xmlListInsert",
+          "xmlListAppend",
+          "xmlListPushBack",
+          "xmlListPushFront",
+          "xmlListMerge",
+          "xmlSchemaValueAppend"
+        ],
+        "deallocator": [
+          "xmlFreeNode",
+          "xmlFreeNodeList",
+          "xmlFreeProp",
+          "xmlFreePropList",
+          "xmlFreeNs",
+          "xmlFreeNsList",
+          "xmlFreeDoc",
+          "xmlFreeDtd",
+          "xmlFreeURI",
+          "xmlFreePattern",
+          "xmlFreePatternList",
+          "xmlFreeStreamCtxt",
+          "xmlFreeParserCtxt",
+          "xmlFreeTextReader",
+          "xmlFreeTextWriter",
+          "xmlSchemaFree",
+          "xmlListDelete",
+          "xmlListClear",
+          "xmlFree",
+          "xmlMemFree",
+          "__xmlFree"
+        ]
+      },
+      "status": "scanned",
+      "reports": 234,
+      "functions_reported": 127,
+      "hits": 9,
+      "hit_rate": 0.0709,
+      "judged_positive": [
+        {
+          "file": "xmlwriter.c",
+          "line": 1062,
+          "function": "xmlTextWriterStartElementNS",
+          "commit": "cee7107a1bf8cd01db1fe1e5a02005ce56ff69f9",
+          "reason": "The commit adds a NULL check for writer->nsstack at the start of xmlTextWriterStartElementNS, preventing the path that leaks the allocated namespace-stack entry when the stack pointer is NULL."
+        },
+        {
+          "file": "xmlwriter.c",
+          "line": 1062,
+          "function": "xmlTextWriterStartElementNS",
+          "commit": "98194640b80a8d04b5af22b077ffd8368a9568cf",
+          "reason": "The commit adds xmlFree(p->prefix) on the p->uri == 0 failure path, deallocating the previously allocated prefix that was otherwise leaked before freeing p."
+        },
+        {
+          "file": "xmlwriter.c",
+          "line": 1798,
+          "function": "xmlTextWriterStartAttributeNS",
+          "commit": "c1342946da47e14d64ea4af211a9402c937aa7f5",
+          "reason": "The commit adds missing deallocations on error paths in xmlTextWriterStartAttributeNS, directly addressing allocations that were previously leaked when insertion or subsequent allocation failed."
+        },
+        {
+          "file": "xmlwriter.c",
+          "line": 1798,
+          "function": "xmlTextWriterStartAttributeNS",
+          "commit": "cee7107a1bf8cd01db1fe1e5a02005ce56ff69f9",
+          "reason": "The commit adds an early check for writer->nsstack == NULL in xmlTextWriterStartAttributeNS, preventing the allocation of the namespace stack entry that would otherwise leak when the guard pointer is NULL."
+        }
+      ],
+      "report_list": [
+        {
+          "file": "HTMLtree.c",
+          "line": 620,
+          "function": "htmlDocDumpMemoryFormat",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "SAX2.c",
+          "line": 2646,
+          "function": "xmlSAX2ProcessingInstruction",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "SAX2.c",
+          "line": 2405,
+          "function": "xmlSAX2StartElementNs",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "SAX2.c",
+          "line": 1642,
+          "function": "xmlSAX2HtmlAttribute",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "SAX2.c",
+          "line": 1247,
+          "function": "xmlSAX1Attribute",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "SAX2.c",
+          "line": 1271,
+          "function": "xmlCheckDefaultedAttributes",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "SAX2.c",
+          "line": 1589,
+          "function": "xmlSAX1StartElement",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "c14n.c",
+          "line": 1993,
+          "function": "xmlC14NDocDumpMemory",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "c14n.c",
+          "line": 1135,
+          "function": "xmlC14NProcessAttrsAxis",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": [
+            {
+              "commit": "0fd00ec5f51065340c98f084df045d76258c6bc3",
+              "subject": "c14n: Fix Type confusion in xmlC14NProcessAttrsAxis",
+              "type": "Misuse"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "0fd00ec5f51065340c98f084df045d76258c6bc3",
+              "fixes": false,
+              "reason": "The later commit only adds an XML_ELEMENT_NODE type guard to prevent type confusion, and does not change any allocation ownership, insertion, or deallocation path related to the reported memory leak."
+            }
+          ]
+        },
+        {
+          "file": "c14n.c",
+          "line": 1074,
+          "function": "xmlC14NFixupBaseAttr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "c14n.c",
+          "line": 713,
+          "function": "xmlExcC14NProcessNamespacesAxis",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "c14n.c",
+          "line": 597,
+          "function": "xmlC14NProcessNamespacesAxis",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": [
+            {
+              "commit": "8c5e54d5bd042e7ac7ffd257f724477c332c535b",
+              "subject": "Fix C14N type confusion",
+              "type": "Misuse"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "8c5e54d5bd042e7ac7ffd257f724477c332c535b",
+              "fixes": false,
+              "reason": "The commit only adds an element-type guard to prevent type confusion when walking parent nodes; it does not change any allocation ownership, insertion, or deallocation, so it does not fix the reported leak."
+            }
+          ]
+        },
+        {
+          "file": "catalog.c",
+          "line": 657,
+          "function": "xmlDumpXMLCatalog",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "catalog.c",
+          "line": 2458,
+          "function": "xmlParseSGMLCatalog",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": [
+            {
+              "commit": "ee9fdfcc244a5d06b5b087437f5cb3decd05d689",
+              "subject": "catalog: fix stack overflow from self-referencing SGML CATALOG entries",
+              "type": "Buffer-Overflow"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "ee9fdfcc244a5d06b5b087437f5cb3decd05d689",
+              "fixes": false,
+              "reason": "The commit fixes a stack overflow from self-referencing SGML CATALOG entries by adding the entry to the hash before recursion; it does not address the reported memory leak of an allocated/duplicated value not being inserted or deallocated."
+            }
+          ]
+        },
+        {
+          "file": "example/testWriter.c",
+          "line": 832,
+          "function": "testXmlwriterTree",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "example/testWriter.c",
+          "line": 572,
+          "function": "testXmlwriterMemory",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "example/xpath1.c",
+          "line": 152,
+          "function": "register_namespaces",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "hash.c",
+          "line": 1147,
+          "function": "xmlHashCopySafe",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "list.c",
+          "line": 682,
+          "function": "xmlListDup",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "list.c",
+          "line": 599,
+          "function": "xmlListSort",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "parser.c",
+          "line": 7286,
+          "function": "xmlParseReference",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "parser.c",
+          "line": 7005,
+          "function": "xmlParseTextDecl",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "parserInternals.c",
+          "line": 2161,
+          "function": "xmlNewPushInput",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "parserInternals.c",
+          "line": 1396,
+          "function": "xmlInputSetEncodingHandler",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "parserInternals.c",
+          "line": 2103,
+          "function": "xmlNewInputFromIO",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "parserInternals.c",
+          "line": 2031,
+          "function": "xmlNewInputFromFd",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "pattern.c",
+          "line": 1004,
+          "function": "xmlCompileStepPattern",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "pattern.c",
+          "line": 813,
+          "function": "xmlCompileAttributeTest",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "relaxng.c",
+          "line": 10252,
+          "function": "xmlRelaxNGValidateState",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "relaxng.c",
+          "line": 3931,
+          "function": "xmlRelaxNGCheckChoiceDeterminism",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "relaxng.c",
+          "line": 6607,
+          "function": "xmlRelaxNGNewDocParserCtxt",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "relaxng.c",
+          "line": 3595,
+          "function": "xmlRelaxNGParseData",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "relaxng.c",
+          "line": 2135,
+          "function": "xmlRelaxNGGetErrorString",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "relaxng.c",
+          "line": 8575,
+          "function": "xmlRelaxNGValidateValue",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "runsuite.c",
+          "line": 435,
+          "function": "xsdTestCase",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "runsuite.c",
+          "line": 328,
+          "function": "xsdIncorrectTestCase",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "runsuite.c",
+          "line": 374,
+          "function": "installResources",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "runtest.c",
+          "line": 2301,
+          "function": "dumpNodeList",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "runtest.c",
+          "line": 822,
+          "function": "entityDeclDebug",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "runtest.c",
+          "line": 1566,
+          "function": "saxParseTest",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "testchar.c",
+          "line": 764,
+          "function": "convert",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "testchar.c",
+          "line": 930,
+          "function": "testEncHandler",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "testdict.c",
+          "line": 766,
+          "function": "test_hash",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "testdict.c",
+          "line": 421,
+          "function": "testall_dict",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "testparser.c",
+          "line": 831,
+          "function": "testHtmlUpdateMetaEncoding",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "testparser.c",
+          "line": 459,
+          "function": "testSaveNullEncDoc",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "testparser.c",
+          "line": 756,
+          "function": "testHtmlInsertMetaEncoding",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "testparser.c",
+          "line": 341,
+          "function": "dumpNodeList",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 5303,
+          "function": "xmlNodeGetContent",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 4908,
+          "function": "xmlNodeSetName",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 1348,
+          "function": "xmlNodeListGetStringInternal",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 3645,
+          "function": "xmlCopyNamespaceList",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 1925,
+          "function": "xmlNewDocNode",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 7420,
+          "function": "xmlDOMWrapNSNormDeclareNsForced",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 4215,
+          "function": "xmlCopyDtd",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 4658,
+          "function": "xmlGetNodePath",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 1018,
+          "function": "xmlNodeParseAttValue",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 5076,
+          "function": "xmlNodeGetBaseSafe",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 3816,
+          "function": "xmlCopyPropList",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 5344,
+          "function": "xmlNodeSetContentInternal",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 251,
+          "function": "xmlSplitQName2",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 2194,
+          "function": "xmlNewCharRef",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "tree.c",
+          "line": 4321,
+          "function": "xmlCopyDoc",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "uri.c",
+          "line": 1987,
+          "function": "xmlBuildURISafe",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "uri.c",
+          "line": 1734,
+          "function": "xmlURIEscape",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "uri.c",
+          "line": 974,
+          "function": "xmlParseURISafe",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "uri.c",
+          "line": 2702,
+          "function": "xmlBuildRelativeURISafe",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": [
+            {
+              "commit": "538b2e38a6c6f2b662c532e9ac1520b768d2472f",
+              "subject": "uri: fix signed integer overflow in xmlBuildRelativeURISafe",
+              "type": "Integer-Overflow"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "538b2e38a6c6f2b662c532e9ac1520b768d2472f",
+              "fixes": false,
+              "reason": "The later commit only changes integer types and adds an overflow check; it does not alter the allocation ownership or deallocation paths, so the reported memory leak is not fixed."
+            }
+          ]
+        },
+        {
+          "file": "uri.c",
+          "line": 1880,
+          "function": "xmlResolvePath",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "valid.c",
+          "line": 2206,
+          "function": "xmlAddIDInternal",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "valid.c",
+          "line": 3607,
+          "function": "xmlValidNormalizeAttributeValue",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "valid.c",
+          "line": 2617,
+          "function": "xmlAddRef",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "valid.c",
+          "line": 3553,
+          "function": "xmlValidCtxtNormalizeAttributeValue",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "valid.c",
+          "line": 5883,
+          "function": "xmlValidateRef",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlIO.c",
+          "line": 1938,
+          "function": "xmlNewInputBufferMemory",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlIO.c",
+          "line": 1548,
+          "function": "xmlParserInputBufferCreateUrl",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlIO.c",
+          "line": 1875,
+          "function": "xmlParserInputBufferCreateFd",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlIO.c",
+          "line": 2078,
+          "function": "xmlOutputBufferCreateFd",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmllint.c",
+          "line": 1883,
+          "function": "parseAndPrintFile",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmllint.c",
+          "line": 1738,
+          "function": "parseFile",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmllint.c",
+          "line": 530,
+          "function": "myStrdupFunc",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmllint.c",
+          "line": 323,
+          "function": "xmllintResourceLoader",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": [
+            {
+              "commit": "32387d3f342322724f0a85f8482eaa30d4f35e2e",
+              "subject": "xmllint: Add NULL checks for xmlStrdup/xmlStrcat in resource loader",
+              "type": "Null-Pointer-Dereference"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "32387d3f342322724f0a85f8482eaa30d4f35e2e",
+              "fixes": false,
+              "reason": "The commit only adds NULL checks and early returns on allocation failure; it does not add any deallocation or change ownership to fix the reported memory leak."
+            }
+          ]
+        },
+        {
+          "file": "xmlreader.c",
+          "line": 1639,
+          "function": "xmlTextReaderDumpCopy",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlreader.c",
+          "line": 4806,
+          "function": "xmlTextReaderSetup",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlreader.c",
+          "line": 5089,
+          "function": "xmlReaderForFd",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": [
+            {
+              "commit": "00cec2bea400d4296b0b429458a283b4de890d49",
+              "subject": "xmlreader: Free input in xmlReaderForFd",
+              "type": "Misuse"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "00cec2bea400d4296b0b429458a283b4de890d49",
+              "fixes": false,
+              "reason": "The commit only removes `input->closecallback = NULL`, which changes file-descriptor closing behavior; it does not add or alter any deallocation of the reported allocated input/reader value, so it does not fix the described memory leak."
+            }
+          ]
+        },
+        {
+          "file": "xmlreader.c",
+          "line": 1722,
+          "function": "xmlTextReaderReadOuterXml",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlreader.c",
+          "line": 1684,
+          "function": "xmlTextReaderReadInnerXml",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlreader.c",
+          "line": 1762,
+          "function": "xmlTextReaderReadString",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlreader.c",
+          "line": 5363,
+          "function": "xmlReaderNewFd",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": [
+            {
+              "commit": "00cec2bea400d4296b0b429458a283b4de890d49",
+              "subject": "xmlreader: Free input in xmlReaderForFd",
+              "type": "Misuse"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "00cec2bea400d4296b0b429458a283b4de890d49",
+              "fixes": false,
+              "reason": "The commit only removes closecallback NULL assignments, which changes file-descriptor closing behavior, but it does not add freeing of the allocated input buffer on the failure path in xmlReaderNewFd, so the reported leak is not fixed."
+            }
+          ]
+        },
+        {
+          "file": "xmlsave.c",
+          "line": 683,
+          "function": "xmlSaveSwitchEncoding",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlsave.c",
+          "line": 2458,
+          "function": "xmlDocDumpFormatMemoryEnc",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 16880,
+          "function": "xmlSchemaDeriveFacetErr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 4278,
+          "function": "xmlSchemaContentModelDump",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 2314,
+          "function": "xmlSchemaInternalErr2",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 2923,
+          "function": "xmlSchemaPIllegalAttrErr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 14891,
+          "function": "xmlSchemaCheckSTPropsCorrect",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 15074,
+          "function": "xmlSchemaCheckCOSSTRestricts",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 22171,
+          "function": "xmlSchemaFormatIDCKeySequence_1",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 2360,
+          "function": "xmlSchemaCustomErr4",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 2424,
+          "function": "xmlSchemaKeyrefErr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 3197,
+          "function": "xmlSchemaPSimpleTypeErr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 2289,
+          "function": "xmlSchemaFormatNodeForError",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 1409,
+          "function": "xmlSchemaGetComponentDesignation",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 16400,
+          "function": "xmlSchemaCheckSRCCT",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 7494,
+          "function": "xmlSchemaParseAttributeGroupRef",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 23420,
+          "function": "xmlSchemaCheckCVCIDCKeyRef",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 14071,
+          "function": "xmlSchemaCheckDerivationOKRestriction2to4",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 2551,
+          "function": "xmlSchemaIllegalAttrErr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 2774,
+          "function": "xmlSchemaFacetErr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 2959,
+          "function": "xmlSchemaPCustomErrExt",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 2857,
+          "function": "xmlSchemaPResCompAttrErr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 2651,
+          "function": "xmlSchemaComplexTypeErr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 1768,
+          "function": "xmlSchemaFormatItemForReport",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 24051,
+          "function": "xmlSchemaValidateQName",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 2519,
+          "function": "xmlSchemaSimpleTypeErr",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemas.c",
+          "line": 4300,
+          "function": "xmlSchemaAttrUsesDump",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemastypes.c",
+          "line": 2289,
+          "function": "xmlSchemaValAtomicListNode",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemastypes.c",
+          "line": 2250,
+          "function": "xmlSchemaCollapseString",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemastypes.c",
+          "line": 2205,
+          "function": "xmlSchemaWhiteSpaceReplace",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlschemastypes.c",
+          "line": 3597,
+          "function": "xmlSchemaValAtomicType",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xmlwriter.c",
+          "line": 1062,
+          "function": "xmlTextWriterStartElementNS",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": [
+            {
+              "commit": "cee7107a1bf8cd01db1fe1e5a02005ce56ff69f9",
+              "subject": "writer: Add a few extra NULL checks to avoid memory leaks on corrupt writer path.",
+              "type": "Null-Pointer-Dereference"
+            },
+            {
+              "commit": "98194640b80a8d04b5af22b077ffd8368a9568cf",
+              "subject": "Fix memory leak of prefix in xmlTextWriterStartElementNS()",
+              "type": "Memory-Leak"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "cee7107a1bf8cd01db1fe1e5a02005ce56ff69f9",
+              "fixes": true,
+              "reason": "The commit adds a NULL check for writer->nsstack at the start of xmlTextWriterStartElementNS, preventing the path that leaks the allocated namespace-stack entry when the stack pointer is NULL."
+            },
+            {
+              "commit": "98194640b80a8d04b5af22b077ffd8368a9568cf",
+              "fixes": true,
+              "reason": "The commit adds xmlFree(p->prefix) on the p->uri == 0 failure path, deallocating the previously allocated prefix that was otherwise leaked before freeing p."
+            }
+          ]
+        },
+        {
+          "file": "xmlwriter.c",
+          "line": 1798,
+          "function": "xmlTextWriterStartAttributeNS",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": [
+            {
+              "commit": "c1342946da47e14d64ea4af211a9402c937aa7f5",
+              "subject": "fix memory leak in issue 1054",
+              "type": "Memory-Leak"
+            },
+            {
+              "commit": "cee7107a1bf8cd01db1fe1e5a02005ce56ff69f9",
+              "subject": "writer: Add a few extra NULL checks to avoid memory leaks on corrupt writer path.",
+              "type": "Null-Pointer-Dereference"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "c1342946da47e14d64ea4af211a9402c937aa7f5",
+              "fixes": true,
+              "reason": "The commit adds missing deallocations on error paths in xmlTextWriterStartAttributeNS, directly addressing allocations that were previously leaked when insertion or subsequent allocation failed."
+            },
+            {
+              "commit": "cee7107a1bf8cd01db1fe1e5a02005ce56ff69f9",
+              "fixes": true,
+              "reason": "The commit adds an early check for writer->nsstack == NULL in xmlTextWriterStartAttributeNS, preventing the allocation of the namespace stack entry that would otherwise leak when the guard pointer is NULL."
+            }
+          ]
+        },
+        {
+          "file": "xpath.c",
+          "line": 3993,
+          "function": "xmlXPathRegisterNs",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xpath.c",
+          "line": 7649,
+          "function": "xmlXPathSubstringAfterFunction",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xpath.c",
+          "line": 7816,
+          "function": "xmlXPathTranslateFunction",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xpath.c",
+          "line": 7604,
+          "function": "xmlXPathSubstringBeforeFunction",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xpath.c",
+          "line": 3411,
+          "function": "xmlXPathDistinctSorted",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "xpath.c",
+          "line": 1771,
+          "function": "xmlXPathCacheNewString",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 1160.4
+    }
+  ]
+}

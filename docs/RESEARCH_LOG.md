@@ -1464,3 +1464,86 @@ First cross-project run (r8 bundles, 3 of 4 targets finished; lua still running)
   Triage cannot replace manual confirmation for cross-project reports.
 - 22:05: cross v3 sqlite done [M]: 0 Bug verdicts (reports: curl 466c06cf 17, curl f2a15357 33, libxml2 962bd10d 13). **Cross v3 totals: 39 pairs, 15 fire, 458 reports, 63 triaged, 2 'Bug' verdicts, both manually confirmed false positives → 0 confirmed new bugs.**
 - 22:15: extended `bench/export_evidence.py` to section 3 (r8/r9 runs, self-port, cross v1/v3, cross-known, matched-v1, revalidate, compiled-out, lua recheck, bundle metadata without plugin.so): 4083 files, 9.0 MB. Secret scan of the staged diff: 0 key values. Committed section 3 work locally (not pushed).
+- 22:32: pushed `general-c-speed` (section 3 commits e70d562..2fbce9c) to origin after user approval.
+
+## 2026-10-07 22:40 — Overnight: historical replay (3.4) and r9 repeat (r9b)
+
+- User approved both ("i will let my device on the whole night").
+- `bench/historical_replay.py` [I]: old release T per target = latest tag that is an ancestor of HEAD and
+  ≥ 12 months older (curl-8_16_0, libxml2 v2.15.0, lua v5.5-beta, sqlite version-3.50.4; branch-only
+  tags such as sqlite 3.42.1 are excluded by the ancestor rule). Later fixes = non-merge commits in T..HEAD
+  with bug keywords; their old-side changed functions (strict-scoring regions). Scan Q at T with
+  each foreign bundle (roles ported at T, out_name `<Q>-hist`). Report = hit if its (file, function) was later
+  fixed. **Base rate** = share of all functions in the scan scope that were later fixed (a checker reporting
+  in random functions has this hit rate). Hits are judged by the LLM against the fix diff (`hist_judge`, ≤ 10
+  hits per bundle, ≤ 3 fixes each); every positive verdict gets a manual check.
+- Dry run lua [M]: tag v5.5-beta (cfce6f4b), 22 later-fixed functions, base rate 21/1273 = **1.65%**.
+- Launched hist-v1 (`e2e/hist-v1/{r9,r8}/`, 4 targets in parallel, r9 then r8 bundles) and **r9b** = r9
+  repeated (same 26 commits, optimized + role_based_checkers, fresh snapshot). Differences from r9:
+  final roles.h (macro/function-pointer matching) and the `callExprIsRole` lines in roles-checker.md.
+  Compare r9b with the **re-validated** r9 (14/26).
+- 23:05: hist-v1 first launch stopped: with bug keywords only, curl's base rate was **40.7%** (1366/3354
+  functions "later fixed"; most curl subjects contain "fix", some are large refactors), so hits would mean
+  nothing. Ground truth is now the matched-pairs rule: source-only fixes with ≤ 40 changed source lines.
+  Base rates [M]: lua 14/1273 = **1.1%**, libxml2 45/3080 = **1.5%**, curl 327/3354 = **9.75%**, sqlite
+  268/3846 = **7.0%**. Tag for sqlite resolved to version-3.50.0 (3.50.x patch tags are not ancestors of trunk).
+  Relaunched (r9 then r8 bundles per target).
+- 23:40: correction: the 23:05 relaunch silently failed (run.sh recreated without the exec bit after `rm -rf e2e/hist-v1`); actually relaunched at 23:40. r9b curl [M]: 5/8 perfect (r9: 5/8).
+
+## 2026-10-08 01:15 — Historical replay: SQLite-born checker finds 2 real leaks in libxml2 2.15.0 (whole-project scan)
+
+- [M] r9 SQLite Memory-Leak `7b60ed80` → libxml2 at **v2.15.0** (0bea77c8, released 2025-09-15), whole scan
+  scope, roles ported at the tag: 234 reports in 127 functions; **9 functions later fixed (7.1% vs base rate
+  1.5%, ≈ 4.7×)**. The LLM judge marked 4 (function, fix) pairs positive; manual review:
+  - **xmlwriter.c:1055 `xmlTextWriterStartElementNS` — confirmed.** Path: `p` allocated (`Assuming 'p' is
+    not equal to null`), `p->prefix = buf`, `p->uri == NULL` → `xmlFree(p); return -1` leaks `p->prefix`.
+    Fixed by **98194640** (2025-12-12) "Fix memory leak of prefix in xmlTextWriterStartElementNS()".
+  - **xmlwriter.c:1798 `xmlTextWriterStartAttributeNS` — confirmed.** Path: `buf` non-NULL, `p == NULL`
+    → `return -1` leaks `buf`. Fixed by **c1342946** (2026-02-11) "fix memory leak in issue 1054", which inserts
+    `xmlFree(buf)` there.
+  - xmlwriter.c:1062 (`return sum`, judged fixed by cee7107a "extra NULL checks"): **not confirmed**; the path does
+    not take the `nsstack == NULL` branch that cee7107a guards, so the judge over-matched (likely the
+    field-store imprecision seen before).
+  - The other 6 hits (c14n type confusion, SGML catalog stack overflow, URI integer overflow, xmllint NULL
+    checks, xmlreader `Free input`) were judged unrelated; xmlreader 00cec2be (a leak fix) is to be reviewed
+    by hand.
+  - The scan made only 3 reports in xmlwriter.c; 2 are these real leaks.
+- Reading [I]: unlike matched pairs (commits chosen by API overlap), this is a **blind whole-project scan of an
+  old release**: a checker generated from a SQLite bug fix and ported by renaming roles flagged two real
+  memory leaks in libxml2 2.15.0 at the exact lines libxml2 fixed 3 and 5 months later. It also produced
+  232 other reports (precision is low); this is not a "new" bug (already fixed upstream), but it is
+  cross-project detection of real bugs not known at scan time.
+  - xmlreader.c:5089 `xmlReaderForFd` (fix 00cec2be) manual review: the report is at `return(NULL)` taken when `input == NULL` (nothing allocated → false positive); 00cec2be is about a dup'ed fd close callback, unrelated. Judge's 'false' was correct.
+- 01:27: **r9b finished [M]** (`bench/role_stats.py r9b`): perfect commits **12/26** (curl 5, libxml2 4, lua 1,
+  sqlite 2); vocabulary roles 90.8%, callable names 98.7%, hardcoded 0/47. Two generic-role runs: r9 14/26
+  (re-validated), r9b 12/26 (mean 13) vs r8 19/26 (one run): the detection cost of generic roles is
+  reproducible. (r9b ran with the final roles.h, so no re-validation is needed.)
+
+## 2026-10-08 02:00 — Historical replay complete
+
+- [M] `bench/hist_report.py e2e/hist-v1 r9 r8` (`e2e/hist-v1/summary.txt`); tags curl-8_16_0, libxml2 v2.15.0,
+  lua v5.5-beta, sqlite version-3.50.0; base rates 9.75% / 1.46% / 1.1% / 6.97%.
+
+  | | r9 checkers | r8 checkers |
+  |---|---|---|
+  | pairs scanned (with ≥ 1 mapped role) | 37/39 | 50/54 |
+  | pairs that report | 14 | 6 |
+  | distinct functions reported | 252 | 17 |
+  | hits (function later changed by a small fix) | **13** | 0 |
+  | hits expected by chance (Σ functions × base rate) | 5.6 | 0.5 |
+  | LLM-judged positive (function, fix) pairs | 4 | 0 |
+  | **manually confirmed real bugs** | **2** | 0 |
+
+- Hits by checker: SQLite Memory-Leak 7b60ed80 gives 12/13 (libxml2 9/127 functions, curl 2/7, lua 1/38); curl NPD
+  f2a15357 → libxml2 1/8. Per target, r9 is enriched only in libxml2 (10 vs 2.0 expected); curl 2 vs 0.9, lua 1 vs
+  0.9, sqlite 0 vs 1.8. Confirmed bugs: libxml2 2.15.0 xmlwriter.c:1055 (fixed 98194640) and :1798 (fixed
+  c1342946); the 4 judged positives collapse to these 2 functions (the summary lists the first report per
+  function, line 1062; the confirmed report in that function is line 1055).
+- Reading [I]: generic-role checkers (r9) fire far more often on other projects than free-form ones (r8:
+  252 vs 17 functions) and find later-fixed bugs above chance, but the signal comes from one generic checker
+  (memory leak: allocation must be freed or inserted on every path), and precision is low (2 confirmed among
+  252 reported functions). r8 checkers are almost silent across projects.
+- 02:20: updated `docs/RESULTS_SECTION_3.md` (r9b, historical replay, revised headline/meaning/limits),
+  `docs/PROGRESS_SUMMARY.md` (goal 3 done with caveats, section 3 results table, next steps, supervisor
+  question) and `docs/PROGRESS_QA.md` (section 3 Q&A rewritten). Evidence export now includes `e2e/hist-v1`
+  (without the large `-fixes.json` caches) and the r9b runs. Committed locally; push awaits user confirmation.

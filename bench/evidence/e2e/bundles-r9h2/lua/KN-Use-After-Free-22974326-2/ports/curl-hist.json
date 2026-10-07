@@ -1,0 +1,77 @@
+{
+  "target": "curl",
+  "commit": "11b991232fbcaa88e2b1faecac224416b0001e35",
+  "candidates": 1595,
+  "identifiers": 34096,
+  "offered": {
+    "gc_trigger": [
+      "curl_dbg_calloc",
+      "CF_CTX_CALL_DATA",
+      "Curl_conn_is_alive",
+      "Curl_is_in_callback",
+      "Curl_nghttp2_calloc",
+      "Curl_conn_keep_alive",
+      "Curl_set_in_callback",
+      "Curl_cft_conn_is_alive",
+      "Curl_cft_conn_keep_alive",
+      "Curl_cf_def_conn_is_alive",
+      "Curl_cf_def_conn_keep_alive",
+      "curlcheck_resolver_start_callback"
+    ],
+    "ref_get": [
+      "Curl_schannel_get_cached_cert_store",
+      "get_args",
+      "my_get_line",
+      "curl_url_get",
+      "Curl_get_line",
+      "Curl_meta_get",
+      "_get_osfhandle",
+      "Curl_dynhds_get",
+      "get_libcurl_info",
+      "Curl_dnscache_get",
+      "Curl_get_pathname",
+      "Curl_uint_tbl_get",
+      "get_url_file_name",
+      "Curl_auth_krb5_get",
+      "Curl_auth_nego_get",
+      "Curl_auth_ntlm_get",
+      "Curl_conn_meta_get",
+      "Curl_uint_hash_get",
+      "curl_url_get_ccsid",
+      "Curl_GetFTPResponse",
+      "Curl_async_get_impl",
+      "Curl_auth_gsasl_get",
+      "Curl_cpool_get_conn",
+      "Curl_multi_get_easy",
+      "curl_multi_get_offt",
+      "GetLoadedModulePaths",
+      "get_terminal_columns",
+      "Curl_conn_get_ip_info",
+      "Curl_conn_get_ssl_info",
+      "Curl_ssl_cf_get_config",
+      "curl_multi_get_handles",
+      "curlx_get_winapi_error",
+      "Curl_conn_cf_get_socket",
+      "Curl_conn_get_transport",
+      "Curl_get_scheme_handler",
+      "Curl_ssl_scache_get_obj",
+      "Curl_conn_cf_get_ip_info",
+      "Curl_creader_get_by_type",
+      "Curl_cwriter_get_by_name",
+      "Curl_cwriter_get_by_type"
+    ]
+  },
+  "mapping": {
+    "gc_trigger": [],
+    "ref_get": []
+  },
+  "dropped_not_in_target": {
+    "gc_trigger": [],
+    "ref_get": []
+  },
+  "rationale": {
+    "gc_trigger": "curl has no automatic garbage collector, so there is no call that can trigger an emergency collection.",
+    "ref_get": "curl has no garbage-collected objects that require rooting to keep them alive across potential automatic collection."
+  },
+  "llm_seconds": 90.3
+}

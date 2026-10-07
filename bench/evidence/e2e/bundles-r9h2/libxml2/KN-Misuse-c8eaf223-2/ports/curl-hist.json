@@ -1,0 +1,62 @@
+{
+  "target": "curl",
+  "commit": "11b991232fbcaa88e2b1faecac224416b0001e35",
+  "candidates": 1595,
+  "identifiers": 34096,
+  "offered": {
+    "init": [
+      "Curl_addrinfo_set_port",
+      "config_alloc",
+      "CF_CTX_CALL_DATA",
+      "Curl_copy_header_value",
+      "Curl_gss_init_sec_context",
+      "Curl_ssl_conn_config_init",
+      "Curl_ssl_easy_config_init",
+      "Curl_gss_init_sec_context_a",
+      "Curl_schannel_set_cached_cert_store",
+      "error",
+      "errorf",
+      "de_init",
+      "Curl_open",
+      "GSS_ERROR",
+      "ALLOC_SIZE",
+      "CURL_FOPEN",
+      "Curl_failf",
+      "Curl_fopen",
+      "new_getout",
+      "win32_init",
+      "ALLOC_SIZE2",
+      "Curl_strdup",
+      "str2tls_max",
+      "Curl_1st_err",
+      "Curl_init_do",
+      "Curl_pp_init",
+      "curl_url_dup",
+      "curl_url_set",
+      "easysrc_init",
+      "inithelpscan",
+      "sigpipe_init",
+      "Curl_MD5_init",
+      "Curl_initinfo",
+      "Curl_meta_set",
+      "Curl_req_init",
+      "Curl_ssh_init",
+      "Curl_ssl_init",
+      "Curl_strerror",
+      "Curl_trc_init",
+      "SET_SOCKERRNO"
+    ]
+  },
+  "mapping": {
+    "init": [
+      "Curl_addrinfo_set_port"
+    ]
+  },
+  "dropped_not_in_target": {
+    "init": []
+  },
+  "rationale": {
+    "init": "Stores a caller-supplied integer (port) into the Curl_addrinfo context, matching the numeric setter role."
+  },
+  "llm_seconds": 92.1
+}

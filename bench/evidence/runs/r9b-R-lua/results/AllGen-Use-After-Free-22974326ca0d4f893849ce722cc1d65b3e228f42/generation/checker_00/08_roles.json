@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "container_insert": {
+      "names": [
+        "luaH_finishset"
+      ],
+      "description": "inserts/updates an element in a container and may allocate/rehash, potentially triggering garbage collection"
+    },
+    "ref_get": {
+      "names": [
+        "sethvalue2s"
+      ],
+      "description": "acquires a strong root/reference to an object, keeping it alive across potentially collecting operations"
+    }
+  }
+}

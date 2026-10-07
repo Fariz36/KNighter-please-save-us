@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "kvvfsDecode"
+      ],
+      "description": "parses an untrusted encoded input stream"
+    },
+    "init": {
+      "names": [
+        "memset"
+      ],
+      "description": "initializes/writes a number of bytes into a memory buffer"
+    }
+  }
+}

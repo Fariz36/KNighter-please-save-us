@@ -1,0 +1,7 @@
+## Bug Pattern
+
+An API entry function accepts a caller-provided output pointer and either writes the result through it or forwards it to an output-writing helper, without checking that the pointer is non-NULL. If the caller passes NULL, the unconditional write/dereference causes a NULL-pointer dereference. The fix adds a NULL guard before the write/forward and returns an error code instead.
+
+Roles:
+- `out_parameter_user`: `curl_easy_recv`, `curl_easy_send` — public wrappers that consume the caller’s output pointer.
+- `output_writer`: `Curl_easy_recv` — helper that writes through the forwarded output pointer; in `curl_easy_send` the equivalent write is the direct store to the output pointer.

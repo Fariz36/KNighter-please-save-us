@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The code validates the length of a caller-supplied buffer but does not validate the corresponding data pointer before using it as the source of a `buffer_copy` or storing it into the allocated output object. If the pointer is NULL, the copy dereferences NULL when copying is requested; otherwise the NULL pointer escapes and can be dereferenced later.
+
+Roles:
+- `allocator`: `curlx_malloc` — allocates the replacement object; may return NULL.
+- `deallocator`: `curlx_safefree` — releases the previously stored object.
+- `buffer_copy`: `memcpy` — copies the data and requires a valid source pointer.

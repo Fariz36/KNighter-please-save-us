@@ -1,0 +1,39 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "sqlite3SrcListAppendFromTerm"
+      ],
+      "description": "allocates a new object and returns a pointer to it, or NULL on failure"
+    },
+    "duplicator": {
+      "names": [
+        "sqlite3SrcListDup"
+      ],
+      "description": "creates a duplicate of an object and returns a pointer to it, or NULL on failure"
+    },
+    "container_insert": {
+      "names": [
+        "sqlite3SrcListAppendList"
+      ],
+      "description": "transfers ownership of an object into a container or list; on success the container takes responsibility for freeing it"
+    },
+    "deallocator": {
+      "names": [
+        "sqlite3SrcListDelete"
+      ],
+      "description": "frees an object or memory; the pointer must not be used afterwards"
+    },
+    "null_on_failure": {
+      "names": [
+        "sqlite3SrcListDup",
+        "sqlite3SrcListAppendFromTerm"
+      ],
+      "description": "may return NULL to indicate failure, so callers must check the result before use"
+    }
+  }
+}

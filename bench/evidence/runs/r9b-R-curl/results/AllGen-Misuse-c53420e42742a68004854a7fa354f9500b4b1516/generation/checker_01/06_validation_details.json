@@ -1,0 +1,78 @@
+{
+  "commit_id": "c53420e42742a68004854a7fa354f9500b4b1516",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-curl/plugin-cache/plugins/76e1f3f5c03f583852a5/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    1,
+    1
+  ],
+  "score": {
+    "tp": 1,
+    "tn": 1,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "lib/vtls/openssl.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 2,
+        "fixed_total": 0,
+        "buggy_on_target": 2,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "ossl_verifyhost"
+        ],
+        "fixed_functions": [
+          "ossl_verifyhost"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "lib/vtls/openssl.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-curl/work/src/f042c25fb876/lib/vtls/openssl.c",
+          "line": 2169,
+          "column": 31,
+          "function": "ossl_verifyhost",
+          "bug_type": "Length-delimited buffer treated as NUL-terminated string",
+          "description": "strlen on length-delimited buffer; use bounded length instead",
+          "issue_hash": "6fa36ed7c6b4b751ee339e3f143ee2d4",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/c53420e42742/8be71126/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9b-R-curl_work_src_f042c25fb876_lib_vtls_openssl.c/report-6fa36e.html",
+          "relpath": "lib/vtls/openssl.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-curl/work/src/f042c25fb876/lib/vtls/openssl.c",
+          "line": 2187,
+          "column": 7,
+          "function": "ossl_verifyhost",
+          "bug_type": "Length-delimited buffer treated as NUL-terminated string",
+          "description": "printf-style %s on length-delimited buffer; use %.*s with length",
+          "issue_hash": "e6197e245340acf9bf454096610b5251",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/c53420e42742/8be71126/buggy/home_faris_RA-MrYudis_Knight_KNighter-please-save-us_bench_runs_r9b-R-curl_work_src_f042c25fb876_lib_vtls_openssl.c/report-e6197e.html",
+          "relpath": "lib/vtls/openssl.c"
+        }
+      ]
+    },
+    "fixed": {
+      "lib/vtls/openssl.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.01,
+    "analysis_seconds": {
+      "buggy": 6.17,
+      "fixed": 6.24
+    },
+    "total_seconds": 12.64
+  },
+  "report_dir": "tmp/validation/c53420e42742/8be71126"
+}

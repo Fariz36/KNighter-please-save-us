@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A resource is unlinked/removed from its container only after the containing structure has already been cleared/zeroed by a cleanup routine. The zeroing destroys the link or reference state needed by the unlink operation, so the unlink becomes ineffective and the linked resource leaks. The unlink/removal must happen before the containing structure is reset.
+
+Roles:
+- `container_remove`: `Curl_peer_unlink`
+- `cleanup`/reset: `cf_h2_proxy_ctx_clear` (which zeroes the context via `memset`)
+- `deallocator`: `curlx_free`

@@ -1,0 +1,25 @@
+{
+  "api_entry_point": [
+    "lua_tonumberx",
+    "lua_tointegerx",
+    "lua_tolstring",
+    "lua_resume"
+  ],
+  "out_param": [
+    "isnum",
+    "pisnum",
+    "len",
+    "nres",
+    "nresults"
+  ],
+  "out_param_writer": [
+    "luaV_tonumber_",
+    "luaV_flttointeger",
+    "auxgetinfo",
+    "luaO_chunkid",
+    "luaO_utf8esc",
+    "lua_pointer2str",
+    "setgcparam",
+    "lua_pushcfunction"
+  ]
+}

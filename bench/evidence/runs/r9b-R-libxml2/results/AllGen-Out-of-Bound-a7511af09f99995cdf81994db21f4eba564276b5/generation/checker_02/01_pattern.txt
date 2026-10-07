@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The result of a `duplicator` / `null_on_failure` call is passed to a `length_of` operation before the code checks whether the `duplicator` returned NULL. If allocation fails and the `duplicator` returns NULL, the `length_of` call dereferences a NULL pointer, causing a crash.
+
+Roles:
+- `duplicator` / `null_on_failure`: `xmlStrdup` (returns a newly allocated copy, or NULL on failure)
+- `length_of`: `strlen`
+- The NULL check on the `duplicator` result (`if (ret->string == NULL)`) is placed after the `length_of` call, so the pointer is used before it is validated.

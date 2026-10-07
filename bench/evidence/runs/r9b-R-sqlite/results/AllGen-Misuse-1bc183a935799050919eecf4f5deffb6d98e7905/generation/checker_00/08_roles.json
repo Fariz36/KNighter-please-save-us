@@ -1,0 +1,27 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "getConstraintToken",
+        "sqlite3GetToken"
+      ],
+      "description": "scans input buffer and returns token length; writes token type/status to an integer out-parameter; may report an illegal/malformed token"
+    },
+    "dequoter": {
+      "names": [
+        "sqlite3Dequote"
+      ],
+      "description": "removes quoting from a string in place; expects a syntactically valid quoted token"
+    },
+    "buffer_copy": {
+      "names": [
+        "memcpy"
+      ],
+      "description": "copies a bounded number of bytes from a source buffer to a destination buffer"
+    }
+  }
+}

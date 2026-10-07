@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The result of a `duplicator` call is dereferenced by a `length_of` function before it is checked for NULL. Since the `duplicator` is a `null_on_failure`, an allocation failure causes a NULL pointer dereference.
+
+Roles:
+- `duplicator`: `xmlStrdup`
+- `null_on_failure`: `xmlStrdup`
+- `length_of`: `strlen`

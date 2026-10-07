@@ -1,0 +1,6 @@
+## Bug Pattern
+
+The byte-count argument passed to a capacity-enlarging `reallocator` is computed too small for all bytes that the same formatting path later writes directly into the enlarged buffer. Specifically, the size formula does not account for the extra decimal point and forced `0` emitted by the alternate-form floating-point branch when precision is zero, plus the terminating NUL. The subsequent pointer writes can therefore overrun the allocated accumulator buffer.
+
+Roles:
+- `reallocator`: `sqlite3StrAccumEnlargeIfNeeded`

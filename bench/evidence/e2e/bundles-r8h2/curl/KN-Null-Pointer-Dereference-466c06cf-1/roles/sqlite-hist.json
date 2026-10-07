@@ -1,0 +1,30 @@
+{
+  "duplicator": [
+    "sqlite3ExprDup",
+    "sqlite3ExprListDup",
+    "sqlite3SelectDup",
+    "sqlite3SrcListDup",
+    "sqlite3IdListDup",
+    "sqlite3WindowDup"
+  ],
+  "source_handle": [
+    "p",
+    "pKeyInfo",
+    "pStep"
+  ],
+  "destination_allocator": [
+    "sqlite3DbMallocRaw",
+    "sqlite3DbMallocZero",
+    "sqlite3DbMallocRawNN",
+    "sqlite3Malloc",
+    "sqlite3MallocZero",
+    "sqlite3Realloc",
+    "sqlite3KeyInfoAlloc",
+    "sqlite3WindowAlloc",
+    "sqlite3ExprAlloc"
+  ],
+  "field_copier": [
+    "sqlite3DbStrDup",
+    "sqlite3DbStrNDup"
+  ]
+}

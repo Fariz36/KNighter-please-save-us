@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "cleanup": {
+      "names": [
+        "cf_h2_proxy_ctx_clear"
+      ],
+      "description": "resets/clears an object, invalidating its internal state (e.g., zeroing memory)."
+    },
+    "container_remove": {
+      "names": [
+        "Curl_peer_unlink"
+      ],
+      "description": "unlinks/removes an element from a container/list; the first pointer argument points to the link/node embedded in a containing object."
+    },
+    "deallocator": {
+      "names": [
+        "curlx_free"
+      ],
+      "description": "frees allocated memory/object; pointer must not be used afterwards."
+    }
+  }
+}

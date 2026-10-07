@@ -1,0 +1,114 @@
+{
+  "start_time": "2026-10-08T00:30:50.611059",
+  "total_commits": 7,
+  "successful_commits": 2,
+  "workers": 4,
+  "results": [
+    {
+      "commit_id": "1bc183a935799050919eecf4f5deffb6d98e7905",
+      "commit_type": "Misuse",
+      "total_checkers": 1,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 621.965455,
+      "errors": [],
+      "success_rate": 1.0,
+      "timestamp": "2026-10-08T00:41:12.581697"
+    },
+    {
+      "commit_id": "a7200804eb4aeb35229388a37ea00af27559bd25",
+      "commit_type": "Buffer-Overflow",
+      "total_checkers": 3,
+      "successful_checkers": 1,
+      "perfect_checkers": 0,
+      "best_tp": 1,
+      "best_tn": 0,
+      "total_time": 1465.320151,
+      "errors": [
+        "Failed to generate compilable checker 1"
+      ],
+      "success_rate": 0.3333333333333333,
+      "timestamp": "2026-10-08T00:55:15.936013"
+    },
+    {
+      "commit_id": "7b60ed803b8da478bbdbae0147121abfc0b9dc2a",
+      "commit_type": "Memory-Leak",
+      "total_checkers": 3,
+      "successful_checkers": 0,
+      "perfect_checkers": 0,
+      "best_tp": 0,
+      "best_tn": 0,
+      "total_time": 1475.007056,
+      "errors": [],
+      "success_rate": 0.0,
+      "timestamp": "2026-10-08T00:55:25.620085"
+    },
+    {
+      "commit_id": "d87f8c4965497148a2cb0cc696ce557d5961cf87",
+      "commit_type": "Integer-Overflow",
+      "total_checkers": 3,
+      "successful_checkers": 0,
+      "perfect_checkers": 0,
+      "best_tp": 0,
+      "best_tn": 0,
+      "total_time": 1507.804522,
+      "errors": [
+        "Failed to generate compilable checker 0",
+        "Failed to generate compilable checker 1"
+      ],
+      "success_rate": 0.0,
+      "timestamp": "2026-10-08T00:55:58.421035"
+    },
+    {
+      "commit_id": "97467fa8fa3219c71868cc2bd370536f017b4e42",
+      "commit_type": "Integer-Overflow",
+      "total_checkers": 3,
+      "successful_checkers": 0,
+      "perfect_checkers": 0,
+      "best_tp": 0,
+      "best_tn": 0,
+      "total_time": 1756.459887,
+      "errors": [
+        "Failed to generate compilable checker 0"
+      ],
+      "success_rate": 0.0,
+      "timestamp": "2026-10-08T01:10:29.047003"
+    },
+    {
+      "commit_id": "720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe",
+      "commit_type": "Integer-Overflow",
+      "total_checkers": 3,
+      "successful_checkers": 1,
+      "perfect_checkers": 1,
+      "best_tp": 1,
+      "best_tn": 1,
+      "total_time": 1765.334838,
+      "errors": [
+        "Failed to generate compilable checker 0",
+        "Failed to generate compilable checker 1"
+      ],
+      "success_rate": 0.3333333333333333,
+      "timestamp": "2026-10-08T01:24:41.272657"
+    },
+    {
+      "commit_id": "2f5d281796853250befde5f83dfe8b909c4a5b39",
+      "commit_type": "Integer-Overflow",
+      "total_checkers": 3,
+      "successful_checkers": 0,
+      "perfect_checkers": 0,
+      "best_tp": 0,
+      "best_tn": 0,
+      "total_time": 1879.55063,
+      "errors": [
+        "Failed to generate compilable checker 0",
+        "Failed to generate compilable checker 1"
+      ],
+      "success_rate": 0.0,
+      "timestamp": "2026-10-08T01:26:45.172184"
+    }
+  ],
+  "end_time": "2026-10-08T01:26:45.174621",
+  "success_rate": 0.2857142857142857
+}

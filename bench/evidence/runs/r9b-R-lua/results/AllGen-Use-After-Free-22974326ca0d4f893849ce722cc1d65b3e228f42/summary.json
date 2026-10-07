@@ -1,0 +1,13 @@
+{
+  "commit_id": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+  "commit_type": "Use-After-Free",
+  "total_checkers": 3,
+  "successful_checkers": 1,
+  "perfect_checkers": 0,
+  "best_tp": 1,
+  "best_tn": 0,
+  "total_time": 967.193343,
+  "errors": [],
+  "success_rate": 0.3333333333333333,
+  "timestamp": "2026-10-08T00:22:23.957550"
+}

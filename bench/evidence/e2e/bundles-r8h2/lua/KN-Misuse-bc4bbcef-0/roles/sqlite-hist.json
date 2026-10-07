@@ -1,0 +1,21 @@
+{
+  "combined_create_and_publish": [
+    "sqlite3Fts3InitHashTable"
+  ],
+  "object_initializer": [
+    "sqlite3Fts3HashInit",
+    "sqlite3HashInit"
+  ],
+  "persistent_registry_lookup": [
+    "sqlite3Fts3HashFind",
+    "sqlite3HashFind"
+  ],
+  "object_allocator": [
+    "sqlite3DbMallocZero"
+  ],
+  "registry_store": [
+    "sqlite3Fts3HashInsert",
+    "sqlite3HashInsert"
+  ],
+  "registry_key": []
+}

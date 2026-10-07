@@ -1,0 +1,8 @@
+{
+  "gc_trigger": [
+    "sqlite3PcacheFetchFinish"
+  ],
+  "ref_get": [
+    "sqlite3PcacheRef"
+  ]
+}

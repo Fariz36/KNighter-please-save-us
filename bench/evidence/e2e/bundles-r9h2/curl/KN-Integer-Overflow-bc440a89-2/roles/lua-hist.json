@@ -1,0 +1,13 @@
+{
+  "length_of": [
+    "sizeudata",
+    "sizestrshr",
+    "luaH_resize",
+    "luaS_resize",
+    "sizeCclosure",
+    "sizeLclosure",
+    "luaS_sizelngstr",
+    "luaH_resizearray",
+    "luaL_prepbuffsize"
+  ]
+}

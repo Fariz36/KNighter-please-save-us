@@ -1,0 +1,80 @@
+{
+  "target": "lua",
+  "commit": "cfce6f4b20afe85ede2182b3df3ab2bfcdb0e692",
+  "candidates": 841,
+  "identifiers": 7223,
+  "offered": {
+    "allocator": [
+      "lua_Alloc",
+      "luaD_growstack",
+      "luaH_size",
+      "isreserved",
+      "luaH_resize",
+      "luaS_resize",
+      "sizeCclosure",
+      "sizeLclosure",
+      "debug_realloc",
+      "luaM_growaux_",
+      "luaM_realloc_",
+      "luaM_freearray",
+      "luaM_growvector",
+      "luaH_resizearray",
+      "luaK_reserveregs",
+      "luaD_reallocstack",
+      "luaM_reallocvchar",
+      "luaM_saferealloc_",
+      "luaZ_resizebuffer",
+      "luaM_reallocvector",
+      "luaK_setreturns",
+      "lua_checkmemory"
+    ],
+    "reallocator": [
+      "lua_Alloc",
+      "debug_realloc",
+      "luaM_realloc_",
+      "luaH_size",
+      "isreserved",
+      "luaH_resize",
+      "luaS_resize",
+      "sizeCclosure",
+      "sizeLclosure",
+      "luaM_growaux_",
+      "luaD_growstack",
+      "luaM_growvector",
+      "luaH_resizearray",
+      "luaK_reserveregs",
+      "luaD_reallocstack",
+      "luaM_reallocvchar",
+      "luaM_saferealloc_",
+      "luaZ_resizebuffer",
+      "luaM_reallocvector",
+      "lua_topointer",
+      "luaK_setreturns",
+      "lua_checkmemory",
+      "lua_pointer2str"
+    ]
+  },
+  "mapping": {
+    "allocator": [
+      "luaM_growaux_",
+      "luaM_growvector"
+    ],
+    "reallocator": [
+      "luaM_realloc_",
+      "luaM_saferealloc_",
+      "lua_Alloc",
+      "debug_realloc",
+      "luaM_reallocvector",
+      "luaM_reallocvchar"
+    ]
+  },
+  "dropped_not_in_target": {
+    "allocator": [],
+    "reallocator": []
+  },
+  "rationale": {
+    "allocator": "luaM_growaux_ is Lua's general-purpose array grower that takes a capacity pointer and may return NULL; luaM_growvector is its macro wrapper, analogous to xmlGrowArray.",
+    "reallocator": "These are Lua's general-purpose reallocators and wrappers, including safe and test variants, analogous to xmlRealloc."
+  },
+  "llm_seconds": 109.7
+}

@@ -1,0 +1,15 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "reallocator": {
+      "names": [
+        "xmlGrowArray",
+        "xmlRealloc"
+      ],
+      "description": "resize/grow an existing allocation and return the new pointer, possibly NULL on failure"
+    }
+  }
+}

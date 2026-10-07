@@ -1,0 +1,38 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "duplicator": {
+      "names": [
+        "xmlStrdup"
+      ],
+      "description": "returns a newly allocated copy of its input; may return NULL on allocation failure"
+    },
+    "null_on_failure": {
+      "names": [
+        "xmlStrdup"
+      ],
+      "description": "function that may return NULL when it fails"
+    },
+    "length_of": {
+      "names": [
+        "strlen"
+      ],
+      "description": "computes the length of a NUL-terminated string; dereferences its pointer argument"
+    },
+    "allocator": {
+      "names": [
+        "xmlMalloc"
+      ],
+      "description": "allocates a block of memory; returns NULL on failure"
+    },
+    "deallocator": {
+      "names": [
+        "xmlFree"
+      ],
+      "description": "frees memory previously returned by the allocator"
+    }
+  }
+}

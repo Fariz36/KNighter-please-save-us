@@ -1,0 +1,27 @@
+{
+  "length_of": [
+    "xmlUTF8Strsize"
+  ],
+  "character_count_bound": [
+    "precision",
+    "len"
+  ],
+  "iterator_advance": [
+    "xmlUTF8Size",
+    "xmlGetUTF8Char",
+    "xmlNextChar"
+  ],
+  "output_length": [
+    "length",
+    "size"
+  ],
+  "narrowing_cast": [],
+  "safe_cap": [],
+  "buffer_append": [
+    "xmlBufferAdd",
+    "xmlBufferAddHead",
+    "xmlOutputBufferWrite",
+    "xmlTextWriterWriteRawLen",
+    "xmlBufAdd"
+  ]
+}

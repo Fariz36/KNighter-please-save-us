@@ -1,0 +1,7 @@
+## Bug Pattern
+
+Unchecked size-expansion arithmetic on an untrusted input length. A `length_of` routine takes a size value and multiplies/adds it to compute an encoded output length, but it does not first check that the input is small enough for the expansion arithmetic to remain representable in the signed size type. For large inputs, the calculation overflows/wraps, so the routine returns a bogus length that callers may trust. The fix is a maximum-safe-input check before performing the arithmetic.
+
+Roles:
+- `untrusted_size`: the input size consumed by `encoder_base64_size()` (the MIME part data size)
+- `length_of`: `encoder_base64_size()`

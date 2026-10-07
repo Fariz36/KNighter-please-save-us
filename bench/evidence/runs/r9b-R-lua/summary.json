@@ -1,0 +1,386 @@
+{
+  "run": "r9b-R-lua",
+  "wall_seconds": 1474.6,
+  "commits": 4,
+  "commits_with_perfect_checker": 1,
+  "llm_calls_total": 48,
+  "llm_seconds_sum": 3421.9,
+  "llm_by_stage": {
+    "patch2pattern": {
+      "calls": 10,
+      "failed": 0,
+      "seconds": 513.9,
+      "prompt_tokens": 95089,
+      "completion_tokens": 70030,
+      "reasoning_tokens": 68304
+    },
+    "pattern2plan": {
+      "calls": 10,
+      "failed": 0,
+      "seconds": 993.8,
+      "prompt_tokens": 90343,
+      "completion_tokens": 135184,
+      "reasoning_tokens": 126634
+    },
+    "plan2checker": {
+      "calls": 10,
+      "failed": 0,
+      "seconds": 1034.5,
+      "prompt_tokens": 166060,
+      "completion_tokens": 176033,
+      "reasoning_tokens": 155720
+    },
+    "repair_syntax": {
+      "calls": 18,
+      "failed": 0,
+      "seconds": 879.7,
+      "prompt_tokens": 73337,
+      "completion_tokens": 156142,
+      "reasoning_tokens": 109439
+    }
+  },
+  "step_seconds_sum": {
+    "\ud83e\udde9 Pattern Extraction": 514.2,
+    "\ud83d\udccb Plan Generation": 993.9,
+    "\ud83d\udcbb Code Generation": 1034.7,
+    "\ud83d\udd27 Syntax Repair": 1306.0,
+    "\u2705 Validation": 175.8
+  },
+  "validation_seconds": {
+    "plugin_seconds": {
+      "n": 7,
+      "sum": 0.0,
+      "mean": 0.0
+    },
+    "setup_seconds": {
+      "n": 7,
+      "sum": 0.2,
+      "mean": 0.03
+    },
+    "total_seconds": {
+      "n": 7,
+      "sum": 175.8,
+      "mean": 25.11
+    }
+  },
+  "per_commit": [
+    {
+      "id": "AllGen-Integer-Overflow-10eb89d1141dc528806b32401e408e36fb2f3bf5",
+      "summary": {
+        "commit_id": "10eb89d1141dc528806b32401e408e36fb2f3bf5",
+        "commit_type": "Integer-Overflow",
+        "total_checkers": 3,
+        "successful_checkers": 1,
+        "perfect_checkers": 0,
+        "best_tp": 1,
+        "best_tn": 0,
+        "total_time": 1292.861891,
+        "errors": [
+          "Failed to generate compilable checker 1",
+          "Failed to generate compilable checker 2"
+        ],
+        "success_rate": 0.3333333333333333,
+        "timestamp": "2026-10-08T00:27:49.629534"
+      },
+      "attempts": [
+        {
+          "attempt": "checker_00",
+          "steps": {
+            "\ud83e\udde9 Pattern Extraction": 73.55,
+            "\ud83d\udccb Plan Generation": 136.47,
+            "\ud83d\udcbb Code Generation": 97.29,
+            "\ud83d\udd27 Syntax Repair": 35.64,
+            "\u2705 Validation": 0.75
+          },
+          "failed_step": null,
+          "strict": [
+            1,
+            0
+          ],
+          "legacy": [
+            1,
+            0
+          ],
+          "error": null,
+          "validation_timing": {
+            "plugin_seconds": 0.0,
+            "setup_seconds": 0.01,
+            "analysis_seconds": {
+              "buggy": 0.37,
+              "fixed": 0.34
+            },
+            "total_seconds": 0.75
+          }
+        },
+        {
+          "attempt": "checker_01",
+          "steps": {
+            "\ud83e\udde9 Pattern Extraction": 48.86,
+            "\ud83d\udccb Plan Generation": 97.76,
+            "\ud83d\udcbb Code Generation": 119.25,
+            "\ud83d\udd27 Syntax Repair": 234.25
+          },
+          "failed_step": "\ud83d\udd27 Syntax Repair"
+        },
+        {
+          "attempt": "checker_02",
+          "steps": {
+            "\ud83e\udde9 Pattern Extraction": 49.08,
+            "\ud83d\udccb Plan Generation": 64.88,
+            "\ud83d\udcbb Code Generation": 158.16,
+            "\ud83d\udd27 Syntax Repair": 176.26
+          },
+          "failed_step": "\ud83d\udd27 Syntax Repair"
+        }
+      ]
+    },
+    {
+      "id": "AllGen-Misuse-bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+      "summary": {
+        "commit_id": "bc4bbcef651ba2870d6c68db16dc7d6ce6f68636",
+        "commit_type": "Misuse",
+        "total_checkers": 1,
+        "successful_checkers": 1,
+        "perfect_checkers": 1,
+        "best_tp": 1,
+        "best_tn": 1,
+        "total_time": 294.991042,
+        "errors": [],
+        "success_rate": 1.0,
+        "timestamp": "2026-10-08T00:11:11.758488"
+      },
+      "attempts": [
+        {
+          "attempt": "checker_00",
+          "steps": {
+            "\ud83e\udde9 Pattern Extraction": 37.83,
+            "\ud83d\udccb Plan Generation": 56.71,
+            "\ud83d\udcbb Code Generation": 66.81,
+            "\ud83d\udd27 Syntax Repair": 119.47,
+            "\u2705 Validation": 13.67
+          },
+          "failed_step": null,
+          "strict": [
+            1,
+            1
+          ],
+          "legacy": [
+            1,
+            1
+          ],
+          "error": null,
+          "validation_timing": {
+            "plugin_seconds": 0.0,
+            "setup_seconds": 0.01,
+            "analysis_seconds": {
+              "buggy": 6.87,
+              "fixed": 6.7
+            },
+            "total_seconds": 13.67
+          }
+        }
+      ]
+    },
+    {
+      "id": "AllGen-Use-After-Free-22974326ca0d4f893849ce722cc1d65b3e228f42",
+      "summary": {
+        "commit_id": "22974326ca0d4f893849ce722cc1d65b3e228f42",
+        "commit_type": "Use-After-Free",
+        "total_checkers": 3,
+        "successful_checkers": 1,
+        "perfect_checkers": 0,
+        "best_tp": 1,
+        "best_tn": 0,
+        "total_time": 967.193343,
+        "errors": [],
+        "success_rate": 0.3333333333333333,
+        "timestamp": "2026-10-08T00:22:23.957550"
+      },
+      "attempts": [
+        {
+          "attempt": "checker_00",
+          "steps": {
+            "\ud83e\udde9 Pattern Extraction": 62.81,
+            "\ud83d\udccb Plan Generation": 131.65,
+            "\ud83d\udcbb Code Generation": 54.45,
+            "\ud83d\udd27 Syntax Repair": 32.88,
+            "\u2705 Validation": 12.39
+          },
+          "failed_step": null,
+          "strict": [
+            1,
+            0
+          ],
+          "legacy": [
+            1,
+            1
+          ],
+          "error": null,
+          "validation_timing": {
+            "plugin_seconds": 0.0,
+            "setup_seconds": 0.01,
+            "analysis_seconds": {
+              "buggy": 6.08,
+              "fixed": 6.07
+            },
+            "total_seconds": 12.39
+          }
+        },
+        {
+          "attempt": "checker_01",
+          "steps": {
+            "\ud83e\udde9 Pattern Extraction": 38.32,
+            "\ud83d\udccb Plan Generation": 90.23,
+            "\ud83d\udcbb Code Generation": 94.91,
+            "\ud83d\udd27 Syntax Repair": 140.07,
+            "\u2705 Validation": 21.48
+          },
+          "failed_step": null,
+          "strict": [
+            0,
+            0
+          ],
+          "legacy": [
+            0,
+            2
+          ],
+          "error": null,
+          "validation_timing": {
+            "plugin_seconds": 0.0,
+            "setup_seconds": 0.09,
+            "analysis_seconds": {
+              "buggy": 12.94,
+              "fixed": 8.19
+            },
+            "total_seconds": 21.48
+          }
+        },
+        {
+          "attempt": "checker_02",
+          "steps": {
+            "\ud83e\udde9 Pattern Extraction": 61.72,
+            "\ud83d\udccb Plan Generation": 85.38,
+            "\ud83d\udcbb Code Generation": 81.18,
+            "\ud83d\udd27 Syntax Repair": 37.27,
+            "\u2705 Validation": 22.04
+          },
+          "failed_step": null,
+          "strict": [
+            0,
+            0
+          ],
+          "legacy": [
+            0,
+            2
+          ],
+          "error": null,
+          "validation_timing": {
+            "plugin_seconds": 0.02,
+            "setup_seconds": 0.05,
+            "analysis_seconds": {
+              "buggy": 14.56,
+              "fixed": 7.2
+            },
+            "total_seconds": 22.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "AllGen-Use-Before-Initialization-efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+      "summary": {
+        "commit_id": "efddc2309c5ff8a1842bea8a9c0d7d4a5d6e1e60",
+        "commit_type": "Use-Before-Initialization",
+        "total_checkers": 3,
+        "successful_checkers": 0,
+        "perfect_checkers": 0,
+        "best_tp": 0,
+        "best_tn": 0,
+        "total_time": 1471.514038,
+        "errors": [
+          "Failed to generate compilable checker 2"
+        ],
+        "success_rate": 0.0,
+        "timestamp": "2026-10-08T00:30:48.279202"
+      },
+      "attempts": [
+        {
+          "attempt": "checker_00",
+          "steps": {
+            "\ud83e\udde9 Pattern Extraction": 45.19,
+            "\ud83d\udccb Plan Generation": 89.47,
+            "\ud83d\udcbb Code Generation": 151.39,
+            "\ud83d\udd27 Syntax Repair": 166.39,
+            "\u2705 Validation": 21.39
+          },
+          "failed_step": null,
+          "strict": [
+            0,
+            0
+          ],
+          "legacy": [
+            0,
+            1
+          ],
+          "error": null,
+          "validation_timing": {
+            "plugin_seconds": 0.0,
+            "setup_seconds": 0.01,
+            "analysis_seconds": {
+              "buggy": 10.78,
+              "fixed": 10.5
+            },
+            "total_seconds": 21.38
+          }
+        },
+        {
+          "attempt": "checker_01",
+          "steps": {
+            "\ud83e\udde9 Pattern Extraction": 35.8,
+            "\ud83d\udccb Plan Generation": 168.06,
+            "\ud83d\udcbb Code Generation": 84.28,
+            "\ud83d\udd27 Syntax Repair": 119.25,
+            "\u2705 Validation": 84.06
+          },
+          "failed_step": null,
+          "strict": [
+            0,
+            0
+          ],
+          "legacy": [
+            0,
+            1
+          ],
+          "error": null,
+          "validation_timing": {
+            "plugin_seconds": 0.01,
+            "setup_seconds": 0.04,
+            "analysis_seconds": {
+              "buggy": 52.08,
+              "fixed": 31.84
+            },
+            "total_seconds": 84.06
+          }
+        },
+        {
+          "attempt": "checker_02",
+          "steps": {
+            "\ud83e\udde9 Pattern Extraction": 61.0,
+            "\ud83d\udccb Plan Generation": 73.32,
+            "\ud83d\udcbb Code Generation": 127.0,
+            "\ud83d\udd27 Syntax Repair": 244.48
+          },
+          "failed_step": "\ud83d\udd27 Syntax Repair"
+        }
+      ]
+    }
+  ],
+  "awake_seconds": 1474.6,
+  "suspended_seconds": -0.0,
+  "suspended": false,
+  "variant": "optimized",
+  "exit_code": 0,
+  "overrides": [
+    "role_based_checkers=true"
+  ]
+}

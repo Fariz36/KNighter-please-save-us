@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A length-delimited byte buffer is treated as a NUL-terminated C string. The code has the buffer’s explicit length available, but it passes the buffer to `strlen()` (`length_of`) and to printf-style `%s` conversions (`error_setter`/logger) that scan until a NUL byte. If the buffer contains no NUL within its declared length, these operations read past the end of the buffer. The fix uses length-bounded operations (`memchr` with the length and `%.*s` formatting).
+
+Roles:
+- `length_of`: strlen
+- `error_setter`: failf
+- `logger`: infof
+- `untrusted_size`: ASN1_STRING_length

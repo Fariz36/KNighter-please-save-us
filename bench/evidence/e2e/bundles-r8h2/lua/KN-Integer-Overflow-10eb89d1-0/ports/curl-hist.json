@@ -1,0 +1,88 @@
+{
+  "target": "curl",
+  "commit": "11b991232fbcaa88e2b1faecac224416b0001e35",
+  "candidates": 1595,
+  "identifiers": 34096,
+  "offered": {
+    "decoder_function": [
+      "Curl_idn_decode",
+      "doh_resp_decode",
+      "curlx_base64_decode",
+      "Curl_sasl_decode_mech",
+      "Curl_http_decode_status",
+      "Curl_auth_decode_spnego_message",
+      "Curl_auth_decode_ntlm_type2_message",
+      "Curl_auth_decode_digest_http_message",
+      "Curl_urldecode",
+      "CURLX_FUNCTION_CAST",
+      "__crt0_glob_function",
+      "Curl_mbedtlsthreadlock_lock_function",
+      "Curl_mbedtlsthreadlock_unlock_function"
+    ],
+    "input_byte": [
+      "Curl_hexbyte",
+      "Curl_input_ntlm",
+      "Curl_rand_bytes",
+      "Curl_input_digest",
+      "Curl_http_input_auth",
+      "Curl_input_negotiate",
+      "setvariable",
+      "SIGPIPE_VARIABLE",
+      "Curl_uint_tbl_first",
+      "Curl_uint_bset_first",
+      "Curl_uint_spbset_first",
+      "Curl_conn_get_first_socket"
+    ],
+    "continuation_count": [
+      "ALLOC_SIZE",
+      "ALLOC_SIZE2",
+      "Curl_bufq_len",
+      "curlx_dyn_len",
+      "CURL_ARRAYSIZE",
+      "Curl_bufref_len",
+      "Curl_bump_headersize",
+      "Curl_uint_tbl_resize",
+      "Curl_uint_bset_resize",
+      "Curl_pgrsSetUploadSize",
+      "Curl_pgrsSetDownloadSize",
+      "Curl_creader_total_length",
+      "Curl_creader_client_length",
+      "Curl_ssl_push_certinfo_len",
+      "Curl_pgrsResetTransferSizes",
+      "Curl_creader_def_total_length",
+      "setvariable",
+      "Curl_hash_count",
+      "Curl_rand_bytes",
+      "Curl_llist_count",
+      "SIGPIPE_VARIABLE",
+      "curlx_str_number",
+      "Curl_dynhds_count",
+      "Curl_cshutdn_count",
+      "Curl_cwriter_count",
+      "Curl_uint_tbl_count",
+      "Curl_uint_bset_count",
+      "Curl_uint_hash_count",
+      "Curl_dynhds_count_name",
+      "Curl_uint_spbset_count",
+      "Curl_cshutdn_dest_count"
+    ]
+  },
+  "mapping": {
+    "decoder_function": [],
+    "input_byte": [],
+    "continuation_count": [
+      "count"
+    ]
+  },
+  "dropped_not_in_target": {
+    "decoder_function": [],
+    "input_byte": [],
+    "continuation_count": []
+  },
+  "rationale": {
+    "decoder_function": "No equivalent UTF-8 sequence decoder exists in curl; available decoders serve unrelated protocols or encodings.",
+    "input_byte": "No equivalent variable or function representing the first byte of a UTF-8 sequence exists in curl.",
+    "continuation_count": "No equivalent variable or function counting UTF-8 continuation bytes exists in curl."
+  },
+  "llm_seconds": 190.2
+}

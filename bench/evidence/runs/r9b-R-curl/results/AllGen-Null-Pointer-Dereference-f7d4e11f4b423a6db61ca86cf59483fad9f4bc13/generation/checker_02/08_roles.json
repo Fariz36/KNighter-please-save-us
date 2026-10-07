@@ -1,0 +1,32 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "buffer_copy": {
+      "names": [
+        "memcpy"
+      ],
+      "description": "copies a buffer from a source pointer to a destination pointer; the source pointer must be valid if the length is nonzero"
+    },
+    "allocator": {
+      "names": [
+        "curlx_malloc"
+      ],
+      "description": "allocates memory; may return NULL on failure"
+    },
+    "deallocator": {
+      "names": [
+        "curlx_safefree"
+      ],
+      "description": "frees memory or an object; the pointer must not be used afterwards"
+    },
+    "null_on_failure": {
+      "names": [
+        "curlx_malloc"
+      ],
+      "description": "returns NULL on failure; its return value must be checked"
+    }
+  }
+}

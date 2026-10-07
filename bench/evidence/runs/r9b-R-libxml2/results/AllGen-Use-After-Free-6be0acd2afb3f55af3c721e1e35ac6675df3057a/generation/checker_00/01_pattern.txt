@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A `deallocator` is called on an object that is still linked into a container/tree/list. The required `container_remove` call is missing before the deallocation, so the container retains a dangling pointer to the freed object. Later traversal, unlinking, or cleanup of that container can access or free the object again, causing use-after-free or double-free.
+
+Roles:
+- `deallocator`: `xmlFreeNode`
+- `container_remove`: `xmlUnlinkNodeInternal`

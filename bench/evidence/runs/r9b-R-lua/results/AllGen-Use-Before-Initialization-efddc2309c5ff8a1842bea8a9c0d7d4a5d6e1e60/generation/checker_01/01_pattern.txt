@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A persistent iterator/state object is prepared once by an `init` function and then prepared again per operation by another `init` function. A mutable per-operation safety counter is initialized only in the one-time `init`, not in the per-operation `init`. If an `error_setter` aborts the operation before the counter is restored, the next operation starts from the stale counter value, defeating the safety check. The fix is to reset that mutable counter in the per-operation `init`; an `aborting_assert` that only checks the expected value is not sufficient.
+
+Roles:
+- `init`: `prepstate`, `reprepstate`
+- `error_setter`: `luaL_error`
+- `aborting_assert`: `lua_assert`

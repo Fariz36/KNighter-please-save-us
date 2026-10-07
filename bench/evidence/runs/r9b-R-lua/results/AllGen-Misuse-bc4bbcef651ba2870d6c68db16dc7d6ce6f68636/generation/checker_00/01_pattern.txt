@@ -1,0 +1,8 @@
+## Bug Pattern
+
+The bug pattern is registering/publishing a newly created object into a persistent registry before a later initialization step that can fail. Here, the combined lookup-or-create API `luaL_newmetatable` immediately inserts the new metatable into the registry, and only afterward `luaL_setfuncs` populates it. If `luaL_setfuncs` raises a memory error, the registry keeps a partially initialized metatable. Later calls see the registry entry already exists and skip initialization, so the incomplete metatable is used.
+
+Roles:
+- `container_insert`: `luaL_newmetatable` (creates and immediately registers the metatable), `lua_setfield` (explicit registration used in the fixed version)
+- `init`: `luaL_setfuncs` (populates the metatable with functions and may raise a non-local error)
+- `allocator`: `lua_newuserdatauv`, `luaL_newlibtable` (create the userdata/table objects)

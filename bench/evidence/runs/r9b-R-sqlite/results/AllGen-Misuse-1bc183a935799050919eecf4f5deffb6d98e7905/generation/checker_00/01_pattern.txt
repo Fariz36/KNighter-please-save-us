@@ -1,0 +1,10 @@
+## Bug Pattern
+
+A tokenizer/parser (`parser_input`) returns both token text/length and a token-type/status output. The caller ignores the status and passes the raw token text/length to a dequoter (`dequoter`) that assumes it is a syntactically valid quoted token. On corrupt or untrusted input, the tokenizer can report an illegal/malformed token, but the dequoter is still invoked and hits its internal assertion / processes invalid input. The fix propagates and checks the token type before dequoting.
+
+Roles:
+- `parser_input`: `getConstraintToken()`, `sqlite3GetToken()` — scan SQL input and return token length plus token type
+- `dequoter` (invented): `sqlite3Dequote()` — removes quoting from a token and assumes the token is valid
+- `allocator`: `sqlite3MallocZero()`
+- `deallocator`: `sqlite3_free()`
+- `buffer_copy`: `memcpy()`

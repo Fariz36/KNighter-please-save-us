@@ -1,0 +1,32 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "container_remove": {
+      "names": [
+        "Curl_peer_unlink"
+      ],
+      "description": "Removes/unlinks an embedded member from its container; must be executed before the containing object's state is reset or zeroed, otherwise the link is lost and the resource leaks."
+    },
+    "init": {
+      "names": [
+        "memset"
+      ],
+      "description": "Initializes or resets an object's memory, typically zeroing it; this invalidates any embedded link/ownership fields."
+    },
+    "cleanup": {
+      "names": [
+        "cf_h2_proxy_ctx_clear"
+      ],
+      "description": "Cleans up and resets a containing object, often zeroing its fields; embedded links must be removed before this call."
+    },
+    "deallocator": {
+      "names": [
+        "curlx_free"
+      ],
+      "description": "Frees allocated memory or an object; the pointer must not be used afterwards."
+    }
+  }
+}

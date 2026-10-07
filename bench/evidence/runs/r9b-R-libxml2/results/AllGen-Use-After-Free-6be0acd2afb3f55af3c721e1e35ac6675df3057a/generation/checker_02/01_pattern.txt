@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A `deallocator` is called on an object that may still be linked into a container/tree; the required `container_remove` operation is missing beforehand. As a result, the freed object remains reachable through its container links, and later traversal or cleanup can access freed memory, causing use-after-free/double-free. The fix is to call `container_remove` before the `deallocator` when consuming, merging, or replacing a linked object.
+
+Roles:
+- `container_remove`: `xmlUnlinkNodeInternal` — detaches a node from its parent/sibling links.
+- `deallocator`: `xmlFreeNode` — frees a node/object; the object must not remain linked or reachable after this call.

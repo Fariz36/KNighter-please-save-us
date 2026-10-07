@@ -1,0 +1,133 @@
+{
+  "commit_id": "a7511af09f99995cdf81994db21f4eba564276b5",
+  "plugin": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/plugin-cache/plugins/c146a55235b2555bae5c/plugin.so",
+  "scoring": "strict",
+  "selected": [
+    0,
+    0
+  ],
+  "score": {
+    "tp": 0,
+    "tn": 0,
+    "legacy_tp": 1,
+    "legacy_tn": 1,
+    "scoring": "strict",
+    "files": [
+      {
+        "path": "xmlregexp.c",
+        "analyzed_buggy": true,
+        "analyzed_fixed": true,
+        "buggy_total": 7,
+        "fixed_total": 0,
+        "buggy_on_target": 0,
+        "fixed_on_target": 0,
+        "buggy_functions": [
+          "xmlRegNewParserCtxt"
+        ],
+        "fixed_functions": [
+          "xmlRegNewParserCtxt"
+        ]
+      }
+    ]
+  },
+  "reports": {
+    "buggy": {
+      "xmlregexp.c": [
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5104,
+          "column": 11,
+          "function": "unknown",
+          "bug_type": "Out-of-bounds read",
+          "description": "Parser input lookahead may read out of bounds",
+          "issue_hash": "0d5367c74cad8e58144f077fd5539d6b",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/a7511af09f99/3b1b771a/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-0d5367.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5090,
+          "column": 14,
+          "function": "unknown",
+          "bug_type": "Out-of-bounds read",
+          "description": "Parser input lookahead may read out of bounds",
+          "issue_hash": "743850270455b6e2b42ee05d0fd5f8eb",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/a7511af09f99/3b1b771a/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-743850.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5028,
+          "column": 26,
+          "function": "unknown",
+          "bug_type": "Out-of-bounds read",
+          "description": "Parser input lookahead may read out of bounds",
+          "issue_hash": "a8406c8ee20888784a3191ba6ba31453",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/a7511af09f99/3b1b771a/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-a8406c.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5022,
+          "column": 28,
+          "function": "unknown",
+          "bug_type": "Out-of-bounds read",
+          "description": "Parser input lookahead may read out of bounds",
+          "issue_hash": "aaeafdf4f0cea1bccb52957b0e821aa9",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/a7511af09f99/3b1b771a/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-aaeafd.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5139,
+          "column": 23,
+          "function": "unknown",
+          "bug_type": "Out-of-bounds read",
+          "description": "Parser input lookahead may read out of bounds",
+          "issue_hash": "b0084a668cdc549893b7c00dcffd1f14",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/a7511af09f99/3b1b771a/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-b0084a.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5028,
+          "column": 45,
+          "function": "unknown",
+          "bug_type": "Out-of-bounds read",
+          "description": "Parser input lookahead may read out of bounds",
+          "issue_hash": "b1f97c651f1e9c0cac62435a48792059",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/a7511af09f99/3b1b771a/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-b1f97c.html",
+          "relpath": "xmlregexp.c"
+        },
+        {
+          "file": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/runs/r9b-R-libxml2/work/build/7cea3fd15574-f6d22c8ac6c7/../../src/7cea3fd15574/xmlregexp.c",
+          "line": 5097,
+          "column": 11,
+          "function": "unknown",
+          "bug_type": "Out-of-bounds read",
+          "description": "Parser input lookahead may read out of bounds",
+          "issue_hash": "d10bee8e41abdf528ccad2ce656c85bd",
+          "html_path": "/home/faris/RA-MrYudis/Knight/KNighter-please-save-us/bench/snapshots/r9b/tmp/validation/a7511af09f99/3b1b771a/buggy/.._.._src_7cea3fd15574_xmlregexp.c/report-d10bee.html",
+          "relpath": "xmlregexp.c"
+        }
+      ]
+    },
+    "fixed": {
+      "xmlregexp.c": []
+    }
+  },
+  "errors": {
+    "buggy": {},
+    "fixed": {}
+  },
+  "timing": {
+    "plugin_seconds": 0.0,
+    "setup_seconds": 0.02,
+    "analysis_seconds": {
+      "buggy": 42.64,
+      "fixed": 35.83
+    },
+    "total_seconds": 78.71
+  },
+  "report_dir": "tmp/validation/a7511af09f99/3b1b771a"
+}

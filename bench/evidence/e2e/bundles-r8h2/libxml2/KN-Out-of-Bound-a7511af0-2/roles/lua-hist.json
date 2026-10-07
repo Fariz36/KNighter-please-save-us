@@ -1,0 +1,9 @@
+{
+  "lookahead": [
+    "luaX_lookahead"
+  ],
+  "length_of": [
+    "luaZ_sizebuffer",
+    "luaZ_bufflen"
+  ]
+}

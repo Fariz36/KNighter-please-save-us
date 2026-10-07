@@ -1,0 +1,7 @@
+## Bug Pattern
+
+A buffer-capacity calculation is passed to a buffer-enlarging `reallocator`, but the calculation underestimates the number of bytes that the subsequent conversion path will write. In particular, it omits conditional fixed characters emitted by the alternate-form path and the terminating NUL. The `reallocator` therefore reserves too little space, and the later direct stores / `buffer_copy` / `memset` writes go past the end of the buffer, causing an out-of-bounds write.
+
+Roles:
+- `reallocator`: `sqlite3StrAccumEnlargeIfNeeded`
+- `buffer_copy`: `memcpy`, `memset`

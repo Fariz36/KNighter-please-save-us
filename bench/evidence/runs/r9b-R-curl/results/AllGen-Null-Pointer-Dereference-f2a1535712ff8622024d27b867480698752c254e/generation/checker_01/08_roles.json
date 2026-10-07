@@ -1,0 +1,25 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "out_parameter_user": {
+      "names": [
+        "curl_easy_recv",
+        "curl_easy_send"
+      ],
+      "description": "Public API entry function that accepts a caller-provided output pointer and must validate it before writing or forwarding it"
+    },
+    "output_writer": {
+      "names": [
+        "Curl_easy_recv"
+      ],
+      "description": "Helper function that writes a result through one of its pointer parameters"
+    },
+    "aborting_assert": {
+      "names": [],
+      "description": "Macro or function that aborts or returns when its condition is false, so the guarded pointer is non-null afterwards"
+    }
+  }
+}

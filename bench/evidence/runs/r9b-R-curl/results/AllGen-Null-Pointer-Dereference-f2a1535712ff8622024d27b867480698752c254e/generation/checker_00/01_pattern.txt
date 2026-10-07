@@ -1,0 +1,7 @@
+## Bug Pattern
+
+The bug pattern is an API using a caller-supplied output pointer as a write destination without first checking it for `NULL`. The pointer is either dereferenced directly (`*n = written`) or passed to a callee that writes through it (`Curl_easy_recv(..., n)`). A caller passing `NULL` therefore triggers a NULL pointer dereference. The fix adds an explicit non-NULL guard and returns `CURLE_BAD_FUNCTION_ARGUMENT`.
+
+Relevant roles:
+- `write_through_callee`: `Curl_easy_recv` — writes the received byte count through the pointer argument supplied by the caller.
+- `error_setter`: `result = CURLE_BAD_FUNCTION_ARGUMENT` — records the invalid-argument error before returning.

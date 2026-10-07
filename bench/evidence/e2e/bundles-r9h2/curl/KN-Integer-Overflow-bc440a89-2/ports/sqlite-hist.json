@@ -1,0 +1,69 @@
+{
+  "target": "sqlite",
+  "commit": "3f523613528194d3487853ed6e5367c6f215ec4f",
+  "candidates": 2450,
+  "identifiers": 48016,
+  "offered": {
+    "length_of": [
+      "ArraySize",
+      "MergeCount",
+      "array_size",
+      "OpenCounter",
+      "SizeofArray",
+      "lsmTreeSize",
+      "IsPowerOfTwo",
+      "MX_CELL_SIZE",
+      "fts3HashCount",
+      "lsmFsPageSize",
+      "lsmVarintSize",
+      "sqlite3_msize",
+      "ExprIsFullSize",
+      "lsmFsBlockSize",
+      "fts3HashKeysize",
+      "lsmFsSectorSize",
+      "sqliteHashCount",
+      "lsmFsSetPageSize",
+      "sqlite3VarintLen",
+      "sqlite3WalDbsize",
+      "lsmCheckpointSize",
+      "lsmFsSetBlockSize",
+      "sqlite3BitvecSize",
+      "sqlite3BtreeCount",
+      "sqlite3MallocSize",
+      "sqlite3OsFileSize",
+      "sqlite3PcacheSize",
+      "sqlite3SectorSize",
+      "testCountDatabase",
+      "win32GetTimeOfDay",
+      "sqlite3CodeRhsOfIN",
+      "sqlite3JournalSize",
+      "sqlite3RCStrResize",
+      "sqlite3Utf8CharLen",
+      "sqlite3_data_count",
+      "sqlite3_str_length",
+      "sqlite3DbMallocSize",
+      "sqlite3OsSectorSize",
+      "sqlite3Utf16ByteLen",
+      "sqlite3WalFramesize"
+    ]
+  },
+  "mapping": {
+    "length_of": [
+      "sqlite3VarintLen",
+      "sqlite3Utf8CharLen",
+      "sqlite3Utf16ByteLen",
+      "sqlite3JournalSize",
+      "MX_CELL_SIZE",
+      "sqlite3WalFramesize",
+      "lsmTreeSize",
+      "lsmCheckpointSize"
+    ]
+  },
+  "dropped_not_in_target": {
+    "length_of": []
+  },
+  "rationale": {
+    "length_of": "These SQLite functions compute a derived length or size from an input size (e.g., varint/UTF encoded lengths, journal/frame/cell/tree/checkpoint sizes), matching the role of curl's encoder_base64_size."
+  },
+  "llm_seconds": 247.6
+}

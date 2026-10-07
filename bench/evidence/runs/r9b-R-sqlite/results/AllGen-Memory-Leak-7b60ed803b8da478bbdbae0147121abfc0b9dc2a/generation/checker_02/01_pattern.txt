@@ -1,0 +1,9 @@
+## Bug Pattern
+
+The bug pattern is a missing deallocation on a guarded ownership-transfer path. A resource is created by a `duplicator`/`allocator` and then conditionally attached to an existing container by a `container_insert`/ownership-transfer call. When the attachment is skipped because the destination container is NULL (for example after an earlier OOM), the code does not call the `deallocator`, so the created resource is leaked. The fix adds the `deallocator` call in the `else` branch of the guarded attachment.
+
+Roles:
+- `duplicator`: `sqlite3SrcListDup`
+- `container_insert`: `sqlite3SrcListAppendList`, `sqlite3SrcListAppendFromTerm`
+- `deallocator`: `sqlite3SrcListDelete`
+- `null_on_failure`: `sqlite3SrcListDup`, `sqlite3SrcListAppendList`

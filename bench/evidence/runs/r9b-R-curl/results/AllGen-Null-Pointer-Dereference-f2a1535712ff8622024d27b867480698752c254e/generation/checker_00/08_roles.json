@@ -1,0 +1,14 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "write_through_callee": {
+      "names": [
+        "Curl_easy_recv"
+      ],
+      "description": "function that writes an output value through one of its pointer parameters; the pointer argument must not be NULL unless the callee checks it"
+    }
+  }
+}

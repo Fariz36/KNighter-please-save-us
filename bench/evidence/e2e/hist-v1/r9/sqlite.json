@@ -1,0 +1,750 @@
+{
+  "tag": "version-3.50.0",
+  "base_rate": {
+    "functions": 3846,
+    "later_fixed": 268,
+    "rate": 0.0697
+  },
+  "results": [
+    {
+      "bundle": "KN-Integer-Overflow-bc440a89-2",
+      "source": "curl",
+      "target": "sqlite",
+      "tag": "version-3.50.0",
+      "bug_type": "Integer-Overflow",
+      "mapping": {
+        "length_of": [
+          "sqlite3VarintLen",
+          "sqlite3Utf8CharLen",
+          "sqlite3Utf16ByteLen",
+          "sqlite3JournalSize",
+          "MX_CELL_SIZE",
+          "sqlite3WalFramesize",
+          "lsmTreeSize",
+          "lsmCheckpointSize"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 526.6
+    },
+    {
+      "bundle": "KN-Memory-Leak-a0f08d69-0",
+      "source": "curl",
+      "target": "sqlite",
+      "tag": "version-3.50.0",
+      "bug_type": "Memory-Leak",
+      "mapping": {
+        "cleanup": [
+          "lsmStringClear",
+          "sqlite3HashClear",
+          "sqlite3BitvecClear",
+          "sqlite3PcacheClear",
+          "sqlite3RowSetClear",
+          "sqlite3SchemaClear",
+          "sqlite3Fts3HashClear",
+          "sqlite3Fts5HashClear",
+          "sqlite3ClearOnOrUsing",
+          "sqlite3BtreeClearCache",
+          "sqlite3PagerClearCache",
+          "sqlite3BtreeClearCursor",
+          "sqlite3WhereClauseClear",
+          "sqlite3VdbeMemClearAndResize",
+          "sqlite3VtabEponymousTableClear",
+          "sqlite3VtabClear"
+        ],
+        "container_remove": [
+          "sqlite3WindowUnlinkFromSelect",
+          "sqlite3UnlinkAndDeleteIndex",
+          "sqlite3UnlinkAndDeleteTable",
+          "sqlite3UnlinkAndDeleteTrigger"
+        ],
+        "deallocator": [
+          "sqlite3OsCloseFree",
+          "lsmFsCloseAndDeleteLog",
+          "sqlite3Fts5StorageReleaseDeleteRow",
+          "lsmFree",
+          "lsm_free",
+          "testFree",
+          "lsmBlockFree",
+          "sqlite3_free",
+          "sqlite3DbFree",
+          "fts5BufferFree",
+          "lsmFreeSnapshot",
+          "sqlite3DbFreeNN",
+          "sqlite3PageFree",
+          "lsmReallocOrFree",
+          "sqlite3FreeIndex",
+          "sqlite3StackFree",
+          "sqlite3ValueFree",
+          "sqlite3ParserFree",
+          "lsmReallocOrFreeRc",
+          "lsmSortedFreeLevel",
+          "sqlite3StackFreeNN",
+          "sqlite3_free_table",
+          "sqlite3_mutex_free",
+          "sqlite3_value_free",
+          "testCksumArrayFree",
+          "testDatasourceFree",
+          "lsmMCursorFreeCache",
+          "sqlite3Fts3ExprFree",
+          "sqlite3Fts5ExprFree",
+          "sqlite3Fts5HashFree",
+          "sqlite3Fts5BufferFree",
+          "sqlite3Fts5ConfigFree",
+          "sqlite3Stat4ProbeFree",
+          "sqlite3VdbeFreeCursor",
+          "sqlite3_free_filename",
+          "sqlite3_snapshot_free",
+          "sqlite3DbReallocOrFree",
+          "sqlite3Fts5TermsetFree",
+          "sqlite3Fts3MIBufferFree"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 431.1
+    },
+    {
+      "bundle": "KN-Misuse-c53420e4-0",
+      "source": "curl",
+      "target": "sqlite",
+      "tag": "version-3.50.0",
+      "bug_type": "Misuse",
+      "mapping": {
+        "length_of": [
+          "strlen",
+          "sqlite3Strlen30"
+        ],
+        "untrusted_size": [
+          "sqlite3_value_bytes",
+          "sqlite3_column_bytes",
+          "sqlite3_value_bytes16",
+          "sqlite3_column_bytes16",
+          "lsmFsPageSize"
+        ],
+        "untrusted_data_accessor": [
+          "sqlite3_value_blob",
+          "sqlite3_column_blob",
+          "lsmFsPageData",
+          "lsmFsMetaPageData",
+          "fts3HashData",
+          "sqliteHashData"
+        ],
+        "allocator": [
+          "sqlite3_malloc",
+          "sqlite3_malloc64",
+          "sqlite3_realloc",
+          "sqlite3_realloc64",
+          "sqlite3DbMallocRaw",
+          "sqlite3DbMallocRawNN",
+          "sqlite3DbMallocZero",
+          "sqlite3StackAllocRaw",
+          "sqlite3StackAllocRawNN"
+        ],
+        "deallocator": [
+          "sqlite3_free",
+          "sqlite3_free_table",
+          "sqlite3_free_filename",
+          "sqlite3_snapshot_free",
+          "sqlite3_value_free",
+          "sqlite3_mutex_free",
+          "sqlite3DbFree",
+          "sqlite3DbFreeNN",
+          "sqlite3PageFree",
+          "sqlite3StackFree",
+          "sqlite3StackFreeNN",
+          "sqlite3ValueFree",
+          "sqlite3ParserFree",
+          "sqlite3FreeIndex",
+          "sqlite3DbReallocOrFree",
+          "sqlite3_release_memory",
+          "lsmFree",
+          "lsm_free",
+          "lsmBlockFree",
+          "lsmFreeSnapshot",
+          "lsmReallocOrFree",
+          "lsmReallocOrFreeRc",
+          "lsmSortedFreeLevel",
+          "sqlite3Fts3ExprFree",
+          "sqlite3Fts5ExprFree",
+          "sqlite3Fts5HashFree",
+          "sqlite3Fts5BufferFree",
+          "sqlite3Fts5ConfigFree",
+          "sqlite3Fts5TermsetFree",
+          "sqlite3Fts3MIBufferFree",
+          "sqlite3Fts5StorageReleaseDeleteRow",
+          "sqlite3OsCloseFree",
+          "lsmFsCloseAndDeleteLog",
+          "testFree",
+          "testCksumArrayFree",
+          "testDatasourceFree",
+          "lsmMCursorFreeCache",
+          "sqlite3Stat4ProbeFree",
+          "sqlite3VdbeFreeCursor",
+          "fts5BufferFree"
+        ],
+        "error_setter": [
+          "sqlite3ErrorMsg",
+          "sqlite3VdbeError",
+          "sqlite3Fts3ErrMsg",
+          "testPrintError",
+          "sqlite3_log"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 400.5
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-466c06cf-0",
+      "source": "curl",
+      "target": "sqlite",
+      "tag": "version-3.50.0",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "duplicator": [
+          "sqlite3ExprDup",
+          "sqlite3ExprListDup",
+          "sqlite3SrcListDup",
+          "sqlite3IdListDup",
+          "sqlite3SelectDup",
+          "sqlite3DbStrDup",
+          "sqlite3DbStrNDup",
+          "lsmMallocStrdup",
+          "testMallocCopy"
+        ],
+        "allocator": [
+          "sqlite3Malloc",
+          "sqlite3MallocZero",
+          "sqlite3Realloc",
+          "sqlite3DbMallocRaw",
+          "sqlite3DbMallocRawNN",
+          "sqlite3DbMallocZero",
+          "sqlite3DbRealloc",
+          "sqlite3DbReallocOrFree",
+          "sqlite3_malloc",
+          "sqlite3_malloc64",
+          "sqlite3_realloc",
+          "sqlite3_realloc64",
+          "sqlite3StackAllocRaw",
+          "sqlite3StackAllocRawNN",
+          "sqlite3ArrayAllocate",
+          "sqlite3ExprAlloc",
+          "sqlite3KeyInfoAlloc",
+          "sqlite3WindowAlloc",
+          "sqlite3AllocateIndexObject",
+          "sqlite3VdbeAllocUnpackedRecord",
+          "sqlite3ParserAlloc",
+          "sqlite3MutexAlloc",
+          "sqlite3_mutex_alloc",
+          "testMalloc",
+          "testRealloc",
+          "testOpen",
+          "lsmMalloc",
+          "lsmRealloc",
+          "lsm_malloc",
+          "lsm_realloc"
+        ]
+      },
+      "status": "scanned",
+      "reports": 7,
+      "functions_reported": 1,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "src/expr.c",
+          "line": 1952,
+          "function": "sqlite3SelectDup",
+          "description": "NULL pointer dereference: duplicator source pointer not checked",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 410.6
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-f2a15357-1",
+      "source": "curl",
+      "target": "sqlite",
+      "tag": "version-3.50.0",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "out_param_api": [
+          "sqlite3_open",
+          "sqlite3_open_v2",
+          "sqlite3_open16",
+          "sqlite3_prepare",
+          "sqlite3_prepare_v2",
+          "sqlite3_prepare_v3",
+          "sqlite3_prepare16",
+          "sqlite3_prepare16_v2",
+          "sqlite3_prepare16_v3",
+          "sqlite3_exec",
+          "sqlite3_blob_open",
+          "sqlite3_blob_read",
+          "sqlite3_table_column_metadata",
+          "sqlite3_snapshot_get",
+          "sqlite3_serialize",
+          "sqlite3_status",
+          "sqlite3_status64",
+          "sqlite3_db_status",
+          "sqlite3_wal_checkpoint_v2",
+          "sqlite3_vtab_in_first",
+          "sqlite3_vtab_in_next",
+          "sqlite3_vtab_rhs_value",
+          "sqlite3_get_table",
+          "sqlite3_randomness",
+          "sqlite3_file_control",
+          "sqlite3_db_config"
+        ]
+      },
+      "status": "scanned",
+      "reports": 44,
+      "functions_reported": 20,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "src/legacy.c",
+          "line": 60,
+          "function": "sqlite3_exec",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/main.c",
+          "line": 3678,
+          "function": "sqlite3_open16",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/main.c",
+          "line": 1013,
+          "function": "sqlite3_db_config",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/main.c",
+          "line": 3650,
+          "function": "sqlite3_open_v2",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/main.c",
+          "line": 3641,
+          "function": "sqlite3_open",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/memdb.c",
+          "line": 773,
+          "function": "sqlite3_serialize",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/prepare.c",
+          "line": 930,
+          "function": "sqlite3_prepare",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/prepare.c",
+          "line": 1083,
+          "function": "sqlite3_prepare16_v3",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/prepare.c",
+          "line": 1058,
+          "function": "sqlite3_prepare16",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/prepare.c",
+          "line": 968,
+          "function": "sqlite3_prepare_v3",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/prepare.c",
+          "line": 1070,
+          "function": "sqlite3_prepare16_v2",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/prepare.c",
+          "line": 947,
+          "function": "sqlite3_prepare_v2",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/status.c",
+          "line": 219,
+          "function": "sqlite3_db_status",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/status.c",
+          "line": 151,
+          "function": "sqlite3_status64",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/status.c",
+          "line": 168,
+          "function": "sqlite3_status",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/table.c",
+          "line": 176,
+          "function": "sqlite3_get_table",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/vdbeapi.c",
+          "line": 1078,
+          "function": "sqlite3_vtab_in_next",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/vdbeapi.c",
+          "line": 1070,
+          "function": "sqlite3_vtab_in_first",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/vdbeblob.c",
+          "line": 150,
+          "function": "sqlite3_blob_open",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/where.c",
+          "line": 4491,
+          "function": "sqlite3_vtab_rhs_value",
+          "description": "Out-parameter may be NULL and is written without a NULL check",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 339.7
+    },
+    {
+      "bundle": "KN-Double-Free-26dfab2f-2",
+      "source": "libxml2",
+      "target": "sqlite",
+      "tag": "version-3.50.0",
+      "bug_type": "Double-Free",
+      "mapping": {
+        "parser_input": [
+          "sqlite3Fts5ParseNode",
+          "sqlite3Fts5ParseNearset"
+        ],
+        "null_on_failure": [
+          "sqlite3Fts5ParseNode",
+          "sqlite3Fts5ParseNearset"
+        ],
+        "deallocator": [
+          "sqlite3Fts5ParseNodeFree",
+          "sqlite3Fts5ParseNearsetFree",
+          "sqlite3Fts5ParsePhraseFree"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 409.2
+    },
+    {
+      "bundle": "KN-Misuse-c8eaf223-2",
+      "source": "libxml2",
+      "target": "sqlite",
+      "tag": "version-3.50.0",
+      "bug_type": "Misuse",
+      "mapping": {
+        "init": [
+          "sqlite3Fts5ConfigSetValue",
+          "sqlite3SetTextEncoding"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 323.9
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-962bd10d-2",
+      "source": "libxml2",
+      "target": "sqlite",
+      "tag": "version-3.50.0",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "allocator": [
+          "fts5BufferGrow",
+          "sqlite3ArrayAllocate",
+          "sqlite3VdbeMemGrow",
+          "sqlite3ExprAlloc",
+          "sqlite3MutexAlloc",
+          "sqlite3ParserAlloc",
+          "sqlite3WindowAlloc",
+          "sqlite3KeyInfoAlloc",
+          "sqlite3_mutex_alloc",
+          "sqlite3StackAllocRaw",
+          "sqlite3StackAllocRawNN",
+          "sqlite3VdbeAllocUnpackedRecord",
+          "sqlite3Malloc",
+          "sqlite3MallocZero",
+          "sqlite3DbMallocRaw",
+          "sqlite3DbMallocZero",
+          "sqlite3DbMallocRawNN",
+          "sqlite3_malloc",
+          "sqlite3_malloc64",
+          "lsmMalloc",
+          "lsm_malloc"
+        ],
+        "reallocator": [
+          "lsmRealloc",
+          "lsm_realloc",
+          "testRealloc",
+          "sqlite3Realloc",
+          "sqlite3_realloc",
+          "lsmReallocOrFree",
+          "sqlite3DbRealloc",
+          "lsmReallocOrFreeRc",
+          "sqlite3WhereRealloc",
+          "sqlite3DbReallocOrFree",
+          "sqlite3_realloc64"
+        ]
+      },
+      "status": "scanned",
+      "reports": 13,
+      "functions_reported": 2,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "src/build.c",
+          "line": 4670,
+          "function": "sqlite3ArrayAllocate",
+          "description": "Pointer parameter dereferenced before NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "src/vdbemem.c",
+          "line": 262,
+          "function": "sqlite3VdbeMemGrow",
+          "description": "Pointer parameter dereferenced before NULL check",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 379.9
+    },
+    {
+      "bundle": "KN-Out-of-Bound-a7511af0-0",
+      "source": "libxml2",
+      "target": "sqlite",
+      "tag": "version-3.50.0",
+      "bug_type": "Out-of-Bound",
+      "mapping": {
+        "indexed_read": [],
+        "length_of": [
+          "strlen",
+          "sqlite3Strlen30"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 312.4
+    },
+    {
+      "bundle": "KN-Misuse-bc4bbcef-0",
+      "source": "lua",
+      "target": "sqlite",
+      "tag": "version-3.50.0",
+      "bug_type": "Misuse",
+      "mapping": {
+        "allocator": [
+          "sqlite3ExprAlloc",
+          "sqlite3KeyInfoAlloc",
+          "sqlite3WindowAlloc",
+          "sqlite3ParserAlloc",
+          "sqlite3MutexAlloc",
+          "sqlite3_mutex_alloc",
+          "sqlite3StackAllocRaw",
+          "sqlite3StackAllocRawNN",
+          "sqlite3StartTable",
+          "sqlite3BtreeCreateTable",
+          "sqlite3Fts5CreateTable",
+          "sqlite3Fts3CreateStatTable",
+          "sqlite3CreateFunc"
+        ],
+        "container_insert": [
+          "sqlite3HashInsert",
+          "sqlite3Fts3HashInsert",
+          "sqlite3BtreeInsert",
+          "sqlite3RowSetInsert",
+          "sqlite3Insert",
+          "lsm_insert",
+          "lsmTreeInsert",
+          "sqlite3EndTable",
+          "sqlite3Fts5CreateTable",
+          "sqlite3BtreeCreateTable",
+          "sqlite3Fts3CreateStatTable",
+          "sqlite3CreateFunc"
+        ],
+        "lookup": [
+          "sqlite3HashFind",
+          "sqlite3Fts3HashFind",
+          "sqlite3FindTable",
+          "sqlite3LocateTable",
+          "sqlite3LocateTableItem",
+          "sqlite3SrcListLookup",
+          "sqlite3PagerLookup",
+          "sqlite3IndexedByLookup",
+          "sqlite3Fts5TableFromCsrid",
+          "sqlite3StartTable",
+          "sqlite3CreateFunc",
+          "sqlite3FindFunction",
+          "sqlite3FindCollSeq"
+        ],
+        "init": [
+          "sqlite3AddColumn",
+          "sqlite3CreateFunc",
+          "sqlite3VtabCallCreate",
+          "sqlite3HashInit",
+          "sqlite3Fts3HashInit",
+          "sqlite3Init",
+          "sqlite3InitOne",
+          "sqlite3MallocInit",
+          "sqlite3OsInit",
+          "sqlite3_os_init",
+          "sqlite3_initialize",
+          "sqlite3StrAccumInit",
+          "sqlite3_backup_init",
+          "sqlite3TokenInit",
+          "sqlite3VdbeMemInit",
+          "sqlite3VtabArgInit",
+          "sqlite3RowSetInit",
+          "sqlite3Fts3Init",
+          "sqlite3Fts3InitAux",
+          "sqlite3Fts3InitTok",
+          "sqlite3Fts3InitTerm",
+          "sqlite3Fts5AuxInit",
+          "sqlite3Fts5ExprInit",
+          "sqlite3RtreeInit",
+          "sqlite3IcuInit",
+          "sqlite3MemdbInit",
+          "sqlite3KvvfsInit",
+          "lsmTreeInit",
+          "sqlite3ParseObjectInit",
+          "sqlite3FixInit",
+          "sqlite3MutexInit",
+          "sqlite3_wsd_init"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 321.0
+    },
+    {
+      "bundle": "KN-Use-After-Free-22974326-2",
+      "source": "lua",
+      "target": "sqlite",
+      "tag": "version-3.50.0",
+      "bug_type": "Use-After-Free",
+      "mapping": {
+        "gc_trigger": [
+          "sqlite3PcacheFetchFinish"
+        ],
+        "ref_get": [
+          "sqlite3PcacheRef"
+        ]
+      },
+      "status": "scanned",
+      "reports": 3,
+      "functions_reported": 3,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "src/pager.c",
+          "line": 5542,
+          "function": "getPageNormal",
+          "description": "GC object may be collected during gc_trigger: missing root before call",
+          "later_fixes": []
+        },
+        {
+          "file": "src/pager.c",
+          "line": 5747,
+          "function": "sqlite3PagerLookup",
+          "description": "GC object may be collected during gc_trigger: missing root before call",
+          "later_fixes": []
+        },
+        {
+          "file": "src/pcache.c",
+          "line": 519,
+          "function": "pcacheFetchFinishWithInit",
+          "description": "GC object may be collected during gc_trigger: missing root before call",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 263.5
+    }
+  ]
+}

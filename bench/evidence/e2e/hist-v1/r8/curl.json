@@ -1,0 +1,569 @@
+{
+  "tag": "curl-8_16_0",
+  "base_rate": {
+    "functions": 3354,
+    "later_fixed": 327,
+    "rate": 0.0975
+  },
+  "results": [
+    {
+      "bundle": "KN-Double-Free-26dfab2f-1",
+      "source": "libxml2",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Double-Free",
+      "mapping": {
+        "resource": [],
+        "ownership_consumer_frees_on_failure": [
+          "Curl_fopen",
+          "Curl_open",
+          "Curl_cf_create"
+        ],
+        "deallocator": [
+          "curl_free",
+          "curl_dbg_free",
+          "Curl_safefree",
+          "tool_safefree",
+          "Curl_freeset",
+          "Curl_req_free",
+          "Curl_ws_free",
+          "Curl_bufq_free",
+          "Curl_conn_free",
+          "curl_mime_free",
+          "curlx_dyn_free",
+          "Curl_bufref_free",
+          "Curl_dynhds_free",
+          "Curl_psl_release",
+          "Curl_creader_free",
+          "Curl_cwriter_free",
+          "Curl_http_req_free",
+          "Curl_http_resp_free",
+          "Curl_httpchunk_free",
+          "curl_slist_free_all",
+          "Curl_ssl_free_certinfo",
+          "Curl_sspi_free_identity",
+          "Curl_gtls_shared_creds_free",
+          "Curl_ftp_parselist_data_free",
+          "Curl_free_idnconverted_hostname",
+          "Curl_multi_xfer_buf_release",
+          "Curl_multi_xfer_ulbuf_release",
+          "Curl_multi_xfer_sockbuf_release",
+          "config_free",
+          "globalconf_free",
+          "tool_mime_free",
+          "slist_wc_free_all",
+          "Curl_h1_req_parse_free",
+          "vquic_ctx_free",
+          "Curl_bufcp_free",
+          "Curl_nghttp2_free",
+          "Curl_mutex_release",
+          "curl_certinfo_free_all",
+          "Curl_close",
+          "curl_easy_cleanup",
+          "curl_multi_cleanup",
+          "curl_share_cleanup",
+          "curl_url_cleanup",
+          "curl_formfree"
+        ],
+        "null_on_failure": [
+          "Curl_fopen",
+          "Curl_open",
+          "Curl_cf_create"
+        ],
+        "duplicate_cleanup": [
+          "curl_free",
+          "curl_dbg_free",
+          "Curl_safefree",
+          "tool_safefree",
+          "Curl_freeset",
+          "Curl_req_free",
+          "Curl_ws_free",
+          "Curl_bufq_free",
+          "Curl_conn_free",
+          "curl_mime_free",
+          "curlx_dyn_free",
+          "Curl_bufref_free",
+          "Curl_dynhds_free",
+          "Curl_psl_release",
+          "Curl_creader_free",
+          "Curl_cwriter_free",
+          "Curl_http_req_free",
+          "Curl_http_resp_free",
+          "Curl_httpchunk_free",
+          "curl_slist_free_all",
+          "Curl_ssl_free_certinfo",
+          "Curl_sspi_free_identity",
+          "Curl_gtls_shared_creds_free",
+          "Curl_ftp_parselist_data_free",
+          "Curl_free_idnconverted_hostname",
+          "Curl_multi_xfer_buf_release",
+          "Curl_multi_xfer_ulbuf_release",
+          "Curl_multi_xfer_sockbuf_release",
+          "config_free",
+          "globalconf_free",
+          "tool_mime_free",
+          "slist_wc_free_all",
+          "Curl_h1_req_parse_free",
+          "vquic_ctx_free",
+          "Curl_bufcp_free",
+          "Curl_nghttp2_free",
+          "Curl_mutex_release",
+          "curl_certinfo_free_all",
+          "Curl_close",
+          "curl_easy_cleanup",
+          "curl_multi_cleanup",
+          "curl_share_cleanup",
+          "curl_url_cleanup",
+          "curl_formfree"
+        ],
+        "context_cleanup": [
+          "Curl_close",
+          "curl_easy_cleanup",
+          "curl_multi_cleanup",
+          "curl_share_cleanup",
+          "curl_url_cleanup",
+          "curl_formfree",
+          "config_free",
+          "globalconf_free",
+          "Curl_freeset",
+          "Curl_psl_release",
+          "Curl_mutex_release",
+          "Curl_multi_xfer_buf_release",
+          "Curl_multi_xfer_ulbuf_release",
+          "Curl_multi_xfer_sockbuf_release",
+          "Curl_hash_clean_with_criterium",
+          "Curl_bufq_free",
+          "Curl_conn_free",
+          "Curl_doh_close",
+          "de_cleanup",
+          "varcleanup",
+          "clean_getout",
+          "glob_cleanup"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 401.3
+    },
+    {
+      "bundle": "KN-Misuse-c8eaf223-2",
+      "source": "libxml2",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Misuse",
+      "mapping": {
+        "config_setter": [
+          "Curl_vsetopt",
+          "curl_easy_setopt"
+        ],
+        "divisor_field": [
+          "max_recv_speed",
+          "max_send_speed"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 277.3
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-79c6eef0-2",
+      "source": "libxml2",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "null_on_failure": [
+          "Curl_cmalloc",
+          "Curl_ccalloc",
+          "Curl_crealloc",
+          "Curl_cstrdup",
+          "Curl_strdup",
+          "curl_url_dup",
+          "curl_easy_init",
+          "curl_mime_init",
+          "config_alloc",
+          "Curl_fileinfo_alloc",
+          "Curl_ftp_parselist_data_alloc",
+          "new_getout",
+          "Curl_MD5_init",
+          "Curl_HMAC_init",
+          "Curl_hsts_init"
+        ],
+        "length_of": [
+          "strlen",
+          "Curl_bufq_len",
+          "curlx_dyn_len",
+          "Curl_bufref_len",
+          "Curl_hash_count",
+          "Curl_llist_count",
+          "Curl_dynhds_count",
+          "Curl_cshutdn_count",
+          "Curl_cwriter_count",
+          "Curl_uint_tbl_count",
+          "Curl_bump_headersize",
+          "Curl_uint_bset_count",
+          "Curl_uint_hash_count",
+          "Curl_uint_tbl_resize",
+          "Curl_uint_bset_resize",
+          "Curl_dynhds_count_name",
+          "Curl_pgrsSetUploadSize",
+          "Curl_uint_spbset_count",
+          "Curl_cshutdn_dest_count",
+          "Curl_dynhds_ccount_name",
+          "Curl_pgrsSetDownloadSize",
+          "Curl_creader_total_length",
+          "Curl_pgrsSetUploadCounter",
+          "Curl_creader_client_length",
+          "Curl_ssl_push_certinfo_len",
+          "Curl_pgrsResetTransferSizes",
+          "Curl_pgrsSetDownloadCounter",
+          "Curl_creader_def_total_length",
+          "jsonWriteString",
+          "Curl_addr2string",
+          "__crt0_glob_function"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 161.7
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-962bd10d-1",
+      "source": "libxml2",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "nullable_inout_capacity_ptr": [
+          "capacity"
+        ],
+        "capacity_computer": [],
+        "reallocator": [
+          "Curl_saferealloc",
+          "curl_dbg_realloc",
+          "Curl_nghttp2_realloc",
+          "Curl_uint_tbl_resize",
+          "Curl_uint_bset_resize"
+        ],
+        "deref_read": [],
+        "deref_write": [],
+        "null_guard": [],
+        "null_on_failure": [
+          "Curl_saferealloc",
+          "curl_dbg_realloc",
+          "Curl_nghttp2_realloc",
+          "config_alloc",
+          "Curl_fileinfo_alloc",
+          "Curl_ftp_parselist_data_alloc"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 277.7
+    },
+    {
+      "bundle": "KN-Out-of-Bound-a7511af0-2",
+      "source": "libxml2",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Out-of-Bound",
+      "mapping": {
+        "lookahead": [],
+        "length_of": [
+          "len"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 273.8
+    },
+    {
+      "bundle": "KN-Integer-Overflow-10eb89d1-0",
+      "source": "lua",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Integer-Overflow",
+      "mapping": {
+        "decoder_function": [],
+        "input_byte": [],
+        "continuation_count": [
+          "count"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 248.6
+    },
+    {
+      "bundle": "KN-Misuse-bc4bbcef-0",
+      "source": "lua",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Misuse",
+      "mapping": {
+        "combined_create_and_publish": [],
+        "object_initializer": [
+          "Curl_init_do",
+          "vquic_ctx_init",
+          "Curl_MD5_init",
+          "Curl_HMAC_init",
+          "Curl_cf_create"
+        ],
+        "persistent_registry_lookup": [
+          "Curl_meta_get",
+          "Curl_conn_meta_get",
+          "Curl_altsvc_lookup"
+        ],
+        "object_allocator": [
+          "ALLOC_SIZE",
+          "ALLOC_SIZE2",
+          "config_alloc",
+          "Curl_fileinfo_alloc",
+          "Curl_ftp_parselist_data_alloc"
+        ],
+        "registry_store": [
+          "Curl_meta_set",
+          "Curl_conn_meta_set",
+          "Curl_schannel_set_cached_cert_store",
+          "Curl_ssl_setup_x509_store",
+          "Curl_wssl_setup_x509_store"
+        ],
+        "registry_key": [
+          "Curl_ssl_peer_key_make"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 290.3
+    },
+    {
+      "bundle": "KN-Use-After-Free-22974326-2",
+      "source": "lua",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Use-After-Free",
+      "mapping": {
+        "gc_managed_object": [],
+        "potential_gc_trigger": [],
+        "gc_root_anchor": [],
+        "weak_reference_container": [],
+        "use_after_free_use": []
+      },
+      "status": "no equivalent roles"
+    },
+    {
+      "bundle": "KN-Buffer-Overflow-a7200804-1",
+      "source": "sqlite",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Buffer-Overflow",
+      "mapping": {
+        "buffer_grow": [
+          "Curl_saferealloc",
+          "curl_dbg_realloc"
+        ],
+        "required_capacity": [
+          "len",
+          "mvsnprintf"
+        ],
+        "write_pointer": [],
+        "digit_set": [],
+        "output_buffer": [
+          "buffer"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 338.5
+    },
+    {
+      "bundle": "KN-Integer-Overflow-720d3afa-0",
+      "source": "sqlite",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Integer-Overflow",
+      "mapping": {
+        "payload_length": [
+          "Curl_creader_total_length",
+          "Curl_creader_client_length",
+          "Curl_creader_def_total_length",
+          "Curl_bufq_len",
+          "curlx_dyn_len"
+        ],
+        "local_payload_length": [
+          "Curl_creader_client_length",
+          "Curl_bufq_len",
+          "curlx_dyn_len"
+        ],
+        "overflow_chunk_size": [
+          "Curl_httpchunk_init",
+          "Curl_httpchunk_read",
+          "Curl_httpchunk_reset",
+          "Curl_httpchunk_is_done",
+          "Curl_httpchunk_add_reader",
+          "Curl_bufq_init"
+        ],
+        "overflow_page_cache": [
+          "Curl_dnscache_add",
+          "Curl_dnscache_get",
+          "Curl_dnscache_init",
+          "Curl_dnscache_clear",
+          "Curl_dnscache_prune",
+          "Curl_dnscache_destroy",
+          "Curl_dnscache_mk_entry",
+          "Curl_ssl_scache_put",
+          "Curl_ssl_scache_take",
+          "Curl_ssl_scache_create",
+          "Curl_ssl_scache_destroy",
+          "Curl_ssl_scache_return",
+          "Curl_ssl_scache_remove_all",
+          "Curl_ssl_scache_add_obj",
+          "Curl_ssl_scache_get_obj",
+          "Curl_uint_bset_resize",
+          "Curl_uint_bset_count",
+          "Curl_uint_tbl_resize",
+          "Curl_uint_tbl_count"
+        ],
+        "reallocator": [
+          "Curl_saferealloc",
+          "curl_dbg_realloc",
+          "Curl_nghttp2_realloc",
+          "Curl_uint_tbl_resize",
+          "Curl_uint_bset_resize"
+        ],
+        "allocated_size_query": [],
+        "zero_initializer": [
+          "memset",
+          "Curl_dnscache_init",
+          "Curl_ssl_scache_create",
+          "Curl_bufq_init",
+          "Curl_hash_init",
+          "Curl_llist_init",
+          "Curl_dynhds_init",
+          "Curl_altsvc_init",
+          "Curl_hsts_init",
+          "Curl_cookie_init"
+        ],
+        "cache_index": [
+          "Curl_conn_sockindex",
+          "CONN_SOCK_IDX_VALID",
+          "Curl_dnscache_get",
+          "Curl_ssl_scache_take"
+        ],
+        "too_narrow_arithmetic_type": [
+          "int",
+          "Curl_uint_tbl_resize",
+          "Curl_uint_bset_resize",
+          "Curl_bump_headersize",
+          "ALLOC_SIZE",
+          "ALLOC_SIZE2",
+          "CURL_ARRAYSIZE"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 332.9
+    },
+    {
+      "bundle": "KN-Integer-Overflow-d87f8c49-0",
+      "source": "sqlite",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Integer-Overflow",
+      "mapping": {
+        "length_of": [],
+        "character_count_bound": [
+          "precision"
+        ],
+        "iterator_advance": [],
+        "output_length": [
+          "length"
+        ],
+        "narrowing_cast": [],
+        "safe_cap": [
+          "CURLMIN"
+        ],
+        "buffer_append": [
+          "curlx_dyn_addn"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 316.1
+    },
+    {
+      "bundle": "KN-Misuse-1bc183a9-1",
+      "source": "sqlite",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Misuse",
+      "mapping": {
+        "tokenizer": [],
+        "dequote_helper": [],
+        "illegal_token_sentinel": [],
+        "dequoter_with_precondition": [
+          "curlx_str_quotedword"
+        ],
+        "caller_ignoring_sentinel": []
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 487.2
+    }
+  ]
+}

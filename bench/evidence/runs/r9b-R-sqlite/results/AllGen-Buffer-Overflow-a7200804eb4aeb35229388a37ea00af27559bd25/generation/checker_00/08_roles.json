@@ -1,0 +1,22 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "allocator": {
+      "names": [
+        "sqlite3StrAccumEnlargeIfNeeded"
+      ],
+      "description": "ensures/reserves capacity for a buffer; its size argument is the number of bytes to reserve for subsequent writes"
+    },
+    "buffer_copy": {
+      "names": [
+        "memcpy",
+        "memset",
+        "memmove"
+      ],
+      "description": "copies or writes a specified number of bytes into a destination buffer"
+    }
+  }
+}

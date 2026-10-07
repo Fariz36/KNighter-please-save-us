@@ -1,0 +1,8 @@
+## Bug Pattern
+
+An allocation/initialization count is computed from an untrusted size using arithmetic in a too-narrow integer type (32-bit), then passed as a size/count argument to a `reallocator` and an `init`. The count expression can overflow/wrap before the division, producing a much smaller overflow-page count. The `reallocator` then allocates a cache that is too small, and later indexed writes into that cache can run past the allocation. The fix widens the count to 64 bits before the arithmetic and before multiplying by the element size.
+
+Roles:
+- `reallocator`: `sqlite3Realloc`
+- `length_of`: `sqlite3MallocSize`
+- `init`: `memset`

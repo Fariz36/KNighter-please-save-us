@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A caller-supplied input struct is dereferenced and its payload pointer is used as the source of a `buffer_copy` (or stored for later use) without validating that the payload pointer is non-NULL. The code checks the input struct pointer, the length, and the `allocator` result, but not the payload pointer. Therefore, if the payload pointer is NULL while the length is nonzero, the copy/dereference can crash.
+
+Roles:
+- `allocator`: `curlx_malloc`
+- `deallocator`: `curlx_safefree`
+- `buffer_copy`: `memcpy`
+- `null_on_failure`: `curlx_malloc`

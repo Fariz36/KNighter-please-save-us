@@ -1,0 +1,32 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "length_of": {
+      "names": [
+        "strlen"
+      ],
+      "description": "returns the length of a NUL-terminated string by scanning for a NUL byte"
+    },
+    "error_setter": {
+      "names": [
+        "failf"
+      ],
+      "description": "printf-style function that records an error message; its format arguments must be valid C strings"
+    },
+    "logger": {
+      "names": [
+        "infof"
+      ],
+      "description": "printf-style function that logs a message; its format arguments must be valid C strings"
+    },
+    "untrusted_size": {
+      "names": [
+        "ASN1_STRING_length"
+      ],
+      "description": "returns the explicit length of a length-delimited buffer; the buffer is not guaranteed to be NUL-terminated"
+    }
+  }
+}

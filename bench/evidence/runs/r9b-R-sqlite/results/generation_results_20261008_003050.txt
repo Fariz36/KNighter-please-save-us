@@ -1,0 +1,7 @@
+1bc183a935799050919eecf4f5deffb6d98e7905,Misuse,True
+a7200804eb4aeb35229388a37ea00af27559bd25,Buffer-Overflow,False
+7b60ed803b8da478bbdbae0147121abfc0b9dc2a,Memory-Leak,False
+d87f8c4965497148a2cb0cc696ce557d5961cf87,Integer-Overflow,False
+97467fa8fa3219c71868cc2bd370536f017b4e42,Integer-Overflow,False
+720d3afa7eb0c09fcd20c3dc74c7f047c01f7dbe,Integer-Overflow,True
+2f5d281796853250befde5f83dfe8b909c4a5b39,Integer-Overflow,False

@@ -1,0 +1,32 @@
+{
+  "role_based": true,
+  "initial_findings": [
+    "aborting_assert"
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "result": "compiled",
+      "remaining": []
+    }
+  ],
+  "final_findings": [],
+  "roles": {
+    "length_of": {
+      "names": [
+        "encoder_base64_size"
+      ],
+      "description": "computes an expanded/encoded output length from an input size; callers trust the returned length"
+    },
+    "untrusted_size": {
+      "names": [],
+      "description": "a function or macro that returns an untrusted size; in this project the input is a struct field, so it is recognized structurally rather than by name"
+    },
+    "aborting_assert": {
+      "names": [
+        "aborting_assert"
+      ],
+      "description": "macro that stops execution when its condition is false, so a branch containing it terminates"
+    }
+  }
+}

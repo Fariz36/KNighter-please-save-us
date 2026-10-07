@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A count of elements for a dynamically grown array is computed using narrow (32-bit) unsigned arithmetic before the result is passed to a `reallocator` and an `init` routine. Because the addition/subtraction can wrap, the computed count becomes too small; the `reallocator` allocates less memory and the `init` routine clears fewer entries than the later code assumes when indexing the array with an offset derived from the same payload size. The fix forces the count computation to be evaluated in a 64-bit type.
+
+Roles:
+- `reallocator`: `sqlite3Realloc` — resizes the overflow page cache.
+- `length_of`: `sqlite3MallocSize` — used to compare the existing allocation size against the computed count.
+- `init`: `memset` — zero-initializes the computed number of cache entries.

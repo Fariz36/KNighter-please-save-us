@@ -1,0 +1,470 @@
+{
+  "tag": "curl-8_16_0",
+  "base_rate": {
+    "functions": 3354,
+    "later_fixed": 327,
+    "rate": 0.0975
+  },
+  "results": [
+    {
+      "bundle": "KN-Double-Free-26dfab2f-2",
+      "source": "libxml2",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Double-Free",
+      "mapping": {
+        "parser_input": [
+          "Curl_cf_create"
+        ],
+        "null_on_failure": [
+          "Curl_cf_create"
+        ],
+        "deallocator": [
+          "vquic_ctx_free"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 222.8
+    },
+    {
+      "bundle": "KN-Misuse-c8eaf223-2",
+      "source": "libxml2",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Misuse",
+      "mapping": {
+        "init": [
+          "Curl_addrinfo_set_port"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 265.4
+    },
+    {
+      "bundle": "KN-Null-Pointer-Dereference-962bd10d-2",
+      "source": "libxml2",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Null-Pointer-Dereference",
+      "mapping": {
+        "allocator": [
+          "config_alloc",
+          "Curl_fileinfo_alloc",
+          "Curl_ftp_parselist_data_alloc",
+          "Curl_saferealloc",
+          "Curl_uint_tbl_resize",
+          "Curl_uint_bset_resize",
+          "file2memory",
+          "file2memory_range",
+          "varexpand"
+        ],
+        "reallocator": [
+          "curl_dbg_realloc",
+          "Curl_saferealloc",
+          "Curl_nghttp2_realloc",
+          "Curl_crealloc",
+          "realloc"
+        ]
+      },
+      "status": "scanned",
+      "reports": 5,
+      "functions_reported": 2,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "lib/uint-bset.c",
+          "line": 64,
+          "function": "Curl_uint_bset_resize",
+          "description": "Pointer parameter dereferenced before NULL check",
+          "later_fixes": []
+        },
+        {
+          "file": "lib/uint-table.c",
+          "line": 87,
+          "function": "Curl_uint_tbl_resize",
+          "description": "Pointer parameter dereferenced before NULL check",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 191.1
+    },
+    {
+      "bundle": "KN-Out-of-Bound-a7511af0-0",
+      "source": "libxml2",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Out-of-Bound",
+      "mapping": {
+        "indexed_read": [
+          "Curl_read16_be",
+          "Curl_read16_le",
+          "Curl_read32_le"
+        ],
+        "length_of": [
+          "strlen",
+          "Curl_bufq_len",
+          "curlx_dyn_len",
+          "Curl_bufref_len"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 243.3
+    },
+    {
+      "bundle": "KN-Misuse-bc4bbcef-0",
+      "source": "lua",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Misuse",
+      "mapping": {
+        "allocator": [
+          "config_alloc",
+          "Curl_fileinfo_alloc",
+          "Curl_ftp_parselist_data_alloc",
+          "file2memory",
+          "wakeup_create",
+          "Curl_cf_create",
+          "file2memory_range",
+          "Curl_cf_tcp_create",
+          "Curl_cf_udp_create",
+          "Curl_thread_create",
+          "Curl_cf_quic_create",
+          "Curl_cf_unix_create",
+          "Curl_creader_create",
+          "Curl_cwriter_create",
+          "Curl_pollset_create",
+          "Curl_cf_osslq_create",
+          "create_dir_hierarchy",
+          "Curl_cf_ngtcp2_create",
+          "Curl_cf_quiche_create",
+          "Curl_ssl_scache_create",
+          "Curl_ssl_session_create",
+          "tool_create_output_file",
+          "Curl_create_sspi_identity",
+          "Curl_gtls_shared_creds_create",
+          "Curl_auth_create_login_message",
+          "Curl_auth_create_plain_message",
+          "Curl_http_proxy_create_CONNECT",
+          "Curl_auth_create_spnego_message",
+          "Curl_ccalloc",
+          "Curl_cmalloc",
+          "Curl_crealloc",
+          "Curl_cstrdup"
+        ],
+        "container_insert": [
+          "Curl_meta_set",
+          "Curl_conn_meta_set",
+          "Curl_llist_insert_next",
+          "Curl_splayinsert",
+          "Curl_conn_cf_insert_after",
+          "Curl_cf_ssl_insert_after",
+          "cf_ip_happy_insert_after",
+          "Curl_cf_setup_insert_after",
+          "Curl_cf_haproxy_insert_after",
+          "Curl_cf_h1_proxy_insert_after",
+          "Curl_cf_h2_proxy_insert_after",
+          "Curl_cf_ssl_proxy_insert_after",
+          "Curl_cf_http_proxy_insert_after",
+          "Curl_cf_socks_proxy_insert_after",
+          "Curl_hash_add",
+          "Curl_hash_add2"
+        ],
+        "lookup": [
+          "Curl_meta_get",
+          "Curl_conn_meta_get",
+          "Curl_meta_set",
+          "Curl_conn_meta_set",
+          "Curl_altsvc_lookup",
+          "Curl_cipher_suite_lookup_id"
+        ],
+        "init": [
+          "de_init",
+          "win32_init",
+          "Curl_init_do",
+          "Curl_pp_init",
+          "easysrc_init",
+          "sigpipe_init",
+          "Curl_MD5_init",
+          "Curl_req_init",
+          "Curl_ssh_init",
+          "Curl_ssl_init",
+          "Curl_trc_init",
+          "Curl_HMAC_init",
+          "Curl_bufq_init",
+          "Curl_hash_init",
+          "Curl_hsts_init",
+          "Curl_sasl_init",
+          "curl_easy_init",
+          "curl_mime_init",
+          "curlx_dyn_init",
+          "curlx_now_init",
+          "curlx_str_init",
+          "vquic_ctx_init",
+          "Curl_amiga_init",
+          "Curl_bufcp_init",
+          "Curl_cpool_init",
+          "Curl_llist_init",
+          "Curl_macos_init",
+          "Curl_mutex_init",
+          "Curl_netrc_init",
+          "Curl_vquic_init",
+          "Curl_win32_init",
+          "curl_multi_init",
+          "curl_share_init",
+          "globalconf_init",
+          "Curl_altsvc_init",
+          "Curl_bufref_init",
+          "Curl_cookie_init",
+          "Curl_dynhds_init",
+          "Curl_sndbuf_init",
+          "curl_global_init"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 348.2
+    },
+    {
+      "bundle": "KN-Use-After-Free-22974326-2",
+      "source": "lua",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Use-After-Free",
+      "mapping": {
+        "gc_trigger": [],
+        "ref_get": []
+      },
+      "status": "no equivalent roles"
+    },
+    {
+      "bundle": "KN-Integer-Overflow-720d3afa-0",
+      "source": "sqlite",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Integer-Overflow",
+      "mapping": {
+        "allocated_size": [],
+        "reallocator": [
+          "Curl_saferealloc",
+          "curl_dbg_realloc",
+          "Curl_nghttp2_realloc",
+          "Curl_uint_tbl_resize",
+          "Curl_uint_bset_resize"
+        ],
+        "null_on_failure": [
+          "Curl_saferealloc",
+          "curl_dbg_realloc",
+          "Curl_nghttp2_realloc"
+        ],
+        "initializer": [
+          "memset"
+        ]
+      },
+      "status": "scanned",
+      "reports": 0,
+      "functions_reported": 0,
+      "hits": 0,
+      "hit_rate": null,
+      "judged_positive": [],
+      "report_list": [],
+      "seconds": 299.3
+    },
+    {
+      "bundle": "KN-Memory-Leak-7b60ed80-1",
+      "source": "sqlite",
+      "target": "curl",
+      "tag": "curl-8_16_0",
+      "bug_type": "Memory-Leak",
+      "mapping": {
+        "allocator": [
+          "ALLOC_SIZE",
+          "ALLOC_SIZE2",
+          "config_alloc",
+          "Curl_fileinfo_alloc",
+          "Curl_ftp_parselist_data_alloc",
+          "new_getout",
+          "Curl_MD5_init",
+          "Curl_HMAC_init",
+          "Curl_hsts_init",
+          "curl_easy_init",
+          "curl_mime_init"
+        ],
+        "duplicator": [
+          "Curl_strdup",
+          "curl_url_dup",
+          "Curl_slist_duplicate"
+        ],
+        "null_on_failure": [
+          "ALLOC_SIZE",
+          "ALLOC_SIZE2",
+          "config_alloc",
+          "Curl_fileinfo_alloc",
+          "Curl_ftp_parselist_data_alloc",
+          "new_getout",
+          "Curl_MD5_init",
+          "Curl_HMAC_init",
+          "Curl_hsts_init",
+          "curl_easy_init",
+          "curl_mime_init",
+          "Curl_strdup",
+          "curl_url_dup",
+          "Curl_slist_duplicate"
+        ],
+        "container_insert": [
+          "Curl_llist_insert_next",
+          "Curl_llist_append",
+          "Curl_slist_append_nodup",
+          "Curl_conn_cf_insert_after",
+          "Curl_splayinsert"
+        ],
+        "deallocator": [
+          "curl_free",
+          "curl_dbg_free",
+          "curl_slist_free_all",
+          "Curl_llist_destroy",
+          "Curl_ftp_parselist_data_free",
+          "config_free",
+          "Curl_freeset",
+          "Curl_req_free",
+          "Curl_bufq_free",
+          "Curl_conn_free",
+          "curl_mime_free",
+          "curlx_dyn_free",
+          "tool_mime_free",
+          "vquic_ctx_free",
+          "Curl_bufcp_free",
+          "globalconf_free",
+          "Curl_bufref_free",
+          "Curl_dynhds_free",
+          "Curl_creader_free",
+          "Curl_cwriter_free",
+          "Curl_nghttp2_free",
+          "Curl_http_req_free",
+          "Curl_http_resp_free",
+          "Curl_httpchunk_free",
+          "Curl_h1_req_parse_free",
+          "Curl_ssl_free_certinfo",
+          "curl_certinfo_free_all",
+          "Curl_sspi_free_identity",
+          "Curl_gtls_shared_creds_free",
+          "Curl_free_idnconverted_hostname",
+          "Curl_ws_free",
+          "slist_wc_free_all",
+          "Curl_close",
+          "de_cleanup",
+          "varcleanup",
+          "connclose"
+        ]
+      },
+      "status": "scanned",
+      "reports": 13,
+      "functions_reported": 7,
+      "hits": 2,
+      "hit_rate": 0.2857,
+      "judged_positive": [],
+      "report_list": [
+        {
+          "file": "lib/formdata.c",
+          "line": 914,
+          "function": "Curl_getformdata",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": [
+            {
+              "commit": "4fb12f289189e8113967e9c9da09958fd8bfa4cb",
+              "subject": "mime: fix use of fseek()",
+              "type": "Misuse"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "4fb12f289189e8113967e9c9da09958fd8bfa4cb",
+              "fixes": false,
+              "reason": "The later commit only replaces the fseek wrapper with Curl_fseeko and does not address the reported memory leak from an allocator/duplicator value not being inserted or deallocated."
+            }
+          ]
+        },
+        {
+          "file": "lib/hmac.c",
+          "line": 167,
+          "function": "Curl_hmacit",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lib/http.c",
+          "line": 2063,
+          "function": "http_target",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": [
+            {
+              "commit": "a479459ea39ac0e7de37237f9f0ba9a0c9d7f470",
+              "subject": "http: fix non-tunneling proxy hostname use",
+              "type": "Misuse"
+            }
+          ],
+          "judged": [
+            {
+              "commit": "a479459ea39ac0e7de37237f9f0ba9a0c9d7f470",
+              "fixes": false,
+              "reason": "The commit only changes the IPv6/hostname condition and comment in http_target, not any allocation ownership or deallocation path related to the reported leak."
+            }
+          ]
+        },
+        {
+          "file": "lib/mime.c",
+          "line": 1272,
+          "function": "Curl_mime_duppart",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lib/pop3.c",
+          "line": 590,
+          "function": "pop3_perform_apop",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lib/vauth/cram.c",
+          "line": 74,
+          "function": "Curl_auth_create_cram_md5_message",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        },
+        {
+          "file": "lib/vauth/digest.c",
+          "line": 380,
+          "function": "Curl_auth_create_digest_md5_message",
+          "description": "Memory leak: value from allocator/duplicator not inserted or deallocated",
+          "later_fixes": []
+        }
+      ],
+      "seconds": 409.3
+    }
+  ]
+}

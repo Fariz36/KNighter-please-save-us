@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "weak_lookup": {
+      "names": [
+        "fasttm"
+      ],
+      "description": "lookup that may return a non-owning/weak reference to an object; the object may be collected unless anchored"
+    },
+    "allocator": {
+      "names": [
+        "luaH_finishset"
+      ],
+      "description": "call that may allocate memory and trigger emergency garbage collection; weakly referenced objects passed to it must be anchored beforehand"
+    },
+    "ref_get": {
+      "names": [
+        "sethvalue2s"
+      ],
+      "description": "stores an object pointer into a GC-visible root, making it strongly reachable/anchored"
+    }
+  }
+}

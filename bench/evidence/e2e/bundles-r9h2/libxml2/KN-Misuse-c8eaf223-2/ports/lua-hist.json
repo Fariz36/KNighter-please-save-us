@@ -1,0 +1,62 @@
+{
+  "target": "lua",
+  "commit": "cfce6f4b20afe85ede2182b3df3ab2bfcdb0e692",
+  "candidates": 841,
+  "identifiers": 7223,
+  "offered": {
+    "init": [
+      "lua_call",
+      "luaD_call",
+      "luaT_callTM",
+      "luaG_callerror",
+      "luaT_callTMres",
+      "luaH_new",
+      "luaH_set",
+      "luaM_new",
+      "luaS_new",
+      "lua_copy",
+      "upisopen",
+      "CREATE_Ax",
+      "CREATE_sJ",
+      "luaS_init",
+      "luaT_init",
+      "luaX_init",
+      "luaZ_init",
+      "lua_Alloc",
+      "lua_error",
+      "CREATE_ABx",
+      "SET_OPCODE",
+      "luaL_error",
+      "luaM_error",
+      "luaopen_io",
+      "luaopen_os",
+      "CREATE_ABCk",
+      "makevariant",
+      "CREATE_vABCk",
+      "luaM_malloc_",
+      "luaopen_base",
+      "luaopen_math",
+      "luaopen_utf8",
+      "allocsizenode",
+      "debug_realloc",
+      "luaG_errormsg",
+      "luaG_forerror",
+      "luaG_runerror",
+      "luaK_semerror",
+      "luaL_argerror",
+      "luaL_buffinit"
+    ]
+  },
+  "mapping": {
+    "init": [
+      "lua_gc"
+    ]
+  },
+  "dropped_not_in_target": {
+    "init": []
+  },
+  "rationale": {
+    "init": "lua_gc with LUA_GCSETSTEPMUL stores the caller-supplied step multiplier into the global state, which is later used as a divisor in luaC_step."
+  },
+  "llm_seconds": 116.8
+}

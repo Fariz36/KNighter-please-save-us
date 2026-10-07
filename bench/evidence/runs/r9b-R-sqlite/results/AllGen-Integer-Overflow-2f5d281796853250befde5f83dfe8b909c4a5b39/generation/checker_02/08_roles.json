@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "aborting_assert": {
+      "names": [
+        "assert"
+      ],
+      "description": "Macro that aborts execution when its condition is false."
+    },
+    "length_of": {
+      "names": [
+        "sqlite3_value_bytes"
+      ],
+      "description": "Returns the length in bytes of a value; used to compute size bounds."
+    }
+  }
+}

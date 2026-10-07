@@ -1,0 +1,81 @@
+{
+  "length_of": [
+    "strlen",
+    "sqlite3Strlen30"
+  ],
+  "untrusted_size": [
+    "sqlite3_value_bytes",
+    "sqlite3_column_bytes",
+    "sqlite3_value_bytes16",
+    "sqlite3_column_bytes16",
+    "lsmFsPageSize"
+  ],
+  "untrusted_data_accessor": [
+    "sqlite3_value_blob",
+    "sqlite3_column_blob",
+    "lsmFsPageData",
+    "lsmFsMetaPageData",
+    "fts3HashData",
+    "sqliteHashData"
+  ],
+  "allocator": [
+    "sqlite3_malloc",
+    "sqlite3_malloc64",
+    "sqlite3_realloc",
+    "sqlite3_realloc64",
+    "sqlite3DbMallocRaw",
+    "sqlite3DbMallocRawNN",
+    "sqlite3DbMallocZero",
+    "sqlite3StackAllocRaw",
+    "sqlite3StackAllocRawNN"
+  ],
+  "deallocator": [
+    "sqlite3_free",
+    "sqlite3_free_table",
+    "sqlite3_free_filename",
+    "sqlite3_snapshot_free",
+    "sqlite3_value_free",
+    "sqlite3_mutex_free",
+    "sqlite3DbFree",
+    "sqlite3DbFreeNN",
+    "sqlite3PageFree",
+    "sqlite3StackFree",
+    "sqlite3StackFreeNN",
+    "sqlite3ValueFree",
+    "sqlite3ParserFree",
+    "sqlite3FreeIndex",
+    "sqlite3DbReallocOrFree",
+    "sqlite3_release_memory",
+    "lsmFree",
+    "lsm_free",
+    "lsmBlockFree",
+    "lsmFreeSnapshot",
+    "lsmReallocOrFree",
+    "lsmReallocOrFreeRc",
+    "lsmSortedFreeLevel",
+    "sqlite3Fts3ExprFree",
+    "sqlite3Fts5ExprFree",
+    "sqlite3Fts5HashFree",
+    "sqlite3Fts5BufferFree",
+    "sqlite3Fts5ConfigFree",
+    "sqlite3Fts5TermsetFree",
+    "sqlite3Fts3MIBufferFree",
+    "sqlite3Fts5StorageReleaseDeleteRow",
+    "sqlite3OsCloseFree",
+    "lsmFsCloseAndDeleteLog",
+    "testFree",
+    "testCksumArrayFree",
+    "testDatasourceFree",
+    "lsmMCursorFreeCache",
+    "sqlite3Stat4ProbeFree",
+    "sqlite3VdbeFreeCursor",
+    "fts5BufferFree"
+  ],
+  "error_setter": [
+    "sqlite3ErrorMsg",
+    "sqlite3VdbeError",
+    "sqlite3Fts3ErrMsg",
+    "testPrintError",
+    "sqlite3_log"
+  ]
+}

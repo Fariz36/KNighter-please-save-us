@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "string_search": {
+      "names": [
+        "strchr"
+      ],
+      "description": "finds the first occurrence of a character in a NUL-terminated string and returns a pointer to it or NULL"
+    },
+    "character_classifier": {
+      "names": [
+        "ISDIGIT"
+      ],
+      "description": "macro or function that classifies a character, e.g., tests if it is a digit"
+    }
+  }
+}

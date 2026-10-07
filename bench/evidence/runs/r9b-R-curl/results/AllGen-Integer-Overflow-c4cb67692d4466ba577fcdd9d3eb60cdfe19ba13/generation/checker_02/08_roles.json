@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "Curl_read16_le"
+      ],
+      "description": "reads an integer field from untrusted parser input"
+    },
+    "buffer_copy": {
+      "names": [
+        "Curl_client_write"
+      ],
+      "description": "copies data from a buffer to an output/sink"
+    },
+    "error_setter": {
+      "names": [
+        "failf"
+      ],
+      "description": "printf-style function that records an error message; its format arguments must be valid C strings"
+    }
+  }
+}

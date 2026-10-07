@@ -1,0 +1,63 @@
+{
+  "target": "sqlite",
+  "commit": "3f523613528194d3487853ed6e5367c6f215ec4f",
+  "candidates": 2450,
+  "identifiers": 48016,
+  "offered": {
+    "init": [
+      "sqlite3VtabCallCreate",
+      "testErrorInit",
+      "testMallocCopy",
+      "lsmMallocStrdup",
+      "sqlite3MallocInit",
+      "sqlite3RowSetInit",
+      "sqlite3ReportError",
+      "sqlite3OsOpenMalloc",
+      "sqlite3CantopenError",
+      "sqlite3SetMakeRecordP5",
+      "sqlite3StrAccumSetError",
+      "sqlite3VdbeMemSetRowSet",
+      "sqlite3ExprSetErrorOffset",
+      "sqlite3Fts5ConfigSetValue",
+      "sqlite3ValueNew",
+      "sqlite3_value_dup",
+      "sqlite3ValueSetStr",
+      "sqlite3ValueSetNull",
+      "sqlite3ParseObjectInit",
+      "sqlite3SetTextEncoding",
+      "sqlite3VtabCallConnect",
+      "sqlite3VtabCallDestroy",
+      "sqlite3IsNumericAffinity",
+      "sqlite3Stat4ProbeSetValue",
+      "sqlite3ValueApplyAffinity",
+      "sqlite3AllocateIndexObject",
+      "sqlite3VdbeAddFunctionCall",
+      "MAX",
+      "isOpen",
+      "LSM_MAX",
+      "lsm_new",
+      "lsm_open",
+      "tdb_open",
+      "testOpen",
+      "DbMaskSet",
+      "__va_copy",
+      "lsmFsOpen",
+      "lsmMalloc",
+      "isMalloced",
+      "lsmEnvOpen"
+    ]
+  },
+  "mapping": {
+    "init": [
+      "sqlite3Fts5ConfigSetValue",
+      "sqlite3SetTextEncoding"
+    ]
+  },
+  "dropped_not_in_target": {
+    "init": []
+  },
+  "rationale": {
+    "init": "These are SQLite setters that store caller-supplied numeric configuration values into a context object (FTS5 configuration and database text encoding, respectively)."
+  },
+  "llm_seconds": 177.0
+}

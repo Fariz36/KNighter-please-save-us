@@ -1,0 +1,24 @@
+{
+  "nullable_inout_capacity_ptr": [
+    "capacity"
+  ],
+  "capacity_computer": [],
+  "reallocator": [
+    "Curl_saferealloc",
+    "curl_dbg_realloc",
+    "Curl_nghttp2_realloc",
+    "Curl_uint_tbl_resize",
+    "Curl_uint_bset_resize"
+  ],
+  "deref_read": [],
+  "deref_write": [],
+  "null_guard": [],
+  "null_on_failure": [
+    "Curl_saferealloc",
+    "curl_dbg_realloc",
+    "Curl_nghttp2_realloc",
+    "config_alloc",
+    "Curl_fileinfo_alloc",
+    "Curl_ftp_parselist_data_alloc"
+  ]
+}

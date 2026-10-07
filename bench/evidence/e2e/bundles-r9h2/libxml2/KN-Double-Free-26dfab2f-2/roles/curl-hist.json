@@ -1,0 +1,11 @@
+{
+  "parser_input": [
+    "Curl_cf_create"
+  ],
+  "null_on_failure": [
+    "Curl_cf_create"
+  ],
+  "deallocator": [
+    "vquic_ctx_free"
+  ]
+}

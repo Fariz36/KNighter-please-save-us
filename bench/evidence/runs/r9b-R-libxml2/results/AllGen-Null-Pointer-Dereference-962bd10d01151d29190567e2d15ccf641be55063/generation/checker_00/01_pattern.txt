@@ -1,0 +1,8 @@
+## Bug Pattern
+
+A `reallocator`-style helper dereferences an in/out pointer parameter (`*capacity`) before checking whether that pointer is NULL. The pointer is read for a size/capacity calculation and later written through, so a caller passing NULL causes a NULL-pointer dereference. The fix adds an early NULL guard before any dereference.
+
+Roles:
+- `reallocator`: `xmlGrowArray`, `xmlRealloc` — resize/grow an existing allocation and return the new pointer, possibly NULL on failure.
+- `null_on_failure`: `xmlRealloc` — returns NULL on failure and is already checked.
+- `size_calculator` (invented): `xmlGrowCapacity` — computes a new capacity/size from the current capacity and bounds.

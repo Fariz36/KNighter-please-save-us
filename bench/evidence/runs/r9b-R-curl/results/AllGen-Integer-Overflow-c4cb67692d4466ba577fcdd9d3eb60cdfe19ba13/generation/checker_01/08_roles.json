@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "Curl_read16_le"
+      ],
+      "description": "reads an untrusted size or offset value from parser/network input"
+    },
+    "buffer_copy": {
+      "names": [
+        "Curl_client_write"
+      ],
+      "description": "copies a buffer of a given size to an output or sink"
+    }
+  }
+}

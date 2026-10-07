@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A `container_remove` operation on an embedded member is performed after the containing object has already been zeroed/reset by an `init`/cleanup step. The zeroing destroys the member’s link/ownership state, so the later removal cannot find and unlink the resource, causing a leak. The `container_remove` must happen before the object is reset.
+
+Roles:
+- `container_remove`: `Curl_peer_unlink`
+- `init`/state-reset: `memset` in `cf_h2_proxy_ctx_clear`
+- `cleanup`: `cf_h2_proxy_ctx_clear`
+- `deallocator`: `curlx_free`

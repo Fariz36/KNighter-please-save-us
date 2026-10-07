@@ -1,0 +1,7 @@
+{
+  "gc_managed_object": [],
+  "potential_gc_trigger": [],
+  "gc_root_anchor": [],
+  "weak_reference_container": [],
+  "use_after_free_use": []
+}

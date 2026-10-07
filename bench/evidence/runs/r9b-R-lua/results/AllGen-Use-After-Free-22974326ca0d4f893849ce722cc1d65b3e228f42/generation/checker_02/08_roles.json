@@ -1,0 +1,27 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "weak_ref_get": {
+      "names": [
+        "fasttm",
+        "luaT_gettmbyobj"
+      ],
+      "description": "retrieves a value through a weak reference; the returned object may be collected by an emergency GC if not rooted"
+    },
+    "container_insert": {
+      "names": [
+        "luaH_finishset"
+      ],
+      "description": "mutates a container/table and may allocate memory, potentially triggering an emergency garbage collection"
+    },
+    "ref_get": {
+      "names": [
+        "sethvalue2s"
+      ],
+      "description": "stores an object into a strongly reachable location (e.g., the Lua stack), preventing its collection"
+    }
+  }
+}

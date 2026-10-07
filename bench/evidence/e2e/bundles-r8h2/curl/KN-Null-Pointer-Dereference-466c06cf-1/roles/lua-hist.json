@@ -1,0 +1,21 @@
+{
+  "duplicator": [
+    "luaS_new",
+    "luaS_newlstr"
+  ],
+  "source_handle": [
+    "str"
+  ],
+  "destination_allocator": [
+    "createstrobj",
+    "luaC_newobj",
+    "luaM_newobject",
+    "luaM_malloc_",
+    "luaM_new",
+    "luaM_realloc_"
+  ],
+  "field_copier": [
+    "strlen",
+    "memcpy"
+  ]
+}

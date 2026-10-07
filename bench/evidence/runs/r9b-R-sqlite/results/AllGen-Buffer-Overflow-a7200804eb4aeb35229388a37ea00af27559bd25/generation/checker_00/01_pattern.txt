@@ -1,0 +1,9 @@
+## Bug Pattern
+
+The size passed to an allocator/capacity-reservation routine is computed without accounting for all bytes that a later, flag-controlled rendering path can write. The actual output write can therefore exceed the reserved buffer capacity.
+
+In this patch, the floating-point formatting size formula adds only a fixed 8-byte pad, but the `!` flag can force an additional decimal point and trailing `0` even when precision is zero. Thus `format('%!.0e',-1e100)` needs 10 bytes (including the terminator) while only 8 were reserved, causing the overflow. The fix increases the pad to 10.
+
+Roles:
+- allocator/capacity provider: `sqlite3StrAccumEnlargeIfNeeded`
+- buffer_copy/write: `memcpy`, `memset`, `memmove`, and the direct writes through `bufpt`

@@ -1,0 +1,21 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "SQLITE_SKIP_UTF8"
+      ],
+      "description": "advances a pointer over UTF-8 input and can consume multiple bytes per step"
+    },
+    "buffer_copy": {
+      "names": [
+        "sqlite3_str_append",
+        "sqlite3_str_appendchar"
+      ],
+      "description": "consumes a byte length to append/pad output"
+    }
+  }
+}

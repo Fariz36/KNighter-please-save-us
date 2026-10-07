@@ -1,0 +1,69 @@
+{
+  "target": "lua",
+  "commit": "cfce6f4b20afe85ede2182b3df3ab2bfcdb0e692",
+  "candidates": 841,
+  "identifiers": 7223,
+  "offered": {
+    "out_param_api": [
+      "api_check",
+      "setgcparam",
+      "api_checkpop",
+      "api_incr_top",
+      "applygcparam",
+      "luaO_codeparam",
+      "api_checknelems",
+      "luaO_applyparam",
+      "UNUSED",
+      "ci_func",
+      "lua_call",
+      "cast_func",
+      "check_exp",
+      "luaD_call",
+      "isLfunction",
+      "luaT_callTM",
+      "get_nresults",
+      "luaC_checkGC",
+      "ttisfunction",
+      "adjustresults",
+      "lua_CFunction",
+      "lua_topointer",
+      "lua_writeline",
+      "luaG_callerror",
+      "luaT_callTMres",
+      "lua_isfunction",
+      "luaL_execresult",
+      "luaL_fileresult",
+      "luaL_pushresult",
+      "lua_iscfunction",
+      "lua_pointer2str",
+      "lua_tocfunction",
+      "lua_writestring",
+      "lua_pushcfunction",
+      "luaL_pushresultsize",
+      "lua_writestringerror",
+      "luaM_newvectorchecked"
+    ]
+  },
+  "mapping": {
+    "out_param_api": [
+      "lua_getstack",
+      "lua_getinfo",
+      "luaL_buffinit",
+      "luaL_prepbuffsize",
+      "luaL_prepbuffer",
+      "luaL_addlstring",
+      "luaL_addstring",
+      "luaL_addvalue",
+      "luaL_pushresult",
+      "luaL_pushresultsize",
+      "luaL_addchar"
+    ]
+  },
+  "dropped_not_in_target": {
+    "out_param_api": []
+  },
+  "rationale": {
+    "out_param_api": "These public Lua C API functions and macros accept a caller-supplied pointer (lua_Debug* or luaL_Buffer*) that they write through without first checking for NULL."
+  },
+  "llm_seconds": 177.8
+}

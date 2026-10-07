@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "reallocator": {
+      "names": [
+        "sqlite3Realloc"
+      ],
+      "description": "reallocates a memory block; its size argument is the total requested byte count"
+    },
+    "length_of": {
+      "names": [
+        "sqlite3MallocSize"
+      ],
+      "description": "returns the usable size in bytes of an allocated memory region"
+    },
+    "init": {
+      "names": [
+        "memset"
+      ],
+      "description": "writes a byte value over a given number of bytes; its length argument must not exceed the destination buffer size"
+    }
+  }
+}

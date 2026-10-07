@@ -1,0 +1,7 @@
+## Bug Pattern
+
+An `aborting_assert` condition performs arithmetic on loop counter/index variables that are declared as narrow signed integers (width < 64 bits), while the compared size bound uses a 64-bit type. The arithmetic is evaluated in the narrow counter type, so the sum/difference can overflow before the comparison. This causes signed integer overflow during assertion evaluation when a large maximum length is configured. The fix is to widen the counters to match the 64-bit size bound.
+
+Roles:
+- `aborting_assert`: `assert`
+- `length_of`: `sqlite3_value_bytes`

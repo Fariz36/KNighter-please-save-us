@@ -1,0 +1,45 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "ASN1_STRING_get0_data"
+      ],
+      "description": "returns a pointer to raw certificate field bytes"
+    },
+    "untrusted_size": {
+      "names": [
+        "ASN1_STRING_length"
+      ],
+      "description": "returns the explicit length of those bytes"
+    },
+    "length_of": {
+      "names": [
+        "strlen"
+      ],
+      "description": "computes string length by scanning for a NUL terminator; unsafe for length-delimited buffers"
+    },
+    "error_setter": {
+      "names": [
+        "failf",
+        "infof"
+      ],
+      "description": "printf-style function that records an error/info message; its %s format specifier requires a NUL-terminated string"
+    },
+    "allocator": {
+      "names": [
+        "ASN1_STRING_to_UTF8"
+      ],
+      "description": "allocates a new buffer through an out-parameter and returns its length"
+    },
+    "deallocator": {
+      "names": [
+        "OPENSSL_free"
+      ],
+      "description": "frees a previously allocated buffer"
+    }
+  }
+}

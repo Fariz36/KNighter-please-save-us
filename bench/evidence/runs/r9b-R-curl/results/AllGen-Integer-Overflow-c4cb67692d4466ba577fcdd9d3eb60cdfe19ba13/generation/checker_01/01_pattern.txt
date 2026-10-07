@@ -1,0 +1,10 @@
+## Bug Pattern
+
+The bug pattern is that a size or offset value obtained from a `parser_input` call (untrusted network data) is stored in an integer type narrower than the type used for the subsequent bounds check. This allows the arithmetic in the bounds check to overflow or truncate, bypassing the check and leading to an out-of-bounds `buffer_copy`.
+
+Roles:
+- `parser_input`: `Curl_read16_le` (reads a 16-bit length/offset from the network message)
+- `buffer_copy`: `Curl_client_write` (copies `len` bytes from the message to the client)
+- `untrusted_size`: the values returned by `Curl_read16_le` (the 16-bit length and offset stored in `len` and `off`)
+
+The fix changes the storage of these untrusted size/offset values from `unsigned short` to `size_t` so that the bounds check arithmetic (`off + sizeof(unsigned int) + len > smbc->got`) is performed at the correct width and cannot be bypassed by integer overflow.

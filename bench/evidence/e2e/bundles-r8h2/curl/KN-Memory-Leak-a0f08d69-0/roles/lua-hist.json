@@ -1,0 +1,14 @@
+{
+  "cleanup": [
+    "luaF_closeupval"
+  ],
+  "destructor": [],
+  "state_reset": [
+    "memset",
+    "luaF_closeupval"
+  ],
+  "link_detach": [
+    "luaF_unlinkupval"
+  ],
+  "link_storage": []
+}

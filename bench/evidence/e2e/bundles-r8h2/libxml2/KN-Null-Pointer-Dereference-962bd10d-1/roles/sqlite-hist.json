@@ -1,0 +1,38 @@
+{
+  "nullable_inout_capacity_ptr": [
+    "capacity"
+  ],
+  "capacity_computer": [
+    "sqlite3VdbeMemGrow",
+    "fts5BufferGrow"
+  ],
+  "reallocator": [
+    "sqlite3Realloc",
+    "sqlite3_realloc",
+    "sqlite3_realloc64",
+    "sqlite3DbRealloc",
+    "sqlite3DbReallocOrFree",
+    "sqlite3WhereRealloc",
+    "lsmRealloc",
+    "lsm_realloc",
+    "lsmReallocOrFree",
+    "lsmReallocOrFreeRc",
+    "testRealloc"
+  ],
+  "deref_read": [],
+  "deref_write": [],
+  "null_guard": [],
+  "null_on_failure": [
+    "sqlite3Realloc",
+    "sqlite3_realloc",
+    "sqlite3_realloc64",
+    "sqlite3DbRealloc",
+    "sqlite3DbReallocOrFree",
+    "sqlite3WhereRealloc",
+    "lsmRealloc",
+    "lsm_realloc",
+    "lsmReallocOrFree",
+    "lsmReallocOrFreeRc",
+    "testRealloc"
+  ]
+}

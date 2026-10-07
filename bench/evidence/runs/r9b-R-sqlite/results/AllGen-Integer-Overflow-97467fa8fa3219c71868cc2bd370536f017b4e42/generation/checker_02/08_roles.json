@@ -1,0 +1,20 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "kvvfsDecode"
+      ],
+      "description": "function that decodes an untrusted encoded byte stream and may compute sizes from it"
+    },
+    "init": {
+      "names": [
+        "memset"
+      ],
+      "description": "memory initialization/write function that takes a size argument and writes that many bytes"
+    }
+  }
+}

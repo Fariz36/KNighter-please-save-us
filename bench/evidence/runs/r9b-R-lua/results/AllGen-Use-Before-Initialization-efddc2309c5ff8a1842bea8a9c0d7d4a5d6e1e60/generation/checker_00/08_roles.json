@@ -1,0 +1,27 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "init": {
+      "names": [
+        "prepstate",
+        "reprepstate"
+      ],
+      "description": "initializes or reinitializes a reusable state object; per-use init must reset all mutable fields that can be corrupted by an aborted operation"
+    },
+    "error_setter": {
+      "names": [
+        "luaL_error"
+      ],
+      "description": "reports/raises an error and aborts the current operation without returning normally"
+    },
+    "aborting_assert": {
+      "names": [
+        "lua_assert"
+      ],
+      "description": "macro that aborts execution when its condition is false"
+    }
+  }
+}

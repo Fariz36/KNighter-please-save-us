@@ -1,0 +1,8 @@
+## Bug Pattern
+
+An untrusted decoded length is accumulated with signed integer arithmetic that is narrower than the value being validated. Because the capacity check is performed only after the accumulation, the length can overflow/wrap, causing the bounds check to pass even though the true decoded length is too large. The corrupted length is then used as the size argument to a memory-initialization operation. The fix widens the accumulator/multiplier and checks the running total against the output capacity during decoding.
+
+Roles:
+- `parser_input`: `kvvfsDecode` (reads and decodes the untrusted encoded stream)
+- `untrusted_size`: the run-length value derived from that input and later used as the size argument
+- `init`: `memset` (writes/zero-fills `n` bytes into the output buffer using the computed length)

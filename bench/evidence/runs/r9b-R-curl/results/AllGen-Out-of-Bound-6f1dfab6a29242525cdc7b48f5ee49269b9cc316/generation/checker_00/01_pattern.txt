@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A `string_search` (`strchr`) returns a pointer to a delimiter in an untrusted NUL-terminated input, and the code advances past that delimiter and reads `ptr[1]`, `ptr[2]`, `ptr[3]` before ensuring that `ptr[0]` is not the string terminator. The successful search only proves the delimiter exists; it does not prove that a field follows it. If the delimiter is the last character, the advanced pointer is on `'\0'` and the later indexed reads go out of bounds. The fix adds a non-NUL check on the current byte before the short-circuited accesses to later offsets.
+
+Roles:
+- `string_search`: `strchr`
+- `parser_input`: the untrusted NUL-terminated FTP response string (`str`, `ptr`)
+- `error_setter`: `failf`
+- `predicate`: `ISDIGIT`

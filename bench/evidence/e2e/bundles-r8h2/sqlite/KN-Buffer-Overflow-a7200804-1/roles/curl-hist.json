@@ -1,0 +1,15 @@
+{
+  "buffer_grow": [
+    "Curl_saferealloc",
+    "curl_dbg_realloc"
+  ],
+  "required_capacity": [
+    "len",
+    "mvsnprintf"
+  ],
+  "write_pointer": [],
+  "digit_set": [],
+  "output_buffer": [
+    "buffer"
+  ]
+}

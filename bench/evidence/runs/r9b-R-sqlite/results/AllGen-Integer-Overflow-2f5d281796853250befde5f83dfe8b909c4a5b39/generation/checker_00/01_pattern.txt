@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A loop counter/accumulator is stored in a signed 32-bit integer even though the corresponding buffer-size/limit value is tracked as a 64-bit integer and can exceed the 32-bit range (here due to an extra-large `SQLITE_MAX_LENGTH` in debug builds). When that narrow counter is used in arithmetic inside an `aborting_assert` bounds check, the arithmetic is evaluated in the narrow type before comparison with the wide size, so it can signed-overflow and cause undefined behavior or a false assertion. The fix is to widen the counters to the same 64-bit type as the size value.
+
+Roles:
+- `length_of`: `sqlite3_value_bytes`
+- `allocator`: `contextMalloc`
+- `reallocator`: `sqlite3Realloc`
+- `aborting_assert`: `assert`

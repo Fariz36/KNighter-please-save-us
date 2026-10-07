@@ -1,0 +1,10 @@
+## Bug Pattern
+
+An owning pointer field is overwritten with a newly allocated object without first releasing the object it already owns. Structurally: `owner->ptr = allocator(...)`, where `owner->ptr` is later released by a `deallocator`/`cleanup`; because the old pointer is not freed/ref-put before the assignment, it becomes unreachable and leaks. Repeated calls leak each previously installed object. The fix avoids the allocating overwrite and mutates the already-owned object in place (`*ctxt->sax = *sax`).
+
+Roles:
+- `allocator`: `xmlMalloc`
+- `buffer_copy`: `memcpy`
+- `deallocator` / `cleanup`: `xmlFreeParserCtxt` (frees the context’s owned SAX handler; the missing release is before overwriting)
+- `init`: `xmlSAXVersion`
+- `parser_input`: `xmlCtxtReadMemory`

@@ -1,0 +1,9 @@
+## Bug Pattern
+
+An overflow-page cache entry count is computed with a 32-bit integer temporary from untrusted page payload/local-size fields. The intermediate addition `payload - local + overhead - 1` can wrap in 32-bit arithmetic before division, producing a too-small count. That under-count is then used as the size argument of a `reallocator` and as the length of an `init`/`memset`, so the overflow-page cache is under-allocated and later indexed with the real overflow-page index, causing an out-of-bounds access. The fix widens the count to a 64-bit integer before doing the arithmetic.
+
+Roles:
+- `reallocator`: `sqlite3Realloc`
+- `length_of`: `sqlite3MallocSize`
+- `init`: `memset`
+- `untrusted_size`: the on-disk page payload/local-size fields used in the count calculation

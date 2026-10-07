@@ -1,0 +1,138 @@
+{
+  "target": "lua",
+  "commit": "cfce6f4b20afe85ede2182b3df3ab2bfcdb0e692",
+  "candidates": 841,
+  "identifiers": 7223,
+  "offered": {
+    "duplicator": [
+      "lua_Alloc",
+      "luaH_new",
+      "luaM_new",
+      "luaS_new",
+      "lua_call",
+      "lua_copy",
+      "upisopen",
+      "CREATE_Ax",
+      "CREATE_sJ",
+      "luaD_call",
+      "luaS_init",
+      "luaT_init",
+      "luaX_init",
+      "luaZ_init",
+      "CREATE_ABx",
+      "luaopen_io",
+      "luaopen_os",
+      "CREATE_ABCk",
+      "luaT_callTM",
+      "makevariant",
+      "CREATE_vABCk",
+      "luaM_malloc_",
+      "luaopen_base",
+      "luaopen_math",
+      "luaopen_utf8",
+      "allocsizenode",
+      "debug_realloc",
+      "luaL_buffinit",
+      "luaL_makeseed",
+      "luaL_openlibs",
+      "luaM_realloc_",
+      "lua_getallocf",
+      "lua_setallocf",
+      "luai_openlibs",
+      "luaopen_debug",
+      "luaopen_table",
+      "luaB_opentests",
+      "luaT_callTMres",
+      "luaopen_string",
+      "luaF_initupvals"
+    ],
+    "source_handle": [
+      "luaM_newobject",
+      "luaC_freeallobjects"
+    ],
+    "destination_allocator": [
+      "luaH_new",
+      "luaM_new",
+      "luaS_new",
+      "lua_call",
+      "lua_copy",
+      "upisopen",
+      "CREATE_Ax",
+      "CREATE_sJ",
+      "luaD_call",
+      "luaS_init",
+      "luaT_init",
+      "luaX_init",
+      "luaZ_init",
+      "lua_Alloc",
+      "CREATE_ABx",
+      "luaopen_io",
+      "luaopen_os",
+      "CREATE_ABCk",
+      "luaT_callTM",
+      "makevariant",
+      "CREATE_vABCk",
+      "luaM_malloc_",
+      "luaopen_base",
+      "luaopen_math",
+      "luaopen_utf8",
+      "allocsizenode",
+      "debug_realloc",
+      "luaL_buffinit",
+      "luaL_makeseed",
+      "luaL_openlibs",
+      "luaM_realloc_",
+      "lua_getallocf",
+      "lua_setallocf",
+      "luai_openlibs",
+      "luaopen_debug",
+      "luaopen_table",
+      "luaB_opentests",
+      "luaT_callTMres",
+      "luaopen_string",
+      "luaF_initupvals"
+    ],
+    "field_copier": [
+      "lua_getfield",
+      "lua_setfield",
+      "luaL_getmetafield",
+      "nodefromval",
+      "lua_topointer",
+      "lua_pointer2str"
+    ]
+  },
+  "mapping": {
+    "duplicator": [
+      "luaS_new",
+      "luaS_newlstr"
+    ],
+    "source_handle": [
+      "str"
+    ],
+    "destination_allocator": [
+      "createstrobj",
+      "luaC_newobj",
+      "luaM_newobject",
+      "luaM_malloc_",
+      "luaM_new",
+      "luaM_realloc_"
+    ],
+    "field_copier": [
+      "strlen",
+      "memcpy"
+    ]
+  },
+  "dropped_not_in_target": {
+    "duplicator": [],
+    "source_handle": [],
+    "destination_allocator": [],
+    "field_copier": []
+  },
+  "rationale": {
+    "duplicator": "Both functions duplicate a C string into a newly allocated Lua TString and accept a nullable source pointer.",
+    "source_handle": "The source C string parameter in luaS_new and luaS_newlstr that may be NULL.",
+    "destination_allocator": "Allocators that create the destination TString directly (createstrobj/luaC_newobj) or through general Lua memory allocation routines.",
+    "field_copier": "Operations that dereference the source string pointer to compute length or copy its contents into the new TString."
+  },
+  "llm_seconds": 515.6
+}

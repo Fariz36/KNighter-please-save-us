@@ -1,0 +1,9 @@
+## Bug Pattern
+
+A raw pointer to an object is obtained from a weakly referenced location and then used across an operation that can allocate and trigger emergency garbage collection. The object is not first anchored as a strong root, so the weak reference can be cleared and the object reclaimed; the later use/update through the saved pointer is a use-after-free. The fix temporarily stores the object in a GC-visible root before the collection-triggering call.
+
+Roles:
+- `allocator` / collection trigger: `luaH_finishset` (may allocate and invoke emergency GC)
+- `ref_get` / strong anchor (missing in buggy path): `sethvalue2s` plus `L->top.p++` (added by fix)
+- `deallocator` / reclaimer: Lua emergency garbage collection, which can clear a weak-table entry and free the referenced object
+- weak/non-owning lookup: `fasttm` on a weak metatable through `hvalue(t)`

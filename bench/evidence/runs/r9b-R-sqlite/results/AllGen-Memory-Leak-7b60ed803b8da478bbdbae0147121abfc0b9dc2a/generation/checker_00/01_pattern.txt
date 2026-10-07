@@ -1,0 +1,10 @@
+## Bug Pattern
+
+A pointer obtained from a `duplicator`/`allocator` (which may return NULL on OOM) is conditionally transferred into a container by a `container_insert`/ownership-transfer append. The cleanup path only handles the success case: if the destination/container pointer is NULL, the transfer is skipped, but the allocated/duplicated object is not passed to a `deallocator`, so it leaks. The fix adds the missing `deallocator` call on the non-transfer branch.
+
+Roles:
+- `duplicator`: sqlite3SrcListDup
+- `allocator`: sqlite3SrcListAppendFromTerm
+- `container_insert` / ownership-transfer: sqlite3SrcListAppendList
+- `deallocator`: sqlite3SrcListDelete
+- `null_on_failure`: sqlite3SrcListDup, sqlite3SrcListAppendFromTerm

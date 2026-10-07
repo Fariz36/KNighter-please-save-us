@@ -1,0 +1,41 @@
+{
+  "role_based": true,
+  "initial_findings": [
+    "aborting_assert"
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "result": "compiled",
+      "remaining": []
+    }
+  ],
+  "final_findings": [],
+  "roles": {
+    "duplicator": {
+      "names": [
+        "curl_url_dup",
+        "DUP"
+      ],
+      "description": "duplicates an object; returns a new copy or NULL on failure"
+    },
+    "allocator": {
+      "names": [
+        "curlx_calloc"
+      ],
+      "description": "allocates zero-initialized memory"
+    },
+    "cleanup": {
+      "names": [
+        "curl_url_cleanup"
+      ],
+      "description": "frees an object or releases resources"
+    },
+    "aborting_assert": {
+      "names": [
+        "DEBUGASSERT"
+      ],
+      "description": "macro that aborts execution when its condition is false, so the argument is non-null afterwards"
+    }
+  }
+}

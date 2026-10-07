@@ -1,0 +1,7 @@
+{
+  "parser_input": [],
+  "null_on_failure": [],
+  "deallocator": [
+    "luaZ_freebuffer"
+  ]
+}

@@ -1,0 +1,6 @@
+## Bug Pattern
+
+The bug pattern is a width mismatch in the arithmetic of an `aborting_assert`: the assertion bound expression is computed using loop counters/indexes declared as narrow integers, while the bound being checked is a wider 64-bit size/limit. The intermediate sum can exceed the narrow type’s range even when the final value fits, causing signed integer overflow (undefined behavior) in the assertion expression, so the assertion no longer reliably validates the bound. The fix widens the loop counters to the same 64-bit type as the bound so the whole assertion expression is evaluated in 64 bits.
+
+Roles:
+- `aborting_assert`: `assert`

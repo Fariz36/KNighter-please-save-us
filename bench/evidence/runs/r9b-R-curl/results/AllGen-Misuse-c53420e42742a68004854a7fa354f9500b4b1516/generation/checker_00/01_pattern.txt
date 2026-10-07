@@ -1,0 +1,11 @@
+## Bug Pattern
+
+The bug pattern is treating a length-delimited byte buffer as a NUL-terminated C string. A parser/accessor returns a pointer to certificate data together with an explicit untrusted length, but the code uses `strlen` and `%s` on that pointer. These APIs require a NUL terminator; if none exists within the declared length, they read past the buffer, and if an embedded NUL exists, the length check/formatting becomes incorrect. The fix uses the explicit length for bounded scanning and bounded formatting (`memchr` with the length and `%.*s`).
+
+Roles:
+- `parser_input`: `ASN1_STRING_get0_data` returns the certificate field bytes.
+- `untrusted_size`: `ASN1_STRING_length` provides the untrusted length of those bytes.
+- `length_of`: `strlen` is applied to the buffer, assuming NUL termination instead of using the explicit length.
+- `error_setter`: `failf` uses `%s` on the same buffer; `infof` has the same formatting issue.
+- `allocator`: `ASN1_STRING_to_UTF8` allocates a converted copy and returns its length.
+- `deallocator`: `OPENSSL_free` releases that copy.

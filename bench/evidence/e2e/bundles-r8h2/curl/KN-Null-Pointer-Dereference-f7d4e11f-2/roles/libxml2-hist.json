@@ -1,0 +1,53 @@
+{
+  "length_field": [
+    "xmlBufferLength",
+    "xmlBufUse",
+    "xmlOutputBufferGetSize"
+  ],
+  "data_pointer": [
+    "data",
+    "xmlBufferContent",
+    "xmlBufContent",
+    "xmlBufferDetach",
+    "xmlBufDetach",
+    "xmlBufferCreateStatic",
+    "xmlNewInputBufferMemory",
+    "xmlBufCreateMem",
+    "xmlNewInputFromMemory"
+  ],
+  "buffer_copy": [
+    "memcpy",
+    "xmlBufAdd",
+    "xmlBufCat",
+    "xmlBufferAdd",
+    "xmlBufferCat",
+    "xmlBufferCCat",
+    "xmlNewInputBufferMemory",
+    "xmlBufCreateMem"
+  ],
+  "error_return": [
+    "xmlRaiseMemoryError",
+    "xmlRaiseError",
+    "xmlCtxtErrMemory",
+    "xmlXPathErrMemory"
+  ],
+  "copy_flag": [],
+  "allocator": [
+    "xmlMalloc",
+    "xmlRealloc",
+    "xmlMemMalloc",
+    "xmlMemRealloc",
+    "xmlMemoryStrdup",
+    "xmlStrdup",
+    "__xmlMalloc"
+  ],
+  "deallocator": [
+    "xmlFree",
+    "xmlMemFree",
+    "__xmlFree",
+    "xmlBufFree",
+    "xmlBufferFree",
+    "xmlFreeParserInputBuffer"
+  ],
+  "validation_guard": []
+}

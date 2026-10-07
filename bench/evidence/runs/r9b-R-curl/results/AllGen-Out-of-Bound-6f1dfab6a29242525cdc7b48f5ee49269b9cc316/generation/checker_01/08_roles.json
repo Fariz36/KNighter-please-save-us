@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "parser_input": {
+      "names": [
+        "curlx_dyn_ptr"
+      ],
+      "description": "returns a pointer to a NUL-terminated input buffer to be parsed"
+    },
+    "delimiter_search": {
+      "names": [
+        "strchr"
+      ],
+      "description": "searches a NUL-terminated string for a delimiter and returns a pointer into that string"
+    },
+    "char_classifier": {
+      "names": [
+        "ISDIGIT"
+      ],
+      "description": "tests a character value for a class; its argument must be a valid byte from the string"
+    }
+  }
+}

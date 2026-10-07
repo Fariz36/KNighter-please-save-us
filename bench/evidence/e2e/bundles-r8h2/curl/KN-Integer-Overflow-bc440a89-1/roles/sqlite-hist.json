@@ -1,0 +1,10 @@
+{
+  "encoded_size_calculator": [],
+  "input_length": [
+    "nIn"
+  ],
+  "max_input_size": [
+    "SQLITE_MAX_LENGTH"
+  ],
+  "error_sentinel": []
+}

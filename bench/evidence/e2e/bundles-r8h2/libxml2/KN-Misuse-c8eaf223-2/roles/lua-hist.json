@@ -1,0 +1,6 @@
+{
+  "config_setter": [
+    "lua_gc"
+  ],
+  "divisor_field": []
+}

@@ -1,0 +1,26 @@
+{
+  "role_based": true,
+  "initial_findings": [],
+  "rounds": [],
+  "final_findings": [],
+  "roles": {
+    "duplicator": {
+      "names": [
+        "xmlStrdup"
+      ],
+      "description": "returns a newly allocated copy of its input, or NULL on failure; its result must be NULL-checked before use"
+    },
+    "null_on_failure": {
+      "names": [
+        "xmlStrdup"
+      ],
+      "description": "function that may return NULL on failure"
+    },
+    "length_of": {
+      "names": [
+        "strlen"
+      ],
+      "description": "computes the length of a NUL-terminated string; its argument must not be NULL"
+    }
+  }
+}
