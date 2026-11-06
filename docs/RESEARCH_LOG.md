@@ -1547,3 +1547,8 @@ First cross-project run (r8 bundles, 3 of 4 targets finished; lua still running)
   `docs/PROGRESS_SUMMARY.md` (goal 3 done with caveats, section 3 results table, next steps, supervisor
   question) and `docs/PROGRESS_QA.md` (section 3 Q&A rewritten). Evidence export now includes `e2e/hist-v1`
   (without the large `-fixes.json` caches) and the r9b runs. Committed locally; push awaits user confirmation.
+- 09:19: pushed `general-c-speed` (4632118: historical replay, r9b, final section 3 docs) after user approval.
+
+## 2026-11-06 — Section 4 dropped; merge general-c-speed into main
+- [M] User decision: section 4 (CVE as input) is discarded; scope ends at section 3.
+- [M] origin/main had 0 commits not in general-c-speed (17 ahead) → fast-forward merge, no conflicts; main becomes identical to the branch.
